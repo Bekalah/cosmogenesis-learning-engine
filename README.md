@@ -1,93 +1,55 @@
-# ✦ Cosmogenesis Learning Engine
+# 🜍 Cosmogenesis Learning Engine
 
-*A spiral teacher for living art, pattern literacy, and visionary study.*
-
-—
-
-## ✦ What This Is
-
-The **Cosmogenesis Learning Engine** is not a syllabus, a chart, or a flat textbook.  
-It is a **living, spiral-based system of learning** — designed for artists, mystics, researchers, and anyone who learns best in dynamic, recursive ways.
-
-- Generate **Cosmogenesis Plates** (Monad → Spiral → Ring → Border).  
-- Import your own data (concepts, texts, correspondences, archives).  
-- Explore **modes of 7, 12, 22, 33, 72** (planets, zodiac, paths, spine, angelic currents).  
-- Export as **SVG / PNG**, or save to a local gallery.  
-- Share or import configurations via JSON.  
-- **ND-safe & accessible**: calm visuals, no autoplay, witness-based “Ward Mode.”  
-- **Works offline, in any browser** — zero installs required.  
+*A living grimoire for non-linear learning, creative pattern recognition, and visionary art.*
 
 —
 
-## ✦ Why Spirals?
+## ✦ What it is
+The **Cosmogenesis Learning Engine** is a cultural technology project —  
+a *spiral pedagogy* that teaches through **patterns, symbols, and evolving art** rather than flat steps.
 
-Flat systems fail spiral minds.  
-Learning is not a line; it is a **return, a turning, an evolution**.
+- Each **plate** combines Monad, Paths, Planets, and Zodiac.  
+- Each **gesture** (a click, a choice, a fusion) is ritual learning action.  
+- Each **export** (SVG/PNG/JSON) is both *artifact* and *lesson*.  
 
-- Yeats tried to map the daimon with two cones.  
-- Blavatsky tried to weave traditions into a system.  
-- Crowley tabulated correspondences in Liber 777.  
-- Kunz and af Klint drew living geometries.  
-
-This engine continues their dream — but instead of freezing the wisdom, it **lets it live, spiral, and evolve**.
-
-—
-
-## ✦ Who It’s For
-
-- **Artists & Designers** → turn archives into living diagrams.  
-- **Mystics & Researchers** → trace correspondences across traditions.  
-- **Educators & Facilitators** → run workshops with one-click demos.  
-- **Neurodivergent Learners** → experience spiral, recursive teaching instead of flat steps.  
-- **Trauma Survivors** → explore patterns in safe, ND-sensitive space.  
+It is both a **digital cathedral fragment** and a **creative toolkit**:  
+museum-grade art + adaptive pedagogy + open-source archive.
 
 —
 
-## ✦ How It Works
+## ✦ Why it exists
+Living with chronic PTSD and neurodivergence, I experienced firsthand how flat, linear education fails.  
+This engine arises as a **counter-design**:  
+- Dynamic rather than flat.  
+- Spiral and progressive rather than static.  
+- Pattern-based, symbolic, and immersive.  
 
-1. **Build a Plate**  
-   Choose mode (7 planets, 12 zodiac, 22 paths, etc.). Adjust spiral turns, radius, and node size.  
-
-2. **Add Data**  
-   Import your own JSON labels or paste text directly.  
-
-3. **Render & Export**  
-   See your plate come alive. Export as SVG/PNG with provenance plaque.  
-
-4. **Evolve**  
-   Unlock new stylepacks (Venus Net, Rilke Slate) through continued use.  
-
-5. **Spiral Learning**  
-   Every time you return, the system grows with you.  
+It exists so that learners, artists, and mystics can **absorb wisdom through beauty** —  
+not rote, but resonance.  
 
 —
 
-## ✦ Provenance Standards
-
-Every plate, every demo, every artifact includes a **provenance plaque**:
-
-- **Intention** → why this plate exists.  
-- **Technique** → how it was made.  
-- **Lineage** → which traditions, archives, or artists inform it.  
-- **Reflection** → what it reveals, what it transforms.  
-
-These standards are drawn from the **Stone Grimoire** and **Cathedral of Circuits** projects, ensuring museum-grade quality and respect for source lineages.
+## ✦ Features
+- **Interactive Plate Builder** → Monad · Spiral (22 paths) · Ring (7 planets) · Border (12 zodiac).  
+- **Export System** → Save plates as **SVG/PNG**; configs as **JSON** with provenance plaque.  
+- **ND-Safe Protocols** → No autoplay, calm motion, toggleable *Ward Mode*.  
+- **Numerology Anchors** → 7 (Netzach/Venus), 22 paths, 72 angelic currents, 33-spine overlay.  
+- **Museum-Grade Provenance** → Every artifact carries lineage, intention, license.  
 
 —
 
-## ✦ Why It Matters
+## ✦ Lineage
+This project fuses open archives and mystic traditions:  
+- **Visionary Art** → Hilma af Klint, Vienna School, Emma Kunz.  
+- **Mystical Systems** → Qabalah, I Ching, Sepher Sephiroth [oai_citation:4‡AleisterCrowley-Liber777.pdf](file-service://file-BUvjngFHkkP5DqwJvL63Yq) [oai_citation:5‡AleisterCrowley-TheIChing.pdf](file-service://file-F4A3vag8erf8M2bmNozZve) [oai_citation:6‡AleisterCrowley-SepherSephiroth.pdf](file-service://file-XWRBRgXhp7764SbzmoPwH1).  
+- **Open Source Archives** → MET, British Library, Gallica, Wellcome, Esoteric Archives [oai_citation:7‡open_source_art_index.md](file-service://file-BZZbjgW7YmSLV55AncED4r) [oai_citation:8‡open_source_art_index.md](file-service://file-LHfQVfT7zQpgjHnbQ93Cs3).  
 
-- For those excluded by flat education, this engine opens a new path: **learning in spirals**.  
-- For creatives, it is a **professional-grade, sponsor-ready tool** for building living art from real archives.  
-- For the public, it is **open-source and accessible**: a cathedral of knowledge you can walk into, remix, and share.  
+Codex alignment: **Stone Grimoire**, **Cathedral of Circuits**, **Codex 144:99** [oai_citation:9‡README.md](file-service://file-9CJRv3EeEdDfpYL6NeH3jv) [oai_citation:10‡thelemic_alignment_brief.md](file-service://file-7oQW6VJqf4yBYwWhBZYbWJ) [oai_citation:11‡README_UPDATE.md](file-service://file-BMXtN5KqDP1P93N6ZAWDKQ).  
 
 —
 
-## ✦ How To Begin
-
-Clone the repo:
-
-```bash
-git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
-cd cosmogenesis-learning-engine
-open index.html
+## ✦ How to run
+1. Clone the repo:  
+   ```bash
+   git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
+   cd cosmogenesis-learning-engine
