@@ -1,9 +1,9 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/README.md b/README.md
-index 6e0268f2d3bb13e0dda62f666c487b769a8cdc80..47824a07536e378dfdf32871447d4c4264cbc399 100644
+index 6e0268f2d3bb13e0dda62f666c487b769a8cdc80..e208e4488056d85ca06a8b061f84fdfef3691da6 100644
 --- a/README.md
 +++ b/README.md
-@@ -1,39 +1,44 @@
+@@ -1,39 +1,46 @@
 -
  # ✦ Cosmogenesis Learning Engine
  
@@ -34,6 +34,7 @@ index 6e0268f2d3bb13e0dda62f666c487b769a8cdc80..47824a07536e378dfdf32871447d4c42
 +- **Gallery** — save your own collection locally.
 +- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.
  - **Offline-Ready** — open `index.html` in any browser; no install required.
++- **Plugins** — load open knowledge connectors or generative art modules on demand.
  
  —
  
@@ -61,6 +62,7 @@ index 6e0268f2d3bb13e0dda62f666c487b769a8cdc80..47824a07536e378dfdf32871447d4c42
 +
 +Cross-discipline demos live in `data/demos.json` and load automatically.
 +Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
++Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
  
 EOF
 )
