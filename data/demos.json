@@ -24,9 +24,19 @@
 +  { "title": "Psychology • Big Five Traits",
 +    "config": { "layout": "wheel", "mode": 5, "labels": ["Openness","Conscientiousness","Extraversion","Agreeableness","Neuroticism"] } },
 +  { "title": "Transpersonal Tech • Cyber-Transcendence Levels",
-+    "config": { "layout": "spiral", "mode": 6, "labels": ["Grounded","Biofeedback","VR Ritual","AI Oracle","Distributed Egregore","Cosmic Integration"] } }
++    "config": { "layout": "spiral", "mode": 6, "labels": ["Grounded","Biofeedback","VR Ritual","AI Oracle","Distributed Egregore","Cosmic Integration"] } },
++  { "title": "Divination • I Ching Trigrams",
++    "config": { "layout": "wheel", "mode": 8, "labels": ["Heaven","Lake","Fire","Thunder","Wind","Water","Mountain","Earth"] } },
++  { "title": "Runes • Elder Futhark",
++    "config": { "layout": "wheel", "mode": 24, "labels": ["Fehu","Uruz","Thurisaz","Ansuz","Raidho","Kenaz","Gebo","Wunjo","Hagalaz","Nauthiz","Isa","Jera","Eihwaz","Perthro","Algiz","Sowilo","Tiwaz","Berkano","Ehwaz","Mannaz","Laguz","Inguz","Othala","Dagaz"] } }
++ ,
++  { "title": "Art • Rosicrucian Color Wheel",
++    "config": { "layout": "wheel", "mode": 4, "labels": ["Red","White","Black","Gold"] } },
++  { "title": "History • Library of Alexandria Scrolls",
++    "config": { "layout": "grid", "mode": 3, "labels": ["Geometry","Mysticism","Medicine"] } },
++  { "title": "Healing • Tibetan Reiki Steps",
++    "config": { "layout": "spiral", "mode": 5, "labels": ["Earth","Water","Fire","Air","Space"] } }
 +]
  
-
-
-
+EOF
+)
