@@ -1,3 +1,14 @@
+--+import { describe, it, expect } from 'vitest';
+--+import { loadFirstDemo } from '../src/configLoader.js';
+--+
+--+describe('configuration loader', () => {
+--+  it('loads the first demo configuration', () => {
+--+    const config = loadFirstDemo();
+--+    expect(config).toHaveProperty('layout');
+--+    expect(Array.isArray(config.labels)).toBe(true);
+--+  });
+--+});
+--+
 -+import { describe, it, expect } from 'vitest';
 -+import { loadFirstDemo } from '../src/configLoader.js';
 -+
@@ -8,15 +19,13 @@
 -+    expect(Array.isArray(config.labels)).toBe(true);
 -+  });
 -+});
--+
-+import { describe, it, expect } from 'vitest';
+-  
++import { test } from 'node:test';
++import assert from 'node:assert/strict';
 +import { loadFirstDemo } from '../src/configLoader.js';
 +
-+describe('configuration loader', () => {
-+  it('loads the first demo configuration', () => {
-+    const config = loadFirstDemo();
-+    expect(config).toHaveProperty('layout');
-+    expect(Array.isArray(config.labels)).toBe(true);
-+  });
++test('loads the first demo configuration', () => {
++  const config = loadFirstDemo();
++  assert.ok(config.layout);
++  assert.ok(Array.isArray(config.labels));
 +});
-  
