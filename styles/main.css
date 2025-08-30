@@ -1,9 +1,41 @@
+-+:root {
+-+  --bg: #f8f5ef;
+-+  --ink: #141414;
+-+  --monad: #0b0b0b;
+-+  --spiral: #b8860b;
+-+  --border: #2a2a2a;
+-+}
+-+
+-+body {
+-+  background: var(--bg);
+-+  color: var(--ink);
+-+  font-family: sans-serif;
+-+  margin: 0;
+-+  padding: 1rem;
+-+}
+-+
+-+#controls {
+-+  margin-bottom: 1rem;
+-+}
+-+
+-+canvas {
+-+  border: 2px solid var(--border);
+-+  background: var(--bg);
+-+}
 +:root {
 +  --bg: #f8f5ef;
 +  --ink: #141414;
 +  --monad: #0b0b0b;
 +  --spiral: #b8860b;
 +  --border: #2a2a2a;
++}
++
++:root.calm {
++  --bg: #f0f5f1;
++  --ink: #334e68;
++  --monad: #284b63;
++  --spiral: #86b300;
++  --border: #334e68;
 +}
 +
 +body {
@@ -22,3 +54,13 @@
 +  border: 2px solid var(--border);
 +  background: var(--bg);
 +}
++
++.no-motion *,
++.no-motion *::before,
++.no-motion *::after {
++  animation: none !important;
++  transition: none !important;
++}
+ 
+EOF
+)
