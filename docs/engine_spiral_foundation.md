@@ -97,6 +97,3 @@
 +   `index.html`’s `style-selector`.
 +3. Reload the page; the new palette will appear in the Style menu and can be
 +   referenced by name in shared configs.
- 
-EOF
-)
