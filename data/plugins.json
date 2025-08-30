@@ -1,79 +1,34 @@
-diff --git a/data/plugins.json b/data/plugins.json
-index dfe16840500909b641f8b2ab345ce579f89f79ab..bb7cdd541825da7a22f254153ec26e1214b96c99 100644
---- a/data/plugins.json
-+++ b/data/plugins.json
-@@ -1,40 +1,34 @@
---+[
---+  {
---+    "id": "wikiSummary",
---+    "title": "Wikipedia Summary",
---+    "src": "plugins/wikiSummary.js",
---+    "description": "Fetch a Wikipedia summary and convert it into labels"
---+  },
---+  {
---+    "id": "p5Mandala",
---+    "title": "p5 Mandala",
---+    "src": "plugins/p5Mandala.js",
---+    "description": "Generate a simple mandala using p5.js"
---+  }
---+]
--+[
--+  {
--+    "id": "wikiSummary",
--+    "title": "Wikipedia Summary",
--+    "src": "plugins/wikiSummary.js",
--+    "description": "Fetch a Wikipedia summary and convert it into labels",
--+    "version": "1.0.0",
--+    "lifecycle": "manual"
--+  },
--+  {
--+    "id": "p5Mandala",
--+    "title": "p5 Mandala",
--+    "src": "plugins/p5Mandala.js",
--+    "description": "Generate a simple mandala using p5.js",
--+    "version": "1.0.0",
--+    "lifecycle": "manual"
--+  },
--+  {
--+    "id": "soundscape",
--+    "title": "Soundscape",
--+    "src": "plugins/soundscape.js",
--+    "description": "Generate a simple binaural soundscape",
--+    "version": "1.0.0",
--+    "lifecycle": "manual"
--+  }
--+]
-+[
-+  {
-+    "id": "wikiSummary",
-+    "title": "Wikipedia Summary",
-+    "src": "plugins/wikiSummary.js",
-+    "description": "Fetch a Wikipedia summary and convert it into labels",
-+    "version": "1.0.0",
-+    "lifecycle": "manual"
-+  },
-+  {
-+    "id": "p5Mandala",
-+    "title": "p5 Mandala",
-+    "src": "plugins/p5Mandala.js",
-+    "description": "Generate a simple mandala using p5.js",
-+    "version": "1.0.0",
-+    "lifecycle": "manual"
-+  },
-+  {
-+    "id": "fractalArt",
-+    "title": "Fractal Art",
-+    "src": "plugins/fractalArt.js",
-+    "description": "Render Visionary Dream fractal artwork",
-+    "version": "1.0.0",
-+    "lifecycle": "manual"
-+  },
-+  {
-+    "id": "soundscape",
-+    "title": "Soundscape",
-+    "src": "plugins/soundscape.js",
-+    "description": "Generate a simple binaural soundscape",
-+    "version": "1.0.0",
-+    "lifecycle": "manual"
-+  }
-+]
+[
+  {
+    "id": "wikiSummary",
+    "title": "Wikipedia Summary",
+    "src": "plugins/wikiSummary.js",
+    "description": "Fetch a Wikipedia summary and convert it into labels",
+    "version": "1.0.0",
+    "lifecycle": "manual"
+  },
+  {
+    "id": "p5Mandala",
+    "title": "p5 Mandala",
+    "src": "plugins/p5Mandala.js",
+    "description": "Generate a simple mandala using p5.js",
+    "version": "1.0.0",
+    "lifecycle": "manual"
+  },
+  {
+    "id": "fractalArt",
+    "title": "Fractal Art",
+    "src": "plugins/fractalArt.js",
+    "description": "Render Visionary Dream fractal artwork",
+    "version": "1.0.0",
+    "lifecycle": "manual"
+  },
+  {
+    "id": "soundscape",
+    "title": "Soundscape",
+    "src": "plugins/soundscape.js",
+    "description": "Generate a simple binaural soundscape",
+    "version": "1.0.0",
+    "lifecycle": "manual"
+  }
+]
