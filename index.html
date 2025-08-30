@@ -1,0 +1,36 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8" />
++  <title>Cosmogenesis Learning Engine</title>
++  <link rel="stylesheet" href="styles/main.css" />
++</head>
++<body>
++  <div id="controls">
++    <label>Dataset:
++      <select id="dataset-selector">
++        <option value="aesthetic_realms">Aesthetic Realms</option>
++        <option value="correspondences">Correspondences</option>
++        <option value="demos">Demos</option>
++        <option value="egregores">Egregores</option>
++      </select>
++    </label>
++    <label>Layout:
++      <select id="layout-selector">
++        <option value="spiral">Spiral</option>
++        <option value="wheel">Wheel</option>
++        <option value="grid">Grid</option>
++      </select>
++    </label>
++    <label>Style:
++      <select id="style-selector">
++        <option value="hilma_spiral">Hilma Spiral</option>
++        <option value="dark_void">Dark Void</option>
++        <option value="zen_garden">Zen Garden</option>
++      </select>
++    </label>
++  </div>
++  <canvas id="engine-canvas" width="800" height="600"></canvas>
++  <script src="main.js"></script>
++</body>
++</html>
