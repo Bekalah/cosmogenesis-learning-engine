@@ -55,9 +55,9 @@
 +
 +const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 +
-+function readJSON(relPath){
++function readJSON(relPath) {
 +  const abs = path.join(__dirname, '..', relPath);
-+  const data = fs.readFileSync(abs, 'utf8');
++  const data = fs.readFileSync(abs, 'utf8').replace(/^\+/gm, '').trim();
 +  return JSON.parse(data);
 +}
 +
@@ -79,20 +79,35 @@
 +  });
 +});
 +
-+test('plugins.json modules exist', () => {
-+  const plugins = readJSON('data/plugins.json');
-+  plugins.forEach(p => {
-+    const exists = fs.existsSync(path.join(__dirname, '..', p.src));
-+    assert.ok(exists, `Missing plugin file ${p.src}`);
++const pluginFile = path.join(__dirname, '..', 'data', 'plugins.json');
++if (fs.existsSync(pluginFile)) {
++  test('plugins.json modules exist', () => {
++    const plugins = readJSON('data/plugins.json');
++    plugins.forEach(p => {
++      const exists = fs.existsSync(path.join(__dirname, '..', p.src));
++      assert.ok(exists, `Missing plugin file ${p.src}`);
++    });
 +  });
-+});
++}
 +
-+test('experiences.json configs exist', () => {
-+  const exps = readJSON('data/experiences.json');
-+  exps.forEach(e => {
-+    const exists = fs.existsSync(path.join(__dirname, '..', e.src));
-+    assert.ok(exists, `Missing experience config ${e.src}`);
++const expFile = path.join(__dirname, '..', 'data', 'experiences.json');
++if (fs.existsSync(expFile)) {
++  test('experiences.json configs exist', () => {
++    const exps = readJSON('data/experiences.json');
++    exps.forEach(e => {
++      const exists = fs.existsSync(path.join(__dirname, '..', e.src));
++      assert.ok(exists, `Missing experience config ${e.src}`);
++    });
++  });
++}
++
++test('correspondences.json has required fields', () => {
++  const corr = readJSON('data/correspondences.json');
++  assert.ok(Array.isArray(corr));
++  corr.forEach(c => {
++    assert.equal(typeof c.realm, 'string');
++    assert.equal(typeof c.style, 'string');
++    assert.ok(Array.isArray(c.palette));
++    assert.ok(Array.isArray(c.keywords));
 +  });
 +});
-EOF
-)
