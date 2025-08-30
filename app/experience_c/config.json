@@ -1,0 +1,6 @@
++{
++  "title": "Agrippa's Study",
++  "description": "Explore Renaissance magic and correspondences with Heinrich Agrippa.",
++  "pages": ["prologue.md"],
++  "components": ["components/seal.js"]
++}
