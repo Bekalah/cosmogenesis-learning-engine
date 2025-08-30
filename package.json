@@ -1,19 +1,46 @@
 {
   "name": "cosmogenesis-learning-engine",
-  "version": "1.0.0",
-  "description": "Interactive engine for cosmogenesis learning experiences",
+  "version": "1.1.0",
+  "description": "Interactive, data-agnostic engine for spiral learning (museum-grade, ND-safe).",
   "type": "module",
-  "main": "main.js",
+  "private": false,
+  "author": "Rebecca Respawn",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "app/index.html",
   "scripts": {
-    "start": "node main.js",
-    "test": "node --test"
+    "dev": "http-server -p 5173 -c-1 .",
+    "start": "npm run dev",
+    "preview": "http-server -p 8080 -c-1 .",
+    "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
+    "test": "node --test",
+    "format": "prettier -w .",
+    "check": "prettier -c .",
+    "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
+    "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
+    "gallery:thumbs": "python3 scripts/pillow_thumbs.py --in exports --out exports/thumbs --size 512",
+    "postinstall": "echo \"Optional: pip install pillow numpy && npm i -D http-server prettier\""
   },
   "keywords": [
     "cosmogenesis",
     "learning",
-    "engine"
+    "engine",
+    "spiral",
+    "fractal",
+    "pillow",
+    "svg",
+    "png"
   ],
-  "author": "Rebecca Respawn",
-  "license": "MIT",
-  "dependencies": {}
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "prettier": "^3.3.3"
+  },
+  "optionalDependencies": {},
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
 }
