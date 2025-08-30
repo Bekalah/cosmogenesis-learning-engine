@@ -1,20 +1,22 @@
-+import p5 from '../vendor/p5.min.js'; // bundled for offline use
-+
-+export default function p5Mandala(container) {
-+  return new p5(p => {
-+    p.setup = function () {
-+      p.createCanvas(400, 400).parent(container);
-+      p.angleMode(p.DEGREES);
-+      p.noLoop();
-+    };
-+
-+    p.draw = function () {
-+      p.background(255);
-+      p.translate(p.width / 2, p.height / 2);
-+      const petals = 12;
-+      for (let i = 0; i < petals; i++) {
-+        p.rotate(360 / petals);
-+        p.ellipse(100, 0, 40, 40);
++export default async function(){
++  if(!window.p5){
++    try{
++      await import('../vendor/p5.min.js');
++    }catch{
++      await import('https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js');
++    }
++  }
++  new p5(p=>{
++    p.setup = ()=>{ p.createCanvas(320,320); p.angleMode(p.DEGREES); p.noFill(); };
++    p.draw = ()=>{
++      p.background(0,0,0,10);
++      p.translate(p.width/2,p.height/2);
++      for(let i=0;i<12;i++){
++        p.push();
++        p.rotate((p.frameCount/2)+i*30);
++        p.stroke(255,150);
++        p.ellipse(0,40,20,20);
++        p.pop();
 +      }
 +    };
 +  });
