@@ -1,0 +1,26 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a//dev/null b/data/aesthetic_realms.json
+index 0000000000000000000000000000000000000000..f5726cf5bdff34cba3ecad9221f5341c487c5e17 100644
+--- a//dev/null
++++ b/data/aesthetic_realms.json
+@@ -0,0 +1,17 @@
++[
++  {
++    "label": "Exact Magus / Angel Science",
++    "style": "Ancient Cathedral",
++    "description": "Gothic geometry, stained glass logic, and arcane lab precision." 
++  },
++  {
++    "label": "Visionary Luminous Feminine",
++    "style": "Elegant Gentle Feminine Artistic",
++    "description": "Soft halos, pastel palettes, and nurturing artistic grace." 
++  },
++  {
++    "label": "Vampire Elite Business",
++    "style": "Constantine Blade Runner Alan Moore Witcher Mods",
++    "description": "Neon-noir occult tech with trenchcoat glamour and enchanted blades." 
++  }
++]
+ 
+EOF
+)
