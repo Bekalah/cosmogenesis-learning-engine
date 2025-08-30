@@ -1,0 +1,6 @@
++[
++  { "title": "Hypatia", "src": "experiences/hypatia/config.json" },
++  { "title": "Tesla", "src": "experiences/tesla/config.json" },
++  { "title": "Agrippa", "src": "experiences/agrippa/config.json" },
++  { "title": "Alexandrian Scriptorium", "src": "experiences/alexandrian-scriptorium/config.json" }
++]
