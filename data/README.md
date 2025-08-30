@@ -1,49 +1,61 @@
-- -- For **artists & designers**: a tool to turn archives into living art.  
-- -- For **mystics & researchers**: a way to trace correspondences across traditions.  
-- -- For **educators & facilitators**: an interactive, non-linear teaching aid.  
-- -- For **neurodivergent learners**: a system that respects spiral, recursive learning.  
-- +- For **artists & designers**: a tool to turn archives into living art.
-- +- For **mystics & researchers**: a way to trace correspondences across traditions.
-- +- For **educators & facilitators**: an interactive, non-linear teaching aid.
-- +- For **neurodivergent learners**: a system that respects spiral, recursive learning.
--  
--  —
--  
--  ## ✦ Quick Start
--  1. Clone this repository:
--     ```bash
--     git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
-- -   cd cosmogenesis-learning-engine
-- +   cd cosmogenesis-learning-engine
-- +   ```
-- +2. Open `index.html` in your browser.
-- +3. Load sample **Demos** or craft your own dataset.
-- +
-- +Cross-discipline demos live in `data/demos.json` and load automatically.
-- +Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
-- +Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
--  
+-- -- For **artists & designers**: a tool to turn archives into living art.  
+-- -- For **mystics & researchers**: a way to trace correspondences across traditions.  
+-- -- For **educators & facilitators**: an interactive, non-linear teaching aid.  
+-- -- For **neurodivergent learners**: a system that respects spiral, recursive learning.  
+-- +- For **artists & designers**: a tool to turn archives into living art.
+-- +- For **mystics & researchers**: a way to trace correspondences across traditions.
+-- +- For **educators & facilitators**: an interactive, non-linear teaching aid.
+-- +- For **neurodivergent learners**: a system that respects spiral, recursive learning.
+--  
+--  —
+--  
+--  ## ✦ Quick Start
+--  1. Clone this repository:
+--     ```bash
+--     git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
+-- -   cd cosmogenesis-learning-engine
+-- +   cd cosmogenesis-learning-engine
+-- +   ```
+-- +2. Open `index.html` in your browser.
+-- +3. Load sample **Demos** or craft your own dataset.
+-- +
+-- +Cross-discipline demos live in `data/demos.json` and load automatically.
+-- +Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
+-- +Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
+--  
+--+
+--++## ✦ Aesthetic Realms
+--++See docs/aesthetic_realms.md for the three style channels.
+-+- For **artists & designers**: a tool to turn archives into living art.
+-+- For **mystics & researchers**: a way to trace correspondences across traditions.
+-+- For **educators & facilitators**: an interactive, non-linear teaching aid.
+-+- For **neurodivergent learners**: a system that respects spiral, recursive learning.
 -+
--++## ✦ Aesthetic Realms
--++See docs/aesthetic_realms.md for the three style channels.
-+- For **artists & designers**: a tool to turn archives into living art.
-+- For **mystics & researchers**: a way to trace correspondences across traditions.
-+- For **educators & facilitators**: an interactive, non-linear teaching aid.
-+- For **neurodivergent learners**: a system that respects spiral, recursive learning.
+-+## ✦ Quick Start
+-+1. Clone this repository:
+-+   ```bash
+-+   git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
+-+   cd cosmogenesis-learning-engine
+-+   ```
+-+2. Open `index.html` in your browser.
+-+3. Load sample **Demos** or craft your own dataset.
+-+
+-+Cross-discipline demos live in `data/demos.json` and load automatically.
+-+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
+-+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
+-+
+-+## ✦ Aesthetic Realms
+-+See docs/aesthetic_realms.md for the three style channels.
+- 
++# Data Directory
 +
-+## ✦ Quick Start
-+1. Clone this repository:
-+   ```bash
-+   git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
-+   cd cosmogenesis-learning-engine
-+   ```
-+2. Open `index.html` in your browser.
-+3. Load sample **Demos** or craft your own dataset.
++This folder collects sample datasets that power the Cosmogenesis Learning Engine.
 +
-+Cross-discipline demos live in `data/demos.json` and load automatically.
-+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
-+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
++- `demos.json` – quick demonstrations for different domains.
++- `egregores.json` – prototype egregore tarot companions.
++- `plugins.json` – descriptors for optional plugin modules.
++- `correspondences.json` – example mappings across traditions.
++- `experiences.json` – list of narrative realms and their configs.
++- `aesthetic_realms.json` – style channels used by the interface.
 +
-+## ✦ Aesthetic Realms
-+See docs/aesthetic_realms.md for the three style channels.
- 
++Use these files as templates when crafting your own datasets.
