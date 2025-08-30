@@ -1,3 +1,17 @@
+-+[
+-+  {
+-+    "id": "wikiSummary",
+-+    "title": "Wikipedia Summary",
+-+    "src": "plugins/wikiSummary.js",
+-+    "description": "Fetch a Wikipedia summary and convert it into labels"
+-+  },
+-+  {
+-+    "id": "p5Mandala",
+-+    "title": "p5 Mandala",
+-+    "src": "plugins/p5Mandala.js",
+-+    "description": "Generate a simple mandala using p5.js"
+-+  }
+-+]
 +[
 +  {
 +    "id": "wikiSummary",
@@ -10,5 +24,13 @@
 +    "title": "p5 Mandala",
 +    "src": "plugins/p5Mandala.js",
 +    "description": "Generate a simple mandala using p5.js"
++  },
++  {
++    "id": "fractalArt",
++    "title": "Fractal Art",
++    "src": "plugins/fractalArt.js",
++    "description": "Render Visionary_Dream fractal artwork"
 +  }
 +]
+EOF
+)
