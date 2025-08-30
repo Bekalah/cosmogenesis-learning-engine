@@ -49,4 +49,3 @@
 +  const bad = { ...good, labels: [] };
 +  assert.throws(() => validatePlateConfig(bad), /Label count/);
 +});
- 
