@@ -1,52 +1,37 @@
-+"""Generate a museum-quality piece of visionary art."""
-+
-+# Import required libraries
-+import numpy as np
-+from PIL import Image
-+
-+# Set canvas resolution
-+WIDTH, HEIGHT = 1024, 1024
-+
-+# Define a surreal, Alex Grey-inspired color palette
-+PALETTE = [
-+    (66, 135, 245),   # Electric blue
-+    (126, 66, 245),   # Violet mystic
-+    (255, 84, 155),   # Psychedelic pink
-+    (245, 192, 66),   # Golden aura
-+    (66, 245, 206),   # Neon turquoise
-+    (245, 241, 66)    # Radiant yellow
-+]
-+
-+# Create a meshgrid for polar coordinates
-+def generate_grid(width, height):
-+    x = np.linspace(-2 * np.pi, 2 * np.pi, width)
-+    y = np.linspace(-2 * np.pi, 2 * np.pi, height)
-+    return np.meshgrid(x, y)
-+
-+# Compute visionary geometry pattern
-+def visionary_pattern(x, y):
-+    r = np.sqrt(x**2 + y**2)
-+    theta = np.arctan2(y, x)
-+    return np.sin(r * 3) + np.cos(theta * 6)
-+
-+# Map normalized values to the surreal palette
-+def map_to_palette(values, palette):
-+    values_norm = (values - values.min()) / (values.max() - values.min())
-+    indices = values_norm * (len(palette) - 1)
-+    lower = np.floor(indices).astype(int)
-+    upper = np.ceil(indices).astype(int)
-+    frac = indices - lower
-+    palette = np.array(palette, dtype=float)
-+    color = (1 - frac)[..., None] * palette[lower] + frac[..., None] * palette[upper]
-+    return color.astype(np.uint8)
-+
-+# Generate the visionary artwork
-+def create_visionary_art(width, height, palette):
-+    x, y = generate_grid(width, height)
-+    pattern = visionary_pattern(x, y)
-+    color_data = map_to_palette(pattern, palette)
-+    image = Image.fromarray(color_data, mode="RGB")
-+    image.save("Visionary_Dream.png")
-+
-+if __name__ == "__main__":
-+    create_visionary_art(WIDTH, HEIGHT, PALETTE)
+# Museum-quality visionary art generator using Python + Pillow
+import numpy as np
+from PIL import Image, ImageDraw
+
+# Canvas dimensions
+WIDTH, HEIGHT = 1920, 1080
+
+# Radiant gradient background (Alex Grey–inspired psychedelia)
+gradient = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
+for y in range(HEIGHT):
+    for x in range(WIDTH):
+        r = int(128 + 127 * np.sin(2 * np.pi * x / WIDTH + np.pi / 3))
+        g = int(128 + 127 * np.sin(2 * np.pi * y / HEIGHT + np.pi / 2))
+        b = int(128 + 127 * np.sin(2 * np.pi * (x + y) / (WIDTH + HEIGHT)))
+        gradient[y, x] = (r, g, b)
+img = Image.fromarray(gradient, 'RGB')
+
+# Matrix-style digital rain overlay
+draw = ImageDraw.Draw(img)
+symbols = "01"
+for col in range(0, WIDTH, 25):
+    offset = np.random.randint(-HEIGHT, 0)
+    for row in range(offset, HEIGHT, 20):
+        draw.text((col, row), np.random.choice(list(symbols)), fill=(0, 255, 70))
+
+# Wonderland spiral path (psychedelic geometry)
+for theta in np.linspace(0, 12 * np.pi, 900):
+    radius = theta * 12
+    x = WIDTH / 2 + radius * np.cos(theta)
+    y = HEIGHT / 2 + radius * np.sin(theta)
+    draw.ellipse((x - 3, y - 3, x + 3, y + 3), fill=(255, 0, 255))
+
+# Final cryptic invitation
+draw.text((WIDTH * 0.33, HEIGHT * 0.9), "Follow the White Rabbit", fill=(255, 255, 255))
+
+# Save the visionary artifact
+img.save("Visionary_Dream.png")
