@@ -1,0 +1,6 @@
++{
++  "title": "Hypatia",
++  "components": [
++    { "id": "counter", "src": "./components/counter.js" }
++  ]
++}
