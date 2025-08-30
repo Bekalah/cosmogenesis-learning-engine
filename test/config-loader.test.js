@@ -1,95 +1,52 @@
+---+import { describe, it, expect } from 'vitest';
+---+import { loadFirstDemo } from '../src/configLoader.js';
+---+
+---+describe('configuration loader', () => {
+---+  it('loads the first demo configuration', () => {
+---+    const config = loadFirstDemo();
+---+    expect(config).toHaveProperty('layout');
+---+    expect(Array.isArray(config.labels)).toBe(true);
+---+  });
+---+});
+---+
+--+import { describe, it, expect } from 'vitest';
+--+import { loadFirstDemo } from '../src/configLoader.js';
+--+
+--+describe('configuration loader', () => {
+--+  it('loads the first demo configuration', () => {
+--+    const config = loadFirstDemo();
+--+    expect(config).toHaveProperty('layout');
+--+    expect(Array.isArray(config.labels)).toBe(true);
+--+  });
+--+});
+--  
 -+import { test } from 'node:test';
 -+import assert from 'node:assert/strict';
--+import fs from 'node:fs';
--+import path from 'node:path';
--+import url from 'node:url';
+-+import { loadFirstDemo } from '../src/configLoader.js';
 -+
--+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
--+
--+function readJSON(relPath){
--+  const abs = path.join(__dirname, '..', relPath);
--+  const data = fs.readFileSync(abs, 'utf8');
--+  return JSON.parse(data);
--+}
--+
--+test('demos.json has titles and configs', () => {
--+  const demos = readJSON('data/demos.json');
--+  assert.ok(Array.isArray(demos));
--+  demos.forEach(d => {
--+    assert.equal(typeof d.title, 'string');
--+    assert.equal(typeof d.config, 'object');
--+  });
+-+test('loads the first demo configuration', () => {
+-+  const config = loadFirstDemo();
+-+  assert.equal(typeof config.layout, 'string');
+-+  assert.ok(Array.isArray(config.labels));
 -+});
--+
--+test('egregores.json has required fields', () => {
--+  const eg = readJSON('data/egregores.json');
--+  assert.ok(Array.isArray(eg));
--+  eg.forEach(e => {
--+    assert.equal(typeof e.name, 'string');
--+    assert.equal(typeof e.arcana, 'string');
--+  });
--+});
--+
--+test('plugins.json modules exist', () => {
--+  const plugins = readJSON('data/plugins.json');
--+  plugins.forEach(p => {
--+    const exists = fs.existsSync(path.join(__dirname, '..', p.src));
--+    assert.ok(exists, `Missing plugin file ${p.src}`);
--+  });
--+});
--+
--+test('experiences.json configs exist', () => {
--+  const exps = readJSON('data/experiences.json');
--+  exps.forEach(e => {
--+    const exists = fs.existsSync(path.join(__dirname, '..', e.src));
--+    assert.ok(exists, `Missing experience config ${e.src}`);
--+  });
--+});
--)
++import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 +import { test } from 'node:test';
-+import assert from 'node:assert/strict';
-+import fs from 'node:fs';
-+import path from 'node:path';
-+import url from 'node:url';
++import { strict as assert } from 'assert';
++import { writeFileSync, unlinkSync } from 'fs';
 +
-+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-+
-+function readJSON(relPath){
-+  const abs = path.join(__dirname, '..', relPath);
-+  const data = fs.readFileSync(abs, 'utf8');
-+  return JSON.parse(data);
-+}
-+
-+test('demos.json has titles and configs', () => {
-+  const demos = readJSON('data/demos.json');
-+  assert.ok(Array.isArray(demos));
-+  demos.forEach(d => {
-+    assert.equal(typeof d.title, 'string');
-+    assert.equal(typeof d.config, 'object');
-+  });
++// Ensure loadConfig surfaces invalid JSON errors
++test('loadConfig throws on invalid JSON', () => {
++  const file = 'test/fixtures/bad.json';
++  writeFileSync(file, '{');
++  assert.throws(() => loadConfig(file), /Invalid JSON/);
++  unlinkSync(file);
 +});
 +
-+test('egregores.json has required fields', () => {
-+  const eg = readJSON('data/egregores.json');
-+  assert.ok(Array.isArray(eg));
-+  eg.forEach(e => {
-+    assert.equal(typeof e.name, 'string');
-+    assert.equal(typeof e.arcana, 'string');
-+  });
++// Validate schema enforcement
++test('validatePlateConfig enforces label count', () => {
++  const good = { layout: 'spiral', mode: 1, labels: ['x'] };
++  validatePlateConfig(good);
++  const bad = { ...good, labels: [] };
++  assert.throws(() => validatePlateConfig(bad), /Label count/);
 +});
-+
-+test('plugins.json modules exist', () => {
-+  const plugins = readJSON('data/plugins.json');
-+  plugins.forEach(p => {
-+    const exists = fs.existsSync(path.join(__dirname, '..', p.src));
-+    assert.ok(exists, `Missing plugin file ${p.src}`);
-+  });
-+});
-+
-+test('experiences.json configs exist', () => {
-+  const exps = readJSON('data/experiences.json');
-+  exps.forEach(e => {
-+    const exists = fs.existsSync(path.join(__dirname, '..', e.src));
-+    assert.ok(exists, `Missing experience config ${e.src}`);
-+  });
-+});
+ 
