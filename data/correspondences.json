@@ -1,0 +1,29 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/data/correspondences.json b/data/correspondences.json
+index e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..f1acad42ef199a9ed6a94c4da6e3527172ce140f 100644
+--- a/data/correspondences.json
++++ b/data/correspondences.json
+@@ -0,0 +1,20 @@
++[
++  {
++    "realm": "Ancient Cathedral",
++    "style": "Gothic arches, stone, stained glass, sacred geometry",
++    "palette": ["stone grey", "aged gold", "midnight blue"],
++    "keywords": ["medieval", "scholarly", "arcane", "liturgical"]
++  },
++  {
++    "realm": "Visionary Feminine",
++    "style": "Elegant, gentle, luminous feminine artistry",
++    "palette": ["rose", "pearl", "soft aqua"],
++    "keywords": ["graceful", "visionary", "angelic", "organic"]
++  },
++  {
++    "realm": "Neon Witchcraft",
++    "style": "Constantine meets Blade Runner with Witcher edge",
++    "palette": ["void black", "neon cyan", "hot magenta"],
++    "keywords": ["urban", "occult", "techno-noir", "witchcraft"]
++  }
++]
+ 
+EOF
+)
