@@ -1,4 +1,4 @@
-name: CI
+  name: CI
 
 on:
   push:
@@ -13,10 +13,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-      # v5 fixes edge cases and ensures proper tool-cache handling
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # match your local; Pillow 10.x supports 3.8–3.13
+          python-version: '3.11'   # use the same version you run locally
 
       - name: Cache pip
         uses: actions/cache@v4
@@ -26,8 +25,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      # Optional but recommended: install system libraries so a source build can succeed
-      # (If wheels are available, this step isn't strictly needed, but it prevents surprises.)
       - name: Install system packages for Pillow
         run: |
           sudo apt-get update
@@ -45,24 +42,19 @@ jobs:
 
       - name: Install dependencies
         env:
-          # Prefer prebuilt wheels; fall back to source if needed.
           PIP_PREFER_BINARY: "1"
-          PIP_NO_WARN_SCRIPT_LOCATION: "0"
         run: |
           python -m pip install --upgrade pip
-          # Try wheels first (fast & reliable). If a wheel doesn't exist, pip will build from source.
           pip install --only-binary=:all: -r requirements.txt || pip install -r requirements.txt
 
-      # Quick sanity check so you can see Pillow actually imported
       - name: Verify Pillow
         run: |
           python - << 'PY'
-          import PIL, sys
+          import PIL
           from PIL import Image
           print("Pillow:", PIL.__version__)
-          print("Formats:", sorted(Image.registered_extensions().keys())[:10], "…")
+          print("OK:", bool(Image))
           PY
 
-      # Run your app tests or build step here (adjust to your project)
       # - name: Run tests
       #   run: pytest -q
