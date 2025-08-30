@@ -1,0 +1,29 @@
++[
++  {
++    "title": "Community Garden",
++    "prompt": "Blend horticulture with social design to plan a community space.",
++    "tasks": [
++      "Map soil and sunlight",
++      "Budget resources",
++      "Schedule volunteers"
++    ]
++  },
++  {
++    "title": "Small Business Workflow",
++    "prompt": "Fuse lean manufacturing with digital marketing to streamline processes.",
++    "tasks": [
++      "Analyze current pipeline",
++      "Introduce automation",
++      "Plan outreach campaign"
++    ]
++  },
++  {
++    "title": "Sustainable City Plan",
++    "prompt": "Combine urban planning with ecological modeling to draft resilient infrastructure.",
++    "tasks": [
++      "Assess energy grids",
++      "Model green transport",
++      "Engage citizen feedback"
++    ]
++  }
++]
