@@ -1,72 +1,141 @@
- # ✦ Cosmogenesis Learning Engine
- 
- *A spiral teacher for living art, pattern recognition, and visionary learning.*
- 
+- # ✦ Cosmogenesis Learning Engine
+- 
+- *A spiral teacher for living art, pattern recognition, and visionary learning.*
+- 
+-+Created by **Rebecca Susan Lemke** (Rebecca Respawn) – architect‑scribe of the Cosmogenesis project.
+-+
+- —
+- 
+- ## ✦ Overview
+--The **Cosmogenesis Learning Engine** is a browser-native app for **spiral learning**.  
+-+The **Cosmogenesis Learning Engine** is a browser-native app for **spiral learning**.
+- It transforms ideas, texts, or archives into **living plates** — interactive diagrams that reveal hidden patterns.
+- 
+--This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.  
+-+This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.
+- It is built to be **dynamic, recursive, and healing**: every return deepens the pattern.
+- 
+- —
+- 
+- ## ✦ Features
+--- **Plate Builder** — generate spirals, twin-cones, wheels, or grids.  
+--- **Any Dataset** — paste text, JSON, CSV, or archives; the engine adapts.  
+--- **Export** — save plates as SVG/PNG or share JSON configs.  
+--- **Gallery** — save your own collection locally.  
+--- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.  
+-+- **Plate Builder** — generate spirals, twin-cones, wheels, or grids.
+-+- **Any Dataset** — paste text, JSON, CSV, or archives; the engine adapts.
+-+- **Export** — save plates as SVG/PNG or share JSON configs.
+-+- **Gallery** — save your own collection locally.
+-+- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.
+- - **Offline-Ready** — open `index.html` in any browser; no install required.
+-+- **Plugins** — load open knowledge connectors or generative art modules on demand, with optional local `vendor/` scripts for offline use.
+-+- **Egregore Tarot** — summon helper personas as learning companions.
+-+- **Trauma-aware** — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
+-+- **Experience Modules** — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
+-+- **Correspondence Library** — sample mappings for chakras ↔ planets, runes, and I Ching.
+-+- **Accessibility Settings** — toggle calm colors, reduced motion, or mute audio; preferences persist locally.
+- 
+- —
+- 
+- ## ✦ Why It Matters
+--- For **artists & designers**: a tool to turn archives into living art.  
+--- For **mystics & researchers**: a way to trace correspondences across traditions.  
+--- For **educators & facilitators**: an interactive, non-linear teaching aid.  
+--- For **neurodivergent learners**: a system that respects spiral, recursive learning.  
+-+- For **artists & designers**: a tool to turn archives into living art.
+-+- For **mystics & researchers**: a way to trace correspondences across traditions.
+-+- For **educators & facilitators**: an interactive, non-linear teaching aid.
+-+- For **neurodivergent learners**: a system that respects spiral, recursive learning.
+- 
+- —
+- 
+- ## ✦ Quick Start
+- 1. Clone this repository:
+-    ```bash
+-    git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
+--   cd cosmogenesis-learning-engine
+-+   cd cosmogenesis-learning-engine
+-+   ```
+-+2. Open `index.html` in your browser.
+-+3. Load sample **Demos** or craft your own dataset.
+-+4. Visit the **Experiences** tab to read narrative prologues and choose a realm.
+-+
+-+Cross-discipline demos live in `data/demos.json` and load automatically.
+-+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
+-+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
+-+Correspondence examples live in `data/correspondences.json` for cross-tradition study.
+-+
+-+—
+-+
+-+## ✦ App Structure
+-+```
+-+app/
+-+├── shared/          # utilities reused across experiences
+-+│   ├── auth/
+-+│   └── utils/
+-+├── experience_a/    # Hypatia's Library
+-+│   ├── components/
+-+│   ├── pages/
+-+│   └── config.json
+-+├── experience_b/    # Tesla's Workshop
+-+│   ├── components/
+-+│   ├── pages/
+-+│   └── config.json
+-+├── experience_c/    # Agrippa's Study
+-+│   ├── components/
+-+│   ├── pages/
+-+│   └── config.json
+-+└── experience_d/    # Alexandrian Scriptorium
+-+    ├── components/
+-+    ├── pages/
+-+    └── config.json
+-+```
+-+Each experience declares its own `config.json` and can be loaded dynamically at runtime.
+-+
+-+—
+-+
+-+## ✦ Cross-Repository Growth
+-+The engine can link with other creative realms or data sources. Companion projects may live in separate repositories and expose
+-+their own modules, datasets, or plugins.
+-+
+-+- Use Git submodules or APIs to register external realms.
+-+- Store module descriptors in a registry so the app can discover them at runtime.
+-+- See `docs/repo_integration.md` for patterns that keep multi-repo ecosystems cohesive.
++# ✦ Cosmogenesis Learning Engine
++
++*A spiral teacher for living art, pattern recognition, and visionary learning.*
++
 +Created by **Rebecca Susan Lemke** (Rebecca Respawn) – architect‑scribe of the Cosmogenesis project.
 +
- —
- 
- ## ✦ Overview
--The **Cosmogenesis Learning Engine** is a browser-native app for **spiral learning**.  
-+The **Cosmogenesis Learning Engine** is a browser-native app for **spiral learning**.
- It transforms ideas, texts, or archives into **living plates** — interactive diagrams that reveal hidden patterns.
- 
--This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.  
-+This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.
- It is built to be **dynamic, recursive, and healing**: every return deepens the pattern.
- 
- —
- 
- ## ✦ Features
--- **Plate Builder** — generate spirals, twin-cones, wheels, or grids.  
--- **Any Dataset** — paste text, JSON, CSV, or archives; the engine adapts.  
--- **Export** — save plates as SVG/PNG or share JSON configs.  
--- **Gallery** — save your own collection locally.  
--- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.  
-+- **Plate Builder** — generate spirals, twin-cones, wheels, or grids.
-+- **Any Dataset** — paste text, JSON, CSV, or archives; the engine adapts.
-+- **Export** — save plates as SVG/PNG or share JSON configs.
-+- **Gallery** — save your own collection locally.
-+- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.
- - **Offline-Ready** — open `index.html` in any browser; no install required.
-+- **Plugins** — load open knowledge connectors or generative art modules on demand, with optional local `vendor/` scripts for offline use.
-+- **Egregore Tarot** — summon helper personas as learning companions.
-+- **Trauma-aware** — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
-+- **Experience Modules** — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
-+- **Correspondence Library** — sample mappings for chakras ↔ planets, runes, and I Ching.
-+- **Accessibility Settings** — toggle calm colors, reduced motion, or mute audio; preferences persist locally.
- 
- —
- 
- ## ✦ Why It Matters
--- For **artists & designers**: a tool to turn archives into living art.  
--- For **mystics & researchers**: a way to trace correspondences across traditions.  
--- For **educators & facilitators**: an interactive, non-linear teaching aid.  
--- For **neurodivergent learners**: a system that respects spiral, recursive learning.  
-+- For **artists & designers**: a tool to turn archives into living art.
-+- For **mystics & researchers**: a way to trace correspondences across traditions.
-+- For **educators & facilitators**: an interactive, non-linear teaching aid.
-+- For **neurodivergent learners**: a system that respects spiral, recursive learning.
- 
- —
- 
- ## ✦ Quick Start
- 1. Clone this repository:
-    ```bash
-    git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
--   cd cosmogenesis-learning-engine
++## ✦ Overview
++The Cosmogenesis Learning Engine is a browser‑native app for **spiral learning**. It transforms ideas, texts, or archives into **living plates**—interactive diagrams that reveal hidden patterns. Built for artists, mystics, educators, and anyone who cannot learn in flat, linear ways. Every return deepens the pattern.
++
++## ✦ Features
++- Plate Builder — generate spirals, twin-cones, wheels, or grids.
++- Any Dataset — paste text, JSON, CSV, or archives; the engine adapts.
++- Export — save plates as SVG/PNG or share JSON configs.
++- Gallery — save your own collection locally.
++- ND-Safe — no autoplay, calm motion, optional Ward Mode.
++- Offline-Ready — open `index.html` in any browser; no install required.
++- Plugins — load open knowledge connectors or generative art modules on demand, with optional local `vendor/` scripts for offline use.
++- Egregore Tarot — summon helper personas as learning companions.
++- Trauma-aware — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
++- Experience Modules — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
++- Correspondence Library — sample mappings for chakras ↔ planets, runes, and I Ching.
++- Accessibility Settings — toggle calm colors, reduced motion, or mute audio; preferences persist locally.
++
++## ✦ Quick Start
++1. Clone this repository:
++   ```bash
++   git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
 +   cd cosmogenesis-learning-engine
 +   ```
 +2. Open `index.html` in your browser.
-+3. Load sample **Demos** or craft your own dataset.
-+4. Visit the **Experiences** tab to read narrative prologues and choose a realm.
++3. Load sample demos or craft your own dataset.
++4. Visit the Experiences tab to explore realms.
 +
-+Cross-discipline demos live in `data/demos.json` and load automatically.
-+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
-+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
-+Correspondence examples live in `data/correspondences.json` for cross-tradition study.
-+
-+—
++Cross-discipline demos live in `data/demos.json`. Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`. Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`. Correspondence examples live in `data/correspondences.json` for cross-tradition study.
 +
 +## ✦ App Structure
 +```
@@ -93,12 +162,10 @@
 +```
 +Each experience declares its own `config.json` and can be loaded dynamically at runtime.
 +
-+—
-+
 +## ✦ Cross-Repository Growth
-+The engine can link with other creative realms or data sources. Companion projects may live in separate repositories and expose
-+their own modules, datasets, or plugins.
++The engine can link with other creative realms or data sources. Companion projects may live in separate repositories and expose their own modules, datasets, or plugins.
 +
 +- Use Git submodules or APIs to register external realms.
 +- Store module descriptors in a registry so the app can discover them at runtime.
 +- See `docs/repo_integration.md` for patterns that keep multi-repo ecosystems cohesive.
++
