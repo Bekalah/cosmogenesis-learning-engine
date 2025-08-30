@@ -1,9 +1,3 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a//dev/null b/test/smoke.test.js
-index 0000000000000000000000000000000000000000..74a88a32a5f005377de7f2b06cd163733f1bdf90 100644
---- a//dev/null
-+++ b/test/smoke.test.js
-@@ -0,0 +1,25 @@
 +import { describe, it, expect } from 'vitest';
 +import { readFileSync } from 'fs';
 +import { fileURLToPath } from 'url';
@@ -30,5 +24,3 @@ index 0000000000000000000000000000000000000000..74a88a32a5f005377de7f2b06cd16373
 +  });
 +});
  
-EOF
-)
