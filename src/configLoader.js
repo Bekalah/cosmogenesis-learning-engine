@@ -1,101 +1,61 @@
--+export function renderPlate(config) {
--+  if (!config || typeof config.layout !== 'string' || typeof config.mode !== 'number' || !Array.isArray(config.labels)) {
--+    throw new Error('Invalid plate configuration');
--+  }
--+  if (config.labels.length !== config.mode) {
--+    throw new Error('Label count must match mode');
--+  }
--+  return { ...config, rendered: true };
+-+import { readFileSync } from 'fs';
+-+import path from 'path';
+-+
+-+export function loadConfig(relativePath) {
+-+  const file = path.resolve(process.cwd(), relativePath);
+-+  const raw = readFileSync(file, 'utf8');
+-+  const clean = raw.replace(/^\s*\+/gm, '').trim();
+-+  return JSON.parse(clean);
 -+}
-- 
-+// Render a plate configuration into coordinates and export helpers
+-+
+-+export function loadFirstDemo() {
+-+  const demos = loadConfig('data/demos.json');
+-+  return demos[0].config;
+-+}
+-+
++import { readFileSync } from 'fs';
++import path from 'path';
 +
-+function spiralPositions(count) {
-+  const points = [];
-+  const a = 5;
-+  const b = 5;
-+  for (let i = 0; i < count; i++) {
-+    const angle = 0.5 * i;
-+    const radius = a + b * angle;
-+    points.push({ x: radius * Math.cos(angle), y: radius * Math.sin(angle) });
++// Load a JSON configuration file with basic error handling
++export function loadConfig(relativePath) {
++  const file = path.resolve(process.cwd(), relativePath);
++  let raw;
++  try {
++    raw = readFileSync(file, 'utf8');
++  } catch (err) {
++    throw new Error(`Config file not found: ${relativePath}`);
 +  }
-+  return points;
++
++  try {
++    return JSON.parse(raw);
++  } catch (err) {
++    throw new Error(`Invalid JSON in ${relativePath}`);
++  }
 +}
 +
-+function twinConePositions(count) {
-+  const points = [];
-+  const spacing = 20;
-+  for (let i = 0; i < count; i++) {
-+    const sign = i % 2 === 0 ? 1 : -1;
-+    const step = Math.floor(i / 2) + 1;
-+    points.push({ x: 0, y: sign * step * spacing });
++// Ensure a plate config adheres to the minimal schema used by renderPlate
++export function validatePlateConfig(config) {
++  if (typeof config !== 'object' || config === null) {
++    throw new Error('Config must be an object');
 +  }
-+  return points;
-+}
-+
-+function wheelPositions(count) {
-+  const points = [];
-+  const radius = 100;
-+  for (let i = 0; i < count; i++) {
-+    const angle = (2 * Math.PI * i) / count;
-+    points.push({ x: radius * Math.cos(angle), y: radius * Math.sin(angle) });
++  const layouts = ['spiral', 'twin-cone', 'wheel', 'grid'];
++  if (!layouts.includes(config.layout)) {
++    throw new Error('Unknown layout');
 +  }
-+  return points;
-+}
-+
-+function gridPositions(count) {
-+  const points = [];
-+  const cols = Math.ceil(Math.sqrt(count));
-+  const size = 40;
-+  for (let i = 0; i < count; i++) {
-+    const row = Math.floor(i / cols);
-+    const col = i % cols;
-+    points.push({ x: col * size, y: row * size });
++  if (typeof config.mode !== 'number' || config.mode <= 0) {
++    throw new Error('Mode must be a positive number');
 +  }
-+  return points;
-+}
-+
-+export function renderPlate(config) {
-+  if (!config || typeof config.layout !== 'string' || typeof config.mode !== 'number' || !Array.isArray(config.labels)) {
-+    throw new Error('Invalid plate configuration');
++  if (!Array.isArray(config.labels)) {
++    throw new Error('Labels must be an array');
 +  }
 +  if (config.labels.length !== config.mode) {
 +    throw new Error('Label count must match mode');
 +  }
++}
 +
-+  const layouts = {
-+    spiral: spiralPositions,
-+    'twin-cone': twinConePositions,
-+    wheel: wheelPositions,
-+    grid: gridPositions,
-+  };
-+
-+  const create = layouts[config.layout];
-+  if (!create) {
-+    throw new Error(`Unsupported layout: ${config.layout}`);
-+  }
-+
-+  const positions = create(config.mode);
-+  const items = config.labels.map((text, i) => ({ text, ...positions[i] }));
-+
-+  function exportAsJSON() {
-+    return JSON.stringify(config, null, 2);
-+  }
-+
-+  function exportAsSVG() {
-+    const size = 500;
-+    const center = size / 2;
-+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">`;
-+    items.forEach(({ text, x, y }) => {
-+      svg += `<text x="${center + x}" y="${center + y}" text-anchor="middle" dominant-baseline="central">${text}</text>`;
-+    });
-+    svg += '</svg>';
-+    return svg;
-+  }
-+
-+  function exportAsPNG() {
-+    return Buffer.from(exportAsSVG());
-+  }
-+
-+  return { ...config, items, exportAsJSON, exportAsSVG, exportAsPNG };
++export function loadFirstDemo() {
++  const demos = loadConfig('data/demos.json');
++  const config = demos[0].config;
++  validatePlateConfig(config);
++  return config;
 +}
