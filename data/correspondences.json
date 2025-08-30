@@ -3,18 +3,21 @@
 +    "realm": "Ancient Cathedral",
 +    "style": "Gothic arches, stone, stained glass, sacred geometry",
 +    "palette": ["stone grey", "aged gold", "midnight blue"],
-+    "keywords": ["medieval", "scholarly", "arcane", "liturgical"]
++    "keywords": ["medieval", "scholarly", "arcane", "liturgical"],
++    "essence": "intelligence and monastic luxury"
 +  },
 +  {
 +    "realm": "Visionary Feminine",
 +    "style": "Elegant, gentle, luminous feminine artistry",
 +    "palette": ["rose", "pearl", "soft aqua"],
-+    "keywords": ["graceful", "visionary", "angelic", "organic"]
++    "keywords": ["graceful", "visionary", "angelic", "organic"],
++    "essence": "elegance and compassionate wisdom"
 +  },
 +  {
 +    "realm": "Neon Witchcraft",
 +    "style": "Constantine meets Blade Runner with Witcher edge",
 +    "palette": ["void black", "neon cyan", "hot magenta"],
-+    "keywords": ["urban", "occult", "techno-noir", "witchcraft"]
++    "keywords": ["urban", "occult", "techno-noir", "witchcraft"],
++    "essence": "innovative occult luxury"
 +  }
 +]
