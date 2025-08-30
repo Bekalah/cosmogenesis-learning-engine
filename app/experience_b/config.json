@@ -1,0 +1,6 @@
++{
++  "title": "Tesla's Workshop",
++  "description": "Experiment with electricity and invention in Nikola Tesla's lab.",
++  "pages": ["prologue.md"],
++  "components": ["components/coil.js"]
++}
