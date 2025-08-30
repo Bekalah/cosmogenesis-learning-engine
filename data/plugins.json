@@ -1,3 +1,14 @@
 +[
-+  { "name": "p5Mandala", "src": "plugins/p5Mandala.js" }
++  {
++    "id": "wikiSummary",
++    "title": "Wikipedia Summary",
++    "src": "plugins/wikiSummary.js",
++    "description": "Fetch a Wikipedia summary and convert it into labels"
++  },
++  {
++    "id": "p5Mandala",
++    "title": "p5 Mandala",
++    "src": "plugins/p5Mandala.js",
++    "description": "Generate a simple mandala using p5.js"
++  }
 +]
