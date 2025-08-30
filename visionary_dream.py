@@ -1,59 +1,44 @@
-# visionary_art_generator.py
-# Museum-quality visionary art using Python + Pillow + NumPy
-
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 
-# Canvas setup
+# Initialize canvas dimensions for high-definition output
 WIDTH, HEIGHT = 1920, 1080
-img = Image.new('RGB', (WIDTH, HEIGHT))
-draw = ImageDraw.Draw(img)
 
-# Gradient background (psychedelic palette)
-gradient = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
-for y in range(HEIGHT):
-    for x in range(WIDTH):
-        r = int(128 + 127 * np.sin(2 * np.pi * (x + y) / (WIDTH + HEIGHT)))
-        g = int(128 + 127 * np.sin(2 * np.pi * x / WIDTH + np.pi / 3))
-        b = int(128 + 127 * np.sin(2 * np.pi * y / HEIGHT + np.pi / 2))
-        gradient[y, x] = (r, g, b)
-img = Image.fromarray(gradient)
+# Generate complex plane grid for fractal calculation
+x = np.linspace(-1.8, 1.8, WIDTH)
+y = np.linspace(-1.0, 1.0, HEIGHT)
+X, Y = np.meshgrid(x, y)
+Z = X + 1j * Y
 
-# Matrix digital rain
-symbols = "01"
-for col in range(0, WIDTH, 20):
-    offset = np.random.randint(-HEIGHT, 0)
-    for row in range(offset, HEIGHT, 20):
-        char = np.random.choice(list(symbols))
-        draw.text((col, row), char, fill=(0, 255, 70))
+# Seed constant shaping the Julia set's visionary geometry
+C = complex(-0.70176, -0.3842)
 
-# Wonderland spiral (glowing)
-for theta in np.linspace(0, 20 * np.pi, 1200):
-    radius = 10 * theta
-    x = WIDTH / 2 + radius * np.cos(theta)
-    y = HEIGHT / 2 + radius * np.sin(theta)
-    draw.ellipse((x - 4, y - 4, x + 4, y + 4), fill=(255, 0, 255))
+# Iterate fractal equation with escape-time algorithm
+iterations = 300
+escape_radius = 10
+M = np.zeros((HEIGHT, WIDTH))
+for i in range(iterations):
+    mask = np.abs(Z) <= escape_radius
+    Z[mask] = Z[mask] ** 2 + C
+    M[mask] = i
 
-# Ethereal chessboard (dual realities)
-tile_size = 80
-for y in range(0, HEIGHT, tile_size):
-    for x in range(0, WIDTH, tile_size):
-        if (x // tile_size + y // tile_size) % 2 == 0:
-            draw.rectangle([x, y, x + tile_size, y + tile_size], outline=(200, 200, 255))
+# Define Alex Grey-inspired spectral palette for transcendental hues
+colors = [
+    "#000000",  # cosmic void
+    "#0d3b66",  # deep indigo
+    "#0336ff",  # electric blue
+    "#845ec2",  # radiant violet
+    "#ff6f91",  # astral magenta
+    "#ff9671",  # solar orange
+    "#ffc75f",  # golden ray
+    "#f9f871"   # ethereal glow
+]
+cmap = LinearSegmentedColormap.from_list("alex_grey", colors, N=256)
 
-# Circuit cathedral (fractal glyphs)
-for i in range(500):
-    x1, y1 = np.random.randint(0, WIDTH), np.random.randint(0, HEIGHT)
-    x2, y2 = x1 + np.random.randint(-50, 50), y1 + np.random.randint(-50, 50)
-    color = tuple(np.random.randint(0, 255, size=3))
-    draw.line((x1, y1, x2, y2), fill=color, width=1)
-
-# Mystical text overlay
-font = ImageFont.load_default()
-draw.text((WIDTH * 0.32, HEIGHT * 0.88), "Follow the White Rabbit", fill=(255, 255, 255), font=font)
-
-# Glow effect
-img = img.filter(ImageFilter.GaussianBlur(radius=1))
-
-# Save final artifact
-img.save("Visionary_Dream.png")
+# Render fractal with palette and save as visionary artwork
+plt.figure(figsize=(WIDTH / 100, HEIGHT / 100), dpi=100)
+plt.imshow(M, cmap=cmap, extent=[-1.8, 1.8, -1.0, 1.0])
+plt.axis("off")
+plt.savefig("Visionary_Dream.png", bbox_inches="tight", pad_inches=0)
+plt.close()
