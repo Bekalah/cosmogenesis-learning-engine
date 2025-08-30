@@ -46,4 +46,3 @@
 +  cross‑device sync.
 +* Future expansions may let Sophia7 craft bespoke quests that blend archaeology,
 +  sociology and art traditions to deepen learning.
-+
