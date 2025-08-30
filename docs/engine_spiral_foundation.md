@@ -1,3 +1,24 @@
+(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/docs/engine_spiral_foundation.md b/docs/engine_spiral_foundation.md
+index 3d5273fbfe946db2a1511fa6dcc06bbb4172c66b..b02f3fa0c0890ecb7b734c3d1c49567cb6211a77 100644
+--- a/docs/engine_spiral_foundation.md
++++ b/docs/engine_spiral_foundation.md
+@@ -1,60 +1,54 @@
+- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+-diff --git a/docs/engine_spiral_foundation.md b/docs/engine_spiral_foundation.md
+-index 5992f957c592579f303555b742493a97b8529c9b..5928c87b7da37617b5c26832b9ed6b6ab2f6360f 100644
+---- a/docs/engine_spiral_foundation.md
+-+++ b/docs/engine_spiral_foundation.md
+-@@ -89,33 +89,49 @@ All engine state can be represented as a JSON config (share/import/export):
+-   “rInner”: 64,
+-   “rOuter”: 460,
+-   “nodeSize”: 24,
+-   “borderWidth”: 2.5,
+-   “style”: “hilma_spiral”,
+-   “labels”: [“Red”,”Orange”,”Yellow”,”Green”,”Cyan”,”Blue”,”Violet”],
+-   “phase”: 1.0471975512
+- }
+- 
 - ⸻
 - 
 - •	layout: “spiral” | “twin_cones” | “wheel” | “grid”
@@ -97,3 +118,4 @@
 +   `index.html`’s `style-selector`.
 +3. Reload the page; the new palette will appear in the Style menu and can be
 +   referenced by name in shared configs.
+ 
