@@ -1,0 +1,6 @@
++{
++  "title": "Tesla",
++  "components": [
++    { "id": "counter", "src": "./components/counter.js" }
++  ]
++}
