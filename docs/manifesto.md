@@ -2,6 +2,8 @@
 +
 +Cosmogenesis is a commitment to spiral learning and living art. We honor minds like Agrippa, Hypatia, Tesla, and Einstein by weaving their curiosity into interactive plates. The engine rejects flat instruction and invites learners to revisit ideas from new angles, revealing correspondences across alchemy, Neoplatonism, integral psychology, and visionary invention.
 +
++We trace lineages from Rosicrucian ateliers to Tibetan mandalas and echo Sappho's lyric fire, restoring lost libraries through code.
++
 +Our guiding principles:
 +
 +1. **Non-linear exploration** – every return deepens the pattern.
@@ -11,5 +13,3 @@
 +5. **Community growth** – a platform where contributors can share new plates, realms, and art packs.
 +
 +By launching the Cosmogenesis Learning Engine, we invite learners to step inside a living archive where each interaction sparks transformation.
-+
- 
