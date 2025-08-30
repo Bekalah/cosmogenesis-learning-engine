@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+      # v5 fixes edge cases and ensures proper tool-cache handling
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # match your local; Pillow 10.x supports 3.8–3.13
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # Optional but recommended: install system libraries so a source build can succeed
+      # (If wheels are available, this step isn't strictly needed, but it prevents surprises.)
+      - name: Install system packages for Pillow
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libjpeg-turbo8-dev \
+            zlib1g-dev \
+            libpng-dev \
+            libfreetype6-dev \
+            liblcms2-dev \
+            libtiff5-dev \
+            libwebp-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libopenjp2-7-dev
+
+      - name: Install dependencies
+        env:
+          # Prefer prebuilt wheels; fall back to source if needed.
+          PIP_PREFER_BINARY: "1"
+          PIP_NO_WARN_SCRIPT_LOCATION: "0"
+        run: |
+          python -m pip install --upgrade pip
+          # Try wheels first (fast & reliable). If a wheel doesn't exist, pip will build from source.
+          pip install --only-binary=:all: -r requirements.txt || pip install -r requirements.txt
+
+      # Quick sanity check so you can see Pillow actually imported
+      - name: Verify Pillow
+        run: |
+          python - << 'PY'
+          import PIL, sys
+          from PIL import Image
+          print("Pillow:", PIL.__version__)
+          print("Formats:", sorted(Image.registered_extensions().keys())[:10], "…")
+          PY
+
+      # Run your app tests or build step here (adjust to your project)
+      # - name: Run tests
+      #   run: pytest -q
