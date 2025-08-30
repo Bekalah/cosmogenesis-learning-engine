@@ -49,5 +49,3 @@
 +2. Choose **Layout** = Spiral.
 +3. Enter 7 labels (colors work well):
  
-EOF
-)
