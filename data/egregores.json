@@ -18,6 +18,14 @@
 +      "Vampire Elite Business"
 +    ],
 +    "assists_with": ["hope mapping", "stellar navigation", "symbolic analysis"]
++  },
++  {
++    "name": "Moonchild",
++    "arcana": "0 – The Fool",
++    "aesthetic_channels": [
++      "Sapphic Muse",
++      "Occult Revision"
++    ],
++    "assists_with": ["poetic triggers", "lunar code experiments", "gentle reboots"]
 +  }
 +]
- 
