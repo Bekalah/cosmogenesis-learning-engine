@@ -1,47 +1,9 @@
---+{
---+  "name": "cosmogenesis-learning-engine",
---+  "version": "1.0.0",
---+  "description": "",
---+  "main": "index.js",
---+  "directories": {
---+    "doc": "docs"
---+  },
---+  "scripts": {
---+    "test": "vitest"
---+  },
---+  "keywords": [],
---+  "author": "",
---+  "license": "ISC",
---+  "type": "module",
---+  "devDependencies": {
---+    "vitest": "^1.6.0"
---+  }
---+}
--+{
--+  "name": "cosmogenesis-learning-engine",
--+  "version": "1.0.0",
--+  "description": "",
--+  "main": "index.js",
--+  "type": "module",
--+  "scripts": {
--+    "test": "vitest"
--+  },
--+  "devDependencies": {
--+    "vitest": "^1.6.0"
--+  }
--+}
 +{
 +  "name": "cosmogenesis-learning-engine",
-+  "version": "1.0.0",
-+  "description": "",
-+  "main": "index.js",
++  "version": "0.1.0",
++  "license": "MIT",
 +  "type": "module",
 +  "scripts": {
-+    "test": "vitest"
-+  },
-+  "devDependencies": {
-+    "vitest": "^1.6.0"
++    "test": "node --test"
 +  }
 +}
-
- 
