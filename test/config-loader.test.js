@@ -26,6 +26,6 @@
 +
 +test('loads the first demo configuration', () => {
 +  const config = loadFirstDemo();
-+  assert.ok(config.layout);
++  assert.equal(typeof config.layout, 'string');
 +  assert.ok(Array.isArray(config.labels));
 +});
