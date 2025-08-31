@@ -1,0 +1,13 @@
+# Node dependencies
+node_modules/
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Generated images and logs
+Visionary_Dream.png
+*.log
+
+# OS files
+.DS_Store
