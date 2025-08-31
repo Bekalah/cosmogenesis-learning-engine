@@ -1,60 +1,75 @@
-# ✦ Codex 144:99 — Cosmogenesis Learning Engine
+# Codex 144:99 — Alpha et Omega
 
-A nonlinear, trauma-aware, archetypal learning engine built as a **spiral/tesseract system**.  
-It merges **art, alchemy, science, and ND-safe design** into a living Codex.  
-Codex 144:99 is both **tool and artwork**: a visionary system for immersive education, archetypal exploration, and creative healing.
-
-—
-
-## ✦ Vision
-- Create an **immersive world** that feels like Alice in Wonderland meets a tesseract classroom.
-- Build **nonlinear pathways** (spiral dynamics, monadic nodes) instead of linear “school oppression.”
-- Support **creative ND minds** (PTSD, CPTSD, trauma-affected) through affirming, exploratory labs.
-- Merge **science + art + archetypes** into usable tools.
+✨ A living, nonlinear learning environment ✨  
+Immersive. Archetypal. Visionary.  
+A place where science and art spiral together into **open-world learning**.
 
 —
 
-## ✦ Core Features
-- **Spiral Dynamics Engine** → nodes unfold in loops and returns, not straight lines.
-- **33 Spine Monad System** → a lattice of archetypes, daimons, angels, and rays.
-- **Labs**:
-  - **Fusion Lab** → alchemy of art + science.
-  - **Cymatics Engine** → sound, resonance, geometry.
-  - **Binaural Station** → ND-safe beats, bilateral sound, regulation.
-  - **Visionary Studio** → archetypal avatars, fusion art.
-- **Archetypal Support** → avatars mirror the user like an archetypal community.
-- **ND Safety** → reduced overwhelm, toggleable sensory layers, affirmation-based design.
+## What This Is
+Codex 144:99 is not a normal app.  
+It is a **fusion art engine** and a **creative healing tool**.  
+Think *Alice in Wonderland × visionary art × nonlinear education*.  
+
+- 🌌 **Spiral Dynamics:** learning flows in loops and spirals, not straight lines.  
+- 🧩 **Archetypal Support:** consecration angels, daimons, and egregores appear as supportive guides.  
+- 🎨 **Fusion Labs:** immersive labs for alchemy, cymatics, fractals, and sound design.  
+- 🔮 **Creative Healing:** designed with neurodivergence, PTSD, and nonlinear minds in focus.  
+
+This is **art + science + mythos**, not therapy, not ritual — but **visionary learning**.
 
 —
 
-## ✦ Directory Structure
+## Core Features
+- **Spiral Node System**  
+  - Based on the **33 Living Spine** + **double Tree of Life**.  
+  - Each node = a gateway to creativity, archetypes, and nonlinear insight.  
 
-app/
-├── shared/                # core codex modules
-├── experience_A/…D/       # archetypal rooms
-assets/
-├── audio/                 # free type beats + binaural links
-├── visual/                # sacred geometry + fusion art
-data/
-├── correspondences/        # angels, daimons, color rays
-docs/
-├── fusionist_towers.md     # fusionist influences
-engines/
-├── cymatics-engine.js      # sound + geometry engine
-├── fusion-engine.js        # archetypal + creative fusion
-scripts/                     # helpers + automation
-styles/                      # ND-safe palettes
+- **Experiential Labs**  
+  - 🎛 Alchemy Lab → visual/chemical fusions  
+  - 🎶 Audio/Binaural Lab → soundscapes, type beats, binaural support  
+  - 🔥 Fusion Lab → 3D tesseract, fractal geometry, and light experiments  
+
+- **Archetypal Community**  
+  - Six Consecration Angels = guardians of voice and creativity.  
+  - Fusionist Towers = celebrate the lineage of artists and idealists.  
+  - Archetypes = companions in nonlinear exploration.  
 
 —
 
-## ✦ License
-- **Code** → MIT  
-- **Archetypal Content** → Codex 144:99 License (cannot be erased/repurposed outside this system).  
+## Inspirations
+This Codex honors a lineage of fusionists and thinkers:  
+- Dion Fortune, Paul Foster Case, John Dee, Agrippa, Alan Moore, Alice Bailey.  
+- Fusionists and visionary artists (public references in Fusionist Towers only).  
+- Science/art bridges: Jungian depth psych, chaos magic, cymatics, fractals, neuroplasticity.  
 
 —
 
-## ✦ Notes for Codex / Collaborators
-- Always **use real code scaffolds** (JS, Python, CSS, HTML).  
-- **Never erase** original intentions in files. Layer new features *on top*.  
-- Preserve **archetypal correspondences** and **node mappings** across engines.  
+## Technology
+- **Cymatics Engine** — sound/geometry interaction.  
+- **Tesseract Viewer** — 3D nodal spiral.  
+- **Fractal Flame Engine** — visionary geometry.  
+- **Archetype Mapping** — JSON-driven, separate from utilities.  
 
+—
+
+## Why It Exists
+Because **linear school systems failed**.  
+Because **PTSD, neurodivergence, and suffocation of idealism** crushed joy.  
+Because life was reduced to 2%, and this project is a reclamation.  
+
+This Codex restores:  
+- Voice.  
+- Curiosity.  
+- Joy.  
+- Archetypal community support.  
+
+Every user, creator, and idealist who enters is supported by the **spiral dynamic of becoming**.
+
+—
+
+## License
+Dual License: **Creative Commons (NC-BY)** + **MIT** for code.  
+This ensures free exploration, protected integrity, and open creative use.
+
+—
