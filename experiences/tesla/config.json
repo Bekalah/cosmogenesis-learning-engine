@@ -1,6 +1,6 @@
-+{
-+  "title": "Tesla",
-+  "components": [
-+    { "id": "counter", "src": "./components/counter.js" }
-+  ]
-+}
+{
+  "title": "Tesla",
+  "components": [
+    { "id": "counter", "src": "./components/counter.js" }
+  ]
+}

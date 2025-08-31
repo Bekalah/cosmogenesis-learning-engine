@@ -1,6 +1,6 @@
-+{
-+  "title": "Hypatia",
-+  "components": [
-+    { "id": "counter", "src": "./components/counter.js" }
-+  ]
-+}
+{
+  "title": "Hypatia",
+  "components": [
+    { "id": "counter", "src": "./components/counter.js" }
+  ]
+}

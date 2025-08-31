@@ -1,6 +1,6 @@
-+{
-+  "title": "Alexandrian Scriptorium",
-+  "components": [
-+    { "id": "counter", "src": "./components/counter.js" }
-+  ]
-+}
+{
+  "title": "Alexandrian Scriptorium",
+  "components": [
+    { "id": "counter", "src": "./components/counter.js" }
+  ]
+}
