@@ -1,0 +1,100 @@
+# ───────────────────────────────────────────────────────────────
+# Cosmogenesis Learning Engine — LFS & Push-Protection Fix
+# This file solves the common “push not allowed” / large file blocks
+# by routing heavy media through Git LFS and normalizing text files.
+#
+# WHAT TO DO (read these notes carefully):
+# 1) Open Working Copy:
+#    • Stage/commit THIS .gitattributes first and push it alone (small change).
+#    • If push is still blocked only because of workflows, temporarily rename:
+#      .github/workflows → .github/workflows_disabled, commit & push, then restore via web.
+#
+# 2) After this file is on GitHub, re-add your media so they go via LFS:
+#    • Unstage any current big media changes.
+#    • Ensure your audio is in assets/sound/, videos in assets/video/.
+#    • Re-add the files so Working Copy creates LFS pointers automatically.
+#    • Commit, then push again.
+#
+# 3) If you already committed a >100MB file into history:
+#    • Remove that file from the index NOW, commit, push.
+#    • Later, rewrite history with BFG or git filter-repo (we can supply a script),
+#      or put the file in Releases instead of the repo.
+#
+# 4) If the error is about workflow permission:
+#    • Your token must allow Actions/Workflows write.
+#    • Quick bypass: rename the workflows folder as noted in step 1, push, then
+#      add/restore the workflow using GitHub’s web UI Actions editor.
+#
+# 5) Org SSO blocker (403 with no detail):
+#    • Open your token at github.com/settings/tokens and “Authorize SSO” for the org.
+#
+# 6) Branch protection:
+#    • If main is protected, push a feature branch and open a PR.
+# ───────────────────────────────────────────────────────────────
+
+# -——— Large media through Git LFS -———
+# Audio
+assets/sound/** filter=lfs diff=lfs merge=lfs -text
+# Video
+assets/video/** filter=lfs diff=lfs merge=lfs -text
+# High-res images & binaries
+assets/img/**/*.psd filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.tif filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.tiff filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.exr filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.bmp filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.webm filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/img/**/*.mov filter=lfs diff=lfs merge=lfs -text
+
+# Optional: any file over ~5–10MB you want to force into LFS by extension
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.flac filter=lfs diff=lfs merge=lfs -text
+*.ogg filter=lfs diff=lfs merge=lfs -text
+*.aiff filter=lfs diff=lfs merge=lfs -text
+*.m4a filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.7z  filter=lfs diff=lfs merge=lfs -text
+
+# -——— Text normalization (keeps diffs clean) -———
+* text=auto
+*.md  text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js  text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.py  text eol=lf
+*.ts  text eol=lf
+*.tsx text eol=lf
+
+# -——— Keep empty tracked directories (use .keep files) -———
+assets/flame/.keep -text
+assets/sound/.keep -text
+assets/video/.keep -text
+public/generated/.keep -text
+gallery/.keep -text
+
+# ───────────────────────────────────────────────────────────────
+# QUICK TROUBLESHOOT FLOW (Working Copy)
+# A) If push says “not allowed” or stalls after adding audio:
+#    1) Commit + push ONLY this .gitattributes.
+#    2) Unstage your big files, then re-add them so they become LFS pointers.
+#    3) Commit + push again.
+#
+# B) If GitHub says a file exceeds 100MB:
+#    1) Remove that file from the index (don’t delete locally), commit, push.
+#    2) Re-add it in assets/sound/ so LFS picks it up, commit, push.
+#
+# C) If the failure mentions workflows:
+#    • Temporarily rename .github/workflows → .github/workflows_disabled, commit, push.
+#    • In GitHub web UI, go to Actions → “New workflow” → paste your YAML → Commit.
+#
+# D) If the error is 403 and vague:
+#    • Authorize SSO on your new token, or ensure the remote uses HTTPS and the token.
+# ───────────────────────────────────────────────────────────────
