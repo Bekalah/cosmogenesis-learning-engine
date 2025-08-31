@@ -1,30 +1,28 @@
-+{
-+  "chakras_planets": [
-+    { "chakra": "Root", "planet": "Saturn" },
-+    { "chakra": "Sacral", "planet": "Jupiter" },
-+    { "chakra": "Solar Plexus", "planet": "Mars" },
-+    { "chakra": "Heart", "planet": "Sun" },
-+    { "chakra": "Throat", "planet": "Mercury" },
-+    { "chakra": "Third Eye", "planet": "Moon" },
-+    { "chakra": "Crown", "planet": "Venus" }
-+  ],
-+  "runes_letters": [
-+    { "rune": "Fehu", "letter": "F" },
-+    { "rune": "Uruz", "letter": "U" },
-+    { "rune": "Thurisaz", "letter": "Th" }
-+  ],
-+  "iching_elements": [
-+    { "hexagram": 1, "name": "Qian", "element": "Heaven" },
-+    { "hexagram": 2, "name": "Kun", "element": "Earth" }
-+  ],
-+  "rosicrucian_metals": [
-+    { "metal": "Gold", "virtue": "Sun" },
-+    { "metal": "Silver", "virtue": "Moon" }
-+  ],
-+  "alexandrian_scrolls": [
-+    { "scroll": "Emerald Tablet", "theme": "Alchemy" },
-+    { "scroll": "Sappho Fragments", "theme": "Lyric wisdom" }
-+  ]
-+}
-EOF
-)
+{
+  "chakras_planets": [
+    { "chakra": "Root", "planet": "Saturn" },
+    { "chakra": "Sacral", "planet": "Jupiter" },
+    { "chakra": "Solar Plexus", "planet": "Mars" },
+    { "chakra": "Heart", "planet": "Sun" },
+    { "chakra": "Throat", "planet": "Mercury" },
+    { "chakra": "Third Eye", "planet": "Moon" },
+    { "chakra": "Crown", "planet": "Venus" }
+  ],
+  "runes_letters": [
+    { "rune": "Fehu", "letter": "F" },
+    { "rune": "Uruz", "letter": "U" },
+    { "rune": "Thurisaz", "letter": "Th" }
+  ],
+  "iching_elements": [
+    { "hexagram": 1, "name": "Qian", "element": "Heaven" },
+    { "hexagram": 2, "name": "Kun", "element": "Earth" }
+  ],
+  "rosicrucian_metals": [
+    { "metal": "Gold", "virtue": "Sun" },
+    { "metal": "Silver", "virtue": "Moon" }
+  ],
+  "alexandrian_scrolls": [
+    { "scroll": "Emerald Tablet", "theme": "Alchemy" },
+    { "scroll": "Sappho Fragments", "theme": "Lyric wisdom" }
+  ]
+}

@@ -1,17 +1,17 @@
-+[
-+  {
-+    "label": "Exact Magus / Angel Science",
-+    "style": "Ancient Cathedral",
-+    "description": "Gothic geometry, stained glass logic, and arcane lab precision." 
-+  },
-+  {
-+    "label": "Visionary Luminous Feminine",
-+    "style": "Elegant Gentle Feminine Artistic",
-+    "description": "Soft halos, pastel palettes, and nurturing artistic grace." 
-+  },
-+  {
-+    "label": "Vampire Elite Business",
-+    "style": "Constantine Blade Runner Alan Moore Witcher Mods",
-+    "description": "Neon-noir occult tech with trenchcoat glamour and enchanted blades." 
-+  }
-+]
+[
+  {
+    "label": "Exact Magus / Angel Science",
+    "style": "Ancient Cathedral",
+    "description": "Gothic geometry, stained glass logic, and arcane lab precision."
+  },
+  {
+    "label": "Visionary Luminous Feminine",
+    "style": "Elegant Gentle Feminine Artistic",
+    "description": "Soft halos, pastel palettes, and nurturing artistic grace."
+  },
+  {
+    "label": "Vampire Elite Business",
+    "style": "Constantine Blade Runner Alan Moore Witcher Mods",
+    "description": "Neon-noir occult tech with trenchcoat glamour and enchanted blades."
+  }
+]

@@ -1,6 +1,6 @@
-+{
-+  "title": "Hypatia's Library",
-+  "description": "Explore geometry and philosophy guided by Hypatia in ancient Alexandria.",
-+  "pages": ["prologue.md"],
-+  "components": ["components/compass.js"]
-+}
+{
+  "title": "Hypatia's Library",
+  "description": "Explore geometry and philosophy guided by Hypatia in ancient Alexandria.",
+  "pages": ["prologue.md"],
+  "components": ["components/compass.js"]
+}

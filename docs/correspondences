@@ -1,25 +1,25 @@
-+# ✦ Correspondences
-+
-+`data/correspondences.json` collects symbolic bridges between systems.  
-+The initial `chakra_planet` set links the seven primary chakras of yogic
-+tradition with the seven classical planets used in Western astrology.
-+
-+| Chakra | Planet | Note |
-+| --- | --- | --- |
-+| Muladhara (Root) | Saturn | Grounding and structure |
-+| Svadhisthana (Sacral) | Jupiter | Growth and flow |
-+| Manipura (Solar Plexus) | Mars | Willpower and action |
-+| Anahata (Heart) | Sun | Vitality and center |
-+| Vishuddha (Throat) | Venus | Harmony in expression |
-+| Ajna (Third Eye) | Mercury | Insight and communication |
-+| Sahasrara (Crown) | Moon | Receptivity and cycles |
-+
-+To extend this file:
-+
-+1. Use descriptive keys (`chakra`, `planet`, `note`).
-+2. Keep the JSON valid and human readable.
-+3. Add new arrays for other correspondence sets (e.g., elements ↔ virtues).
-+
-+Refer back to this document when introducing new terms so contributors
-+understand how to weave additional mappings.
-+
+# ✦ Correspondences
+
+`data/correspondences.json` collects symbolic bridges between systems.  
+The initial `chakra_planet` set links the seven primary chakras of yogic
+tradition with the seven classical planets used in Western astrology.
+
+| Chakra | Planet | Note |
+| --- | --- | --- |
+| Muladhara (Root) | Saturn | Grounding and structure |
+| Svadhisthana (Sacral) | Jupiter | Growth and flow |
+| Manipura (Solar Plexus) | Mars | Willpower and action |
+| Anahata (Heart) | Sun | Vitality and center |
+| Vishuddha (Throat) | Venus | Harmony in expression |
+| Ajna (Third Eye) | Mercury | Insight and communication |
+| Sahasrara (Crown) | Moon | Receptivity and cycles |
+
+To extend this file:
+
+1. Use descriptive keys (`chakra`, `planet`, `note`).
+2. Keep the JSON valid and human readable.
+3. Add new arrays for other correspondence sets (e.g., elements ↔ virtues).
+
+Refer back to this document when introducing new terms so contributors
+understand how to weave additional mappings.
+
