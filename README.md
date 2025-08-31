@@ -233,11 +233,23 @@
 +2. Open `index.html` in your browser.
 +3. Load sample demos from `data/` or craft your own dataset.
 +
-+Plugins live in `plugins/` and experience modules in `app/`.
-+
-+## Development
-+Run tests with:
-+
-+```bash
-+npm test
-+```
+Plugins live in `plugins/` and experience modules in `app/`.
+
+## Development
+Run tests with:
+
+```bash
+npm test
+```
+
+## Visionary Dream Generator
+
+Render a static spiral plate from the command line:
+
+```bash
+pip install pillow
+python visionary_dream.py --palette calm --width 1280 --height 720
+```
+
+The script outputs `Visionary_Dream.png` and a brief alt-text file for accessible viewing.
+
