@@ -1,60 +1,96 @@
-# ✦ Codex 144:99 — Cosmogenesis Learning Engine
+Codex 144:99 — Alpha et Omega
 
-A nonlinear, trauma-aware, archetypal learning engine built as a **spiral/tesseract system**.  
-It merges **art, alchemy, science, and ND-safe design** into a living Codex.  
-Codex 144:99 is both **tool and artwork**: a visionary system for immersive education, archetypal exploration, and creative healing.
+Master Entry Document
 
-—
+Vision:
+Codex 144:99 (Alpha et Omega) is a spiral-dynamic, nonlinear learning environment.
+It is designed as a living cathedral — a fusion of art, science, and archetypal support — where users can explore creativity, healing, and knowledge through immersive environments.
 
-## ✦ Vision
-- Create an **immersive world** that feels like Alice in Wonderland meets a tesseract classroom.
-- Build **nonlinear pathways** (spiral dynamics, monadic nodes) instead of linear “school oppression.”
-- Support **creative ND minds** (PTSD, CPTSD, trauma-affected) through affirming, exploratory labs.
-- Merge **science + art + archetypes** into usable tools.
+This is not ritual software. It is a visionary art + learning engine.
+It mirrors the architecture of the Double Tree of Life, the 33-node Living Spine, and the Tesseract, re-imagined as interactive creative tools.
 
-—
+⸻
 
-## ✦ Core Features
-- **Spiral Dynamics Engine** → nodes unfold in loops and returns, not straight lines.
-- **33 Spine Monad System** → a lattice of archetypes, daimons, angels, and rays.
-- **Labs**:
-  - **Fusion Lab** → alchemy of art + science.
-  - **Cymatics Engine** → sound, resonance, geometry.
-  - **Binaural Station** → ND-safe beats, bilateral sound, regulation.
-  - **Visionary Studio** → archetypal avatars, fusion art.
-- **Archetypal Support** → avatars mirror the user like an archetypal community.
-- **ND Safety** → reduced overwhelm, toggleable sensory layers, affirmation-based design.
+Core Directories:
+	•	app/  (shared modules and experiences A–D)
+	•	assets/  (CC0 / public-domain sound, image, video links only)
+	•	docs/
+	•	engines/  (JacobsLadder, ApprenticePillar, Tesseract, Cymatics, FusionArt)
+	•	plugins/
+	•	scripts/
+	•	src/
+	•	styles/
 
-—
+Rule: Never erase or flatten. Extend only.
 
-## ✦ Directory Structure
+⸻
 
-app/
-├── shared/                # core codex modules
-├── experience_A/…D/       # archetypal rooms
-assets/
-├── audio/                 # free type beats + binaural links
-├── visual/                # sacred geometry + fusion art
-data/
-├── correspondences/        # angels, daimons, color rays
-docs/
-├── fusionist_towers.md     # fusionist influences
-engines/
-├── cymatics-engine.js      # sound + geometry engine
-├── fusion-engine.js        # archetypal + creative fusion
-scripts/                     # helpers + automation
-styles/                      # ND-safe palettes
+Engines:
 
-—
+JacobsLadder Engine
+	•	33-node spiral staircase.
+	•	Functions: mount, rotate, addNode, renderTo.
 
-## ✦ License
-- **Code** → MIT  
-- **Archetypal Content** → Codex 144:99 License (cannot be erased/repurposed outside this system).  
+ApprenticePillar Engine
+	•	Six consecration guardians mapped to the pillar.
+	•	Functions: initializePillar, activateGuardian, renderPillar.
 
-—
+Tesseract Engine
+	•	4D cube overlay linking experiences A–D.
+	•	Functions: mount, transform, linkExperience.
 
-## ✦ Notes for Codex / Collaborators
-- Always **use real code scaffolds** (JS, Python, CSS, HTML).  
-- **Never erase** original intentions in files. Layer new features *on top*.  
-- Preserve **archetypal correspondences** and **node mappings** across engines.  
+Cymatics Lab
+	•	Audio → resonance visualizations.
+	•	Functions: applySound, generatePattern, renderPattern.
 
+Fusion Art Engine
+	•	Generates visionary, alchemical art (geometry + color palettes).
+	•	Functions: generateArt, exportArt.
+
+⸻
+
+Labs & Experiences:
+	•	Experiences A–D: nonlinear “rooms” for exploration.
+	•	Binaural & Type Beat Lab: link CC0 / public-domain beats, sync with Cymatics visuals.
+	•	Fusion Labs: experimental art + geometry overlays.
+
+⸻
+
+Principles:
+	•	Nonlinear > Linear
+	•	Experiential > Didactic
+	•	Archetypal > Personal
+	•	Fusion > Reduction
+	•	Healing > Exploitation
+
+⸻
+
+Guardrails for Codex:
+	•	Do not inject rituals or personal belief systems.
+	•	Archetypes = symbolic, supportive, artistic.
+	•	Real code only (JS/TS, WebGL, Three.js, React).
+	•	Modular, extendable design.
+	•	Always comment: // ✦ Codex 144:99 — preserve original intention
+
+⸻
+
+Task Flow for Codex:
+	1.	Review this document before writing code.
+	2.	Extend engines/ with modular classes and APIs.
+	3.	Never erase symbolic mappings or original intentions.
+	4.	Add assets only if open-source / CC0 / public-domain.
+	5.	Test with npm run dev.
+
+⸻
+
+Example Prompt for Codex:
+Implement a function in engines/Cymatics.js called applySound(url) that loads an audio file from a public-domain URL, generates a real-time waveform using the Web Audio API, and maps it onto a spiral grid in the JacobsLadder engine.
+
+⸻
+
+Final Note:
+Codex 144:99 is a living system. Always preserve its spine, expand its body, and never overwrite its soul.
+
+⸻
+
+This is one single, clean file you can paste in as README.md or CODEX_ENTRY.md.
