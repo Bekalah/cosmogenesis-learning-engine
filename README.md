@@ -1,54 +1,33 @@
- +
- +*A spiral teacher for living art, pattern recognition, and visionary learning.*
- +
- +Created by **Rebecca Respawn** – architect-scribe of the Cosmogenesis project.
- +
- +## Overview
- +The Cosmogenesis Learning Engine is a browser-native app for spiral learning. It transforms ideas, texts, or archives into living plates—interactive diagrams that reveal hidden patterns. Built for artists, mystics, educators, and anyone who learns beyond linear paths.
- +
- +## Features
- +- Plate Builder — generate spirals, twin-cones, wheels, or grids
- +- Any Dataset — paste text, JSON, CSV, or archives; the engine adapts
- +- Export — save plates as SVG/PNG or share JSON configs
- +- Gallery — save your own collection locally
- +- ND-Safe — no autoplay, calm motion, optional Ward Mode
- +- Offline-Ready — open `index.html` in any browser; no install required
- +- Plugins — add open knowledge connectors or generative art modules
- +- Egregore Tarot — summon helper personas as learning companions
- +- Trauma-aware — see `docs/neurodivergent_learning.md` for ND & PTSD guidance
- +- Experience Modules — explore realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium
- +
- +## Quick Start
- +1. Clone this repository and open the project directory.
- +2. Open `index.html` in your browser.
- +3. Load sample demos from `data/` or craft your own dataset.
- +
--+Plugins live in `plugins/` and experience modules in `app/`.
--+
--+## Development
--+Run tests with:
--+
--+```bash
--+npm test
--+```
-+Plugins live in `plugins/` and experience modules in `app/`.
-+
-+## Development
-+Run tests with:
-+
-+```bash
-+npm test
-+```
-+
-+## Visionary Dream Generator
-+
-+Render a static spiral plate from the command line:
-+
-+```bash
-+pip install pillow
-+python visionary_dream.py --palette calm --width 1280 --height 720
-+```
-+
-+The script outputs `Visionary_Dream.png` and a brief alt-text file for accessible viewing.
-+
- 
+
+# ✦ Codex 144:99 — Cosmogenesis Learning Engine
+_A living, visionary art grimoire and immersive learning experiment_
+
+—
+
+## 🌌 What This Is
+Codex 144:99 (Alpha et Omega) is not just code — it is a **non-linear, spiral learning engine**.  
+Think **Alice in Wonderland × visionary art × open-source mysticism × neuro-divergent support tools**.  
+This repo is the cathedral: a space for **creative processing, immersive archetypes, and fusion art engines**.
+
+—
+
+## ✨ Core Features
+- **33 Living Spine** → nodes of a spiral dynamic, mapped to archetypes and sound.
+- **Double Tree of Life** → mirrored lattice for symbolic & structural learning.
+- **Tesseract Labyrinth** → immersive 3D hypercube explorations.
+- **Cymatic Engine** → sound frequencies generate live geometry blooms.
+- **Binaural Lab** → experimental soundscapes (type beats, 808s, binaural audio).
+- **Archetypal Avatars** → Archangels of Consecration, daimons, and guardians as interactive supports.
+
+—
+
+## 🎨 Visionary Influences
+- Visionary art (Tool / Adam Jones, Alex Grey, Andrew Gonzalez)  
+- Hermetic, alchemical, and Kabbalistic systems (Agrippa, John Dee, Dion Fortune, Paul Foster Case)  
+- Depth psychology & archetypal studies (Jung, Marie-Louise von Franz, William James)  
+- Spiral Dynamics, bilateral learning, non-linear pedagogy  
+- Transpersonal and esoteric thinkers (Ken Wilber, Antero Alli, Phil Hine, Alan Moore, Paul Levy, Timothy Leary)
+
+—
+
+## 📂 Repo Structure
