@@ -69,6 +69,12 @@ export function loadConfig(relativePath) {
   try {
     return JSON.parse(raw);
   } catch (err) {
+  } catch {
+    throw new Error(`Config file not found: ${relativePath}`);
+  }
+  try {
+    return JSON.parse(raw);
+  } catch {
     throw new Error(`Invalid JSON in ${relativePath}`);
   }
 }

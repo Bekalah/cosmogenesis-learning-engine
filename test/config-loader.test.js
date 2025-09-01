@@ -1,6 +1,9 @@
 import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 import { test } from 'node:test';
 import { strict as assert } from 'assert';
+import { test } from 'node:test';
+import { strict as assert } from 'assert';
+import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 import { writeFileSync, unlinkSync } from 'fs';
 
 // Ensure loadConfig surfaces invalid JSON errors
