@@ -8,6 +8,15 @@ test('soundscape respects mute', ()=>{
   global.window = { COSMO_SETTINGS: { muteAudio: true } };
   global.alert = () => {};
   assert.doesNotThrow(()=> soundscape('hypatia'));
+import soundscape from '../plugins/soundscape.js';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+
+function cleanup(){ delete global.window; }
+
+test('soundscape respects mute', ()=>{
+  global.window = { COSMO_SETTINGS: { muteAudio: true } };
+  assert.doesNotThrow(()=> soundscape.activate(null,'hypatia'));
   cleanup();
 });
 
@@ -26,5 +35,17 @@ test('soundscape starts oscillators when not muted', ()=>{
   global.alert = () => {};
   assert.doesNotThrow(()=> soundscape('tesla'));
   assert.equal(started,2);
+  class FakeGain { constructor(){ this.gain={value:0}; } connect(){ } }
+  global.window = {
+    COSMO_SETTINGS: { muteAudio: false },
+    AudioContext: class {
+      constructor(){ this.currentTime = 0; this.destination = {}; }
+      createOscillator(){ return new FakeOsc(); }
+      createGain(){ return new FakeGain(); }
+    }
+  };
+  assert.doesNotThrow(()=> soundscape.activate(null,'tesla'));
+  assert.equal(started,2);
+  soundscape.deactivate();
   cleanup();
 });

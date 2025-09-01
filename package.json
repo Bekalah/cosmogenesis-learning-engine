@@ -44,3 +44,15 @@
     "maintained node versions"
   ]
 }
+  "version": "1.0.0",
+  "description": "Interactive engine for cosmogenesis learning experiences",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "node --test"
+  },
+  "keywords": ["cosmogenesis", "learning", "engine"],
+  "author": "Rebecca Respawn",
+  "license": "MIT"
+}
