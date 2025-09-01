@@ -18,3 +18,18 @@ The Cosmogenesis engine can grow alongside other creative projects. Treat each e
 - Document each module's API and expected events in its own repository for easier maintenance.
 
 These practices let the Learning Engine evolve with your other projects while staying cohesive and open to community contributions.
+
+## Remote Experience Loader
+
+Use `src/remoteExperienceLoader.js` to pull experience definitions straight from a public GitHub repository. This lets the engine run modules without cloning their repos.
+
+```html
+<script type="module">
+import { fetchRemoteExperiences } from '../src/remoteExperienceLoader.js';
+
+const experiences = await fetchRemoteExperiences('user/other-repo');
+console.log(experiences);
+</script>
+```
+
+Each loaded experience resolves its components and optional prologue pages using raw GitHub URLs.

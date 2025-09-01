@@ -295,3 +295,18 @@ python3 scripts/visionary_fractal.py --width 1920 --height 1080
 ```
 
 The image saves as `Visionary_Dream.png` in the project root.
+
+## Remote Experiences
+
+Use the helper `src/remoteExperienceLoader.js` to load experiences directly from another public GitHub repository without cloning it.
+
+```html
+<script type="module">
+import { fetchRemoteExperiences } from './src/remoteExperienceLoader.js';
+
+const experiences = await fetchRemoteExperiences('user/other-repo');
+console.log(experiences);
+</script>
+```
+
+Each experience fetched this way resolves its components and first page from the remote repo using raw GitHub URLs.
