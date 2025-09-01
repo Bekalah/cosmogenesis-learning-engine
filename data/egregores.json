@@ -1,31 +1,8 @@
 [
-  {
-    "name": "Maribelle Vespertine",
-    "arcana": "XVIII – The Moon",
-    "aesthetic_channels": [
-      "Visionary Luminous Feminine",
-      "Exact Magus Science",
-      "Vampire Elite Business"
-    ],
-    "assists_with": ["pattern intuition", "lunar cycles", "creative diagnostics"]
-  },
-  {
-    "name": "Aurelia Sable",
-    "arcana": "XVII – The Star",
-    "aesthetic_channels": [
-      "Visionary Luminous Feminine",
-      "Exact Magus Science",
-      "Vampire Elite Business"
-    ],
-    "assists_with": ["hope mapping", "stellar navigation", "symbolic analysis"]
-  },
-  {
-    "name": "Moonchild",
-    "arcana": "0 – The Fool",
-    "aesthetic_channels": [
-      "Sapphic Muse",
-      "Occult Revision"
-    ],
-    "assists_with": ["poetic triggers", "lunar code experiments", "gentle reboots"]
-  }
+  {"id":"moonchild","title":"Moonchild","role":"Dream Guide","numbers":[3,9],"seedSyllables":["la","mu"],"quote":"Sleep is a portal."},
+  {"id":"circuitum99","title":"Circuitum 99","role":"Techno Mystic","numbers":[9,9],"seedSyllables":["cir","zen"],"quote":"Loops reveal truth."},
+  {"id":"stone-grimoire","title":"Stone Grimoire","role":"Archivist","numbers":[4,7],"seedSyllables":["gra","num"],"quote":"Etched in time."},
+  {"id":"reweave","title":"Reweave","role":"Healer","numbers":[5,8],"seedSyllables":["re","wa"],"quote":"Threads reunite."},
+  {"id":"raku-dragon","title":"Raku Dragon","role":"Fire Keeper","numbers":[1,0],"seedSyllables":["ra","ku"],"quote":"Temper then shine."},
+  {"id":"forest-trickster","title":"Forest Trickster","role":"Guide","numbers":[2,5],"seedSyllables":["fo","ti"],"quote":"Paths shift."}
 ]

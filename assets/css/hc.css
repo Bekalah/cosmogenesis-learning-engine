@@ -1,0 +1,8 @@
+html[data-hc="true"] {
+  --ink:#fff;
+  --wash:#000;
+  --accent:#ff0;
+}
+html[data-hc="true"] button,html[data-hc="true"] select,html[data-hc="true"] input{
+  border-color:#ff0;
+}
