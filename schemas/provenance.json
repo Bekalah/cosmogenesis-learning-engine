@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Provenance",
+  "type": "object",
+  "required": ["title", "creator", "year", "license", "source"],
+  "properties": {
+    "id": {"type": "string"},
+    "title": {"type": "string"},
+    "creator": {"type": "string"},
+    "year": {"type": ["string", "number"]},
+    "edition": {"type": "string"},
+    "license": {"type": "string"},
+    "source": {"type": "string", "format": "uri"},
+    "notes": {"type": "string"},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "safety": {
+      "type": "object",
+      "properties": {
+        "motionSensitive": {"type": "boolean"},
+        "highContrast": {"type": "boolean"},
+        "audioReactive": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
