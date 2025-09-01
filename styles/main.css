@@ -49,3 +49,27 @@
 +  const bad = { ...good, labels: [] };
 +  assert.throws(() => validatePlateConfig(bad), /Label count/);
 +});
+:root {
+  --bg: #f8f5ef;
+  --ink: #141414;
+  --monad: #0b0b0b;
+  --spiral: #b8860b;
+  --border: #2a2a2a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: sans-serif;
+  margin: 0;
+  padding: 1rem;
+}
+
+#controls {
+  margin-bottom: 1rem;
+}
+
+canvas {
+  border: 2px solid var(--border);
+  background: var(--bg);
+}

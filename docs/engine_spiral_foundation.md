@@ -24,19 +24,19 @@
  
  A stylepack defines UI paper/ink plus art palette:
  
-+```js
+```js
  const STYLEPACKS = {
    hilma_spiral: {
 -    bg:”#f8f5ef”, ink:”#141414”, monad:”#0b0b0b”, spiral:”#b8860b”, border:”#2a2a2a”,
 -    nodes:[“#b7410e”,”#c56a1a”,”#d7a21a”,”#2e7d32”,”#1f6feb”,”#4338ca”,”#6d28d9”]
-+    bg: "#f8f5ef", ink: "#141414", monad: "#0b0b0b", spiral: "#b8860b", border: "#2a2a2a",
-+    nodes: ["#b7410e", "#c56a1a", "#d7a21a", "#2e7d32", "#1f6feb", "#4338ca", "#6d28d9"]
+    bg: "#f8f5ef", ink: "#141414", monad: "#0b0b0b", spiral: "#b8860b", border: "#2a2a2a",
+    nodes: ["#b7410e", "#c56a1a", "#d7a21a", "#2e7d32", "#1f6feb", "#4338ca", "#6d28d9"]
    },
 -  // ...
-+  // additional stylepacks here
+  // additional stylepacks here
  };
-+```
+```
  
-+Each stylepack defines core colors for the interface: background (`bg`), ink (`ink`), monad center, spiral stroke, border, and an array of node colors. To register a new stylepack, extend the `STYLEPACKS` object in the UI and expose its key through a selector or query parameter.
-+
-+—
+Each stylepack defines core colors for the interface: background (`bg`), ink (`ink`), monad center, spiral stroke, border, and an array of node colors. To register a new stylepack, extend the `STYLEPACKS` object in the UI and expose its key through a selector or query parameter.
+
+—

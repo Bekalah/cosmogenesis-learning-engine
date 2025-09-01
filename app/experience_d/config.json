@@ -1,6 +1,6 @@
-+{
-+  "title": "Alexandrian Scriptorium",
-+  "description": "Browse lost scrolls and Sapphic fragments in a seaside archive.",
-+  "pages": ["prologue.md"],
-+  "components": ["components/chord.js"]
-+}
+{
+  "title": "Alexandrian Scriptorium",
+  "description": "Browse lost scrolls and Sapphic fragments in a seaside archive.",
+  "pages": ["prologue.md"],
+  "components": ["components/chord.js"]
+}

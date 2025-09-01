@@ -1,4 +1,5 @@
 export default async function p5Mandala(){
+export default async function(){
   if(!window.p5){
     try{
       await import('../vendor/p5.min.js');

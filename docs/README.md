@@ -47,15 +47,15 @@
 -+## ✦ Aesthetic Realms
 -+See docs/aesthetic_realms.md for the three style channels.
 - 
-+# Data Directory
-+
-+This folder collects sample datasets that power the Cosmogenesis Learning Engine.
-+
-+- `demos.json` – quick demonstrations for different domains.
-+- `egregores.json` – prototype egregore tarot companions.
-+- `plugins.json` – descriptors for optional plugin modules.
-+- `correspondences.json` – example mappings across traditions.
-+- `experiences.json` – list of narrative realms and their configs.
-+- `aesthetic_realms.json` – style channels used by the interface.
-+
-+Use these files as templates when crafting your own datasets.
+# Data Directory
+
+This folder collects sample datasets that power the Cosmogenesis Learning Engine.
+
+- `demos.json` – quick demonstrations for different domains.
+- `egregores.json` – prototype egregore tarot companions.
+- `plugins.json` – descriptors for optional plugin modules.
+- `correspondences.json` – example mappings across traditions.
+- `experiences.json` – list of narrative realms and their configs.
+- `aesthetic_realms.json` – style channels used by the interface.
+
+Use these files as templates when crafting your own datasets.

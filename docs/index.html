@@ -1,34 +1,34 @@
-+<!DOCTYPE html>
-+<html lang="en">
-+<head>
-+  <meta charset="utf-8" />
-+  <title>Cosmogenesis Learning Engine</title>
-+  <meta name="viewport" content="width=device-width, initial-scale=1" />
-+  <style>
-+    body { font-family: sans-serif; margin: 2rem; }
-+  </style>
-+</head>
-+<body>
-+  <h1>Cosmogenesis Learning Engine</h1>
-+  <p>This minimal shell loads demos and prepares modules for immersive experiences.</p>
-+  <div id="demo-list">Loading demos…</div>
-+  <script>
-+    async function loadDemos() {
-+      try {
-+        const res = await fetch('data/demos.json');
-+        const demos = await res.json();
-+        const container = document.getElementById('demo-list');
-+        container.innerHTML = '';
-+        demos.forEach(d => {
-+          const item = document.createElement('div');
-+          item.textContent = d.title || JSON.stringify(d);
-+          container.appendChild(item);
-+        });
-+      } catch (err) {
-+        console.error('Failed to load demos', err);
-+      }
-+    }
-+    loadDemos();
-+  </script>
-+</body>
-+</html> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cosmogenesis Learning Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Cosmogenesis Learning Engine</h1>
+  <p>This minimal shell loads demos and prepares modules for immersive experiences.</p>
+  <div id="demo-list">Loading demos…</div>
+  <script>
+    async function loadDemos() {
+      try {
+        const res = await fetch('data/demos.json');
+        const demos = await res.json();
+        const container = document.getElementById('demo-list');
+        container.innerHTML = '';
+        demos.forEach(d => {
+          const item = document.createElement('div');
+          item.textContent = d.title || JSON.stringify(d);
+          container.appendChild(item);
+        });
+      } catch (err) {
+        console.error('Failed to load demos', err);
+      }
+    }
+    loadDemos();
+  </script>
+</body>
+</html> 

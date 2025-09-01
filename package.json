@@ -55,4 +55,10 @@
   "keywords": ["cosmogenesis", "learning", "engine"],
   "author": "Rebecca Respawn",
   "license": "MIT"
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
 }
