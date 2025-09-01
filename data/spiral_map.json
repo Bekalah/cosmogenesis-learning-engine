@@ -13,3 +13,26 @@
     {"id":"n011","chapel":"respawn-gate","title":"Return","skin":"HYPATIA","guardian":"a5","egregoreId":"moonchild","position":{"theta":5.0,"radius":3.0,"elevation":0},"payload":{"visuals":[],"text":"Again","provenanceRefs":[{"title":"Circle","creator":"Monk","year":"1400","license":"CC-BY","source":"Monastery"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}}
   ]
 }
+[
+  {
+    "id": "n001",
+    "title": "Prima Materia",
+    "skin": "VISIONARY_PERM",
+    "guardian": "alignment",
+    "position": {
+      "theta": 0.0,
+      "radius": 1.0,
+      "elevation": 0.05
+    },
+    "payload": {
+      "visuals": ["splendor_solis_01", "vesica_grid_A"],
+      "text": "Opening of the spiral.",
+      "audioPreset": "planetary_moon",
+      "provenanceRefs": ["ps_splendor_01", "hk_kunz_A"]
+    },
+    "safety": {
+      "reducedMotionOK": true,
+      "allowAudio": false
+    }
+  }
+]

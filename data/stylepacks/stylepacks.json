@@ -5,6 +5,17 @@
     "type": "classic",
     "palette": {"ink":"#eae8e0","wash":"#111","accent":"#b08d57","gold":"#d4af37"},
     "motifs":[],"textures":[],"shaders":["vellum"]
+    "type": "Lineage",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["parchment tables", "planetary seals", "quill textures", "vellum crackle"],
+    "textures": [],
+    "shaders": []
   },
   {
     "id": "TESLA",
@@ -12,6 +23,17 @@
     "type": "electric",
     "palette": {"ink":"#e0f7ff","wash":"#00081a","accent":"#00aaff","gold":"#ffd700"},
     "motifs":[],"textures":[],"shaders":["neon-soft"]
+    "type": "Lineage",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["neon coils", "Lissajous curves", "resonance schematics", "oscilloscope glass"],
+    "textures": [],
+    "shaders": []
   },
   {
     "id": "HYPATIA",
@@ -19,6 +41,17 @@
     "type": "scholar",
     "palette": {"ink":"#fff8f0","wash":"#1a1625","accent":"#c093ff","gold":"#f5c542"},
     "motifs":[],"textures":[],"shaders":["marble"]
+    "type": "Lineage",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["marble domes", "astrolabes", "star atlases", "Alexandria scripts"],
+    "textures": [],
+    "shaders": []
   },
   {
     "id": "BUSINESS_CATHEDRAL",
@@ -26,6 +59,17 @@
     "type": "modern",
     "palette": {"ink":"#f0f0f0","wash":"#121212","accent":"#ff4e00","gold":"#c0a000"},
     "motifs":[],"textures":[],"shaders":["aura-veil"]
+    "type": "Business",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["obsidian + gold", "Rosslyn spiral pillar", "sponsor-deck grids", "curator plaques"],
+    "textures": [],
+    "shaders": []
   },
   {
     "id": "VISIONARY_PERM",
@@ -33,5 +77,16 @@
     "type": "visionary",
     "palette": {"ink":"#e0ffe8","wash":"#002b36","accent":"#00ff8a","gold":"#ffd700"},
     "motifs":[],"textures":[],"shaders":["oculus-bloom"]
+    "type": "Perm",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["alabaster avatars", "vesica halos", "Rubin softness", "surreal engravings"],
+    "textures": [],
+    "shaders": []
   }
 ]
