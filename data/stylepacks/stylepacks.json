@@ -1,0 +1,77 @@
+[
+  {
+    "id": "AGRIPPA",
+    "name": "Agrippa",
+    "type": "Lineage",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["parchment tables", "planetary seals", "quill textures", "vellum crackle"],
+    "textures": [],
+    "shaders": []
+  },
+  {
+    "id": "TESLA",
+    "name": "Tesla",
+    "type": "Lineage",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["neon coils", "Lissajous curves", "resonance schematics", "oscilloscope glass"],
+    "textures": [],
+    "shaders": []
+  },
+  {
+    "id": "HYPATIA",
+    "name": "Hypatia",
+    "type": "Lineage",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["marble domes", "astrolabes", "star atlases", "Alexandria scripts"],
+    "textures": [],
+    "shaders": []
+  },
+  {
+    "id": "BUSINESS_CATHEDRAL",
+    "name": "Business Cathedral",
+    "type": "Business",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["obsidian + gold", "Rosslyn spiral pillar", "sponsor-deck grids", "curator plaques"],
+    "textures": [],
+    "shaders": []
+  },
+  {
+    "id": "VISIONARY_PERM",
+    "name": "Visionary Perm",
+    "type": "Perm",
+    "palette": {
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "roseQuartz": "#FFB6C1",
+      "tealGlow": "#00CED1",
+      "violet": "#8A2BE2"
+    },
+    "motifs": ["alabaster avatars", "vesica halos", "Rubin softness", "surreal engravings"],
+    "textures": [],
+    "shaders": []
+  }
+]

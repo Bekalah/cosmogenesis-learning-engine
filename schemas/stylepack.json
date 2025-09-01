@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stylepack",
+  "type": "object",
+  "required": ["id", "name", "type", "palette", "motifs", "textures", "shaders"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "type": {"type": "string", "enum": ["Lineage", "Business", "Perm"]},
+    "palette": {
+      "type": "object",
+      "required": ["gold", "obsidian", "roseQuartz", "tealGlow", "violet"],
+      "properties": {
+        "gold": {"type": "string", "pattern": "^#([0-9a-fA-F]{6})$"},
+        "obsidian": {"type": "string", "pattern": "^#([0-9a-fA-F]{6})$"},
+        "roseQuartz": {"type": "string", "pattern": "^#([0-9a-fA-F]{6})$"},
+        "tealGlow": {"type": "string", "pattern": "^#([0-9a-fA-F]{6})$"},
+        "violet": {"type": "string", "pattern": "^#([0-9a-fA-F]{6})$"}
+      },
+      "additionalProperties": false
+    },
+    "motifs": {"type": "array", "items": {"type": "string"}},
+    "textures": {"type": "array", "items": {"type": "string"}},
+    "shaders": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}
