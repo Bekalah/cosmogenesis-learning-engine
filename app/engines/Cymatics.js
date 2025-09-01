@@ -1,44 +1,60 @@
-# ✦ Codex 144:99 -- Visionary geometry with Alex Grey inspired palette
+// ✦ Codex 144:99 — Cymatics Engine (sound ↔ spiral)
+// Loads a CC0 audio track, analyzes it with the Web Audio API,
+// and maps frequency energy onto a 33‑node Jacob's Ladder spiral using Three.js.
 
-import numpy as np
-from PIL import Image
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { createCymaticsBridge } from '../shared/cymatics-bridge.js';
 
-# ✦ Set the canvas resolution
-WIDTH, HEIGHT = 1024, 1024
+// ✦ applySound — main entry
+// url: public‑domain/CC0 audio file
+// mount: DOM element to attach renderer (defaults to document.body)
+export async function applySound(url, mount = document.body) {
+  // ⚑ Create analysis bridge
+  const bridge = await createCymaticsBridge();
+  await bridge.loadTrack(url);
 
-# ✦ Define luminous, psychedelic palette (Alex Grey inspiration)
-palette = np.array([
-    [40, 0, 80],      # deep indigo
-    [70, 0, 130],     # electric violet
-    [0, 128, 255],    # luminous blue
-    [0, 255, 128],    # auric green
-    [255, 200, 0],    # golden amber
-    [255, 255, 255]   # pure light
-], dtype=np.float32) / 255.0
+  // ⚑ Three.js scene setup
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+  camera.position.z = 25;
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(512, 512);
+  mount.appendChild(renderer.domElement);
 
-# ✦ Forge coordinate grid for the visionary field
-x = np.linspace(-1, 1, WIDTH)
-y = np.linspace(-1, 1, HEIGHT)
-xx, yy = np.meshgrid(x, y)
+  // ⚑ Build 33‑node spiral
+  const nodes = [];
+  const nodeCount = 33;
+  for (let i = 0; i < nodeCount; i++) {
+    const angle = i * 0.4; // spiral step
+    const radius = 0.5 * i;
+    const geo = new THREE.SphereGeometry(0.5, 16, 16);
+    const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
+    scene.add(mesh);
+    nodes.push(mesh);
+  }
 
-# ✦ Convert to polar space for kaleidoscopic symmetry
-r = np.sqrt(xx**2 + yy**2)
-theta = np.arctan2(yy, xx)
-symmetry = 6  # six-fold spiritual mirror
-theta = (theta % (2 * np.pi / symmetry)) * symmetry
+  // ⚑ Map spectrum to nodes each frame
+  bridge.onFrame(({ spectrum }) => {
+    const step = Math.floor(spectrum.length / nodeCount);
+    nodes.forEach((n, i) => {
+      const amp = spectrum[i * step];
+      n.scale.setScalar(0.5 + amp * 2);
+      n.material.color.setHSL(0.7 - amp * 0.7, 1, 0.5);
+    });
+  });
 
-# ✦ Generate layered wave interference across the living spine
-z = np.sin(10 * r + 5 * theta) + np.cos(8 * r - 4 * theta)
+  // ⚑ Animation loop
+  const animate = () => {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  };
+  animate();
 
-# ✦ Normalize to sacred range 0–1
-z = (z - z.min()) / (z.max() - z.min())
+  // ⚑ Start audio playback & analysis
+  await bridge.play();
+  bridge.start();
 
-# ✦ Map the visionary field onto the radiant palette
-indices = z * (len(palette) - 1)
-lower = np.floor(indices).astype(int)
-upper = np.clip(lower + 1, 0, len(palette) - 1)
-t = indices - lower
-img_array = palette[lower] * (1 - t)[..., None] + palette[upper] * t[..., None]
-
-# ✦ Seal the artwork in the archive
-Image.fromarray(np.uint8(img_array * 255)).save("Visionary_Dream.png")
+  return { scene, bridge };
+}

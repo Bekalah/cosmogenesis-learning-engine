@@ -1,34 +1,3 @@
-{
-  "_provenance": {
-    "curator": "Rebecca Respawn",
-    "date": "2025-08-30",
-    "license": "CC0 / CC-BY (see LICENSE)",
-    "notes": "Atmospheric beats curated for Codex 144:99 cathedral use. ND-safe: no autoplay."
-  },
-  "tracks": [
-    {
-      "id": "gothwave_dream",
-      "title": "Dream Reverb Gothwave",
-      "artist": "Open Source CC0",
-      "url": "https://freemusicarchive.org/track/ethereal-synthwave-dreamscape",
-      "mood": ["slow", "goth", "ambient"],
-      "length": "4:33"
-    },
-    {
-      "id": "skeler_style_bass",
-      "title": "Bass Reverie (Skeler Type)",
-      "artist": "CC-BY Producer",
-      "url": "https://pixabay.com/music/id-12345/",
-      "mood": ["dark", "trapwave", "spacey"],
-      "length": "3:57"
-    },
-    {
-      "id": "reverb_rock_shadows",
-      "title": "Shadows in Reverb Rock",
-      "artist": "FreeSound CC0 Collab",
-      "url": "https://freesound.org/people/atmospheric/sounds/678910/",
-      "mood": ["rock", "reverb", "cathedral"],
-      "length": "5:12"
-    }
-  ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:00386da1be2a33f2205e52c1fb1e929499bfa80d8620af2303b4a8d509120887
+size 1025
