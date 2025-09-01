@@ -31,13 +31,16 @@
 ## Geometry & Harmonics  
 - Logarithmic Spiral: r = ae^(bθ).  
 - Vartanian, O., & Skov, M. (2014). Neuroaesthetics of fractals.  
-- Chaieb, L. et al. (2015). Auditory beat stimulation. *Frontiers in Human Neuroscience.*  
-- Fourier analysis for sound-light-geometry mapping.  
+- Chaieb, L. et al. (2015). Auditory beat stimulation. *Frontiers in Human Neuroscience.*
+- Fourier analysis for sound-light-geometry mapping.
 
 —
 
-## Open-Source Anchors  
+## Open-Source Anchors
 - Tone.js (MIT) → generative sound.  
 - p5.js / Paper.js / Two.js (MIT) → geometry & art engines.  
 - Wikimedia Commons & Met Museum OA → visionary art archives.  
-- NIH PTSD Research Portal → open trauma data.  
+- NIH PTSD Research Portal → open trauma data.
+
+## Why spiral?
+The logarithmic spiral embodies growth and return, allowing learners to revisit ideas with widening context. Its geometry offers a gentle path that mirrors natural patterns, supporting memory integration and curiosity.

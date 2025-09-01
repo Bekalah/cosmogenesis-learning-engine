@@ -1,0 +1,37 @@
+[
+  {
+    "id": "AGRIPPA",
+    "name": "Agrippa",
+    "type": "classic",
+    "palette": {"ink":"#eae8e0","wash":"#111","accent":"#b08d57","gold":"#d4af37"},
+    "motifs":[],"textures":[],"shaders":["vellum"]
+  },
+  {
+    "id": "TESLA",
+    "name": "Tesla",
+    "type": "electric",
+    "palette": {"ink":"#e0f7ff","wash":"#00081a","accent":"#00aaff","gold":"#ffd700"},
+    "motifs":[],"textures":[],"shaders":["neon-soft"]
+  },
+  {
+    "id": "HYPATIA",
+    "name": "Hypatia",
+    "type": "scholar",
+    "palette": {"ink":"#fff8f0","wash":"#1a1625","accent":"#c093ff","gold":"#f5c542"},
+    "motifs":[],"textures":[],"shaders":["marble"]
+  },
+  {
+    "id": "BUSINESS_CATHEDRAL",
+    "name": "Business Cathedral",
+    "type": "modern",
+    "palette": {"ink":"#f0f0f0","wash":"#121212","accent":"#ff4e00","gold":"#c0a000"},
+    "motifs":[],"textures":[],"shaders":["aura-veil"]
+  },
+  {
+    "id": "VISIONARY_PERM",
+    "name": "Visionary Perm",
+    "type": "visionary",
+    "palette": {"ink":"#e0ffe8","wash":"#002b36","accent":"#00ff8a","gold":"#ffd700"},
+    "motifs":[],"textures":[],"shaders":["oculus-bloom"]
+  }
+]
