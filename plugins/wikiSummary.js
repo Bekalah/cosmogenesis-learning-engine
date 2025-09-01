@@ -33,6 +33,7 @@ export default {
   deactivate() {}
 };
 export default async function(engine){
+export default async function wikiSummary(engine){
   const topic = prompt('Enter a Wikipedia topic');
   if(!topic) return;
   const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic)}`;
