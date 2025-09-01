@@ -13,3 +13,4 @@ const base = { mode: 4, labels: ['a', 'b', 'c', 'd'] };
     assert.ok(Buffer.isBuffer(plate.exportAsPNG()));
   });
 });
+

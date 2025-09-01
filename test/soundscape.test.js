@@ -46,6 +46,8 @@ import soundscape from '../plugins/soundscape.js';
 function cleanup() {
   delete global.window;
   delete global.alert;
+function cleanup() {
+  delete global.window;
 }
 
 test('soundscape respects mute', () => {
@@ -76,6 +78,13 @@ test('soundscape starts oscillators when not muted', () => {
     connect() {}
   }
   class FakeMerger {
+    constructor() { this.frequency = { value: 0 }; }
+    connect() { return this; }
+    start() { started++; }
+    stop() {}
+  }
+  class FakeGain {
+    constructor() { this.gain = { value: 0 }; }
     connect() {}
   }
   global.window = {
@@ -106,7 +115,13 @@ test('soundscape starts oscillators when not muted', () => {
       }
     },
   };
+      constructor() { this.currentTime = 0; this.destination = {}; }
+      createOscillator() { return new FakeOsc(); }
+      createGain() { return new FakeGain(); }
+    }
+  };
   assert.doesNotThrow(() => soundscape('tesla'));
   assert.equal(started, 2);
   cleanup();
 });
+
