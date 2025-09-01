@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cosmogenesis</title>
+  <link rel="preload" href="registry/structure.json" as="fetch" type="application/json">
+  <link rel="preload" href="registry/datasets/palettes.core.json" as="fetch" type="application/json">
+  <link rel="preload" href="registry/datasets/correspondences.core.json" as="fetch" type="application/json">
+  <link rel="stylesheet" href="assets/css/palette.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+</head>
+<body>
+  <main>
+    <canvas id="plate" width="1280" height="720"></canvas>
+    <aside id="hud" aria-live="polite">
+      <p id="plaque"></p>
+      <button class="btn" id="ladder-btn">Toggle Jacob’s Ladder</button>
+      <button class="btn" id="png-btn">Export PNG</button>
+      <button class="btn" id="meta-btn">Export META (.json)</button>
+    </aside>
+  </main>
+  <script src="js/core/guard.js"></script>
+  <script src="js/compat/prefers.js"></script>
+  <script src="js/engines/cosmogenesis/index.js" defer></script>
+</body>
+</html>
