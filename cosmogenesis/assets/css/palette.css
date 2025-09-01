@@ -1,0 +1,12 @@
+:root {
+  --bg:#0B0B0B;
+  --ink:#ECECEC;
+  --muted:#B8B8B8;
+  --gold:#C9A227;
+  --rose:#FFB6C1;
+  --violet:#8A2BE2;
+  --aqua:#00CED1;
+  --focus:#FFD700;
+  --panel:rgba(20,20,20,.75);
+  --stroke:rgba(255,255,255,.08);
+}

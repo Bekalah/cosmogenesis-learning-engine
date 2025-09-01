@@ -1,0 +1,12 @@
+{
+  "version":"1.0.0",
+  "plate":{
+    "axis_deg":23.5,
+    "spiral":{"a":2.0,"b":0.20,"theta_max":18.8495559215,"points":1400},
+    "halos":6,"halo_radius":40,
+    "glow":{"radius_factor":0.18,"alpha":0.30},
+    "ladder":{"enabled":true,"vertebrae":33,"radius_factor":0.28,"thickness":2}
+  },
+  "palette_id":"gonzalez-obsidian",
+  "motion":{"gentle_wobble":0.03,"hz":0.6}
+}
