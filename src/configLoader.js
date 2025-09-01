@@ -105,3 +105,4 @@ export function loadFirstDemo() {
   validatePlateConfig(config);
   return config;
 }
+
