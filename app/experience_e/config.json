@@ -1,0 +1,6 @@
+{
+  "title": "Global Healing Web",
+  "description": "Connects Tibetan Reiki, Karuna, Egyptian Seichem, hypnosis, and more in a fractal history of world healing.",
+  "pages": ["fractal-web.md"],
+  "components": ["components/fractalWeb.js"]
+}
