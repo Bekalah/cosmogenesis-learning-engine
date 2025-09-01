@@ -1,0 +1,5 @@
+# Ignore generated art outputs
+*.png
+*.jpg
+*.jpeg
+*.gif

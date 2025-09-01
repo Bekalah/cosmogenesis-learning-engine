@@ -18,4 +18,11 @@ test('renderPlate renders first demo plate without throwing', () => {
   const plate = renderPlate(config);
   assert.equal(plate.layout, config.layout);
   assert.equal(plate.labels.length, config.mode);
+import { strict as assert } from 'assert';
+import { loadFirstDemo } from '../src/configLoader.js';
+
+test('loadFirstDemo returns valid config', () => {
+  const config = loadFirstDemo();
+  assert.equal(typeof config.layout, 'string');
+  assert.equal(config.labels.length, config.mode);
 });
