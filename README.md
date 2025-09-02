@@ -58,10 +58,10 @@
 ---+   cd cosmogenesis-learning-engine
 ---+   ```
 ---+2. Open `index.html` in your browser.
----+3. Load sample **Demos** or craft your own dataset.
+---+3. Load sample **Rooms** or craft your own dataset.
 ---+4. Visit the **Experiences** tab to read narrative prologues and choose a realm.
 ---+
----+Cross-discipline demos live in `data/demos.json` and load automatically.
+---+Cross-discipline rooms live in `data/rooms.json` and load automatically.
 ---+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
 ---+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
 ---+Correspondence examples live in `data/correspondences.json` for cross-tradition study.
@@ -132,10 +132,10 @@
 --+   cd cosmogenesis-learning-engine
 --+   ```
 --+2. Open `index.html` in your browser.
---+3. Load sample demos or craft your own dataset.
+--+3. Load sample rooms or craft your own dataset.
 --+4. Visit the Experiences tab to explore realms.
 --+
---+Cross-discipline demos live in `data/demos.json`. Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`. Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`. Correspondence examples live in `data/correspondences.json` for cross-tradition study.
+--+Cross-discipline rooms live in `data/rooms.json`. Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`. Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`. Correspondence examples live in `data/correspondences.json` for cross-tradition study.
 --+
 --+## ✦ App Structure
 --+```
@@ -196,7 +196,7 @@
 -+
 -+1. Clone this repository and open the project directory.
 -+2. Open `index.html` in your browser.
--+3. Load sample demos or craft your own dataset.
+-+3. Load sample rooms or craft your own dataset.
 -+
 -+Sample datasets live in `data/`. Plugins reside in `plugins/`. Experience modules are under `app/`.
 -+
@@ -231,7 +231,7 @@
 +## Quick Start
 +1. Clone this repository and open the project directory.
 +2. Open `index.html` in your browser.
-+3. Load sample demos from `data/` or craft your own dataset.
++3. Load sample rooms from `data/` or craft your own dataset.
 +
 Plugins live in `plugins/` and experience modules in `app/`.
 
@@ -263,7 +263,7 @@ The **Cosmogenesis Learning Engine** is a browser-native app for spiral learning
 
 1. Clone this repository and open the project directory.
 2. Open `index.html` in your browser.
-3. Load sample demos or craft your own dataset.
+3. Load sample rooms or craft your own dataset.
 
 Sample datasets live in `data/`. Plugins reside in `plugins/`. Experience modules are under `app/`.
 
@@ -310,3 +310,13 @@ console.log(experiences);
 ```
 
 Each experience fetched this way resolves its components and first page from the remote repo using raw GitHub URLs.
+
+## Environment Setup
+
+Install Python (including Pillow) and Node dependencies locally without relying on remote workflows:
+
+```bash
+bash scripts/setup_env.sh
+```
+
+This helper script creates a virtual environment, installs packages from `requirements.txt`, and runs `npm install` for client modules.

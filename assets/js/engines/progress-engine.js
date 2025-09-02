@@ -32,6 +32,11 @@
   document.addEventListener("quest:complete", (e) => {
     markQuestComplete(e.detail.roomId, e.detail.quest);
   });
+<<<<<<< codex/create-open-world-learning-engine-features-j3nbmd
   window.roomsProgress = { state, markRoomEnter, markQuestComplete };
   window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
+=======
+  window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
+  window.roomsProgress = { state, markRoomEnter, markQuestComplete };
+>>>>>>> main
 })();

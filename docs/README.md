@@ -17,9 +17,9 @@
 -- +   cd cosmogenesis-learning-engine
 -- +   ```
 -- +2. Open `index.html` in your browser.
--- +3. Load sample **Demos** or craft your own dataset.
+-- +3. Load sample rooms or craft your own dataset.
 -- +
--- +Cross-discipline demos live in `data/demos.json` and load automatically.
+-- +Room definitions live in `data/rooms.json` and load automatically.
 -- +Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
 -- +Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
 --  
@@ -38,9 +38,9 @@
 -+   cd cosmogenesis-learning-engine
 -+   ```
 -+2. Open `index.html` in your browser.
--+3. Load sample **Demos** or craft your own dataset.
+-+3. Load sample rooms or craft your own dataset.
 -+
--+Cross-discipline demos live in `data/demos.json` and load automatically.
+-+Room definitions live in `data/rooms.json` and load automatically.
 -+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
 -+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
 -+
@@ -51,7 +51,7 @@
 
 This folder collects sample datasets that power the Cosmogenesis Learning Engine.
 
-- `demos.json` – quick demonstrations for different domains.
+- `rooms.json` – canonical room definitions.
 - `egregores.json` – prototype egregore tarot companions.
 - `plugins.json` – descriptors for optional plugin modules.
 - `correspondences.json` – example mappings across traditions.

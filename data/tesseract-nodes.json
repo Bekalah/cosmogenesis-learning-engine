@@ -9,5 +9,12 @@
     { "from": "home", "to": "agrippa" },
     { "from": "home", "to": "hypatia" },
     { "from": "home", "to": "einstein" }
+    {"id": "agrippa", "label": "Agrippa"},
+    {"id": "hypatia", "label": "Hypatia"},
+    {"id": "einstein", "label": "Einstein"}
+  ],
+  "edges": [
+    {"from": "agrippa", "to": "hypatia"},
+    {"from": "hypatia", "to": "einstein"}
   ]
 }
