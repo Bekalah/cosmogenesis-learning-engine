@@ -310,3 +310,13 @@ console.log(experiences);
 ```
 
 Each experience fetched this way resolves its components and first page from the remote repo using raw GitHub URLs.
+
+## Environment Setup
+
+Install Python (including Pillow) and Node dependencies locally without relying on remote workflows:
+
+```bash
+bash scripts/setup_env.sh
+```
+
+This helper script creates a virtual environment, installs packages from `requirements.txt`, and runs `npm install` for client modules.
