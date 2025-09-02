@@ -1,5 +1,5 @@
-// Simple guard to prevent multiple boots
-if (window.__COSMOGENESIS_GUARD__) {
-  throw new Error('Cosmogenesis already initialized');
+const bootFlags = new Set();
+export function guardBoot(name) {
+  if (bootFlags.has(name)) throw new Error(`Guard: ${name} already booted`);
+  bootFlags.add(name);
 }
-window.__COSMOGENESIS_GUARD__ = true;

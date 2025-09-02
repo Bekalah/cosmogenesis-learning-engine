@@ -23,4 +23,8 @@ test('loadConfig returns valid plate config', () => {
 test('renderPlate creates items for basic wheel', () => {
   const plate = renderPlate({ layout: 'wheel', mode: 3, labels: ['a', 'b', 'c'] });
   assert.equal(plate.items.length, 3);
+test('smoke: renderPlate yields points', () => {
+  const cfg = loadFirstDemo();
+  const { points } = renderPlate(cfg);
+  assert.ok(Array.isArray(points) && points.length > 0, 'points generated');
 });
