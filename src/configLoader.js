@@ -10,6 +10,7 @@ export function loadConfig(relativePath) {
   } catch {
     throw new Error(`Config file not found: ${relativePath}`);
   }
+
   try {
     return JSON.parse(raw);
   } catch {
