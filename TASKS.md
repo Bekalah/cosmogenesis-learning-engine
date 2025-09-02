@@ -9,6 +9,9 @@
 
 ## Priority Spiral (P1 → P3)
 
+### Legacy Cleanup
+- [ ] Fix legacy file issues blocking `npm test` and `npm run check`
+
 ### P1 — Foundation (today)
 - [ ] Add docs: `docs/CODEX_EXT_RUNBOOK.md`, `docs/SCIENCE_REFERENCES.md`, `docs/STYLE_GUIDE.md`
 - [ ] Add schemas: `schemas/provenance.json`, `schemas/stylepack.json`
@@ -37,6 +40,9 @@
 
 ### P4 — Esoteric Node Matrix & Rosslyn Integration
 - [ ] Map 144 nodes to 72 Shem angels and 72 demons (3° zodiac segments)
+---
+### P4 — Esoteric Node Matrix & Rosslyn Integration
+- [ ] Map 144 nodes to 72 Shem angels and demons (3° zodiac segments)
 - [ ] Encode Soyga/zodiac color scheme in `data/angels.json`
 - [ ] Build Jacob's Ladder interface modeled after Rosslyn apprentice pillar
 - [ ] Infuse Rosslyn Cathedral motifs into UI templates and chapels
@@ -48,10 +54,16 @@
 
 ## Commands (Working Copy / local)
 - Initialize (if needed):
-  - `git init && git add . && git commit -m “init: cosmogenesis spine”`
+  - `git init && git add . && git commit -m "init: cosmogenesis spine"`
 - Feature branch:
   - `git checkout -b feat/p1-foundation`
 - Commit P1 chunks in order above.
 - Push:
   - `git push -u origin feat/p1-foundation`
 - Open PR with title: `P1 — Foundation (Docs+Schemas+Stubs)`
+
+## Next Steps — Rooms & Tesseract
+- [ ] Flesh out rooms-engine with quest state persistence
+- [ ] Render tesseract map updates in real time
+- [ ] Implement accessibility audit for new engines
+- [ ] Add integration tests covering room unlock flow

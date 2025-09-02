@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Museum-quality visionary art in p5.js -->
+  <meta charset="UTF-8">
+  <title>Visionary Dream</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+</head>
+<body>
+<script>
+// === Palette inspired by Alex Grey ===
+const palette = ['#0a2fff','#ff00ff','#00f2c7','#ffb300','#a200ff'];
+let angle = 0, sculptureMode = 0;
+
+function setup() {
+  // --- Full-HD 3D canvas ---
+  createCanvas(1920,1080,WEBGL);
+  noStroke();
+}
+
+function draw() {
+  // --- Gradient cosmic backdrop ---
+  for(let y=-height/2;y<height/2;y++){
+    const inter = map(y,-height/2,height/2,0,1);
+    const from = color('#040014'), to = color('#150033');
+    stroke(lerpColor(from,to,inter));
+    line(-width/2,y,width/2,y);
+  }
+  noStroke();
+
+  // --- Orbital camera control & soft lighting ---
+  orbitControl();
+  ambientLight(40);
+  pointLight(255,255,255,0,0,500);
+
+  // --- Rotating visionary sculpture ---
+  rotateY(angle*0.3);
+  rotateX(angle*0.2);
+  for(let i=0;i<palette.length;i++){
+    push();
+    const size = 200 + i*60;
+    fill(palette[i]);
+    if(sculptureMode===0) torus(size,size/6,64,32);      // luminous rings
+    else if(sculptureMode===1) sphere(size/2,48,32);     // morph into spheres
+    else box(size/1.5);                                  // angular fusion
+    rotateY(angle*0.1);
+    pop();
+  }
+  angle += 0.01;
+}
+
+// --- Switch modes & save visionary still ---
+function keyPressed(){
+  if(key==='s'||key==='S') saveCanvas('Visionary_Dream','png');
+  if(key==='f'||key==='F') sculptureMode = (sculptureMode+1)%3;
+}
+</script>
+</body>
+</html>

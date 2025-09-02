@@ -15,3 +15,8 @@ This guide summarizes design considerations for learners with ADHD, autism, PTSD
 - Michael Gazzaniga, *The Ethical Brain* – hemispheric specialization and integration.
 
 These notes are a starting point; contributions and corrections are welcome.
+ 
+## Adaptive Spiral Codex (144:99)
+- Experimental module that mirrors chronic PTSD processing loops to iteratively improve.
+- Fuses science, psychology, healing, and art so learners can explore special interests without losing quality.
+- Open-ended playground that rebuilds joy pathways through creative focus and curiosity.

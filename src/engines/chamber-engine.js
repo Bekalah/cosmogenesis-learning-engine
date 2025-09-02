@@ -1,32 +1,16 @@
-class ChamberEngine extends EventTarget {
-  constructor() {
-    super();
-    this.current = null;
-    this.skin = null;
-    this.guardian = null;
-    this.payload = null;
-  }
+export const chamberEngine = (() => {
+  const openChambers = new Set();
+  const payloads = new Map();
+  let current = null;
 
-  open(id) {
-    this.current = id;
-    this.dispatchEvent(new CustomEvent('chamber:open', { detail: id }));
+  function openMultiple(ids = []) {
+    ids.forEach(id => { openChambers.add(id); current = id; });
   }
-
-  applySkin(skinId) {
-    this.skin = skinId;
-    this.dispatchEvent(new CustomEvent('skin:apply', { detail: skinId }));
+  function closeAll() {
+    openChambers.clear(); payloads.clear(); current = null;
   }
+  function setPayload(id, data) { payloads.set(id, data); }
+  function getPayload(id) { return payloads.get(id) ?? null; }
 
-  setGuardian(name) {
-    this.guardian = name;
-    this.dispatchEvent(new CustomEvent('guardian:set', { detail: name }));
-  }
-
-  setPayload(payload) {
-    this.payload = payload;
-    this.dispatchEvent(new CustomEvent('payload:set', { detail: payload }));
-  }
-}
-
-export const chamberEngine = new ChamberEngine();
-export default chamberEngine;
+  return { openMultiple, closeAll, openChambers, payloads, current: () => current, setPayload, getPayload };
+})();
