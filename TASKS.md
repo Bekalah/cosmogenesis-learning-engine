@@ -35,14 +35,20 @@
 
 **DoD (P3):** switching skins persists; missing provenance blocks export.
 
-—
+---
 
 ## Commands (Working Copy / local)
 - Initialize (if needed):
-  - `git init && git add . && git commit -m “init: cosmogenesis spine”`
+  - `git init && git add . && git commit -m "init: cosmogenesis spine"`
 - Feature branch:
   - `git checkout -b feat/p1-foundation`
 - Commit P1 chunks in order above.
 - Push:
   - `git push -u origin feat/p1-foundation`
 - Open PR with title: `P1 — Foundation (Docs+Schemas+Stubs)`
+
+## Next Steps — Rooms & Tesseract
+- [ ] Flesh out rooms-engine with quest state persistence
+- [ ] Render tesseract map updates in real time
+- [ ] Implement accessibility audit for new engines
+- [ ] Add integration tests covering room unlock flow
