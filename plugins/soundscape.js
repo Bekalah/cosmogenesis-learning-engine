@@ -61,8 +61,20 @@ const soundscape = {
 
     const AudioCtx = global.window.AudioContext || global.window.webkitAudioContext;
     const ctx = new AudioCtx();
+// Simple binaural soundscape using the Web Audio API
+export default function soundscape(name) {
+  const settings = global.window?.COSMO_SETTINGS || {};
+  if (settings.muteAudio) return;
+
+  const AudioCtx = global.window?.AudioContext || global.window?.webkitAudioContext;
+  if (!AudioCtx) {
+    console.warn('Web Audio API not supported');
+    return;
+  }
+
+  const ctx = new AudioCtx();
+  try {
     const gain = ctx.createGain();
-    gain.gain.value = 0.1;
     gain.connect(ctx.destination);
 
     const freqs = theme === 'tesla' ? [432, 864] : [220, 440];
@@ -97,4 +109,17 @@ export default soundscape;
     osc.start();
     osc.stop(ctx.currentTime + 1);
   });
+    const base = { hypatia: 220, tesla: 330 }[name] || 440;
+    [base, base * 2].forEach((freq) => {
+      const osc = ctx.createOscillator();
+      osc.frequency.value = freq;
+      osc.connect(gain);
+      osc.start();
+      osc.stop(ctx.currentTime + 1);
+    });
+  } catch (err) {
+    console.error('Failed to initialize soundscape', err);
+  } finally {
+    ctx.close?.();
+  }
 }
