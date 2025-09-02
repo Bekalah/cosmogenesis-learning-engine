@@ -25,11 +25,15 @@ from matplotlib.patches import Circle, Rectangle
 # Canvas settings
 # ------------------------------------------------------------
 WIDTH, HEIGHT = 1920, 1080  # Resolution
+CENTER = (WIDTH // 2, HEIGHT // 2)
+CENTER = np.array([WIDTH / 2, HEIGHT / 2])
 
 # ------------------------------------------------------------
 # Sacred color schemes
 # ------------------------------------------------------------
 # Chakra colors for vertical ascent (7 levels)
+CHAKRA_COLORS: List[tuple] = [
+CHAKRA_COLORS = [
     (255, 0, 0),      # Root
     (255, 127, 0),    # Sacral
     (255, 255, 0),    # Solar Plexus

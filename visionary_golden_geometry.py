@@ -109,6 +109,15 @@ def draw_elemental_glyphs(draw: ImageDraw.ImageDraw, center: tuple[int, int], si
             (earth_center[0] - half, earth_center[1] + half),
             (earth_center[0] + half, earth_center[1] + half),
         ],
+    # Earth – square with a cross
+    left = center[0] - size
+    top = center[1] - half
+    right = center[0] - half
+    bottom = center[1] + half
+    draw.rectangle([left, top, right, bottom], outline=PALETTE["earth"], width=3)
+    draw.line([(left, center[1]), (right, center[1])], fill=PALETTE["earth"], width=3)
+    draw.line(
+        [(center[0] - 0.75 * size, top), (center[0] - 0.75 * size, bottom)],
         fill=PALETTE["earth"],
         width=3,
     )
