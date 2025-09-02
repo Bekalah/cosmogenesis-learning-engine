@@ -35,6 +35,11 @@
     save();
     console.log("Edge unlocked:", edge.from, edge.to);
   }
+  function reset() {
+    unlocked.nodes.clear();
+    unlocked.edges.clear();
+    save();
+  }
   document.addEventListener("tesseract:unlockNode", (e) => {
     unlockNode(e.detail.id);
   });
@@ -42,4 +47,5 @@
     unlockEdge(e.detail);
   });
   window.tesseractHooks = { unlockNode, unlockEdge, unlocked };
+  window.tesseractHooks = { unlockNode, unlockEdge, unlocked, reset };
 })();

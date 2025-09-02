@@ -22,6 +22,10 @@
     state.rooms[roomId].quests[quest] = true;
     save(state);
   }
+  function reset() {
+    state.rooms = {};
+    save(state);
+  }
   document.addEventListener("room:enter", (e) => {
     markRoomEnter(e.detail.id);
   });
@@ -29,4 +33,5 @@
     markQuestComplete(e.detail.roomId, e.detail.quest);
   });
   window.roomsProgress = { state, markRoomEnter, markQuestComplete };
+  window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
 })();
