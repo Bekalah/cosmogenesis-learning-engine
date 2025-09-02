@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadFirstDemo } from '../src/configLoader.js';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 import { renderPlate } from '../src/renderPlate.js';
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -38,6 +41,9 @@ test("renderPlate renders first demo plate without throwing", () => {
 test("loadFirstDemo returns valid config", () => {
   const config = loadFirstDemo();
   assert.equal(typeof config.layout, "string");
+test('loadConfig returns valid plate config', () => {
+  const config = loadConfig('test/fixtures/wheel.json');
+  validatePlateConfig(config);
   assert.equal(config.labels.length, config.mode);
 });
 

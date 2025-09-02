@@ -1,12 +1,15 @@
 // Ambient soundscape plugin using the Web Audio API
 // Respectful of mute settings for neurodivergent-friendly quiet
 
+// Minimal binaural soundscape helper used by tests and examples
 const soundscape = {
   id: 'soundscape',
 
   activate(_engine, theme = 'hypatia') {
-    if (window.COSMO_SETTINGS?.muteAudio) return;
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const settings = global.window?.COSMO_SETTINGS || {};
+    if (settings.muteAudio) return;
+
+    const AudioCtx = global.window.AudioContext || global.window.webkitAudioContext;
     const ctx = new AudioCtx();
     const gain = ctx.createGain();
     gain.gain.value = 0.1;
