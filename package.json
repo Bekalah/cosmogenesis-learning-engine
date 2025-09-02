@@ -15,7 +15,7 @@
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
-    "test": "node --test",
+    "test": "node --test && python3 -m py_compile $(git ls-files '*.py')",
     "format": "prettier -w .",
     "check": "prettier -c .",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
