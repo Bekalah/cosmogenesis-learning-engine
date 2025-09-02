@@ -6,7 +6,6 @@
     "description": "Fetch a Wikipedia summary and convert it into labels",
     "version": "1.0.0",
     "lifecycle": "manual"
-    "description": "Fetch a Wikipedia summary and convert it into labels"
   },
   {
     "id": "p5Mandala",
@@ -31,6 +30,5 @@
     "description": "Generate a simple binaural soundscape",
     "version": "1.0.0",
     "lifecycle": "manual"
-    "description": "Generate a simple mandala using p5.js"
   }
 ]
