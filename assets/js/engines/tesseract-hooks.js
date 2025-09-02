@@ -83,3 +83,4 @@ function update() {
     detail: { unlocked: Array.from(unlocked), edges }
   }));
 }
+})();
