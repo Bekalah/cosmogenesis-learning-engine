@@ -8,7 +8,7 @@ This roadmap outlines the next steps for evolving the engine into a modular hub 
 - [ ] Provide rich documentation in `README.md` and each subdirectory.
 
 ## Data Layer (`/data`)
-- [ ] Define schema for demos, plugins, egregores, correspondences, and experiences.
+- [ ] Define schema for rooms, plugins, egregores, correspondences, and experiences.
 - [ ] Implement loader utilities that validate datasets against the schema.
 - [ ] Expand sample datasets to cover art, science, mysticism, and cross‑disciplinary mappings.
 

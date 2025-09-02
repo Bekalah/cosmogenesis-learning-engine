@@ -92,7 +92,7 @@ P3—Chamber Skins: 5 skins functional; soft morphs; guardian mapping works. DoD
 P4—Visionary Art: painterly pipeline running; 4K exports with provenance; OA overlays selectable. DoD: validator blocks export if provenance missing.
 P5—Harmonics: Tone.js presets; UI toggles; ND fades. DoD: Lighthouse or custom audit passes “no autoplay audio”.
 P6—Provenance & Safety: schemas validated CI; Calm Mode reduces motion/contrast globally. DoD: a11y checklist passes (no flashes; prefers-reduced-motion honored).
-P7—Business: Business Cathedral deck template exports; avatar pack (Perm) present; readme_fusion.md added. DoD: demo deck exports in under 1 minute with plate + provenance.
+P7—Business: Business Cathedral deck template exports; avatar pack (Perm) present; readme_fusion.md added. DoD: sample deck exports in under 1 minute with plate + provenance.
 
 13) Content Contracts (Shared JSON Stubs)
 • /data/spiral_map.json:

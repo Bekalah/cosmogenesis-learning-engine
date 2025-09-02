@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 import { writeFileSync, unlinkSync } from 'fs';
 
+// Ensure loadConfig surfaces invalid JSON errors
 test('loadConfig throws on invalid JSON', () => {
   const file = 'test/fixtures/bad.json';
   writeFileSync(file, '{');
@@ -16,4 +17,3 @@ test('validatePlateConfig enforces label count', () => {
   const bad = { ...good, labels: [] };
   assert.throws(() => validatePlateConfig(bad), /Label count/);
 });
-

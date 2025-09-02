@@ -94,4 +94,3 @@ export function renderPlate(config) {
 
   return { ...config, items, exportAsJSON, exportAsSVG, exportAsPNG };
 }
-

@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    {"id": "agrippa", "label": "Agrippa"},
+    {"id": "hypatia", "label": "Hypatia"},
+    {"id": "einstein", "label": "Einstein"}
+  ],
+  "edges": [
+    {"from": "agrippa", "to": "hypatia"},
+    {"from": "hypatia", "to": "einstein"}
+  ]
+}
