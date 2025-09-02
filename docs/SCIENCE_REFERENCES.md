@@ -55,6 +55,16 @@
 - Doczi, G. (1981). *The Power of Limits: Proportional Harmonies in Nature, Art, and Architecture.* Shambhala.
 - Weitz, J. (2007). Emma Kunz's healing drawings. *Art Journal.*
 - Abrahams, R. (2019). Mystical realism of Andrew Gonzalez. *Visionary Art Review.*
+- Tone.js (MIT) → generative sound.
+- p5.js / Paper.js / Two.js (MIT) → geometry & art engines.
+- Wikimedia Commons & Met Museum OA → visionary art archives.
+- NIH PTSD Research Portal → open trauma data.
+
+## Sacred Geometry & Visionary Art
+- Livio, M. (2003). *The Golden Ratio: The Story of Phi.* Basic Books.
+- Doczi, G. (1981). *The Power of Limits: Proportional Harmonies in Nature, Art, and Architecture.* Shambhala.
+- Weitz, J. (2007). Emma Kunz's healing drawings. *Art Journal.*
+- Abrahams, R. (2019). Mystical realism of Andrew Gonzalez. *Visionary Art Review.*
 
 ## Why spiral?
 The logarithmic spiral embodies growth and return, allowing learners to revisit ideas with widening context. Its geometry offers a gentle path that mirrors natural patterns, supporting memory integration and curiosity.
