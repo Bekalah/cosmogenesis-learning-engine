@@ -33,4 +33,5 @@
     markQuestComplete(e.detail.roomId, e.detail.quest);
   });
   window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
+  window.roomsProgress = { state, markRoomEnter, markQuestComplete };
 })();
