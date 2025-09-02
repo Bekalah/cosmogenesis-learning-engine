@@ -1,4 +1,4 @@
-import { test } from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import soundscape, { playSoundscape } from '../plugins/soundscape.js';
 
@@ -26,12 +26,14 @@ test("soundscape respects mute", () => {
   assert.doesNotThrow(() => soundscape("hypatia"));
   global.alert = () => {};
   assert.doesNotThrow(() => playSoundscape('hypatia'));
+  global.window = { COSMO_SETTINGS: { muteAudio: true } };
   assert.doesNotThrow(() => soundscape.activate(null, 'hypatia'));
   cleanup();
 });
 
 test("soundscape starts oscillators when not muted", () => {
   let started = 0;
+
   class FakeOsc {
     constructor() { this.frequency = { value: 0 }; }
     connect() { return this; }
@@ -92,6 +94,7 @@ test("soundscape starts oscillators when not muted", () => {
     connect() { return this; }
   }
   }
+
   class FakeGain {
     constructor() { this.gain = { value: 0 }; }
     connect() { return this; }
@@ -111,6 +114,15 @@ test("soundscape starts oscillators when not muted", () => {
   }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   assert.doesNotThrow(() => playSoundscape('tesla'));
+
+  class FakeCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+  }
+
+  global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeCtx };
+  assert.doesNotThrow(() => soundscape.activate(null, 'tesla'));
   assert.equal(started, 2);
   soundscape.deactivate();
   cleanup();

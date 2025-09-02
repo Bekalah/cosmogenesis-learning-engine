@@ -5,6 +5,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 import { writeFileSync, unlinkSync } from 'fs';
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { writeFileSync, unlinkSync } from 'node:fs';
+import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 
 // Ensure loadConfig surfaces invalid JSON errors
 test('loadConfig throws on invalid JSON', () => {
