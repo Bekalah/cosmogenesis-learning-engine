@@ -49,12 +49,24 @@
     save();
     console.log("Edge unlocked:", edge.from, edge.to);
   }
+<<<<<<< codex/create-open-world-learning-engine-features-j3nbmd
+=======
+    save();
+    console.log("Edge unlocked:", edge.from, edge.to);
+  }
+>>>>>>> upstream/codex/create-open-world-learning-engine-features-j3nbmd
   document.addEventListener("tesseract:unlockNode", (e) => {
     unlockNode(e.detail.id);
   });
   document.addEventListener("tesseract:unlockEdge", (e) => {
     unlockEdge(e.detail);
   });
+  window.tesseractHooks = { unlockNode, unlockEdge };
+  window.tesseractHooks = { unlockNode, unlockEdge, unlocked, reset };
+<<<<<<< codex/create-open-world-learning-engine-features-j3nbmd
+  window.tesseractHooks = { unlockNode, unlockEdge, unlocked };
+  window.tesseractHooks = { unlockNode, unlockEdge, unlocked, reset };
+=======
   window.tesseractHooks = { unlockNode, unlockEdge };
   window.tesseractHooks = { unlockNode, unlockEdge, unlocked, reset };
   window.tesseractHooks = { unlockNode, unlockEdge, unlocked };
@@ -83,4 +95,5 @@ function update() {
     detail: { unlocked: Array.from(unlocked), edges }
   }));
 }
+>>>>>>> upstream/codex/create-open-world-learning-engine-features-j3nbmd
 })();
