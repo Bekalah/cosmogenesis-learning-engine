@@ -1,14 +1,11 @@
-import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 import { test } from 'node:test';
-import { strict as assert } from 'assert';
-import { test } from 'node:test';
-import { strict as assert } from 'assert';
+import assert from 'node:assert/strict';
 import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
+import { strict as assert } from 'assert';
 import { writeFileSync, unlinkSync } from 'fs';
+import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
 
 // Ensure loadConfig surfaces invalid JSON errors
-import { writeFileSync, unlinkSync } from 'fs';
-
 test('loadConfig throws on invalid JSON', () => {
   const file = 'test/fixtures/bad.json';
   writeFileSync(file, '{');
@@ -16,11 +13,9 @@ test('loadConfig throws on invalid JSON', () => {
   unlinkSync(file);
 });
 
-// Validate schema enforcement
 test('validatePlateConfig enforces label count', () => {
   const good = { layout: 'spiral', mode: 1, labels: ['x'] };
   validatePlateConfig(good);
   const bad = { ...good, labels: [] };
   assert.throws(() => validatePlateConfig(bad), /Label count/);
 });
-

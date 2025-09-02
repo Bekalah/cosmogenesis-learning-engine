@@ -27,7 +27,7 @@ Thumbnails for gallery:
 Write a manifest.json describing assets:
   python3 scripts/generate_flame.py manifest --root assets/flame --out assets/flame/manifest.json
 
-All-in one demo (batch → atlas → thumbs → manifest):
+All-in one sample (batch → atlas → thumbs → manifest):
   python3 scripts/generate_flame.py all --root assets/flame --count 6
 
 Notes:
