@@ -4,6 +4,8 @@
     const res = await fetch("/data/rooms.json", { cache: "no-store" });
     return res.json();
   }
+  const progress =
+    (window.roomsProgress && window.roomsProgress.state) || { rooms: {} };
   function emit(name, detail) {
     document.dispatchEvent(new CustomEvent(name, { detail }));
   }
@@ -13,6 +15,8 @@
     rooms.forEach((room) => {
       const section = document.createElement("section");
       section.className = "room";
+      const roomState = progress.rooms[room.id];
+      if (roomState && roomState.entered) section.classList.add("visited");
       const title = document.createElement("h2");
       title.textContent = room.name;
       const enter = document.createElement("button");
@@ -25,6 +29,8 @@
       const list = document.createElement("ul");
       Object.entries(room.quests || {}).forEach(([q, url]) => {
         const li = document.createElement("li");
+        if (roomState && roomState.quests && roomState.quests[q])
+          li.classList.add("completed");
         const a = document.createElement("a");
         a.textContent = q;
         a.href = url;
