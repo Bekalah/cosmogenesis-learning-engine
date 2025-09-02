@@ -4,7 +4,6 @@
     "config": {
       "layout": "wheel",
       "mode": 7,
-      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
       "labels": [
         "Red",
         "Orange",
@@ -29,50 +28,4 @@
     }
   }
 ]
-  {
--+    "title": "Art • 7 Colors (Basic Design)",
--+    "config": {
--+      "layout": "wheel",
--+      "mode": 7,
--+      "labels": ["Red","Orange","Yellow","Green","Cyan","Blue","Violet"]
--+    }
--+  }
--+]
-+[
-+  {
-+    "title": "Art \u2022 7 Colors (Basic Design)",
-+    "config": {
-+      "layout": "wheel",
-+      "mode": 7,
-+      "labels": [
-+        "Red",
-+        "Orange",
-+        "Yellow",
-+        "Green",
-+        "Cyan",
-+        "Blue",
-+        "Violet"
-+      ]
-+    }
-+  },
-+  {
-+    "title": "Art \u2022 Visionary Dream",
-+    "config": {
-+      "layout": "spiral",
-+      "mode": 3,
-+      "labels": [
-+        "Community Garden",
-+        "Small Business Workflow",
-+        "Sustainable City Plan"
-+      ]
-+    }
-+  }
-+]
-    "title": "Art • 7 Colors (Basic Design)",
-    "config": {
-      "layout": "wheel",
-      "mode": 7,
-      "labels": ["Red","Orange","Yellow","Green","Cyan","Blue","Violet"]
-    }
-  }
-]
+
