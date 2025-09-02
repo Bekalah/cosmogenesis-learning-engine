@@ -2,6 +2,7 @@
 // Respectful of mute settings for neurodivergent-friendly quiet
 
 // Minimal binaural soundscape helper used by tests and examples
+// Minimal binaural soundscape helper used by tests and demos
 const soundscape = {
   id: 'soundscape',
 

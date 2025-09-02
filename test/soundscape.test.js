@@ -85,6 +85,11 @@ test("soundscape starts oscillators when not muted", () => {
     constructor() { this.gain = { value: 0 }; }
     connect() { return this; }
   }
+  }
+  class FakeGain {
+    constructor() { this.gain = { value: 0 }; }
+    connect() { return this; }
+  }
   class FakeCtx {
     constructor() { this.destination = {}; }
     createOscillator() { return new FakeOsc(); }

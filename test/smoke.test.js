@@ -37,6 +37,10 @@ test("renderPlate renders first demo plate without throwing", () => {
   assert.equal(plate.layout, config.layout);
   assert.equal(plate.labels.length, config.mode);
 });
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { loadFirstDemo } from '../src/configLoader.js';
+import { renderPlate } from '../src/renderPlate.js';
 
 test("loadFirstDemo returns valid config", () => {
   const config = loadFirstDemo();

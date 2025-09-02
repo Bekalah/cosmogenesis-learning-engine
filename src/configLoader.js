@@ -45,6 +45,10 @@ export function validatePlateConfig(config) {
 export function loadFirstDemo() {
   const demos = loadConfig("data/demos.json");
   const config = demos[0].config;
+// Convenience helper used in tests and demos
+export function loadFirstDemo() {
+  const demos = loadConfig('data/demos.json');
+  const config = demos[0]?.config;
   validatePlateConfig(config);
   return config;
 }
