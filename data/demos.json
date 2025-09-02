@@ -5,15 +5,6 @@
       "layout": "wheel",
       "mode": 7,
       "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
-      "labels": [
-        "Red",
-        "Orange",
-        "Yellow",
-        "Green",
-        "Cyan",
-        "Blue",
-        "Violet"
-      ]
     }
   },
   {
