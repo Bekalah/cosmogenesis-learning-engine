@@ -56,8 +56,30 @@ test('soundscape starts oscillators when not muted', () => {
   }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   global.alert = () => {};
+  }
+  global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
+  class FakeGain { constructor() { this.gain = { value: 0 }; } connect() { return this; } }
+  class FakeMerger { connect() { return this; } }
+  class FakeAudioCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+    createChannelMerger() { return new FakeMerger(); }
+    close() {}
+  }
+  global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
+  global.alert = () => {};
   assert.doesNotThrow(() => soundscape('tesla'));
   assert.equal(started, 2);
   soundscape.deactivate();
+  cleanup();
+});
+
+test('soundscape handles missing AudioContext', () => {
+  global.window = { COSMO_SETTINGS: { muteAudio: false } };
+  const warnings = [];
+  console.warn = (msg) => warnings.push(msg);
+  assert.doesNotThrow(() => soundscape('hypatia'));
+  assert.ok(warnings.some((m) => /Web Audio API not supported/.test(m)));
   cleanup();
 });
