@@ -1,0 +1,32 @@
+[
+  {
+    "id": "agrippa",
+    "name": "Agrippa",
+    "description": "Renaissance polymath exploring occult philosophy.",
+    "quests": {
+      "read": "https://www.gutenberg.org/ebooks/33952",
+      "sketch": "https://commons.wikimedia.org/wiki/File:Agrippa_Von_Nettenheim.jpg",
+      "remix": "https://archive.org/details/threebooksoccult00agri"
+    }
+  },
+  {
+    "id": "hypatia",
+    "name": "Hypatia",
+    "description": "Alexandrian astronomer and philosopher.",
+    "quests": {
+      "read": "https://en.wikipedia.org/wiki/Hypatia",
+      "sketch": "https://commons.wikimedia.org/wiki/File:HYPATIA_(Museo_del_Prado).jpg",
+      "remix": "https://archive.org/details/hypatia00knip"
+    }
+  },
+  {
+    "id": "einstein",
+    "name": "Einstein",
+    "description": "Physicist of relativity and quanta.",
+    "quests": {
+      "read": "https://www.gutenberg.org/ebooks/5001",
+      "sketch": "https://commons.wikimedia.org/wiki/File:Einstein_1921_portrait2.jpg",
+      "remix": "https://archive.org/details/alberteinsteinre00einso"
+    }
+  }
+]
