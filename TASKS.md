@@ -35,6 +35,15 @@
 
 **DoD (P3):** switching skins persists; missing provenance blocks export.
 
+### P4 — Esoteric Node Matrix & Rosslyn Integration
+- [ ] Map 144 nodes to 72 Shem angels and 72 demons (3° zodiac segments)
+- [ ] Encode Soyga/zodiac color scheme in `data/angels.json`
+- [ ] Build Jacob's Ladder interface modeled after Rosslyn apprentice pillar
+- [ ] Infuse Rosslyn Cathedral motifs into UI templates and chapels
+- [ ] Cross-reference node colors with Codex 144:99 palette
+
+**DoD (P4):** each node resolves to a color, angel, and zodiac degree; Jacob's Ladder scene renders with Rosslyn accents.
+
 —
 
 ## Commands (Working Copy / local)
