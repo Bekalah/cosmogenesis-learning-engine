@@ -38,6 +38,8 @@
 
 **DoD (P3):** switching skins persists; missing provenance blocks export.
 
+### P4 — Esoteric Node Matrix & Rosslyn Integration
+- [ ] Map 144 nodes to 72 Shem angels and 72 demons (3° zodiac segments)
 ---
 ### P4 — Esoteric Node Matrix & Rosslyn Integration
 - [ ] Map 144 nodes to 72 Shem angels and demons (3° zodiac segments)
