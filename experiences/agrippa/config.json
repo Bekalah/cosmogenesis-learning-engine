@@ -1,6 +1,6 @@
-+{
-+  "title": "Agrippa",
-+  "components": [
-+    { "id": "counter", "src": "./components/counter.js" }
-+  ]
-+}
+{
+  "title": "Agrippa",
+  "components": [
+    { "id": "counter", "src": "./components/counter.js" }
+  ]
+}
