@@ -1,0 +1,11 @@
+[
+  {
+    "id": "AGRIPPA",
+    "name": "Agrippa",
+    "type": "classic",
+    "palette": {"ink":"#eae8e0","wash":"#111","accent":"#b08d57","gold":"#d4af37"},
+    "motifs": [],
+    "textures": [],
+    "shaders": ["vellum"]
+  }
+]

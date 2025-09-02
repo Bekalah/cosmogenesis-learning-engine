@@ -1,96 +1,322 @@
-Codex 144:99 — Alpha et Omega
+--- # ✦ Cosmogenesis Learning Engine
+--- 
+--- *A spiral teacher for living art, pattern recognition, and visionary learning.*
+--- 
+---+Created by **Rebecca Susan Lemke** (Rebecca Respawn) – architect‑scribe of the Cosmogenesis project.
+---+
+--- —
+--- 
+--- ## ✦ Overview
+----The **Cosmogenesis Learning Engine** is a browser-native app for **spiral learning**.  
+---+The **Cosmogenesis Learning Engine** is a browser-native app for **spiral learning**.
+--- It transforms ideas, texts, or archives into **living plates** — interactive diagrams that reveal hidden patterns.
+--- 
+----This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.  
+---+This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.
+--- It is built to be **dynamic, recursive, and healing**: every return deepens the pattern.
+--- 
+--- —
+--- 
+--- ## ✦ Features
+----- **Plate Builder** — generate spirals, twin-cones, wheels, or grids.  
+----- **Any Dataset** — paste text, JSON, CSV, or archives; the engine adapts.  
+----- **Export** — save plates as SVG/PNG or share JSON configs.  
+----- **Gallery** — save your own collection locally.  
+----- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.  
+---+- **Plate Builder** — generate spirals, twin-cones, wheels, or grids.
+---+- **Any Dataset** — paste text, JSON, CSV, or archives; the engine adapts.
+---+- **Export** — save plates as SVG/PNG or share JSON configs.
+---+- **Gallery** — save your own collection locally.
+---+- **ND-Safe** — no autoplay, calm motion, optional Ward Mode.
+--- - **Offline-Ready** — open `index.html` in any browser; no install required.
+---+- **Plugins** — load open knowledge connectors or generative art modules on demand, with optional local `vendor/` scripts for offline use.
+---+- **Egregore Tarot** — summon helper personas as learning companions.
+---+- **Trauma-aware** — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
+---+- **Experience Modules** — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
+---+- **Correspondence Library** — sample mappings for chakras ↔ planets, runes, and I Ching.
+---+- **Accessibility Settings** — toggle calm colors, reduced motion, or mute audio; preferences persist locally.
+--- 
+--- —
+--- 
+--- ## ✦ Why It Matters
+----- For **artists & designers**: a tool to turn archives into living art.  
+----- For **mystics & researchers**: a way to trace correspondences across traditions.  
+----- For **educators & facilitators**: an interactive, non-linear teaching aid.  
+----- For **neurodivergent learners**: a system that respects spiral, recursive learning.  
+---+- For **artists & designers**: a tool to turn archives into living art.
+---+- For **mystics & researchers**: a way to trace correspondences across traditions.
+---+- For **educators & facilitators**: an interactive, non-linear teaching aid.
+---+- For **neurodivergent learners**: a system that respects spiral, recursive learning.
+--- 
+--- —
+--- 
+--- ## ✦ Quick Start
+--- 1. Clone this repository:
+---    ```bash
+---    git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
+----   cd cosmogenesis-learning-engine
+---+   cd cosmogenesis-learning-engine
+---+   ```
+---+2. Open `index.html` in your browser.
+---+3. Load sample **Rooms** or craft your own dataset.
+---+4. Visit the **Experiences** tab to read narrative prologues and choose a realm.
+---+
+---+Cross-discipline rooms live in `data/rooms.json` and load automatically.
+---+Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`.
+---+Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`.
+---+Correspondence examples live in `data/correspondences.json` for cross-tradition study.
+---+
+---+—
+---+
+---+## ✦ App Structure
+---+```
+---+app/
+---+├── shared/          # utilities reused across experiences
+---+│   ├── auth/
+---+│   └── utils/
+---+├── experience_a/    # Hypatia's Library
+---+│   ├── components/
+---+│   ├── pages/
+---+│   └── config.json
+---+├── experience_b/    # Tesla's Workshop
+---+│   ├── components/
+---+│   ├── pages/
+---+│   └── config.json
+---+├── experience_c/    # Agrippa's Study
+---+│   ├── components/
+---+│   ├── pages/
+---+│   └── config.json
+---+└── experience_d/    # Alexandrian Scriptorium
+---+    ├── components/
+---+    ├── pages/
+---+    └── config.json
+---+```
+---+Each experience declares its own `config.json` and can be loaded dynamically at runtime.
+---+
+---+—
+---+
+---+## ✦ Cross-Repository Growth
+---+The engine can link with other creative realms or data sources. Companion projects may live in separate repositories and expose
+---+their own modules, datasets, or plugins.
+---+
+---+- Use Git submodules or APIs to register external realms.
+---+- Store module descriptors in a registry so the app can discover them at runtime.
+---+- See `docs/repo_integration.md` for patterns that keep multi-repo ecosystems cohesive.
+--+# ✦ Cosmogenesis Learning Engine
+--+
+--+*A spiral teacher for living art, pattern recognition, and visionary learning.*
+--+
+--+Created by **Rebecca Susan Lemke** (Rebecca Respawn) – architect‑scribe of the Cosmogenesis project.
+--+
+--+## ✦ Overview
+--+The Cosmogenesis Learning Engine is a browser‑native app for **spiral learning**. It transforms ideas, texts, or archives into **living plates**—interactive diagrams that reveal hidden patterns. Built for artists, mystics, educators, and anyone who cannot learn in flat, linear ways. Every return deepens the pattern.
+--+
+--+## ✦ Features
+--+- Plate Builder — generate spirals, twin-cones, wheels, or grids.
+--+- Any Dataset — paste text, JSON, CSV, or archives; the engine adapts.
+--+- Export — save plates as SVG/PNG or share JSON configs.
+--+- Gallery — save your own collection locally.
+--+- ND-Safe — no autoplay, calm motion, optional Ward Mode.
+--+- Offline-Ready — open `index.html` in any browser; no install required.
+--+- Plugins — load open knowledge connectors or generative art modules on demand, with optional local `vendor/` scripts for offline use.
+--+- Egregore Tarot — summon helper personas as learning companions.
+--+- Trauma-aware — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
+--+- Experience Modules — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
+--+- Correspondence Library — sample mappings for chakras ↔ planets, runes, and I Ching.
+--+- Accessibility Settings — toggle calm colors, reduced motion, or mute audio; preferences persist locally.
+--+
+--+## ✦ Quick Start
+--+1. Clone this repository:
+--+   ```bash
+--+   git clone https://github.com/bekalah/cosmogenesis-learning-engine.git
+--+   cd cosmogenesis-learning-engine
+--+   ```
+--+2. Open `index.html` in your browser.
+--+3. Load sample rooms or craft your own dataset.
+--+4. Visit the Experiences tab to explore realms.
+--+
+--+Cross-discipline rooms live in `data/rooms.json`. Prototype egregore cards live in `data/egregores.json` and are described in `docs/egregore_tarot.md`. Plugin descriptors live in `data/plugins.json` with docs in `docs/plugins.md`. Correspondence examples live in `data/correspondences.json` for cross-tradition study.
+--+
+--+## ✦ App Structure
+--+```
+--+app/
+--+├── shared/          # utilities reused across experiences
+--+│   ├── auth/
+--+│   └── utils/
+--+├── experience_a/    # Hypatia's Library
+--+│   ├── components/
+--+│   ├── pages/
+--+│   └── config.json
+--+├── experience_b/    # Tesla's Workshop
+--+│   ├── components/
+--+│   ├── pages/
+--+│   └── config.json
+--+├── experience_c/    # Agrippa's Study
+--+│   ├── components/
+--+│   ├── pages/
+--+│   └── config.json
+--+└── experience_d/    # Alexandrian Scriptorium
+--+    ├── components/
+--+    ├── pages/
+--+    └── config.json
+--+```
+--+Each experience declares its own `config.json` and can be loaded dynamically at runtime.
+--+
+--+## ✦ Cross-Repository Growth
+--+The engine can link with other creative realms or data sources. Companion projects may live in separate repositories and expose their own modules, datasets, or plugins.
+--+
+--+- Use Git submodules or APIs to register external realms.
+--+- Store module descriptors in a registry so the app can discover them at runtime.
+--+- See `docs/repo_integration.md` for patterns that keep multi-repo ecosystems cohesive.
+--+
+-+# Cosmogenesis Learning Engine
+-+
+-+*A spiral teacher for living art, pattern recognition, and visionary learning.*
+-+
+-+Created by **Rebecca Susan Lemke** (Rebecca Respawn) – architect‑scribe of the Cosmogenesis project.
+-+
+-+## Overview
+-+
+-+The **Cosmogenesis Learning Engine** is a browser-native app for spiral learning. It transforms ideas, texts, or archives into living plates—interactive diagrams that reveal hidden patterns. This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.
+-+
+-+## Features
+-+
+-+- Plate Builder — generate spirals, twin-cones, wheels, or grids.
+-+- Any Dataset — paste text, JSON, CSV, or archives; the engine adapts.
+-+- Export — save plates as SVG/PNG or share JSON configs.
+-+- Gallery — save your own collection locally.
+-+- ND-Safe — no autoplay, calm motion, optional Ward Mode.
+-+- Offline-Ready — open `index.html` in any browser; no install required.
+-+- Plugins — load open knowledge connectors or generative art modules on demand.
+-+- Egregore Tarot — summon helper personas as learning companions.
+-+- Trauma-aware — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
+-+- Experience Modules — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
+-+
+-+## Quick Start
+-+
+-+1. Clone this repository and open the project directory.
+-+2. Open `index.html` in your browser.
+-+3. Load sample rooms or craft your own dataset.
+-+
+-+Sample datasets live in `data/`. Plugins reside in `plugins/`. Experience modules are under `app/`.
+-+
+-+## Development
+-+
+-+Run tests with:
+-+
+-+```bash
+-+npm test
+-+```
++# Cosmogenesis Learning Engine
++
++*A spiral teacher for living art, pattern recognition, and visionary learning.*
++
++Created by **Rebecca Respawn** – architect-scribe of the Cosmogenesis project.
++
++## Overview
++The Cosmogenesis Learning Engine is a browser-native app for spiral learning. It transforms ideas, texts, or archives into living plates—interactive diagrams that reveal hidden patterns. Built for artists, mystics, educators, and anyone who learns beyond linear paths.
++
++## Features
++- Plate Builder — generate spirals, twin-cones, wheels, or grids
++- Any Dataset — paste text, JSON, CSV, or archives; the engine adapts
++- Export — save plates as SVG/PNG or share JSON configs
++- Gallery — save your own collection locally
++- ND-Safe — no autoplay, calm motion, optional Ward Mode
++- Offline-Ready — open `index.html` in any browser; no install required
++- Plugins — add open knowledge connectors or generative art modules
++- Egregore Tarot — summon helper personas as learning companions
++- Trauma-aware — see `docs/neurodivergent_learning.md` for ND & PTSD guidance
++- Experience Modules — explore realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium
++
++## Quick Start
++1. Clone this repository and open the project directory.
++2. Open `index.html` in your browser.
++3. Load sample rooms from `data/` or craft your own dataset.
++
+Plugins live in `plugins/` and experience modules in `app/`.
 
-Master Entry Document
+## Development
+# Cosmogenesis Learning Engine
 
-Vision:
-Codex 144:99 (Alpha et Omega) is a spiral-dynamic, nonlinear learning environment.
-It is designed as a living cathedral — a fusion of art, science, and archetypal support — where users can explore creativity, healing, and knowledge through immersive environments.
+*A spiral teacher for living art, pattern recognition, and visionary learning.*
 
-This is not ritual software. It is a visionary art + learning engine.
-It mirrors the architecture of the Double Tree of Life, the 33-node Living Spine, and the Tesseract, re-imagined as interactive creative tools.
+Created by **Rebecca Susan Lemke** (Rebecca Respawn) – architect‑scribe of the Cosmogenesis project.
 
-⸻
+## Overview
 
-Core Directories:
-	•	app/  (shared modules and experiences A–D)
-	•	assets/  (CC0 / public-domain sound, image, video links only)
-	•	docs/
-	•	engines/  (JacobsLadder, ApprenticePillar, Tesseract, Cymatics, FusionArt)
-	•	plugins/
-	•	scripts/
-	•	src/
-	•	styles/
+The **Cosmogenesis Learning Engine** is a browser-native app for spiral learning. It transforms ideas, texts, or archives into living plates—interactive diagrams that reveal hidden patterns. This project exists for artists, mystics, educators, and anyone who cannot learn in flat, linear ways.
 
-Rule: Never erase or flatten. Extend only.
+## Features
 
-⸻
+- Plate Builder — generate spirals, twin-cones, wheels, or grids.
+- Any Dataset — paste text, JSON, CSV, or archives; the engine adapts.
+- Export — save plates as SVG/PNG or share JSON configs.
+- Gallery — save your own collection locally.
+- ND-Safe — no autoplay, calm motion, optional Ward Mode.
+- Offline-Ready — open `index.html` in any browser; no install required.
+- Plugins — load open knowledge connectors or generative art modules on demand.
+- Egregore Tarot — summon helper personas as learning companions.
+- Trauma-aware — see `docs/neurodivergent_learning.md` for ND & PTSD guidance.
+- Experience Modules — step into realms like Hypatia's Library, Tesla's Workshop, Agrippa's Study, and the Alexandrian Scriptorium.
 
-Engines:
+## Quick Start
 
-JacobsLadder Engine
-	•	33-node spiral staircase.
-	•	Functions: mount, rotate, addNode, renderTo.
+1. Clone this repository and open the project directory.
+2. Open `index.html` in your browser.
+3. Load sample rooms or craft your own dataset.
 
-ApprenticePillar Engine
-	•	Six consecration guardians mapped to the pillar.
-	•	Functions: initializePillar, activateGuardian, renderPillar.
+Sample datasets live in `data/`. Plugins reside in `plugins/`. Experience modules are under `app/`.
 
-Tesseract Engine
-	•	4D cube overlay linking experiences A–D.
-	•	Functions: mount, transform, linkExperience.
+## Development
 
-Cymatics Lab
-	•	Audio → resonance visualizations.
-	•	Functions: applySound, generatePattern, renderPattern.
+Run tests with:
 
-Fusion Art Engine
-	•	Generates visionary, alchemical art (geometry + color palettes).
-	•	Functions: generateArt, exportArt.
+```bash
+npm test
+```
 
-⸻
+## Visionary Dream Generator
 
-Labs & Experiences:
-	•	Experiences A–D: nonlinear “rooms” for exploration.
-	•	Binaural & Type Beat Lab: link CC0 / public-domain beats, sync with Cymatics visuals.
-	•	Fusion Labs: experimental art + geometry overlays.
+Render a static spiral plate from the command line:
 
-⸻
+```bash
+pip install pillow
+python visionary_dream.py --palette calm --width 1280 --height 720
+```
 
-Principles:
-	•	Nonlinear > Linear
-	•	Experiential > Didactic
-	•	Archetypal > Personal
-	•	Fusion > Reduction
-	•	Healing > Exploitation
+The script outputs `Visionary_Dream.png` and a brief alt-text file for accessible viewing.
 
-⸻
+### Visionary Fractal Art
 
-Guardrails for Codex:
-	•	Do not inject rituals or personal belief systems.
-	•	Archetypes = symbolic, supportive, artistic.
-	•	Real code only (JS/TS, WebGL, Three.js, React).
-	•	Modular, extendable design.
-	•	Always comment: // ✦ Codex 144:99 — preserve original intention
+Generate a museum‑quality Julia set infused with Alex Grey hues:
 
-⸻
+```bash
+python3 scripts/visionary_fractal.py --width 1920 --height 1080
+```
 
-Task Flow for Codex:
-	1.	Review this document before writing code.
-	2.	Extend engines/ with modular classes and APIs.
-	3.	Never erase symbolic mappings or original intentions.
-	4.	Add assets only if open-source / CC0 / public-domain.
-	5.	Test with npm run dev.
+The image saves as `Visionary_Dream.png` in the project root.
 
-⸻
+## Remote Experiences
 
-Example Prompt for Codex:
-Implement a function in engines/Cymatics.js called applySound(url) that loads an audio file from a public-domain URL, generates a real-time waveform using the Web Audio API, and maps it onto a spiral grid in the JacobsLadder engine.
+Use the helper `src/remoteExperienceLoader.js` to load experiences directly from another public GitHub repository without cloning it.
 
-⸻
+```html
+<script type="module">
+import { fetchRemoteExperiences } from './src/remoteExperienceLoader.js';
 
-Final Note:
-Codex 144:99 is a living system. Always preserve its spine, expand its body, and never overwrite its soul.
+const experiences = await fetchRemoteExperiences('user/other-repo');
+console.log(experiences);
+</script>
+```
 
-⸻
+Each experience fetched this way resolves its components and first page from the remote repo using raw GitHub URLs.
 
-This is one single, clean file you can paste in as README.md or CODEX_ENTRY.md.
+## Environment Setup
+
+Install Python (including Pillow) and Node dependencies locally without relying on remote workflows:
+
+```bash
+bash scripts/setup_env.sh
+```
+
+This helper script creates a virtual environment, installs packages from `requirements.txt`, and runs `npm install` for client modules.

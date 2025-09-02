@@ -1,17 +1,16 @@
-# Visionary Dream Generator
+# Visionary Dream Generators
 
 These steps keep things calm and clear:
 
 1. **Install Pillow**
    - Run: `pip install pillow`
-2. **Create the artwork**
+2. **Create golden geometry art**
+   - Run: `python visionary_golden_geometry.py`
+3. **Classic spiral mode**
    - Run: `python visionary_dream.py`
-3. **Optional settings**
-   - Calm palette: `python visionary_dream.py --palette calm`
-   - High contrast: `python visionary_dream.py --palette contrast`
-   - Custom size: `python visionary_dream.py --width 1280 --height 720`
-4. **View the result**
-   - `Visionary_Dream.png` image and `Visionary_Dream.txt` description appear in this folder.
+4. **Optional settings**
+   - Custom size: `python visionary_golden_geometry.py --width 1280 --height 720`
+5. **View the result**
+   - `Visionary_Dream.png` appears in this folder.
 
 Feel free to pause between steps. Nothing moves or makes sound unless you choose to run it.
-

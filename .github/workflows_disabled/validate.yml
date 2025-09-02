@@ -1,0 +1,14 @@
+name: Validate JSON + Lint
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i -D ajv ajv-formats jsonc-parser
+      - name: Validate stylepacks.json
+        run: node .github/workflows/validate.js stylepacks ./schemas/stylepack.json ./data/stylepacks/stylepacks.json
+      - name: Validate provenance refs (if present)
+        run: node .github/work
