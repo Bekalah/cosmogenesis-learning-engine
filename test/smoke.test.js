@@ -28,3 +28,4 @@ test('smoke: renderPlate yields points', () => {
   const { points } = renderPlate(cfg);
   assert.ok(Array.isArray(points) && points.length > 0, 'points generated');
 });
+});

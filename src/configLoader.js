@@ -39,6 +39,7 @@ export function validatePlateConfig(config) {
 }
 
 // Convenience helper to load and validate the first demo plate
+// Convenience loader for the first demo plate
 export function loadFirstDemo() {
   return {
     version: "0.9.2",

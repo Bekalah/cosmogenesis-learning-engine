@@ -56,6 +56,8 @@ test('soundscape starts oscillators when not muted', () => {
   }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   global.alert = () => {};
+  }
+  global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   assert.doesNotThrow(() => soundscape('tesla'));
   assert.equal(started, 2);
   soundscape.deactivate();

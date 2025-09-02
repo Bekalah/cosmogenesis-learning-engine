@@ -20,6 +20,7 @@ export function playSoundscape(theme = 'hypatia') {
     const osc = ctx.createOscillator();
     osc.frequency.value = f;
 // Simple binaural soundscape using the Web Audio API
+// Ambient soundscapes honoring realm archetypes
 export default function soundscape(name) {
   const settings = global.window?.COSMO_SETTINGS || {};
   if (settings.muteAudio) return;
@@ -87,4 +88,13 @@ const soundscape = {
 };
 
 export default soundscape;
+
+  const base = name === 'tesla' ? 330 : 220;
+  [base, base * 2].forEach((freq) => {
+    const osc = ctx.createOscillator();
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    osc.start();
+    osc.stop(ctx.currentTime + 1);
+  });
 }
