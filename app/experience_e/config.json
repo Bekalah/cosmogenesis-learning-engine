@@ -1,0 +1,6 @@
+{
+  "title": "Global Healing Web",
+  "description": "Fractal map linking Tibetan Raku Kei, Usui and Karuna Reiki, Egyptian Sekhem, hypnosis, EMDR, brainspotting, and more.",
+  "pages": ["fractal-web.md"],
+  "components": ["components/fractalWeb.js"]
+}
