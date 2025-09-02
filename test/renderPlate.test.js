@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { renderPlate } from "../src/renderPlate.js";
+import { test } from 'node:test';
+import { renderPlate } from '../src/renderPlate.js';
+import assert from 'node:assert/strict';
 
 const base = { mode: 4, labels: ["a", "b", "c", "d"] };
 

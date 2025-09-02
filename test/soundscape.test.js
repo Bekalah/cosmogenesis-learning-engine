@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import soundscape from '../plugins/soundscape.js';
+import soundscape, { playSoundscape } from '../plugins/soundscape.js';
 
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -9,6 +9,9 @@ import soundscape from "../plugins/soundscape.js";
 // Clean window after each test
 function cleanup() {
   delete global.window;
+function cleanup() {
+  delete global.window;
+  delete global.alert;
 }
 function cleanup() { delete global.window; }
 
@@ -21,6 +24,9 @@ test("soundscape respects mute", () => {
     AudioContext: class {},
   };
   assert.doesNotThrow(() => soundscape("hypatia"));
+  global.alert = () => {};
+  assert.doesNotThrow(() => playSoundscape('hypatia'));
+  assert.doesNotThrow(() => soundscape.activate(null, 'hypatia'));
   cleanup();
 });
 
@@ -97,6 +103,14 @@ test("soundscape starts oscillators when not muted", () => {
   }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeCtx };
   assert.doesNotThrow(() => soundscape.activate(null, 'tesla'));
+  class FakeAudioCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+    close() {}
+  }
+  global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
+  assert.doesNotThrow(() => playSoundscape('tesla'));
   assert.equal(started, 2);
   soundscape.deactivate();
   cleanup();

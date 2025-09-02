@@ -60,6 +60,8 @@ test("loadConfig throws on invalid JSON", () => {
 // Validate schema enforcement
 test("validatePlateConfig enforces label count", () => {
   const good = { layout: "spiral", mode: 1, labels: ["x"] };
+test('validatePlateConfig enforces label count', () => {
+  const good = { layout: 'spiral', mode: 1, labels: ['x'] };
   validatePlateConfig(good);
   const bad = { ...good, labels: [] };
   assert.throws(() => validatePlateConfig(bad), /Label count/);
