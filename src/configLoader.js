@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { readFileSync } from 'fs';
 import path from 'path';
 import Ajv from 'ajv';

@@ -1,3 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { writeFileSync, unlinkSync } from 'node:fs';
+import { loadConfig, validatePlateConfig } from '../src/configLoader.js';
+
+// Ensure loadConfig surfaces invalid JSON errors
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { strict as assert } from 'node:assert';
