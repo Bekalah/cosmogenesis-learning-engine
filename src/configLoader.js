@@ -1,5 +1,7 @@
 import { readFileSync } from 'fs';
 import path from 'path';
+import Ajv from 'ajv';
+import plateSchema from '../schemas/plate-config.json' with { type: 'json' };
 
 // Custom error type that aggregates structural problems
 export class ConfigError extends Error {
@@ -52,6 +54,17 @@ export function validatePlateConfig(config, source = 'config') {
 
   if (errors.length) {
     throw new ConfigError(source, errors);
+const ajv = new Ajv({ allErrors: true, $data: true });
+const validate = ajv.compile(plateSchema);
+
+export function validatePlateConfig(config, source = 'config') {
+  const valid = validate(config);
+  if (!valid) {
+    const messages = validate.errors.map((err) => {
+      const loc = err.instancePath ? err.instancePath.slice(1) : 'config';
+      return `${loc} ${err.message}`;
+    });
+    throw new ConfigError(source, messages);
   }
   return true;
 }
