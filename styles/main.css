@@ -56,6 +56,10 @@ canvas {
   background: radial-gradient(circle at center, rgba(0,0,0,0.1), transparent 60%);
   background: radial-gradient(circle at center, rgba(0,0,0,0.1), transparent 60%);
   background: radial-gradient(circle at center, rgba(0,0,0,0.2), transparent 60%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.1), transparent 60%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.2), transparent 60%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.2), transparent 60%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.1), transparent 60%);
   transition: background 0.4s ease;
   pointer-events: none;
 }
