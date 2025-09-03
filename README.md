@@ -24,6 +24,9 @@ npm i
 npm run dev     # serves at http://localhost:5173
 # open /cosmogenesis/index.html
 npm test        # node --test
+
+# Visionary Dream fallback
+When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 ```
 
 # User-provided custom instructions
