@@ -9,6 +9,11 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { loadConfig } from '../src/configLoader.js';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { loadConfig, loadFirstDemo } from '../src/configLoader.js';
 import { renderPlate } from '../src/renderPlate.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
