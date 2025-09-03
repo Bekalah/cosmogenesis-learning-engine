@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { readFileSync } from 'fs';
 import path from 'path';
 import Ajv from 'ajv';
@@ -71,6 +73,7 @@ export function validatePlateConfig(config, source = 'config') {
 
 // Convenience helper to load and validate the first demo plate
 // Convenience loader for the first demo plate
+// Convenience helper to grab the first demo configuration
 export function loadFirstDemo() {
   return {
     version: "0.9.2",
