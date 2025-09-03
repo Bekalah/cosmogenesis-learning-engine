@@ -33,6 +33,9 @@
     "svg",
     "png"
   ],
+  "dependencies": {
+    "ajv": "^8.12.0"
+  },
   "devDependencies": {
     "http-server": "^14.1.1",
     "prettier": "^3.3.3"
