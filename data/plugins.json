@@ -5,8 +5,8 @@
     "src": "plugins/wikiSummary.js",
     "description": "Fetch a Wikipedia summary and convert it into labels",
     "version": "1.0.0",
-    "lifecycle": "manual"
-    "description": "Fetch a Wikipedia summary and convert it into labels"
+    "lifecycle": "manual",
+    "type": "layout"
   },
   {
     "id": "p5Mandala",
@@ -14,7 +14,8 @@
     "src": "plugins/p5Mandala.js",
     "description": "Generate a simple mandala using p5.js",
     "version": "1.0.0",
-    "lifecycle": "manual"
+    "lifecycle": "manual",
+    "type": "layout"
   },
   {
     "id": "fractalArt",
@@ -22,7 +23,8 @@
     "src": "plugins/fractalArt.js",
     "description": "Render Visionary Dream fractal artwork",
     "version": "1.0.0",
-    "lifecycle": "manual"
+    "lifecycle": "manual",
+    "type": "layout"
   },
   {
     "id": "soundscape",
@@ -30,7 +32,7 @@
     "src": "plugins/soundscape.js",
     "description": "Generate a simple binaural soundscape",
     "version": "1.0.0",
-    "lifecycle": "manual"
-    "description": "Generate a simple mandala using p5.js"
+    "lifecycle": "manual",
+    "type": "audio"
   }
 ]
