@@ -30,6 +30,9 @@ test('validatePlateConfig enforces label count', () => {
   validatePlateConfig(good);
   const bad = { ...good, labels: [] };
   assert.throws(() => validatePlateConfig(bad), /Label count/);
+// Ensure loadConfig surfaces missing file errors
+test('loadConfig throws on missing file', () => {
+  assert.throws(() => loadConfig('nope.json'), ConfigError);
 });
 // Ensure loadConfig surfaces missing file errors
 test('loadConfig throws on missing file', () => {
@@ -45,6 +48,13 @@ test('validatePlateConfig aggregates errors', () => {
       err.messages.includes('layout must be one of: spiral, twin-cone, wheel, grid') &&
       err.messages.includes('mode must be a positive integer') &&
       err.messages.includes('label count must match mode')
+  const bad = { layout: 'unknown', mode: 0, labels: [] };
+  assert.throws(() => validatePlateConfig(bad), (err) => {
+    return (
+      err instanceof ConfigError &&
+      err.messages.some((m) => m.includes('layout')) &&
+      err.messages.some((m) => m.includes('mode')) &&
+      err.messages.some((m) => m.includes('labels'))
     );
   });
 });

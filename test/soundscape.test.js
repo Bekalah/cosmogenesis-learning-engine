@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import soundscape, { playSoundscape } from '../plugins/soundscape.js';
+import { soundscape } from '../plugins/soundscape.js';
 
 function cleanup() {
   delete global.window;
@@ -67,6 +68,15 @@ test('soundscape starts oscillators when not muted', () => {
   global.alert = () => {};
   }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
+  class FakeGain { constructor() { this.gain = { value: 0 }; } connect() { return this; } }
+  class FakeMerger { connect() { return this; } }
+  class FakeAudioCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+    createChannelMerger() { return new FakeMerger(); }
+    close() {}
+  }
   class FakeGain { constructor() { this.gain = { value: 0 }; } connect() { return this; } }
   class FakeMerger { connect() { return this; } }
   class FakeAudioCtx {
