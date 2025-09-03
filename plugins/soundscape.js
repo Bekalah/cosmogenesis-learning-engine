@@ -202,6 +202,15 @@ export default {
 soundscape.activate = function (_engine, theme = 'hypatia') {
   if (global.window?.COSMO_SETTINGS?.muteAudio) return;
   const AudioCtx = global.window.AudioContext || global.window.webkitAudioContext;
+// Minimal soundscape generator respecting global mute settings
+export default function soundscape(name) {
+  const settings = global.window?.COSMO_SETTINGS || {};
+  if (settings.muteAudio) return;
+
+  const AudioCtx =
+    global.window?.AudioContext || global.window?.webkitAudioContext;
+  if (!AudioCtx) return;
+
   const ctx = new AudioCtx();
   const gain = ctx.createGain();
   gain.gain.value = 0.1;
@@ -230,3 +239,4 @@ soundscape.deactivate = function () {
   }
 };
 
+}

@@ -67,7 +67,6 @@
   window.tesseractHooks = { unlockNode, unlockEdge, unlocked, reset };
   window.tesseractHooks = { unlockNode, unlockEdge, unlocked };
 })();
-=======
 // Tesseract Hooks: unlock nodes and edges
 let graph = null;
 const unlocked = new Set();
@@ -92,7 +91,6 @@ function update() {
     detail: { unlocked: Array.from(unlocked), edges }
   }));
 }
->>>>>>> upstream/codex/create-open-world-learning-engine-features-j3nbmd
 (() => {
   "use strict";
   const unlocked = { nodes: new Set(), edges: new Set() };
@@ -114,4 +112,7 @@ function update() {
     unlockEdge(e.detail);
   });
   window.tesseractHooks = { unlockNode, unlockEdge };
+=======
+  window.tesseractHooks = { unlockNode, unlockEdge, unlocked, reset };
+>>>>>>> 24c5cfe3024ae4ac26e3e89053bd0b3aa38b1841
 })();

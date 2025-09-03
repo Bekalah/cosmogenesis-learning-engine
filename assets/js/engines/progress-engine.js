@@ -37,8 +37,8 @@
 <<<<<<< codex/create-open-world-learning-engine-features-j3nbmd
   window.roomsProgress = { state, markRoomEnter, markQuestComplete };
   window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
-=======
   window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
   window.roomsProgress = { state, markRoomEnter, markQuestComplete };
->>>>>>> upstream/codex/create-open-world-learning-engine-features-j3nbmd
+=======
+>>>>>>> 24c5cfe3024ae4ac26e3e89053bd0b3aa38b1841
 })();
