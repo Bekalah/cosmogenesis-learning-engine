@@ -1,4 +1,3 @@
-"""Visionary geometry rendered with Python and Matplotlib.
 """Visionary geometry rendered with pure Python.
 
 Produces a museum-quality mandala using an Alex Grey-inspired palette.
