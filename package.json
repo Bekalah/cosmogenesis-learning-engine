@@ -8,7 +8,7 @@
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
-    "test": "node --test test/plugin-registry.test.js test/progress-engine.test.js",
+    "test": "node --test test/codexConfig.test.js test/plugin-registry.test.js test/progress-engine.test.js",
     "fmt": "prettier -w .",
     "check": "prettier -c .",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
@@ -34,4 +34,3 @@
     "prettier": "^3.3.3"
   }
 }
-
