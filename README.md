@@ -310,3 +310,13 @@ console.log(experiences);
 ```
 
 Each experience fetched this way resolves its components and first page from the remote repo using raw GitHub URLs.
+
+## Environment Setup
+
+Install Python and Node dependencies locally without relying on remote workflows. The engine relies on the Pillow imaging library; the helper script will attempt to use an existing installation and only contact PyPI if needed:
+
+```bash
+bash scripts/setup_env.sh
+```
+
+If the script cannot reach PyPI it will fall back to the system package manager. In completely offline environments, manually install a Pillow wheel (`pip install Pillow-*.whl`).

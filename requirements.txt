@@ -1,5 +1,7 @@
-# Pin Pillow to a modern version with wheels for ubuntu-latest
-Pillow==10.4.0
+# Pillow is required for image generation.
+# Use any modern version; if PyPI is unreachable, install via system
+# package (e.g., `sudo apt-get install python3-pil`) or a downloaded wheel.
+Pillow>=10.0
 
 # Add your other deps below, pinned if possible:
 # numpy==1.26.4
