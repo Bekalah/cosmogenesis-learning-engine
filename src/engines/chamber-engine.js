@@ -1,3 +1,13 @@
+export const chamberEngine = (() => {
+  const openChambers = new Set();
+  const payloads = new Map();
+  let current = null;
+
+  function openMultiple(ids = []) {
+    ids.forEach(id => { openChambers.add(id); current = id; });
+  }
+  function closeAll() {
+    openChambers.clear(); payloads.clear(); current = null;
 class ChamberEngine extends EventTarget {
   constructor() {
     super();

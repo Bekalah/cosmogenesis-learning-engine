@@ -4,6 +4,8 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import Ajv from 'ajv';
 import plateSchema from '../schemas/plate-config.json' with { type: 'json' };
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 
 // Custom error type that aggregates structural problems
 export class ConfigError extends Error {
@@ -26,6 +28,9 @@ export function loadConfig(relativePath) {
     throw new ConfigError(relativePath, [`Unable to read file: ${err.message}`]);
   }
 
+  } catch {
+    throw new Error(`Config file not found: ${relativePath}`);
+  }
   try {
     return JSON.parse(raw);
   } catch {
