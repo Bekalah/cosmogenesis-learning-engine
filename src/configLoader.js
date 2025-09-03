@@ -1,5 +1,11 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { readFileSync } from 'fs';
 import path from 'path';
+import Ajv from 'ajv';
+import plateSchema from '../schemas/plate-config.json' with { type: 'json' };
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 
 // Custom error type that aggregates structural problems
 export class ConfigError extends Error {
@@ -52,12 +58,24 @@ export function validatePlateConfig(config, source = 'config') {
 
   if (errors.length) {
     throw new ConfigError(source, errors);
+const ajv = new Ajv({ allErrors: true, $data: true });
+const validate = ajv.compile(plateSchema);
+
+export function validatePlateConfig(config, source = 'config') {
+  const valid = validate(config);
+  if (!valid) {
+    const messages = validate.errors.map((err) => {
+      const loc = err.instancePath ? err.instancePath.slice(1) : 'config';
+      return `${loc} ${err.message}`;
+    });
+    throw new ConfigError(source, messages);
   }
   return true;
 }
 
 // Convenience helper to load and validate the first demo plate
 // Convenience loader for the first demo plate
+// Convenience helper to grab the first demo configuration
 export function loadFirstDemo() {
   return {
     version: "0.9.2",
