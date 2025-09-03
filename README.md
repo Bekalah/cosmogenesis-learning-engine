@@ -26,6 +26,11 @@ npm run dev     # serves at http://localhost:5173
 npm test        # node --test
 ```
 
+When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
+
+### Shared Python overlays
+All Python art generators now reuse a common `enochian_layers` module that draws the Enochian grid and planetary sigils so mystical features stay consistent across scripts.
+
 # User-provided custom instructions
 
 Codex-style” prompt template for visionary art

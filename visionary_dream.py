@@ -18,6 +18,8 @@ from typing import List
 
 from PIL import Image, ImageDraw, ImageColor, ImageFont
 
+from enochian_layers import draw_enochian_grid, draw_celestial_sigils
+
 
 # Color palette inspired by Alex Grey ---------------------------------------
 PALETTE: List[str] = [
@@ -93,7 +95,14 @@ def generate_art(width: int, height: int) -> Image.Image:
     image = Image.new("RGBA", (width, height), "black")
     draw = ImageDraw.Draw(image, "RGBA")
 
+    # Core spiral
     draw_spiral(draw, width, height)
+
+    # Mystical overlays
+    draw_enochian_grid(draw, width, height)
+    draw_celestial_sigils(draw, width, height)
+
+    # Character labels
     label_characters(draw, width, height)
 
     return image
@@ -108,13 +117,13 @@ def main() -> None:
     )
     parser.add_argument("--width", type=int, default=2048, help="image width")
     parser.add_argument("--height", type=int, default=2048, help="image height")
+    parser.add_argument("--output", type=Path, default=Path("Visionary_Dream.png"), help="output image path")
     args = parser.parse_args()
 
     art = generate_art(args.width, args.height)
 
-    output = Path("Visionary_Dream.png")
-    art.save(output)
-    print(f"Art saved to {output.resolve()}")
+    art.save(args.output)
+    print(f"Art saved to {args.output.resolve()}")
 
 
 if __name__ == "__main__":
