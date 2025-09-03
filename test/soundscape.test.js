@@ -13,6 +13,10 @@ test('soundscape respects mute', () => {
 }
 
 test('soundscape respects mute', () => {
+  delete global.alert;
+}
+
+test('soundscape respects mute', () => {
   global.window = { COSMO_SETTINGS: { muteAudio: true }, AudioContext: class {} };
   global.alert = () => {};
   assert.doesNotThrow(() => playSoundscape('hypatia'));
