@@ -48,11 +48,13 @@
         >
       </div>
     </header>
+    <!-- portal backdrop will be injected by chariot-portal.js -->
+
     <main class="stage">
-      <canvas id="stage" width="800" height="600"></canvas>
+      <canvas id="stage" width="1920" height="1080"></canvas>
 
       <section class="container oracle-velvet luminous-heart" id="gallery">
-        <h2 style="margin-top: 0">Simple Gallery Test</h2>
+        <h2 style="margin-top: 0">Cathedral Gallery of Egregores</h2>
         <p class="small">
           Pulls from <code>/bridge/c99-bridge.json</code> if available (ND-safe,
           static).
@@ -62,6 +64,8 @@
       </section>
 
       <script type="module">
+        import { initChariotPortal } from "./src/ui/chariot-portal.js";
+        initChariotPortal();
         async function readBridge() {
           try {
             const r = await fetch("/bridge/c99-bridge.json", {
