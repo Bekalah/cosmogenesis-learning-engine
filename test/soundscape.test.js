@@ -5,6 +5,14 @@ import { soundscape } from '../plugins/soundscape.js';
 
 function cleanup() {
   delete global.window;
+}
+
+test('soundscape respects mute', () => {
+  global.window = { COSMO_SETTINGS: { muteAudio: true } };
+  delete global.alert;
+}
+
+test('soundscape respects mute', () => {
   delete global.alert;
 }
 
@@ -66,6 +74,15 @@ test('soundscape enables binaural beats when requested', () => {
     constructor() { this.gain = { value: 0 }; }
     connect() { return this; }
   }
+
+  class FakeCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+  }
+
+  global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeCtx };
+  assert.doesNotThrow(() => soundscape.activate(null, { theme: 'tesla', binaural: true }));
   class FakeAudioCtx {
     constructor() { this.currentTime = 0; this.destination = {}; }
     createOscillator() { return new FakeOsc(); }
@@ -98,6 +115,9 @@ test('soundscape enables binaural beats when requested', () => {
     createChannelMerger() { return new FakeMerger(); }
     close() {}
   }
+  class FakeGain {
+    constructor() { this.gain = { value: 0 }; }
+    connect() { return this; }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   global.alert = () => {};
   }
