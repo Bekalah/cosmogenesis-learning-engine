@@ -64,6 +64,7 @@
         <line x1="-120" y1="120" x2="-60" y2="60" />
       </g>
     </svg>
+    <!-- portal backdrop will be injected by chariot-portal.js -->
 
     <main class="stage">
       <canvas id="stage" width="1920" height="1080"></canvas>
@@ -79,6 +80,8 @@
       </section>
 
       <script type="module">
+        import { initChariotPortal } from "./src/ui/chariot-portal.js";
+        initChariotPortal();
         async function readBridge() {
           try {
             const r = await fetch("/bridge/c99-bridge.json", {
