@@ -5,6 +5,18 @@ Cosmogenesis is a portable plate engine for your Cathedral of Circuits. It rende
 - **META export** with provenance (SHA-256 of config)
 - **Reduced-motion respect** (no wobble when OS requests it)
 
+### IndraNet Engine
+New in this release, the **IndraNet Engine** projects the Codex 144:99 lattice as a 12×12 holographic web. The shared
+`bridge.json` now ships an `indraNet` block so any app can load the 144 jewel nodes and 99 gate clusters and render its own
+network without coupling to this repo's UI.
+
+```javascript
+import { IndraNet } from './app/engines/IndraNet.js';
+const net = new IndraNet();
+await net.load('/c99/bridge.json');
+net.mount(document.getElementById('viz')).render();
+```
+
 ## Quickstart
 ```bash
 npm i
