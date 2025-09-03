@@ -4,6 +4,7 @@ Cosmogenesis is a portable plate engine for your Cathedral of Circuits. It rende
 - **PNG export** for art plates
 - **META export** with provenance (SHA-256 of config)
 - **Reduced-motion respect** (no wobble when OS requests it)
+- **Harmony toggle** to translate node patterns into Solfeggio-based music
 
 ### IndraNet Engine
 New in this release, the **IndraNet Engine** projects the Codex 144:99 lattice as a 12×12 holographic web. The shared
