@@ -1,0 +1,6 @@
+{
+  "title": "Open Learning Atrium",
+  "description": "A luminous hall where portals reveal endless disciplines.",
+  "pages": ["prologue.md"],
+  "components": ["components/portal-gate.js"]
+}
