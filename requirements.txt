@@ -1,8 +1,5 @@
-# Pin Pillow to a modern version with wheels for ubuntu-latest
-Pillow==10.4.0
-
 # Add your other deps below, pinned if possible:
-# numpy==1.26.4
-# matplotlib==3.9.2
+numpy==1.26.4
+matplotlib==3.9.2
 # fastapi==0.114.0
 # uvicorn==0.30.6

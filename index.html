@@ -6,8 +6,15 @@
   <title>Cosmogenesis Learning Engine</title>
   <link rel="stylesheet" href="assets/css/core.css">
   <link rel="stylesheet" href="assets/css/hc.css">
+  
+  <link rel="stylesheet" href="/public/c99/css/perm-style.css" />
+  
 </head>
 <body>
+
+<!-- optional background aura (does nothing if CSS is missing) -->
+<div class="violet-gate bg-soft" aria-hidden="true"></div>
+
   <header>
     <h1>Cosmogenesis Learning Engine</h1>
     <div class="controls">
@@ -18,9 +25,80 @@
       <button id="hc-toggle" aria-pressed="false">High Contrast</button>
       <button id="btn-export">Export Plate</button>
     </div>
+    
+    <!-- flavor rail (purely decorative) -->
+<div class="mode-rail" id="flavorRail" style="margin-left:auto">
+  <span class="mode-chip"><i class="swatch" style="background:#1a1a1a"></i>Nigredo</span>
+  <span class="mode-chip"><i class="swatch" style="background:#e6f0ff"></i>Albedo</span>
+  <span class="mode-chip"><i class="swatch" style="background:#ffd76a"></i>Citrinitas</span>
+  <span class="mode-chip"><i class="swatch" style="background:#b4455a"></i>Rubedo</span>
+</div>
+
   </header>
-  <main>
+  <main class="stage">
     <canvas id="stage" width="800" height="600"></canvas>
+    
+    <section class="container oracle-velvet luminous-heart" id="gallery">
+  <h2 style="margin-top:0">Simple Gallery Test</h2>
+  <p class="small">Pulls from <code>/bridge/c99-bridge.json</code> if available (ND-safe, static).</p>
+  <div id="solfeggioRail" class="mode-rail"></div>
+  <div id="thumbs" class="grid three" style="margin-top:12px"></div>
+</section>
+
+<script type="module">
+  async function readBridge() {
+    try {
+      const r = await fetch('/bridge/c99-bridge.json', { cache: 'no-store' });
+      if (!r.ok) throw new Error('bridge missing');
+      return await r.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function card(title, img, css = '') {
+    const src = img?.thumb || img?.webp || img?.src || '';
+    return `
+      <figure class="egregore-card ${css}">
+        ${src ? `<img src="${src}" alt="${title}" style="width:100%;height:auto;border-radius:10px;display:block;" loading="lazy" decoding="async" />` : ''}
+        <figcaption class="small" style="margin-top:6px">${title}</figcaption>
+      </figure>
+    `;
+  }
+
+  function chipHz(hz, label) {
+    return `<span class="solfeggio-chip"><i></i>${hz} Hz -- ${label}</span>`;
+  }
+
+  (async () => {
+    const m = await readBridge();
+    const rail = document.getElementById('solfeggioRail');
+    const mount = document.getElementById('thumbs');
+
+    // Solfeggio (silent chips)
+    (m?.solfeggio?.frequencies || []).forEach(f => {
+      rail.insertAdjacentHTML('beforeend', chipHz(f.hz, f.key));
+    });
+
+    // Collect a few sources for thumbnails (any or none)
+    const pool = [];
+    if (m?.respawn_gate?.assets) pool.push(...m.respawn_gate.assets);
+    if (m?.oracle_art)           pool.push(...m.oracle_art);
+    if (m?.angel_seals)          pool.push(...m.angel_seals);
+    if (m?.visionary?.overlays)  pool.push(...m.visionary.overlays);
+
+    if (pool.length === 0) {
+      mount.innerHTML = `<div class="note">No bridge thumbs yet. Drop art in <code>stone_grimoire/assets/art/inbox/</code> and run <code>node core/build/update-art.js</code>.</div>`;
+      return;
+    }
+
+    // Render up to 12 thumbs
+    pool.slice(0, 12).forEach(a => {
+      mount.insertAdjacentHTML('beforeend', card(a.name || 'asset', a, 'gonz-velvet'));
+    });
+  })();
+</script>
+
   </main>
   <footer>ND-safe • no autoplay • no strobe • honors reduced motion</footer>
 

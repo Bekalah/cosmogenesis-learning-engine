@@ -1,0 +1,11 @@
+{
+  "title": "Global Healing Web",
+  "description": "Connects Tibetan Reiki, Karuna, Egyptian Seichem, hypnosis, and more in a fractal history of world healing.",
+  "description": "Fractal map linking Tibetan Raku Kei, Usui and Karuna Reiki, Egyptian Sekhem, hypnosis, EMDR, brainspotting, and more.",
+  "pages": ["fractal-web.md"],
+  "components": ["components/fractalWeb.js"]
+  "title": "Open Learning Atrium",
+  "description": "A luminous hall where portals reveal endless disciplines.",
+  "pages": ["prologue.md"],
+  "components": ["components/portal-gate.js"]
+}

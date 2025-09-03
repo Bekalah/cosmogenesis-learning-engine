@@ -5,6 +5,7 @@
     "src": "plugins/wikiSummary.js",
     "description": "Fetch a Wikipedia summary and convert it into labels",
     "version": "1.0.0",
+    "lifecycle": "manual"
     "lifecycle": "manual",
     "type": "layout"
   },
@@ -32,6 +33,7 @@
     "src": "plugins/soundscape.js",
     "description": "Generate a simple binaural soundscape",
     "version": "1.0.0",
+    "lifecycle": "manual"
     "lifecycle": "manual",
     "type": "audio"
   }

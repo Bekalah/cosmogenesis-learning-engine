@@ -1,21 +1,17 @@
 {
   "name": "cosmogenesis-learning-engine",
-  "version": "1.1.0",
-  "description": "Interactive, data-agnostic engine for spiral learning (museum-grade, ND-safe).",
+  "version": "0.9.2",
   "type": "module",
-  "private": false,
-  "author": "Rebecca Respawn",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18"
-  },
-  "main": "app/index.html",
+  "private": true,
   "scripts": {
+    "dev": "npx http-server -p 5173 -c-1 .",
+    "test": "node --test",
+    "fmt": "npx prettier -w ."
     "dev": "http-server -p 5173 -c-1 .",
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
-    "test": "node --test",
+    "test": "node --test && python3 -m py_compile $(git ls-files '*.py')",
     "format": "prettier -w .",
     "check": "prettier -c .",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
@@ -39,11 +35,5 @@
   "devDependencies": {
     "http-server": "^14.1.1",
     "prettier": "^3.3.3"
-  },
-  "optionalDependencies": {},
-  "browserslist": [
-    "defaults",
-    "not IE 11",
-    "maintained node versions"
-  ]
+  }
 }
