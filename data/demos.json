@@ -4,6 +4,7 @@
     "config": {
       "layout": "wheel",
       "mode": 7,
+      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
       "labels": [
          "labels": [
         "Red",
@@ -16,7 +17,10 @@
       ]
       "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
 Green", "Cyan", "Blue", "Violet"]
->>>>>>> origin/main-upstream-upstream-upstream-upstream
+>>>>>>> Stashed changes
+      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
+>>>>>>> upstream/codex/improve-creative-learning-engine-design
+>>>>>>> main-upstream-upstream-upstream-upstream
     }
   },
   {
