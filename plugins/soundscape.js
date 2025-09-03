@@ -68,6 +68,18 @@ const soundscape = {
     if (settings.muteAudio) return;
 
     const AudioCtx = global.window.AudioContext || global.window.webkitAudioContext;
+// Minimal soundscape plugin with optional binaural beats
+export default {
+  id: 'soundscape',
+  activate(_engine, opts = {}) {
+    if (typeof opts === 'string') opts = { theme: opts };
+    const { theme = 'hypatia', binaural = false } = opts;
+    if (global.window?.COSMO_SETTINGS?.muteAudio) return;
+    const AudioCtx = global.window?.AudioContext;
+    if (!AudioCtx) {
+      global.window?.alert?.('Web Audio API not supported');
+      return;
+    }
     const ctx = new AudioCtx();
 // Simple binaural soundscape using the Web Audio API
 export default function soundscape(name) {
@@ -87,6 +99,9 @@ export default function soundscape(name) {
 
     const freqs = theme === 'tesla' ? [432, 864] : [220, 440];
     this._osc = freqs.map((f) => {
+    const base = theme === 'tesla' ? 432 : 220;
+    const freqs = binaural ? [base, base * 2] : [base];
+    this._osc = freqs.map(f => {
       const osc = ctx.createOscillator();
       osc.frequency.value = f;
       osc.connect(gain);
@@ -97,6 +112,7 @@ export default function soundscape(name) {
   },
   deactivate() {
     this._osc?.forEach((o) => {
+    this._osc?.forEach(o => {
       try { o.stop(); } catch {}
     });
     this._osc = null;
