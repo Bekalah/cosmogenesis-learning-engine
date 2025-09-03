@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import path from 'path';
+import plateSchema from '../schemas/plate-config.json' with { type: 'json' };
 
 // Custom error type that aggregates structural problems
 export class ConfigError extends Error {
