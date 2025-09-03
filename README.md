@@ -280,11 +280,11 @@ npm test
 Render a static spiral plate from the command line:
 
 ```bash
-pip install pillow
-python visionary_dream.py --palette calm --width 1280 --height 720
+pip install -r requirements.txt
+python visionary_dream.py --width 1280 --height 720
 ```
 
-The script outputs `Visionary_Dream.png` and a brief alt-text file for accessible viewing.
+The script outputs `Visionary_Dream.png`.
 
 ### Visionary Fractal Art
 

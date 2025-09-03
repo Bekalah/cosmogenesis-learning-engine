@@ -9,6 +9,9 @@
 
 ## Priority Spiral (P1 → P3)
 
+### Legacy Cleanup
+- [ ] Fix legacy file issues blocking `npm test` and `npm run check`
+
 ### P1 — Foundation (today)
 - [ ] Add docs: `docs/CODEX_EXT_RUNBOOK.md`, `docs/SCIENCE_REFERENCES.md`, `docs/STYLE_GUIDE.md`
 - [ ] Add schemas: `schemas/provenance.json`, `schemas/stylepack.json`
