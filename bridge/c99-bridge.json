@@ -4,6 +4,9 @@
     "updated": "2025-09-02T14:00:00Z",
     "nd_safe": true,
     "generator": "manual seed"
+    "updated": "2025-09-02T23:00:39.115Z",
+    "nd_safe": true,
+    "generator": "update-art.js (manual)"
   },
   "tokens": {
     "css": "/assets/css/perm-style.css",
@@ -19,6 +22,67 @@
       "amber": "#FFC800",
       "light": "#FFFFFF",
       "gold": "#C9A227"
+      "crimson": "#B7410E",
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "rose_quartz": "#FFB6C1",
+      "teal_glow": "#00CED1",
+      "violet_alt": "#8A2BE2",
+      "gonz_0": "#0b0b0b",
+      "gonz_1": "#16121b",
+      "gonz_2": "#2a2140",
+      "gonz_3": "#5e4ba8",
+      "gonz_4": "#e6e6e6",
+      "obsidian_glass": "#0f1014",
+      "obsidian_sheen": "#191b22",
+      "obsidian_rainbow": "#33214e",
+      "shungite_ink": "#0a0b0c",
+      "tourmaline_ridge": "#121318",
+      "basalt_ash": "#2b2f36",
+      "glint_silver": "#d9e0e7",
+      "lava_ember": "#ff4b1f",
+      "lava_core": "#ff7a00",
+      "raku_copper": "#b87333",
+      "raku_charcoal": "#1a1a1a",
+      "raku_violet": "#6E00FF",
+      "raku_azure": "#1F7AF3",
+      "smoke_gray": "#6b6f76",
+      "bg_legacy": "#0e0e12",
+      "ink_legacy": "#e9e7e1",
+      "gold_legacy": "#d4af37",
+      "rose_legacy": "#b4435d",
+      "lapis_legacy": "#2f5a9e",
+      "ash_legacy": "#6b6f76",
+      "line_legacy": "#22242a",
+      "muted_legacy": "#b9b6ad",
+      "accent_legacy": "#7fd8b3"
+    },
+    "secondary": {
+      "bg": "#0d0e14",
+      "ink": "#ECE7DE",
+      "edge": "#1D2028",
+      "sun": "#F2C14E",
+      "sea": "#3FA7D6",
+      "fern": "#24D6A9",
+      "rose": "#D65A8A",
+      "amethyst": "#7B5DD6"
+    },
+    "layers": {
+      "visionary": {
+        "name": "AlexGreyGrid",
+        "alpha": 0.22,
+        "scale": 1,
+        "line": "#4a4f63",
+        "highlight": "#aab3ff",
+        "pattern": "sacred-grid"
+      },
+      "patina": {
+        "name": "RakuBloom",
+        "alpha": 0.18,
+        "copper": "raku_copper",
+        "violet": "raku_violet",
+        "azure": "raku_azure"
+      }
     }
   },
   "routes": {
@@ -172,4 +236,14 @@
       "type": "png"
     }
   ]
+  "rooms": [],
+  "angels": [],
+  "creatures": {
+    "dragons": [],
+    "daimons": []
+  },
+  "visionary": {
+    "overlays": []
+  },
+  "assets": []
 }

@@ -141,3 +141,6 @@ Visionary_Dream.png
 /data/correspondences-2.json
 !/core/build/package.json
 
+
+!stone-grimoire/core/build/
+!stone-grimoire/core/build/update-art.js
