@@ -139,3 +139,6 @@ Visionary_Dream.png
 # OS files
 .DS_Store
 /data/correspondences-2.json
+
+!stone-grimoire/core/build/
+!stone-grimoire/core/build/update-art.js
