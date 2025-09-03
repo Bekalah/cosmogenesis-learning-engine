@@ -25,6 +25,11 @@
         a.className = 'tile';
         a.href = r.href;
         a.innerHTML = `<strong>${r.name}</strong><span class="cap">${r.description}</span>`;
+      listRooms().forEach(room => {
+        const a = document.createElement('a');
+        a.className = 'tile';
+        a.href = room.href;
+        a.innerHTML = `<strong>${room.name}</strong><span class="cap">${room.description}</span>`;
         mount.appendChild(a);
       });
     </script>

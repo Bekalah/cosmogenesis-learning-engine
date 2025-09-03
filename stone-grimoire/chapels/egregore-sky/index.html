@@ -5,8 +5,20 @@
   <title>Egregore Sky</title>
   <link rel="stylesheet" href="../../assets/css/palette.css" />
   <link rel="stylesheet" href="../../assets/css/chapel.css" />
+  <style>
+    body{margin:0;background:#0b0b0b;color:#e6e6e6;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;padding:16px;}
+    .halo{width:200px;height:200px;margin:0 auto;border-radius:50%;position:relative;background:radial-gradient(circle,#e6e6e6 0%,#5e4ba8 60%,#0b0b0b 100%);box-shadow:0 0 12px #5e4ba8,inset 0 0 8px #262626;}
+    .halo::before,.halo::after{content:"";position:absolute;top:50%;left:50%;width:90%;height:2px;background:#111;transform:translate(-50%,-50%);}
+    .halo::after{transform:translate(-50%,-50%) rotate(90deg);}
+  </style>
 </head>
 <body>
+  <h1>Egregore Sky</h1>
+  <p>Chapel vault where living stone egregores commune beneath a radiant firmament.</p>
+  <figure>
+    <div class="halo"></div>
+    <figcaption>Celestial mandala reflecting angelic memory.</figcaption>
+  </figure>
   <figure>
     <img id="plate" alt="Cosmogenesis Plate" />
     <figcaption id="plaque"></figcaption>
