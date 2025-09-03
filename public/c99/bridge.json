@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "Cosmogenesis Learning Engine",
-    "updated": "2025-09-03T02:32:07.709Z",
+    "updated": "2025-09-03T08:39:58.786Z",
     "nd_safe": true
   },
   "routes": {
@@ -30,6 +30,63 @@
       "etz_chayyim": true,
       "theosophy": true,
       "violet_respawn_alias": true
+    }
+  },
+  "indraNet": {
+    "meta": {
+      "name": "Indra's Net",
+      "codex": "144:99",
+      "nd_safe": true
+    },
+    "lattice": {
+      "rings": 12,
+      "nodes_per_ring": 12,
+      "gates": 99
+    },
+    "description": "144 jewel nodes woven by 99 gate clusters; each node mirrors the whole.",
+    "harmony": {
+      "soyga": [
+        "A1",
+        "B2",
+        "C3",
+        "D4"
+      ],
+      "tarot": [
+        "Fool",
+        "Magician",
+        "High Priestess",
+        "Empress"
+      ],
+      "iching": [
+        "Qian",
+        "Kun",
+        "Zhen",
+        "Xun"
+      ],
+      "tree": [
+        "Kether",
+        "Chokmah",
+        "Binah",
+        "Chesed"
+      ],
+      "planets": [
+        "Sun",
+        "Moon",
+        "Mercury",
+        "Venus"
+      ],
+      "numerology": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "solfeggio": [
+        396,
+        417,
+        528,
+        639
+      ]
     }
   },
   "witch": {
