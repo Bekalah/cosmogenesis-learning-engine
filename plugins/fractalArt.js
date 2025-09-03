@@ -76,6 +76,29 @@ export default {
         }
       }
 
+    new p5(p => {
+      const prompts = cases.map(c => c.prompt);
+      for (let i = prompts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [prompts[i], prompts[j]] = [prompts[j], prompts[i]];
+      }
+
+      p.setup = () => {
+        p.createCanvas(WIDTH, HEIGHT);
+        p.noLoop();
+        p.angleMode(p.RADIANS);
+        p.textFont('sans-serif');
+      };
+
+      function drawBackground() {
+        for (let i = PALETTE.length - 1; i >= 0; i--) {
+          p.noStroke();
+          p.fill(PALETTE[i]);
+          const r = Math.max(WIDTH, HEIGHT) * (i + 1) / PALETTE.length;
+          p.ellipse(CENTER.x, CENTER.y, r, r);
+        }
+      }
+
       function drawSpiral() {
         const turns = 3.5;
         const points = 500;
@@ -164,6 +187,18 @@ export default {
     };
   });
 }
+      function drawPrompts(maxR) {
+        const r = maxR * 0.3;
+        p.fill(255);
+        p.textAlign(p.CENTER, p.CENTER);
+        prompts.forEach((txt, i) => {
+          const angle = i * (2 * Math.PI / prompts.length);
+          const x = CENTER.x + r * Math.cos(angle);
+          const y = CENTER.y + r * Math.sin(angle);
+          p.text(txt, x, y);
+        });
+      }
+
       function drawPrompts(maxR) {
         const r = maxR * 0.3;
         p.fill(255);

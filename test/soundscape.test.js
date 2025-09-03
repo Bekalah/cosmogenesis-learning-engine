@@ -86,6 +86,15 @@ test('soundscape starts oscillators when not muted', () => {
     createChannelMerger() { return new FakeMerger(); }
     close() {}
   }
+  class FakeGain { constructor() { this.gain = { value: 0 }; } connect() { return this; } }
+  class FakeMerger { connect() { return this; } }
+  class FakeAudioCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+    createChannelMerger() { return new FakeMerger(); }
+    close() {}
+  }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   global.alert = () => {};
   assert.doesNotThrow(() => soundscape('tesla'));

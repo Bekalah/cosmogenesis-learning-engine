@@ -133,6 +133,14 @@ export default soundscape;
       osc.start();
       osc.stop(ctx.currentTime + 1);
     });
+    const base = { hypatia: 220, tesla: 330 }[name] || 440;
+    [base, base * 2].forEach((freq) => {
+      const osc = ctx.createOscillator();
+      osc.frequency.value = freq;
+      osc.connect(gain);
+      osc.start();
+      osc.stop(ctx.currentTime + 1);
+    });
   } catch (err) {
     console.error('Failed to initialize soundscape', err);
   } finally {
