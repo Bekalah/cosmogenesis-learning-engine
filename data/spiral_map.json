@@ -1,38 +1,3 @@
 {
-  "nodes": [
-    {"id":"n001","chapel":"crypt","title":"Stone Memory","skin":"AGRIPPA","guardian":"a1","egregoreId":"stone-grimoire","position":{"theta":0.0,"radius":1,"elevation":0},"payload":{"visuals":[],"text":"Echo of the deep past","provenanceRefs":[{"title":"Tablet","creator":"Unknown","year":"1200","license":"CC0","source":"Museum"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n002","chapel":"crypt","title":"Silent Bell","skin":"TESLA","guardian":"a2","egregoreId":"moonchild","position":{"theta":0.5,"radius":1.2,"elevation":0},"payload":{"visuals":[],"text":"Waiting ring","provenanceRefs":[{"title":"Bell","creator":"Smith","year":"1890","license":"CC-BY","source":"Archive"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n003","chapel":"crypt","title":"Faded Map","skin":"HYPATIA","guardian":"a3","egregoreId":"reweave","position":{"theta":1.0,"radius":1.4,"elevation":0},"payload":{"visuals":[],"text":"Paths forgotten","provenanceRefs":[{"title":"Map","creator":"Cartographer","year":"1600","license":"CC0","source":"Library"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n004","chapel":"crypt","title":"Cold Flame","skin":"AGRIPPA","guardian":"a4","egregoreId":"raku-dragon","position":{"theta":1.5,"radius":1.6,"elevation":0},"payload":{"visuals":[],"text":"Fire without heat","provenanceRefs":[{"title":"Flame","creator":"Artist","year":"2020","license":"CC-BY","source":"Gallery"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n005","chapel":"apprentice-pillar","title":"First Lesson","skin":"TESLA","guardian":"a5","egregoreId":"circuitum99","position":{"theta":2.0,"radius":1.8,"elevation":0},"payload":{"visuals":[],"text":"Begin here","provenanceRefs":[{"title":"Scroll","creator":"Teacher","year":"2001","license":"CC-BY","source":"Academy"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n006","chapel":"apprentice-pillar","title":"Second Lesson","skin":"HYPATIA","guardian":"a6","egregoreId":"moonchild","position":{"theta":2.5,"radius":2,"elevation":0},"payload":{"visuals":[],"text":"Continue","provenanceRefs":[{"title":"Stone","creator":"Mason","year":"1500","license":"CC0","source":"Quarry"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n007","chapel":"apprentice-pillar","title":"Third Lesson","skin":"BUSINESS_CATHEDRAL","guardian":"a1","egregoreId":"reweave","position":{"theta":3.0,"radius":2.2,"elevation":0},"payload":{"visuals":[],"text":"Repeat","provenanceRefs":[{"title":"Glyph","creator":"Scholar","year":"1780","license":"CC-BY","source":"Archive"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n008","chapel":"helix-totem","title":"Ascending","skin":"VISIONARY_PERM","guardian":"a2","egregoreId":"forest-trickster","position":{"theta":3.5,"radius":2.4,"elevation":0},"payload":{"visuals":[],"text":"Rise","provenanceRefs":[{"title":"Totem","creator":"Carver","year":"1850","license":"CC0","source":"Forest"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n009","chapel":"helix-totem","title":"Turning","skin":"AGRIPPA","guardian":"a3","egregoreId":"raku-dragon","position":{"theta":4.0,"radius":2.6,"elevation":0},"payload":{"visuals":[],"text":"Spiral","provenanceRefs":[{"title":"Wheel","creator":"Engineer","year":"1900","license":"CC-BY","source":"Workshop"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n010","chapel":"respawn-gate","title":"Gatekeeper","skin":"TESLA","guardian":"a4","egregoreId":"circuitum99","position":{"theta":4.5,"radius":2.8,"elevation":0},"payload":{"visuals":[],"text":"Pass","provenanceRefs":[{"title":"Gate","creator":"Smith","year":"1700","license":"CC0","source":"Forge"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}},
-    {"id":"n011","chapel":"respawn-gate","title":"Return","skin":"HYPATIA","guardian":"a5","egregoreId":"moonchild","position":{"theta":5.0,"radius":3.0,"elevation":0},"payload":{"visuals":[],"text":"Again","provenanceRefs":[{"title":"Circle","creator":"Monk","year":"1400","license":"CC-BY","source":"Monastery"}]},"safety":{"reducedMotionOK":true,"allowAudio":false}}
-  ]
+  "nodes": []
 }
-[
-  {
-    "id": "n001",
-    "title": "Prima Materia",
-    "skin": "VISIONARY_PERM",
-    "guardian": "alignment",
-    "position": {
-      "theta": 0.0,
-      "radius": 1.0,
-      "elevation": 0.05
-    },
-    "payload": {
-      "visuals": ["splendor_solis_01", "vesica_grid_A"],
-      "text": "Opening of the spiral.",
-      "audioPreset": "planetary_moon",
-      "provenanceRefs": ["ps_splendor_01", "hk_kunz_A"]
-    },
-    "safety": {
-      "reducedMotionOK": true,
-      "allowAudio": false
-    }
-  }
-]

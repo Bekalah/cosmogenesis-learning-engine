@@ -21,7 +21,7 @@ See [`data/egregores.json`](../data/egregores.json) for the starter format:
 2. Render the corresponding art (SVG/PNG) and notes.
 3. Bind helper routines, e.g. `maribelle.intuition()` for pattern hints.
 
-This framework lets new characters plug into the demo panel or future sponsor showcases.
+This framework lets new characters plug into the sample panel or future sponsor showcases.
 
 ## ✦ Origins & Lineages
 - Personas may echo Rosicrucian lodges, Tibetan transmissions, or Sappho's surviving verses.
