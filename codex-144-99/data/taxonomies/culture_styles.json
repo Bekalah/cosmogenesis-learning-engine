@@ -1,0 +1,7 @@
+{
+  "Egyptian": {"font": "Papyrus", "class": "egyptian"},
+  "Greek": {"font": "Times New Roman", "class": "greek"},
+  "Norse": {"font": "Runic", "class": "norse"},
+  "Hindu": {"font": "Noto Sans Devanagari", "class": "hindu"},
+  "Yoruba": {"font": "Noto Sans", "class": "yoruba"}
+}
