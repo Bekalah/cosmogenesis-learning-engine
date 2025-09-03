@@ -1,0 +1,445 @@
+{
+  "meta": {
+    "project": "Circuitum99 × Stone Grimoire",
+    "updated": "2025-09-02T14:00:00Z",
+    "nd_safe": true,
+    "generator": "manual seed"
+    "updated": "2025-09-02T23:00:39.115Z",
+    "nd_safe": true,
+    "generator": "update-art.js (manual)"
+  },
+  "tokens": {
+    "css": "/assets/css/perm-style.css",
+    "json": "/assets/tokens/perm-style.json",
+    "palette": {
+      "void": "#0B0B0B",
+      "ink": "#141414",
+      "bone": "#F8F5EF",
+      "indigo": "#280050",
+      "violet": "#460082",
+      "blue": "#0080FF",
+      "green": "#00FF80",
+      "amber": "#FFC800",
+      "light": "#FFFFFF",
+      "gold": "#C9A227"
+      "crimson": "#B7410E",
+      "gold": "#C9A227",
+      "obsidian": "#0B0B0B",
+      "rose_quartz": "#FFB6C1",
+      "teal_glow": "#00CED1",
+      "violet_alt": "#8A2BE2",
+      "gonz_0": "#0b0b0b",
+      "gonz_1": "#16121b",
+      "gonz_2": "#2a2140",
+      "gonz_3": "#5e4ba8",
+      "gonz_4": "#e6e6e6",
+      "obsidian_glass": "#0f1014",
+      "obsidian_sheen": "#191b22",
+      "obsidian_rainbow": "#33214e",
+      "shungite_ink": "#0a0b0c",
+      "tourmaline_ridge": "#121318",
+      "basalt_ash": "#2b2f36",
+      "glint_silver": "#d9e0e7",
+      "lava_ember": "#ff4b1f",
+      "lava_core": "#ff7a00",
+      "raku_copper": "#b87333",
+      "raku_charcoal": "#1a1a1a",
+      "raku_violet": "#6E00FF",
+      "raku_azure": "#1F7AF3",
+      "smoke_gray": "#6b6f76",
+      "bg_legacy": "#0e0e12",
+      "ink_legacy": "#e9e7e1",
+      "gold_legacy": "#d4af37",
+      "rose_legacy": "#b4435d",
+      "lapis_legacy": "#2f5a9e",
+      "ash_legacy": "#6b6f76",
+      "line_legacy": "#22242a",
+      "muted_legacy": "#b9b6ad",
+      "accent_legacy": "#7fd8b3"
+    },
+    "secondary": {
+      "bg": "#0d0e14",
+      "ink": "#ECE7DE",
+      "edge": "#1D2028",
+      "sun": "#F2C14E",
+      "sea": "#3FA7D6",
+      "fern": "#24D6A9",
+      "rose": "#D65A8A",
+      "amethyst": "#7B5DD6"
+    },
+    "layers": {
+      "visionary": {
+        "name": "AlexGreyGrid",
+        "alpha": 0.22,
+        "scale": 1,
+        "line": "#4a4f63",
+        "highlight": "#aab3ff",
+        "pattern": "sacred-grid"
+      },
+      "patina": {
+        "name": "RakuBloom",
+        "alpha": 0.18,
+        "copper": "raku_copper",
+        "violet": "raku_violet",
+        "azure": "raku_azure"
+      }
+    }
+  },
+  "routes": {
+    "stone_grimoire": {
+      "base": "/",
+      "chapels": "/chapels/",
+      "assets": "/assets/",
+      "bridge": "/bridge/c99-bridge.json"
+    },
+    "cosmogenesis": {
+      "tokens": "/c99/tokens/perm-style.json",
+      "css": "/c99/css/perm-style.css",
+      "public": "/c99/",
+      "bridge": "/bridge/c99-bridge.json"
+    }
+  },
+  "rooms": [
+    {
+      "id": "crypt",
+      "title": "The Crypt",
+      "element": "earth",
+      "tone": 110,
+      "geometry": "vesica",
+      "stylepack": "Rosicrucian Black",
+      "assets": [
+        {
+          "name": "portal_crypt-a01.png",
+          "thumb": "/assets/art/thumbs/portal_crypt-a01-512.jpg",
+          "webp": "/assets/art/webp/portal_crypt-a01.webp",
+          "src": "/assets/art/processed/portal_crypt-a01.png",
+          "type": "png"
+        },
+        {
+          "name": "sigil_ann-abyss.svg",
+          "thumb": "",
+          "webp": "",
+          "src": "/assets/art/processed/sigil_ann-abyss.svg",
+          "type": "svg"
+    "updated": "2025-09-03T02:31:49.313Z",
+    "nd_safe": true
+  },
+  "adventure": {
+    "hermetic_alchemy": {
+      "id": "hermetic_alchemy",
+      "title": "Hermetic Alchemy",
+      "stages": [
+        {
+          "key": "nigredo",
+          "title": "Nigredo — Dissolve",
+          "color": "#1a1a1a",
+          "tag": "stage-nigredo"
+        },
+        {
+          "key": "albedo",
+          "title": "Albedo — Purify",
+          "color": "#e6f0ff",
+          "tag": "stage-albedo"
+        },
+        {
+          "key": "citrinitas",
+          "title": "Citrinitas — Dawn",
+          "color": "#ffd76a",
+          "tag": "stage-citrinitas"
+        },
+        {
+          "key": "rubedo",
+          "title": "Rubedo — Conjoin",
+          "color": "#b4455a",
+          "tag": "stage-rubedo"
+        }
+      ],
+      "optional": true
+    },
+    "tree_of_life": {
+      "id": "tree_of_life",
+      "title": "Tree of Life Path",
+      "sephiroth": [
+        {
+          "k": "keter",
+          "n": "Keter",
+          "col": "#f7f4e6"
+        },
+        {
+          "k": "chokmah",
+          "n": "Chokhmah",
+          "col": "#d7dfe8"
+        },
+        {
+          "k": "binah",
+          "n": "Binah",
+          "col": "#b7b0c8"
+        },
+        {
+          "k": "chesed",
+          "n": "Chesed",
+          "col": "#bcd6ff"
+        },
+        {
+          "k": "gevurah",
+          "n": "Gevurah",
+          "col": "#f2b6b6"
+        },
+        {
+          "k": "tiferet",
+          "n": "Tiferet",
+          "col": "#f1d58c"
+        },
+        {
+          "k": "netzach",
+          "n": "Netzach",
+          "col": "#b4e0a4"
+        },
+        {
+          "k": "hod",
+          "n": "Hod",
+          "col": "#c4b0ff"
+        },
+        {
+          "k": "yesod",
+          "n": "Yesod",
+          "col": "#c9b3ff"
+        },
+        {
+          "k": "malkuth",
+          "n": "Malkuth",
+          "col": "#d0c69c"
+        }
+      ],
+      "paths_22": [
+        {
+          "p": "11",
+          "from": "kether",
+          "to": "chokmah"
+        },
+        {
+          "p": "12",
+          "from": "kether",
+          "to": "binah"
+        },
+        {
+          "p": "13",
+          "from": "binah",
+          "to": "tiferet"
+        },
+        {
+          "p": "14",
+          "from": "chokmah",
+          "to": "tiferet"
+        },
+        {
+          "p": "15",
+          "from": "chokmah",
+          "to": "binah"
+        },
+        {
+          "p": "16",
+          "from": "chesed",
+          "to": "gevurah"
+        },
+        {
+          "p": "17",
+          "from": "tiferet",
+          "to": "netzach"
+        },
+        {
+          "p": "18",
+          "from": "tiferet",
+          "to": "hod"
+        },
+        {
+          "p": "19",
+          "from": "netzach",
+          "to": "yesod"
+        },
+        {
+          "p": "20",
+          "from": "hod",
+          "to": "yesod"
+        },
+        {
+          "p": "21",
+          "from": "chesed",
+          "to": "tiferet"
+        },
+        {
+          "p": "22",
+          "from": "gevurah",
+          "to": "tiferet"
+        },
+        {
+          "p": "23",
+          "from": "binah",
+          "to": "chesed"
+        },
+        {
+          "p": "24",
+          "from": "binah",
+          "to": "gevurah"
+        },
+        {
+          "p": "25",
+          "from": "tiferet",
+          "to": "yesod"
+        },
+        {
+          "p": "26",
+          "from": "chesed",
+          "to": "netzach"
+        },
+        {
+          "p": "27",
+          "from": "netzach",
+          "to": "hod"
+        },
+        {
+          "p": "28",
+          "from": "hod",
+          "to": "netzach"
+        },
+        {
+          "p": "29",
+          "from": "netzach",
+          "to": "malkuth"
+        },
+        {
+          "p": "30",
+          "from": "hod",
+          "to": "malkuth"
+        },
+        {
+          "p": "31",
+          "from": "yesod",
+          "to": "malkuth"
+        },
+        {
+          "p": "32",
+          "from": "chesed",
+          "to": "hod"
+        }
+      ],
+      "optional": true
+    },
+    "theosophical_aeons": {
+      "id": "aeons_map",
+      "title": "Theosophical Aeons",
+      "aeons": [
+        {
+          "k": "sat",
+          "title": "Sat — Boundless",
+          "col": "#B9A8FF"
+        },
+        {
+          "k": "svabhavat",
+          "title": "Svabhavat — Substrate",
+          "col": "#CFE6F2"
+        },
+        {
+          "k": "manvantara",
+          "title": "Manvantara — Outbreath",
+          "col": "#FFD76A"
+        },
+        {
+          "k": "pralaya",
+          "title": "Pralaya — Inbreath",
+          "col": "#1C2029"
+        },
+        {
+          "k": "rounds",
+          "title": "Rounds — Evolutionary Arcs",
+          "col": "#87EBCF"
+        },
+        {
+          "k": "root_races",
+          "title": "Root-Races — Humanity Phases",
+          "col": "#F4D4E1"
+        }
+      ],
+      "optional": true,
+      "notes": "Blavatsky flavor only; selectable."
+    }
+  },
+  "avalon": {
+    "source": "Dion Fortune",
+    "realm": "Avalon",
+    "keys": [
+      "Priestess-Current",
+      "Grail Service",
+      "Tor↔Isle Polarity",
+      "Round Table Oath"
+    ],
+    "veils": [
+      "Outer Isle",
+      "Inner Sanctuary",
+      "Lady's Veil"
+    ],
+    "notes": "Avalon is explicitly Dion Fortune's current."
+  },
+  "between_realm": {
+    "id": "in_between_astral",
+    "title": "The Narthex Between",
+    "quality": "liminal hush; beyond ladders/temples",
+    "features": [
+      "veil eddies",
+      "liminal wind",
+      "subtle star-motes"
+    ],
+    "optional": true
+  },
+  "respawn_gate": {
+    "alias": "violet_flame_gate",
+    "ray": 6,
+    "optional": true,
+    "steps": [
+      "Invoke",
+      "Rotate",
+      "Transmute",
+      "Replace"
+    ],
+    "style": {
+      "class": "respawn-gate",
+      "layer": "respawnGate"
+    }
+  },
+  "oracle_art": [],
+  "angel_seals": [],
+  "pillar_art": [],
+  "egregores": {
+    "schema": {
+      "id": "string",
+      "title": "string",
+      "domain": "string",
+      "ray": "number|null",
+      "angel": "string|null",
+      "pillar": "left|middle|right|null",
+      "solfeggio": "number|null",
+      "tarot": "string|null",
+      "color": "hex|null",
+      "css": "string|null"
+    },
+    {
+      "name": "portal_respawn-a01.png",
+      "src": "/assets/art/processed/portal_respawn-a01.png",
+      "thumb": "/assets/art/thumbs/portal_respawn-a01-512.jpg",
+      "webp": "/assets/art/webp/portal_respawn-a01.webp",
+      "type": "png"
+    }
+  ]
+  "rooms": [],
+  "angels": [],
+  "creatures": {
+    "dragons": [],
+    "daimons": []
+  },
+  "visionary": {
+    "overlays": []
+  },
+  "assets": []
+    "list": []
+  }
+}

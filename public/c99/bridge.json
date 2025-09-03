@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "project": "Cosmogenesis Learning Engine",
+    "updated": "2025-09-03T02:32:07.709Z",
+    "nd_safe": true
+  },
+  "routes": {
+    "tokens": "/c99/tokens/perm-style.json",
+    "css": "/c99/css/perm-style.css"
+  },
+  "codex": {
+    "meta": {
+      "name": "Codex 144:99",
+      "version": "1.0.0",
+      "nd_safe": true
+    },
+    "principles": [
+      "144 nodes → 99 gates",
+      "Witch-as-a-Coven: the one contains the many",
+      "Ray VI devotion & transmutation without compulsion",
+      "Hermetic, Tree, Theosophy are selectable flavors",
+      "John Dee lens: empire of mind, service to spirit"
+    ],
+    "counts": {
+      "nodes": 144,
+      "gates": 99
+    },
+    "flavors": {
+      "hermetic": true,
+      "etz_chayyim": true,
+      "theosophy": true,
+      "violet_respawn_alias": true
+    }
+  },
+  "witch": {
+    "id": "witch-default",
+    "name": "Architect-Scribe",
+    "title": "Witch-as-a-Coven",
+    "roles": [
+      "creator",
+      "scribe",
+      "guardian"
+    ],
+    "numerology": {
+      "root": 2,
+      "scribe": 11,
+      "star": 22,
+      "guardian": 33
+    },
+    "palette_preference": "deep-velvet",
+    "safety": {
+      "autoplay": false,
+      "strobe": false,
+      "motion": "reduce"
+    },
+    "codex": "assets/data/codex.144_99.json"
+  },
+  "coven": {
+    "id": "coven-default",
+    "name": "Cathedral Seed",
+    "witch": "profiles/default.witch.json",
+    "members": [
+      "profiles/default.witch.json"
+    ],
+    "packs": [
+      "packs/sample-world.pack.json"
+    ],
+    "policy": {
+      "nd_safe": true,
+      "sharing": "private-by-default",
+      "license": "BY creator, non-commercial unless specified"
+    }
+  },
+  "pack": {
+    "id": "world-sample-velvet-avalon",
+    "title": "Velvet Avalon Sample",
+    "version": "1.0.0",
+    "witch": "profiles/default.witch.json",
+    "stylepack_key": "velvet-avalon",
+    "tokens": "/public/c99/tokens/perm-style.json",
+    "css": "/public/c99/css/perm-style.css",
+    "flavors": {
+      "hermetic_alchemy": true,
+      "tree_of_life": true,
+      "theosophical_aeons": true
+    },
+    "respawn_alias_violet": true,
+    "between_realm": {
+      "enable": true,
+      "class": "between-narthex",
+      "layer": "inBetweenVeil"
+    },
+    "protection": {
+      "enable": true,
+      "class": "protection-handsigil",
+      "layer": "protectionSigil"
+    },
+    "solfeggio": [
+      396,
+      417,
+      528,
+      639,
+      741,
+      852,
+      963
+    ],
+    "egregores_hint": "assets/data/egregores.core.json",
+    "angels_hint": "assets/data/angels72.json",
+    "bridge_overrides": {
+      "adventure.default": "hermetic_alchemy"
+    },
+    "notes": "Portable pack; couture tokens/CSS mirrored."
+  },
+  "style": {
+    "tokens": "/c99/tokens/perm-style.json",
+    "css": "/c99/css/perm-style.css"
+  }
+}

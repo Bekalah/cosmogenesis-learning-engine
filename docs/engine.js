@@ -47,24 +47,24 @@ function setStyle(styleName) {
 
 window.setStyle = setStyle;
 
-async function loadDemos() {
+async function loadRooms() {
   try {
-    const res = await fetch('data/demos.json');
-    const demos = await res.json();
-    const container = document.getElementById('demo-list');
+    const res = await fetch('data/rooms.json');
+    const rooms = await res.json();
+    const container = document.getElementById('room-list');
     container.innerHTML = '';
-    demos.forEach(d => {
+    rooms.forEach(r => {
       const item = document.createElement('div');
-      item.textContent = d.title || JSON.stringify(d);
+      item.textContent = r.name;
       container.appendChild(item);
     });
   } catch (err) {
-    console.error('Failed to load demos', err);
+    console.error('Failed to load rooms', err);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadDemos();
+  loadRooms();
   const stored = localStorage.getItem('style') || 'light';
   setStyle(stored);
   const selector = document.getElementById('style-selector');

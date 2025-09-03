@@ -1,0 +1,56 @@
+.room {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem;
+}
+.room h2 {
+  margin: 0 0 0.5rem 0;
+}
+.room ul {
+  list-style: none;
+  padding: 0;
+}
+.room li {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.room.visited {
+  background-color: #f0f8ff;
+}
+
+.room li.completed a {
+  text-decoration: line-through;
+  opacity: 0.6;
+/* Symbol plates for Rooms */
+.room-card {
+  border: 1px solid var(--ink, #444);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: var(--paper, #fafafa);
+}
+.room-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+.room-card button {
+  display: block;
+  margin: 0.25rem 0;
+}
+#tesseract-stage {
+  margin-top: 2rem;
+.room {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem;
+}
+.room h2 {
+  margin: 0 0 0.5rem 0;
+}
+.room ul {
+  list-style: none;
+  padding: 0;
+}
+.room li {
+  display: inline-block;
+  margin-right: 0.5rem;
+}

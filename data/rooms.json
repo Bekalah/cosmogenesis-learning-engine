@@ -1,0 +1,80 @@
+[
+  {
+    "id": "agrippa",
+    "name": "Agrippa's Study",
+    "quests": [
+      {"id": "read", "title": "Read a page from *Three Books of Occult Philosophy*", "link": "https://archive.org/details/threebooksofoccu00agri"},
+      {"id": "sketch", "title": "Sketch a Renaissance sigil"},
+      {"id": "remix", "title": "Remix a passage into modern language"}
+    ]
+  },
+  {
+    "id": "hypatia",
+    "name": "Hypatia's Library",
+    "quests": [
+      {"id": "read", "title": "Browse the *Mathematical Collection*", "link": "https://archive.org/details/hypatia-mathematical-collection"},
+      {"id": "sketch", "title": "Sketch a geometric proof"},
+      {"id": "remix", "title": "Remix a theorem into a poem"}
+    ]
+  },
+  {
+    "id": "einstein",
+    "name": "Einstein's Lab",
+    "quests": [
+      {"id": "read", "title": "Read *Relativity: The Special and General Theory*", "link": "https://www.gutenberg.org/ebooks/30155"},
+      {"id": "sketch", "title": "Sketch space-time curvature"},
+      {"id": "remix", "title": "Remix E=mc^2 into art"}
+    ]
+    "name": "Agrippa",
+    "description": "Renaissance polymath exploring occult philosophy.",
+    "quests": {
+      "read": "https://www.gutenberg.org/ebooks/33952",
+      "sketch": "https://commons.wikimedia.org/wiki/File:Agrippa_Von_Nettenheim.jpg",
+      "remix": "https://archive.org/details/threebooksoccult00agri"
+    }
+  },
+  {
+    "id": "hypatia",
+    "name": "Hypatia",
+    "description": "Alexandrian astronomer and philosopher.",
+    "quests": {
+      "read": "https://en.wikipedia.org/wiki/Hypatia",
+      "sketch": "https://commons.wikimedia.org/wiki/File:HYPATIA_(Museo_del_Prado).jpg",
+      "remix": "https://archive.org/details/hypatia00knip"
+    }
+  },
+  {
+    "id": "einstein",
+    "name": "Einstein",
+    "description": "Physicist of relativity and quanta.",
+    "quests": {
+      "read": "https://www.gutenberg.org/ebooks/5001",
+      "sketch": "https://commons.wikimedia.org/wiki/File:Einstein_1921_portrait2.jpg",
+      "remix": "https://archive.org/details/alberteinsteinre00einso"
+    }
+    "name": "Agrippa's Study",
+    "quests": [
+      {"id": "read", "title": "Read a page from *Three Books of Occult Philosophy*", "link": "https://archive.org/details/threebooksofoccu00agri"},
+      {"id": "sketch", "title": "Sketch a Renaissance sigil"},
+      {"id": "remix", "title": "Remix a passage into modern language"}
+    ]
+  },
+  {
+    "id": "hypatia",
+    "name": "Hypatia's Library",
+    "quests": [
+      {"id": "read", "title": "Browse the *Mathematical Collection*", "link": "https://archive.org/details/hypatia-mathematical-collection"},
+      {"id": "sketch", "title": "Sketch a geometric proof"},
+      {"id": "remix", "title": "Remix a theorem into a poem"}
+    ]
+  },
+  {
+    "id": "einstein",
+    "name": "Einstein's Lab",
+    "quests": [
+      {"id": "read", "title": "Read *Relativity: The Special and General Theory*", "link": "https://www.gutenberg.org/ebooks/30155"},
+      {"id": "sketch", "title": "Sketch space-time curvature"},
+      {"id": "remix", "title": "Remix E=mc^2 into art"}
+    ]
+  }
+]

@@ -1,51 +1,12 @@
-// Render a plate configuration into coordinates and export helpers
-
-function spiralPositions(count) {
-  const points = [];
-  const a = 5;
-  const b = 5;
-  for (let i = 0; i < count; i++) {
-    const angle = 0.5 * i;
-    const radius = a + b * angle;
-    points.push({ x: radius * Math.cos(angle), y: radius * Math.sin(angle) });
-  }
-  return points;
-}
-
-function twinConePositions(count) {
-  const points = [];
-  const spacing = 20;
-  for (let i = 0; i < count; i++) {
-    const sign = i % 2 === 0 ? 1 : -1;
-    const step = Math.floor(i / 2) + 1;
-    points.push({ x: 0, y: sign * step * spacing });
-  }
-  return points;
-}
-
-function wheelPositions(count) {
-  const points = [];
-  const radius = 100;
-  for (let i = 0; i < count; i++) {
-    const angle = (2 * Math.PI * i) / count;
-    points.push({ x: radius * Math.cos(angle), y: radius * Math.sin(angle) });
-  }
-  return points;
-}
-
-function gridPositions(count) {
-  const points = [];
-  const cols = Math.ceil(Math.sqrt(count));
-  const size = 40;
-  for (let i = 0; i < count; i++) {
-    const row = Math.floor(i / cols);
-    const col = i % cols;
-    points.push({ x: col * size, y: row * size });
-  }
-  return points;
-}
-
 export function renderPlate(config) {
+  // Generate Archimedean spiral points (logic mirror of browser engine)
+  const pts = [];
+  const s = config.plate.spiral || { a:1, b:0.18, theta_max: 12, points: 600 };
+  const k = 10; // arbitrary scale for test context
+  for (let i=0;i<=s.points;i++){
+    const t = (i/s.points) * s.theta_max;
+    const r = s.a + s.b*t;
+    pts.push([ (r*Math.cos(t))*k, (r*Math.sin(t))*k ]);
   if (
     !config ||
     typeof config.layout !== 'string' ||
@@ -91,7 +52,5 @@ export function renderPlate(config) {
   function exportAsPNG() {
     return Buffer.from(exportAsSVG());
   }
-
-  return { ...config, items, exportAsJSON, exportAsSVG, exportAsPNG };
+  return { points: pts };
 }
-

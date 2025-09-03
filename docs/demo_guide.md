@@ -36,7 +36,7 @@ It is a **spiral walk-through**: each turn revisits the same engine with deeper 
 Hit **Reset** to clear the plate and try new labels or layouts.
 
 ## ✦ Second Spiral — Correspondences
-1. Load a dataset from `data/demos.json` such as *Seven Chakras*.
+1. Load a dataset from `data/rooms.json` such as *Agrippa*.
 2. Notice how the same geometry now expresses a different tradition.
 3. Toggle **Style** to switch palettes or themes.
 
