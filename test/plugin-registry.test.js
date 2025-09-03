@@ -18,6 +18,5 @@ test('load registers plugins by type', async () => {
   const layouts = getByType('layout');
   assert.equal(layouts.length, 1);
 
-  // clean up temporary fixtures directory
   rmSync(fixturesDir, { recursive: true, force: true });
 });
