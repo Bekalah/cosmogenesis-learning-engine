@@ -1,221 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cosmogenesis Learning Engine</title>
-  <link rel="stylesheet" href="assets/css/core.css">
-  <link rel="stylesheet" href="assets/css/hc.css">
-  
-  <link rel="stylesheet" href="/public/c99/css/perm-style.css" />
-  
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmogenesis Learning Engine</title>
+    <link rel="stylesheet" href="assets/css/core.css" />
+    <link rel="stylesheet" href="assets/css/hc.css" />
 
-<!-- optional background aura (does nothing if CSS is missing) -->
-<div class="violet-gate bg-soft" aria-hidden="true"></div>
+    <link rel="stylesheet" href="/public/c99/css/perm-style.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body class="pearlescent">
+    <!-- optional background aura (does nothing if CSS is missing) -->
+    <div class="violet-gate bg-soft" aria-hidden="true"></div>
 
-  <header>
-    <h1>Cosmogenesis Learning Engine</h1>
-    <div class="controls">
-      <label>Tilt <input id="tilt" type="range" min="0" max="45" step="0.5"></label>
-      <label>Nodes <input id="nodes" type="number" min="33" max="144" step="1"></label>
-      <label>Skin <select id="skin"></select></label>
-      <button id="calm-toggle" aria-pressed="false">Calm Mode</button>
-      <button id="hc-toggle" aria-pressed="false">High Contrast</button>
-      <button id="btn-export">Export Plate</button>
-    </div>
-    
-    <!-- flavor rail (purely decorative) -->
-<div class="mode-rail" id="flavorRail" style="margin-left:auto">
-  <span class="mode-chip"><i class="swatch" style="background:#1a1a1a"></i>Nigredo</span>
-  <span class="mode-chip"><i class="swatch" style="background:#e6f0ff"></i>Albedo</span>
-  <span class="mode-chip"><i class="swatch" style="background:#ffd76a"></i>Citrinitas</span>
-  <span class="mode-chip"><i class="swatch" style="background:#b4455a"></i>Rubedo</span>
-</div>
+    <header>
+      <h1>Cosmogenesis Learning Engine</h1>
+      <div class="controls">
+        <label
+          >Tilt <input id="tilt" type="range" min="0" max="45" step="0.5"
+        /></label>
+        <label
+          >Nodes <input id="nodes" type="number" min="33" max="144" step="1"
+        /></label>
+        <label
+          >Skin
+          <select id="skin"></select
+        ></label>
+        <button id="calm-toggle" aria-pressed="false">Calm Mode</button>
+        <button id="hc-toggle" aria-pressed="false">High Contrast</button>
+        <button id="btn-export">Export Plate</button>
+      </div>
 
-  </header>
-  <main class="stage">
-    <canvas id="stage" width="800" height="600"></canvas>
-    
-    <section class="container oracle-velvet luminous-heart" id="gallery">
-  <h2 style="margin-top:0">Simple Gallery Test</h2>
-  <p class="small">Pulls from <code>/bridge/c99-bridge.json</code> if available (ND-safe, static).</p>
-  <div id="solfeggioRail" class="mode-rail"></div>
-  <div id="thumbs" class="grid three" style="margin-top:12px"></div>
-</section>
+      <!-- flavor rail (purely decorative) -->
+      <div class="mode-rail" id="flavorRail" style="margin-left: auto">
+        <span class="mode-chip"
+          ><i class="swatch" style="background: #1a1a1a"></i>Nigredo</span
+        >
+        <span class="mode-chip"
+          ><i class="swatch" style="background: #e6f0ff"></i>Albedo</span
+        >
+        <span class="mode-chip"
+          ><i class="swatch" style="background: #ffd76a"></i>Citrinitas</span
+        >
+        <span class="mode-chip"
+          ><i class="swatch" style="background: #b4455a"></i>Rubedo</span
+        >
+      </div>
+    </header>
+    <main class="stage">
+      <canvas id="stage" width="800" height="600"></canvas>
 
-<script type="module">
-  async function readBridge() {
-    try {
-      const r = await fetch('/bridge/c99-bridge.json', { cache: 'no-store' });
-      if (!r.ok) throw new Error('bridge missing');
-      return await r.json();
-    } catch (e) {
-      return null;
-    }
-  }
+      <section class="container oracle-velvet luminous-heart" id="gallery">
+        <h2 style="margin-top: 0">Simple Gallery Test</h2>
+        <p class="small">
+          Pulls from <code>/bridge/c99-bridge.json</code> if available (ND-safe,
+          static).
+        </p>
+        <div id="solfeggioRail" class="mode-rail"></div>
+        <div id="thumbs" class="grid three" style="margin-top: 12px"></div>
+      </section>
 
-  function card(title, img, css = '') {
-    const src = img?.thumb || img?.webp || img?.src || '';
-    return `
+      <script type="module">
+        async function readBridge() {
+          try {
+            const r = await fetch("/bridge/c99-bridge.json", {
+              cache: "no-store",
+            });
+            if (!r.ok) throw new Error("bridge missing");
+            return await r.json();
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function card(title, img, css = "") {
+          const src = img?.thumb || img?.webp || img?.src || "";
+          return `
       <figure class="egregore-card ${css}">
-        ${src ? `<img src="${src}" alt="${title}" style="width:100%;height:auto;border-radius:10px;display:block;" loading="lazy" decoding="async" />` : ''}
+        ${src ? `<img src="${src}" alt="${title}" style="width:100%;height:auto;border-radius:10px;display:block;" loading="lazy" decoding="async" />` : ""}
         <figcaption class="small" style="margin-top:6px">${title}</figcaption>
       </figure>
     `;
-  }
+        }
 
-  function chipHz(hz, label) {
-    return `<span class="solfeggio-chip"><i></i>${hz} Hz -- ${label}</span>`;
-  }
+        function chipHz(hz, label) {
+          return `<span class="solfeggio-chip"><i></i>${hz} Hz -- ${label}</span>`;
+        }
 
-  (async () => {
-    const m = await readBridge();
-    const rail = document.getElementById('solfeggioRail');
-    const mount = document.getElementById('thumbs');
+        (async () => {
+          const m = await readBridge();
+          const rail = document.getElementById("solfeggioRail");
+          const mount = document.getElementById("thumbs");
 
-    // Solfeggio (silent chips)
-    (m?.solfeggio?.frequencies || []).forEach(f => {
-      rail.insertAdjacentHTML('beforeend', chipHz(f.hz, f.key));
-    });
+          // Solfeggio (silent chips)
+          (m?.solfeggio?.frequencies || []).forEach((f) => {
+            rail.insertAdjacentHTML("beforeend", chipHz(f.hz, f.key));
+          });
 
-    // Collect a few sources for thumbnails (any or none)
-    const pool = [];
-    if (m?.respawn_gate?.assets) pool.push(...m.respawn_gate.assets);
-    if (m?.oracle_art)           pool.push(...m.oracle_art);
-    if (m?.angel_seals)          pool.push(...m.angel_seals);
-    if (m?.visionary?.overlays)  pool.push(...m.visionary.overlays);
+          // Collect a few sources for thumbnails (any or none)
+          const pool = [];
+          if (m?.respawn_gate?.assets) pool.push(...m.respawn_gate.assets);
+          if (m?.oracle_art) pool.push(...m.oracle_art);
+          if (m?.angel_seals) pool.push(...m.angel_seals);
+          if (m?.visionary?.overlays) pool.push(...m.visionary.overlays);
 
-    if (pool.length === 0) {
-      mount.innerHTML = `<div class="note">No bridge thumbs yet. Drop art in <code>stone_grimoire/assets/art/inbox/</code> and run <code>node core/build/update-art.js</code>.</div>`;
-      return;
-    }
+          if (pool.length === 0) {
+            mount.innerHTML = `<div class="note">No bridge thumbs yet. Drop art in <code>stone_grimoire/assets/art/inbox/</code> and run <code>node core/build/update-art.js</code>.</div>`;
+            return;
+          }
 
-    // Render up to 12 thumbs
-    pool.slice(0, 12).forEach(a => {
-      mount.insertAdjacentHTML('beforeend', card(a.name || 'asset', a, 'gonz-velvet'));
-    });
-  })();
-</script>
+          // Render up to 12 thumbs
+          pool.slice(0, 12).forEach((a) => {
+            mount.insertAdjacentHTML(
+              "beforeend",
+              card(a.name || "asset", a, "gonz-velvet ember-eye"),
+            );
+          });
+        })();
+      </script>
+    </main>
+    <footer>ND-safe • no autoplay • no strobe • honors reduced motion</footer>
 
-  </main>
-  <footer>ND-safe • no autoplay • no strobe • honors reduced motion</footer>
+    <script type="module">
+      import {
+        cfg,
+        getStylepacks,
+        getSpiralMap,
+        getAngels,
+      } from "./src/codex.ext.js";
+      import ThemeEngine from "./src/engines/theme-engine.js";
+      import ArtEngine from "./src/engines/art-engine.js";
+      import SpiralEngine from "./src/engines/spiral-engine.js";
+      import { exportPlate } from "./src/engines/exporter.js";
+      import GuardianPlaque from "./src/ui/guardian-plaque.js";
+      import initInfoDot from "./src/ui/info-dot.js";
 
-  <script type="module">
-    import { cfg, getStylepacks, getSpiralMap, getAngels } from './src/codex.ext.js';
-    import ThemeEngine from './src/engines/theme-engine.js';
-    import ArtEngine from './src/engines/art-engine.js';
-    import SpiralEngine from './src/engines/spiral-engine.js';
-    import { exportPlate } from './src/engines/exporter.js';
-    import GuardianPlaque from './src/ui/guardian-plaque.js';
-    import initInfoDot from './src/ui/info-dot.js';
+      const canvas = document.getElementById("stage");
+      const tiltInput = document.getElementById("tilt");
+      const nodesInput = document.getElementById("nodes");
+      const skinSelect = document.getElementById("skin");
+      const calmBtn = document.getElementById("calm-toggle");
+      const hcBtn = document.getElementById("hc-toggle");
 
-    const canvas = document.getElementById('stage');
-    const tiltInput = document.getElementById('tilt');
-    const nodesInput = document.getElementById('nodes');
-    const skinSelect = document.getElementById('skin');
-    const calmBtn = document.getElementById('calm-toggle');
-    const hcBtn = document.getElementById('hc-toggle');
+      const themes = new ThemeEngine(getStylepacks());
+      const art = new ArtEngine(canvas, themes);
+      const spiral = new SpiralEngine(canvas, art);
 
-    const themes = new ThemeEngine(getStylepacks());
-    const art = new ArtEngine(canvas, themes);
-    const spiral = new SpiralEngine(canvas, art);
-
-    function applyState() {
-      const tilt = parseFloat(localStorage.getItem('cosmo:v1:tilt') || '23.5');
-      const nodes = parseInt(localStorage.getItem('cosmo:v1:nodes') || '33', 10);
-      const skin = localStorage.getItem('cosmo:v1:skin') || 'AGRIPPA';
-      const calm = localStorage.getItem('cosmo:v1:calm') === 'true';
-      const hc = localStorage.getItem('cosmo:v1:hc') === 'true';
-      tiltInput.value = tilt;
-      nodesInput.value = nodes;
-      skinSelect.value = skin;
-      spiral.init({ tiltDeg: tilt, nodeCount: nodes, map: getSpiralMap() });
-      themes.applyToElement(document.documentElement, skin);
-      document.documentElement.dataset.calm = calm;
-      document.documentElement.dataset.hc = hc;
-      calmBtn.setAttribute('aria-pressed', calm);
-      hcBtn.setAttribute('aria-pressed', hc);
-    }
-
-    tiltInput.addEventListener('input', e => {
-      const v = parseFloat(e.target.value);
-      spiral.setTilt(v);
-      localStorage.setItem('cosmo:v1:tilt', v);
-    });
-    nodesInput.addEventListener('change', e => {
-      let n = parseInt(e.target.value, 10);
-      if (![33,72,144].includes(n)) n = 33;
-      spiral.setNodeCount(n);
-      localStorage.setItem('cosmo:v1:nodes', n);
-    });
-    skinSelect.addEventListener('change', e => {
-      const id = e.target.value;
-      themes.applyToElement(document.documentElement, id);
-      localStorage.setItem('cosmo:v1:skin', id);
-    });
-
-    calmBtn.addEventListener('click', () => {
-      const active = calmBtn.getAttribute('aria-pressed') === 'true';
-      const next = !active;
-      calmBtn.setAttribute('aria-pressed', next);
-      document.documentElement.dataset.calm = next;
-      localStorage.setItem('cosmo:v1:calm', next);
-    });
-
-    hcBtn.addEventListener('click', () => {
-      const active = hcBtn.getAttribute('aria-pressed') === 'true';
-      const next = !active;
-      hcBtn.setAttribute('aria-pressed', next);
-      if (next) document.documentElement.setAttribute('data-hc', 'true');
-      else document.documentElement.removeAttribute('data-hc');
-      localStorage.setItem('cosmo:v1:hc', next);
-    });
-
-    document.getElementById('btn-export').addEventListener('click', async () => {
-      try {
-        const map = getSpiralMap();
-        const node = map.nodes[0];
-        const res = await exportPlate({
-          skin: skinSelect.value,
-          nodeId: node?.id || 'n0',
-          provenanceRefs: node?.payload.provenanceRefs || [],
-          out: { width: 4096, format: 'png' }
-        });
-        const a = document.createElement('a');
-        a.download = `${res.jsonSidecar.nodeId}.${'png'}`;
-        a.href = URL.createObjectURL(res.blob);
-        a.click();
-        const j = document.createElement('a');
-        j.download = `${res.jsonSidecar.nodeId}.json`;
-        j.href = URL.createObjectURL(new Blob([JSON.stringify(res.jsonSidecar,null,2)],{type:'application/json'}));
-        j.click();
-      } catch (e) {
-        plaque.open(e.message);
+      function applyState() {
+        const tilt = parseFloat(
+          localStorage.getItem("cosmo:v1:tilt") || "23.5",
+        );
+        const nodes = parseInt(
+          localStorage.getItem("cosmo:v1:nodes") || "33",
+          10,
+        );
+        const skin = localStorage.getItem("cosmo:v1:skin") || "AGRIPPA";
+        const calm = localStorage.getItem("cosmo:v1:calm") === "true";
+        const hc = localStorage.getItem("cosmo:v1:hc") === "true";
+        tiltInput.value = tilt;
+        nodesInput.value = nodes;
+        skinSelect.value = skin;
+        spiral.init({ tiltDeg: tilt, nodeCount: nodes, map: getSpiralMap() });
+        themes.applyToElement(document.documentElement, skin);
+        document.documentElement.dataset.calm = calm;
+        document.documentElement.dataset.hc = hc;
+        calmBtn.setAttribute("aria-pressed", calm);
+        hcBtn.setAttribute("aria-pressed", hc);
       }
-    });
 
-    const packs = getStylepacks();
-    packs.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.id;
-      opt.textContent = p.name;
-      skinSelect.appendChild(opt);
-    });
+      tiltInput.addEventListener("input", (e) => {
+        const v = parseFloat(e.target.value);
+        spiral.setTilt(v);
+        localStorage.setItem("cosmo:v1:tilt", v);
+      });
+      nodesInput.addEventListener("change", (e) => {
+        let n = parseInt(e.target.value, 10);
+        if (![33, 72, 144].includes(n)) n = 33;
+        spiral.setNodeCount(n);
+        localStorage.setItem("cosmo:v1:nodes", n);
+      });
+      skinSelect.addEventListener("change", (e) => {
+        const id = e.target.value;
+        themes.applyToElement(document.documentElement, id);
+        localStorage.setItem("cosmo:v1:skin", id);
+      });
 
-    const plaque = new GuardianPlaque();
-    initInfoDot();
+      calmBtn.addEventListener("click", () => {
+        const active = calmBtn.getAttribute("aria-pressed") === "true";
+        const next = !active;
+        calmBtn.setAttribute("aria-pressed", next);
+        document.documentElement.dataset.calm = next;
+        localStorage.setItem("cosmo:v1:calm", next);
+      });
 
-    document.addEventListener('chamber:open', e => {
-      const id = e.detail.id;
-      const node = getSpiralMap().nodes.find(n => n.id === id);
-      const angel = getAngels().find(a => a.id === node.guardian);
-      plaque.open(`Angel of ${angel.title}, ${angel.mantra}`);
-    });
+      hcBtn.addEventListener("click", () => {
+        const active = hcBtn.getAttribute("aria-pressed") === "true";
+        const next = !active;
+        hcBtn.setAttribute("aria-pressed", next);
+        if (next) document.documentElement.setAttribute("data-hc", "true");
+        else document.documentElement.removeAttribute("data-hc");
+        localStorage.setItem("cosmo:v1:hc", next);
+      });
 
-    applyState();
-    spiral.draw();
-  </script>
-</body>
+      document
+        .getElementById("btn-export")
+        .addEventListener("click", async () => {
+          try {
+            const map = getSpiralMap();
+            const node = map.nodes[0];
+            const res = await exportPlate({
+              skin: skinSelect.value,
+              nodeId: node?.id || "n0",
+              provenanceRefs: node?.payload.provenanceRefs || [],
+              out: { width: 4096, format: "png" },
+            });
+            const a = document.createElement("a");
+            a.download = `${res.jsonSidecar.nodeId}.${"png"}`;
+            a.href = URL.createObjectURL(res.blob);
+            a.click();
+            const j = document.createElement("a");
+            j.download = `${res.jsonSidecar.nodeId}.json`;
+            j.href = URL.createObjectURL(
+              new Blob([JSON.stringify(res.jsonSidecar, null, 2)], {
+                type: "application/json",
+              }),
+            );
+            j.click();
+          } catch (e) {
+            plaque.open(e.message);
+          }
+        });
+
+      const packs = getStylepacks();
+      packs.forEach((p) => {
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        opt.textContent = p.name;
+        skinSelect.appendChild(opt);
+      });
+
+      const plaque = new GuardianPlaque();
+      initInfoDot();
+
+      document.addEventListener("chamber:open", (e) => {
+        const id = e.detail.id;
+        const node = getSpiralMap().nodes.find((n) => n.id === id);
+        const angel = getAngels().find((a) => a.id === node.guardian);
+        plaque.open(`Angel of ${angel.title}, ${angel.mantra}`);
+      });
+
+      applyState();
+      spiral.draw();
+    </script>
+  </body>
 </html>

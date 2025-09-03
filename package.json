@@ -4,15 +4,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "npx http-server -p 5173 -c-1 .",
-    "test": "node --test",
-    "fmt": "npx prettier -w ."
     "dev": "http-server -p 5173 -c-1 .",
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
     "test": "node --test && python3 -m py_compile $(git ls-files '*.py')",
-    "format": "prettier -w .",
+    "fmt": "prettier -w .",
     "check": "prettier -c .",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
     "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
@@ -24,3 +21,4 @@
     "prettier": "^3.3.3"
   }
 }
+
