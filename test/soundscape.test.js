@@ -8,7 +8,7 @@ function cleanup() {
 }
 
 test('soundscape respects mute', () => {
-  global.window = { COSMO_SETTINGS: { muteAudio: true } };
+  global.window = { COSMO_SETTINGS: { muteAudio: true }, AudioContext: class {} };
   global.alert = () => {};
   assert.doesNotThrow(() => soundscape('hypatia'));
   cleanup();
@@ -30,6 +30,17 @@ test('soundscape starts oscillators when not muted', () => {
     createGain() { return new FakeGain(); }
     createChannelMerger() { return new FakeMerger(); }
     close() {}
+  }
+  class FakeGain {
+    constructor() { this.gain = { value: 0 }; }
+    connect() { return this; }
+  }
+  class FakeMerger { connect() { return this; } }
+  class FakeAudioCtx {
+    constructor() { this.currentTime = 0; this.destination = {}; }
+    createOscillator() { return new FakeOsc(); }
+    createGain() { return new FakeGain(); }
+    createChannelMerger() { return new FakeMerger(); }
   }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   global.alert = () => {};

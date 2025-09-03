@@ -22,6 +22,9 @@ export function loadConfig(relativePath) {
     throw new ConfigError(relativePath, [`Unable to read file: ${err.message}`]);
   }
 
+  } catch {
+    throw new Error(`Config file not found: ${relativePath}`);
+  }
   try {
     return JSON.parse(raw);
   } catch {
@@ -45,6 +48,7 @@ export function validatePlateConfig(config, source = 'config') {
   return true;
 }
 
+// Convenience helper to grab the first demo configuration
 export function loadFirstDemo() {
   const demos = loadConfig('data/demos.json');
   if (!Array.isArray(demos) || demos.length === 0 || typeof demos[0].config !== 'object') {

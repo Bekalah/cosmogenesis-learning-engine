@@ -2,11 +2,13 @@
 
 —
 
-## Hemispheres & Trauma  
-- McGilchrist, I. (2009). *The Master and His Emissary.*  
-- McGilchrist, I. (2021). *The Matter With Things.*  
-- Brewin, C. (2014). Memory fragmentation in PTSD. *Journal of Experimental Psychopathology.*  
-- Grand, D. (2003). *Brainspotting.*  
+## Hemispheres & Trauma
+- McGilchrist, I. (2009). *The Master and His Emissary.*
+- McGilchrist, I. (2021). *The Matter With Things.*
+- Brewin, C. (2014). Memory fragmentation in PTSD. *Journal of Experimental Psychopathology.*
+- Grand, D. (2003). *Brainspotting.*
+- Shin, L. M., Rauch, S. L., & Pitman, R. K. (2006). Amygdala, medial prefrontal cortex, and hippocampal function in PTSD. *Annals of the New York Academy of Sciences.*
+- Aupperle, R. L. et al. (2012). Executive function deficits in PTSD: neural and behavioral evidence. *Neuropharmacology.*
 
 —
 
@@ -22,9 +24,14 @@
 
 —
 
-## Neurodivergence  
-- Frith, U., & Happé, F. (2005). Theory of mind & autism. *Mind & Language.*  
-- Eide, B., & Eide, F. (2011). *The Dyslexic Advantage.*  
+## Neurodivergence
+- Frith, U., & Happé, F. (2005). Theory of mind & autism. *Mind & Language.*
+- Eide, B., & Eide, F. (2011). *The Dyslexic Advantage.*
+- Barkley, R. A. (1997). Behavioral inhibition, sustained attention, and executive functions: constructing a unifying theory of ADHD. *Psychological Bulletin.*
+
+## Default Mode Network
+- Bluhm, R. L. et al. (2009). Resting state default-mode network connectivity in PTSD. *Journal of Psychiatry & Neuroscience.*
+- Daniels, J. K. et al. (2010). Default mode network alterations in PTSD. *European Neuropsychopharmacology.*
 
 —
 
