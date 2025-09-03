@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "name": "Indra's Net",
+    "codex": "144:99",
+    "nd_safe": true
+  },
+  "lattice": {
+    "rings": 12,
+    "nodes_per_ring": 12,
+    "gates": 99
+  },
+  "angels_hint": "assets/data/angels72.json",
+  "description": "144 jewel nodes woven by 99 gate clusters; each node mirrors the whole."
+}
