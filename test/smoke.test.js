@@ -16,6 +16,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 test('basic arithmetic works', () => {
   assert.equal(1 + 1, 2);
 });
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { loadConfig, loadFirstDemo } from '../src/configLoader.js';
