@@ -20,6 +20,9 @@ export function playSoundscape(theme = 'hypatia') {
   if (!AudioCtx) {
     globalThis.alert?.('Web Audio API not supported');
 // Simple binaural soundscape using the Web Audio API
+export default function soundscape(name) {
+  const settings = global.window?.COSMO_SETTINGS || {};
+  if (settings.muteAudio) return;
 export function soundscape(name) {
   const settings = global.window?.COSMO_SETTINGS || {};
   if (settings.muteAudio) return;
