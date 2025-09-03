@@ -115,6 +115,9 @@ test('soundscape enables binaural beats when requested', () => {
     createChannelMerger() { return new FakeMerger(); }
     close() {}
   }
+  class FakeGain {
+    constructor() { this.gain = { value: 0 }; }
+    connect() { return this; }
   global.window = { COSMO_SETTINGS: { muteAudio: false }, AudioContext: FakeAudioCtx };
   global.alert = () => {};
   }

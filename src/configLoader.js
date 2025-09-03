@@ -28,6 +28,9 @@ export function loadConfig(relativePath) {
     throw new ConfigError(relativePath, [`Unable to read file: ${err.message}`]);
   }
 
+  } catch {
+    throw new Error(`Config file not found: ${relativePath}`);
+  }
   try {
     return JSON.parse(raw);
   } catch {
