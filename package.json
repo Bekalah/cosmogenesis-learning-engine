@@ -8,12 +8,13 @@
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
-    "test": "node --test test/plugin-registry.test.js test/progress-engine.test.js",
+    "test": "./scripts/run-tests.sh",
     "fmt": "prettier -w .",
     "check": "prettier -c .",
     "test": "node --test",
     "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
     "check": "prettier -c src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
+    "check": "./scripts/run-check.sh",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
     "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
     "gallery:thumbs": "python3 scripts/pillow_thumbs.py --in exports --out exports/thumbs --size 512",
@@ -37,4 +38,3 @@
     "prettier": "^3.3.3"
   }
 }
-
