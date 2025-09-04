@@ -20,6 +20,8 @@ from typing import List, Tuple
 
 from PIL import Image, ImageDraw, ImageColor, ImageFont
 
+from enochian_layers import draw_enochian_grid, draw_celestial_sigils
+
 
 # Planetary symbols and their angelic counterparts ---------------------------
 PLANETARY_SIGILS: List[Tuple[str, str]] = [
