@@ -8,4 +8,15 @@
     "textures": [],
     "shaders": ["vellum"]
   }
+
+  ,{
+    "id": "ROSSLYN_GOTHIC",
+    "name": "Rosslyn Gothic",
+    "type": "visionary",
+    "palette": {"ink":"#f5f3ef","wash":"#0b0b0b","accent":"#7d6f64","gold":"#d4af37"},
+    "motifs": ["rosslyn","cubes"],
+    "textures": [],
+    "shaders": ["stone"],
+    "overlays": ["overlays/rosslyn/cube.png"]
+  }
 ]
