@@ -8,7 +8,11 @@
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
+<<<<<<< codex/add-art-assets-for-study
     "test": "./scripts/run-tests.sh",
+=======
+    "test": "node --test test/codexConfig.test.js test/plugin-registry.test.js test/progress-engine.test.js",
+>>>>>>> upstream/codex/lock-codex-144-99-settings
     "fmt": "prettier -w .",
     "check": "prettier -c .",
     "test": "node --test",
