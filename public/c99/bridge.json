@@ -97,6 +97,11 @@
       {
         "id": 1,
         "name": "Vehuiah",
+        "attribute": "Will & New Begin    },
+    "angels": [
+      {
+        "id": 1,
+        "name": "Vehuiah",
         "attribute": "Will & New Beginnings",
         "frequency": 396,
         "color": "#cc3232"
@@ -606,6 +611,8 @@
     "title": "Witch-as-a-Coven",
     "roles": [
       "creator",
+or",
+>>>>>>> Stashed changes
       "scribe",
       "guardian"
     ],
