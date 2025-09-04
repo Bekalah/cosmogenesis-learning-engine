@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <style>
+    :root {
+      --seal-primary: #50c878;
+      --seal-accent: #8a2be2;
+    }
+    .ring { fill: none; stroke: var(--seal-primary); stroke-width: 4; }
+    .eye { fill: none; stroke: var(--seal-accent); stroke-width: 3; }
+    .vine { fill: none; stroke: var(--seal-accent); stroke-width: 2; }
+    .text { fill: var(--seal-primary); font-family: 'Georgia', serif; font-size: 12px; letter-spacing: 3px; }
+  </style>
+  <defs>
+    <path id="textcircle" d="M100,10 A90,90 0 1,1 99.9,10" />
+  </defs>
+  <circle class="ring" cx="100" cy="100" r="90" />
+  <ellipse class="eye" cx="100" cy="100" rx="40" ry="60" />
+  <path class="vine" d="M100 40 C120 70 80 130 100 160" />
+  <text class="text">
+    <textPath href="#textcircle">CATHEDRAL • OF • CIRCUITS • 144:99 ☿ ♄ ♇</textPath>
+  </text>
+</svg>
