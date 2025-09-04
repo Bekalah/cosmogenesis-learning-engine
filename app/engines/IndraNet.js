@@ -27,6 +27,7 @@ export class IndraNet {
         planets: true,
         numerology: true
       }
+      palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
     };
   }
 
