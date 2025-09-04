@@ -2,13 +2,15 @@
 
 Living registry for the 22 Major Arcana of Liber Arcanae: Codex Abyssiae.
 
+Mineralogical data follow Mindat (2024) classifications and planetary metrics reference NASA JPL fact sheets (2022) to maintain scientific traceability.
+
 0. The Fool — Rebecca Respawn
     • Hebrew Letter: Aleph (Air, Breath)
     • Astrology: Uranus, Aquarius 0°
     • Ray: Electric Blue (Ray 2/Octarine overlay)
     • Angel/Demon: Vehuiah ↔ Bael
     • Deities: Hermes, Thoth, Jizo
-    • Crystal: Clear Quartz
+    • Crystal: Clear Quartz (SiO₂, hexagonal, piezoelectric)
     • BioGeometry Freq: BG3 White
     • Solfeggio/Planetary: 852 Hz / Uranus tone
     • Artifact: Spiral Key
@@ -29,7 +31,7 @@ I. The Magician — Mirror Witch
     • Ray: Golden Yellow (Ray 1)
     • Angel/Demon: Raziel ↔ Paimon
     • Deities: Hermes, Odin, Tahuti
-    • Crystal: Citrine
+    • Crystal: Citrine (SiO₂, trigonal quartz, Fe³⁺ dopant)
     • BioGeometry Freq: Solar BG ray
     • Solfeggio/Planetary: 741 Hz / Mercury tone
     • Artifact: Duality Wand
@@ -50,7 +52,7 @@ II. The High Priestess — Moonchild
     • Ray: Silver Indigo (Ray 2)
     • Angel/Demon: Gabriel ↔ Naamah
     • Deities: Isis, Artemis, Hekate
-    • Crystal: Moonstone
+    • Crystal: Moonstone ((Na,K)AlSi₃O₈, monoclinic feldspar)
     • BioGeometry Freq: Lunar BG ray
     • Solfeggio/Planetary: 417 Hz / Moon tone
     • Artifact: Veiled Scroll
@@ -71,7 +73,7 @@ III. The Empress — Rose Matrix
     • Ray: Emerald Green (Ray 4)
     • Angel/Demon: Anael ↔ Astaroth
     • Deities: Aphrodite, Freya, Hathor
-    • Crystal: Rose Quartz
+    • Crystal: Rose Quartz (SiO₂, trigonal, Ti inclusions)
     • BioGeometry Freq: Venusian BG ray
     • Solfeggio/Planetary: 672 Hz / Venus tone
     • Artifact: Blooming Scepter
@@ -92,7 +94,7 @@ IV. The Emperor — Solaris Rex
     • Ray: Scarlet (Ray 5)
     • Angel/Demon: Kamael ↔ Asmodeus
     • Deities: Ares, Mars, Tyr
-    • Crystal: Red Jasper
+    • Crystal: Red Jasper (SiO₂, microcrystalline quartz with Fe₂O₃)
     • BioGeometry Freq: Martian BG ray
     • Solfeggio/Planetary: 741 Hz / Mars tone
     • Artifact: Iron Crown
@@ -113,7 +115,7 @@ V. The Hierophant — Zidaryen
     • Ray: Earthy Brown (Ray 3)
     • Angel/Demon: Sandalphon ↔ Mammon
     • Deities: Osiris, Cernunnos, Ganesh
-    • Crystal: Sodalite
+    • Crystal: Sodalite (Na₈Al₆Si₆O₂₄Cl₂, cubic tectosilicate)
     • BioGeometry Freq: Deep Earth BG ray
     • Solfeggio/Planetary: 396 Hz / Earth resonance
     • Artifact: Sacred Staff
@@ -134,7 +136,7 @@ VI. The Lovers — Twin Flame
     • Ray: Rose-Gold (Ray 6)
     • Angel/Demon: Raphael ↔ Lilith
     • Deities: Adam & Eve, Krishna & Radha, Shiva & Shakti
-    • Crystal: Rhodochrosite
+    • Crystal: Rhodochrosite (MnCO₃, trigonal carbonate)
     • BioGeometry Freq: Harmonizing BG ray
     • Solfeggio/Planetary: 639 Hz / Venus-Mercury tone
     • Artifact: Crystal Arrow
@@ -155,7 +157,7 @@ VII. The Chariot — Auriga Star
     • Ray: Silver-Blue (Ray 7)
     • Angel/Demon: Muriel ↔ Phenex
     • Deities: Kartikeya, Sphinx, Sekhmet
-    • Crystal: Carnelian
+    • Crystal: Carnelian (SiO₂, chalcedony with Fe₂O₃)
     • BioGeometry Freq: Lunar-Solar BG blend
     • Solfeggio/Planetary: 528 Hz / Moon-Sun tone
     • Artifact: Victory Armor
@@ -176,7 +178,7 @@ VIII. Strength — Leonine Heart
     • Ray: Golden Orange (Ray 5)
     • Angel/Demon: Michael ↔ Amon
     • Deities: Sekhmet, Durga, Hercules
-    • Crystal: Tiger's Eye
+    • Crystal: Tiger's Eye (SiO₂, fibrous quartz, crocidolite pseudomorph)
     • BioGeometry Freq: Solar BG ray
     • Solfeggio/Planetary: 285 Hz / Sun tone
     • Artifact: Lion Belt
@@ -197,7 +199,7 @@ IX. The Hermit — Lantern Bearer
     • Ray: Indigo (Ray 2)
     • Angel/Demon: Uriel ↔ Haagenti
     • Deities: Hermes Trismegistus, Sophia, Odin
-    • Crystal: Amethyst
+    • Crystal: Amethyst (SiO₂, trigonal quartz with Fe⁴⁺)
     • BioGeometry Freq: Deep Indigo BG ray
     • Solfeggio/Planetary: 432 Hz / Mercury-Saturn tone
     • Artifact: Lantern of Wisdom
@@ -218,7 +220,7 @@ X. Wheel of Fortune — Spiral Weaver
     • Ray: Royal Blue (Ray 4)
     • Angel/Demon: Sachiel ↔ Belzebub
     • Deities: Fortuna, Zeus, Lakshmi
-    • Crystal: Blue Topaz
+    • Crystal: Blue Topaz (Al₂SiO₄(F,OH)₂, orthorhombic silicate)
     • BioGeometry Freq: Jovian BG ray
     • Solfeggio/Planetary: 864 Hz / Jupiter tone
     • Artifact: Turning Wheel
@@ -239,7 +241,7 @@ XI. Justice — Scalesong
     • Ray: Emerald Turquoise (Ray 3)
     • Angel/Demon: Anafiel ↔ Andras
     • Deities: Ma'at, Themis, Dike
-    • Crystal: Jade
+    • Crystal: Jade (jadeite, NaAlSi₂O₆, monoclinic pyroxene)
     • BioGeometry Freq: Balanced BG ray
     • Solfeggio/Planetary: 528 Hz / Venus tone
     • Artifact: Feather Scales
@@ -260,7 +262,7 @@ XII. The Hanged Man — Reversal Seer
     • Ray: Aquamarine (Ray 2)
     • Angel/Demon: Asariel ↔ Bifrons
     • Deities: Odin, Osiris, Quetzalcoatl
-    • Crystal: Aquamarine
+    • Crystal: Aquamarine (Be₃Al₂(Si₆O₁₈), hexagonal beryl)
     • BioGeometry Freq: Watery BG ray
     • Solfeggio/Planetary: 741 Hz / Neptune tone
     • Artifact: Suspended Rope
@@ -281,7 +283,7 @@ XIII. Death — Ann Abyss
     • Ray: Violet-Black (Ray 7)
     • Angel/Demon: Melahel ↔ Belial
     • Deities: Persephone, Anubis, Lilith
-    • Crystal: Obsidian
+    • Crystal: Obsidian (SiO₂, amorphous volcanic glass)
     • BioGeometry Freq: Violet BG ray
     • Solfeggio/Planetary: 396 Hz / Pluto tone
     • Artifact: Obsidian Mirror Shard
@@ -302,7 +304,7 @@ XIV. Temperance — Alchemical Child
     • Ray: White-Gold (Ray 5)
     • Angel/Demon: Zadkiel ↔ Glasya-Labolas
     • Deities: Iris, Brigid, Temperantia
-    • Crystal: Labradorite
+    • Crystal: Labradorite ((Ca,Na)(Al,Si)₄O₈, triclinic feldspar)
     • BioGeometry Freq: Rainbow BG ray
     • Solfeggio/Planetary: 528 Hz / Jupiter tone
     • Artifact: Blending Chalice
@@ -323,7 +325,7 @@ XV. The Devil — Fenrix Abyss
     • Ray: Black-Red (Ray 7)
     • Angel/Demon: Azazel ↔ Belial
     • Deities: Pan, Baphomet, Dionysus
-    • Crystal: Jet
+    • Crystal: Jet (C, amorphous lignite)
     • BioGeometry Freq: Dense Earth BG ray
     • Solfeggio/Planetary: 396 Hz / Saturn tone
     • Artifact: Desire Chain
@@ -344,7 +346,7 @@ XVI. The Tower — Ruin Breaker
     • Ray: Electric Scarlet (Ray 5)
     • Angel/Demon: Barachiel ↔ Abaddon
     • Deities: Zeus, Set, Shiva the Destroyer
-    • Crystal: Garnet
+    • Crystal: Garnet (Fe₃Al₂(SiO₄)₃, cubic almandine)
     • BioGeometry Freq: Lightning BG ray
     • Solfeggio/Planetary: 852 Hz / Mars tone
     • Artifact: Falling Brick
@@ -365,7 +367,7 @@ XVII. The Star — Serene Bridge
     • Ray: Celestial Blue (Ray 2)
     • Angel/Demon: Cambriel ↔ Raum
     • Deities: Nut, Astarte, Saraswati
-    • Crystal: Celestite
+    • Crystal: Celestite (SrSO₄, orthorhombic sulfate)
     • BioGeometry Freq: Stellar BG ray
     • Solfeggio/Planetary: 963 Hz / Uranus tone
     • Artifact: Water-Bearer Jar
@@ -386,7 +388,7 @@ XVIII. The Moon — Dream Weaver
     • Ray: Opalescent Violet (Ray 6)
     • Angel/Demon: Zadkiel ↔ Amaymon
     • Deities: Selene, Yemaya, Manannan
-    • Crystal: Selenite
+    • Crystal: Selenite (CaSO₄·2H₂O, monoclinic gypsum)
     • BioGeometry Freq: Subconscious BG ray
     • Solfeggio/Planetary: 174 Hz / Neptune tone
     • Artifact: Silver Mirror
@@ -407,7 +409,7 @@ XIX. The Sun — Radiant Child
     • Ray: Gold (Ray 1)
     • Angel/Demon: Raphael ↔ Sorath
     • Deities: Ra, Apollo, Surya
-    • Crystal: Sunstone
+    • Crystal: Sunstone ((Na,Ca)(Si,Al)₄O₈, triclinic feldspar)
     • BioGeometry Freq: Solar BG ray
     • Solfeggio/Planetary: 528 Hz / Sun tone
     • Artifact: Solar Disc
@@ -428,7 +430,7 @@ XX. Judgement — Phoenix Call
     • Ray: Crimson-Gold (Ray 9)
     • Angel/Demon: Jeremiel ↔ Malphas
     • Deities: Gabriel, Horus, Phoenix
-    • Crystal: Fire Opal
+    • Crystal: Fire Opal (SiO₂·nH₂O, amorphous hydrated silica)
     • BioGeometry Freq: Purifying BG ray
     • Solfeggio/Planetary: 888 Hz / Pluto tone
     • Artifact: Awakening Trumpet
@@ -449,7 +451,7 @@ XXI. The World — Codex Weaver
     • Ray: Prismatic (Ray 7)
     • Angel/Demon: Cassiel ↔ Leviathan
     • Deities: Gaia, Shiva, Ananke
-    • Crystal: Hematite
+    • Crystal: Hematite (Fe₂O₃, trigonal iron oxide)
     • BioGeometry Freq: Earth Unity BG ray
     • Solfeggio/Planetary: 432 Hz / Saturn tone
     • Artifact: Ouroboros Ring
@@ -463,3 +465,9 @@ XXI. The World — Codex Weaver
     •   learning[]: synthesis exercises
     •   game[]: world-building finale
     •   artifact[]: Ouroboros Ring
+
+---
+
+## References
+- Mindat.org Mineral Database, accessed 2024
+- NASA Jet Propulsion Laboratory, Planetary Fact Sheets, 2022
