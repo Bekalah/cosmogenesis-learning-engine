@@ -4,6 +4,7 @@
     "updated": "2025-09-04T05:55:46.733Z",
     "updated": "2025-09-03T08:31:47.508Z",
     "updated": "2025-09-03T16:39:54.746Z",
+    "updated": "2025-09-03T08:31:47.508Z",
     "nd_safe": true
   },
   "routes": {
@@ -604,6 +605,7 @@
         "color": "#cc323f"
       }
     ]
+    "description": "144 jewel nodes woven by 99 gate clusters; each node mirrors the whole."
   },
   "witch": {
     "id": "witch-default",
