@@ -19,6 +19,7 @@ const manifest={
 meta:{project:"Cosmogenesis Learning Engine", updated:new Date().toISOString(), nd_safe:true},
 routes:{ tokens:"/c99/tokens/perm-style.json", css:"/c99/css/perm-style.css" },
 codex, indraNet: Object.assign(indra,{ harmony }), witch, coven, pack,
+codex, indraNet: indra, witch, coven, pack,
 style:{ tokens: fs.existsSync(tokensPath)?"/c99/tokens/perm-style.json":"", css: fs.existsSync(cssPath)?"/c99/css/perm-style.css":"" }
 };
 fs.writeFileSync(path.join(outDir,'bridge.json'), JSON.stringify(manifest,null,2));
