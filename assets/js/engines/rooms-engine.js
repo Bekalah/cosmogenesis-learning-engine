@@ -27,6 +27,7 @@ export function listRooms() {
       href: './openworld/index.html',
       description:
         'Nature sanctuary weaving Hermetic, Thelemic, Kabalistic, Pagan & Buddhist mythos of time',
+      description: 'Explore animals, plants, and crystals in aeonic harmony',
     },
   ];
 }
