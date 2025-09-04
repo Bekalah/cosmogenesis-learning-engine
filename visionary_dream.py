@@ -23,6 +23,7 @@ from PIL import Image, ImageDraw, ImageColor, ImageFont
 
 # Planetary symbols and their angelic counterparts ---------------------------
 PLANETARY_SIGILS: List[Tuple[str, str]] = [
+PLANETARY_SIGILS = [
     ("\u2609", "Michael"),  # Sun
     ("\u263D", "Gabriel"),  # Moon
     ("\u263F", "Raphael"),  # Mercury
