@@ -109,7 +109,7 @@ BRAND/WORLD NOTES (applies to all):
 INTEGRATION CHECKLIST (quick run):
 [ ] SG: merge tokens JSON (version 3.7.0) and append CSS helpers; run update-art.js to regenerate /bridge/c99-bridge.json and mirrors to cosmogenesis/public/c99/.
 [ ] Cosmogenesis: add data files (codex, profile, coven, pack). (Optional) run tools/build-bridge.js to write public/c99/bridge.json.
-[ ] Circuitum99: ensure pages link /c99/css/perm-style.css and rely on SG bridge; place optional components where needed (.violet-gate.bg-soft, .avalon-grove, .between-narthex, .protection-handsigil).
+[ ] circuitum99: ensure pages link /c99/css/perm-style.css and rely on SG bridge; place optional components where needed (.violet-gate.bg-soft, .avalon-grove, .between-narthex, .protection-handsigil).
 [ ] A11y: no autoplay, no strobe, high contrast; only animate when body.hasClass(“allow-motion”).
 [ ] Commit: originals/ processed/ thumbs/ webp/ bridge/ (SG) + cosmogenesis/public/c99/ tokens/css + new cosmogenesis assets/data + optional tools.
 
@@ -120,7 +120,7 @@ SUGGESTED COMMIT MESSAGE (paste into Git): feat(style+world): couture pearlescen
 – SG CSS append (violet gate, oracle velvet, luminous heart, avalon grove, between narthex, protection handsigil)
 – SG update-art.js patch (adventure/avalon/between merge; respawn alias; angel/egregore/pillar/oracle/ward detection)
 – Cosmogenesis data: codex.144_99, profile, coven, sample pack; optional bridge tool
-– Circuitum99: consumes bridge; flavors selectable; ward + luminous scenes added
+– circuitum99: consumes bridge; flavors selectable; ward + luminous scenes added
 ND-safe; no autoplay; motion opt-in; no tree changes.
 
 ⸻
