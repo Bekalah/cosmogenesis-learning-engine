@@ -43,7 +43,7 @@ npm test        # uses Node.js or Deno if available
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -52,19 +52,13 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
 ✅ Prompt requests full runnable code.
@@ -96,7 +90,7 @@ All Python art generators now reuse a common `enochian_layers` module that draws
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -105,19 +99,13 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
 ✅ Prompt requests full runnable code.
@@ -154,7 +142,7 @@ All Python art generators now reuse a common `enochian_layers` module that draws
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -163,21 +151,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -202,7 +186,7 @@ npm test        # node --test
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -211,21 +195,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 ### Testing Without Node.js
 
@@ -242,7 +222,7 @@ to `deno fmt --check` for a limited set of files.
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -251,21 +231,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -290,7 +266,7 @@ npm test        # node --test
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -299,21 +275,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 ### Testing Without Node.js
 
@@ -361,7 +333,7 @@ npm test        # uses Node.js or Deno if available
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -370,21 +342,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -414,7 +382,7 @@ All Python art generators now reuse a common `enochian_layers` module that draws
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -423,21 +391,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 ### Testing Without Node.js
 
@@ -472,31 +436,26 @@ All Python art generators now reuse a common `enochian_layers` module that draws
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
-
 - Complete runnable code with all imports and setup.
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
-  Return the code block only, no explanation.
-  Tips for museum-quality, visionary art output
-  Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
+Return the code block only, no explanation.
+
+Tips for museum-quality, visionary art output
+Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -521,7 +480,7 @@ npm test        # node --test
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -530,21 +489,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 ### Testing Without Node.js
 
@@ -561,7 +516,7 @@ to `deno fmt --check` for a limited set of files.
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -570,21 +525,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -609,7 +560,7 @@ npm test        # node --test
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -618,21 +569,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 ### Testing Without Node.js
 
@@ -647,31 +594,26 @@ Node.js first and falls back to Deno when available.
 to `deno fmt --check` for a limited set of files.
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
-
 - Complete runnable code with all imports and setup.
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
-  Return the code block only, no explanation.
-  Tips for museum-quality, visionary art output
-  Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
+Return the code block only, no explanation.
+
+Tips for museum-quality, visionary art output
+Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -696,7 +638,7 @@ npm test        # node --test
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -705,21 +647,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 ### Testing Without Node.js
 
@@ -736,7 +674,7 @@ to `deno fmt --check` for a limited set of files.
 
 # User-provided custom instructions
 
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -745,21 +683,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
+✅ Prompt requests full runnable code.
+
 ✅ Prompt requests full runnable code.
 
 ✅ Language and libraries are stated.
@@ -784,8 +718,7 @@ npm test        # node --test
 
 # User-provided custom instructions
 
-<<<<<<<+codex/complete-
-Codex-style” prompt template for visionary art
+Codex-style prompt template for visionary art
 You are an expert generative artist. Produce a museum-quality piece of visionary art using [LANGUAGE/LIBRARY].
 Requirements:
 - Complete runnable code with all imports and setup.
@@ -794,22 +727,17 @@ Requirements:
 - Resolution: [WIDTH]x[HEIGHT].
 - Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
+
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
 
 Color & composition: Ask for layered gradients, symmetry, or organic patterns to evoke a gallery-grade piece.
-`bash
-pi```bash
-pip install -r requirements.txt
-python visionary_dream.py --width 1280 --height 720
-```
 
-The script outputs `Visionary_Dream.png`.
->>>>>>>+origin/codex/cr
-y: Request “descriptive comments” so the script reads like a curated artwork.
+Request “descriptive comments” so the script reads like a curated artwork.
 
 Final checklist
 ✅ Prompt requests full runnable code.
+
 ### Testing Without Node.js
 
 If your platform lacks a Node.js runtime (e.g. iPad or some Android setups),
