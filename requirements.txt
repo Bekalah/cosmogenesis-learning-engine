@@ -1,4 +1,5 @@
-# Pillow is required for image generation.
+
+# Install via system package if PyPI is unavailable.
 # If PyPI is unreachable, install via system package
 # (e.g., `sudo apt-get install python3-pil`) or a downloaded wheel.
 # Pin to a known-good version for consistency.
