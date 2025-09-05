@@ -60,6 +60,7 @@ test('progress export JSON writes a file', () => {
 });
 
 test('records progress and resets', () => {
+
   const ctx = loadEngine();
   ctx.window.roomsProgress.markRoomEnter('agrippa');
   ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
@@ -79,6 +80,7 @@ test("records progress and resets", () => {
   deepEqual(state, {
   const ctx = loadEngine();
   const ctx = loadEngine();
+
   ctx.window.roomsProgress.markRoomEnter('agrippa');
   ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
   deepEqual(ctx.window.roomsProgress.state.rooms, {

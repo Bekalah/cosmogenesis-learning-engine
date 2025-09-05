@@ -11,6 +11,9 @@ Minor Arcana using an indigo-silver storm palette. The image is rendered at
 Creates a museum-quality piece inspired by the Swords suit of the Minor Arcana.
 Rendered at 1920x1080 and saved as "Visionary_Dream.png".
 
+
+from __future__ import annotations
+
 """
 
 from __future__ import annotations
@@ -61,12 +64,16 @@ def draw_swords(draw: ImageDraw.ImageDraw) -> None:
     cx, cy = WIDTH // 2, HEIGHT // 2
     length = 300
 
+    draw.line([(cx - 60, cy + length), (cx - 60, cy - length)], fill=PALETTE[3], width=4)
+    draw.rectangle([(cx - 80, cy - 20), (cx - 40, cy)], fill=PALETTE[3])
+
 
     draw.line([(cx - 60, cy + length), (cx - 60, cy - length)], fill=PALETTE[3], width=4)
     draw.rectangle([(cx - 80, cy - 20), (cx - 40, cy)], fill=PALETTE[3])
 
     draw.line([(cx - 60, cy + length), (cx - 60, cy - length)], fill=PALETTE[3], width=4)
     draw.rectangle([(cx - 80, cy - 20), (cx - 40, cy)], fill=PALETTE[3])
+
     draw.line([(cx + 60, cy + length), (cx + 60, cy - length)], fill=PALETTE[3], width=4)
     draw.rectangle([(cx + 40, cy - 20), (cx + 80, cy)], fill=PALETTE[3])
 
@@ -91,7 +98,6 @@ def main() -> None:
 
     image.save(OUTPUT)
 
-=======
     output = Path("Visionary_Dream.png")
     image.save(output)
     print(f"Art saved to {output.resolve()}")
