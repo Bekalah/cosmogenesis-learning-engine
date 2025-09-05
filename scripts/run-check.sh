@@ -3,6 +3,7 @@
 set -e
 
 if command -v node >/dev/null 2>&1; then
+
   npx prettier -c package.json test/plugin-registry.test.js test/progress-engine.test.js
   npx prettier -c package.json test/**/*.js
 elif command -v deno >/dev/null 2>&1; then
