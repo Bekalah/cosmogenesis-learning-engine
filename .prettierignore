@@ -14,7 +14,6 @@ plugins
 src
 data
 public
-test
 main.js
 modules
 openworld

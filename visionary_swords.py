@@ -1,20 +1,35 @@
+
+#!/usr/bin/env python3
+"""Visionary Swords Generator.
+
+Creates a museum-quality piece of visionary art inspired by the Swords suit of the
+Minor Arcana using an indigo-silver storm palette. The image is rendered at
+1920x1080 resolution and saved as "Visionary_Dream.png".
+=======
 """Swords Suit Visionary Art Generator.
 
 Creates a museum-quality piece inspired by the Swords suit of the Minor Arcana.
 Rendered at 1920x1080 and saved as "Visionary_Dream.png".
+
+
+from __future__ import annotations
+
 """
 
 from __future__ import annotations
+
+
+import math
+
 
 import random
 from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-# Canvas configuration ------------------------------------------------------
 WIDTH, HEIGHT = 1920, 1080
+OUTPUT = Path("Visionary_Dream.png")
 
-# Color palette inspired by indigo-silver storm motifs ----------------------
 PALETTE = [
     "#1A237E",  # Deep Indigo
     "#283593",  # Storm Blue
@@ -26,10 +41,10 @@ PALETTE = [
 def blend_background(draw: ImageDraw.ImageDraw) -> None:
     """Fill background with a vertical indigo-to-silver gradient."""
     for y in range(HEIGHT):
-        ratio = y / HEIGHT
-        r = int(26 * (1 - ratio) + 192 * ratio)
-        g = int(35 * (1 - ratio) + 192 * ratio)
-        b = int(126 * (1 - ratio) + 192 * ratio)
+        t = y / HEIGHT
+        r = int(26 * (1 - t) + 192 * t)
+        g = int(35 * (1 - t) + 192 * t)
+        b = int(126 * (1 - t) + 192 * t)
         draw.line([(0, y), (WIDTH, y)], fill=(r, g, b))
 
 def draw_lightning(draw: ImageDraw.ImageDraw, bolts: int = 5) -> None:
@@ -48,8 +63,17 @@ def draw_swords(draw: ImageDraw.ImageDraw) -> None:
     """Draw central crossed swords."""
     cx, cy = WIDTH // 2, HEIGHT // 2
     length = 300
+
     draw.line([(cx - 60, cy + length), (cx - 60, cy - length)], fill=PALETTE[3], width=4)
     draw.rectangle([(cx - 80, cy - 20), (cx - 40, cy)], fill=PALETTE[3])
+
+
+    draw.line([(cx - 60, cy + length), (cx - 60, cy - length)], fill=PALETTE[3], width=4)
+    draw.rectangle([(cx - 80, cy - 20), (cx - 40, cy)], fill=PALETTE[3])
+
+    draw.line([(cx - 60, cy + length), (cx - 60, cy - length)], fill=PALETTE[3], width=4)
+    draw.rectangle([(cx - 80, cy - 20), (cx - 40, cy)], fill=PALETTE[3])
+
     draw.line([(cx + 60, cy + length), (cx + 60, cy - length)], fill=PALETTE[3], width=4)
     draw.rectangle([(cx + 40, cy - 20), (cx + 80, cy)], fill=PALETTE[3])
 
@@ -70,6 +94,10 @@ def main() -> None:
     draw_lightning(draw)
     draw_swords(draw)
     draw_ravens(draw)
+
+
+    image.save(OUTPUT)
+
     output = Path("Visionary_Dream.png")
     image.save(output)
     print(f"Art saved to {output.resolve()}")
