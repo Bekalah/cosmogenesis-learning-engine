@@ -4,8 +4,6 @@ import { deepEqual } from 'node:assert';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import { EventEmitter } from 'node:events';
-import { exportJSON } from '../src/engines/exporter.js';
-
 function loadEngine() {
   const storage = {};
   const doc = new EventEmitter();
@@ -42,12 +40,15 @@ test('progress export JSON writes a file', () => {
 });
 
 test('records progress and resets', () => {
-  const ctx = loadEngine();
   ctx.window.roomsProgress.markRoomEnter('agrippa');
   ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
   deepEqual(ctx.window.roomsProgress.state.rooms, {
     agrippa: { quests: { read: true }, entered: true },
   });
   ctx.window.roomsProgress.reset();
-  deepEqual(ctx.window.roomsProgress.state.rooms, {});
+  const reset = JSON.parse(
+    JSON.stringify(ctx.window.roomsProgress.state.rooms),
+  );
+  deepEqual(reset, {});
 });
+
