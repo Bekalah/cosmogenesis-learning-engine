@@ -66,6 +66,10 @@ test("records progress and resets", () => {
     JSON.stringify(ctx.window.roomsProgress.state.rooms),
   );
   deepEqual(state, {
+  const ctx = loadEngine();
+  ctx.window.roomsProgress.markRoomEnter('agrippa');
+  ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
+  deepEqual(ctx.window.roomsProgress.state.rooms, {
     agrippa: { quests: { read: true }, entered: true },
   });
   ctx.window.roomsProgress.reset();
