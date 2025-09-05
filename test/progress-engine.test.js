@@ -1,15 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { deepEqual } from 'node:assert';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+import { EventEmitter } from 'node:events';
 import { exportJSON } from '../src/engines/exporter.js';
-
-test('progress export JSON writes a file', () => {
-  const path = exportJSON({ ok: true }, 'progress.json');
-  assert.ok(typeof path === 'string' && path.endsWith('progress.json'));
-import { test } from "node:test";
-import { deepEqual } from "node:assert";
-import { readFileSync } from "node:fs";
-import vm from "node:vm";
-import { EventEmitter } from "node:events";
 
 function loadEngine() {
   const storage = {};
@@ -35,16 +30,21 @@ function loadEngine() {
     console,
   };
   vm.runInNewContext(
-    readFileSync("assets/js/engines/progress-engine.js", "utf8"),
+    readFileSync('assets/js/engines/progress-engine.js', 'utf8'),
     ctx,
   );
   return ctx;
 }
 
-test("records progress and resets", () => {
+test('progress export JSON writes a file', () => {
+  const path = exportJSON({ ok: true }, 'progress.json');
+  assert.ok(typeof path === 'string' && path.endsWith('progress.json'));
+});
+
+test('records progress and resets', () => {
   const ctx = loadEngine();
-  ctx.window.roomsProgress.markRoomEnter("agrippa");
-  ctx.window.roomsProgress.markQuestComplete("agrippa", "read");
+  ctx.window.roomsProgress.markRoomEnter('agrippa');
+  ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
   deepEqual(ctx.window.roomsProgress.state.rooms, {
     agrippa: { quests: { read: true }, entered: true },
   });

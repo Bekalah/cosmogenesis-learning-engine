@@ -8,19 +8,8 @@
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
-<<<<<<< codex/add-art-assets-for-study
-    "test": "./scripts/run-tests.sh",
-    "test": "node --test test/codexConfig.test.js test/plugin-registry.test.js test/progress-engine.test.js",
-    "fmt": "prettier -w .",
-=======
-    "test": "node --test && python3 -m py_compile $(git ls-files '*.py')",
-    "fmt": "npx prettier -w .",
-    "format": "prettier -w .",
->>>>>>> origin/codex/update-perm-style-with-new-palettes-and-layers
-    "check": "prettier -c .",
-    "test": "node --test",
-    "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
-    "check": "prettier -c src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
+    "test": "./scripts/run-tests.sh && python3 -m py_compile $(git ls-files '*.py')",
+    "format": "npx prettier -w .",
     "check": "./scripts/run-check.sh",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
     "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
@@ -45,4 +34,3 @@
     "prettier": "^3.3.3"
   }
 }
-
