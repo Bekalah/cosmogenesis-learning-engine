@@ -91,7 +91,6 @@ def main() -> None:
 
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output = Path(f"Visionary_Dream_{stamp}.png")
-    output = Path("Visionary_Dream.png")
 
     image.save(output)
     print(f"Art saved to {output.resolve()}")
