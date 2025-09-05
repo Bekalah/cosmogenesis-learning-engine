@@ -1,5 +1,13 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { readFileSync } from 'fs';
 import path from 'path';
+import Ajv from 'ajv';
+import plateSchema from '../schemas/plate-config.json' with { type: 'json' };
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { readFileSync } from "fs";
+import path from "path";
 
 // Custom error type that aggregates structural problems
 export class ConfigError extends Error {
@@ -20,6 +28,11 @@ export function loadConfig(relativePath) {
     throw new Error(`Config file not found: ${relativePath}`);
   } catch (err) {
     throw new ConfigError(relativePath, [`Unable to read file: ${err.message}`]);
+  }
+
+    raw = readFileSync(file, "utf8");
+  } catch {
+    throw new Error(`Config file not found: ${relativePath}`);
   }
 
   try {
@@ -52,12 +65,41 @@ export function validatePlateConfig(config, source = 'config') {
 
   if (errors.length) {
     throw new ConfigError(source, errors);
+const ajv = new Ajv({ allErrors: true, $data: true });
+const validate = ajv.compile(plateSchema);
+
+export function validatePlateConfig(config, source = 'config') {
+  const valid = validate(config);
+  if (!valid) {
+    const messages = validate.errors.map((err) => {
+      const loc = err.instancePath ? err.instancePath.slice(1) : 'config';
+      return `${loc} ${err.message}`;
+    });
+    throw new ConfigError(source, messages);
+// Ensure a plate config adheres to the minimal schema used by renderPlate
+export function validatePlateConfig(config) {
+  if (typeof config !== "object" || config === null) {
+    throw new Error("Config must be an object");
+  }
+  const layouts = ["spiral", "twin-cone", "wheel", "grid"];
+  if (!layouts.includes(config.layout)) {
+    throw new Error("Unknown layout");
+  }
+  if (typeof config.mode !== "number" || config.mode <= 0) {
+    throw new Error("Mode must be a positive number");
+  }
+  if (!Array.isArray(config.labels)) {
+    throw new Error("Labels must be an array");
+  }
+  if (config.labels.length !== config.mode) {
+    throw new Error("Label count must match mode");
   }
   return true;
 }
 
 // Convenience helper to load and validate the first demo plate
 // Convenience loader for the first demo plate
+// Convenience helper to grab the first demo configuration
 export function loadFirstDemo() {
   return {
     version: "0.9.2",
@@ -73,6 +115,7 @@ export function loadFirstDemo() {
   if (!Array.isArray(demos) || demos.length === 0 || typeof demos[0].config !== 'object') {
     throw new ConfigError('data/demos.json', ['Expected array with a config object']);
   }
+  const demos = loadConfig("data/demos.json");
   const config = demos[0].config;
   validatePlateConfig(config, 'data/demos.json[0].config');
   return config;

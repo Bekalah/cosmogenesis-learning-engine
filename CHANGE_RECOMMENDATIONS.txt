@@ -1,0 +1,8 @@
+1. Extract core logic into a dedicated `cosmogenesis_core` package exposed via a clean API for reuse across repositories.
+2. Share dependencies using a single `requirements.txt` and common `package.json` to keep environments consistent.
+3. Structure repositories as lightweight plugins or services that call into the core engine.
+4. Provide Docker containers or dev environments based on the core image to ensure reproducibility.
+5. Implement CI pipelines that run tests against the shared engine for early compatibility checks.
+6. Maintain centralized documentation and examples demonstrating how client repos integrate with the engine.
+7. Deduplicate duplicate script keys in `package.json` to avoid overrides (`dev` and `test` defined twice).
+8. Ensure all repositories include tests executed with `node --test` and Python linting for consistency.

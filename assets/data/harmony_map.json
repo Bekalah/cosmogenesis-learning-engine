@@ -1,0 +1,9 @@
+{
+  "soyga": ["A1", "B2", "C3", "D4"],
+  "tarot": ["Fool", "Magician", "High Priestess", "Empress"],
+  "iching": ["Qian", "Kun", "Zhen", "Xun"],
+  "tree": ["Kether", "Chokmah", "Binah", "Chesed"],
+  "planets": ["Sun", "Moon", "Mercury", "Venus"],
+  "numerology": ["1", "2", "3", "4"],
+  "solfeggio": [396, 417, 528, 639]
+}

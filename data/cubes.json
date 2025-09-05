@@ -1,0 +1,14 @@
+[
+  {
+    "id": "cube_528",
+    "toneHz": 528,
+    "liber777": "Path 18",
+    "overlay": "assets/overlays/rosslyn/cube_528.png"
+  },
+  {
+    "id": "cube_432",
+    "toneHz": 432,
+    "liber777": "Path 13",
+    "overlay": "assets/overlays/rosslyn/cube_432.png"
+  }
+]

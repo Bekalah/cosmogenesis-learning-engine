@@ -1,0 +1,6 @@
+{
+  "title": "Portal Nexus",
+  "description": "Central hub linking every realm through radiant gateways.",
+  "pages": ["prologue.md"],
+  "components": ["components/portal-gate.js"]
+}
