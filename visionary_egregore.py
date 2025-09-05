@@ -5,24 +5,6 @@ matplotlib. The palette draws from Alex Grey's luminous visionary spectrum and
 saves the result to ``Visionary_Dream.png`` at 2048x2048 resolution.
 """
 
-# Imports and cosmic setup ---------------------------------------------------
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Canvas resolution -----------------------------------------------------------
-WIDTH, HEIGHT = 2048, 2048
-
-# Luminous palette inspired by Alex Grey -------------------------------------
-matplotlib. Each node functions as a multi-purpose egregore supporting
-technical, artistic, systemic, integral, intelligent, and empowering aspects
-of a personal world-building ecosystem. The palette draws from Alex Grey's
-luminous visionary spectrum and saves output to ``Visionary_Dream.png`` at
-2048x2048 resolution.
-"""
-
-# ---------------------------------------------------------------------------
-# Imports and cosmic setup
-# ---------------------------------------------------------------------------
 from __future__ import annotations
 
 import random

@@ -13,6 +13,8 @@ import vm from "node:vm";
 import { EventEmitter } from "node:events";
 import { exportJSON } from "../src/engines/exporter.js";
 
+import { exportJSON } from '../src/engines/exporter.js';
+
 function loadEngine() {
   const storage = {};
   const doc = new EventEmitter();
@@ -66,6 +68,7 @@ test("records progress and resets", () => {
     JSON.stringify(ctx.window.roomsProgress.state.rooms),
   );
   deepEqual(state, {
+  const ctx = loadEngine();
   const ctx = loadEngine();
   ctx.window.roomsProgress.markRoomEnter('agrippa');
   ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');

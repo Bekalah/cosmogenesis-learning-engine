@@ -13,6 +13,8 @@
     "test": "./scripts/run-tests.sh",
     "fmt": "npx prettier -w .",
     "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
+    "test": "./scripts/run-tests.sh && python3 -m py_compile $(git ls-files '*.py')",
+    "format": "npx prettier -w .",
     "check": "./scripts/run-check.sh",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
     "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
