@@ -1,0 +1,47 @@
+{
+  "version": "2025-09-05",
+  "nodes": [
+    {
+      "id": "CRUX-011",
+      "title": "Vertebra 11 — Harmonic Compass",
+      "kind": "story",
+      "summary": "Spine node invoking harmonic ratio, witness, and navigation.",
+      "lineage": {
+        "codex": "33-spine",
+        "path": "spine/11"
+      },
+      "correspondences": {
+        "planet": "Mercury",
+        "zodiac": "Gemini",
+        "element": "Air",
+        "chakra": "Third Eye",
+        "freq_hz": 852,
+        "color_hex": "#B0E0E6"
+      },
+      "assets": [
+        {
+          "path": "assets/glyph.png",
+          "role": "glyph"
+        },
+        {
+          "path": "assets/chant.mp3",
+          "role": "audio"
+        }
+      ],
+      "links": {
+        "repo": "circuitum99",
+        "relpath": "nodes/144-99/node-CRUX-011"
+      },
+      "meta": {
+        "author": "Rebecca Respawn",
+        "license": "CC BY-NC-SA 4.0",
+        "tags": [
+          "harmony",
+          "witness",
+          "ratio"
+        ],
+        "version": "1.0.0"
+      }
+    }
+  ]
+}
