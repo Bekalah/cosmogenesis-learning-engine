@@ -1,4 +1,6 @@
+
 """Visionary geometry rendered with pure Python.
+
 
 Produces a museum-quality mandala using an Alex Grey-inspired palette.
 """
