@@ -1,0 +1,244 @@
+[
+  {
+    "name": "Clear Quartz",
+    "palette": [
+      "#FFFFFF",
+      "#E0F7FA"
+    ],
+    "sacred_geometry": "hexagon",
+    "fractal": "prismatic mandelbrot",
+    "sound_hz": 852,
+    "asset": "assets/crystals/clear_quartz.png"
+  },
+  {
+    "name": "Citrine",
+    "palette": [
+      "#FFD700",
+      "#FFA500"
+    ],
+    "sacred_geometry": "triangle",
+    "fractal": "golden spiral",
+    "sound_hz": 741,
+    "asset": "assets/crystals/citrine.png"
+  },
+  {
+    "name": "Moonstone",
+    "palette": [
+      "#F0F8FF",
+      "#BCC6CC"
+    ],
+    "sacred_geometry": "circle",
+    "fractal": "lunar wave",
+    "sound_hz": 417,
+    "asset": "assets/crystals/moonstone.png"
+  },
+  {
+    "name": "Rose Quartz",
+    "palette": [
+      "#FFC0CB",
+      "#FFB6C1"
+    ],
+    "sacred_geometry": "flower of life",
+    "fractal": "rose mandala",
+    "sound_hz": 672,
+    "asset": "assets/crystals/rose_quartz.png"
+  },
+  {
+    "name": "Red Jasper",
+    "palette": [
+      "#B22222",
+      "#8B0000"
+    ],
+    "sacred_geometry": "square",
+    "fractal": "martian pyramid",
+    "sound_hz": 741,
+    "asset": "assets/crystals/red_jasper.png"
+  },
+  {
+    "name": "Sodalite",
+    "palette": [
+      "#1E3A8A",
+      "#3B82F6"
+    ],
+    "sacred_geometry": "cube",
+    "fractal": "cubic lattice",
+    "sound_hz": 396,
+    "asset": "assets/crystals/sodalite.png"
+  },
+  {
+    "name": "Rhodochrosite",
+    "palette": [
+      "#FF5E78",
+      "#FF99A8"
+    ],
+    "sacred_geometry": "rhombus",
+    "fractal": "heart spiral",
+    "sound_hz": 639,
+    "asset": "assets/crystals/rhodochrosite.png"
+  },
+  {
+    "name": "Carnelian",
+    "palette": [
+      "#E25822",
+      "#FF7F50"
+    ],
+    "sacred_geometry": "tetrahedron",
+    "fractal": "flame julia",
+    "sound_hz": 528,
+    "asset": "assets/crystals/carnelian.png"
+  },
+  {
+    "name": "Tiger's Eye",
+    "palette": [
+      "#D4AF37",
+      "#8B4513"
+    ],
+    "sacred_geometry": "rectangle",
+    "fractal": "fibrous stripe",
+    "sound_hz": 285,
+    "asset": "assets/crystals/tigers_eye.png"
+  },
+  {
+    "name": "Amethyst",
+    "palette": [
+      "#9966CC",
+      "#8A2BE2"
+    ],
+    "sacred_geometry": "octagon",
+    "fractal": "violet geode",
+    "sound_hz": 432,
+    "asset": "assets/crystals/amethyst.png"
+  },
+  {
+    "name": "Blue Topaz",
+    "palette": [
+      "#00BFFF",
+      "#5F9EA0"
+    ],
+    "sacred_geometry": "dodecahedron",
+    "fractal": "aquatic crystal",
+    "sound_hz": 864,
+    "asset": "assets/crystals/blue_topaz.png"
+  },
+  {
+    "name": "Jade",
+    "palette": [
+      "#00A86B",
+      "#98FB98"
+    ],
+    "sacred_geometry": "torus",
+    "fractal": "jade dragon",
+    "sound_hz": 528,
+    "asset": "assets/crystals/jade.png"
+  },
+  {
+    "name": "Aquamarine",
+    "palette": [
+      "#7FFFD4",
+      "#40E0D0"
+    ],
+    "sacred_geometry": "icosahedron",
+    "fractal": "sea spiral",
+    "sound_hz": 741,
+    "asset": "assets/crystals/aquamarine.png"
+  },
+  {
+    "name": "Obsidian",
+    "palette": [
+      "#0C0C0C",
+      "#555555"
+    ],
+    "sacred_geometry": "plane",
+    "fractal": "volcanic mirror",
+    "sound_hz": 396,
+    "asset": "assets/crystals/obsidian.png"
+  },
+  {
+    "name": "Labradorite",
+    "palette": [
+      "#4B0082",
+      "#20B2AA"
+    ],
+    "sacred_geometry": "trapezoid",
+    "fractal": "aurora borealis",
+    "sound_hz": 528,
+    "asset": "assets/crystals/labradorite.png"
+  },
+  {
+    "name": "Jet",
+    "palette": [
+      "#343434",
+      "#000000"
+    ],
+    "sacred_geometry": "sphere",
+    "fractal": "void lattice",
+    "sound_hz": 396,
+    "asset": "assets/crystals/jet.png"
+  },
+  {
+    "name": "Garnet",
+    "palette": [
+      "#8B0000",
+      "#800000"
+    ],
+    "sacred_geometry": "rhombic dodecahedron",
+    "fractal": "pomegranate",
+    "sound_hz": 852,
+    "asset": "assets/crystals/garnet.png"
+  },
+  {
+    "name": "Celestite",
+    "palette": [
+      "#87CEEB",
+      "#B0E0E6"
+    ],
+    "sacred_geometry": "star tetrahedron",
+    "fractal": "starburst",
+    "sound_hz": 963,
+    "asset": "assets/crystals/celestite.png"
+  },
+  {
+    "name": "Selenite",
+    "palette": [
+      "#F8F8FF",
+      "#E0FFFF"
+    ],
+    "sacred_geometry": "crescent",
+    "fractal": "selenian wave",
+    "sound_hz": 174,
+    "asset": "assets/crystals/selenite.png"
+  },
+  {
+    "name": "Sunstone",
+    "palette": [
+      "#FFA07A",
+      "#FFDAB9"
+    ],
+    "sacred_geometry": "solar circle",
+    "fractal": "solar flare",
+    "sound_hz": 528,
+    "asset": "assets/crystals/sunstone.png"
+  },
+  {
+    "name": "Fire Opal",
+    "palette": [
+      "#FF4500",
+      "#FF8C00"
+    ],
+    "sacred_geometry": "triangle",
+    "fractal": "phoenix plume",
+    "sound_hz": 888,
+    "asset": "assets/crystals/fire_opal.png"
+  },
+  {
+    "name": "Hematite",
+    "palette": [
+      "#696969",
+      "#2F4F4F"
+    ],
+    "sacred_geometry": "cube",
+    "fractal": "iron spiral",
+    "sound_hz": 432,
+    "asset": "assets/crystals/hematite.png"
+  }
+]
