@@ -1,6 +1,9 @@
 """Monad Vision Generator.
 
 Creates a museum-quality piece of visionary art inspired by Alex Grey.
+The image is rendered at 2048x2048 resolution and saved to a
+timestamped "Visionary_Dream_YYYYMMDD_HHMMSS.png" file.
+
 The image is rendered at 2048x2048 resolution and saved as
 "Visionary_Dream.png".
 """
@@ -11,6 +14,8 @@ from __future__ import annotations
 import math
 import random
 from pathlib import Path
+from datetime import datetime
+
 
 from PIL import Image, ImageDraw
 
@@ -84,7 +89,10 @@ def main() -> None:
     background_gradient(draw)
     monad_patterns(draw)
 
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output = Path(f"Visionary_Dream_{stamp}.png")
     output = Path("Visionary_Dream.png")
+
     image.save(output)
     print(f"Art saved to {output.resolve()}")
 
