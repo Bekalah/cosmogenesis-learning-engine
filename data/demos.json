@@ -5,25 +5,6 @@
       "layout": "wheel",
       "mode": 7,
       "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
-      "labels": [
-         "labels": [
-        "Red",
-        "Orange",
-        "Yellow",
-        "Green",
-        "Cyan",
-        "Blue",
-        "Violet"
-      ]
-      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
-Green", "Cyan", "Blue", "Violet"]
->>>>>>> Stashed changes
-      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
->>>>>>> upstream/codex/improve-creative-learning-engine-design
->>>>>>> main-upstream-upstream-upstream-upstream
->>>>>>> codex/improve-creative-learning-engine-design
->>>>>>> origin/codex/update-package-for-code-bot
->>>>>>> codex/enhance-aesthetic-designs-and-environments
     }
   },
   {
@@ -39,4 +20,3 @@ Green", "Cyan", "Blue", "Violet"]
     }
   }
 ]
-
