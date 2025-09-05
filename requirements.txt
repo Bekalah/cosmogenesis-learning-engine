@@ -1,11 +1,9 @@
 # Pillow is required for image generation.
-# Use any modern version; if PyPI is unreachable, install via system
-# package (e.g., `sudo apt-get install python3-pil`) or a downloaded wheel.
-Pillow>=10.0
+# Install via system package if PyPI is unavailable.
+Pillow==10.4.0
 
 # Add your other deps below, pinned if possible:
 numpy==1.26.4
 matplotlib==3.9.2
-Pillow==10.4.0
 # fastapi==0.114.0
 # uvicorn==0.30.6
