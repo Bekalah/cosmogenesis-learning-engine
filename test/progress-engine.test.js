@@ -1,15 +1,15 @@
-import { test } from 'node:test';
-import assert from 'node:assert/strict';
-import { exportJSON } from '../src/engines/exporter.js';
-
-test('progress export JSON writes a file', () => {
-  const path = exportJSON({ ok: true }, 'progress.json');
-  assert.ok(typeof path === 'string' && path.endsWith('progress.json'));
 import { test } from "node:test";
+import assert from "node:assert/strict";
 import { deepEqual } from "node:assert";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import { EventEmitter } from "node:events";
+import { exportJSON } from "../src/engines/exporter.js";
+
+test("progress export JSON writes a file", () => {
+  const path = exportJSON({ ok: true }, "progress.json");
+  assert.ok(typeof path === "string" && path.endsWith("progress.json"));
+});
 
 function loadEngine() {
   const storage = {};
