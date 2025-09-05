@@ -1,0 +1,146 @@
+[
+  {
+    "card_id": 0,
+    "card_name": "The Fool",
+    "meaning": "Potential",
+    "node_id": 1,
+    "node_name": "Crown of First Light",
+    "shem_angel": "Vehuiah",
+    "goetic_demon": "Bael"
+  },
+  {
+    "card_id": 1,
+    "card_name": "The Magician",
+    "meaning": "Manifestation",
+    "node_id": 2,
+    "node_name": "Gate of Silent Depth",
+    "shem_angel": "Jeliel",
+    "goetic_demon": "Agares"
+  },
+  {
+    "card_id": 2,
+    "card_name": "The High Priestess",
+    "meaning": "Intuition",
+    "node_id": 3,
+    "node_name": "Serpent of Breath",
+    "shem_angel": "Sitael",
+    "goetic_demon": "Vassago"
+  },
+  {
+    "card_id": 3,
+    "card_name": "The Empress",
+    "meaning": "Creation",
+    "node_id": 4,
+    "node_name": "Furnace of Becoming",
+    "shem_angel": "Elemiah",
+    "goetic_demon": "Samigina"
+  },
+  {
+    "card_id": 4,
+    "card_name": "The Emperor",
+    "meaning": "Structure",
+    "node_id": 5,
+    "node_name": "Lunar Well of Dreams",
+    "shem_angel": "Mahasiah",
+    "goetic_demon": "Marbas"
+  },
+  {
+    "card_id": 5,
+    "card_name": "The Hierophant",
+    "meaning": "Tradition",
+    "node_id": 6,
+    "node_name": "Emerald Root of Gaia",
+    "shem_angel": "Lelahel",
+    "goetic_demon": "Valefor"
+  },
+  {
+    "card_id": 6,
+    "card_name": "The Lovers",
+    "meaning": "Choice",
+    "node_id": 7,
+    "node_name": "Star Ladder of Knowledge",
+    "shem_angel": "Achaiah",
+    "goetic_demon": "Amon"
+  },
+  {
+    "card_id": 7,
+    "card_name": "The Chariot",
+    "meaning": "Determination",
+    "node_id": 8,
+    "node_name": "Temple of Love-Wisdom",
+    "shem_angel": "Kahethel",
+    "goetic_demon": "Barbatos"
+  },
+  {
+    "card_id": 8,
+    "card_name": "Strength",
+    "meaning": "Fortitude",
+    "node_id": 9,
+    "node_name": "Guardian of Thresholds",
+    "shem_angel": "Haziel",
+    "goetic_demon": "Paimon"
+  },
+  {
+    "card_id": 9,
+    "card_name": "The Hermit",
+    "meaning": "Reflection",
+    "node_id": 10,
+    "node_name": "Ancestral Echo Drum",
+    "shem_angel": "Aladiah",
+    "goetic_demon": "Buer"
+  },
+  {
+    "card_id": 10,
+    "card_name": "Wheel of Fortune",
+    "meaning": "Change",
+    "node_id": 11,
+    "node_name": "Solar Voice of Truth",
+    "shem_angel": "Lauviah",
+    "goetic_demon": "Gremory"
+  },
+  {
+    "card_id": 11,
+    "card_name": "Justice",
+    "meaning": "Balance",
+    "node_id": 12,
+    "node_name": "Labyrinth of Saturn",
+    "shem_angel": "Hahaiah",
+    "goetic_demon": "Vine"
+  },
+  {
+    "card_id": 12,
+    "card_name": "The Hanged Man",
+    "meaning": "Perspective",
+    "node_id": 13,
+    "node_name": "Gate of Learning / Path of Aleph",
+    "shem_angel": "Iezalel",
+    "goetic_demon": "Beleth"
+  },
+  {
+    "card_id": 13,
+    "card_name": "Death",
+    "meaning": "Transformation",
+    "node_id": 14,
+    "node_name": "Furnace of Fire / Path of Shin",
+    "shem_angel": "Mebahel",
+    "goetic_demon": "Leraje"
+  },
+  {
+    "card_id": 14,
+    "card_name": "Temperance",
+    "meaning": "Integration",
+    "node_id": 15,
+    "node_name": "Labyrinth of Time / Path of Tav",
+    "shem_angel": "Hariel",
+    "goetic_demon": "Eligos"
+  },
+  {
+    "card_id": 15,
+    "card_name": "The Devil",
+    "meaning": "Attachment",
+    "node_id": 16,
+    "node_name": "Voice of Spirit / Path of Resh",
+    "shem_angel": "Hakamiah",
+    "goetic_demon": "Zepar"
+  }
+]

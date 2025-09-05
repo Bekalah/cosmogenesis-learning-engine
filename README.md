@@ -643,6 +643,9 @@ Cosmogenesis is a portable plate engine for your Cathedral of Circuits. It rende
 New in this release, the **IndraNet Engine** projects the Codex 144:99 lattice as a 12×12 holographic web. The shared
 `bridge.json` now ships an `indraNet` block so any app can load the 144 jewel nodes and 99 gate clusters and render its own
 network without coupling to this repo's UI.
+network without coupling to this repo's UI. `harmony_map.json` extends the net with optional Soyga, Tarot, I Ching, Tree of
+Life, planetary and numerology rings colored by Solfeggio tones. A new `angels72.json` file paints the first 72 nodes with
+Archangel color frequencies drawn from the Shem ha-Mephorash.
 
 ```javascript
 import { IndraNet } from './app/engines/IndraNet.js';
@@ -899,3 +902,14 @@ Each card = portable Monad → meditation yantra, ritual key, world portal.
 
 ✨ Rebecca — this is now a complete, organized Codex of all we have discussed.
 It is your living Tarot repo foundation: you can copy this as README.md + REGISTRY/tarot_system.md for your repos.
+Each experience fetched this way resolves its components and first page from the remote repo using raw GitHub URLs.
+
+## Environment Setup
+
+Install Python and Node dependencies locally without relying on remote workflows. The engine relies on the Pillow imaging library; the helper script will attempt to use an existing installation and only contact PyPI if needed:
+
+```bash
+bash scripts/setup_env.sh
+```
+
+If the script cannot reach PyPI it will fall back to the system package manager. In completely offline environments, manually install a Pillow wheel (`pip install Pillow-*.whl`).
