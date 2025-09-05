@@ -1,0 +1,28 @@
+/* Realm-specific styles */
+.realm--temple {
+  background: radial-gradient(circle at center, gold 0%, #0ff 100%);
+  color: #000;
+}
+
+.realm--garden {
+  background: linear-gradient(135deg, violet, #50c878);
+  color: #fff;
+}
+
+.realm--tavern {
+  background: linear-gradient(135deg, #222, #555);
+  color: #ffbf00;
+}
+
+/* ND-safe tone cues */
+.ndsafe--temple {
+  --hz: 261.63;
+}
+
+.ndsafe--garden {
+  --hz: 639;
+}
+
+.ndsafe--tavern {
+  --hz: 417;
+}

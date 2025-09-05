@@ -1,0 +1,15 @@
+{
+  "solar_gold": {"primary": "#FFD700", "secondary": "#FFA500", "accent": "#FFFACD"},
+  "lunar_blue": {"primary": "#87CEFA", "secondary": "#4682B4", "accent": "#E0FFFF"},
+  "quicksilver": {"primary": "#C0C0C0", "secondary": "#A9A9A9", "accent": "#F5F5F5"},
+  "venus_rose": {"primary": "#FFC0CB", "secondary": "#FF69B4", "accent": "#FFF0F5"},
+  "martian_crimson": {"primary": "#DC143C", "secondary": "#8B0000", "accent": "#FA8072"},
+  "royal_blue": {"primary": "#4169E1", "secondary": "#27408B", "accent": "#87CEEB"},
+  "saturn_stone": {"primary": "#708090", "secondary": "#2F4F4F", "accent": "#C0C0C0"},
+  "uranian_aqua": {"primary": "#00FFFF", "secondary": "#40E0D0", "accent": "#AFEEEE"},
+  "neptunian_violet": {"primary": "#9370DB", "secondary": "#4B0082", "accent": "#E6E6FA"},
+  "gaia_green": {"primary": "#228B22", "secondary": "#006400", "accent": "#98FB98"},
+  "plutonian_wine": {"primary": "#800020", "secondary": "#4B0000", "accent": "#FFB6C1"},
+  "white_gold": {"primary": "#F8F8FF", "secondary": "#EEE8AA", "accent": "#FFD700"},
+  "accent_wheel": ["#FFD700","#FF6347","#20B2AA","#BA55D3","#00CED1","#FF69B4","#7FFF00","#FF4500"]
+}

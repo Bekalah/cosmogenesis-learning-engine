@@ -24,4 +24,10 @@
     "title": "Global Healing Web",
     "src": "app/experience_e/config.json"
   }
+  {"id":"experience_a","title":"Hypatia's Library","src":"app/experience_a/config.json"},
+  {"id":"experience_b","title":"Tesla's Workshop","src":"app/experience_b/config.json"},
+  {"id":"experience_c","title":"Agrippa's Study","src":"app/experience_c/config.json"},
+  {"id":"experience_d","title":"Alexandrian Scriptorium","src":"app/experience_d/config.json"},
+  {"id":"experience_e","title":"Open Learning Atrium","src":"app/experience_e/config.json"},
+  {"id":"experience_f","title":"Portal Nexus","src":"app/experience_f/config.json"}
 ]

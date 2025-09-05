@@ -9,19 +9,19 @@ export function renderPlate(config) {
     pts.push([ (r*Math.cos(t))*k, (r*Math.sin(t))*k ]);
   if (
     !config ||
-    typeof config.layout !== 'string' ||
-    typeof config.mode !== 'number' ||
+    typeof config.layout !== "string" ||
+    typeof config.mode !== "number" ||
     !Array.isArray(config.labels)
   ) {
-    throw new Error('Invalid plate configuration');
+    throw new Error("Invalid plate configuration");
   }
   if (config.labels.length !== config.mode) {
-    throw new Error('Label count must match mode');
+    throw new Error("Label count must match mode");
   }
 
   const layouts = {
     spiral: spiralPositions,
-    'twin-cone': twinConePositions,
+    "twin-cone": twinConePositions,
     wheel: wheelPositions,
     grid: gridPositions,
   };
@@ -45,7 +45,7 @@ export function renderPlate(config) {
     items.forEach(({ text, x, y }) => {
       svg += `<text x="${center + x}" y="${center + y}" text-anchor="middle" dominant-baseline="central">${text}</text>`;
     });
-    svg += '</svg>';
+    svg += "</svg>";
     return svg;
   }
 

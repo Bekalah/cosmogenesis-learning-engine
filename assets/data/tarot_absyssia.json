@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "cards": [
+    {
+      "id": "abys0",
+      "name": "Abyssian Fool",
+      "arcana": "major",
+      "realm": "cosmogenesis",
+      "stylepack": "absyssia",
+      "toneHz": 432,
+      "angelId": "sandalphon",
+      "daemonId": "legion"
+    }
+  ]
+}

@@ -2,17 +2,12 @@
   "use strict";
   function bridgeRoomEnter(e) {
     const id = e.detail.id;
-    document.dispatchEvent(
-      new CustomEvent("tesseract:unlockNode", { detail: { id } }),
-    );
-    document.dispatchEvent(
-      new CustomEvent("tesseract:unlockEdge", {
-        detail: { from: "home", to: id },
-      }),
-    );
+    document.dispatchEvent(new CustomEvent("tesseract:unlockNode", { detail: { id } }));
+    document.dispatchEvent(new CustomEvent("tesseract:unlockEdge", { detail: { from: "home", to: id } }));
   }
   document.addEventListener("room:enter", bridgeRoomEnter);
 })();
+
 // Tesseract Bridge: links room quests to tesseract map
 import { createTesseractLab } from '../../../app/shared/tesseract-lab.js';
 
@@ -32,8 +27,6 @@ async function initBridge() {
 
 document.addEventListener('DOMContentLoaded', initBridge);
 
-// When a room quest fires, notify hooks to unlock nodes
-
 document.addEventListener('room:quest', ev => {
   const { roomId } = ev.detail || {};
   if (roomId && !seenRooms.has(roomId)) {
@@ -42,26 +35,9 @@ document.addEventListener('room:quest', ev => {
   }
 });
 
-// Listen for hook updates to refresh labels
-
 document.addEventListener('tesseract:nodesUpdated', ev => {
   if (!lab || !nodeData) return;
   const unlocked = ev.detail?.unlocked || [];
   const labels = nodeData.nodes.map(n => unlocked.includes(n.id) ? `★ ${n.label}` : n.label);
   lab.update({ labels });
 });
-(() => {
-  "use strict";
-  function bridgeRoomEnter(e) {
-    const id = e.detail.id;
-    document.dispatchEvent(
-      new CustomEvent("tesseract:unlockNode", { detail: { id } }),
-    );
-    document.dispatchEvent(
-      new CustomEvent("tesseract:unlockEdge", {
-        detail: { from: "home", to: id },
-      }),
-    );
-  }
-  document.addEventListener("room:enter", bridgeRoomEnter);
-})();

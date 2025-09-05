@@ -1,143 +1,749 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    Cosmogenesis Learning Engine — Launch Build (Spiral Pedagogy, Data-Agnostic)
+    Author: Rebecca Respawn (GitHub: @bekalah)
+
+    NOTE ON "IT DOESN’T WORK":
+    This build adds resilient loading for the Demos system.
+    - It FIRST tries to fetch /data/demos.json (your external presets).
+    - If missing or invalid, it FALLS BACK to built-in demos so the tab still works.
+    - A tiny "System Status" line in the About panel reports what's happening.
+
+    You do NOT need any bundler or server. Open index.html directly. Works offline.
+  -->
+  <meta charset="utf-8">
   <title>Cosmogenesis Learning Engine</title>
-  <link rel="stylesheet" href="assets/css/core.css">
-  <link rel="stylesheet" href="assets/css/hc.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1f6feb">
+  <meta name="description" content="A data-agnostic, museum-grade instrument for spiral learning. Build plates from any dataset (STEM, design, poetry, sacred texts), export SVG/PNG, save galleries, share/import configs.">
+
+  <!-- Minimal PWA manifest (optional install) -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Cosmogenesis Learning Engine","short_name":"Cosmogenesis","start_url":"./","display":"standalone","theme_color":"#1f6feb","background_color":"#0f1012"}'>
+
+  <!-- Favicon (embedded SVG) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Cdefs%3E%3CradialGradient id=%27g%27%3E%3Cstop offset=%270%27 stop-color=%27%23fff%27/%3E%3Cstop offset=%271%27 stop-color=%27%231f6feb%27/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2747%27 fill=%27url(%23g)%27/%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2714%27 fill=%27%23fff%27/%3E%3C/svg%3E'>
+
+  <style>
+    :root{
+      --paper:#f8f5ef; --ink:#141414; --muted:#6b6b6b; --focus:#1f6feb;
+      --card:#ffffff; --ring:#dedede; --shadow:0 1px 2px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.06);
+      --radius:14px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --paper:#0f1012; --ink:#e7e7ea; --muted:#a0a0a7; --card:#16181b; --ring:#2a2c30;
+        --shadow:0 2px 6px rgba(0,0,0,.4),0 18px 60px rgba(0,0,0,.35);}
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--paper);color:var(--ink);
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;}
+    a{color:var(--focus);text-decoration:none}
+    :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:10px}
+    header{padding:1rem 1.2rem;border-bottom:1px solid var(--ring);background:linear-gradient(180deg,#ffffff1a,#0000)}
+    header .top{display:flex;gap:.8rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    header h1{margin:0;font-size:1.06rem}
+    header .sub{margin:0;color:var(--muted);font-size:.92rem}
+    .actions{display:flex;gap:.5rem;flex-wrap:wrap}
+    .btn{border:1px solid var(--ring);background:#fff0;border-radius:10px;padding:.5rem .8rem;cursor:pointer}
+    .btn:hover{background:#ffffff24}
+    .btn.primary{border-color:var(--focus);background:#eef4ff22}
+
+    main{display:grid;grid-template-columns:minmax(300px,360px) 1fr;gap:1rem;padding:1rem;align-items:start}
+    @media (max-width:980px){main{grid-template-columns:1fr}}
+
+    .panel{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .panel h2{margin:0;padding:.8rem 1rem;border-bottom:1px solid var(--ring);font-size:.95rem}
+    .pane{padding:1rem}
+    nav.tabs{display:flex;border-bottom:1px solid var(--ring)}
+    nav.tabs button{flex:1;border:0;border-bottom:3px solid transparent;padding:.75rem .6rem;background:transparent;cursor:pointer}
+    nav.tabs button[aria-selected="true"]{border-color:var(--focus);background:#ffffff12}
+
+    .controls{display:grid;gap:.8rem}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+    @media (max-width:560px){.row{grid-template-columns:1fr}}
+    label{display:grid;gap:.35rem;font-size:.92rem}
+    input[type="number"],input[type="text"],select,textarea{width:100%;padding:.6rem;border:1px solid var(--ring);border-radius:10px;background:#fff0;color:var(--ink)}
+    textarea{min-height:88px;resize:vertical}
+    .hint{color:var(--muted);font-size:.9rem}
+
+    .canvas-card{display:flex;flex-direction:column}
+    .canvas-top{display:flex;justify-content:space-between;align-items:center;padding:.7rem .95rem;border-bottom:1px solid var(--ring)}
+    .badge{font-size:.75rem;color:#fff;background:var(--focus);padding:.2rem .6rem;border-radius:999px}
+    figure{margin:0;padding:1rem}
+    .viz{width:100%;height:min(82vh,980px);display:block;background:
+      radial-gradient(140% 120% at 50% 18%, #ffffff 0%, #f3efe7 60%, #ebe3d7 100%); touch-action:manipulation}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem}
+    .card{border:1px solid var(--ring);border-radius:12px;overflow:hidden;background:var(--card)}
+    .card img{width:100%;height:140px;object-fit:cover;display:block;background:#0001}
+    .card .meta{padding:.5rem .6rem;font-size:.85rem;color:var(--muted)}
+    footer{padding:1rem;color:var(--muted);text-align:center}
+
+    .toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:var(--paper);
+      padding:.5rem .8rem;border-radius:999px;font-size:.85rem;box-shadow:var(--shadow);z-index:9999}
+    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+    .node-label{font:600 12px/1 system-ui,Segoe UI,Roboto;fill:#fff;paint-order:stroke;stroke:#000;stroke-width:.6;letter-spacing:.2px}
+
+    .status-line{margin-top:.5rem;color:var(--muted);font-size:.85rem}
+  </style>
 </head>
 <body>
   <header>
-    <h1>Cosmogenesis Learning Engine</h1>
-    <div class="controls">
-      <label>Tilt <input id="tilt" type="range" min="0" max="45" step="0.5"></label>
-      <label>Nodes <input id="nodes" type="number" min="33" max="144" step="1"></label>
-      <label>Skin <select id="skin"></select></label>
-      <button id="calm-toggle" aria-pressed="false">Calm Mode</button>
-      <button id="hc-toggle" aria-pressed="false">High Contrast</button>
-      <button id="btn-export">Export Plate</button>
+    <div class="top">
+      <div>
+        <h1>Cosmogenesis Learning Engine</h1>
+        <p class="sub">A spiral teacher for ANY dataset — art, STEM, design, poetry, sacred texts — data-agnostic, accessible, export-ready.</p>
+      </div>
+      <div class="actions" role="group" aria-label="Primary actions">
+        <button class="btn" id="btn-share-link" title="Copy a link with your current configuration">Copy Share Link</button>
+        <button class="btn" id="btn-import" title="Import a configuration JSON">Import Config</button>
+        <a class="btn primary" href="https://github.com/bekalah/cosmogenesis-learning-engine" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </header>
+
   <main>
-    <canvas id="stage" width="800" height="600"></canvas>
+    <!-- Left Column -->
+    <section class="panel" aria-labelledby="left-title">
+      <h2 id="left-title">Workspace</h2>
+      <nav class="tabs" role="tablist" aria-label="Workspace Tabs">
+        <button role="tab" aria-selected="true" aria-controls="pane-build" id="tab-build">Build</button>
+        <button role="tab" aria-selected="false" aria-controls="pane-data" id="tab-data">Data</button>
+        <button role="tab" aria-selected="false" aria-controls="pane-demos" id="tab-demos">Demos</button>
+        <button role="tab" aria-selected="false" aria-controls="pane-gallery" id="tab-gallery">Gallery</button>
+        <button role="tab" aria-selected="false" aria-controls="pane-about" id="tab-about">About</button>
+      </nav>
+
+      <!-- BUILD -->
+      <div class="pane" id="pane-build" role="tabpanel" aria-labelledby="tab-build">
+        <form class="controls" id="controls" aria-describedby="controls-help">
+          <p id="controls-help" class="sr-only">Adjust parameters to re-render the plate instantly. Your settings auto-save.</p>
+
+          <div class="row">
+            <label>Layout
+              <select name="layout" aria-label="Layout">
+                <option value="spiral" selected>Spiral (Monad → Spiral → Ring → Border)</option>
+                <option value="twin_cones">Twin Cones (Oppositions)</option>
+                <option value="wheel">Wheel (circular nodes)</option>
+                <option value="grid">Grid (matrix layout)</option>
+              </select>
+            </label>
+            <label>Mode (node count)
+              <select name="mode" aria-label="Mode">
+                <option value="auto" selected>Auto (use number of labels)</option>
+                <option value="7">7</option><option value="12">12</option>
+                <option value="22">22</option><option value="33">33</option><option value="72">72</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="row">
+            <label>Spiral turns
+              <input name="turns" type="number" step="0.25" min="0.5" max="64" value="9">
+            </label>
+            <label>Samples (quality)
+              <input name="samples" type="number" step="100" min="400" max="14000" value="1600">
+            </label>
+          </div>
+
+          <div class="row">
+            <label>Inner radius
+              <input name="rInner" type="number" step="5" min="10" max="400" value="60">
+            </label>
+            <label>Outer radius
+              <input name="rOuter" type="number" step="10" min="200" max="900" value="440">
+            </label>
+          </div>
+
+          <div class="row">
+            <label>Node size
+              <input name="nodeSize" type="number" step="2" min="6" max="60" value="28">
+            </label>
+            <label>Border width
+              <input name="borderWidth" type="number" step="0.5" min="0.5" max="12" value="3">
+            </label>
+          </div>
+
+          <label>Style
+            <select name="style" aria-label="Stylepack">
+              <option value="hilma_spiral" selected>Hilma Spiral</option>
+              <option value="rosicrucian_black">Rosicrucian Black</option>
+              <option value="alchemical_bloom">Alchemical Bloom</option>
+              <option value="angelic_chorus">Angelic Chorus</option>
+              <option value="venus_net">Venus Net (unlocks)</option>
+              <option value="rilke_slate">Rilke Slate (unlocks)</option>
+            </select>
+          </label>
+
+          <label>Labels (comma, newline, or CSV — leave blank to auto 1..N)
+            <textarea name="labels" placeholder="Paste: words, items, concepts, names, steps..."></textarea>
+          </label>
+
+          <div class="btnbar" role="group" aria-label="Actions">
+            <button type="button" id="btn-random" title="Slight random phase for variety">Randomize Phase (R)</button>
+            <button type="button" id="btn-reset" title="Reset to defaults">Reset</button>
+            <button type="button" id="btn-svg" class="primary" title="Export as SVG">Export SVG (S)</button>
+            <button type="button" id="btn-png" class="primary" title="Export as PNG">Export PNG (P)</button>
+            <button type="button" id="btn-save-card" title="Save to gallery">Save to Gallery</button>
+            <button type="button" id="btn-copy-config" title="Copy JSON config">Copy Config JSON</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- DATA -->
+      <div class="pane" id="pane-data" role="tabpanel" aria-labelledby="tab-data" hidden>
+        <div class="controls">
+          <p class="hint">This engine is data-agnostic. Load labels from JSON/CSV/TEXT:</p>
+          <div class="row">
+            <label>From URL (JSON array or CSV)
+              <input name="dataUrl" type="text" placeholder="/data/labels.json or /data/labels.csv">
+            </label>
+            <label>Paste (auto-detect JSON/CSV/TEXT)
+              <textarea name="dataPaste" placeholder='["Saturn","Jupiter","Mars"]  OR  Saturn,Jupiter,Mars  OR  one per line'></textarea>
+            </label>
+          </div>
+          <div class="btnbar">
+            <button type="button" id="btn-load-url">Load from URL</button>
+            <button type="button" id="btn-apply-paste">Apply Paste</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEMOS -->
+      <div class="pane" id="pane-demos" role="tabpanel" aria-labelledby="tab-demos" hidden>
+        <p class="hint">One-click demos (art, STEM, UX, poetry, sacred). The engine will try <code>/data/demos.json</code> first, then fall back to built-ins.</p>
+        <div class="controls" id="demo-list"></div>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="pane" id="pane-gallery" role="tabpanel" aria-labelledby="tab-gallery" hidden>
+        <div class="btnbar">
+          <button type="button" id="btn-gallery-export">Export Gallery JSON</button>
+          <button type="button" id="btn-gallery-import">Import Gallery JSON</button>
+          <button type="button" id="btn-gallery-clear" title="Clear gallery">Clear Gallery</button>
+        </div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="pane" id="pane-about" role="tabpanel" aria-labelledby="tab-about" hidden>
+        <h3>Provenance Plaque</h3>
+        <p><strong>Intention:</strong> A living, spiral-based device for pattern literacy across ANY field. From sacred symbolism to scientific taxonomies.</p>
+        <p><strong>Technique:</strong> Modular layouts (spiral, twin cones, wheel, grid). Data adapters accept JSON/CSV/TEXT. Export SVG/PNG. Local galleries. Share/import configs.</p>
+        <p><strong>Lineage:</strong> Visionary diagramming, correspondence tables, inclusive design.</p>
+        <p><strong>Reflection:</strong> Flat systems obscure relationships; spiral systems reveal them. This is an architect–scribe engine for living study.</p>
+        <p class="status-line" id="system-status" aria-live="polite">System Status: initializing…</p>
+      </div>
+    </section>
+
+    <!-- Right Column -->
+    <section class="panel canvas-card" aria-labelledby="canvas-title">
+      <div class="canvas-top">
+        <strong id="canvas-title">Cosmogenesis Plate</strong>
+        <span class="badge" aria-label="Live rendering">LIVE</span>
+      </div>
+      <figure>
+        <svg id="plate" class="viz" viewBox="-512 -512 1024 1024" role="img" aria-labelledby="viz-title viz-desc">
+          <title id="viz-title">Cosmogenesis Plate — Modular Layout</title>
+          <desc id="viz-desc">Spiral, twin-cones, wheel, or grid geometry; labeled nodes; exportable, data-agnostic.</desc>
+        </svg>
+      </figure>
+    </section>
   </main>
-  <footer>ND-safe • no autoplay • no strobe • honors reduced motion</footer>
 
-  <script type="module">
-    import { cfg, getStylepacks, getSpiralMap, getAngels } from './src/codex.ext.js';
-    import ThemeEngine from './src/engines/theme-engine.js';
-    import ArtEngine from './src/engines/art-engine.js';
-    import SpiralEngine from './src/engines/spiral-engine.js';
-    import { exportPlate } from './src/engines/exporter.js';
-    import GuardianPlaque from './src/ui/guardian-plaque.js';
-    import initInfoDot from './src/ui/info-dot.js';
+  <footer>
+    © 2025 Cosmogenesis Learning Engine • Open Source • Works offline
+  </footer>
 
-    const canvas = document.getElementById('stage');
-    const tiltInput = document.getElementById('tilt');
-    const nodesInput = document.getElementById('nodes');
-    const skinSelect = document.getElementById('skin');
-    const calmBtn = document.getElementById('calm-toggle');
-    const hcBtn = document.getElementById('hc-toggle');
+  <script>
+    /* ===================== Stylepacks ===================== */
+    const STYLEPACKS = {
+      hilma_spiral: { bg:"#f8f5ef", ink:"#141414", monad:"#0b0b0b", spiral:"#b8860b", border:"#2a2a2a",
+        nodes:["#b7410e","#c56a1a","#d7a21a","#2e7d32","#1f6feb","#4338ca","#6d28d9"] },
+      rosicrucian_black: { bg:"#111111", ink:"#f2f2f2", monad:"#f2f2f2", spiral:"#b71c1c", border:"#e5e5e5",
+        nodes:["#f5f5f5","#d32f2f","#fbc02d","#9e9e9e","#9c27b0","#26a69a","#64b5f6"] },
+      alchemical_bloom: { bg:"#fff9f4", ink:"#222222", monad:"#2f2f2f", spiral:"#8b5e34", border:"#5d4037",
+        nodes:["#7f5539","#b08968","#e6ccb2","#a3b18a","#669bbc","#7d8597","#9a8c98"] },
+      angelic_chorus: { bg:"#ffffff", ink:"#202020", monad:"#111111", spiral:"#6b59e6", border:"#6b7280",
+        nodes:["#ffd6e7","#d5e8ff","#e5ffdf","#fff4c2","#e6e1ff","#dff9ff","#ffe6d1"] },
+      venus_net: { bg:"#f1fff5", ink:"#132c18", monad:"#0a3d1f", spiral:"#27ae60", border:"#1b5e20",
+        nodes:["#2ecc71","#a3e635","#86efac","#bbf7d0","#34d399","#65a30d","#16a34a"] },
+      rilke_slate: { bg:"#f4f5f7", ink:"#1e1f23", monad:"#0e1116", spiral:"#6b7280", border:"#94a3b8",
+        nodes:["#94a3b8","#64748b","#475569","#334155","#a1a1aa","#71717a","#52525b"] }
+    };
 
-    const themes = new ThemeEngine(getStylepacks());
-    const art = new ArtEngine(canvas, themes);
-    const spiral = new SpiralEngine(canvas, art);
+    /* ===================== Built-in demos (fallback) ===================== */
+    const BUILTIN_DEMOS = [
+      { title:"Art • 7 Colors", config:{ layout:"wheel", mode:7, labels:["Red","Orange","Yellow","Green","Cyan","Blue","Violet"] } },
+      { title:"STEM • 12 Cranial Nerves", config:{ layout:"grid", mode:12, labels:["I Olfactory","II Optic","III Oculomotor","IV Trochlear","V Trigeminal","VI Abducens","VII Facial","VIII Vestibulocochlear","IX Glossopharyngeal","X Vagus","XI Accessory","XII Hypoglossal"] } },
+      { title:"UX • 22 Research Prompts", config:{ layout:"spiral", mode:22, labels:Array.from({length:22},(_,i)=>`Prompt ${i+1}`) } },
+      { title:"Poetry • 33 Lines in a Cycle", config:{ layout:"spiral", mode:33, labels:Array.from({length:33},(_,i)=>`Line ${i+1}`) } },
+      { title:"Sacred • 72 Names (Study Plate)", config:{ layout:"spiral", mode:72, labels:Array.from({length:72},(_,i)=>`Name ${i+1}`) } },
+      { title:"Yeats • Twin Cones (Oppositions)", config:{ layout:"twin_cones", mode:12,
+        labels:["Logic","Imagination","Discipline","Inspiration","Analysis","Synthesis","Form","Flow","Silence","Voice","Structure","Wildness"] } }
+    ];
 
-    function applyState() {
-      const tilt = parseFloat(localStorage.getItem('cosmo:v1:tilt') || '23.5');
-      const nodes = parseInt(localStorage.getItem('cosmo:v1:nodes') || '33', 10);
-      const skin = localStorage.getItem('cosmo:v1:skin') || 'AGRIPPA';
-      const calm = localStorage.getItem('cosmo:v1:calm') === 'true';
-      const hc = localStorage.getItem('cosmo:v1:hc') === 'true';
-      tiltInput.value = tilt;
-      nodesInput.value = nodes;
-      skinSelect.value = skin;
-      spiral.init({ tiltDeg: tilt, nodeCount: nodes, map: getSpiralMap() });
-      themes.applyToElement(document.documentElement, skin);
-      document.documentElement.dataset.calm = calm;
-      document.documentElement.dataset.hc = hc;
-      calmBtn.setAttribute('aria-pressed', calm);
-      hcBtn.setAttribute('aria-pressed', hc);
+    /* ===================== Helpers ===================== */
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+    const ls = {
+      get(k, f){ try{ return JSON.parse(localStorage.getItem(k)) ?? f }catch{ return f } },
+      set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch{} },
+      del(k){ try{ localStorage.removeItem(k) }catch{} }
+    };
+    function toast(msg, t=1800){
+      const el = document.createElement("div"); el.className = "toast"; el.textContent = msg;
+      document.body.appendChild(el); setTimeout(()=> el.remove(), t);
+    }
+    function group(svg, cls){ const g = document.createElementNS("http://www.w3.org/2000/svg","g"); if (cls) g.setAttribute("class", cls); svg.appendChild(g); return g }
+    function circle(cx,cy,r,attrs={}){ const c = document.createElementNS("http://www.w3.org/2000/svg","circle"); c.setAttribute("cx",cx); c.setAttribute("cy",cy); c.setAttribute("r",r); for(const k in attrs)c.setAttribute(k,attrs[k]); return c }
+    function rect(x,y,w,h,attrs={}){ const r = document.createElementNS("http://www.w3.org/2000/svg","rect"); r.setAttribute("x",x); r.setAttribute("y",y); r.setAttribute("width",w); r.setAttribute("height",h); for(const k in attrs)r.setAttribute(k,attrs[k]); return r }
+    function path(d,attrs={}){ const p = document.createElementNS("http://www.w3.org/2000/svg","path"); p.setAttribute("d",d); for(const k in attrs)p.setAttribute(k,attrs[k]); return p }
+    function text(x,y,str,attrs={}){ const t = document.createElementNS("http://www.w3.org/2000/svg","text"); t.setAttribute("x",x); t.setAttribute("y",y); t.textContent = str; for(const k in attrs)t.setAttribute(k,attrs[k]); return t }
+    function serializeSVG(svg){
+      const clone = svg.cloneNode(true);
+      const bg = getComputedStyle(document.documentElement).getPropertyValue("--paper") || "#ffffff";
+      const full = rect(-512,-512,1024,1024,{fill:(bg||"").toString().trim()||"#ffffff"});
+      clone.insertBefore(full, clone.firstChild);
+      return new XMLSerializer().serializeToString(clone);
+    }
+    function download(filename, blob){
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a);
+      a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
+    }
+    async function svgToPng(svg, size=2048){
+      const src = serializeSVG(svg);
+      const blob = new Blob([src], {type:"image/svg+xml;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const img = new Image(); img.decoding = "async";
+      const pngBlob = await new Promise((res, rej)=>{
+        img.onload = () => {
+          const c = document.createElement("canvas"); c.width = size; c.height = size;
+          const ctx = c.getContext("2d");
+          ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim() || "#ffffff";
+          ctx.fillRect(0,0,size,size); ctx.drawImage(img, 0, 0, size, size);
+          c.toBlob(b => { URL.revokeObjectURL(url); res(b) }, "image/png");
+        };
+        img.onerror = rej; img.src = url;
+      });
+      return pngBlob;
+    }
+    function parseLabels(raw){
+      if (!raw || !raw.trim()) return [];
+      const s = raw.trim();
+      try{
+        const obj = JSON.parse(s);
+        if (Array.isArray(obj)) return obj.map(x => (x && (x.name||x.title||x.label)) || String(x));
+      }catch{}
+      if (s.includes(",")) return s.split(",").map(x => x.trim()).filter(Boolean);
+      return s.split(/\r?\n/).map(x => x.trim()).filter(Boolean);
     }
 
-    tiltInput.addEventListener('input', e => {
-      const v = parseFloat(e.target.value);
-      spiral.setTilt(v);
-      localStorage.setItem('cosmo:v1:tilt', v);
-    });
-    nodesInput.addEventListener('change', e => {
-      let n = parseInt(e.target.value, 10);
-      if (![33,72,144].includes(n)) n = 33;
-      spiral.setNodeCount(n);
-      localStorage.setItem('cosmo:v1:nodes', n);
-    });
-    skinSelect.addEventListener('change', e => {
-      const id = e.target.value;
-      themes.applyToElement(document.documentElement, id);
-      localStorage.setItem('cosmo:v1:skin', id);
-    });
-
-    calmBtn.addEventListener('click', () => {
-      const active = calmBtn.getAttribute('aria-pressed') === 'true';
-      const next = !active;
-      calmBtn.setAttribute('aria-pressed', next);
-      document.documentElement.dataset.calm = next;
-      localStorage.setItem('cosmo:v1:calm', next);
-    });
-
-    hcBtn.addEventListener('click', () => {
-      const active = hcBtn.getAttribute('aria-pressed') === 'true';
-      const next = !active;
-      hcBtn.setAttribute('aria-pressed', next);
-      if (next) document.documentElement.setAttribute('data-hc', 'true');
-      else document.documentElement.removeAttribute('data-hc');
-      localStorage.setItem('cosmo:v1:hc', next);
-    });
-
-    document.getElementById('btn-export').addEventListener('click', async () => {
-      try {
-        const map = getSpiralMap();
-        const node = map.nodes[0];
-        const res = await exportPlate({
-          skin: skinSelect.value,
-          nodeId: node?.id || 'n0',
-          provenanceRefs: node?.payload.provenanceRefs || [],
-          out: { width: 4096, format: 'png' }
-        });
-        const a = document.createElement('a');
-        a.download = `${res.jsonSidecar.nodeId}.${'png'}`;
-        a.href = URL.createObjectURL(res.blob);
-        a.click();
-        const j = document.createElement('a');
-        j.download = `${res.jsonSidecar.nodeId}.json`;
-        j.href = URL.createObjectURL(new Blob([JSON.stringify(res.jsonSidecar,null,2)],{type:'application/json'}));
-        j.click();
-      } catch (e) {
-        plaque.open(e.message);
+    /* ===================== Engine ===================== */
+    class CosmogenesisEngine {
+      constructor(svg, config={}){
+        this.svg = svg;
+        this.phase = Math.random() * Math.PI * 2;
+        this.config = Object.assign(this.defaults(), config);
+        this.setTheme(this.config.style);
       }
+      defaults(){
+        return { layout:"spiral", mode:"auto", turns:9, samples:1600, rInner:60, rOuter:440, nodeSize:28, borderWidth:3, style:"hilma_spiral", labels:[] };
+      }
+      setTheme(key){
+        const pack = STYLEPACKS[key] || STYLEPACKS.hilma_spiral;
+        this.theme = pack;
+        document.documentElement.style.setProperty("--paper", pack.bg);
+        document.documentElement.style.setProperty("--ink", pack.ink);
+      }
+      setConfig(next){
+        if ("phase" in next) this.phase = next.phase;
+        const prevStyle = this.config.style;
+        this.config = Object.assign(this.config, next);
+        if (this.config.style !== prevStyle) this.setTheme(this.config.style);
+        return this;
+      }
+      effectiveCount(){
+        const { mode, labels } = this.config;
+        if (mode === "auto") return (labels && labels.length) ? labels.length : 7;
+        const n = Number(mode); return (n>0? n : 7);
+      }
+      labels(){
+        const n = this.effectiveCount();
+        const labels = Array.isArray(this.config.labels) && this.config.labels.length
+          ? this.config.labels
+          : Array.from({length:n},(_,i)=> String(i+1));
+        return labels.slice(0, n);
+      }
+      render(){
+        while (this.svg.firstChild) this.svg.removeChild(this.svg.firstChild);
+        const root = group(this.svg,"root");
+        this.drawBorder(root);
+        switch(this.config.layout){
+          case "twin_cones": this.drawTwinCones(root); break;
+          case "wheel": this.drawNodeRing(root); break;
+          case "grid": this.drawGrid(root); break;
+          default: this.drawSpiral(root); this.drawNodeRing(root); break;
+        }
+        this.drawInnerGuide(root);
+        this.drawMonad(root);
+        return this;
+      }
+      drawMonad(root){
+        const r = clamp(this.config.rInner*0.32, 10, 120);
+        root.appendChild(circle(0,0,r,{ fill:this.theme.monad, "aria-label":"Monad" }));
+      }
+      drawBorder(root){
+        const { rOuter, borderWidth } = this.config;
+        root.appendChild(circle(0,0, rOuter + clamp(borderWidth*1.2,1,16), {
+          fill:"none", stroke:this.theme.border, "stroke-width":borderWidth, "aria-label":"Border"
+        }));
+      }
+      drawInnerGuide(root){
+        root.appendChild(circle(0, 0, this.config.rInner*1.12, {
+          fill:"none", stroke:this.theme.border, "stroke-opacity":"0.25", "stroke-dasharray":"2 6", "stroke-width":"1"
+        }));
+      }
+      drawSpiral(root){
+        const { samples, rInner, rOuter, turns } = this.config;
+        const thetaMax = turns * 2 * Math.PI;
+        let d = "";
+        for (let i=0;i<=samples;i++){
+          const t = i / samples;
+          const theta = t * thetaMax;
+          const r = rInner + (rOuter - rInner) * t;
+          const x = r * Math.cos(theta);
+          const y = r * Math.sin(theta);
+          d += (i===0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
+        }
+        root.appendChild(path(d,{ fill:"none", stroke:this.theme.spiral, "stroke-width":2, "stroke-linecap":"round", "aria-label":"Spiral"}));
+      }
+      drawNodeRing(root){
+        const n = this.effectiveCount();
+        const ringR = this.config.rOuter * 0.88;
+        const labels = this.labels();
+        const colors = this.theme.nodes;
+        const g = group(root,"node-ring");
+        for (let i=0;i<n;i++){
+          const angle = this.phase + i * (2*Math.PI / n);
+          const x = ringR * Math.cos(angle);
+          const y = ringR * Math.sin(angle);
+          const fill = colors[i % colors.length];
+          g.appendChild(circle(x, y, this.config.nodeSize, { fill, stroke:"#000", "stroke-opacity":"0.25", "stroke-width":"1"}));
+          g.appendChild(text(x, y+4, String(labels[i] ?? i+1), { class:"node-label", "text-anchor":"middle"}));
+        }
+      }
+      drawTwinCones(root){
+        const { rInner, rOuter, samples } = this.config;
+        const g = group(root,"twin-cones");
+        const arms = (phaseShift)=> {
+          let d = "";
+          for (let i=0;i<=samples;i++){
+            const t = i/samples;
+            const r = rInner + (rOuter - rInner) * Math.pow(t, 1.1);
+            const theta = (t * Math.PI) + phaseShift + this.phase;
+            const x = r * Math.cos(theta);
+            const y = r * Math.sin(theta);
+            d += (i===0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
+          }
+          return d;
+        };
+        g.appendChild(path(arms(0), { fill:"none", stroke:this.theme.spiral, "stroke-width":2 }));
+        g.appendChild(path(arms(Math.PI), { fill:"none", stroke:this.theme.spiral, "stroke-width":2 }));
+        // Node arcs
+        const n = this.effectiveCount();
+        const labels = this.labels();
+        const colors = this.theme.nodes;
+        const arcR = rOuter * 0.82;
+        for (let i=0;i<n;i++){
+          const side = (i % 2 === 0) ? 1 : -1;
+          const k = Math.floor(i/2);
+          const steps = Math.ceil(n/2);
+          const a = (k / Math.max(1,steps-1)) * Math.PI;
+          const angle = (side>0 ? a : a + Math.PI) + this.phase;
+          const x = arcR * Math.cos(angle);
+          const y = arcR * Math.sin(angle);
+          const fill = colors[i % colors.length];
+          g.appendChild(circle(x, y, this.config.nodeSize, { fill, stroke:"#000", "stroke-opacity":"0.25", "stroke-width":"1"}));
+          g.appendChild(text(x, y+4, String(labels[i] ?? i+1), { class:"node-label", "text-anchor":"middle"}));
+        }
+      }
+      drawGrid(root){
+        const n = this.effectiveCount();
+        const labels = this.labels();
+        const colors = this.theme.nodes;
+        const cols = Math.ceil(Math.sqrt(n));
+        const rows = Math.ceil(n / cols);
+        const size = (this.config.rOuter*1.6) / Math.max(cols, rows);
+        const startX = - (cols-1) * size * 0.6;
+        const startY = - (rows-1) * size * 0.6;
+        for (let i=0;i<n;i++){
+          const r = Math.floor(i/cols), c = i % cols;
+          const x = startX + c * size * 1.2;
+          const y = startY + r * size * 1.2;
+          const fill = colors[i % colors.length];
+          root.appendChild(circle(x, y, this.config.nodeSize, { fill, stroke:"#000", "stroke-opacity":"0.2", "stroke-width":"1"}));
+          root.appendChild(text(x, y+4, String(labels[i] ?? i+1), { class:"node-label", "text-anchor":"middle"}));
+        }
+      }
+      exportSVGBlob(){ return new Blob([serializeSVG(this.svg)], { type:"image/svg+xml;charset=utf-8" }); }
+      async exportPNGBlob(size=2048){ return svgToPng(this.svg, size); }
+    }
+
+    /* ===================== App wiring ===================== */
+    const svg = $("#plate");
+    const form = $("#controls");
+    const statusLine = $("#system-status");
+    const DEFAULTS = new CosmogenesisEngine(svg).defaults();
+    let engine = new CosmogenesisEngine(svg, DEFAULTS).render();
+    let evo = ls.get("cosmo.evo", { renders:0, modesUsed:{}, unlocks:{} });
+
+    // restore from URL or LS
+    (function restore(){
+      const url = new URL(location.href);
+      const cfgParam = url.searchParams.get("cfg");
+      let restored = null;
+      if (cfgParam){ try{ restored = JSON.parse(atob(cfgParam)); }catch{} }
+      else { restored = ls.get("cosmo.config", null); }
+      if (restored){
+        engine.setConfig(restored).render();
+        for (const [k,v] of Object.entries(restored)){
+          if (form.elements[k]) form.elements[k].value = Array.isArray(v) ? v.join("\n") : v;
+        }
+      }
+      maybeUnlock();
+    })();
+
+    function getFormConfig(){
+      const fd = new FormData(form);
+      const layout = fd.get("layout");
+      const modeRaw = fd.get("mode");
+      const mode = (modeRaw==="auto") ? "auto" : Number(modeRaw);
+      const turns = Number(fd.get("turns"));
+      const samples = Number(fd.get("samples"));
+      const rInner = Number(fd.get("rInner"));
+      const rOuter = Number(fd.get("rOuter"));
+      const nodeSize = Number(fd.get("nodeSize"));
+      const borderWidth = Number(fd.get("borderWidth"));
+      const style = fd.get("style");
+      const labelsRaw = (fd.get("labels")||"").trim();
+      let labels = parseLabels(labelsRaw);
+      return { layout, mode, turns, samples, rInner, rOuter, nodeSize, borderWidth, style, labels };
+    }
+    function saveConfig(){ ls.set("cosmo.config", getFormConfig()); }
+    function renderFromForm(){
+      const cfg = getFormConfig();
+      engine.setConfig(cfg).render();
+      evo.renders++; evo.modesUsed[String(cfg.mode)]=true; ls.set("cosmo.evo", evo);
+      saveConfig(); maybeUnlock();
+    }
+
+    function maybeUnlock(){
+      const uniqueModes = Object.keys(evo.modesUsed).length;
+      const styleSel = form.elements.style;
+      for (const opt of styleSel.options){
+        if (opt.value === "venus_net") opt.disabled = uniqueModes < 3 && !evo.unlocks.venus_net;
+        if (opt.value === "rilke_slate") opt.disabled = evo.renders < 44 && !evo.unlocks.rilke_slate;
+      }
+      if (uniqueModes >= 3 && !evo.unlocks.venus_net){ evo.unlocks.venus_net = true; toast("Unlocked style: Venus Net"); }
+      if (evo.renders >= 44 && !evo.unlocks.rilke_slate){ evo.unlocks.rilke_slate = true; toast("Unlocked style: Rilke Slate"); }
+    }
+
+    // Form events
+    form.addEventListener("input", (e)=>{
+      if (e.target.name === "dataUrl" || e.target.name === "dataPaste") return;
+      renderFromForm();
     });
 
-    const packs = getStylepacks();
-    packs.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.id;
-      opt.textContent = p.name;
-      skinSelect.appendChild(opt);
+    // Buttons
+    $("#btn-random").addEventListener("click", ()=>{ engine.setConfig({ phase: Math.random() * Math.PI * 2 }).render(); evo.renders++; ls.set("cosmo.evo", evo); saveConfig(); });
+    $("#btn-reset").addEventListener("click", ()=>{
+      form.reset();
+      for (const [k,v] of Object.entries(DEFAULTS)){ if (form.elements[k]) form.elements[k].value = (k==="labels"? "" : v); }
+      engine = new CosmogenesisEngine(svg, DEFAULTS).render();
+      ls.set("cosmo.config", DEFAULTS); toast("Reset to defaults.");
+      evo = { renders:0, modesUsed:{}, unlocks:{} }; ls.set("cosmo.evo", evo); maybeUnlock();
+    });
+    $("#btn-svg").addEventListener("click", ()=>{ download("cosmogenesis-plate.svg", engine.exportSVGBlob()); toast("Exported SVG."); });
+    $("#btn-png").addEventListener("click", async ()=>{ download("cosmogenesis-plate.png", await engine.exportPNGBlob(2048)); toast("Exported PNG."); });
+    $("#btn-copy-config").addEventListener("click", async ()=>{
+      try{ await navigator.clipboard.writeText(JSON.stringify(getFormConfig(), null, 2)); toast("Config copied."); }catch{ toast("Copy failed."); }
     });
 
-    const plaque = new GuardianPlaque();
-    initInfoDot();
-
-    document.addEventListener('chamber:open', e => {
-      const id = e.detail.id;
-      const node = getSpiralMap().nodes.find(n => n.id === id);
-      const angel = getAngels().find(a => a.id === node.guardian);
-      plaque.open(`Angel of ${angel.title}, ${angel.mantra}`);
+    // Data tab
+    async function fetchAsText(url){
+      const res = await fetch(url, { cache:"no-store" });
+      if (!res.ok) throw new Error("HTTP "+res.status);
+      return await res.text();
+    }
+    function parseAnyToLabels(t){
+      t = t.trim();
+      if (!t) return [];
+      try{ const j = JSON.parse(t); if (Array.isArray(j)) return j.map(x => (x&&(x.name||x.title||x.label)) || String(x)); }catch{}
+      if (t.includes("\n")){
+        const lines = t.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+        if (lines.every(line => !line.includes(","))) return lines;
+        return lines.map(line => line.split(",")[0].trim()).filter(Boolean);
+      }
+      if (t.includes(",")) return t.split(",").map(s=>s.trim()).filter(Boolean);
+      return [t];
+    }
+    $("#btn-load-url").addEventListener("click", async ()=>{
+      const url = (document.querySelector("[name='dataUrl']").value||"").trim();
+      if (!url) return toast("Enter a data URL.");
+      try{
+        const text = await fetchAsText(url);
+        const labels = parseAnyToLabels(text);
+        form.elements.labels.value = labels.join("\n");
+        renderFromForm(); toast("Loaded labels from URL.");
+      }catch{ toast("Failed to load."); }
+    });
+    $("#btn-apply-paste").addEventListener("click", ()=>{
+      const raw = (document.querySelector("[name='dataPaste']").value||"").trim();
+      if (!raw) return toast("Paste some data.");
+      const labels = parseAnyToLabels(raw);
+      form.elements.labels.value = labels.join("\n");
+      renderFromForm(); toast("Applied pasted data.");
     });
 
-    applyState();
-    spiral.draw();
+    /* ===================== Demos loader (resilient) ===================== */
+    async function loadExternalDemos(){
+      try{
+        const res = await fetch("./data/demos.json", { cache:"no-store" });
+        if (!res.ok) throw new Error("No external demos.json");
+        const json = await res.json();
+        if (!Array.isArray(json)) throw new Error("demos.json must be an array");
+        if (json.length === 0) throw new Error("demos.json is empty");
+        return json;
+      }catch(err){
+        return null; // signal fallback
+      }
+    }
+    async function initDemos(){
+      const host = $("#demo-list"); host.innerHTML = "";
+      const external = await loadExternalDemos();
+      const demos = external || BUILTIN_DEMOS;
+      renderDemoCards(demos, host);
+      statusLine && (statusLine.textContent = external
+        ? "System Status: using /data/demos.json"
+        : "System Status: external demos not found — using built-in demos (OK).");
+    }
+    function renderDemoCards(demos, host){
+      demos.forEach(d=>{
+        const wrap = document.createElement("div"); wrap.className="panel"; wrap.style.border="1px dashed var(--ring)";
+        const title = document.createElement("h3"); title.textContent = d.title; title.style.margin="0"; title.style.padding="0.6rem 0.8rem"; title.style.borderBottom="1px solid var(--ring)";
+        const pane = document.createElement("div"); pane.className="pane";
+        const apply = document.createElement("button"); apply.className="btn primary"; apply.textContent = "Load Demo";
+        apply.addEventListener("click", ()=>{
+          const cfg = Object.assign({}, DEFAULTS, { style:"hilma_spiral" }, d.config);
+          engine.setConfig(cfg).render();
+          for (const [k,v] of Object.entries(cfg)){
+            if (!form.elements[k]) continue;
+            if (Array.isArray(v)) form.elements[k].value = v.join("\n"); else form.elements[k].value = v;
+          }
+          ls.set("cosmo.config", cfg);
+          evo.renders++; evo.modesUsed[String(cfg.mode)]=true; ls.set("cosmo.evo", evo); maybeUnlock();
+          toast("Demo loaded.");
+        });
+        pane.appendChild(apply); wrap.appendChild(title); wrap.appendChild(pane); host.appendChild(wrap);
+      });
+    }
+    initDemos();
+
+    // Gallery
+    function renderGallery(){
+      const host = $("#gallery"); host.innerHTML = "";
+      const items = ls.get("cosmo.gallery", []);
+      if (!items.length){ host.innerHTML = "<p class='hint'>Your saved plates will appear here.</p>"; return; }
+      items.forEach((card, idx)=>{
+        const div = document.createElement("div"); div.className="card";
+        const img = document.createElement("img"); img.alt = "Plate preview";
+        (async ()=>{
+          const tmp = new CosmogenesisEngine(svg, card.cfg).render();
+          const blob = await tmp.exportPNGBlob(512);
+          img.src = URL.createObjectURL(blob);
+          setTimeout(()=> URL.revokeObjectURL(img.src), 6000);
+          engine.render();
+        })();
+        const meta = document.createElement("div"); meta.className="meta"; meta.textContent = new Date(card.t).toLocaleString();
+        const row = document.createElement("div"); row.style.display="flex"; row.style.gap=".5rem"; row.style.padding=".5rem";
+        const load = document.createElement("button"); load.className="btn"; load.textContent="Load";
+        load.addEventListener("click", ()=>{
+          engine.setConfig(card.cfg).render();
+          for (const [k,v] of Object.entries(card.cfg)){ if (form.elements[k]) form.elements[k].value = Array.isArray(v)? v.join("\n"): v; }
+          ls.set("cosmo.config", card.cfg); toast("Loaded from gallery.");
+        });
+        const del = document.createElement("button"); del.className="btn"; del.textContent="Delete";
+        del.addEventListener("click", ()=>{ const g = ls.get("cosmo.gallery", []); g.splice(idx,1); ls.set("cosmo.gallery", g); renderGallery(); });
+        row.appendChild(load); row.appendChild(del);
+        div.appendChild(img); div.appendChild(meta); div.appendChild(row);
+        host.appendChild(div);
+      });
+    }
+    renderGallery();
+    $("#btn-save-card").addEventListener("click", ()=>{
+      const cfg = getFormConfig();
+      const card = { t:Date.now(), cfg, thumb:null };
+      const gallery = ls.get("cosmo.gallery", []);
+      gallery.unshift(card); ls.set("cosmo.gallery", gallery);
+      renderGallery(); toast("Saved to gallery.");
+    });
+    $("#btn-gallery-export").addEventListener("click", ()=>{ download("cosmogenesis-gallery.json", new Blob([JSON.stringify(ls.get("cosmo.gallery", []), null, 2)], {type:"application/json"})); toast("Gallery exported."); });
+    $("#btn-gallery-import").addEventListener("click", ()=>{
+      const input = document.createElement("input"); input.type="file"; input.accept="application/json";
+      input.onchange = async (e)=>{ const f = e.target.files[0]; if (!f) return;
+        try{ const arr = JSON.parse(await f.text()); if (Array.isArray(arr)){ ls.set("cosmo.gallery", arr); renderGallery(); toast("Gallery imported."); } else toast("Invalid JSON."); }catch{ toast("Invalid JSON."); }};
+      input.click();
+    });
+    $("#btn-gallery-clear").addEventListener("click", ()=>{ if (!confirm("Clear gallery?")) return; ls.del("cosmo.gallery"); renderGallery(); toast("Gallery cleared."); });
+
+    // Share & Import
+    $("#btn-share-link").addEventListener("click", async ()=>{
+      const cfg = JSON.stringify(getFormConfig());
+      const link = `${location.origin}${location.pathname}?cfg=${btoa(cfg)}`;
+      try{ await navigator.clipboard.writeText(link); toast("Share link copied."); }catch{ toast("Copy failed."); }
+    });
+    $("#btn-import").addEventListener("click", ()=>{
+      const raw = prompt("Paste a config JSON"); if (!raw) return;
+      try{
+        const cfg = JSON.parse(raw);
+        engine.setConfig(cfg).render();
+        for (const [k,v] of Object.entries(cfg)){ if (form.elements[k]) form.elements[k].value = Array.isArray(v)? v.join("\n"): v; }
+        ls.set("cosmo.config", cfg); toast("Config imported.");
+      }catch{ toast("Invalid JSON."); }
+    });
+
+    // Keyboard shortcuts
+    window.addEventListener("keydown", (e)=>{
+      if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+      const k = e.key.toLowerCase();
+      if (k==="r") $("#btn-random").click();
+      if (k==="s") $("#btn-svg").click();
+      if (k==="p") $("#btn-png").click();
+    });
+
+    // Tabs
+    (function tabbing(){
+      const tabs = $$(".tabs [role=tab]");
+      tabs.forEach(tab=>{
+        tab.addEventListener("click", ()=>{
+          tabs.forEach(t=> t.setAttribute("aria-selected","false"));
+          tab.setAttribute("aria-selected","true");
+          const ids = ["pane-build","pane-data","pane-demos","pane-gallery","pane-about"];
+          ids.forEach(id=>{ const el = $("#"+id); el.hidden = (tab.getAttribute("aria-controls")!==id); });
+        });
+      });
+    })();
+
+    // Ensure initial render persisted
+    if (!ls.get("cosmo.config", null)) engine.render();
+
+    // If status line exists (About tab), set initial OK state
+    statusLine && (statusLine.textContent = "System Status: ready.");
   </script>
 </body>
 </html>

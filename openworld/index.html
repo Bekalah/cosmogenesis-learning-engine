@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ain Soph Grove</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{margin:0;background:#0b0b0b;color:#e6e6e6;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;padding:16px;}
+    .mandala{width:200px;height:200px;margin:0 auto;border-radius:50%;position:relative;background:conic-gradient(#5e4ba8,#e6e6e6 90deg,#5e4ba8 180deg,#e6e6e6 270deg,#5e4ba8 360deg);box-shadow:0 0 12px #5e4ba8,inset 0 0 8px #262626;}
+    .mandala::before,.mandala::after{content:"";position:absolute;top:50%;left:50%;width:90%;height:2px;background:#111;transform:translate(-50%,-50%);}
+    .mandala::after{transform:translate(-50%,-50%) rotate(90deg);}
+    .mandala span{position:absolute;top:50%;left:50%;width:90%;height:2px;background:#111;transform:translate(-50%,-50%) rotate(45deg);}
+    .mandala span.diag2{transform:translate(-50%,-50%) rotate(-45deg);}
+  </style>
+</head>
+<body>
+  <h1>Ain Soph Grove</h1>
+  <p>Open world sanctuary of animals, plants, and crystals. Aeons weave theosophic harmony, echoing the grimoires of Dr. Skinner.</p>
+  <p>Hermetic seals meet Thelemic will, Kabalistic sefirot, Pagan seasons, and the Buddhist wheel of time in the whispering leaves.</p>
+  <figure>
+    <div class="mandala"><span></span><span class="diag2"></span></div>
+    <svg viewBox="0 0 200 200" width="200" height="200" aria-label="Aeonic time mandala">
+      <defs>
+        <radialGradient id="time-gradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#5e4ba8" />
+          <stop offset="100%" stop-color="#e6e6e6" />
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="90" fill="url(#time-gradient)" stroke="#262626" stroke-width="4"/>
+      <g stroke="#111" stroke-width="2">
+        <line x1="100" y1="10" x2="100" y2="190" />
+        <line x1="10" y1="100" x2="190" y2="100" />
+        <line x1="27" y1="27" x2="173" y2="173" />
+        <line x1="27" y1="173" x2="173" y2="27" />
+      </g>
+    </svg>
+    <figcaption>Mandala of time uniting alchemical, thelemic, sefirotic, pagan, and dharmic cycles.</figcaption>
+  </figure>
+</body>
+</html>
