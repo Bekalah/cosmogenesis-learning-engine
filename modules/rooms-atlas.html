@@ -19,6 +19,11 @@
     <script type="module">
       import { listRooms } from '/assets/js/engines/rooms-engine.js';
       const mount = document.getElementById('rooms-atlas');
+      listRooms().forEach(r => {
+        const a = document.createElement('a');
+        a.className = 'tile';
+        a.href = r.href;
+        a.innerHTML = `<strong>${r.name}</strong><span class="cap">${r.description}</span>`;
       listRooms().forEach(room => {
         const a = document.createElement('a');
         a.className = 'tile';

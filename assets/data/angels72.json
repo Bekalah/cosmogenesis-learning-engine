@@ -1,0 +1,506 @@
+[
+  {
+    "id": 1,
+    "name": "Vehuiah",
+    "attribute": "Will & New Beginnings",
+    "frequency": 396,
+    "color": "#cc3232"
+  },
+  {
+    "id": 2,
+    "name": "Jeliel",
+    "attribute": "Love & Wisdom",
+    "frequency": 417,
+    "color": "#cc3f32"
+  },
+  {
+    "id": 3,
+    "name": "Sitael",
+    "attribute": "Construction & Stability",
+    "frequency": 528,
+    "color": "#cc4c32"
+  },
+  {
+    "id": 4,
+    "name": "Elemiah",
+    "attribute": "Divine Power",
+    "frequency": 639,
+    "color": "#cc5932"
+  },
+  {
+    "id": 5,
+    "name": "Mahasiah",
+    "attribute": "Rectification",
+    "frequency": 741,
+    "color": "#cc6632"
+  },
+  {
+    "id": 6,
+    "name": "Lelahel",
+    "attribute": "Healing Light",
+    "frequency": 852,
+    "color": "#cc7232"
+  },
+  {
+    "id": 7,
+    "name": "Achaiah",
+    "attribute": "Patience",
+    "frequency": 963,
+    "color": "#cc7f32"
+  },
+  {
+    "id": 8,
+    "name": "Cahetel",
+    "attribute": "Blessings",
+    "frequency": 396,
+    "color": "#cc8c32"
+  },
+  {
+    "id": 9,
+    "name": "Haziel",
+    "attribute": "Mercy",
+    "frequency": 417,
+    "color": "#cc9932"
+  },
+  {
+    "id": 10,
+    "name": "Aladiah",
+    "attribute": "Grace",
+    "frequency": 528,
+    "color": "#cca532"
+  },
+  {
+    "id": 11,
+    "name": "Lauviah",
+    "attribute": "Victory",
+    "frequency": 639,
+    "color": "#ccb232"
+  },
+  {
+    "id": 12,
+    "name": "Hahaiah",
+    "attribute": "Refuge",
+    "frequency": 741,
+    "color": "#ccbf32"
+  },
+  {
+    "id": 13,
+    "name": "Iezalel",
+    "attribute": "Fidelity",
+    "frequency": 852,
+    "color": "#cbcc32"
+  },
+  {
+    "id": 14,
+    "name": "Mebahel",
+    "attribute": "Justice",
+    "frequency": 963,
+    "color": "#bfcc32"
+  },
+  {
+    "id": 15,
+    "name": "Hariel",
+    "attribute": "Purification",
+    "frequency": 396,
+    "color": "#b2cc32"
+  },
+  {
+    "id": 16,
+    "name": "Hakamiah",
+    "attribute": "Loyalty",
+    "frequency": 417,
+    "color": "#a5cc32"
+  },
+  {
+    "id": 17,
+    "name": "Lauviah",
+    "attribute": "Understanding",
+    "frequency": 528,
+    "color": "#98cc32"
+  },
+  {
+    "id": 18,
+    "name": "Caliel",
+    "attribute": "Truth",
+    "frequency": 639,
+    "color": "#8ccc32"
+  },
+  {
+    "id": 19,
+    "name": "Leuviah",
+    "attribute": "Expansion",
+    "frequency": 741,
+    "color": "#7fcc32"
+  },
+  {
+    "id": 20,
+    "name": "Pahaliah",
+    "attribute": "Redemption",
+    "frequency": 852,
+    "color": "#72cc32"
+  },
+  {
+    "id": 21,
+    "name": "Nelchael",
+    "attribute": "Learning",
+    "frequency": 963,
+    "color": "#65cc32"
+  },
+  {
+    "id": 22,
+    "name": "Yeiayel",
+    "attribute": "Fame",
+    "frequency": 396,
+    "color": "#59cc32"
+  },
+  {
+    "id": 23,
+    "name": "Melahel",
+    "attribute": "Cures",
+    "frequency": 417,
+    "color": "#4ccc32"
+  },
+  {
+    "id": 24,
+    "name": "Haheuiah",
+    "attribute": "Protection",
+    "frequency": 528,
+    "color": "#3fcc32"
+  },
+  {
+    "id": 25,
+    "name": "Nith-Haiah",
+    "attribute": "Wisdom",
+    "frequency": 639,
+    "color": "#32cc32"
+  },
+  {
+    "id": 26,
+    "name": "Haaiah",
+    "attribute": "Diplomacy",
+    "frequency": 741,
+    "color": "#32cc3f"
+  },
+  {
+    "id": 27,
+    "name": "Yerathel",
+    "attribute": "Propagation of Light",
+    "frequency": 852,
+    "color": "#32cc4c"
+  },
+  {
+    "id": 28,
+    "name": "Seheiah",
+    "attribute": "Longevity",
+    "frequency": 963,
+    "color": "#32cc59"
+  },
+  {
+    "id": 29,
+    "name": "Reiyel",
+    "attribute": "Liberation",
+    "frequency": 396,
+    "color": "#32cc66"
+  },
+  {
+    "id": 30,
+    "name": "Omael",
+    "attribute": "Fruitfulness",
+    "frequency": 417,
+    "color": "#32cc72"
+  },
+  {
+    "id": 31,
+    "name": "Lecabel",
+    "attribute": "Talent",
+    "frequency": 528,
+    "color": "#32cc7f"
+  },
+  {
+    "id": 32,
+    "name": "Vasariah",
+    "attribute": "Justice",
+    "frequency": 639,
+    "color": "#32cc8c"
+  },
+  {
+    "id": 33,
+    "name": "Yehuiah",
+    "attribute": "Subordination",
+    "frequency": 741,
+    "color": "#32cc99"
+  },
+  {
+    "id": 34,
+    "name": "Lehahiah",
+    "attribute": "Obedience",
+    "frequency": 852,
+    "color": "#32cca5"
+  },
+  {
+    "id": 35,
+    "name": "Chavakiah",
+    "attribute": "Reconciliation",
+    "frequency": 963,
+    "color": "#32ccb2"
+  },
+  {
+    "id": 36,
+    "name": "Menadel",
+    "attribute": "Work",
+    "frequency": 396,
+    "color": "#32ccbf"
+  },
+  {
+    "id": 37,
+    "name": "Aniel",
+    "attribute": "Courage",
+    "frequency": 417,
+    "color": "#32cbcc"
+  },
+  {
+    "id": 38,
+    "name": "Haamiah",
+    "attribute": "Ritual",
+    "frequency": 528,
+    "color": "#32bfcc"
+  },
+  {
+    "id": 39,
+    "name": "Rehael",
+    "attribute": "Healing",
+    "frequency": 639,
+    "color": "#32b2cc"
+  },
+  {
+    "id": 40,
+    "name": "Ieiazel",
+    "attribute": "Comfort",
+    "frequency": 741,
+    "color": "#32a5cc"
+  },
+  {
+    "id": 41,
+    "name": "Hahahel",
+    "attribute": "Mission",
+    "frequency": 852,
+    "color": "#3298cc"
+  },
+  {
+    "id": 42,
+    "name": "Mikael",
+    "attribute": "Unity",
+    "frequency": 963,
+    "color": "#328ccc"
+  },
+  {
+    "id": 43,
+    "name": "Veuliah",
+    "attribute": "Prosperity",
+    "frequency": 396,
+    "color": "#327fcc"
+  },
+  {
+    "id": 44,
+    "name": "Yelaiah",
+    "attribute": "Combat",
+    "frequency": 417,
+    "color": "#3272cc"
+  },
+  {
+    "id": 45,
+    "name": "Sealiah",
+    "attribute": "Motivation",
+    "frequency": 528,
+    "color": "#3265cc"
+  },
+  {
+    "id": 46,
+    "name": "Ariel",
+    "attribute": "Revelation",
+    "frequency": 639,
+    "color": "#3259cc"
+  },
+  {
+    "id": 47,
+    "name": "Asaliah",
+    "attribute": "Contemplation",
+    "frequency": 741,
+    "color": "#324ccc"
+  },
+  {
+    "id": 48,
+    "name": "Mihael",
+    "attribute": "Fertility",
+    "frequency": 852,
+    "color": "#323fcc"
+  },
+  {
+    "id": 49,
+    "name": "Vehuel",
+    "attribute": "Elevation",
+    "frequency": 963,
+    "color": "#3232cc"
+  },
+  {
+    "id": 50,
+    "name": "Daniel",
+    "attribute": "Mercy",
+    "frequency": 396,
+    "color": "#3f32cc"
+  },
+  {
+    "id": 51,
+    "name": "Hahasiah",
+    "attribute": "Alchemy",
+    "frequency": 417,
+    "color": "#4c32cc"
+  },
+  {
+    "id": 52,
+    "name": "Imamiah",
+    "attribute": "Atonement",
+    "frequency": 528,
+    "color": "#5932cc"
+  },
+  {
+    "id": 53,
+    "name": "Nanael",
+    "attribute": "Spiritual Communication",
+    "frequency": 639,
+    "color": "#6632cc"
+  },
+  {
+    "id": 54,
+    "name": "Nithael",
+    "attribute": "Eternity",
+    "frequency": 741,
+    "color": "#7232cc"
+  },
+  {
+    "id": 55,
+    "name": "Mebaiah",
+    "attribute": "Inspiration",
+    "frequency": 852,
+    "color": "#7f32cc"
+  },
+  {
+    "id": 56,
+    "name": "Poyel",
+    "attribute": "Support",
+    "frequency": 963,
+    "color": "#8c32cc"
+  },
+  {
+    "id": 57,
+    "name": "Nemamiah",
+    "attribute": "Discernment",
+    "frequency": 396,
+    "color": "#9932cc"
+  },
+  {
+    "id": 58,
+    "name": "Yeialel",
+    "attribute": "Mental Strength",
+    "frequency": 417,
+    "color": "#a532cc"
+  },
+  {
+    "id": 59,
+    "name": "Harahel",
+    "attribute": "Intellectual Riches",
+    "frequency": 528,
+    "color": "#b232cc"
+  },
+  {
+    "id": 60,
+    "name": "Mitzrael",
+    "attribute": "Reparation",
+    "frequency": 639,
+    "color": "#bf32cc"
+  },
+  {
+    "id": 61,
+    "name": "Umabel",
+    "attribute": "Affinity",
+    "frequency": 741,
+    "color": "#cc32cb"
+  },
+  {
+    "id": 62,
+    "name": "Iahhel",
+    "attribute": "Knowledge",
+    "frequency": 852,
+    "color": "#cc32bf"
+  },
+  {
+    "id": 63,
+    "name": "Anauel",
+    "attribute": "Unity",
+    "frequency": 963,
+    "color": "#cc32b2"
+  },
+  {
+    "id": 64,
+    "name": "Mehiel",
+    "attribute": "Inspiration",
+    "frequency": 396,
+    "color": "#cc32a5"
+  },
+  {
+    "id": 65,
+    "name": "Damabiah",
+    "attribute": "Wellspring",
+    "frequency": 417,
+    "color": "#cc3298"
+  },
+  {
+    "id": 66,
+    "name": "Manakel",
+    "attribute": "Support",
+    "frequency": 528,
+    "color": "#cc328c"
+  },
+  {
+    "id": 67,
+    "name": "Eyael",
+    "attribute": "Transformation",
+    "frequency": 639,
+    "color": "#cc327f"
+  },
+  {
+    "id": 68,
+    "name": "Habuhiah",
+    "attribute": "Healing of Nature",
+    "frequency": 741,
+    "color": "#cc3272"
+  },
+  {
+    "id": 69,
+    "name": "Rochel",
+    "attribute": "Restitution",
+    "frequency": 852,
+    "color": "#cc3265"
+  },
+  {
+    "id": 70,
+    "name": "Jabamiah",
+    "attribute": "Alchemy",
+    "frequency": 963,
+    "color": "#cc3259"
+  },
+  {
+    "id": 71,
+    "name": "Haiaiel",
+    "attribute": "Valor",
+    "frequency": 396,
+    "color": "#cc324c"
+  },
+  {
+    "id": 72,
+    "name": "Mumiah",
+    "attribute": "Rebirth",
+    "frequency": 417,
+    "color": "#cc323f"
+  }
+]

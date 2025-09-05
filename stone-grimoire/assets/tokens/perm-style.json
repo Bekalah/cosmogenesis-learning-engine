@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Circuitum99 — Perm Style",
+    "name": "circuitum99 — Perm Style",
     "version": "2.1.0",
     "author": "Virelai Ezra Lux",
     "materials_version": "obsidian-volcanic-1.0",
@@ -58,6 +58,7 @@
   },
   "a11y": { "min_contrast": 4.5, "motion": "reduce", "autoplay": false, "strobe": false }
   "meta": { "name": "Circuitum99 -- Perm Style", "version": "3.7.0", "author": "Virelai Ezra Lux (Rebecca Respawn)", "materials_version": "obsidian-volcanic-pearlescent-1.1", "nd_safe": true, "notes": "World-of-Enchantment baseline for business + apps. Avalon (Dion Fortune) present. Theosophical Aeons path available as flavor. Violet Flame ↔ Respawn Gate alias (Ray VI). Alex Grey visionary grid. Andrew Gonzalez velvet. Nacre/Moonstone/Abalone iridescence. Witch-as-the-Coven protection sigil (Hamsa/Evil Eye) encoded. Solfeggio × BioGeometry color-healing. Egregores + Consecration Angels + Pillars + Tarot. Subtle true-fairy shimmer in walls." },
+  "meta": { "name": "circuitum99 -- Perm Style", "version": "3.7.0", "author": "Virelai Ezra Lux (Rebecca Respawn)", "materials_version": "obsidian-volcanic-pearlescent-1.1", "nd_safe": true, "notes": "World-of-Enchantment baseline for business + apps. Avalon (Dion Fortune) present. Theosophical Aeons path available as flavor. Violet Flame ↔ Respawn Gate alias (Ray VI). Alex Grey visionary grid. Andrew Gonzalez velvet. Nacre/Moonstone/Abalone iridescence. Witch-as-the-Coven protection sigil (Hamsa/Evil Eye) encoded. Solfeggio × BioGeometry color-healing. Egregores + Consecration Angels + Pillars + Tarot. Subtle true-fairy shimmer in walls." },
   "palette": {
     "void":"#0B0B0B",
     "ink":"#141414",

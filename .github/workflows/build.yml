@@ -1,0 +1,39 @@
+name: build
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout engine
+        uses: actions/checkout@v4
+      - name: Checkout circuitum99
+        uses: actions/checkout@v4
+        with:
+          repository: rebecca/circuitum99
+          path: ../circuitum99
+      - name: Checkout liber-arcanae
+        uses: actions/checkout@v4
+        with:
+          repository: rebecca/liber-arcanae
+          path: ../liber-arcanae
+      - name: Checkout stone-cathedral
+        uses: actions/checkout@v4
+        with:
+          repository: rebecca/stone-cathedral
+          path: ../stone-cathedral
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm run build
+      - name: Upload registry artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: registry
+          path: registry/registry.json

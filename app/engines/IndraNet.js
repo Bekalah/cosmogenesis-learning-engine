@@ -28,6 +28,10 @@ export class IndraNet {
         numerology: true
       }
       palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
+        numerology: true,
+        angels: true
+      }
+      palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
     };
   }
 
@@ -72,6 +76,16 @@ export class IndraNet {
         const x = Math.cos(angle) * rad;
         const y = Math.sin(angle) * rad;
         const node = this._circle(x, y, cfg.nodeSize, { fill: cfg.palette.node });
+        let fill = cfg.palette.node;
+        let label;
+        if (cfg.layers.angels && this.network?.angels) {
+          const a = this.network.angels[r * perRing + i];
+          if (a) {
+            fill = a.color || fill;
+            label = a.name;
+          }
+        }
+        const node = this._circle(x, y, cfg.nodeSize, { fill }, label);
         this.svg.appendChild(node);
         nodes.push({ x, y, ring: r, index: i });
       }
@@ -93,11 +107,17 @@ export class IndraNet {
 
   // helper to draw a circle
   _circle(cx, cy, r, attrs = {}) {
+  _circle(cx, cy, r, attrs = {}, label) {
     const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c.setAttribute('cx', cx);
     c.setAttribute('cy', cy);
     c.setAttribute('r', r);
     for (const k in attrs) c.setAttribute(k, attrs[k]);
+    if (label) {
+      const t = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      t.textContent = label;
+      c.appendChild(t);
+    }
     return c;
   }
 
@@ -145,6 +165,9 @@ export class IndraNet {
       963: '#ee82ee'
     };
     return map[freq] || '#ffffff';
+  }
+
+    return c;
   }
 
   // helper to draw a link
