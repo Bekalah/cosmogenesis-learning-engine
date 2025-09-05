@@ -3,6 +3,9 @@
 Creates a museum-quality piece of visionary art inspired by Alex Grey.
 The image is rendered at 2048x2048 resolution and saved to a
 timestamped "Visionary_Dream_YYYYMMDD_HHMMSS.png" file.
+
+The image is rendered at 2048x2048 resolution and saved as
+"Visionary_Dream.png".
 """
 
 # Imports and setup ---------------------------------------------------------
@@ -12,6 +15,7 @@ import math
 import random
 from pathlib import Path
 from datetime import datetime
+
 
 from PIL import Image, ImageDraw
 
@@ -87,6 +91,8 @@ def main() -> None:
 
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output = Path(f"Visionary_Dream_{stamp}.png")
+    output = Path("Visionary_Dream.png")
+
     image.save(output)
     print(f"Art saved to {output.resolve()}")
 
