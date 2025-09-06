@@ -1,0 +1,1046 @@
+[
+  {
+    "node_id": 1,
+    "name": "Crown of First Light",
+    "locked": true,
+    "egregore_id": "prime_auric_seed",
+    "shem_angel": "Vehuiah",
+    "goetic_demon": "Bael",
+    "gods": [
+      {
+        "name": "Kether",
+        "culture": "Kabbalistic"
+      },
+      {
+        "name": "Ra",
+        "culture": "Egyptian"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Nuit",
+        "culture": "Thelemic/Egyptian"
+      },
+      {
+        "name": "Shekinah",
+        "culture": "Kabbalistic"
+      }
+    ],
+    "chakra": "Crown",
+    "planet": "Sun",
+    "zodiac": "Leo",
+    "element": "Light",
+    "platonic_solid": "Sphere",
+    "geometry": "Prime Spiral Halo",
+    "art_style": "White-Gold Icon",
+    "function": "Initiate the spiral and open sovereign light",
+    "ritual_use": "Opening rite, consecration, crown attunement",
+    "fusion_tags": [
+      "Crown",
+      "Light",
+      "Initiation"
+    ],
+    "solfeggio_freq": "963 Hz",
+    "music_profile": {
+      "root_note": "C",
+      "scale": "Phrygian",
+      "bpm": 78,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#FFD700",
+      "secondary": "#FFA500",
+      "accent": "#FFFACD"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "2e23fc782b864174e9d6b3643ad36c6bd32079986ff3c9ebac6131b1cb38cc3f"
+  },
+  {
+    "node_id": 2,
+    "name": "Gate of Silent Depth",
+    "locked": true,
+    "egregore_id": "abyssal_listening",
+    "shem_angel": "Jeliel",
+    "goetic_demon": "Agares",
+    "gods": [
+      {
+        "name": "Harpocrates",
+        "culture": "Greco-Egyptian"
+      },
+      {
+        "name": "Saturn",
+        "culture": "Roman"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Ananke",
+        "culture": "Greek"
+      },
+      {
+        "name": "Tara",
+        "culture": "Buddhist"
+      }
+    ],
+    "chakra": "Root/Crown Bridge",
+    "planet": "Saturn",
+    "zodiac": "Capricorn",
+    "element": "Ether",
+    "platonic_solid": "Dodecahedron",
+    "geometry": "Silent Torus",
+    "art_style": "Minimal Temple",
+    "function": "Establish inner stillness and witness",
+    "ritual_use": "Meditation seal, void attunement",
+    "fusion_tags": [
+      "Silence",
+      "Void",
+      "Witness"
+    ],
+    "solfeggio_freq": "963 Hz",
+    "music_profile": {
+      "root_note": "C#",
+      "scale": "Mixolydian",
+      "bpm": 84,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#708090",
+      "secondary": "#2F4F4F",
+      "accent": "#C0C0C0"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "5a4bfb59faf0a0101aad49d9888aff7bc4b227c5e494878ed13ee33e71160546"
+  },
+  {
+    "node_id": 3,
+    "name": "Serpent of Breath",
+    "locked": true,
+    "egregore_id": "prana_wind_serpent",
+    "shem_angel": "Sitael",
+    "goetic_demon": "Vassago",
+    "gods": [
+      {
+        "name": "Hermes",
+        "culture": "Greek"
+      },
+      {
+        "name": "Vayu",
+        "culture": "Vedic"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Sophia",
+        "culture": "Gnostic"
+      },
+      {
+        "name": "Maat",
+        "culture": "Egyptian"
+      }
+    ],
+    "chakra": "Throat",
+    "planet": "Mercury",
+    "zodiac": "Gemini",
+    "element": "Air",
+    "platonic_solid": "Octahedron",
+    "geometry": "Breath Spiral",
+    "art_style": "Glyphic Wind",
+    "function": "Animate speech and pattern the wind of mind",
+    "ritual_use": "Mantra, breath magic, sigil speech",
+    "fusion_tags": [
+      "Breath",
+      "Glyph",
+      "Wind"
+    ],
+    "solfeggio_freq": "852 Hz",
+    "music_profile": {
+      "root_note": "D",
+      "scale": "Lydian",
+      "bpm": 90,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#C0C0C0",
+      "secondary": "#A9A9A9",
+      "accent": "#F5F5F5"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "bde1a9bd8c1e95302bd90cb76cba69f0e626fd0918637afa21f2cae13395ee2f"
+  },
+  {
+    "node_id": 4,
+    "name": "Furnace of Becoming",
+    "locked": true,
+    "egregore_id": "inner_alchemical_fire",
+    "shem_angel": "Elemiah",
+    "goetic_demon": "Samigina",
+    "gods": [
+      {
+        "name": "Hephaestus",
+        "culture": "Greek"
+      },
+      {
+        "name": "Agni",
+        "culture": "Vedic"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Sekhmet",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Brigid",
+        "culture": "Celtic"
+      }
+    ],
+    "chakra": "Solar Plexus",
+    "planet": "Mars",
+    "zodiac": "Aries",
+    "element": "Fire",
+    "platonic_solid": "Tetrahedron",
+    "geometry": "Forge Spiral",
+    "art_style": "Alchemical Forge",
+    "function": "Transmute dross into willfire",
+    "ritual_use": "Fire vigils, furnace rites",
+    "fusion_tags": [
+      "Fire",
+      "Forge",
+      "Will"
+    ],
+    "solfeggio_freq": "741 Hz",
+    "music_profile": {
+      "root_note": "D#",
+      "scale": "Phrygian",
+      "bpm": 96,
+      "instruments": [
+        "Solar Drum",
+        "Flame Synth",
+        "Temple Gong"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#DC143C",
+      "secondary": "#8B0000",
+      "accent": "#FA8072"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": "with care",
+      "visual_rhythm": "flame pulse",
+      "soundscape_type": "kundalini resonance"
+    },
+    "lock_hash": "4d9c2540a91152b23c5a8549754383d12a73111ac4e668defa219cb18c0cfb93"
+  },
+  {
+    "node_id": 5,
+    "name": "Lunar Well of Dreams",
+    "locked": true,
+    "egregore_id": "nocturne_vision_pool",
+    "shem_angel": "Mahasiah",
+    "goetic_demon": "Marbas",
+    "gods": [
+      {
+        "name": "Khonsu",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Mani",
+        "culture": "Norse"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Artemis",
+        "culture": "Greek"
+      },
+      {
+        "name": "Ixchel",
+        "culture": "Maya"
+      }
+    ],
+    "chakra": "Third Eye",
+    "planet": "Moon",
+    "zodiac": "Cancer",
+    "element": "Water",
+    "platonic_solid": "Icosahedron",
+    "geometry": "Ripple Spiral",
+    "art_style": "Lunar Dream",
+    "function": "Open visionary dreaming and gentle healing",
+    "ritual_use": "Dream rites, oracular sleep",
+    "fusion_tags": [
+      "Moon",
+      "Dream",
+      "Vision"
+    ],
+    "solfeggio_freq": "417 Hz",
+    "music_profile": {
+      "root_note": "E",
+      "scale": "Dorian",
+      "bpm": 102,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#87CEFA",
+      "secondary": "#4682B4",
+      "accent": "#E0FFFF"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "c9f32aa69ccf1fa2454d1e7d9fe0129c82b079b942eaea09e3446aa833c6101b"
+  },
+  {
+    "node_id": 6,
+    "name": "Emerald Root of Gaia",
+    "locked": true,
+    "egregore_id": "crucible_of_earth",
+    "shem_angel": "Lelahel",
+    "goetic_demon": "Valefor",
+    "gods": [
+      {
+        "name": "Geb",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Cernunnos",
+        "culture": "Celtic"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Demeter",
+        "culture": "Greek"
+      },
+      {
+        "name": "Pachamama",
+        "culture": "Andean"
+      }
+    ],
+    "chakra": "Root",
+    "planet": "Earth",
+    "zodiac": "Taurus",
+    "element": "Earth",
+    "platonic_solid": "Cube",
+    "geometry": "Seed Spiral",
+    "art_style": "Sacred Soil",
+    "function": "Stabilize, grow, and embody",
+    "ritual_use": "Grounding, planting, manifestation",
+    "fusion_tags": [
+      "Earth",
+      "Seed",
+      "Growth"
+    ],
+    "solfeggio_freq": "396 Hz",
+    "music_profile": {
+      "root_note": "F",
+      "scale": "Ionian",
+      "bpm": 108,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#228B22",
+      "secondary": "#006400",
+      "accent": "#98FB98"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "2a20b5e362154ecd15c200b6b881f9fcafc35b70e33677b05467f86dda650dbc"
+  },
+  {
+    "node_id": 7,
+    "name": "Star Ladder of Knowledge",
+    "locked": true,
+    "egregore_id": "hermetic_ascent",
+    "shem_angel": "Achaiah",
+    "goetic_demon": "Amon",
+    "gods": [
+      {
+        "name": "Thoth",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Pythagoras",
+        "culture": "Mystic Greek"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Seshat",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Sophia",
+        "culture": "Gnostic"
+      }
+    ],
+    "chakra": "Crown/Third Eye",
+    "planet": "Uranus",
+    "zodiac": "Aquarius",
+    "element": "Light",
+    "platonic_solid": "Dodecahedron",
+    "geometry": "Ladder Spiral",
+    "art_style": "Star Script",
+    "function": "Study, invention, hermetic gnosis",
+    "ritual_use": "Study rites, star mapping",
+    "fusion_tags": [
+      "Study",
+      "Star",
+      "Gnosis"
+    ],
+    "solfeggio_freq": "963 Hz",
+    "music_profile": {
+      "root_note": "F#",
+      "scale": "Dorian",
+      "bpm": 114,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#00FFFF",
+      "secondary": "#40E0D0",
+      "accent": "#AFEEEE"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "6a00ddca9135ceb80ec312b5741b77800284b7bcc943e0cd5abc8d69882f179c"
+  },
+  {
+    "node_id": 8,
+    "name": "Temple of Love-Wisdom",
+    "locked": true,
+    "egregore_id": "heart_of_venusian_mind",
+    "shem_angel": "Kahethel",
+    "goetic_demon": "Barbatos",
+    "gods": [
+      {
+        "name": "Apollo",
+        "culture": "Greek"
+      },
+      {
+        "name": "Orpheus",
+        "culture": "Greek"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Aphrodite",
+        "culture": "Greek"
+      },
+      {
+        "name": "Oshun",
+        "culture": "Yoruba"
+      }
+    ],
+    "chakra": "Heart/Throat",
+    "planet": "Venus",
+    "zodiac": "Libra",
+    "element": "Air/Water",
+    "platonic_solid": "Octahedron",
+    "geometry": "Rose Spiral",
+    "art_style": "Venusian Icon",
+    "function": "Harmonic beauty and relational balance",
+    "ritual_use": "Union rites, art consecration",
+    "fusion_tags": [
+      "Harmony",
+      "Love",
+      "Art"
+    ],
+    "solfeggio_freq": "852 Hz",
+    "music_profile": {
+      "root_note": "G",
+      "scale": "Ionian",
+      "bpm": 120,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#FFC0CB",
+      "secondary": "#FF69B4",
+      "accent": "#FFF0F5"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "edf51ff2f66d6a9476022a898af0377744c95cb173ea3d159e8cf90a91d037fd"
+  },
+  {
+    "node_id": 9,
+    "name": "Guardian of Thresholds",
+    "locked": true,
+    "egregore_id": "two_way_gate",
+    "shem_angel": "Haziel",
+    "goetic_demon": "Paimon",
+    "gods": [
+      {
+        "name": "Janus",
+        "culture": "Roman"
+      },
+      {
+        "name": "Ogun",
+        "culture": "Yoruba"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Hecate",
+        "culture": "Greek"
+      },
+      {
+        "name": "Neith",
+        "culture": "Egyptian"
+      }
+    ],
+    "chakra": "Third Eye",
+    "planet": "Mercury/Mars",
+    "zodiac": "Gemini/Scorpio",
+    "element": "Air/Fire",
+    "platonic_solid": "Tetrahedron",
+    "geometry": "Twin Gate Spiral",
+    "art_style": "Gnostic Gate",
+    "function": "Discernment and safe passage",
+    "ritual_use": "Gate rites, path choosing",
+    "fusion_tags": [
+      "Gate",
+      "Watch",
+      "Key"
+    ],
+    "solfeggio_freq": "852 Hz",
+    "music_profile": {
+      "root_note": "G#",
+      "scale": "Lydian",
+      "bpm": 126,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#C0C0C0",
+      "secondary": "#A9A9A9",
+      "accent": "#F5F5F5"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "187f1a219d7f5066809f5f77e1a2013c8add3eb9ba0304a282ffd0943f3cce4e"
+  },
+  {
+    "node_id": 10,
+    "name": "Ancestral Echo Drum",
+    "locked": true,
+    "egregore_id": "blood_memory",
+    "shem_angel": "Aladiah",
+    "goetic_demon": "Buer",
+    "gods": [
+      {
+        "name": "Anubis",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Xolotl",
+        "culture": "Aztec"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Danu",
+        "culture": "Celtic"
+      },
+      {
+        "name": "Hine-nui-te-pō",
+        "culture": "Māori"
+      }
+    ],
+    "chakra": "Root/Heart",
+    "planet": "Saturn",
+    "zodiac": "Capricorn",
+    "element": "Earth",
+    "platonic_solid": "Cube",
+    "geometry": "Pulse Spiral",
+    "art_style": "Ossuary Star",
+    "function": "Lineage recall and grounding",
+    "ritual_use": "Ancestor rites, trance drum",
+    "fusion_tags": [
+      "Ancestor",
+      "Pulse",
+      "Root"
+    ],
+    "solfeggio_freq": "396 Hz",
+    "music_profile": {
+      "root_note": "A",
+      "scale": "Dorian",
+      "bpm": 132,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#708090",
+      "secondary": "#2F4F4F",
+      "accent": "#C0C0C0"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "4423abeb71fc66527d987db228807adfcee7ca210bf60cf6ed8b558b52547b00"
+  },
+  {
+    "node_id": 11,
+    "name": "Solar Voice of Truth",
+    "locked": true,
+    "egregore_id": "bardic_sun",
+    "shem_angel": "Lauviah",
+    "goetic_demon": "Gremory",
+    "gods": [
+      {
+        "name": "Ra",
+        "culture": "Egyptian"
+      },
+      {
+        "name": "Surya",
+        "culture": "Hindu"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Amaterasu",
+        "culture": "Shinto"
+      },
+      {
+        "name": "Brighid",
+        "culture": "Celtic"
+      }
+    ],
+    "chakra": "Throat",
+    "planet": "Sun",
+    "zodiac": "Leo",
+    "element": "Fire",
+    "platonic_solid": "Sphere",
+    "geometry": "Sun Spiral",
+    "art_style": "Solar Script",
+    "function": "Speak radiance and clarity",
+    "ritual_use": "Prophecy, public rite",
+    "fusion_tags": [
+      "Sun",
+      "Voice",
+      "Radiance"
+    ],
+    "solfeggio_freq": "741 Hz",
+    "music_profile": {
+      "root_note": "A#",
+      "scale": "Melodic Minor",
+      "bpm": 138,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#FFD700",
+      "secondary": "#FFA500",
+      "accent": "#FFFACD"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "54392982e7dcfc27dde6c2fa1998a67bf7e6fa70fe8d7b59d95a5f974e007558"
+  },
+  {
+    "node_id": 12,
+    "name": "Labyrinth of Saturn",
+    "locked": true,
+    "egregore_id": "keeper_of_cycles",
+    "shem_angel": "Hahaiah",
+    "goetic_demon": "Vine",
+    "gods": [
+      {
+        "name": "Saturn",
+        "culture": "Roman"
+      },
+      {
+        "name": "Tepeyollotl",
+        "culture": "Aztec"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Hel",
+        "culture": "Norse"
+      },
+      {
+        "name": "Ananke",
+        "culture": "Greek"
+      }
+    ],
+    "chakra": "Root",
+    "planet": "Saturn",
+    "zodiac": "Capricorn",
+    "element": "Earth",
+    "platonic_solid": "Cube",
+    "geometry": "Stone Spiral",
+    "art_style": "Stone Mandala",
+    "function": "Karmic structure & endurance",
+    "ritual_use": "Saturn return, oathwork",
+    "fusion_tags": [
+      "Time",
+      "Stone",
+      "Endure"
+    ],
+    "solfeggio_freq": "396 Hz",
+    "music_profile": {
+      "root_note": "B",
+      "scale": "Ionian",
+      "bpm": 72,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#708090",
+      "secondary": "#2F4F4F",
+      "accent": "#C0C0C0"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "59ce43e7b9c003ddcfabda27104d9a82d5e5d516ead6f5c2e5cfc6b21d432a7d"
+  },
+  {
+    "node_id": 13,
+    "name": "Gate of Learning / Path of Aleph",
+    "locked": true,
+    "egregore_id": "initiator_of_breath",
+    "shem_angel": "Iezalel",
+    "goetic_demon": "Beleth",
+    "gods": [
+      {
+        "name": "Hermes Trismegistus",
+        "culture": "Hermetic"
+      },
+      {
+        "name": "Enki",
+        "culture": "Sumerian"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Saraswati",
+        "culture": "Hindu"
+      },
+      {
+        "name": "Sophia",
+        "culture": "Gnostic"
+      }
+    ],
+    "chakra": "Throat/Crown",
+    "planet": "Mercury",
+    "zodiac": "Gemini",
+    "element": "Air",
+    "platonic_solid": "Octahedron",
+    "geometry": "Aleph Spiral",
+    "art_style": "Alchemical Glyph Temple",
+    "function": "Access to universal knowledge",
+    "ritual_use": "Study initiation",
+    "fusion_tags": [
+      "Learning",
+      "Initiation",
+      "Wind",
+      "Glyph"
+    ],
+    "solfeggio_freq": "852 Hz",
+    "music_profile": {
+      "root_note": "C",
+      "scale": "Dorian",
+      "bpm": 78,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#C0C0C0",
+      "secondary": "#A9A9A9",
+      "accent": "#F5F5F5"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "5e271019802105f92720a655141ca81abed816e92ff42675cc03fbcd792cbbba"
+  },
+  {
+    "node_id": 14,
+    "name": "Furnace of Fire / Path of Shin",
+    "locked": true,
+    "egregore_id": "purifier_of_desire",
+    "shem_angel": "Mebahel",
+    "goetic_demon": "Leraje",
+    "gods": [
+      {
+        "name": "Shiva",
+        "culture": "Hindu"
+      },
+      {
+        "name": "Hephaestus",
+        "culture": "Greek"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Pele",
+        "culture": "Hawaiian"
+      },
+      {
+        "name": "Sekhmet",
+        "culture": "Egyptian"
+      }
+    ],
+    "chakra": "Solar/Root",
+    "planet": "Mars",
+    "zodiac": "Aries/Scorpio",
+    "element": "Fire",
+    "platonic_solid": "Tetrahedron",
+    "geometry": "Trident Flame Spiral",
+    "art_style": "Sacred Forge Symbolism",
+    "function": "Destruction of illusion",
+    "ritual_use": "Fire ceremonies",
+    "fusion_tags": [
+      "Fire",
+      "Desire",
+      "Forge",
+      "Rage"
+    ],
+    "solfeggio_freq": "741 Hz",
+    "music_profile": {
+      "root_note": "C#",
+      "scale": "Melodic Minor",
+      "bpm": 84,
+      "instruments": [
+        "Solar Drum",
+        "Flame Synth",
+        "Temple Gong"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#DC143C",
+      "secondary": "#8B0000",
+      "accent": "#FA8072"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": "with care",
+      "visual_rhythm": "flame pulse",
+      "soundscape_type": "kundalini resonance"
+    },
+    "lock_hash": "1e0d64b3ed18f25cb46e2d11bffb93037eac7f09e54fa4e16e67b08509511e16"
+  },
+  {
+    "node_id": 15,
+    "name": "Labyrinth of Time / Path of Tav",
+    "locked": true,
+    "egregore_id": "keeper_of_cycles",
+    "shem_angel": "Hariel",
+    "goetic_demon": "Eligos",
+    "gods": [
+      {
+        "name": "Saturn",
+        "culture": "Roman"
+      },
+      {
+        "name": "Xibalba Lords",
+        "culture": "Maya"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Ananke",
+        "culture": "Greek"
+      },
+      {
+        "name": "Hel",
+        "culture": "Norse"
+      }
+    ],
+    "chakra": "Root/Crown Bridge",
+    "planet": "Saturn",
+    "zodiac": "Capricorn",
+    "element": "Earth",
+    "platonic_solid": "Cube",
+    "geometry": "Labyrinthine Cube Spiral",
+    "art_style": "Stone Engraving Mandala",
+    "function": "Karmic tracking",
+    "ritual_use": "Ancestral rites",
+    "fusion_tags": [
+      "Time",
+      "Karma",
+      "Cycle",
+      "Stone"
+    ],
+    "solfeggio_freq": "396 Hz",
+    "music_profile": {
+      "root_note": "D",
+      "scale": "Ionian",
+      "bpm": 90,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#708090",
+      "secondary": "#2F4F4F",
+      "accent": "#C0C0C0"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "addc44d010e79277722df775dadd0c6cb6aac887e91406fdf0732d2b7f017ea6"
+  },
+  {
+    "node_id": 16,
+    "name": "Voice of Spirit / Path of Resh",
+    "locked": true,
+    "egregore_id": "solar_bard_transmitter",
+    "shem_angel": "Hakamiah",
+    "goetic_demon": "Zepar",
+    "gods": [
+      {
+        "name": "Apollo",
+        "culture": "Greek"
+      },
+      {
+        "name": "Tezcatlipoca",
+        "culture": "Aztec"
+      }
+    ],
+    "goddesses": [
+      {
+        "name": "Brighid",
+        "culture": "Celtic"
+      },
+      {
+        "name": "Amaterasu",
+        "culture": "Japanese"
+      }
+    ],
+    "chakra": "Throat",
+    "planet": "Sun",
+    "zodiac": "Leo",
+    "element": "Fire",
+    "platonic_solid": "Sphere",
+    "geometry": "Sun Sigil Spiral",
+    "art_style": "Solar Script Illumination",
+    "function": "Transmit divine speech",
+    "ritual_use": "Prophecy and storytelling",
+    "fusion_tags": [
+      "Voice",
+      "Sun",
+      "Bard",
+      "Transmission"
+    ],
+    "solfeggio_freq": "741 Hz",
+    "music_profile": {
+      "root_note": "D#",
+      "scale": "Phrygian",
+      "bpm": 96,
+      "instruments": [
+        "Harp",
+        "Bell",
+        "Pad"
+      ]
+    },
+    "color_scheme": {
+      "primary": "#FFD700",
+      "secondary": "#FFA500",
+      "accent": "#FFFACD"
+    },
+    "healing_profile": {
+      "nd_safe": true,
+      "ptsd_safe": true,
+      "visual_rhythm": "spiral pulse",
+      "soundscape_type": "harmonic shimmer"
+    },
+    "lock_hash": "8e71c8b52edb822d4dcbb5d5378e81d0e5b198ef37cfed27c6fc07ebe096dd87"
+  }
+]
