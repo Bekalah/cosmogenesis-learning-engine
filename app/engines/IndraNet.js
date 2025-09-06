@@ -32,6 +32,10 @@ export class IndraNet {
         angels: true
       }
       palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
+        numerology: true,
+        angels: true
+      }
+      palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
     };
   }
 
