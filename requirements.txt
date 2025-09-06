@@ -1,3 +1,10 @@
+
+# Install via system package if PyPI is unavailable.
+# If PyPI is unreachable, install via system package
+# (e.g., `sudo apt-get install python3-pil`) or a downloaded wheel.
+# Pin to a known-good version for consistency.
+Pillow==10.4.0
+
 # Add your other deps below, pinned if possible:
 numpy==1.26.4
 matplotlib==3.9.2
