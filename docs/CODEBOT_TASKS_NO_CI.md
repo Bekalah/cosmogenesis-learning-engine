@@ -12,7 +12,7 @@ git subtree add —prefix cosmogenesis_learning_engine <REMOTE_URL_C99> main —
 # PERM STYLE TOKENS
 stone_grimoire/assets/tokens/perm-style.json
 {
-  “meta”: { “name”: “Circuitum99 — Perm Style”, “version”: “1.0.0”, “author”: “Virelai Ezra Lux”, “nd_safe”: true, “notes”: “High-end couture × ancient arcana. No autoplay, no strobe.” },
+  “meta”: { “name”: “circuitum99 — Perm Style”, “version”: “1.0.0”, “author”: “Virelai Ezra Lux”, “nd_safe”: true, “notes”: “High-end couture × ancient arcana. No autoplay, no strobe.” },
   “palette”: { “void”:”#0B0B0B”,”ink”:”#141414”,”bone”:”#F8F5EF”,”indigo”:”#280050”,”violet”:”#460082”,”blue”:”#0080FF”,”green”:”#00FF80”,”amber”:”#FFC800”,”light”:”#FFFFFF”,”crimson”:”#B7410E”,”gold”:”#C9A227”,”obsidian”:”#0B0B0B”,”rose_quartz”:”#FFB6C1”,”teal_glow”:”#00CED1”,”violet_alt”:”#8A2BE2”,”gonzalez_palette”:[“#0b0b0b”,”#16121b”,”#2a2140”,”#5e4ba8”,”#e6e6e6”] },
   “line”: { “hair”: 1, “primary”: 2, “pillar”: 3 },
   “typography”: { “display”: “’EB Garamond’,’Junicode’,serif”, “gothic”: “’Cinzel’,serif”, “ui”: “’Inter’,system-ui,sans-serif”, “scale”: { “h1”: 1.888, “h2”: 1.555, “h3”: 1.333, “body”: 1.0, “small”: 0.888 } },
@@ -105,7 +105,7 @@ if(Array.isArray(angels72)){
 // Build bridge manifest (MEAT)
 const manifest = {
   meta: {
-    project: “Circuitum99 × Stone Grimoire”,
+    project: “circuitum99 × Stone Grimoire”,
     updated: new Date().toISOString(),
     nd_safe: true,
     generator: “update-art.js (manual)”
@@ -161,7 +161,7 @@ console.log(“Art ingest complete. ND-safe ✓”);
 # A MEATY STARTING BRIDGE (writes automatically, but here is a ready-to-use rich example you can drop in if you want to seed the system right now)
 bridge/c99-bridge.json
 {
-  “meta”: { “project”: “Circuitum99 × Stone Grimoire”, “updated”: “2025-09-02T12:00:00.000Z”, “nd_safe”: true, “generator”: “manual seed” },
+  “meta”: { “project”: “circuitum99 × Stone Grimoire”, “updated”: “2025-09-02T12:00:00.000Z”, “nd_safe”: true, “generator”: “manual seed” },
   “tokens”: {
     “css”: “/assets/css/perm-style.css”,
     “json”: “/assets/tokens/perm-style.json”,

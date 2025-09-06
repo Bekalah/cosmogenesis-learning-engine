@@ -1,0 +1,322 @@
+{
+  "The Fool": [
+    1,
+    3,
+    7
+  ],
+  "The Magician": [
+    2,
+    3,
+    7,
+    13
+  ],
+  "The High Priestess": [
+    3,
+    13
+  ],
+  "The Empress": [
+    4,
+    6,
+    8,
+    11,
+    16
+  ],
+  "The Emperor": [
+    5
+  ],
+  "The Hierophant": [
+    3,
+    6,
+    7,
+    13
+  ],
+  "The Lovers": [
+    7,
+    8
+  ],
+  "The Chariot": [
+    4,
+    5,
+    9,
+    14
+  ],
+  "Strength": [
+    4,
+    9,
+    11,
+    14,
+    15,
+    16
+  ],
+  "The Hermit": [
+    8,
+    10
+  ],
+  "The Wheel": [
+    10,
+    11
+  ],
+  "Justice": [
+    3,
+    12
+  ],
+  "The Hanged One": [
+    13
+  ],
+  "Death": [
+    9,
+    10,
+    14
+  ],
+  "Temperance": [
+    15,
+    16
+  ],
+  "The Devil": [
+    16
+  ],
+  "The Moon": [
+    9
+  ],
+  "The Sun": [
+    1,
+    8,
+    11,
+    16
+  ]
+  "The Fool": {
+    "codex_ids": [
+      1,
+      3,
+      7
+    ],
+    "crystal": "Clear Quartz",
+    "artifact": {
+      "name": "Clear Quartz",
+      "palette": [
+        "#FFFFFF",
+        "#E0F7FA"
+      ],
+      "sacred_geometry": "hexagon",
+      "fractal": "prismatic mandelbrot",
+      "sound_hz": 852,
+      "asset": "assets/crystals/clear_quartz.png"
+    }
+  },
+  "The Magician": {
+    "codex_ids": [
+      3,
+      9
+    ],
+    "crystal": "Citrine",
+    "artifact": {
+      "name": "Citrine",
+      "palette": [
+        "#FFD700",
+        "#FFA500"
+      ],
+      "sacred_geometry": "triangle",
+      "fractal": "golden spiral",
+      "sound_hz": 741,
+      "asset": "assets/crystals/citrine.png"
+    }
+  },
+  "The High Priestess": {
+    "codex_ids": [
+      5
+    ],
+    "crystal": "Moonstone",
+    "artifact": {
+      "name": "Moonstone",
+      "palette": [
+        "#F0F8FF",
+        "#BCC6CC"
+      ],
+      "sacred_geometry": "circle",
+      "fractal": "lunar wave",
+      "sound_hz": 417,
+      "asset": "assets/crystals/moonstone.png"
+    }
+  },
+  "The Empress": {
+    "codex_ids": [
+      8
+    ],
+    "crystal": "Rose Quartz",
+    "artifact": {
+      "name": "Rose Quartz",
+      "palette": [
+        "#FFC0CB",
+        "#FFB6C1"
+      ],
+      "sacred_geometry": "flower of life",
+      "fractal": "rose mandala",
+      "sound_hz": 672,
+      "asset": "assets/crystals/rose_quartz.png"
+    }
+  },
+  "The Hierophant": {
+    "codex_ids": [
+      6
+    ],
+    "crystal": "Sodalite",
+    "artifact": {
+      "name": "Sodalite",
+      "palette": [
+        "#1E3A8A",
+        "#3B82F6"
+      ],
+      "sacred_geometry": "cube",
+      "fractal": "cubic lattice",
+      "sound_hz": 396,
+      "asset": "assets/crystals/sodalite.png"
+    }
+  },
+  "The Chariot": {
+    "codex_ids": [
+      4,
+      14
+    ],
+    "crystal": "Carnelian",
+    "artifact": {
+      "name": "Carnelian",
+      "palette": [
+        "#E25822",
+        "#FF7F50"
+      ],
+      "sacred_geometry": "tetrahedron",
+      "fractal": "flame julia",
+      "sound_hz": 528,
+      "asset": "assets/crystals/carnelian.png"
+    }
+  },
+  "Strength": {
+    "codex_ids": [
+      4,
+      7,
+      14
+    ],
+    "crystal": "Tiger's Eye",
+    "artifact": {
+      "name": "Tiger's Eye",
+      "palette": [
+        "#D4AF37",
+        "#8B4513"
+      ],
+      "sacred_geometry": "rectangle",
+      "fractal": "fibrous stripe",
+      "sound_hz": 285,
+      "asset": "assets/crystals/tigers_eye.png"
+    }
+  },
+  "The Hermit": {
+    "codex_ids": [
+      3,
+      7,
+      13
+    ],
+    "crystal": "Amethyst",
+    "artifact": {
+      "name": "Amethyst",
+      "palette": [
+        "#9966CC",
+        "#8A2BE2"
+      ],
+      "sacred_geometry": "octagon",
+      "fractal": "violet geode",
+      "sound_hz": 432,
+      "asset": "assets/crystals/amethyst.png"
+    }
+  },
+  "Death": {
+    "codex_ids": [
+      10
+    ],
+    "crystal": "Obsidian",
+    "artifact": {
+      "name": "Obsidian",
+      "palette": [
+        "#0C0C0C",
+        "#555555"
+      ],
+      "sacred_geometry": "plane",
+      "fractal": "volcanic mirror",
+      "sound_hz": 396,
+      "asset": "assets/crystals/obsidian.png"
+    }
+  },
+  "Temperance": {
+    "codex_ids": [
+      4
+    ],
+    "crystal": "Labradorite",
+    "artifact": {
+      "name": "Labradorite",
+      "palette": [
+        "#4B0082",
+        "#20B2AA"
+      ],
+      "sacred_geometry": "trapezoid",
+      "fractal": "aurora borealis",
+      "sound_hz": 528,
+      "asset": "assets/crystals/labradorite.png"
+    }
+  },
+  "The Star": {
+    "codex_ids": [
+      13
+    ],
+    "crystal": "Celestite",
+    "artifact": {
+      "name": "Celestite",
+      "palette": [
+        "#87CEEB",
+        "#B0E0E6"
+      ],
+      "sacred_geometry": "star tetrahedron",
+      "fractal": "starburst",
+      "sound_hz": 963,
+      "asset": "assets/crystals/celestite.png"
+    }
+  },
+  "The Sun": {
+    "codex_ids": [
+      1,
+      8,
+      11,
+      16
+    ],
+    "crystal": "Sunstone",
+    "artifact": {
+      "name": "Sunstone",
+      "palette": [
+        "#FFA07A",
+        "#FFDAB9"
+      ],
+      "sacred_geometry": "solar circle",
+      "fractal": "solar flare",
+      "sound_hz": 528,
+      "asset": "assets/crystals/sunstone.png"
+    }
+  },
+  "The World": {
+    "codex_ids": [
+      2,
+      12,
+      14,
+      15
+    ],
+    "crystal": "Hematite",
+    "artifact": {
+      "name": "Hematite",
+      "palette": [
+        "#696969",
+        "#2F4F4F"
+      ],
+      "sacred_geometry": "cube",
+      "fractal": "iron spiral",
+      "sound_hz": 432,
+      "asset": "assets/crystals/hematite.png"
+    }
+  }
+}
