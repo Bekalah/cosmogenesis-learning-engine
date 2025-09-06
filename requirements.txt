@@ -1,0 +1,30 @@
+
+# Pillow is required for image generation.
+<<<<<<< main-origin
+# Install via system package if PyPI is unavailable.
+
+
+# Install via system package if PyPI is unavailable.
+# If PyPI is unreachable, install via system package
+# (e.g., `sudo apt-get install python3-pil`) or a downloaded wheel.
+# Pin to a known-good version for consistency.
+
+=======
+# If PyPI is unreachable, install via system package
+# (e.g., `sudo apt-get install python3-pil`) or a downloaded wheel.
+# Pin to a known-good version for consistency.
+>>>>>>> codex/create-a-visionary-room-arrangement-concept
+Pillow==10.4.0
+
+# Add your other deps below, pinned if possible:
+numpy==1.26.4
+matplotlib==3.9.2
+<<<<<<< main-origin
+
+# Pillow for visionary artwork generation
+Pillow==10.4.0
+
+=======
+>>>>>>> codex/create-a-visionary-room-arrangement-concept
+# fastapi==0.114.0
+# uvicorn==0.30.6
