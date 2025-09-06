@@ -109,6 +109,10 @@ def draw_elemental_glyphs(draw: ImageDraw.ImageDraw, center: tuple[int, int], si
             (earth_center[0] - half, earth_center[1] + half),
             (earth_center[0] + half, earth_center[1] + half),
         ],
+        fill=PALETTE["earth"],
+        width=3,
+    )
+
     # Earth – square with a cross
     left = center[0] - size
     top = center[1] - half

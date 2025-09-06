@@ -1,13 +1,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { readFileSync } from 'fs';
-import path from 'path';
-import Ajv from 'ajv';
-import plateSchema from '../schemas/plate-config.json' with { type: 'json' };
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
 
-// Custom error type that aggregates structural problems
 export class ConfigError extends Error {
   constructor(file, messages) {
     super(messages.join('; '));
@@ -16,18 +9,14 @@ export class ConfigError extends Error {
   }
 }
 
-// Load a JSON configuration file with expanded error handling
 export function loadConfig(relativePath) {
   const file = path.resolve(process.cwd(), relativePath);
   let raw;
   try {
     raw = readFileSync(file, 'utf8');
   } catch {
-    throw new Error(`Config file not found: ${relativePath}`);
-  } catch (err) {
-    throw new ConfigError(relativePath, [`Unable to read file: ${err.message}`]);
+    throw new ConfigError(relativePath, ['Unable to read file']);
   }
-
   try {
     return JSON.parse(raw);
   } catch {
@@ -35,10 +24,8 @@ export function loadConfig(relativePath) {
   }
 }
 
-// Validate a plate config and surface all structural issues
 export function validatePlateConfig(config, source = 'config') {
   const errors = [];
-
   if (typeof config !== 'object' || config === null) {
     errors.push('config must be an object');
   } else {
@@ -55,41 +42,16 @@ export function validatePlateConfig(config, source = 'config') {
       errors.push('label count must match mode');
     }
   }
-
   if (errors.length) {
     throw new ConfigError(source, errors);
-const ajv = new Ajv({ allErrors: true, $data: true });
-const validate = ajv.compile(plateSchema);
-
-export function validatePlateConfig(config, source = 'config') {
-  const valid = validate(config);
-  if (!valid) {
-    const messages = validate.errors.map((err) => {
-      const loc = err.instancePath ? err.instancePath.slice(1) : 'config';
-      return `${loc} ${err.message}`;
-    });
-    throw new ConfigError(source, messages);
   }
   return true;
 }
 
-// Convenience helper to load and validate the first demo plate
-// Convenience loader for the first demo plate
-// Convenience helper to grab the first demo configuration
 export function loadFirstDemo() {
-  return {
-    version: "0.9.2",
-    palette_id: "gonzalez-obsidian",
-    motion: { gentle_wobble: 0, hz: 0.25 },
-    plate: {
-      spiral: { a: 1, b: 0.18, theta_max: 12, points: 600 },
-      halos: 3, halo_radius: 0.2, axis_deg: 23.5,
-      ladder: { enabled: false, vertebrae: 33, thickness: 0.004 }
-    }
-  };
   const demos = loadConfig('data/demos.json');
-  if (!Array.isArray(demos) || demos.length === 0 || typeof demos[0].config !== 'object') {
-    throw new ConfigError('data/demos.json', ['Expected array with a config object']);
+  if (!Array.isArray(demos) || demos.length === 0) {
+    throw new ConfigError('data/demos.json', ['Expected array']);
   }
   const config = demos[0].config;
   validatePlateConfig(config, 'data/demos.json[0].config');
