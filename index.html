@@ -321,6 +321,27 @@
   </head>
   <body>
     <header>
+
+      <h1>Cosmogenesis Learning Engine</h1>
+      <div class="controls">
+        <label
+          >Tilt <input id="tilt" type="range" min="0" max="45" step="0.5"
+        /></label>
+        <label
+          >Nodes <input id="nodes" type="number" min="33" max="144" step="1"
+        /></label>
+        <label
+          >Skin
+          <select id="skin"></select
+        ></label>
+        <label
+          >Font
+          <select id="font-selector"></select
+        ></label>
+        <button id="calm-toggle" aria-pressed="false">Calm Mode</button>
+        <button id="hc-toggle" aria-pressed="false">High Contrast</button>
+        <button id="btn-export">Export Plate</button>
+
       <div class="top">
         <div>
           <h1>Cosmogenesis Learning Engine</h1>
@@ -1554,6 +1575,72 @@
         }
         maybeUnlock();
       })();
+
+          // Render up to 12 thumbs
+          pool.slice(0, 12).forEach((a) => {
+            mount.insertAdjacentHTML(
+              "beforeend",
+              card(a.name || "asset", a, "gonz-velvet ember-eye"),
+            );
+          });
+        })();
+      </script>
+    </main>
+    <footer>ND-safe • no autoplay • no strobe • honors reduced motion</footer>
+
+    <script type="module">
+      import {
+        cfg,
+        getStylepacks,
+        getSpiralMap,
+        getAngels,
+      } from "./src/codex.ext.js";
+      import ThemeEngine from "./src/engines/theme-engine.js";
+      import ArtEngine from "./src/engines/art-engine.js";
+      import SpiralEngine from "./src/engines/spiral-engine.js";
+      import { exportPlate } from "./src/engines/exporter.js";
+      import GuardianPlaque from "./src/ui/guardian-plaque.js";
+      import initInfoDot from "./src/ui/info-dot.js";
+      import initFontSelector from "./src/ui/font-selector.js";
+
+      const canvas = document.getElementById("stage");
+      const tiltInput = document.getElementById("tilt");
+      const nodesInput = document.getElementById("nodes");
+      const skinSelect = document.getElementById("skin");
+      const calmBtn = document.getElementById("calm-toggle");
+      const hcBtn = document.getElementById("hc-toggle");
+      initFontSelector();
+
+      const themes = new ThemeEngine(getStylepacks());
+      const art = new ArtEngine(canvas, themes);
+      const spiral = new SpiralEngine(canvas, art);
+
+      function applyState() {
+        const tilt = parseFloat(
+          localStorage.getItem("cosmo:v1:tilt") || "23.5",
+        );
+        const nodes = parseInt(
+          localStorage.getItem("cosmo:v1:nodes") || "33",
+          10,
+        );
+        const skin = localStorage.getItem("cosmo:v1:skin") || "AGRIPPA";
+        const calm = localStorage.getItem("cosmo:v1:calm") === "true";
+        const hc = localStorage.getItem("cosmo:v1:hc") === "true";
+        tiltInput.value = tilt;
+        nodesInput.value = nodes;
+        skinSelect.value = skin;
+        spiral.init({ tiltDeg: tilt, nodeCount: nodes, map: getSpiralMap() });
+        themes.applyToElement(document.documentElement, skin);
+        document.documentElement.dataset.calm = calm;
+        document.documentElement.dataset.hc = hc;
+        calmBtn.setAttribute("aria-pressed", calm);
+        hcBtn.setAttribute("aria-pressed", hc);
+      }
+
+      tiltInput.addEventListener("input", (e) => {
+        const v = parseFloat(e.target.value);
+        spiral.setTilt(v);
+        localStorage.setItem("cosmo:v1:tilt", v);
 
       function getFormConfig() {
         const fd = new FormData(form);
