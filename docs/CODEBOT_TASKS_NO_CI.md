@@ -12,8 +12,10 @@ git subtree add —prefix cosmogenesis_learning_engine <REMOTE_URL_C99> main —
 # PERM STYLE TOKENS
 stone_grimoire/assets/tokens/perm-style.json
 {
-  “meta”: { “name”: “circuitum99 — Perm Style”, “version”: “1.0.0”, “author”: “Virelai Ezra Lux”, “nd_safe”: true, “notes”: “High-end couture × ancient arcana. No autoplay, no strobe.” },
-  “palette”: { “void”:”#0B0B0B”,”ink”:”#141414”,”bone”:”#F8F5EF”,”indigo”:”#280050”,”violet”:”#460082”,”blue”:”#0080FF”,”green”:”#00FF80”,”amber”:”#FFC800”,”light”:”#FFFFFF”,”crimson”:”#B7410E”,”gold”:”#C9A227”,”obsidian”:”#0B0B0B”,”rose_quartz”:”#FFB6C1”,”teal_glow”:”#00CED1”,”violet_alt”:”#8A2BE2”,”gonzalez_palette”:[“#0b0b0b”,”#16121b”,”#2a2140”,”#5e4ba8”,”#e6e6e6”] },
+>>>>>>>+Updated upstrea
+le”, “ve  “meta”: { “name”: “Circuitum99 — Perm Style”, “version”: “1.0.0”, “author”: “Virelai Ezra Lux”, “nd_safe”: true, “notes”: “High-end couture × ancient arcana. No autoplay, no strobe.” },
+>>>>>>>+Stashed changes
+#460082”,”blue”:”#0080FF”,”green”:”#00FF80”,”amber”:”#FFC800”,”light”:”#FFFFFF”,”crimson”:”#B7410E”,”gold”:”#C9A227”,”obsidian”:”#0B0B0B”,”rose_quartz”:”#FFB6C1”,”teal_glow”:”#00CED1”,”violet_alt”:”#8A2BE2”,”gonzalez_palette”:[“#0b0b0b”,”#16121b”,”#2a2140”,”#5e4ba8”,”#e6e6e6”] },
   “line”: { “hair”: 1, “primary”: 2, “pillar”: 3 },
   “typography”: { “display”: “’EB Garamond’,’Junicode’,serif”, “gothic”: “’Cinzel’,serif”, “ui”: “’Inter’,system-ui,sans-serif”, “scale”: { “h1”: 1.888, “h2”: 1.555, “h3”: 1.333, “body”: 1.0, “small”: 0.888 } },
   “geometry”: { “vesica_ratio”: 1.732, “spine_33”: true, “pillars_21”: true, “gates_99”: true },
@@ -105,7 +107,9 @@ if(Array.isArray(angels72)){
 // Build bridge manifest (MEAT)
 const manifest = {
   meta: {
+<<<<<<< Updated upstream
     project: “circuitum99 × Stone Grimoire”,
+    project: “Circuitum99 × Stone Grimoire”,
     updated: new Date().toISOString(),
     nd_safe: true,
     generator: “update-art.js (manual)”
@@ -129,8 +133,11 @@ const manifest = {
     }
   },
   rooms: rooms.map(r=>({
-    id: r.id, title: r.title, element: r.element, tone: r.tone, geometry: r.geometry, stylepack: r.stylepack,
-    assets: (assetsByRoom[r.id]||[]).map(a=>({name:a.name,thumb:`/${a.thumb}`,webp:a.webp?`/${a.webp}`:’’,src:`/${a.processed}`,type:a.type}))
+    id: r.id,    project: “circuitum99 × Stone Grimoire”,
+>>>>>>>-Updated upstrea
+ylepack:    project: “Circuitum99 × Stone Grimoire”,
+>>>>>>>+Stashed changes
+umb:`/${a.thumb}`,webp:a.webp?`/${a.webp}`:’’,src:`/${a.processed}`,type:a.type}))
   })),
   angels: angels,
   assets: assets.map(a=>({name:a.name,src:`/${a.processed}`,thumb:a.thumb?`/${a.thumb}`:’’,webp:a.webp?`/${a.webp}`:’’,type:a.type}))
@@ -162,6 +169,7 @@ console.log(“Art ingest complete. ND-safe ✓”);
 bridge/c99-bridge.json
 {
   “meta”: { “project”: “circuitum99 × Stone Grimoire”, “updated”: “2025-09-02T12:00:00.000Z”, “nd_safe”: true, “generator”: “manual seed” },
+  “meta”: { “project”: “Circuitum99 × Stone Grimoire”, “updated”: “2025-09-02T12:00:00.000Z”, “nd_safe”: true, “generator”: “manual seed” },
   “tokens”: {
     “css”: “/assets/css/perm-style.css”,
     “json”: “/assets/tokens/perm-style.json”,
@@ -169,13 +177,11 @@ bridge/c99-bridge.json
   },
   “routes”: {
     “stone_grimoire”: { “base”: “/“, “chapels”: “/chapels/“, “assets”: “/assets/“, “bridge”: “/bridge/c99-bridge.json” },
-    “cosmogenesis”: { “tokens”: “/c99/tokens/perm-style.json”, “css”: “/c99/css/perm-style.css”, “public”: “/c99/“, “bridge”: “/bridge/c99-bridge.json” }
-  },
-  “rooms”: [
-    { “id”:”crypt”,”title”:”The Crypt”,”element”:”earth”,”tone”:110,”geometry”:”vesica”,”stylepack”:”Rosicrucian Black”,
-      “assets”:[
-        { “name”:”portal_crypt-a01.png”,”thumb”:”/assets/art/thumbs/portal_crypt-a01-512.jpg”,”webp”:”/assets/art/webp/portal_crypt-a01.webp”,”src”:”/assets/art/processed/portal_crypt-a01.png”,”type”:”png” },
-        { “name”:”sigil_ann-abyss.svg”,”thumb”:””,”webp”:””,”src”:”/assets/art/processed/sigil_ann-abyss.svg”,”type”:”svg” }
+    “cosmogenesis”: { “tokens”: “/c99/tokens/perm-style.json”, “css”: “/c99/css/perm-style.css”, “public”: “/c99/“, “bridge”: “/bridge/  “meta”: { “project”: “circuitum99 × Stone Grimoire”, “updated”: “2025-09-02T12:00:00.000Z”, “nd_safe”: true, “generator”: “manual seed” },
+>>>>>>>+Updated upstrea
+_crypt-a  “meta”: { “project”: “Circuitum99 × Stone Grimoire”, “updated”: “2025-09-02T12:00:00.000Z”, “nd_safe”: true, “generator”: “manual seed” },
+>>>>>>>+Stashed changes
+il_ann-abyss.svg”,”thumb”:””,”webp”:””,”src”:”/assets/art/processed/sigil_ann-abyss.svg”,”type”:”svg” }
       ]
     },
     { “id”:”nave”,”title”:”The Nave”,”element”:”air”,”tone”:222,”geometry”:”rose-window”,”stylepack”:”Angelic Chorus”,

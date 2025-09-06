@@ -4,6 +4,12 @@ import { writeFileSync, rmSync, mkdtempSync } from "fs";
 import { tmpdir } from "os";
 import path from "path";
 import { load, getByType } from "../src/pluginRegistry.js";
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { writeFileSync, rmSync, mkdtempSync } from 'fs';
+import { tmpdir } from 'os';
+import path from 'path';
+import { load, getByType } from '../src/pluginRegistry.js';
 
 test('load registers plugins by type', async () => {
   // create isolated temp directory for plugin fixtures
@@ -31,5 +37,12 @@ test("load registers plugins by type", async () => {
   const layouts = getByType("layout");
   assert.equal(layouts.length, 1);
 
+
+  const errs = await load(descFile);
+  assert.equal(errs.length, 0);
+  const layouts = getByType('layout');
+  assert.equal(layouts.length, 1);
+
+  // clean up temporary fixtures directory
   rmSync(fixturesDir, { recursive: true, force: true });
 });

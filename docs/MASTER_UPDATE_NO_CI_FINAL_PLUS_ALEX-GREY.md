@@ -18,9 +18,11 @@ bridge/c99-bridge.js
 stone_grimoire/assets/tokens/perm-style.json
 {
   “meta”: {
-    “name”: “circuitum99 — Perm Style”,
-    “version”: “2.1.0”,
-    “author”: “Virelai Ezra Lux”,
+<<<<<<    “name”: “circuitum99 — Perm Style”,
+>>>>>>>+Updated upstrea
+e”: “Cir    “name”: “Circuitum99 — Perm Style”,
+>>>>>>>+Stashed changes
+  “author”: “Virelai Ezra Lux”,
     “materials_version”: “obsidian-volcanic-1.0”,
     “nd_safe”: true,
     “notes”: “Legacy SG + Secondary palette + Volcanic Obsidian + Raku Reiki + Visionary (Alex Grey) layer.”

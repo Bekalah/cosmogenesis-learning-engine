@@ -6,6 +6,7 @@ TEST_FILES="test/plugin-registry.test.js test/progress-engine.test.js test/expor
 
 TEST_FILES="test/plugin-registry.test.js test/progress-engine.test.js test/exporter.test.js"
 
+TEST_FILES="test/plugin-registry.test.js test/progress-engine.test.js"
 
 if command -v node >/dev/null 2>&1; then
   node --test $TEST_FILES

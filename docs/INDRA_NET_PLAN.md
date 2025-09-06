@@ -5,7 +5,10 @@
 - **Bridge**: `tools/build-bridge.js` now exports the `indraNet` block into `/public/c99/bridge.json` so external apps can fetch it.
 - **Engine**: `app/engines/IndraNet.js` renders the lattice as SVG with optional links.
 - **Harmony layers**: `assets/data/harmony_map.json` bridges Soyga, Tarot, I Ching, Tree of Life, planets and numerology using Solfeggio color bands.
-- **Angel colors**: `assets/data/angels72.json` maps the 72 Shem angels to node hues and Solfeggio tones.
+<<<<<- **Angel colors**: `assets/data/angels72.json` maps the 72 Shem angels to node hues and Solfeggio tones.
+>>>>>>>+Updated upstrea
+==
+>>>>>>> Stashed changes
 - **Usage**:
   ```javascript
   import { IndraNet } from './app/engines/IndraNet.js';

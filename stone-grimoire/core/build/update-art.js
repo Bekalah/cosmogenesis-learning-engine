@@ -52,7 +52,10 @@ for(const a of assets){
 const visionaryAssets = assets.filter(a=>/alex[-_ ]?grey|visionary|sacred|grid/.test(a.name));
 
 const manifest={
-  meta:{ project:"circuitum99 × Stone Grimoire", updated:new Date().toISOString(), nd_safe:true, generator:"update-art.js (manual)" },
+<<  meta:{ project:"circuitum99 × Stone Grimoire", updated:new Date().toISOString(), nd_safe:true, generator:"update-art.js (manual)" },
+>>>>>>>+Updated upstrea
+====
+>>>>>>> Stashed changes
   meta:{ project:"Circuitum99 × Stone Grimoire", updated:new Date().toISOString(), nd_safe:true, generator:"update-art.js (manual)" },
   tokens:{ css:"/assets/css/perm-style.css", json:"/assets/tokens/perm-style.json", palette:styleTokens.palette||{}, secondary:styleTokens.secondary||{}, layers:styleTokens.layers||{} },
   routes:{ stone_grimoire:{ base:"/", chapels:"/chapels/", assets:"/assets/", bridge:"/bridge/c99-bridge.json" }, cosmogenesis:{ tokens:"/c99/tokens/perm-style.json", css:"/c99/css/perm-style.css", public:"/c99/", bridge:"/bridge/c99-bridge.json" } },
@@ -94,8 +97,12 @@ fs.mkdirSync(path.dirname(cssDest),{recursive:true});
 fs.copyFileSync(tokensSrc,tokensDest);
 fs.copyFileSync(cssSrc,cssDest);
 const styleTokens=JSON.parse(fs.readFileSync(tokensSrc,'utf8'));
-let manifest={meta:{project:"circuitum99 × Stone Grimoire",updated:new Date().toISOString(),nd_safe:true}};
-const assets=[];
+<<<<<<let manifest={meta:{project:"circuitum99 × Stone Grimoire",updated:new Date().toISOString(),nd_safe:true}};
+>>>>>>>+Updated upstrea
+
+let manlet manifest={meta:{project:"Circuitum99 × Stone Grimoire",updated:new Date().toISOString(),nd_safe:true}};
+>>>>>>>+Stashed changes
+sets=[];
 function safeReadJSON(p){ try{ return JSON.parse(fs.readFileSync(p,'utf8')); }catch{ return null; } }
 const cgDataRoot=path.resolve(repoRoot,'assets','data');
 const angels72=safeReadJSON(path.join(cgDataRoot,'angels72.json'))||[];

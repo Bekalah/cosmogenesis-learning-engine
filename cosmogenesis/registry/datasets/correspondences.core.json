@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "namespaces": {
+    "cosmogenesis": {
+      "axis_deg": 23.5,
+      "jacobs_ladder_steps": 33,
+      "halos": 6
+    }
+  }
+}

@@ -20,5 +20,12 @@ fi
 if command -v npm >/dev/null 2>&1; then
   npm install
 fi
+command -v npm >/dev/null 2>&1 && npm install >/dev/null 2>&1 || echo "npm not available or install failed."
+# Upgrade pip and install Python dependencies (including Pillow)
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# Install Node dependencies
+npm install
 
 echo "Environment setup complete."
