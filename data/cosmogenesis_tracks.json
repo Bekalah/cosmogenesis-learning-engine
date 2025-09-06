@@ -1,0 +1,14 @@
+[
+  {
+    "id": "moonchild",
+    "title": "Moonchild Lesson",
+    "cube": "cube_528",
+    "spiralStep": 1
+  },
+  {
+    "id": "tower",
+    "title": "Tower Lesson",
+    "cube": "cube_432",
+    "spiralStep": 2
+  }
+]
