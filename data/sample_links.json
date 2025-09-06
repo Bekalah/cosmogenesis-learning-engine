@@ -1,0 +1,6 @@
+{
+  "resources": [
+    {"id": "alpha", "link": "https://example.com/alpha"},
+    {"id": "beta", "nested": {"link": "https://example.com/beta"}}
+  ]
+}
