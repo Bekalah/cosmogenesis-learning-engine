@@ -1,33 +1,216 @@
 [
   {
-    "title": "Art \u2022 7 Colors (Basic Design)",
+    "title": "Art • 7 Colors (Basic Design)",
     "config": {
       "layout": "wheel",
       "mode": 7,
-      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
-      "labels": [
-         "labels": [
-        "Red",
-        "Orange",
-        "Yellow",
-        "Green",
-        "Cyan",
-        "Blue",
-        "Violet"
+      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"],
+      "resources": [
+        {
+          "title": "Color Theory",
+          "url": "https://en.wikipedia.org/wiki/Color_theory"
+        }
       ]
-      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
-Green", "Cyan", "Blue", "Violet"]
->>>>>>> Stashed changes
-      "labels": ["Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet"]
->>>>>>> upstream/codex/improve-creative-learning-engine-design
->>>>>>> main-upstream-upstream-upstream-upstream
->>>>>>> codex/improve-creative-learning-engine-design
->>>>>>> origin/codex/update-package-for-code-bot
->>>>>>> codex/enhance-aesthetic-designs-and-environments
     }
   },
   {
-    "title": "Art \u2022 Visionary Dream",
+    "title": "STEM • 12 Cranial Nerves",
+    "config": {
+      "layout": "grid",
+      "mode": 12,
+      "labels": [
+        "I Olfactory",
+        "II Optic",
+        "III Oculomotor",
+        "IV Trochlear",
+        "V Trigeminal",
+        "VI Abducens",
+        "VII Facial",
+        "VIII Vestibulocochlear",
+        "IX Glossopharyngeal",
+        "X Vagus",
+        "XI Accessory",
+        "XII Hypoglossal"
+      ]
+    }
+  },
+  {
+    "title": "UX • 22 Research Prompts",
+    "config": {
+      "layout": "spiral",
+      "mode": 22,
+      "labels": [
+        "Prompt 1",
+        "Prompt 2",
+        "Prompt 3",
+        "Prompt 4",
+        "Prompt 5",
+        "Prompt 6",
+        "Prompt 7",
+        "Prompt 8",
+        "Prompt 9",
+        "Prompt 10",
+        "Prompt 11",
+        "Prompt 12",
+        "Prompt 13",
+        "Prompt 14",
+        "Prompt 15",
+        "Prompt 16",
+        "Prompt 17",
+        "Prompt 18",
+        "Prompt 19",
+        "Prompt 20",
+        "Prompt 21",
+        "Prompt 22"
+      ]
+    }
+  },
+  {
+    "title": "Poetry • 33 Lines in a Cycle",
+    "config": {
+      "layout": "spiral",
+      "mode": 33,
+      "labels": [
+        "Line 1",
+        "Line 2",
+        "Line 3",
+        "Line 4",
+        "Line 5",
+        "Line 6",
+        "Line 7",
+        "Line 8",
+        "Line 9",
+        "Line 10",
+        "Line 11",
+        "Line 12",
+        "Line 13",
+        "Line 14",
+        "Line 15",
+        "Line 16",
+        "Line 17",
+        "Line 18",
+        "Line 19",
+        "Line 20",
+        "Line 21",
+        "Line 22",
+        "Line 23",
+        "Line 24",
+        "Line 25",
+        "Line 26",
+        "Line 27",
+        "Line 28",
+        "Line 29",
+        "Line 30",
+        "Line 31",
+        "Line 32",
+        "Line 33"
+      ]
+    }
+  },
+  {
+    "title": "Sacred • 72 Names (Study Plate)",
+    "config": {
+      "layout": "spiral",
+      "mode": 72,
+      "labels": [
+        "Name 1",
+        "Name 2",
+        "Name 3",
+        "Name 4",
+        "Name 5",
+        "Name 6",
+        "Name 7",
+        "Name 8",
+        "Name 9",
+        "Name 10",
+        "Name 11",
+        "Name 12",
+        "Name 13",
+        "Name 14",
+        "Name 15",
+        "Name 16",
+        "Name 17",
+        "Name 18",
+        "Name 19",
+        "Name 20",
+        "Name 21",
+        "Name 22",
+        "Name 23",
+        "Name 24",
+        "Name 25",
+        "Name 26",
+        "Name 27",
+        "Name 28",
+        "Name 29",
+        "Name 30",
+        "Name 31",
+        "Name 32",
+        "Name 33",
+        "Name 34",
+        "Name 35",
+        "Name 36",
+        "Name 37",
+        "Name 38",
+        "Name 39",
+        "Name 40",
+        "Name 41",
+        "Name 42",
+        "Name 43",
+        "Name 44",
+        "Name 45",
+        "Name 46",
+        "Name 47",
+        "Name 48",
+        "Name 49",
+        "Name 50",
+        "Name 51",
+        "Name 52",
+        "Name 53",
+        "Name 54",
+        "Name 55",
+        "Name 56",
+        "Name 57",
+        "Name 58",
+        "Name 59",
+        "Name 60",
+        "Name 61",
+        "Name 62",
+        "Name 63",
+        "Name 64",
+        "Name 65",
+        "Name 66",
+        "Name 67",
+        "Name 68",
+        "Name 69",
+        "Name 70",
+        "Name 71",
+        "Name 72"
+      ]
+    }
+  },
+  {
+    "title": "Yeats • Twin Cones (Oppositions)",
+    "config": {
+      "layout": "twin_cones",
+      "mode": 12,
+      "labels": [
+        "Logic",
+        "Imagination",
+        "Discipline",
+        "Inspiration",
+        "Analysis",
+        "Synthesis",
+        "Form",
+        "Flow",
+        "Silence",
+        "Voice",
+        "Structure",
+        "Wildness"
+      ]
+    }
+  },
+  {
+    "title": "Art • Visionary Dream",
     "config": {
       "layout": "spiral",
       "mode": 3,
@@ -35,8 +218,13 @@ Green", "Cyan", "Blue", "Violet"]
         "Community Garden",
         "Small Business Workflow",
         "Sustainable City Plan"
+      ],
+      "resources": [
+        {
+          "title": "Visionary Art Library",
+          "url": "https://example.org/visionary"
+        }
       ]
     }
   }
 ]
-

@@ -16,6 +16,18 @@
       "items": { "type": "string" },
       "minItems": { "$data": "1/mode" },
       "maxItems": { "$data": "1/mode" }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false
