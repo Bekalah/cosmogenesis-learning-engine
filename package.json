@@ -19,6 +19,7 @@
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
     "test": "./scripts/run-tests.sh",
+    "test": "node --test test/codexConfig.test.js test/plugin-registry.test.js test/progress-engine.test.js",
     "fmt": "npx prettier -w .",
     "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
     "test": "node --test && python3 -m py_compile $(git ls-files '*.py')",
@@ -42,7 +43,6 @@
   },
   "dependencies": {
     "ajv": "^8.17.1"
-<<<<<<< main-origin
     "ajv": "^8.12.0"
   },
   "devDependencies": {
@@ -54,10 +54,8 @@
   "devDependencies": {
     "prettier": "^3.3.3"
 
-=======
   },
   "devDependencies": {
     "prettier": "^3.3.3"
->>>>>>> codex/create-a-visionary-room-arrangement-concept
   }
 }
