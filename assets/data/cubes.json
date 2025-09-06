@@ -1,0 +1,6 @@
+{
+  "cubes": [
+    {"id": "cube_1", "toneHz": 528, "path": "Path 13", "overlay": "overlays/rosslyn/cube_1.png"},
+    {"id": "cube_2", "toneHz": 396, "path": "Path 17", "overlay": "overlays/rosslyn/cube_2.png"}
+  ]
+}
