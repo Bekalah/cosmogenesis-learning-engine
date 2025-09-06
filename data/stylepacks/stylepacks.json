@@ -7,5 +7,34 @@
     "motifs": [],
     "textures": [],
     "shaders": ["vellum"]
+  },
+  {
+    "id": "ROSSLyn",
+    "name": "Rosslyn Cubes",
+    "type": "classic",
+    "palette": {
+      "ink": "#f0e9e4",
+      "wash": "#1d1d1d",
+      "accent": "#7f7f7f",
+      "gold": "#d4af37"
+    },
+    "motifs": ["rosslyn-cube"],
+    "textures": [],
+    "shaders": [],
+    "overlays": [
+      "assets/overlays/rosslyn/cube_528.png",
+      "assets/overlays/rosslyn/cube_432.png"
+    ]
+  }
+
+  ,{
+    "id": "ROSSLYN_GOTHIC",
+    "name": "Rosslyn Gothic",
+    "type": "visionary",
+    "palette": {"ink":"#f5f3ef","wash":"#0b0b0b","accent":"#7d6f64","gold":"#d4af37"},
+    "motifs": ["rosslyn","cubes"],
+    "textures": [],
+    "shaders": ["stone"],
+    "overlays": ["overlays/rosslyn/cube.png"]
   }
 ]
