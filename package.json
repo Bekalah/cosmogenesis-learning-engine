@@ -1,5 +1,13 @@
 {
   "name": "cosmogenesis-learning-engine",
+  "version": "0.9.2",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./bridge": "./bridge/c99-bridge.json",
+    "./engine": "./app/engines/IndraNet.js"
+  },
   "private": true,
   "type": "module",
   "scripts": {
@@ -23,6 +31,7 @@
     "test": "./scripts/run-tests.sh && python3 -m py_compile $(git ls-files '*.py')",
     "format": "npx prettier -w .",
     "check": "./scripts/run-check.sh",
+    "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
     "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
     "gallery:thumbs": "python3 scripts/pillow_thumbs.py --in exports --out exports/thumbs --size 512",
