@@ -93,6 +93,52 @@ Interactive Book & Realms
 
 ⸻
 
+Tradition Currents & Dynamic Upgrades
+
+✦ Reiki (Advanced Usui)
+• Direct channeling: each node can self-attune new energetic systems.
+• Attunements as CYOA nodes: three-stage branches mirror initiatory choices.
+• Energy "flavors": Tarot and angel currents register as distinct flows.
+
+✦ Sepher Sephiroth (Crowley / Gematria)
+• Hebrew letters gate nodes as numbers and elemental keys.
+• Elevens, twenty-twos, and thirty-threes act as portal rooms in the 144 lattice.
+
+✦ Regardie (Golden Dawn)
+• Rituals function as therapy, reinforcing ND-safe play.
+• Color scales, tattwas, and scrying provide ready art modules.
+
+✦ Goetia (Rufus Opus)
+• Seventy-two daemons pose paradox riddles and initiatory tasks.
+• Circles, triangles, and spirit pots translate to geometry and fusion rites.
+
+✦ Agrippa
+• Each node invites multiple interpretations to avoid dogma.
+• Mirrors the Renaissance tension between skepticism and magic.
+
+✦ Paul Foster Case
+• Tarot encodes a helix cipher of seven unfoldment stages.
+• ROTA wheel anchors macro arcs within the thirty-three-chapter spine.
+
+✦ Jodorowsky (Psychomagic)
+• Mystery rooms prescribe symbolic acts for healing.
+• Performance serves therapy rather than spectacle.
+
+✦ Alchemy (Frater Albertus)
+• Labs blend planetary hours, tinctures, and layered geometry.
+• Body, mind, and soul align with Stone, Cosmogenesis, and Circuitum99.
+
+Dynamic Upgrades for Codex 144:99
+1. Nodes act as self-attunements.
+2. Hebrew gate overlays on archetype nodes.
+3. Therapeutic engine for ND-safe psychodrama.
+4. Mystery House rooms branch by Compassion, Power, and Knowledge.
+5. Helix Tarot maps seven-stage unfoldment across the 144 lattice.
+6. Labyrinth artifacts render seals, weapons, and tinctures as static layers.
+7. Maintain Renaissance paradox to keep the system open-ended.
+
+⸻
+
 Licensing
 
 Everything is contributed under Creative Commons CC0 — open, non-revocable, free to remix .
