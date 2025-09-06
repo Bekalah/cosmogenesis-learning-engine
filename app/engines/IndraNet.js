@@ -31,6 +31,11 @@ export class IndraNet {
         numerology: true,
         angels: true
       }
+      palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
+        numerology: true,
+        angels: true
+      }
+      palette: { bg: '#000000', node: '#ffffff', link: '#888888' }
     };
   }
 
@@ -164,6 +169,9 @@ export class IndraNet {
       963: '#ee82ee'
     };
     return map[freq] || '#ffffff';
+  }
+
+    return c;
   }
 
   // helper to draw a link

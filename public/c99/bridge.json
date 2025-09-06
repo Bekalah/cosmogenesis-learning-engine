@@ -4,6 +4,10 @@
     "updated": "2025-09-03T08:39:58.786Z",
     "updated": "2025-09-03T08:31:47.508Z",
     "updated": "2025-09-03T16:39:54.746Z",
+    "updated": "2025-09-04T05:55:46.733Z",
+    "updated": "2025-09-03T08:31:47.508Z",
+    "updated": "2025-09-03T16:39:54.746Z",
+    "updated": "2025-09-03T08:31:47.508Z",
     "nd_safe": true
   },
   "routes": {
@@ -93,6 +97,11 @@
     }
     "description": "144 jewel nodes woven by 99 gate clusters; each node mirrors the whole."
     },
+    "angels": [
+      {
+        "id": 1,
+        "name": "Vehuiah",
+        "attribute": "Will & New Begin    },
     "angels": [
       {
         "id": 1,
@@ -599,6 +608,7 @@
         "color": "#cc323f"
       }
     ]
+    "description": "144 jewel nodes woven by 99 gate clusters; each node mirrors the whole."
   },
   "witch": {
     "id": "witch-default",
@@ -606,6 +616,8 @@
     "title": "Witch-as-a-Coven",
     "roles": [
       "creator",
+or",
+>>>>>>> Stashed changes
       "scribe",
       "guardian"
     ],

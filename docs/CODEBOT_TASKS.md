@@ -10,7 +10,7 @@ git subtree push —prefix cosmogenesis_learning_engine <REMOTE_URL_C99> main
 stone_grimoire/assets/tokens/perm-style.json
 {
   “meta”: {
-    “name”: “Circuitum99 — Perm Style”,
+    “name”: “circuitum99 — Perm Style”,
     “version”: “1.0.0”,
     “author”: “Virelai Ezra Lux”,
     “nd_safe”: true,
