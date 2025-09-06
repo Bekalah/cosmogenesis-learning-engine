@@ -1,0 +1,796 @@
+{
+  "wormholes": [
+    {
+      "id": 1,
+      "nodes": [
+        1,
+        109
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 2,
+      "nodes": [
+        2,
+        110
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 3,
+      "nodes": [
+        3,
+        111
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 4,
+      "nodes": [
+        4,
+        112
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 5,
+      "nodes": [
+        5,
+        113
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 6,
+      "nodes": [
+        6,
+        114
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 7,
+      "nodes": [
+        7,
+        115
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 8,
+      "nodes": [
+        8,
+        116
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 9,
+      "nodes": [
+        9,
+        117
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 10,
+      "nodes": [
+        10,
+        118
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 11,
+      "nodes": [
+        11,
+        119
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 12,
+      "nodes": [
+        12,
+        120
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 13,
+      "nodes": [
+        13,
+        121
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 14,
+      "nodes": [
+        14,
+        122
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 15,
+      "nodes": [
+        15,
+        123
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 16,
+      "nodes": [
+        16,
+        124
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 17,
+      "nodes": [
+        17,
+        125
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 18,
+      "nodes": [
+        18,
+        126
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 19,
+      "nodes": [
+        19,
+        127
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 20,
+      "nodes": [
+        20,
+        128
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 21,
+      "nodes": [
+        21,
+        129
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 22,
+      "nodes": [
+        22,
+        130
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 23,
+      "nodes": [
+        23,
+        131
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 24,
+      "nodes": [
+        24,
+        132
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 25,
+      "nodes": [
+        25,
+        133
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 26,
+      "nodes": [
+        26,
+        134
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 27,
+      "nodes": [
+        27,
+        135
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 28,
+      "nodes": [
+        28,
+        136
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 29,
+      "nodes": [
+        29,
+        137
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 30,
+      "nodes": [
+        30,
+        138
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 31,
+      "nodes": [
+        31,
+        139
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 32,
+      "nodes": [
+        32,
+        140
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 33,
+      "nodes": [
+        33,
+        141
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 34,
+      "nodes": [
+        34,
+        142
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 35,
+      "nodes": [
+        35,
+        143
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 36,
+      "nodes": [
+        36,
+        144
+      ],
+      "method": "numerological_inversion"
+    },
+    {
+      "id": 37,
+      "nodes": [
+        37,
+        82
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 38,
+      "nodes": [
+        38,
+        83
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 39,
+      "nodes": [
+        39,
+        84
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 40,
+      "nodes": [
+        40,
+        85
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 41,
+      "nodes": [
+        41,
+        86
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 42,
+      "nodes": [
+        42,
+        87
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 43,
+      "nodes": [
+        43,
+        88
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 44,
+      "nodes": [
+        44,
+        89
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 45,
+      "nodes": [
+        45,
+        90
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 46,
+      "nodes": [
+        46,
+        91
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 47,
+      "nodes": [
+        47,
+        92
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 48,
+      "nodes": [
+        48,
+        93
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 49,
+      "nodes": [
+        49,
+        94
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 50,
+      "nodes": [
+        50,
+        95
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 51,
+      "nodes": [
+        51,
+        96
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 52,
+      "nodes": [
+        52,
+        97
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 53,
+      "nodes": [
+        53,
+        98
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 54,
+      "nodes": [
+        54,
+        99
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 55,
+      "nodes": [
+        55,
+        100
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 56,
+      "nodes": [
+        56,
+        101
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 57,
+      "nodes": [
+        57,
+        102
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 58,
+      "nodes": [
+        58,
+        103
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 59,
+      "nodes": [
+        59,
+        104
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 60,
+      "nodes": [
+        60,
+        105
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 61,
+      "nodes": [
+        61,
+        106
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 62,
+      "nodes": [
+        62,
+        107
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 63,
+      "nodes": [
+        63,
+        108
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 64,
+      "nodes": [
+        64,
+        109
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 65,
+      "nodes": [
+        65,
+        110
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 66,
+      "nodes": [
+        66,
+        111
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 67,
+      "nodes": [
+        67,
+        112
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 68,
+      "nodes": [
+        68,
+        113
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 69,
+      "nodes": [
+        69,
+        114
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 70,
+      "nodes": [
+        70,
+        115
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 71,
+      "nodes": [
+        71,
+        116
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 72,
+      "nodes": [
+        72,
+        117
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 73,
+      "nodes": [
+        73,
+        118
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 74,
+      "nodes": [
+        74,
+        119
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 75,
+      "nodes": [
+        75,
+        120
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 76,
+      "nodes": [
+        76,
+        121
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 77,
+      "nodes": [
+        77,
+        122
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 78,
+      "nodes": [
+        78,
+        123
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 79,
+      "nodes": [
+        79,
+        124
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 80,
+      "nodes": [
+        80,
+        125
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 81,
+      "nodes": [
+        81,
+        126
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 82,
+      "nodes": [
+        82,
+        127
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 83,
+      "nodes": [
+        83,
+        128
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 84,
+      "nodes": [
+        84,
+        129
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 85,
+      "nodes": [
+        85,
+        130
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 86,
+      "nodes": [
+        86,
+        131
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 87,
+      "nodes": [
+        87,
+        132
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 88,
+      "nodes": [
+        88,
+        133
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 89,
+      "nodes": [
+        89,
+        134
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 90,
+      "nodes": [
+        90,
+        135
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 91,
+      "nodes": [
+        91,
+        136
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 92,
+      "nodes": [
+        92,
+        137
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 93,
+      "nodes": [
+        93,
+        138
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 94,
+      "nodes": [
+        94,
+        139
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 95,
+      "nodes": [
+        95,
+        140
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 96,
+      "nodes": [
+        96,
+        141
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 97,
+      "nodes": [
+        97,
+        142
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 98,
+      "nodes": [
+        98,
+        143
+      ],
+      "method": "culture_contrast"
+    },
+    {
+      "id": 99,
+      "nodes": [
+        99,
+        144
+      ],
+      "method": "culture_contrast"
+    }
+  ]
+}

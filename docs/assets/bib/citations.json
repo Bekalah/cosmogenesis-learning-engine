@@ -1,0 +1,10 @@
+[
+  {
+    "id": "lawlor1982",
+    "type": "book",
+    "title": "Sacred Geometry: Philosophy and Practice",
+    "author": [{"family": "Lawlor", "given": "Robert"}],
+    "issued": {"date-parts": [[1982]]},
+    "publisher": "Thames & Hudson"
+  }
+]

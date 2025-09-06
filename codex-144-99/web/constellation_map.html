@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Constellation Map</title>
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        background: #000;
+      }
+      #cy {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      async function loadData() {
+        const nodesResp = await fetch("../data/codex_nodes_full.json");
+        const nodesData = await nodesResp.json();
+        const nodeMap = new Map(nodesData.map((n) => [n.node_id, n]));
+        const linksResp = await fetch("../data/cross_links.json");
+        const linksData = await linksResp.json();
+
+        const elements = [];
+        const ensureNode = (id) => {
+          if (!elements.find((e) => e.data && e.data.id === String(id))) {
+            const n = nodeMap.get(id);
+            elements.push({
+              data: { id: String(id), label: n ? n.name : `Node ${id}` },
+            });
+          }
+        };
+
+        for (const wh of linksData.wormholes) {
+          const [a, b] = wh.nodes;
+          ensureNode(a);
+          ensureNode(b);
+          elements.push({
+            data: { id: `w${wh.id}`, source: String(a), target: String(b) },
+          });
+        }
+
+        const cy = cytoscape({
+          container: document.getElementById("cy"),
+          elements,
+          style: [
+            {
+              selector: "node",
+              style: {
+                label: "data(label)",
+                "background-color": "#0ff",
+                color: "#fff",
+                "font-size": 8,
+              },
+            },
+            { selector: "edge", style: { width: 1, "line-color": "#555" } },
+          ],
+          layout: { name: "cose" },
+        });
+      }
+      loadData();
+    </script>
+  </body>
+</html>

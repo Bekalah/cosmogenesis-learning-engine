@@ -1,15 +1,32 @@
+
+
+import { test } from "node:test";
+import assert from "node:assert/strict";
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { deepEqual } from 'node:assert';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+import { EventEmitter } from 'node:events';
+
 import { exportJSON } from '../src/engines/exporter.js';
 
-test('progress export JSON writes a file', () => {
-  const path = exportJSON({ ok: true }, 'progress.json');
-  assert.ok(typeof path === 'string' && path.endsWith('progress.json'));
 import { test } from "node:test";
-import { deepEqual } from "node:assert";
+import assert, { deepEqual } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import { EventEmitter } from "node:events";
+import { exportJSON } from "../src/engines/exporter.js";
+
+
+
+test("progress export JSON writes a file", () => {
+  const path = exportJSON({ ok: true }, "progress.json");
+  assert.ok(typeof path === "string" && path.endsWith("progress.json"));
+});
+
+import { exportJSON } from '../src/engines/exporter.js';
+
 
 function loadEngine() {
   const storage = {};
@@ -35,19 +52,51 @@ function loadEngine() {
     console,
   };
   vm.runInNewContext(
-    readFileSync("assets/js/engines/progress-engine.js", "utf8"),
+    readFileSync('assets/js/engines/progress-engine.js', 'utf8'),
     ctx,
   );
   return ctx;
 }
 
+
+test('progress export JSON writes a file', () => {
+  const path = exportJSON({ ok: true }, 'progress.json');
+  assert.ok(typeof path === 'string' && path.endsWith('progress.json'));
+});
+
+test('records progress and resets', () => {
+
+  const ctx = loadEngine();
+  ctx.window.roomsProgress.markRoomEnter('agrippa');
+  ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
+  deepEqual(ctx.window.roomsProgress.state.rooms, {
+
+test("progress export JSON writes a file", () => {
+  const path = exportJSON({ ok: true }, "progress.json");
+  assert.ok(typeof path === "string" && path.endsWith("progress.json"));
+});
+
 test("records progress and resets", () => {
   const ctx = loadEngine();
   ctx.window.roomsProgress.markRoomEnter("agrippa");
   ctx.window.roomsProgress.markQuestComplete("agrippa", "read");
+  const state = JSON.parse(
+    JSON.stringify(ctx.window.roomsProgress.state.rooms),
+  );
+  deepEqual(state, {
+
+  const ctx = loadEngine();
+  const ctx = loadEngine();
+
+  ctx.window.roomsProgress.markRoomEnter('agrippa');
+  ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
   deepEqual(ctx.window.roomsProgress.state.rooms, {
     agrippa: { quests: { read: true }, entered: true },
   });
   ctx.window.roomsProgress.reset();
-  deepEqual(ctx.window.roomsProgress.state.rooms, {});
+  const reset = JSON.parse(
+    JSON.stringify(ctx.window.roomsProgress.state.rooms),
+  );
+  deepEqual(reset, {});
 });
+
