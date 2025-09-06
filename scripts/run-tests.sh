@@ -1,7 +1,11 @@
 #!/usr/bin/env sh
 # Lightweight test runner with fallbacks for Node.js and Deno environments
 set -e
+
+TEST_FILES="test/plugin-registry.test.js test/progress-engine.test.js test/exporter.test.js test/config-loader.test.js"
+
 TEST_FILES="test/plugin-registry.test.js test/progress-engine.test.js test/exporter.test.js"
+
 
 if command -v node >/dev/null 2>&1; then
   node --test $TEST_FILES

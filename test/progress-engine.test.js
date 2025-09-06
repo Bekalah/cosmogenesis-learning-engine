@@ -1,4 +1,5 @@
 
+
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { test } from 'node:test';
@@ -9,12 +10,14 @@ import vm from 'node:vm';
 import { EventEmitter } from 'node:events';
 
 import { exportJSON } from '../src/engines/exporter.js';
+
 import { test } from "node:test";
 import assert, { deepEqual } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import { EventEmitter } from "node:events";
 import { exportJSON } from "../src/engines/exporter.js";
+
 
 
 test("progress export JSON writes a file", () => {
@@ -55,6 +58,7 @@ function loadEngine() {
   return ctx;
 }
 
+
 test('progress export JSON writes a file', () => {
   const path = exportJSON({ ok: true }, 'progress.json');
   assert.ok(typeof path === 'string' && path.endsWith('progress.json'));
@@ -66,6 +70,7 @@ test('records progress and resets', () => {
   ctx.window.roomsProgress.markRoomEnter('agrippa');
   ctx.window.roomsProgress.markQuestComplete('agrippa', 'read');
   deepEqual(ctx.window.roomsProgress.state.rooms, {
+
 test("progress export JSON writes a file", () => {
   const path = exportJSON({ ok: true }, "progress.json");
   assert.ok(typeof path === "string" && path.endsWith("progress.json"));
@@ -79,6 +84,7 @@ test("records progress and resets", () => {
     JSON.stringify(ctx.window.roomsProgress.state.rooms),
   );
   deepEqual(state, {
+
   const ctx = loadEngine();
   const ctx = loadEngine();
 

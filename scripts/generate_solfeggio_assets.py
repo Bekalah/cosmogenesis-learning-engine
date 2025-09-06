@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""Generate lossless Solfeggio tone assets for all 144 nodes.
+
+This script reads the Codex node registry and synthesizes a pure sine wave
+for each node's Solfeggio frequency. The resulting files are written as
+48 kHz, 16-bit mono WAV assets under ``assets/generated/audio``.
 """Generate lossless Solfeggio tone assets and metadata for all 144 nodes.
 
 This script reads the Codex node registry and synthesizes a pure sine wave
@@ -41,6 +46,8 @@ def synthesize_tone(freq: float, duration: float, sample_rate: int) -> np.ndarra
 # ---------------------------------------------------------------------------
 
 def generate_assets(nodes_file: Path, out_dir: Path, duration: float, sample_rate: int) -> None:
+    """Create one WAV file per node based on its Solfeggio frequency."""
+    """Create audio and metadata assets for each node."""
     """Create audio and metadata assets for each node."""
     """Create one WAV file per node based on its Solfeggio frequency."""
     nodes = json.loads(nodes_file.read_text())
@@ -50,6 +57,9 @@ def generate_assets(nodes_file: Path, out_dir: Path, duration: float, sample_rat
         node_id = entry["node_id"]
         freq_str = entry["solfeggio_freq"]  # e.g., "963 Hz"
         freq = float(freq_str.split()[0])
+        data = synthesize_tone(freq, duration, sample_rate)
+        filename = out_dir / f"node_{node_id:03d}_{int(freq)}Hz.wav"
+        with wave.open(str(filename), "w") as wf:
 
         # Create node directory
         node_dir = out_dir / f"node_{node_id:03d}"
