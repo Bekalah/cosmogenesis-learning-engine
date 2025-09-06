@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cosmogenesis — Spiral Teacher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cosmogenesis plate engine: spiral teacher with ND-safe motion, ladder toggle, PNG/META export." />
+  <link rel="stylesheet" href="./assets/css/palette.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+</head>
+<body>
+  <main id="app" aria-label="Cosmogenesis Plate">
+    <header class="hud" aria-live="polite">
+      <div class="hud__left">
+        <button id="ladder-btn" type="button" aria-pressed="false" aria-label="Toggle Jacob’s Ladder">Ladder: Off</button>
+      </div>
+      <p id="plaque" class="plaque" role="status">Loading Cosmogenesis…</p>
+      <div class="hud__right">
+        <button id="png-btn" type="button" aria-label="Export PNG">PNG</button>
+        <button id="meta-btn" type="button" aria-label="Export META JSON">META</button>
+      </div>
+    </header>
+
+    <section class="stage">
+      <canvas id="plate" width="1280" height="720" role="img" aria-label="Cosmogenesis spiral plate"></canvas>
+    </section>
+  </main>
+
+  <script type="module">
+    import { guardBoot } from './js/core/guard.js';
+    import { prefers } from './js/compat/prefers.js';
+    import { bootCosmogenesis } from '/assets/js/engines/fractal-engine.js';
+
+    guardBoot('cosmogenesis');
+    bootCosmogenesis({ prefers });
+  </script>
+</body>
+</html>
