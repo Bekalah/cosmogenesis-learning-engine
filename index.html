@@ -321,6 +321,27 @@
   </head>
   <body>
     <header>
+
+      <h1>Cosmogenesis Learning Engine</h1>
+      <div class="controls">
+        <label
+          >Tilt <input id="tilt" type="range" min="0" max="45" step="0.5"
+        /></label>
+        <label
+          >Nodes <input id="nodes" type="number" min="33" max="144" step="1"
+        /></label>
+        <label
+          >Skin
+          <select id="skin"></select
+        ></label>
+        <label
+          >Font
+          <select id="font-selector"></select
+        ></label>
+        <button id="calm-toggle" aria-pressed="false">Calm Mode</button>
+        <button id="hc-toggle" aria-pressed="false">High Contrast</button>
+        <button id="btn-export">Export Plate</button>
+
       <div class="top">
         <div>
           <h1>Cosmogenesis Learning Engine</h1>
@@ -352,6 +373,7 @@
             >GitHub</a
           >
         </div>
+
   <meta charset="utf-8">
   <title>Cosmogenesis Learning Engine</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -1384,6 +1406,135 @@
               }),
             );
           }
+
+          }
+          root.appendChild(
+            path(d, {
+              fill: "none",
+              stroke: this.theme.spiral,
+              "stroke-width": 2,
+              "stroke-linecap": "round",
+              "aria-label": "Spiral",
+            }),
+          );
+        }
+        drawNodeRing(root) {
+          const n = this.effectiveCount();
+          const ringR = this.config.rOuter * 0.88;
+          const labels = this.labels();
+          const colors = this.theme.nodes;
+          const g = group(root, "node-ring");
+          for (let i = 0; i < n; i++) {
+            const angle = this.phase + i * ((2 * Math.PI) / n);
+            const x = ringR * Math.cos(angle);
+            const y = ringR * Math.sin(angle);
+            const fill = colors[i % colors.length];
+            g.appendChild(
+              circle(x, y, this.config.nodeSize, {
+                fill,
+                stroke: "#000",
+                "stroke-opacity": "0.25",
+                "stroke-width": "1",
+              }),
+            );
+            g.appendChild(
+              text(x, y + 4, String(labels[i] ?? i + 1), {
+                class: "node-label",
+                "text-anchor": "middle",
+              }),
+            );
+          }
+        }
+        drawTwinCones(root) {
+          const { rInner, rOuter, samples } = this.config;
+          const g = group(root, "twin-cones");
+          const arms = (phaseShift) => {
+            let d = "";
+            for (let i = 0; i <= samples; i++) {
+              const t = i / samples;
+              const r = rInner + (rOuter - rInner) * Math.pow(t, 1.1);
+              const theta = t * Math.PI + phaseShift + this.phase;
+              const x = r * Math.cos(theta);
+              const y = r * Math.sin(theta);
+              d += i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`;
+            }
+            return d;
+          };
+          g.appendChild(
+            path(arms(0), {
+              fill: "none",
+              stroke: this.theme.spiral,
+              "stroke-width": 2,
+            }),
+          );
+          g.appendChild(
+            path(arms(Math.PI), {
+              fill: "none",
+              stroke: this.theme.spiral,
+              "stroke-width": 2,
+            }),
+          );
+          // Node arcs
+          const n = this.effectiveCount();
+          const labels = this.labels();
+          const colors = this.theme.nodes;
+          const arcR = rOuter * 0.82;
+          for (let i = 0; i < n; i++) {
+            const side = i % 2 === 0 ? 1 : -1;
+            const k = Math.floor(i / 2);
+            const steps = Math.ceil(n / 2);
+            const a = (k / Math.max(1, steps - 1)) * Math.PI;
+            const angle = (side > 0 ? a : a + Math.PI) + this.phase;
+            const x = arcR * Math.cos(angle);
+            const y = arcR * Math.sin(angle);
+            const fill = colors[i % colors.length];
+            g.appendChild(
+              circle(x, y, this.config.nodeSize, {
+                fill,
+                stroke: "#000",
+                "stroke-opacity": "0.25",
+                "stroke-width": "1",
+              }),
+            );
+            g.appendChild(
+              text(x, y + 4, String(labels[i] ?? i + 1), {
+                class: "node-label",
+                "text-anchor": "middle",
+              }),
+            );
+          }
+        }
+        drawGrid(root) {
+          const n = this.effectiveCount();
+          const labels = this.labels();
+          const colors = this.theme.nodes;
+          const cols = Math.ceil(Math.sqrt(n));
+          const rows = Math.ceil(n / cols);
+          const size = (this.config.rOuter * 1.6) / Math.max(cols, rows);
+          const startX = -(cols - 1) * size * 0.6;
+          const startY = -(rows - 1) * size * 0.6;
+          for (let i = 0; i < n; i++) {
+            const r = Math.floor(i / cols),
+              c = i % cols;
+            const x = startX + c * size * 1.2;
+            const y = startY + r * size * 1.2;
+            const fill = colors[i % colors.length];
+            root.appendChild(
+              circle(x, y, this.config.nodeSize, {
+                fill,
+                stroke: "#000",
+                "stroke-opacity": "0.2",
+                "stroke-width": "1",
+              }),
+            );
+            root.appendChild(
+              text(x, y + 4, String(labels[i] ?? i + 1), {
+                class: "node-label",
+                "text-anchor": "middle",
+              }),
+            );
+          }
+
         }
         exportSVGBlob() {
           return new Blob([serializeSVG(this.svg)], {
@@ -1424,6 +1575,72 @@
         }
         maybeUnlock();
       })();
+
+          // Render up to 12 thumbs
+          pool.slice(0, 12).forEach((a) => {
+            mount.insertAdjacentHTML(
+              "beforeend",
+              card(a.name || "asset", a, "gonz-velvet ember-eye"),
+            );
+          });
+        })();
+      </script>
+    </main>
+    <footer>ND-safe • no autoplay • no strobe • honors reduced motion</footer>
+
+    <script type="module">
+      import {
+        cfg,
+        getStylepacks,
+        getSpiralMap,
+        getAngels,
+      } from "./src/codex.ext.js";
+      import ThemeEngine from "./src/engines/theme-engine.js";
+      import ArtEngine from "./src/engines/art-engine.js";
+      import SpiralEngine from "./src/engines/spiral-engine.js";
+      import { exportPlate } from "./src/engines/exporter.js";
+      import GuardianPlaque from "./src/ui/guardian-plaque.js";
+      import initInfoDot from "./src/ui/info-dot.js";
+      import initFontSelector from "./src/ui/font-selector.js";
+
+      const canvas = document.getElementById("stage");
+      const tiltInput = document.getElementById("tilt");
+      const nodesInput = document.getElementById("nodes");
+      const skinSelect = document.getElementById("skin");
+      const calmBtn = document.getElementById("calm-toggle");
+      const hcBtn = document.getElementById("hc-toggle");
+      initFontSelector();
+
+      const themes = new ThemeEngine(getStylepacks());
+      const art = new ArtEngine(canvas, themes);
+      const spiral = new SpiralEngine(canvas, art);
+
+      function applyState() {
+        const tilt = parseFloat(
+          localStorage.getItem("cosmo:v1:tilt") || "23.5",
+        );
+        const nodes = parseInt(
+          localStorage.getItem("cosmo:v1:nodes") || "33",
+          10,
+        );
+        const skin = localStorage.getItem("cosmo:v1:skin") || "AGRIPPA";
+        const calm = localStorage.getItem("cosmo:v1:calm") === "true";
+        const hc = localStorage.getItem("cosmo:v1:hc") === "true";
+        tiltInput.value = tilt;
+        nodesInput.value = nodes;
+        skinSelect.value = skin;
+        spiral.init({ tiltDeg: tilt, nodeCount: nodes, map: getSpiralMap() });
+        themes.applyToElement(document.documentElement, skin);
+        document.documentElement.dataset.calm = calm;
+        document.documentElement.dataset.hc = hc;
+        calmBtn.setAttribute("aria-pressed", calm);
+        hcBtn.setAttribute("aria-pressed", hc);
+      }
+
+      tiltInput.addEventListener("input", (e) => {
+        const v = parseFloat(e.target.value);
+        spiral.setTilt(v);
+        localStorage.setItem("cosmo:v1:tilt", v);
 
       function getFormConfig() {
         const fd = new FormData(form);
