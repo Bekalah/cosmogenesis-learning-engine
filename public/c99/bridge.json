@@ -1,8 +1,7 @@
 {
   "meta": {
     "project": "Cosmogenesis Learning Engine",
-    "updated": "2025-09-03T08:39:58.786Z",
-    "updated": "2025-09-03T08:31:47.508Z",
+    "updated": "2025-09-04T05:55:46.733Z",
     "nd_safe": true
   },
   "routes": {
@@ -89,7 +88,6 @@
         639
       ]
     }
-    "description": "144 jewel nodes woven by 99 gate clusters; each node mirrors the whole."
   },
   "witch": {
     "id": "witch-default",
