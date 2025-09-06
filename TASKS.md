@@ -11,6 +11,7 @@
 
 ### Legacy Cleanup
 - [ ] Fix legacy file issues blocking `npm test` and `npm run check`
+- [ ] Remove remaining visionary_* artifacts and Pillow references
 
 ### P1 — Foundation (today)
 - [ ] Add docs: `docs/CODEX_EXT_RUNBOOK.md`, `docs/SCIENCE_REFERENCES.md`, `docs/STYLE_GUIDE.md`

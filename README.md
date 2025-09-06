@@ -51,7 +51,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -88,7 +87,6 @@ npm run dev     # serves at http://localhost:5173
 npm test        # node --test
 ```
 
-When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 For additional fallback strategies, see `docs/dependency_workarounds.md`.
 
 ### Shared Python overlays
@@ -105,7 +103,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -142,14 +139,11 @@ npm test        # uses Node.js or Deno if available
 npm test        # node --test
 
 # Visionary Dream fallback
-When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 ````
 
-When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 
 ### Shared Python overlays
 
-All Python art generators now reuse a common `enochian_layers` module that draws the Enochian grid and planetary sigils so mystical features stay consistent across scripts. This includes `visionary_dream.py`, `visionary_golden_geometry.py`, and `visionary_codex.py`.
 
 # User-provided custom instructions
 
@@ -161,7 +155,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -210,7 +203,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -248,7 +240,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -299,7 +290,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -368,7 +358,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -410,7 +399,6 @@ npm run dev     # serves at http://localhost:5173
 npm test        # uses Node.js or Deno if available
 ```
 
-When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 
 ### Shared Python overlays
 
@@ -426,7 +414,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -465,14 +452,11 @@ npm test        # uses Node.js or Deno if available
 npm test        # node --test
 
 # Visionary Dream fallback
-When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 ````
 
-When Python isn't available, open `visionary_dream.html` in a browser to render the Enochian grid and planetary sigils via p5.js.
 
 ### Shared Python overlays
 
-All Python art generators now reuse a common `enochian_layers` module that draws the Enochian grid and planetary sigils so mystical features stay consistent across scripts. This includes `visionary_dream.py`, `visionary_golden_geometry.py`, and `visionary_codex.py`.
 
 # User-provided custom instructions
 
@@ -484,7 +468,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -533,7 +516,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -571,7 +553,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -616,7 +597,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -653,7 +633,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -718,7 +697,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -756,7 +734,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -801,7 +778,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
   Return the code block only, no explanation.
 
 Tips for museum-quality, visionary art output
@@ -990,7 +966,6 @@ Requirements:
 - Comment each major step.
 - Use color palettes inspired by [ARTISTIC INSPIRATION, e.g., Alex Grey or surrealism].
 - Resolution: [WIDTH]x[HEIGHT].
-- Output should render/save an image titled "Visionary_Dream.png".
 Return the code block only, no explanation.
 Tips for museum-quality, visionary art output
 Inspiration reference: Specify artists, movements, or themes (e.g., “visionary geometry,” “psychedelic mandalas”) to guide style.
@@ -1011,10 +986,8 @@ Each experience fetched this way resolves its components and first page from the
 
 ## Environment Setup
 
-Install Python and Node dependencies locally without relying on remote workflows. The engine relies on the Pillow imaging library; the helper script will attempt to use an existing installation and only contact PyPI if needed:
 
 ```bash
 bash scripts/setup_env.sh
 ```
 
-If the script cannot reach PyPI it will fall back to the system package manager. In completely offline environments, manually install a Pillow wheel (`pip install Pillow-*.whl`).
