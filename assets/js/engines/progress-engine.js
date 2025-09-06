@@ -26,19 +26,7 @@
     state.rooms = {};
     save(state);
   }
-  document.addEventListener("room:enter", (e) => {
-    markRoomEnter(e.detail.id);
-  });
-  document.addEventListener("quest:complete", (e) => {
-    markQuestComplete(e.detail.roomId, e.detail.quest);
-  });
+  document.addEventListener("room:enter", e => markRoomEnter(e.detail.id));
+  document.addEventListener("quest:complete", e => markQuestComplete(e.detail.roomId, e.detail.quest));
   window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
-  window.roomsProgress = { state, markRoomEnter, markQuestComplete };
-<<<<<<< codex/create-open-world-learning-engine-features-j3nbmd
-  window.roomsProgress = { state, markRoomEnter, markQuestComplete };
-  window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
-  window.roomsProgress = { state, markRoomEnter, markQuestComplete, reset };
-  window.roomsProgress = { state, markRoomEnter, markQuestComplete };
-=======
->>>>>>> 24c5cfe3024ae4ac26e3e89053bd0b3aa38b1841
 })();

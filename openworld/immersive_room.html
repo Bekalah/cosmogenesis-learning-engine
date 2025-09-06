@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Immersive Visionary Room</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>body{margin:0;overflow:hidden}</style>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'https://unpkg.com/three@0.155.0/build/three.module.js';
+import {OrbitControls} from 'https://unpkg.com/three@0.155.0/examples/jsm/controls/OrbitControls.js';
+
+// Parse image path from query string
+const params = new URLSearchParams(location.search);
+const texPath = params.get('img') || '../Visionary_Dream.png';
+
+// Setup renderer
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Setup camera
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+camera.position.set(0, 0, 5);
+
+// Create scene
+const scene = new THREE.Scene();
+
+// Load texture and build room
+const loader = new THREE.TextureLoader();
+loader.load(texPath, texture => {
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  const materials = Array(6).fill(new THREE.MeshBasicMaterial({map:texture, side:THREE.BackSide}));
+  const room = new THREE.Mesh(new THREE.BoxGeometry(20, 10, 20), materials);
+  scene.add(room);
+});
+
+// Controls for exploration
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// Start simple ambient tone on first interaction
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+function startTone(){
+  const osc = ctx.createOscillator();
+  osc.type = 'sine';
+  osc.frequency.value = 432;
+  osc.connect(ctx.destination);
+  osc.start();
+}
+
+document.addEventListener('click', () => {
+  if (ctx.state !== 'running') ctx.resume().then(startTone);
+}, {once:true});
+
+// Animation loop
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// Handle resize
+addEventListener('resize', () => {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+});
+</script>
+</body>
+</html>
