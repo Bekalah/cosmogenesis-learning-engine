@@ -1,0 +1,7 @@
+{
+  "sources": [
+    { "repo": "circuitum99", "globs": ["nodes/**/node-*/node.json"] },
+    { "repo": "liber-arcanae", "globs": ["nodes/**/node-*/node.json"] },
+    { "repo": "stone-cathedral", "globs": ["nodes/**/node-*/node.json"] }
+  ]
+}
