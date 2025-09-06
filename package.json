@@ -18,6 +18,9 @@
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
     "build": "echo \"Static app -- no bundling required. Use 'Export SVG/PNG' in-app.\"",
+    "test": "./scripts/run-tests.sh",
+    "fmt": "npx prettier -w .",
+    "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
     "test": "node --test && python3 -m py_compile $(git ls-files '*.py')",
     "fmt": "npx prettier -w .",
     "format": "prettier -w .",
@@ -44,8 +47,11 @@
   "devDependencies": {
     "http-server": "^14.1.1",
     "prettier": "^3.4.2"
+
+
   },
   "devDependencies": {
     "prettier": "^3.3.3"
+
   }
 }
