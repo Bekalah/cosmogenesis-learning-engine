@@ -1,5 +1,10 @@
+
 import { readFileSync } from "node:fs";
 import path from "node:path";
+
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
 
 // Custom error type that aggregates structural problems
 export class ConfigError extends Error {
@@ -17,11 +22,18 @@ export function loadConfig(relativePath) {
   const file = path.resolve(process.cwd(), relativePath);
   let raw;
   try {
+
     raw = readFileSync(file, "utf8");
   } catch (err) {
     throw new ConfigError(relativePath, [
       `Unable to read file: ${err.message}`,
     ]);
+  }
+
+
+    raw = readFileSync(file, 'utf8');
+  } catch {
+    throw new ConfigError(relativePath, ['Config file not found']);
   }
 
   try {
@@ -34,8 +46,15 @@ export function loadConfig(relativePath) {
 // Validate a plate config against the JSON schema
 export function validatePlateConfig(config, source = "config") {
   const errors = [];
+
   if (typeof config !== "object" || config === null) {
     errors.push("config must be an object");
+
+  const layouts = ['spiral', 'twin-cone', 'wheel', 'grid'];
+
+  if (typeof config !== 'object' || config === null) {
+    errors.push('config must be an object');
+
   } else {
     if (!layouts.includes(config.layout)) {
       errors.push(`layout must be one of: ${layouts.join(", ")}`);
@@ -74,6 +93,7 @@ export function validatePlateConfig(config, source = "config") {
   return true;
 }
 
+
 // Convenience helper to grab the first demo configuration
 export function loadFirstDemo() {
   const demos = loadConfig("data/demos.json");
@@ -85,6 +105,13 @@ export function loadFirstDemo() {
     throw new ConfigError("data/demos.json", [
       "Expected array with a config object",
     ]);
+
+// Convenience helper to load and validate the first demo plate
+export function loadFirstDemo() {
+  const demos = loadConfig('data/demos.json');
+  if (!Array.isArray(demos) || demos.length === 0 || typeof demos[0].config !== 'object') {
+    throw new ConfigError('data/demos.json', ['Expected array with a config object']);
+
   }
   const config = demos[0].config;
   validatePlateConfig(config, "data/demos.json[0].config");

@@ -18,8 +18,6 @@ Each spiral is a _return_ — not a reset.
 
 Use the **Demos** tab or load `data/demos.json` to explore built-in presets:
 
-Each demo may also include a list of `resources` with links for further study.
-
 - Art • 7 Colors (Basic Design)
 - STEM • 12 Cranial Nerves
 - UX • 22 Research Prompts
