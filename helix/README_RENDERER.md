@@ -14,6 +14,9 @@ Offline-only canvas demo. Encodes a four-layer cosmology without motion.
 3. Fibonacci curve (log spiral)
 4. Double-helix lattice (phase-shifted sine waves)
 
+Geometry parameters lean on symbolic numbers:
+3, 7, 9, 11, 22, 33, 99, and 144.
+
 ## Develop
 No tooling required. Files:
 - `index.html`
