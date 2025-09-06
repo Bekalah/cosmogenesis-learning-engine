@@ -27,6 +27,10 @@
           >Skin
           <select id="skin"></select
         ></label>
+        <label
+          >Font
+          <select id="font-selector"></select
+        ></label>
         <button id="calm-toggle" aria-pressed="false">Calm Mode</button>
         <button id="hc-toggle" aria-pressed="false">High Contrast</button>
         <button id="btn-export">Export Plate</button>
@@ -155,6 +159,7 @@
       import { exportPlate } from "./src/engines/exporter.js";
       import GuardianPlaque from "./src/ui/guardian-plaque.js";
       import initInfoDot from "./src/ui/info-dot.js";
+      import initFontSelector from "./src/ui/font-selector.js";
 
       const canvas = document.getElementById("stage");
       const tiltInput = document.getElementById("tilt");
@@ -162,6 +167,7 @@
       const skinSelect = document.getElementById("skin");
       const calmBtn = document.getElementById("calm-toggle");
       const hcBtn = document.getElementById("hc-toggle");
+      initFontSelector();
 
       const themes = new ThemeEngine(getStylepacks());
       const art = new ArtEngine(canvas, themes);
