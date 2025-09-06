@@ -10,6 +10,8 @@ import math
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageColor
 
+from enochian_layers import draw_enochian_grid, draw_celestial_sigils
+
 # Color palette inspired by visionary artists
 PALETTE = {
     "background": "#0e0d0d",
@@ -109,6 +111,10 @@ def draw_elemental_glyphs(draw: ImageDraw.ImageDraw, center: tuple[int, int], si
             (earth_center[0] - half, earth_center[1] + half),
             (earth_center[0] + half, earth_center[1] + half),
         ],
+        fill=PALETTE["earth"],
+        width=3,
+    )
+
     # Earth – square with a cross
     left = center[0] - size
     top = center[1] - half
@@ -152,6 +158,10 @@ def main() -> None:
     draw_golden_spiral(draw, center, PALETTE["spiral"])
     glyph_size = int(min(args.width, args.height) / (PHI * 3))
     draw_elemental_glyphs(draw, center, glyph_size)
+
+    # Mystical overlays reused across Python generators
+    draw_enochian_grid(draw, args.width, args.height)
+    draw_celestial_sigils(draw, args.width, args.height)
 
     img.save(args.output)
     print(f"Artwork saved to {Path(args.output).resolve()}")
