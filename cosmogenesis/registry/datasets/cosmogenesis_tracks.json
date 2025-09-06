@@ -1,0 +1,6 @@
+{
+  "tracks": [
+    {"id": "track_alpha", "title": "First Spiral", "cube": "cube_1"},
+    {"id": "track_beta", "title": "Second Spiral", "cube": "cube_2"}
+  ]
+}

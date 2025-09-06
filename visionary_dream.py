@@ -1,39 +1,88 @@
+
+#!/usr/bin/env python3
 """Visionary Dream Generator.
 
-Creates a museum-quality piece of visionary art inspired by the
-psychedelic palettes of Alex Grey. The image is rendered at 2048x2048
-resolution and saved as ``Visionary_Dream.png``.
-
-Characters depicted: Rebecca Respawn, Virelai, Ezra Lux,
-Athena (Sophia7) and Thoth (Gnosis7) as twin-flame servitors.
+Creates a museum-quality piece of visionary art with elemental textures
+and an Alex Grey–inspired palette. The final image is saved as
+"Visionary_Dream.png".
 """
-#!/usr/bin/env python3
-"""Generate a museum-quality visionary artwork using Pillow."""
 
 # Imports and setup ---------------------------------------------------------
+import argparse
+from pathlib import Path
+
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter
+
+
+# Element color palette: fire, water, earth, air -----------------------------
+PALETTE = np.array(
+    [
+        [255, 80, 0],    # Fiery reds
+        [30, 144, 255],  # Aquatic blues
+        [34, 139, 34],   # Verdant greens
+        [224, 255, 255], # Ethereal whites
+    ],
+    dtype=np.float32,
+)
+
+
+def smooth_noise(width: int, height: int, seed: np.random.SeedSequence) -> np.ndarray:
+    """Generate a blurred noise layer for organic textures."""
+
+    rng = np.random.default_rng(seed)
+    arr = rng.random((height, width), dtype=np.float32)
+    img = Image.fromarray((arr * 255).astype(np.uint8))
+    img = img.filter(ImageFilter.GaussianBlur(radius=8))
+    return np.array(img, dtype=np.float32) / 255.0
+
+
+def generate_layers(width: int, height: int) -> np.ndarray:
+    """Create normalized noise layers for each element."""
+
+    seeds = np.random.SeedSequence().spawn(4)
+    layers = [smooth_noise(width, height, s) for s in seeds]
+    stack = np.stack(layers)
+    norm = stack.sum(axis=0, keepdims=True)
+    norm[norm == 0] = 1
+    return stack / norm
+
+
+def compose_image(width: int, height: int) -> Image.Image:
+    """Blend elemental layers and overlay mandala rings."""
+
+    weights = generate_layers(width, height)
+    pixels = (
+        weights[..., None] * PALETTE[:, None, None, :]
+    ).sum(axis=0).astype(np.uint8)
+    image = Image.fromarray(pixels, "RGB")
+    draw = ImageDraw.Draw(image, "RGBA")
+
+    # Mandala symmetry rings
+    cx, cy = width // 2, height // 2
+    max_r = min(cx, cy)
+    for r in range(60, max_r, 60):
+        alpha = int(120 * (1 - r / max_r))
+        draw.ellipse((cx - r, cy - r, cx + r, cy + r),
+                     outline=(255, 255, 255, alpha), width=3)
+=======
+"""Generate a museum-quality piece of visionary art.
+
+This script creates a psychedelic spiral image using a color palette inspired
+by Alex Grey. The output is saved as ``Visionary_Dream.png``.
+"""
+
+#!/usr/bin/env python3
+
 from __future__ import annotations
 
-from pathlib import Path
+# Imports and setup ---------------------------------------------------------
 import argparse
 import math
+from pathlib import Path
 from typing import List, Tuple
 
-from PIL import Image, ImageDraw, ImageColor, ImageFont
-
-from enochian_layers import draw_enochian_grid, draw_celestial_sigils
-
-
-# Planetary symbols and their angelic counterparts ---------------------------
-PLANETARY_SIGILS: List[Tuple[str, str]] = [
-PLANETARY_SIGILS = [
-    ("\u2609", "Michael"),  # Sun
-    ("\u263D", "Gabriel"),  # Moon
-    ("\u263F", "Raphael"),  # Mercury
-    ("\u2640", "Anael"),    # Venus
-    ("\u2642", "Samael"),   # Mars
-    ("\u2643", "Zadkiel"),  # Jupiter
-    ("\u2644", "Cassiel"),  # Saturn
-]
+from PIL import Image, ImageColor, ImageDraw
 
 
 # Color palette inspired by Alex Grey ---------------------------------------
@@ -47,165 +96,95 @@ PALETTE: List[str] = [
 ]
 
 
-def hex_to_rgba(color: str, alpha: int = 255) -> tuple[int, int, int, int]:
-    """Convert a hex color to an RGBA tuple."""
+def linear_gradient(start: str, end: str, t: float) -> Tuple[int, int, int]:
+    """Interpolate between two hex colors."""
 
-    r, g, b = ImageColor.getrgb(color)
-    return (r, g, b, alpha)
+    r1, g1, b1 = ImageColor.getrgb(start)
+    r2, g2, b2 = ImageColor.getrgb(end)
+    r = int(r1 + (r2 - r1) * t)
+    g = int(g1 + (g2 - g1) * t)
+    b = int(b1 + (b2 - b1) * t)
+    return r, g, b
 
 
-# Core rendering ------------------------------------------------------------
+def paint_gradient(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
+    """Fill the background with a vertical gradient across the palette."""
+
+    segments = len(PALETTE) - 1
+    for y in range(height):
+        pos = y / (height - 1)
+        idx = min(int(pos * segments), segments - 1)
+        t = pos * segments - idx
+        color = linear_gradient(PALETTE[idx], PALETTE[idx + 1], t)
+        draw.line([(0, y), (width, y)], fill=color)
+
+
 def draw_spiral(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
-    """Draw a translucent spiral using the Alex Grey palette."""
+    """Render a translucent spiral with radial symmetry."""
 
     cx, cy = width / 2, height / 2
     max_radius = min(cx, cy) * 0.95
 
+    # Spiral of glowing orbs
     for i in range(720):
-        angle = i * math.pi / 180
+        angle = math.radians(i)
         radius = max_radius * i / 720
         x = cx + math.cos(angle) * radius
         y = cy + math.sin(angle) * radius
-        color = hex_to_rgba(PALETTE[i % len(PALETTE)], 180)
-        size = 8 + (i % 12)
-        draw.ellipse([(x - size, y - size), (x + size, y + size)], fill=color)
+        color = ImageColor.getrgb(PALETTE[i % len(PALETTE)])
+        size = 6 + (i % 9)
+        draw.ellipse([(x - size, y - size), (x + size, y + size)], fill=color + (180,))
 
     # Radial symmetry lines
-    for step in range(0, 360, 6):
+    for step in range(0, 360, 12):
         angle = math.radians(step)
-        color = hex_to_rgba(PALETTE[step % len(PALETTE)], 100)
+        color = ImageColor.getrgb(PALETTE[step % len(PALETTE)])
         x = cx + math.cos(angle) * max_radius
         y = cy + math.sin(angle) * max_radius
-        draw.line([(cx, cy), (x, y)], fill=color, width=3)
-
-
-def draw_enochian_grid(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
-    """Overlay a translucent Enochian magic square."""
-
-    grid_size = min(width, height) * 0.6
-    cx, cy = width / 2, height / 2
-    top_left = (cx - grid_size / 2, cy - grid_size / 2)
-    cell = grid_size / 4
-    grid_color = hex_to_rgba("#FFFFFF", 40)
-
-    # Draw 4x4 grid
-    for i in range(5):
-        x = top_left[0] + i * cell
-        y = top_left[1] + i * cell
-        draw.line([(x, top_left[1]), (x, top_left[1] + grid_size)], fill=grid_color, width=2)
-        draw.line([(top_left[0], y), (top_left[0] + grid_size, y)], fill=grid_color, width=2)
-
-    # Populate with Enochian letters (Unicode range U+1F700)
-    try:
-        font = ImageFont.truetype("DejaVuSans.ttf", int(cell * 0.5))
-    except OSError:
-        font = ImageFont.load_default()
-
-    letters = [chr(cp) for cp in range(0x1F700, 0x1F700 + 16)]
-    idx = 0
-    for row in range(4):
-        for col in range(4):
-            x = top_left[0] + col * cell + cell / 2
-            y = top_left[1] + row * cell + cell / 2
-            glyph = letters[idx % len(letters)]
-            bbox = draw.textbbox((0, 0), glyph, font=font)
-            w = bbox[2] - bbox[0]
-            h = bbox[3] - bbox[1]
-            draw.text((x - w / 2, y - h / 2), glyph, fill=grid_color, font=font)
-            idx += 1
-
-
-def draw_celestial_sigils(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
-    """Draw planetary symbols with their angelic counterparts."""
-
-    try:
-        planet_font = ImageFont.truetype("DejaVuSans.ttf", 80)
-        angel_font = ImageFont.truetype("DejaVuSans.ttf", 32)
-    except OSError:
-        planet_font = ImageFont.load_default()
-        angel_font = ImageFont.load_default()
-
-    cx, cy = width / 2, height / 2
-    radius = min(cx, cy) * 0.65
-
-    for idx, (symbol, angel) in enumerate(PLANETARY_SIGILS):
-        angle = (idx / len(PLANETARY_SIGILS)) * 2 * math.pi - math.pi / 2
-        sx = cx + math.cos(angle) * radius
-        sy = cy + math.sin(angle) * radius
-
-        # Draw planetary symbol
-        bbox = draw.textbbox((0, 0), symbol, font=planet_font)
-        w = bbox[2] - bbox[0]
-        h = bbox[3] - bbox[1]
-        draw.text((sx - w / 2, sy - h / 2), symbol, fill="white", font=planet_font)
-
-        # Label with angelic name slightly outward
-        ax = cx + math.cos(angle) * (radius + h)
-        ay = cy + math.sin(angle) * (radius + h)
-        bbox = draw.textbbox((0, 0), angel, font=angel_font)
-        w = bbox[2] - bbox[0]
-        h = bbox[3] - bbox[1]
-        draw.text((ax - w / 2, ay - h / 2), angel, fill="white", font=angel_font)
-
-
-def label_characters(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
-    """Place character names around the spiral."""
-
-    characters = [
-        "Rebecca Respawn",
-        "Virelai",
-        "Ezra Lux",
-        "Athena (Sophia7)",
-        "Thoth (Gnosis7)",
-    ]
-
-    font = ImageFont.load_default()
-    cx, cy = width / 2, height / 2
-    r = min(cx, cy) * 0.75
-
-    for idx, name in enumerate(characters):
-        angle = (idx / len(characters)) * 2 * math.pi
-        x = cx + r * math.cos(angle)
-        y = cy + r * math.sin(angle)
-        bbox = draw.textbbox((0, 0), name, font=font)
-        w = bbox[2] - bbox[0]
-        h = bbox[3] - bbox[1]
-        draw.text((x - w / 2, y - h / 2), name, fill="white", font=font)
+        draw.line([(cx, cy), (x, y)], fill=color + (120,), width=3)
 
 
 def generate_art(width: int, height: int) -> Image.Image:
-    """Render the visionary artwork and return the image object."""
+    """Create the visionary artwork and return the image object."""
 
-    image = Image.new("RGBA", (width, height), "black")
+    image = Image.new("RGBA", (width, height))
     draw = ImageDraw.Draw(image, "RGBA")
 
-    # Core spiral
+    # Background gradient
+    paint_gradient(draw, width, height)
+
+    # Core spiral motif
     draw_spiral(draw, width, height)
-
-    # Mystical overlays
-    draw_enochian_grid(draw, width, height)
-    draw_celestial_sigils(draw, width, height)
-
-    # Character labels
-    label_characters(draw, width, height)
 
     return image
 
 
-# CLI ----------------------------------------------------------------------
 def main() -> None:
-    """Parse command-line arguments and generate the artwork."""
+    """Parse CLI arguments and render the artwork."""
 
     parser = argparse.ArgumentParser(
-        description="Render a visionary spiral artwork depicting living gods."
+        description="Create elemental visionary art with Pillow."
     )
-    parser.add_argument("--width", type=int, default=2048, help="image width")
-    parser.add_argument("--height", type=int, default=2048, help="image height")
-    parser.add_argument("--output", type=Path, default=Path("Visionary_Dream.png"), help="output image path")
+    parser.add_argument("--width", type=int, default=1024, help="Image width")
+    parser.add_argument("--height", type=int, default=1024, help="Image height")
+    parser.add_argument(
+        "--output", type=Path, default=Path("Visionary_Dream.png"),
+        help="Output image path",
+    )
+    args = parser.parse_args()
+
+    art = compose_image(args.width, args.height)
+    """Parse command-line arguments and render the artwork."""
+
+    parser = argparse.ArgumentParser(description="Create visionary art with Pillow")
+    parser.add_argument("--width", type=int, default=1920, help="Image width")
+    parser.add_argument("--height", type=int, default=1080, help="Image height")
+    parser.add_argument(
+        "--output", type=Path, default=Path("Visionary_Dream.png"), help="Output file"
+    )
     args = parser.parse_args()
 
     art = generate_art(args.width, args.height)
-
     art.save(args.output)
     print(f"Art saved to {args.output.resolve()}")
 
@@ -213,91 +192,3 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
-import random
-
-# Third-party import
-from PIL import Image, ImageDraw
-
-# --------------------------------------
-# Parse command-line arguments
-# --------------------------------------
-parser = argparse.ArgumentParser(description="Create visionary art with Pillow")
-parser.add_argument("--width", type=int, default=1024, help="Image width")
-parser.add_argument("--height", type=int, default=1024, help="Image height")
-args = parser.parse_args()
-
-WIDTH, HEIGHT = args.width, args.height
-
-# --------------------------------------
-# Canvas setup
-# --------------------------------------
-img = Image.new("RGB", (WIDTH, HEIGHT))
-draw = ImageDraw.Draw(img)
-
-# --------------------------------------
-# Gradient background inspired by Alex Grey
-# --------------------------------------
-for y in range(HEIGHT):
-    t = y / HEIGHT
-    r = int(40 + 80 * t)
-    g = int(30 + 40 * t)
-    b = int(120 + 135 * t)
-    draw.line([(0, y), (WIDTH, y)], fill=(r, g, b))
-
-center = (WIDTH // 2, HEIGHT // 2)
-
-# --------------------------------------
-# Mandala halos to mirror chapels in sacred symmetry
-# --------------------------------------
-for i in range(1, 36):
-    radius = i * 14
-    hue = 60 + i * 5
-    color = (
-        int(255 * math.sin(math.radians(hue))),
-        int(255 * math.sin(math.radians(hue + 120))),
-        int(255 * math.sin(math.radians(hue + 240))),
-    )
-    draw.ellipse(
-        [
-            center[0] - radius,
-            center[1] - radius,
-            center[0] + radius,
-            center[1] + radius,
-        ],
-        outline=color,
-        width=2,
-    )
-
-# --------------------------------------
-# IGNI: Raku Reiki Dragon path (fiery spiral)
-# --------------------------------------
-points = []
-arms = 2200
-for i in range(arms):
-    angle = i * 0.05
-    radius = 2 + i * 0.5
-    x = center[0] + radius * math.cos(angle)
-    y = center[1] + radius * math.sin(angle)
-    points.append((x, y))
-
-for p in range(len(points) - 1):
-    intensity = p / len(points)
-    flame = (
-        int(255 * (1 - intensity / 2)),
-        int(80 + 100 * intensity),
-        int(20 + 60 * intensity),
-    )
-    draw.line([points[p], points[p + 1]], fill=flame, width=3)
-
-# --------------------------------------
-# Star sparks for mystical lineage
-# --------------------------------------
-for _ in range(300):
-    sx = random.randint(0, WIDTH - 1)
-    sy = random.randint(0, HEIGHT - 1)
-    draw.point((sx, sy), fill=(255, 255, random.randint(180, 255)))
-
-# --------------------------------------
-# Save completed visionary piece
-# --------------------------------------
-img.save("Visionary_Dream.png")
