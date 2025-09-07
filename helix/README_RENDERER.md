@@ -17,6 +17,9 @@ Offline-only canvas demo. Encodes a four-layer cosmology without motion.
 Geometry parameters lean on symbolic numbers:
 3, 7, 9, 11, 22, 33, 99, and 144.
 
+Numerology constants are exported as `NUM` from `js/helix-renderer.mjs` so
+other scripts may reuse them.
+
 ## Develop
 No tooling required. Files:
 - `index.html`
