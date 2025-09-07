@@ -1,6 +1,9 @@
 /*
   helix-renderer.mjs
+  Motto: Per Texturas Numerorum, Spira Loquitur.
   ND-safe static renderer for layered sacred geometry.
+
+  Seal Motto: Per Texturas Numerorum, Spira Loquitur.
 
   Layers:
     1) Vesica field (intersecting circles)
@@ -42,6 +45,7 @@ function drawTreeOfLife(ctx, w, h, nodeColor, pathColor, NUM) {
   // Simplified yet canonical layout: 10 nodes, 22 straight paths.
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = 2;
+
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -86,6 +90,25 @@ function drawTreeOfLife(ctx, w, h, nodeColor, pathColor, NUM) {
     ctx.moveTo(nodes[a].x, nodes[a].y);
     ctx.lineTo(nodes[b].x, nodes[b].y);
     ctx.stroke();
+
+  const nodes = [];
+  const centerX = w / 2;
+  const topY = h / NUM.ELEVEN; // proportioned via 11
+  const verticalStep = (h - topY * 2) / NUM.NINE;
+  for (let i = 0; i < 10; i++) {
+    nodes.push({ x: centerX, y: topY + i * verticalStep });
+  }
+  // Draw paths (simple straight connections for ND-safety clarity)
+  nodes.forEach((a, i) => {
+    for (let j = i + 1; j < nodes.length; j++) {
+      if ((j - i) % NUM.THREE === 0 || j - i === 1) {
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    }
+
   });
 
   ctx.fillStyle = nodeColor;
