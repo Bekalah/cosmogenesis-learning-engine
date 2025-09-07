@@ -11,7 +11,7 @@ creative environments.
   external repositories.
 - Bridge configuration (`bridge/c99-bridge.json`) links this engine with the
   **circuitum99** soul repository.
-- Plugin registry stubs exist under `plugins/` and `tests/` proving the engine
+- Plugin registry stubs exist under `plugins/` and `test/` proving the engine
   can discover optional features.
 
 ## Current Repository Links
