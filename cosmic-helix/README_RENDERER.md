@@ -1,4 +1,5 @@
 # Cosmic Helix Renderer
+Per Texturas Numerorum, Spira Loquitur.
 
 *Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
 
