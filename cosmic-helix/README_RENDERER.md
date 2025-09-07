@@ -2,6 +2,8 @@
 
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
+*Motto: Per Texturas Numerorum, Spira Loquitur*
+
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas will render four static layers:
