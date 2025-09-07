@@ -1,5 +1,6 @@
 /*
   helix-renderer.mjs
+  Motto: Per Texturas Numerorum, Spira Loquitur.
   ND-safe static renderer for layered sacred geometry.
 
   Layers:

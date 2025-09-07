@@ -1,4 +1,5 @@
 # Cosmic Helix Renderer
+Per Texturas Numerorum, Spira Loquitur.
 
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
