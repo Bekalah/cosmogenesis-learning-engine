@@ -34,8 +34,23 @@ circuitum99/
     # ✦ Cathedral of Circuits — Pull Request Checklist ✦
 
 Please confirm all items before merging.  
-This project follows **CONTRIBUTING.md** (Bot Contract).  
+This project follows **CONTRIBUTING.md** (Bot Contract).
 No GitHub Actions. ND-safe only.
+
+
+### 🧪 Offline Testing
+Run the smoke tests locally before opening a PR:
+
+```sh
+node tests/indranet.test.mjs
+node tests/dataset-loader.test.mjs
+```
+
+For Deno users:
+
+```sh
+deno run --allow-read --allow-net tests/dataset-loader.test.mjs
+```
 
 —
 
