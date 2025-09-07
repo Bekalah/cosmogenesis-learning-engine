@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-09-07
+
+- Add Paul Foster Case chapel description.
+
 ## 2025-09-04
 
 - Add node schema, registry builder, validation tools, and CI workflow.
