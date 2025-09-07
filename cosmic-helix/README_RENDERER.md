@@ -6,7 +6,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas will render four static layers:
    - **Vesica field** — intersecting circles forming the womb of forms.
-   - **Tree‑of‑Life scaffold** — ten sephirot with simple straight paths.
+   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double‑helix lattice** — two phase‑shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. If missing, a calm
