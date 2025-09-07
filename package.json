@@ -16,9 +16,14 @@
     "dev": "http-server -p 5173 -c-1 .",
     "start": "npm run dev",
     "preview": "http-server -p 8080 -c-1 .",
-    "test": "node --test",
+    "test": "./scripts/run-tests.sh",
     "fmt": "prettier -w .",
-    "check": "prettier -c ."
+    "check": "./scripts/run-check.sh",
+    "format": "prettier -w src/configLoader.js src/renderPlate.js plugins/soundscape.js test/*.js data/demos.json",
+    "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
+    "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
+    "gallery:thumbs": "python3 scripts/pillow_thumbs.py --in exports --out exports/thumbs --size 512",
+    "postinstall": "echo \"Optional: pip install pillow numpy && npm i -D http-server prettier\""
   },
   "dependencies": {
     "ajv": "^8.17.1"
