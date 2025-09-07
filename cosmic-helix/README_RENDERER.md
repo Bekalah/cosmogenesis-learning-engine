@@ -26,4 +26,4 @@ extending `renderHelix` with new draw functions while preserving the calm visual
 hierarchy.
 
 ## Related Lore
-For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md).
+For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
