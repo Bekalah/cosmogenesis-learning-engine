@@ -35,11 +35,7 @@
       "meta": {
         "author": "Rebecca Respawn",
         "license": "CC BY-NC-SA 4.0",
-        "tags": [
-          "harmony",
-          "witness",
-          "ratio"
-        ],
+        "tags": ["harmony", "witness", "ratio"],
         "version": "1.0.0"
       }
     }

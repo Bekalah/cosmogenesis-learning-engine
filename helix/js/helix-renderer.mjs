@@ -30,23 +30,39 @@ function drawVesica(ctx, w, h, color, NUM) {
 // Draw Tree-of-Life nodes and connecting paths
 function drawTree(ctx, w, h, colorNode, colorPath, NUM) {
   const nodes = [
-    { x:0.5, y:0.06 }, // Kether
-    { x:0.35, y:0.18 }, { x:0.65, y:0.18 }, // Chokmah, Binah
-    { x:0.25, y:0.38 }, { x:0.75, y:0.38 }, // Chesed, Gevurah
-    { x:0.5, y:0.5 }, // Tipheret
-    { x:0.35, y:0.68 }, { x:0.65, y:0.68 }, // Netzach, Hod
-    { x:0.5, y:0.82 }, // Yesod
-    { x:0.5, y:0.94 } // Malkuth
-  ].map(p => ({ x:p.x * w, y:p.y * h }));
+    { x: 0.5, y: 0.06 }, // Kether
+    { x: 0.35, y: 0.18 },
+    { x: 0.65, y: 0.18 }, // Chokmah, Binah
+    { x: 0.25, y: 0.38 },
+    { x: 0.75, y: 0.38 }, // Chesed, Gevurah
+    { x: 0.5, y: 0.5 }, // Tipheret
+    { x: 0.35, y: 0.68 },
+    { x: 0.65, y: 0.68 }, // Netzach, Hod
+    { x: 0.5, y: 0.82 }, // Yesod
+    { x: 0.5, y: 0.94 }, // Malkuth
+  ].map((p) => ({ x: p.x * w, y: p.y * h }));
   const paths = [
-    [0,1],[0,2],[1,2],
-    [1,3],[1,5],[2,4],[2,5],
-    [3,5],[4,5],[3,6],[4,7],
-    [5,6],[5,7],[6,7],[6,8],[7,8],[8,9]
+    [0, 1],
+    [0, 2],
+    [1, 2],
+    [1, 3],
+    [1, 5],
+    [2, 4],
+    [2, 5],
+    [3, 5],
+    [4, 5],
+    [3, 6],
+    [4, 7],
+    [5, 6],
+    [5, 7],
+    [6, 7],
+    [6, 8],
+    [7, 8],
+    [8, 9],
   ];
   ctx.strokeStyle = colorPath;
   ctx.lineWidth = 2;
-  for (const [a,b] of paths) {
+  for (const [a, b] of paths) {
     ctx.beginPath();
     ctx.moveTo(nodes[a].x, nodes[a].y);
     ctx.lineTo(nodes[b].x, nodes[b].y);
@@ -65,9 +81,10 @@ function drawTree(ctx, w, h, colorNode, colorPath, NUM) {
 function drawFibonacci(ctx, w, h, color, NUM) {
   const phi = (1 + Math.sqrt(5)) / 2; // golden ratio
   const c = Math.min(w, h) / NUM.ONEFORTYFOUR; // base radius tied to 144
-  const center = { x:w * 0.8, y:h * 0.2 };
+  const center = { x: w * 0.8, y: h * 0.2 };
   const pts = [];
-  for (let t = 0; t <= NUM.THIRTYTHREE; t += 0.1) { // 0..33 radians
+  for (let t = 0; t <= NUM.THIRTYTHREE; t += 0.1) {
+    // 0..33 radians
     const r = c * Math.pow(phi, t / (Math.PI / 2));
     const x = center.x + r * Math.cos(t);
     const y = center.y + r * Math.sin(t);
@@ -76,7 +93,9 @@ function drawFibonacci(ctx, w, h, color, NUM) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.beginPath();
-  pts.forEach(([x, y], i) => { i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+  pts.forEach(([x, y], i) => {
+    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  });
   ctx.stroke();
 }
 
@@ -108,7 +127,7 @@ function drawHelix(ctx, w, h, colors, NUM) {
 }
 
 export function renderHelix(ctx, opts) {
-  const { width:w, height:h, palette, NUM } = opts;
+  const { width: w, height: h, palette, NUM } = opts;
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, w, h);
   // Layer order ensures depth without motion

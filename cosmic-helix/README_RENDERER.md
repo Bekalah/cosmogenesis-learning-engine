@@ -1,6 +1,8 @@
 # Cosmic Helix Renderer
 Per Texturas Numerorum, Spira Loquitur.
 
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
+
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
 ## Usage
@@ -25,3 +27,6 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 The renderer is intentionally minimal. Future layers or overlays can be added by
 extending `renderHelix` with new draw functions while preserving the calm visual
 hierarchy.
+
+## Related Lore
+For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
