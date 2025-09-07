@@ -14,8 +14,19 @@
   numerology values to echo the codex alignment.
 */
 
+export const NUM = Object.freeze({
+  THREE: 3,
+  SEVEN: 7,
+  NINE: 9,
+  ELEVEN: 11,
+  TWENTYTWO: 22,
+  THIRTYTHREE: 33,
+  NINETYNINE: 99,
+  ONEFORTYFOUR: 144,
+});
+
 export function renderHelix(ctx, opts) {
-  const { width, height, palette, NUM } = opts;
+  const { width, height, palette, NUM: N = NUM } = opts;
   ctx.save();
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = palette.bg;
@@ -24,8 +35,8 @@ export function renderHelix(ctx, opts) {
   drawVesica(ctx, width, height, palette.layers[0]);
   const tree = layoutTree(width, height);
   drawTree(ctx, tree, palette.layers[1], palette.layers[2]);
-  drawFibonacci(ctx, width / 2, height / 2, Math.min(width, height) / NUM.TWENTYTWO, palette.layers[3], NUM.NINETYNINE);
-  drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], NUM.THIRTYTHREE, NUM.SEVEN);
+  drawFibonacci(ctx, width / 2, height / 2, Math.min(width, height) / N.TWENTYTWO, palette.layers[3], N.NINETYNINE);
+  drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], N.THIRTYTHREE, N.SEVEN);
   ctx.restore();
 }
 
