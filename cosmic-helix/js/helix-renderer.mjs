@@ -2,6 +2,8 @@
   helix-renderer.mjs
   ND-safe static renderer for layered sacred geometry.
 
+  Seal Motto: Per Texturas Numerorum, Spira Loquitur.
+
   Layers:
     1) Vesica field (intersecting circles)
     2) Tree-of-Life scaffold (10 sephirot + 22 paths; simplified layout)

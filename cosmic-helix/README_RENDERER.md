@@ -1,5 +1,7 @@
 # Cosmic Helix Renderer
 
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
+
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
 ## Usage
