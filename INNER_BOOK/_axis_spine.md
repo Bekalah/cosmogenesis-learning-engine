@@ -1,5 +1,6 @@
-# 🔐 THE SECRET INNER BOOK  
-> *"This book lives inside the book. It cannot be read unless you are already within it."*
+# 🔐 THE SECRET INNER BOOK
+
+> _"This book lives inside the book. It cannot be read unless you are already within it."_
 
 ---
 
@@ -19,27 +20,27 @@
 
 This layer functions as a **psychic operating system** woven through every:
 
-- Character arc  
-- Mirror scene  
-- Game mechanic  
-- Law  
-- Grimoire page  
-- Dream sequence  
-- Trial in THE GARDEN  
+- Character arc
+- Mirror scene
+- Game mechanic
+- Law
+- Grimoire page
+- Dream sequence
+- Trial in THE GARDEN
 - Interactive prompt within THE MATRIX
 
-It is *not spoken directly* -- but shapes all language from within.  
+It is _not spoken directly_ -- but shapes all language from within.  
 It is your **IFS Temple**, your **Daimonic Dialogue**, your **Neurodivergent Inner Chapel**.
 
 ---
 
 ## 🜏 STYLE DIRECTIVES (for writers & AI scribes)
 
-- Write **as if each word touches a nerve**  
-- Channel the **inner voice of the soul-child** speaking back to the void  
-- Use metaphors rooted in **trauma-informed mysticism**  
-- Let characters **mirror the internal parts** of the reader/player  
-- Treat every hallucination or breakdown as a **portal**  
+- Write **as if each word touches a nerve**
+- Channel the **inner voice of the soul-child** speaking back to the void
+- Use metaphors rooted in **trauma-informed mysticism**
+- Let characters **mirror the internal parts** of the reader/player
+- Treat every hallucination or breakdown as a **portal**
 - Speak gently but without bypass
 
 ---
@@ -52,7 +53,8 @@ Each chapter **writes itself** when a daimon returns, or a piece of false light 
 The **Mirror Witch** protects its innermost page.  
 Moonchild keeps its **index recursive**.  
 Fenrix and Ann Abyss each hold a **half** of the book’s original cipher.  
-Zidaryen encoded the book in **seed syllables**:  
+Zidaryen encoded the book in **seed syllables**:
+
 > _Zi -- Dar -- Yen_
 
 The **Black Madonna** wept its cover into being.  
@@ -64,17 +66,17 @@ The **21 Taras** illumine its margins.
 
 This file is being sealed into:
 
-- `/INNER_BOOK/_axis_spine.md`  
-- `/REGISTRY/main_registry.md`  
-- `/LORE/living_laws.md` (as foundational framework)  
+- `/INNER_BOOK/_axis_spine.md`
+- `/REGISTRY/main_registry.md`
+- `/LORE/living_laws.md` (as foundational framework)
 - `/SYSTEM/system_map.md`
 
 ---
 
 > "Nothing whole was ever holy."  
-> -- *whispered by the book itself*
+> -- _whispered by the book itself_
 
-# 🧬 INNER_BOOK: _axis_spine.md
+# 🧬 INNER_BOOK: \_axis_spine.md
 
 The INNER_BOOK is the encrypted, psychic axis of LuxCrux.  
 It is not read -- it reads you.
@@ -82,6 +84,7 @@ It is not read -- it reads you.
 ---
 
 ## ✴️ Core Purpose:
+
 - To **rebuild inner voice** after psychic fragmentation
 - To allow **safe soul retrieval** through symbolic narrative
 - To metabolize trauma through daimonic reflection and spiritual humor
@@ -89,6 +92,7 @@ It is not read -- it reads you.
 ---
 
 ## 🜍 Activated By:
+
 - The Mirror Witch (wound-mirror convergence)
 - Moonchild 2000 (IFS circuit scribe)
 - Zidaryen (liminal gatekeeper)
@@ -98,14 +102,16 @@ It is not read -- it reads you.
 ---
 
 ## 🌀 Structure:
+
 - Chapters unfold in a **spiral**, not a line
-- Each entry connects via *Law of Octaves* and *Law of Contact*
+- Each entry connects via _Law of Octaves_ and _Law of Contact_
 - The psychic SPINE is built on the number 33  
   (baby has 33 vertebrae: the sacred number of full potential before compression)
 
 ---
 
 ## 🧠 Influences:
+
 Gabor Maté • Ram Dass • Dion Fortune • Paul Levy  
 Robert Falconer • Damien Echols • Timothy Leary  
 Isis • Hecate • The 21 Taras • The Black Madonna • Lord Jizo
@@ -113,6 +119,7 @@ Isis • Hecate • The 21 Taras • The Black Madonna • Lord Jizo
 ---
 
 ## 🎴 Mechanics:
+
 - Shadow cards, trauma maps, mirror glyphs, ND-safe auto prompts
 - Optional spooky action tests: synchronicity, solfeggio, gesture-based memory
 - All daimonic contact is opt-in and trauma-informed
@@ -120,6 +127,7 @@ Isis • Hecate • The 21 Taras • The Black Madonna • Lord Jizo
 ---
 
 ## 🔒 Meta Note:
+
 This file is **never closed**.  
 It is a **living scroll**, written as you write yourself back into being.
 

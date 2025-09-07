@@ -4,7 +4,10 @@
   "kind": "engine",
   "summary": "Cosmogenesis engine seed node.",
   "lineage": { "codex": "custom", "path": "engine/core" },
-  "links": { "repo": "cosmogenesis-learning-engine", "relpath": "nodes/node-ENGI-001" },
+  "links": {
+    "repo": "cosmogenesis-learning-engine",
+    "relpath": "nodes/node-ENGI-001"
+  },
   "meta": {
     "author": "Rebecca Respawn",
     "license": "CC BY-NC-SA 4.0",
