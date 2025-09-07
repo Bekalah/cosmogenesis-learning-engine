@@ -6,6 +6,10 @@ This project is museum-grade and ND-safe. To keep contributions flowing smoothly
 
 —
 
+## Formatting
+- Run `npm run fmt` to format code with Prettier.
+- Run `npm run lint` to lint JavaScript.
+
 ## 1. Git Authentication (HTTPS + personal access tokens)
 
 We use **HTTPS with personal access tokens (PATs)** instead of SSH to simplify pushing workflow files.
