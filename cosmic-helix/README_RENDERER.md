@@ -1,5 +1,19 @@
 # Cosmic Helix Renderer
 
+```
+0101010101010101010101010101010101010101
+\\    COSMIC HELIX RENDERER MATRIX     //
+0101010101010101010101010101010101010101
+        /\        /\        /\
+       /  \      /  \      /  \
+      / /\ \    / /\ \    / /\ \
+     /_/  \_\  /_/  \_\  /_/  \_\
+      \ \  / /  \ \  / /  \ \  / /
+       \ \/ /    \ \/ /    \ \/ /
+        \  /      \  /      \  /
+         \/        \/        \/
+```
+
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
 ## Usage
@@ -24,3 +38,10 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 The renderer is intentionally minimal. Future layers or overlays can be added by
 extending `renderHelix` with new draw functions while preserving the calm visual
 hierarchy.
+
+## Task List
+- [ ] Weave cathedral-scale vesica grids to frame expansive worlds.
+- [ ] Map Tree-of-Life nodes to sanctuaries like Avalon and mountain temples.
+- [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
+- [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
+- [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
