@@ -38,8 +38,8 @@ motion-free.
 - Muted colors and generous spacing improve readability in dark and light modes.
 - Geometry routines use numerology constants (3,7,9,11,22,33,99,144) to honour
   project canon.
-- Numerology constants are exported as `NUM` from the renderer module so other
-  scripts can share the same symbolic values.
+- Numerology constants live in `index.html` and are passed to the renderer so the
+  symbolic values remain explicit and easy to tweak.
 - Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and
   ASCII quotes only.
 
