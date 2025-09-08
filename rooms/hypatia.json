@@ -1,0 +1,23 @@
+{
+  "roomId": "hypatia",
+  "name": "Hypatia of Alexandria",
+  "hexagramPosition": "Lower Left",
+  "tetragrammatonRole": "Heh",
+  "domain": "Philosophy / Mathematics / Neoplatonism",
+  "signatureWorks": ["Commentary on Diophantus", "Astronomical tables"],
+  "codexRole": "Garden guide / Star weaver",
+  "tarotOverlay": "XVII The Star",
+  "astrologySymbolism": "Linked to Virgo-Mercury wisdom, balance of rational and mystical",
+  "fusionNotes": [
+    "Embodied the feminine intellectual tradition",
+    "United number with cosmology",
+    "Martyrdom as protection of wisdom flame"
+  ],
+  "artifact": {
+    "type": "fusion-plate",
+    "description": "Spiral Star Plate — number grids overlaying a radiant astral mandala",
+    "function": "Offers resilience, intellectual clarity, and visionary hope"
+  },
+  "connections": ["tesla", "agrippa", "hilma"]
+}
+
