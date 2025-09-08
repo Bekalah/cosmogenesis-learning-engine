@@ -1,0 +1,23 @@
+{
+  "id": "R132",
+  "name": "Room 132",
+  "num": 132,
+  "tradition": [
+    "alpha_et_omega",
+    "zodiac"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

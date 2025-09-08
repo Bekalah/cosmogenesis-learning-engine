@@ -1,0 +1,40 @@
+{
+  "id": "MA04_Emperor",
+  "title": "The Emperor",
+  "arcana": "Major",
+  "suit": null,
+  "number": 4,
+  "court": null,
+  "qabalistic_path": "",
+  "sephira": null,
+  "planet": "",
+  "zodiac": "",
+  "element": "",
+  "colour_scales": {
+    "King": "",
+    "Queen": "",
+    "Emperor": "",
+    "Empress": ""
+  },
+  "seed_syllables": [],
+  "daemon_echoes": [],
+  "consecration_angels": [],
+  "artifacts": [],
+  "abilities": [],
+  "companions": {
+    "npc": "MA04_Emperor_npc"
+  },
+  "rituals": [],
+  "interactions": [
+    "inspect",
+    "attune",
+    "place_on_altar",
+    "combine",
+    "harmonize"
+  ],
+  "playable": true,
+  "locked": true,
+  "provenance": {
+    "generated": "auto"
+  }
+}

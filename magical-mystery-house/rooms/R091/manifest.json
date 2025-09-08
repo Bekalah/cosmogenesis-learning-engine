@@ -1,0 +1,22 @@
+{
+  "id": "R091",
+  "name": "Room 091",
+  "num": 91,
+  "tradition": [
+    "tibetan"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

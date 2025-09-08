@@ -1,0 +1,16 @@
+# Equinox I iii ASCII Figures
+
+[Triangle]
+  /\
+ /__\
+
+[Greek Cross]
+ +--+
+ |  |
+ +--+
+
+[Numerical Lattice]
+ 0 1 0 1
+ 1 0 1 0
+ 0 1 0 1
+ 1 0 1 0

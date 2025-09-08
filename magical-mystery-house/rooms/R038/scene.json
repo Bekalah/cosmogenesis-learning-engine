@@ -1,0 +1,20 @@
+{
+  "glb_bundle": [],
+  "materials": "Haute-Grimoire-PBR-01",
+  "environment_hdr": "temple_soft_01.hdr",
+  "camera_defaults": {
+    "speed": 1,
+    "fov": 60,
+    "sensitivity": 0.5
+  },
+  "accessibility": {
+    "reduce_motion": true,
+    "high_contrast": false,
+    "captions": true
+  },
+  "lighting": {
+    "ibl_intensity": 1,
+    "key_fill_ratio": 0.8,
+    "no_hard_strobe": true
+  }
+}

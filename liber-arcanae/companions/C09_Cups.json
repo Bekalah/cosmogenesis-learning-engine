@@ -1,0 +1,9 @@
+{
+  "id": "C09_Cups_companion",
+  "behavior": {
+    "idle_near_player": true,
+    "offer_hint": true,
+    "safe_follow": true
+  },
+  "hint_caption": "the colour wishes to breathe toward emerald"
+}

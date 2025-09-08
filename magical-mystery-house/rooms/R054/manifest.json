@@ -1,0 +1,23 @@
+{
+  "id": "R054",
+  "name": "Room 054",
+  "num": 54,
+  "tradition": [
+    "reiki_grid",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

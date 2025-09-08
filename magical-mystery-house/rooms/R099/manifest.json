@@ -1,0 +1,26 @@
+{
+  "id": "R099",
+  "name": "Room 099",
+  "num": 99,
+  "tradition": [
+    "solomonic",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144,
+    99
+  ],
+  "shrine_nodes": [
+    "ascii_figure_0"
+  ],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

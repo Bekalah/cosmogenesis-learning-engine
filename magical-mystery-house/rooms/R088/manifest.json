@@ -1,0 +1,22 @@
+{
+  "id": "R088",
+  "name": "Room 088",
+  "num": 88,
+  "tradition": [
+    "mary_magdalene"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

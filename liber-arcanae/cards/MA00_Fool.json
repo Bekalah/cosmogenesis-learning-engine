@@ -1,0 +1,45 @@
+{
+  "id": "MA00_Fool",
+  "title": "The Fool",
+  "arcana": "Major",
+  "suit": null,
+  "number": 0,
+  "court": null,
+  "qabalistic_path": "",
+  "sephira": null,
+  "planet": "",
+  "zodiac": "",
+  "element": "",
+  "colour_scales": {
+    "King": "",
+    "Queen": "",
+    "Emperor": "",
+    "Empress": ""
+  },
+  "seed_syllables": [],
+  "daemon_echoes": [],
+  "consecration_angels": [],
+  "artifacts": [
+    "white_rose",
+    "staff",
+    "satchel",
+    "cliff_token"
+  ],
+  "abilities": [],
+  "companions": {
+    "npc": "MA00_Fool_npc"
+  },
+  "rituals": [],
+  "interactions": [
+    "inspect",
+    "attune",
+    "place_on_altar",
+    "combine",
+    "harmonize"
+  ],
+  "playable": true,
+  "locked": true,
+  "provenance": {
+    "generated": "auto"
+  }
+}

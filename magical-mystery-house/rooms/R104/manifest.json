@@ -1,0 +1,22 @@
+{
+  "id": "R104",
+  "name": "Room 104",
+  "num": 104,
+  "tradition": [
+    "alpha_et_omega"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

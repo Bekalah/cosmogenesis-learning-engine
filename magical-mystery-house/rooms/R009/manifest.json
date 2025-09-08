@@ -1,0 +1,23 @@
+{
+  "id": "R009",
+  "name": "Hermit Lantern",
+  "num": 9,
+  "tradition": [
+    "egyptian",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}
