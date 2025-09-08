@@ -1,9 +1,6 @@
 /*
   helix-renderer.mjs
-  Motto: Per Texturas Numerorum, Spira Loquitur.
   ND-safe static renderer for layered sacred geometry.
-
-  Seal Motto: Per Texturas Numerorum, Spira Loquitur.
 
   Layers:
     1) Vesica field (intersecting circles)
@@ -17,19 +14,8 @@
     - numerology constants wire geometry to 3/7/9/11/22/33/99/144
 */
 
-export const NUM = Object.freeze({
-  THREE: 3,
-  SEVEN: 7,
-  NINE: 9,
-  ELEVEN: 11,
-  TWENTYTWO: 22,
-  THIRTYTHREE: 33,
-  NINETYNINE: 99,
-  ONEFORTYFOUR: 144,
-});
-
 export function renderHelix(ctx, opts) {
-  const { width, height, palette, NUM: N = NUM } = opts;
+  const { width, height, palette, NUM: N } = opts;
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
 
@@ -52,10 +38,9 @@ function drawVesicaField(ctx, w, h, color, N) {
   }
 }
 
-
+function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = 2;
-
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -67,32 +52,14 @@ function drawVesicaField(ctx, w, h, color, N) {
     { x: w * 0.25, y: h * 0.65 }, // 6 Netzach
     { x: w * 0.75, y: h * 0.65 }, // 7 Hod
     { x: w / 2, y: h * 0.75 }, // 8 Yesod
-    { x: w / 2, y: h * 0.9 }, // 9 Malkuth
+    { x: w / 2, y: h * 0.9 } // 9 Malkuth
   ];
 
   const paths = [
-    [0, 1],
-    [0, 2],
-    [0, 5],
-    [1, 2],
-    [1, 5],
-    [2, 5],
-    [1, 3],
-    [2, 4],
-    [3, 4],
-    [3, 5],
-    [4, 5],
-    [3, 6],
-    [4, 7],
-    [5, 6],
-    [5, 7],
-    [6, 7],
-    [6, 8],
-    [7, 8],
-    [5, 8],
-    [6, 9],
-    [7, 9],
-    [8, 9],
+    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
+    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
+    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
   ];
 
   paths.forEach(([a, b]) => {
@@ -100,25 +67,6 @@ function drawVesicaField(ctx, w, h, color, N) {
     ctx.moveTo(nodes[a].x, nodes[a].y);
     ctx.lineTo(nodes[b].x, nodes[b].y);
     ctx.stroke();
-
-  const nodes = [];
-  const centerX = w / 2;
-  const topY = h / N.ELEVEN; // proportioned via 11
-  const verticalStep = (h - topY * 2) / N.NINE;
-  for (let i = 0; i < 10; i++) {
-    nodes.push({ x: centerX, y: topY + i * verticalStep });
-  }
-  // Draw paths (simple straight connections for ND-safety clarity)
-  nodes.forEach((a, i) => {
-    for (let j = i + 1; j < nodes.length; j++) {
-      if ((j - i) % N.THREE === 0 || j - i === 1) {
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.stroke();
-      }
-    }
-
   });
 
   ctx.fillStyle = nodeColor;
@@ -160,11 +108,11 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
     for (let x = 0; x <= w; x += stepX) {
       const y =
         midY +
-        amplitude *
-          Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
+        amplitude * Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
       if (x === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
     ctx.stroke();
   }
 }
+
