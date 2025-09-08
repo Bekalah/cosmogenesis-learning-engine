@@ -1,0 +1,190 @@
+[
+  {
+    "roomId": "tesla",
+    "name": "Nikola Tesla",
+    "hexagramPosition": "Upper Left",
+    "tetragrammatonRole": "Yod",
+    "domain": "Electromagnetic Invention / Resonant Engineering",
+    "signatureWorks": ["Colorado Springs Notes", "Wardenclyffe Tower", "Tesla Coil"],
+    "codexRole": "Engineer of Lightning Grid",
+    "tarotOverlay": "XVI The Tower",
+    "astrologySymbolism": "Sun in Cancer — lightning mind in watery body",
+    "fusionNotes": [
+      "Dreamed wireless power flowing like water",
+      "Alternating current wizardry woven into modern grid",
+      "Sees numbers 3, 6, 9 as key to universe"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Coil Resonance Plate — arcs of blue light in concentric rings",
+      "function": "Charges circuits and fuels inventions"
+    },
+    "connections": ["hypatia", "agrippa"]
+  },
+  {
+    "roomId": "hypatia",
+    "name": "Hypatia of Alexandria",
+    "hexagramPosition": "Lower Left",
+    "tetragrammatonRole": "Heh",
+    "domain": "Philosophy / Stellar Mathematics",
+    "signatureWorks": ["Commentary on Diophantus", "Astronomical Canon"],
+    "codexRole": "Scholar of Star Paths",
+    "tarotOverlay": "XVII The Star",
+    "astrologySymbolism": "Sun in Pisces — philosopher navigating the cosmos",
+    "fusionNotes": [
+      "Taught geometry and astronomy in Alexandria",
+      "Preserved classical knowledge amid turmoil",
+      "Modeled planets with elegant instruments"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Astrolabe Plate — brass ringed with star etchings",
+      "function": "Charts celestial courses and sharpens reasoning"
+    },
+    "connections": ["tesla", "hilma"]
+    "domain": "Electromagnetic Invention / Resonant Physics",
+    "signatureWorks": ["Colorado Springs Notes", "Inventions, Researches and Writings of Nikola Tesla"],
+    "codexRole": "Thunder Alchemist of Coils",
+    "tarotOverlay": "XVI The Tower",
+    "astrologySymbolism": "Sun in Cancer, Aquarius rising — lightning mind bridging sky and earth",
+    "fusionNotes": [
+      "Dreamed of wireless energy lattices",
+      "Tuned coils to sing planetary harmonics",
+      "Mapped storms as instruments"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Resonance Coil Plate — copper spiral humming with violet arcs",
+      "function": "Amplifies electrical vision and harmonic resonance"
+    },
+    "connections": ["agrippa", "dee", "hypatia"]
+  },
+  {
+    "roomId": "hypatia",
+    "name": "Hypatia",
+    "hexagramPosition": "Center Left",
+    "tetragrammatonRole": "Heh",
+    "domain": "Mathematics / Philosophy / Astronomy",
+    "signatureWorks": ["Commentary on Diophantus", "Astronomical Canon"],
+    "codexRole": "Philosopher-Librarian of Alexandria",
+    "tarotOverlay": "XI Justice",
+    "astrologySymbolism": "Sun in Pisces — lucid reason within shifting tides",
+    "fusionNotes": [
+      "Taught conic sections and celestial motions",
+      "Defended the Library as sanctuary",
+      "Unified science and mysticism through number"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Astrolabe Plate — bronze circles aligning stars and proofs",
+      "function": "Centers the mind and reveals geometric pathways"
+    },
+    "connections": ["tesla", "agrippa", "hilma"]
+  },
+  {
+    "roomId": "agrippa",
+    "name": "Heinrich Cornelius Agrippa",
+    "hexagramPosition": "Lower Center",
+    "tetragrammatonRole": "Vav",
+    "domain": "Occult Philosophy / Planetary Magick",
+    "signatureWorks": ["Three Books of Occult Philosophy"],
+    "codexRole": "Archivist of Planetary Grids",
+    "tarotOverlay": "V The Hierophant",
+    "astrologySymbolism": "Saturn scholar weaving classical correspondences",
+    "fusionNotes": [
+      "Systematized renaissance magic with planetary tables",
+      "Bridged hermetic, kabbalistic, and classical wisdom",
+      "Influenced Dee and Fortune with structured correspondences"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Planetary Grid Plate — geometric seals around a central star",
+      "function": "Aligns planetary forces for ritual work"
+    },
+    "connections": ["dee", "tesla"]
+    "hexagramPosition": "Lower Left",
+    "tetragrammatonRole": "Vav",
+    "domain": "Occult Philosophy / Renaissance Magic",
+    "signatureWorks": ["Three Books of Occult Philosophy"],
+    "codexRole": "Scholar of Sigils and Planetary Grids",
+    "tarotOverlay": "V The Hierophant",
+    "astrologySymbolism": "Sun in Virgo — meticulous magus codifying correspondences",
+    "fusionNotes": [
+      "Compiled classical and medieval magic into system",
+      "Linked planetary seals with angelic hierarchies",
+      "Prototype for grimoire navigation"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Sigil Compass Plate — etched circles aligning planets and angels",
+      "function": "Maps correspondences and stabilizes ritual space"
+    },
+    "connections": ["hypatia", "tesla", "dee"]
+  },
+  {
+    "roomId": "dee",
+    "name": "John Dee",
+    "hexagramPosition": "Lower Right",
+    "tetragrammatonRole": "Heh final",
+    "domain": "Angel Tech / Hermetic Science / Navigation",
+    "signatureWorks": ["Monas Hieroglyphica", "Libri Mysteria", "Liber Soyga"],
+    "codexRole": "Magician-Navigator of Angelic Lattice",
+    "tarotOverlay": "I The Magician",
+    "astrologySymbolism": "Sun in Leo, Mercury exalted — visionary scholar bridging math and angels",
+    "fusionNotes": [
+      "Sought direct angelic conversation through Enochian",
+      "Mapped cosmos as text lattice (Soyga, Monas)",
+      "Advisor to queens, but servant to angels"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Monadic Plate — a living glyph that pulses between circle, cross, and line",
+      "function": "Unlocks angelic codes and higher navigation"
+    },
+    "connections": ["agrippa", "fortune", "hilma"]
+  },
+  {
+    "roomId": "fortune",
+    "name": "Dion Fortune",
+    "hexagramPosition": "Center Rose",
+    "tetragrammatonRole": "Shekhinah (implicit presence)",
+    "domain": "Psychic Protection / Qabalistic Temple Building",
+    "signatureWorks": ["The Mystical Qabalah", "Psychic Self-Defense"],
+    "codexRole": "Guardian of Inner Temple / Lady Chapel",
+    "tarotOverlay": "VIII Strength",
+    "astrologySymbolism": "Sun Sagittarius — fire teacher of esoteric temple",
+    "fusionNotes": [
+      "Made the Tree of Life into a temple with rooms",
+      "Taught psychic protection as real architecture",
+      "One of the first women to claim authority in occult orders"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Rose Cross Plate — a glowing cross of petals and gold lines",
+      "function": "Shields the player and strengthens psychic resilience"
+    },
+    "connections": ["dee", "hilma", "rebecca-respawn"]
+  },
+  {
+    "roomId": "hilma",
+    "name": "Hilma af Klint",
+    "hexagramPosition": "Upper Center",
+    "tetragrammatonRole": "Aleph (unspoken seed)",
+    "domain": "Visionary Art / Spiritual Abstraction",
+    "signatureWorks": ["Paintings for the Temple", "The Swan", "The Ten Largest"],
+    "codexRole": "Visionary Painter of Spiral Gardens",
+    "tarotOverlay": "XVIII The Moon",
+    "astrologySymbolism": "Sun Libra — balancing seen and unseen, form and spirit",
+    "fusionNotes": [
+      "Created abstract visionary art before modern abstraction",
+      "Worked in a spiritual atelier of five women",
+      "Her paintings = diagrams of evolution and soul-spirals"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Spiral Garden Plate — radiant concentric rings blooming like flowers",
+      "function": "Opens visionary perception and attunes nervous system"
+    },
+    "connections": ["fortune", "dee", "hypatia"]
+  }
+]
