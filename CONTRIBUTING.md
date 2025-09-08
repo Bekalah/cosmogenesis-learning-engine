@@ -6,6 +6,10 @@ This project is museum-grade and ND-safe. To keep contributions flowing smoothly
 
 —
 
+## Formatting
+- Run `npm run fmt` to format code with Prettier.
+- Run `npm run lint` to lint JavaScript.
+
 ## 1. Git Authentication (HTTPS + personal access tokens)
 
 We use **HTTPS with personal access tokens (PATs)** instead of SSH to simplify pushing workflow files.
@@ -34,8 +38,23 @@ circuitum99/
     # ✦ Cathedral of Circuits — Pull Request Checklist ✦
 
 Please confirm all items before merging.  
-This project follows **CONTRIBUTING.md** (Bot Contract).  
+This project follows **CONTRIBUTING.md** (Bot Contract).
 No GitHub Actions. ND-safe only.
+
+
+### 🧪 Offline Testing
+Run the smoke tests locally before opening a PR:
+
+```sh
+node tests/indranet.test.mjs
+node tests/dataset-loader.test.mjs
+```
+
+For Deno users:
+
+```sh
+deno run --allow-read --allow-net tests/dataset-loader.test.mjs
+```
 
 —
 
