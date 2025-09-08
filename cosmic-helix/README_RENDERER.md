@@ -1,4 +1,5 @@
 <<<<<<<+codex/create-ma
+<<<<<<<+codex/create-ma
 # Cosmic Helix Renderer
 Per Texturas Numerorum, Spira Loquitur.
 
@@ -6,11 +7,23 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 
 Static HTML and Canvas were chosen so the geometry renders locally without network calls or heavy libraries, keeping the experience deterministic and motion-free.
 
+=======
+Per Texturas Numerorum, Spira Loquitur. //
+
+# Cosmic Helix Renderer
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
+Per Texturas Numerorum, Spira Loquitur.  //
+
+# Cosmic Helix Renderer
+
+Offline, ND-safe canvas sketch for layered sacred geometry.
+
+>>>>>>>+origin/codex/cr
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming the womb of forms.
-   - **Tree-of-Life scaffold** — ten sephirot with twenty-two straight paths.
+<<<   - **Tree-of-Life scaffold** — ten sephirot with twenty-two straight paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
 er Texturas Numerorum, Spira Loquitur.  //
@@ -22,11 +35,19 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
-   - Vesica field — intersecting circles forming the womb of forms.
+>>>>>>>+codex/create-ma
+ - **Tre   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
+>>>>>>>+origin/codex/cr
+tersecting circles forming the womb of forms.
    - Tree-of-Life scaffold — ten sephirot with twenty-two paths.
    - Fibonacci curve — golden spiral polyline anchored to centre.
    - Double-helix lattice — two phase-shifted sine tracks.
+<<<<<<< codex/create-master-readme-for-cathedral-of-circuits-aeujew
 >>>>>>> origin/codex/build-dd-style-living-grimoire-viewer
+=======
+>>>>>>> origin/codex/create-graphs-and-implement-core-node-flow
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -55,10 +76,18 @@ The renderer is intentionally minimal. Future layers or overlays can be added by
 
 ## Related Lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
+<<<<<<< codex/create-master-readme-for-cathedral-of-circuits-aeujew
 =======
+=======
+
+## Design notes
+>>>>>>> origin/codex/create-graphs-and-implement-core-node-flow
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
 
 ## Extending
 The renderer is intentionally minimal. Future layers can extend `renderHelix` while preserving the calm visual hierarchy.
+<<<<<<< codex/create-master-readme-for-cathedral-of-circuits-aeujew
 >>>>>>> origin/codex/build-dd-style-living-grimoire-viewer
+=======
+>>>>>>> origin/codex/create-graphs-and-implement-core-node-flow
