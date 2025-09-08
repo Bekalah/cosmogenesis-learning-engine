@@ -42,6 +42,44 @@
       "function": "Charts celestial courses and sharpens reasoning"
     },
     "connections": ["tesla", "hilma"]
+    "domain": "Electromagnetic Invention / Resonant Physics",
+    "signatureWorks": ["Colorado Springs Notes", "Inventions, Researches and Writings of Nikola Tesla"],
+    "codexRole": "Thunder Alchemist of Coils",
+    "tarotOverlay": "XVI The Tower",
+    "astrologySymbolism": "Sun in Cancer, Aquarius rising — lightning mind bridging sky and earth",
+    "fusionNotes": [
+      "Dreamed of wireless energy lattices",
+      "Tuned coils to sing planetary harmonics",
+      "Mapped storms as instruments"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Resonance Coil Plate — copper spiral humming with violet arcs",
+      "function": "Amplifies electrical vision and harmonic resonance"
+    },
+    "connections": ["agrippa", "dee", "hypatia"]
+  },
+  {
+    "roomId": "hypatia",
+    "name": "Hypatia",
+    "hexagramPosition": "Center Left",
+    "tetragrammatonRole": "Heh",
+    "domain": "Mathematics / Philosophy / Astronomy",
+    "signatureWorks": ["Commentary on Diophantus", "Astronomical Canon"],
+    "codexRole": "Philosopher-Librarian of Alexandria",
+    "tarotOverlay": "XI Justice",
+    "astrologySymbolism": "Sun in Pisces — lucid reason within shifting tides",
+    "fusionNotes": [
+      "Taught conic sections and celestial motions",
+      "Defended the Library as sanctuary",
+      "Unified science and mysticism through number"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Astrolabe Plate — bronze circles aligning stars and proofs",
+      "function": "Centers the mind and reveals geometric pathways"
+    },
+    "connections": ["tesla", "agrippa", "hilma"]
   },
   {
     "roomId": "agrippa",
@@ -64,6 +102,24 @@
       "function": "Aligns planetary forces for ritual work"
     },
     "connections": ["dee", "tesla"]
+    "hexagramPosition": "Lower Left",
+    "tetragrammatonRole": "Vav",
+    "domain": "Occult Philosophy / Renaissance Magic",
+    "signatureWorks": ["Three Books of Occult Philosophy"],
+    "codexRole": "Scholar of Sigils and Planetary Grids",
+    "tarotOverlay": "V The Hierophant",
+    "astrologySymbolism": "Sun in Virgo — meticulous magus codifying correspondences",
+    "fusionNotes": [
+      "Compiled classical and medieval magic into system",
+      "Linked planetary seals with angelic hierarchies",
+      "Prototype for grimoire navigation"
+    ],
+    "artifact": {
+      "type": "fusion-plate",
+      "description": "Sigil Compass Plate — etched circles aligning planets and angels",
+      "function": "Maps correspondences and stabilizes ritual space"
+    },
+    "connections": ["hypatia", "tesla", "dee"]
   },
   {
     "roomId": "dee",
