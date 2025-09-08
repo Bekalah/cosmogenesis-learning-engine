@@ -1,7 +1,4 @@
-<<<<<<< codex/create-master-readme-for-cathedral-of-circuits-aeujew
-=======
 // Per Texturas Numerorum, Spira Loquitur. //
->>>>>>>+origin/codex/cr
 // Per Texturas Numerorum, Spira Loquitur.  //
 /*
   helix-renderer.mjs
