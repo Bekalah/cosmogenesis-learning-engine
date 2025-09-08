@@ -1,0 +1,14 @@
+.plaque {
+  padding: 16px;
+  border: 2px solid #ffd340;
+  color: #ffd340;
+  background: #121212;
+  display: inline-block;
+  cursor: pointer;
+}
+.garden {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid #444;
+  color: #a6a6c1;
+}

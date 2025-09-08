@@ -1,0 +1,65 @@
+[
+  {
+    "id": "respawn-gate",
+    "title": "Respawn Gate",
+    "kind": "nave",
+    "angel": {
+      "shemId": 1
+    },
+    "kabbalah": {
+      "sephira": "Malkuth",
+      "path": "Tav"
+    },
+    "tarot": {
+      "card": "0 The Fool / XXI The World (threshold)"
+    },
+    "numerology": {
+      "code": [
+        1,
+        9,
+        21,
+        33,
+        99,
+        144
+      ]
+    },
+    "style": {
+      "stylepackId": "solar-gold",
+      "palette": "primary"
+    },
+    "diagrams": [
+      {
+        "type": "glyph",
+        "src": "assets/glyphs/ouroboros-circuit.svg",
+        "caption": "Ouroboros Circuit Crown"
+      }
+    ],
+    "rites": [
+      {
+        "id": "silent-vigil",
+        "file": "content/rites/Silent_Vigil.md"
+      }
+    ],
+    "voice": {
+      "invocation": "I step through the ring that devours endings. The Gate returns me whole."
+    },
+    "accessibility": {
+      "noAutoplay": true,
+      "noStrobe": true,
+      "soundOnGesture": true,
+      "ariaLabels": true,
+      "fadeMs": 800,
+      "maxVolumeDb": -18
+    },
+    "plaque": {
+      "glyph": "ouroboros-circuit",
+      "toneHz": 256,
+      "swatches": [
+        "#FFD340",
+        "#FFFFFF",
+        "#121212"
+      ],
+      "curatorNotes": "Reset circuit; threshold between collapse & return."
+    }
+  }
+]

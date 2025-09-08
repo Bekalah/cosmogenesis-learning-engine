@@ -1,0 +1,107 @@
+{
+  "rooms": [
+    {
+      "id": "respawn-gate",
+      "title": "Respawn Gate",
+      "kind": "nave",
+      "angel": {
+        "shemId": 1
+      },
+      "kabbalah": {
+        "sephira": "Malkuth",
+        "path": "Tav"
+      },
+      "tarot": {
+        "card": "0 The Fool / XXI The World (threshold)"
+      },
+      "numerology": {
+        "code": [
+          1,
+          9,
+          21,
+          33,
+          99,
+          144
+        ]
+      },
+      "style": {
+        "stylepackId": "solar-gold",
+        "palette": "primary"
+      },
+      "diagrams": [
+        {
+          "type": "glyph",
+          "src": "assets/glyphs/ouroboros-circuit.svg",
+          "caption": "Ouroboros Circuit Crown"
+        }
+      ],
+      "rites": [
+        {
+          "id": "silent-vigil",
+          "file": "content/rites/Silent_Vigil.md"
+        }
+      ],
+      "voice": {
+        "invocation": "I step through the ring that devours endings. The Gate returns me whole."
+      },
+      "accessibility": {
+        "noAutoplay": true,
+        "noStrobe": true,
+        "soundOnGesture": true,
+        "ariaLabels": true,
+        "fadeMs": 800,
+        "maxVolumeDb": -18
+      },
+      "plaque": {
+        "glyph": "ouroboros-circuit",
+        "toneHz": 256,
+        "swatches": [
+          "#FFD340",
+          "#FFFFFF",
+          "#121212"
+        ],
+        "curatorNotes": "Reset circuit; threshold between collapse & return."
+      }
+    }
+  ],
+  "lineage": {
+    "roots": [
+      "Hermetica",
+      "Neoplatonism",
+      "Kabbalah",
+      "Alchemy"
+    ],
+    "renaissance_trunk": [
+      "Heinrich Cornelius Agrippa",
+      "John Dee",
+      "Paracelsus",
+      "Pico della Mirandola",
+      "Giordano Bruno"
+    ],
+    "golden_dawn_branch": [
+      "Dion Fortune",
+      "Paul Foster Case",
+      "Israel Regardie",
+      "Aleister Crowley",
+      "Mary Ached"
+    ],
+    "chaos_reality_leaves": [
+      "Robert Anton Wilson",
+      "Timothy Leary",
+      "Antero Alli",
+      "Phil Hine",
+      "Peter Carroll",
+      "Kenneth Grant",
+      "Gordon White"
+    ],
+    "visionary_artists": [
+      "Hilma af Klint",
+      "Emma Kunz",
+      "Leonora Carrington",
+      "Robert Venosa",
+      "Ernst Fuchs",
+      "Brom",
+      "Stoneharrow"
+    ]
+  }
+}
