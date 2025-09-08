@@ -13,6 +13,10 @@
 - [ ] Fix legacy file issues blocking `npm test` and `npm run check`
 - [ ] Remove remaining visionary_* artifacts and Pillow references
 
+### Helix Renderer Modernization
+- [x] Replace broken helix renderer with static HTML canvas (vesica, tree, fibonacci, helix)
+- [ ] Add style toggles for avatar/book/music modes
+
 ### P1 — Foundation (today)
 - [ ] Add docs: `docs/CODEX_EXT_RUNBOOK.md`, `docs/SCIENCE_REFERENCES.md`, `docs/STYLE_GUIDE.md`
 - [ ] Add schemas: `schemas/provenance.json`, `schemas/stylepack.json`
