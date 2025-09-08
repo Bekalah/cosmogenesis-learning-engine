@@ -25,7 +25,8 @@
     "generate:flame": "python3 scripts/generate_flame.py --out assets/flame/flame.png",
     "generate:atlas": "python3 scripts/pillow_atlas.py --in assets/flame --out assets/flame/atlas.png",
     "gallery:thumbs": "python3 scripts/pillow_thumbs.py --in exports --out exports/thumbs --size 512",
-    "postinstall": "echo \"Optional: pip install pillow numpy && npm i -D http-server prettier\""
+    "postinstall": "echo \"Optional: pip install pillow numpy && npm i -D http-server prettier\"",
+    "rubric": "node scripts/validate-rubric.mjs"
   },
   "dependencies": {
     "ajv": "^8.17.1"
