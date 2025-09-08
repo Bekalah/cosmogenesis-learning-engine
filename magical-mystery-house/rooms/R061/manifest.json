@@ -1,0 +1,22 @@
+{
+  "id": "R061",
+  "name": "Room 061",
+  "num": 61,
+  "tradition": [
+    "alchemy"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R078",
+  "name": "Room 078",
+  "num": 78,
+  "tradition": [
+    "gnostic"
+  ],
+  "anchor_constants": [
+    144,
+    78
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

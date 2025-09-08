@@ -1,0 +1,22 @@
+{
+  "id": "R142",
+  "name": "Room 142",
+  "num": 142,
+  "tradition": [
+    "agrippa"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

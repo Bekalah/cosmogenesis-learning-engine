@@ -1,0 +1,22 @@
+{
+  "id": "R037",
+  "name": "Room 037",
+  "num": 37,
+  "tradition": [
+    "egyptian"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

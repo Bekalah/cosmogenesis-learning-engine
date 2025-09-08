@@ -1,0 +1,22 @@
+{
+  "id": "R139",
+  "name": "Room 139",
+  "num": 139,
+  "tradition": [
+    "planetary_hours"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

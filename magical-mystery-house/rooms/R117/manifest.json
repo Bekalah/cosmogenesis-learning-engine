@@ -1,0 +1,23 @@
+{
+  "id": "R117",
+  "name": "Room 117",
+  "num": 117,
+  "tradition": [
+    "alchemy",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

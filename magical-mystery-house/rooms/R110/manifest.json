@@ -1,0 +1,22 @@
+{
+  "id": "R110",
+  "name": "Room 110",
+  "num": 110,
+  "tradition": [
+    "reiki_grid"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "R098",
+  "name": "Room 098",
+  "num": 98,
+  "tradition": [
+    "watchtowers"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "R012",
+  "name": "Zodiac Cross Annex",
+  "num": 12,
+  "tradition": [
+    "reiki_grid",
+    "zodiac"
+  ],
+  "anchor_constants": [
+    144,
+    12
+  ],
+  "shrine_nodes": [
+    "ascii_figure_2"
+  ],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

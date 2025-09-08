@@ -1,0 +1,22 @@
+{
+  "id": "R103",
+  "name": "Room 103",
+  "num": 103,
+  "tradition": [
+    "alchemy"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "R035",
+  "name": "Room 035",
+  "num": 35,
+  "tradition": [
+    "tibetan"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

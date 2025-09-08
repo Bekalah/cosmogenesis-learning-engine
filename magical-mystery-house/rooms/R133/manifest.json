@@ -1,0 +1,22 @@
+{
+  "id": "R133",
+  "name": "Room 133",
+  "num": 133,
+  "tradition": [
+    "tibetan"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

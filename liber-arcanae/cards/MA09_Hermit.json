@@ -1,0 +1,40 @@
+{
+  "id": "MA09_Hermit",
+  "title": "The Hermit",
+  "arcana": "Major",
+  "suit": null,
+  "number": 9,
+  "court": null,
+  "qabalistic_path": "",
+  "sephira": null,
+  "planet": "",
+  "zodiac": "",
+  "element": "",
+  "colour_scales": {
+    "King": "",
+    "Queen": "",
+    "Emperor": "",
+    "Empress": ""
+  },
+  "seed_syllables": [],
+  "daemon_echoes": [],
+  "consecration_angels": [],
+  "artifacts": [],
+  "abilities": [],
+  "companions": {
+    "npc": "MA09_Hermit_npc"
+  },
+  "rituals": [],
+  "interactions": [
+    "inspect",
+    "attune",
+    "place_on_altar",
+    "combine",
+    "harmonize"
+  ],
+  "playable": true,
+  "locked": true,
+  "provenance": {
+    "generated": "auto"
+  }
+}

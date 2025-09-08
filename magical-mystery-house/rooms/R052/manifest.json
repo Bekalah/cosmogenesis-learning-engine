@@ -1,0 +1,22 @@
+{
+  "id": "R052",
+  "name": "Room 052",
+  "num": 52,
+  "tradition": [
+    "slavic"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

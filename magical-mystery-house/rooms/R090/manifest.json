@@ -1,0 +1,23 @@
+{
+  "id": "R090",
+  "name": "Room 090",
+  "num": 90,
+  "tradition": [
+    "alpha_et_omega",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

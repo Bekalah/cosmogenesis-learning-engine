@@ -1,0 +1,23 @@
+{
+  "id": "R081",
+  "name": "Room 081",
+  "num": 81,
+  "tradition": [
+    "hilma_atelier",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}
