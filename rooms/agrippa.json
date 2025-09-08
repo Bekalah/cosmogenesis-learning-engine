@@ -1,0 +1,23 @@
+{
+  "roomId": "agrippa",
+  "name": "Heinrich Cornelius Agrippa",
+  "hexagramPosition": "Upper Left",
+  "tetragrammatonRole": "Yod",
+  "domain": "Occult Philosophy / Correspondences",
+  "signatureWorks": ["Three Books of Occult Philosophy", "Tables of Magical Correspondence"],
+  "codexRole": "Seed scribe / Lattice architect",
+  "tarotOverlay": "I The Magician",
+  "astrologySymbolism": "Aries Sun — builder of first comprehensive occult grid",
+  "fusionNotes": [
+    "Mapped planetary, elemental, and angelic forces into tables",
+    "Laid foundations for Dee, Fortune, and modern magicians",
+    "His system = Codex 144:99 ancestor"
+  ],
+  "artifact": {
+    "type": "fusion-plate",
+    "description": "Seed Grid Plate — lattice of planetary sigils woven into Soyga-like square",
+    "function": "Activates correspondences and order within chaos"
+  },
+  "connections": ["tesla", "hypatia", "dee"]
+}
+
