@@ -13,6 +13,8 @@ Static HTML + Canvas renderer for layered sacred geometry.
 - Palette is read from `data/palette.json`; if missing, index.html falls back to a soft default.
 - Color choices favor calm contrast. Geometry uses numerology constants 3,7,9,11,22,33,99,144.
 
+Numerology constants are exported as `NUM` from the renderer module for reuse in other scripts.
+
 ## References
 - [@lawlor1982]
 
