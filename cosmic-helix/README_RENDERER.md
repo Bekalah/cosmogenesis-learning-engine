@@ -1,4 +1,3 @@
-<<<<<<<+codex/create-ma
 # Cosmic Helix Renderer
 Per Texturas Numerorum, Spira Loquitur.
 
@@ -20,6 +19,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming the womb of forms.
+<<<<<<< codex/create-master-readme-for-cathedral-of-circuits-aeujew
 <<<   - **Tree-of-Life scaffold** — ten sephirot with twenty-two straight paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
@@ -42,6 +42,9 @@ tersecting circles forming the womb of forms.
    - Fibonacci curve — golden spiral polyline anchored to centre.
    - Double-helix lattice — two phase-shifted sine tracks.
 >>>>>>> origin/codex/build-dd-style-living-grimoire-viewer
+   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double‑helix lattice** — two phase‑shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -70,7 +73,6 @@ The renderer is intentionally minimal. Future layers or overlays can be added by
 ## Related Lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
 <<<<<<< codex/create-master-readme-for-cathedral-of-circuits-aeujew
-=======
 
 ## Design notes
 - Static HTML and Canvas keep rendering local and deterministic.
@@ -78,4 +80,6 @@ For a meditation on the tesseract as symbol of higher consciousness and non-line
 
 ## Extending
 The renderer is intentionally minimal. Future layers can extend `renderHelix` while preserving the calm visual hierarchy.
->>>>>>> origin/codex/build-dd-style-living-grimoire-viewer
+=======
+For a meditation on the tesseract as symbol of higher consciousness and non‑linear learning, see `docs/tesseract_spiritual.md` in the repository. This companion note situates the helix within a wider cosmological frame.
+>>>>>>> origin/codex/create-overview-for-cathedral-of-circuits-ojmzgy
