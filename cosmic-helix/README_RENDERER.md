@@ -56,5 +56,4 @@ hierarchy.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
 
 ## Related Lore
-For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
-
+For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](./docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
