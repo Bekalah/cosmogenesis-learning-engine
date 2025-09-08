@@ -29,7 +29,7 @@
   <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
 
   <script type="module">
-    import { renderHelix, NUM } from "./js/helix-renderer.mjs";
+    import { renderHelix } from "./js/helix-renderer.mjs";
 
     const elStatus = document.getElementById("status");
     const canvas = document.getElementById("stage");
@@ -47,9 +47,9 @@
 
     const defaults = {
       palette: {
-        bg:"#0b0b12",
-        ink:"#e8e8f0",
-        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
 
@@ -57,8 +57,20 @@
     const active = palette || defaults.palette;
     elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
 
+    // Numerology constants used by geometry routines
+    const NUM = {
+      THREE: 3,
+      SEVEN: 7,
+      NINE: 9,
+      ELEVEN: 11,
+      TWENTYTWO: 22,
+      THIRTYTHREE: 33,
+      NINETYNINE: 99,
+      ONEFORTYFOUR: 144
+    };
+
     // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM });
+    renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: active, NUM });
   </script>
 </body>
 </html>
