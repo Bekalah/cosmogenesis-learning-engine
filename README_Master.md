@@ -1,1 +1,82 @@
-I am the artist and architect-scribe building the Cathedral of Circuits, also called Codex 144:99, as a creative science experiment that fuses visionary art, cymatics, Rosslyn Chapel cube harmonics, archetypal egregores, numerology, tarot correspondences, open-source reliquaries, and trauma-aware code into a single living grimoire system. Across this chat we gathered and aligned the foundation: the Cathedral Code Annex gives us the engines and structure, the Open Source Art Index ensures that all images and texts come from lawful, public domain or open access archives like Hilma af Klint, John Dee’s Liber Soyga, Dion Fortune, Rosicrucian engravings, and more, the Apprentice Pillar folio anchors the spiral pedagogy in Rosslyn tracery with museum plaque standards, the Codex Expanded files bring Jacob’s Ladder and cube harmonics into the codex, and the Codex Kit all-in-one locks the schema, required keys, and interactive book generator contract so nothing drifts. We set guardrails: never overwrite, only add, all nodes stay locked with deterministic IDs, Shem/Goet pairings remain intact, ND-safe and trauma-aware presentation is always respected with no autoplay or strobe, reduced motion is honored, and every new chapel or folio carries the museum plaque order of Intention, Technique, Lineage, Evidence, Reflection. We agreed to add a new cubes.json mapping Rosslyn cubes to frequencies, Liber 777 paths, and overlays, extend stylepacks with rosslyn_gothic or cube chorale entries, update overlay-relief.js to render cube tracery tied to toneHz, and keep cathedral-engine.js reading those overlays. We clarified that egregores are not game triggers but protective archetypal presences, a coven of guardians woven into the codex and bound to numerology and tarot archetypes like Rebecca Respawn, Moonchild, Ann Abyss, Virelai Ezra Lux, Dion Fortune, John Dee, and Crowley as Shadow, each carrying healing flags so the system itself is ND-safe. We reinforced the Trinity model: Stone-Cathedral is the body with rooms, pigments, reliquaries, Circuitum 99 Codex is the soul with mythos, correspondences, and egregores, and the Cosmogenesis Learning Engine is the spirit, a spiral pedagogy inspired by the Apprentice Pillar, teaching in loops instead of straight lines. Together they form a cathedral you can walk through digitally, a codex that records archetypal correspondences and numerological structures, and a spiral learning device that adapts to complex and nonlinear minds. We placed integrity at the center: this is not a product to dilute but a standard to protect, built on open archives, museum grade presentation, trauma informed accessibility, and archetypal guardianship. It is designed for those who learn in spirals, who hold many layers inside, who need safe visionary environments to explore theology, art, and self integration. Every realm and folio must reflect this, every exportable plate or clip is a talismanic extension, and every part of the trinity protects the others. In this chat we prepared instructions for Codex updates: schema validation, locked node manifests, additive cubes.json, overlay integrations, egregore extensions, cosmogenesis tracks, and interactive book generation all tied to the ethics and lineage declared in the manifest. What emerges is a coherent whole: a living cathedral, codex, and spiral engine that reflects complexity as beauty and coherence, and that establishes a creative science standard where archives become pigments, numerology becomes structure, and archetypes become protectors. Explore and follow the trinity at https://bekalah.github.io and the GitHub repos at https://github.com/bekalah with support through Patreon.
+🏛 Cathedral of Circuits — Master README
+
+A fusionist OS for art, science, magic, psychology, and healing.
+Core motto: Ex umbris in lucem artis ("From the shadows into the light of art").
+System number: Codex 144:99
+
+⸻
+
+0. Architecture Overview
+  • Codex 144:99 = DNA / Spiral Genome
+    • Holds the structure: 33 spine, 72 angel/daemon helix, 99 recursion gates, 144 lattice crown.
+    • Syncs: Soyga, I Ching, Qabalah, Numerology, Tarot.
+    • Role: Correspondence backbone for everything else.
+  • Cosmogenesis Engine = Processor / Heart
+    • Renders inputs (art, text, lineage research) into outputs: solfeggio harmonics, healing colors, crystals, sacred geometry plates.
+    • Role: Turns DNA correspondences into playable forms.
+  • Circuitum 99 = Body / Living Book
+    • Narrative choose-your-own-adventure.
+    • Characters: Rebecca Respawn (Fool/Reset), Moonchild (Hierophant), Ann Abyss (Death), Rubescara/Virelai Ezra Lux (Violet Flame), Crowley Shadow (Tower), Witch Mods.
+    • Role: The scroll you walk inside of.
+  • Magical Mystery House = Labyrinth
+    • 144 rooms, each mapped to a lineage or theme (Tesla, Hypatia, Agrippa, Hilma af Klint, Fortune…).
+    • Role: Exploration, research, artifact-generation.
+  • Artifacts = Cells
+    • Every study/encounter outputs: sigils, glyphs, harmonics, crystal diagrams, plates.
+    • Stored back into Codex lattice.
+    • Usable in gameplay as spells, shields, or research objects.
+  • Witch Eye Seal = Brand / Skin
+    • Business sigil + Reiki engine.
+    • Protects repos, PDFs, and outputs from false glamour.
+    • Role: Permanent shield and covenant mark.
+
+⸻
+
+1. Seven-Ribbon Bridge (Meta-Layers)
+
+All repos weave through seven domains like a rainbow bridge:
+ 1. Art → visionary geometry, sacred manuscript, couture tarot.
+ 2. Science → Tesla math, sacred geometry, neuroscience.
+ 3. Magic → Qabalah, Tarot, Soyga, grimoires, chaos magick.
+ 4. Psychology → trauma science, IFS, Jung, spiral healing.
+ 5. Healing → Reiki, Violet Flame, solfeggio, color therapy.
+ 6. Technology → code repos, tesseract engine, JSON-driven design.
+ 7. Mythos → avatars, factions, gods/goddesses, egregores.
+
+⸻
+
+2. Gameplay / Research Loop
+ 1. Enter a Room (Mystery House node).
+ 2. Engine renders harmonics, colors, geometry.
+ 3. Codex DNA assigns correspondences (Tarot, Soyga, numerology).
+ 4. Book (Circuitum 99) narrates the encounter.
+ 5. Artifact Plate is generated.
+ 6. Plate archived into Codex lattice → usable across apps.
+
+{
+  "system": "Cathedral of Circuits",
+  "codex144_99": {
+    "spine": 33,
+    "angels": 72,
+    "gates": 99,
+    "lattice": 144,
+    "sync": ["Soyga", "I Ching", "Kabbalah", "Tarot", "Numerology"]
+  },
+  "engine": {
+    "inputs": ["art", "text", "lineage"],
+    "outputs": ["harmonics", "colors", "crystals", "geometry"]
+  },
+  "book": {
+    "name": "Circuitum 99",
+    "avatars": ["Rebecca Respawn", "Moonchild", "Ann Abyss", "Rubescara/Virelai", "Crowley Shadow", "Witch Mods"]
+  },
+  "mysteryHouse": {
+    "rooms": 144,
+    "examples": ["tesla", "hypatia", "agrippa", "fortune", "hilma"]
+  },
+  "artifacts": ["sigil", "glyph", "harmonic", "crystal", "plate"],
+  "witchEye": {
+    "functions": ["brand-seal", "protection", "reiki-engine"]
+  },
+  "bridge": ["Art", "Science", "Magic", "Psychology", "Healing", "Technology", "Mythos"]
+}
