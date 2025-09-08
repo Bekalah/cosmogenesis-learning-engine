@@ -69,6 +69,9 @@ This file is being sealed into:
 - `/INNER_BOOK/_axis_spine.md`
 - `/REGISTRY/main_registry.md`
 - `/LORE/living_laws.md` (as foundational framework)
+- `/INNER_BOOK/_axis_spine.md`  
+- `/registry/main_registry.md`  
+- `/LORE/living_laws.md` (as foundational framework)  
 - `/SYSTEM/system_map.md`
 
 ---
