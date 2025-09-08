@@ -1,4 +1,5 @@
 # Cosmic Helix Renderer
+Per Texturas Numerorum, Spira Loquitur.
 
 Offline-only canvas demo. Encodes a four-layer cosmology without motion.
 

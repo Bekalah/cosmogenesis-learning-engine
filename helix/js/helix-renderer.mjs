@@ -1,5 +1,6 @@
 /*
   helix-renderer.mjs
+  Motto: Per Texturas Numerorum, Spira Loquitur.
   ND-safe static renderer for layered sacred geometry.
   No animation, no external deps. Called by index.html.
   Geometry scales parameterized by numerology constants 3,7,9,11,22,33,99,144.
@@ -17,8 +18,7 @@ export const NUM = Object.freeze({
 });
 
 // Draw vesica field (intersecting circles forming gentle grid)
-function drawVesica(ctx, w, h, color, N) {
-  const r = Math.min(w, h) / N.THREE; // radius tuned by numerology 3
+
   const cx = w / 2;
   const cy = h / 2;
   ctx.strokeStyle = color;
@@ -38,7 +38,7 @@ function drawVesica(ctx, w, h, color, N) {
 }
 
 // Draw Tree-of-Life nodes and connecting paths
-function drawTree(ctx, w, h, colorNode, colorPath, N) {
+
   const nodes = [
     { x: 0.5, y: 0.06 }, // Kether
     { x: 0.35, y: 0.18 },
@@ -88,7 +88,7 @@ function drawTree(ctx, w, h, colorNode, colorPath, N) {
 }
 
 // Draw static Fibonacci spiral as polyline
-function drawFibonacci(ctx, w, h, color, N) {
+
   const phi = (1 + Math.sqrt(5)) / 2; // golden ratio
   const c = Math.min(w, h) / N.ONEFORTYFOUR; // base radius tied to 144
   const center = { x: w * 0.8, y: h * 0.2 };
@@ -110,9 +110,7 @@ function drawFibonacci(ctx, w, h, color, N) {
 }
 
 // Draw static double helix lattice
-function drawHelix(ctx, w, h, colors, N) {
-  const amp = w / N.ELEVEN; // amplitude using 11
-  const freq = (2 * Math.PI) / (h / N.TWENTYTWO); // wave frequency with 22
+
   ctx.lineWidth = 1.5;
   for (let i = 0; i < 2; i++) {
     const phase = i * Math.PI;
@@ -124,7 +122,7 @@ function drawHelix(ctx, w, h, colors, N) {
     }
     ctx.stroke();
   }
-  // lattice rungs every 18 (9*2) pixels
+  // lattice rungs every 18 (9*2) pixels to maintain calm rhythm
   ctx.strokeStyle = colors[2] || colors[0];
   for (let y = 0; y <= h; y += N.NINE * 2) {
     const x1 = w / 2 + amp * Math.sin(freq * y);

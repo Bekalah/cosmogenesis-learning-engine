@@ -1,6 +1,9 @@
 /*
   helix-renderer.mjs
+  Motto: Per Texturas Numerorum, Spira Loquitur.
   ND-safe static renderer for layered sacred geometry.
+
+  Seal Motto: Per Texturas Numerorum, Spira Loquitur.
 
   Layers:
     1) Vesica field (intersecting circles)
@@ -49,9 +52,55 @@ function drawVesicaField(ctx, w, h, color, N) {
   }
 }
 
-function drawTreeOfLife(ctx, w, h, nodeColor, pathColor, N) {
+
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = 2;
+
+
+  const nodes = [
+    { x: w / 2, y: h * 0.05 }, // 0 Kether
+    { x: w * 0.25, y: h * 0.15 }, // 1 Chokmah
+    { x: w * 0.75, y: h * 0.15 }, // 2 Binah
+    { x: w * 0.25, y: h * 0.35 }, // 3 Chesed
+    { x: w * 0.75, y: h * 0.35 }, // 4 Geburah
+    { x: w / 2, y: h * 0.45 }, // 5 Tiphereth
+    { x: w * 0.25, y: h * 0.65 }, // 6 Netzach
+    { x: w * 0.75, y: h * 0.65 }, // 7 Hod
+    { x: w / 2, y: h * 0.75 }, // 8 Yesod
+    { x: w / 2, y: h * 0.9 }, // 9 Malkuth
+  ];
+
+  const paths = [
+    [0, 1],
+    [0, 2],
+    [0, 5],
+    [1, 2],
+    [1, 5],
+    [2, 5],
+    [1, 3],
+    [2, 4],
+    [3, 4],
+    [3, 5],
+    [4, 5],
+    [3, 6],
+    [4, 7],
+    [5, 6],
+    [5, 7],
+    [6, 7],
+    [6, 8],
+    [7, 8],
+    [5, 8],
+    [6, 9],
+    [7, 9],
+    [8, 9],
+  ];
+
+  paths.forEach(([a, b]) => {
+    ctx.beginPath();
+    ctx.moveTo(nodes[a].x, nodes[a].y);
+    ctx.lineTo(nodes[b].x, nodes[b].y);
+    ctx.stroke();
+
   const nodes = [];
   const centerX = w / 2;
   const topY = h / N.ELEVEN; // proportioned via 11
@@ -69,8 +118,9 @@ function drawTreeOfLife(ctx, w, h, nodeColor, pathColor, N) {
         ctx.stroke();
       }
     }
+
   });
-  // Nodes
+
   ctx.fillStyle = nodeColor;
   nodes.forEach((n) => {
     ctx.beginPath();

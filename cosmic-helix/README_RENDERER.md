@@ -1,12 +1,19 @@
 # Cosmic Helix Renderer
+Per Texturas Numerorum, Spira Loquitur.
+
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
 
 Offline, ND-safe canvas sketch for layered sacred geometry.
+
+Static HTML and Canvas were chosen so the geometry renders locally without
+network calls or heavy libraries, keeping the experience deterministic and
+motion-free.
 
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas will render four static layers:
    - **Vesica field** — intersecting circles forming the womb of forms.
-   - **Tree‑of‑Life scaffold** — ten sephirot with simple straight paths.
+   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double‑helix lattice** — two phase‑shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. If missing, a calm
@@ -28,4 +35,4 @@ extending `renderHelix` with new draw functions while preserving the calm visual
 hierarchy.
 
 ## Related Lore
-For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md).
+For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
