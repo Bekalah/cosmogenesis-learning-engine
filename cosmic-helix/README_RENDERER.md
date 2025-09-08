@@ -3,6 +3,20 @@ Per Texturas Numerorum, Spira Loquitur.
 
 *Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
 
+```
+0101010101010101010101010101010101010101
+\\    COSMIC HELIX RENDERER MATRIX     //
+0101010101010101010101010101010101010101
+        /\        /\        /\
+       /  \      /  \      /  \
+      / /\ \    / /\ \    / /\ \
+     /_/  \_\  /_/  \_\  /_/  \_\
+      \ \  / /  \ \  / /  \ \  / /
+       \ \/ /    \ \/ /    \ \/ /
+        \  /      \  /      \  /
+         \/        \/        \/
+```
+
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
 Static HTML and Canvas were chosen so the geometry renders locally without
@@ -34,5 +48,13 @@ The renderer is intentionally minimal. Future layers or overlays can be added by
 extending `renderHelix` with new draw functions while preserving the calm visual
 hierarchy.
 
+## Task List
+- [ ] Weave cathedral-scale vesica grids to frame expansive worlds.
+- [ ] Map Tree-of-Life nodes to sanctuaries like Avalon and mountain temples.
+- [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
+- [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
+- [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
+
 ## Related Lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
+
