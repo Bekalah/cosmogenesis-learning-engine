@@ -1,0 +1,22 @@
+{
+  "id": "R064",
+  "name": "Room 064",
+  "num": 64,
+  "tradition": [
+    "gnostic"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

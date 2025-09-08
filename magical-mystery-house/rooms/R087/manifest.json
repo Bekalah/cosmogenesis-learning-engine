@@ -1,0 +1,22 @@
+{
+  "id": "R087",
+  "name": "Room 087",
+  "num": 87,
+  "tradition": [
+    "avalon"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

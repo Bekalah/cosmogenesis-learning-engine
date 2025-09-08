@@ -1,0 +1,23 @@
+{
+  "id": "R084",
+  "name": "Room 084",
+  "num": 84,
+  "tradition": [
+    "watchtowers",
+    "zodiac"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "to_R069",
+    "to_room": "R069",
+    "requires_constant": null,
+    "requires_card": null,
+    "visual_gate_state": "closed"
+  },
+  {
+    "name": "to_R071",
+    "to_room": "R071",
+    "requires_constant": null,
+    "requires_card": null,
+    "visual_gate_state": "closed"
+  }
+]

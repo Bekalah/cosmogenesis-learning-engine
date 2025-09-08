@@ -1,0 +1,40 @@
+{
+  "id": "MA21_World",
+  "title": "The World",
+  "arcana": "Major",
+  "suit": null,
+  "number": 21,
+  "court": null,
+  "qabalistic_path": "",
+  "sephira": null,
+  "planet": "",
+  "zodiac": "",
+  "element": "",
+  "colour_scales": {
+    "King": "",
+    "Queen": "",
+    "Emperor": "",
+    "Empress": ""
+  },
+  "seed_syllables": [],
+  "daemon_echoes": [],
+  "consecration_angels": [],
+  "artifacts": [],
+  "abilities": [],
+  "companions": {
+    "npc": "MA21_World_npc"
+  },
+  "rituals": [],
+  "interactions": [
+    "inspect",
+    "attune",
+    "place_on_altar",
+    "combine",
+    "harmonize"
+  ],
+  "playable": true,
+  "locked": true,
+  "provenance": {
+    "generated": "auto"
+  }
+}

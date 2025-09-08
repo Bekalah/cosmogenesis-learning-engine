@@ -1,0 +1,25 @@
+{
+  "id": "R011",
+  "name": "Room 011",
+  "num": 11,
+  "tradition": [
+    "hilma_atelier"
+  ],
+  "anchor_constants": [
+    144,
+    11
+  ],
+  "shrine_nodes": [
+    "ascii_figure_1"
+  ],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

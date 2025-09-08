@@ -1,0 +1,22 @@
+{
+  "id": "R094",
+  "name": "Room 094",
+  "num": 94,
+  "tradition": [
+    "slavic"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

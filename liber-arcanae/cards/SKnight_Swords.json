@@ -1,0 +1,38 @@
+{
+  "id": "SKnight_Swords",
+  "title": "Knight of Swords",
+  "arcana": "Minor",
+  "suit": "Swords",
+  "number": null,
+  "court": "Knight",
+  "qabalistic_path": "",
+  "sephira": null,
+  "planet": "",
+  "zodiac": "",
+  "element": "",
+  "colour_scales": {
+    "King": "",
+    "Queen": "",
+    "Emperor": "",
+    "Empress": ""
+  },
+  "seed_syllables": [],
+  "daemon_echoes": [],
+  "consecration_angels": [],
+  "artifacts": [],
+  "abilities": [],
+  "companions": {
+    "npc": "SKnight_Swords_npc"
+  },
+  "rituals": [],
+  "interactions": [
+    "inspect",
+    "attune",
+    "place_on_altar"
+  ],
+  "playable": true,
+  "locked": true,
+  "provenance": {
+    "generated": "auto"
+  }
+}

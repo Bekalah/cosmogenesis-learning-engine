@@ -38,6 +38,39 @@
         "tags": ["harmony", "witness", "ratio"],
         "version": "1.0.0"
       }
+    },
+    {
+      "id": "ascii_figure_0",
+      "title": "Numerical Lattice",
+      "kind": "codex_node",
+      "num": 99,
+      "source": "Equinox I iii",
+      "links": {
+        "repo": "cosmogenesis-learning-engine",
+        "relpath": "docs/sources/ascii/equinox_i_iii.txt"
+      }
+    },
+    {
+      "id": "ascii_figure_1",
+      "title": "Triangle",
+      "kind": "ritual_diagram",
+      "num": 11,
+      "source": "Equinox I iii",
+      "links": {
+        "repo": "circuitum99",
+        "relpath": "docs/sources/ascii/equinox_i_iii.txt"
+      }
+    },
+    {
+      "id": "ascii_figure_2",
+      "title": "Greek Cross",
+      "kind": "zodiacal_cross",
+      "num": 12,
+      "source": "Equinox I iii",
+      "links": {
+        "repo": "liber-arcanae",
+        "relpath": "docs/sources/ascii/equinox_i_iii.txt"
+      }
     }
   ]
 }

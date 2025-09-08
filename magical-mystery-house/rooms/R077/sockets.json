@@ -1,0 +1,55 @@
+[
+  {
+    "name": "altar_center",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "accepts": [
+      "artifact_id",
+      "card_id",
+      "constant"
+    ],
+    "onPlace": []
+  },
+  {
+    "name": "lectern",
+    "position": [
+      1,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "accepts": [
+      "card_id"
+    ],
+    "onPlace": []
+  },
+  {
+    "name": "wall_north",
+    "position": [
+      0,
+      0,
+      -1
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "accepts": [
+      "artifact_id"
+    ],
+    "onPlace": []
+  }
+]

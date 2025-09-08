@@ -1,0 +1,30 @@
+[
+  {
+    "name": "to_R011",
+    "to_room": "R011",
+    "requires_constant": null,
+    "requires_card": null,
+    "visual_gate_state": "closed"
+  },
+  {
+    "name": "to_R013",
+    "to_room": "R013",
+    "requires_constant": null,
+    "requires_card": null,
+    "visual_gate_state": "closed"
+  },
+  {
+    "name": "to_R020",
+    "to_room": "R020",
+    "requires_constant": null,
+    "requires_card": "MA11_Justice",
+    "visual_gate_state": "closed"
+  },
+  {
+    "name": "to_R099",
+    "to_room": "R099",
+    "requires_constant": null,
+    "requires_card": "Any_Ace",
+    "visual_gate_state": "closed"
+  }
+]

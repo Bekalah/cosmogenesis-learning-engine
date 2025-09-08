@@ -1,0 +1,40 @@
+{
+  "id": "MA17_Star",
+  "title": "The Star",
+  "arcana": "Major",
+  "suit": null,
+  "number": 17,
+  "court": null,
+  "qabalistic_path": "",
+  "sephira": null,
+  "planet": "",
+  "zodiac": "",
+  "element": "",
+  "colour_scales": {
+    "King": "",
+    "Queen": "",
+    "Emperor": "",
+    "Empress": ""
+  },
+  "seed_syllables": [],
+  "daemon_echoes": [],
+  "consecration_angels": [],
+  "artifacts": [],
+  "abilities": [],
+  "companions": {
+    "npc": "MA17_Star_npc"
+  },
+  "rituals": [],
+  "interactions": [
+    "inspect",
+    "attune",
+    "place_on_altar",
+    "combine",
+    "harmonize"
+  ],
+  "playable": true,
+  "locked": true,
+  "provenance": {
+    "generated": "auto"
+  }
+}

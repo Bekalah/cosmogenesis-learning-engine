@@ -1,0 +1,22 @@
+{
+  "id": "R111",
+  "name": "Room 111",
+  "num": 111,
+  "tradition": [
+    "planetary_hours"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

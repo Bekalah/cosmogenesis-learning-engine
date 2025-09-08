@@ -1,0 +1,24 @@
+{
+  "id": "R144",
+  "name": "Room 144",
+  "num": 144,
+  "tradition": [
+    "mary_magdalene",
+    "zodiac",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

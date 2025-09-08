@@ -1,0 +1,25 @@
+{
+  "id": "R072",
+  "name": "Room 072",
+  "num": 72,
+  "tradition": [
+    "agrippa",
+    "zodiac",
+    "serpent_path"
+  ],
+  "anchor_constants": [
+    144,
+    72
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "R082",
+  "name": "Room 082",
+  "num": 82,
+  "tradition": [
+    "reiki_grid"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

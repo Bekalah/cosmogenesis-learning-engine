@@ -1,0 +1,23 @@
+{
+  "id": "R048",
+  "name": "Room 048",
+  "num": 48,
+  "tradition": [
+    "alpha_et_omega",
+    "zodiac"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}

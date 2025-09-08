@@ -1,0 +1,9 @@
+[
+  {
+    "name": "to_R143",
+    "to_room": "R143",
+    "requires_constant": null,
+    "requires_card": null,
+    "visual_gate_state": "closed"
+  }
+]

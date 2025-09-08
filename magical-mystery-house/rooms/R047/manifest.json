@@ -1,0 +1,22 @@
+{
+  "id": "R047",
+  "name": "Room 047",
+  "num": 47,
+  "tradition": [
+    "alchemy"
+  ],
+  "anchor_constants": [
+    144
+  ],
+  "shrine_nodes": [],
+  "altar_sockets": [
+    "altar_center",
+    "lectern"
+  ],
+  "portals": [],
+  "calm_mode": true,
+  "locked": false,
+  "provenance": {
+    "generated": "auto"
+  }
+}
