@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><title>Tesseract — Chariot</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../assets/css/core.css">
+<link rel="stylesheet" href="../assets/css/chapel.css">
+<style>
+.tesseract-wrap{perspective:900px; margin:1rem auto; max-width:820px}
+.cube{position:relative; margin:0 auto; transform-style:preserve-3d; width:260px; height:260px; transition:transform .6s ease}
+.face{position:absolute; width:260px; height:260px; border:1px solid rgba(255,255,255,.20); display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.03)}
+.face .label{opacity:.9; font-size:1rem}
+.controls .pill{margin-right:.4rem}
+.mode-note{font-size:.9rem; opacity:.85}
+.skin{font-size:.85rem; opacity:.9}
+</style>
+<script defer src="../assets/js/tesseract.js"></script>
+</head>
+<body data-motion="reduced">
+<header>
+  <h1>Tesseract — Chariot of Open-World Discovery</h1>
+  <nav><a href="../index.html">← Exit / Ground</a> · <a href="grand-stand.html">Grand Stand</a></nav>
+  <p class="ethics">ND-safe: no autoplay; button-based step rotation; high-contrast toggle supported.</p>
+</header>
+<main>
+  <section class="controls">
+    <h2>Modes & Skin</h2>
+    <div>
+      <button class="pill is-on" data-mode="still" aria-pressed="true">Still</button>
+      <button class="pill" data-mode="net" aria-pressed="false">Unfolded Net</button>
+      <button class="pill" data-mode="step" aria-pressed="false">Step Rotation</button>
+      <span class="mode-note" id="modeNote"></span>
+    </div>
+    <div style="margin-top:.5rem">
+      <label for="skinSel">Tarot Skin:</label>
+      <select id="skinSel" class="skin" aria-label="Tarot skin"></select>
+    </div>
+  </section>
+  <section class="tesseract-wrap">
+    <div class="cube" id="cube" aria-live="polite">
+      <div class="face" id="f1" style="transform:translateZ(130px)"><span class="label">Major</span></div>
+      <div class="face" id="f2" style="transform:rotateY(90deg) translateZ(130px)"><span class="label">Wands</span></div>
+      <div class="face" id="f3" style="transform:rotateY(180deg) translateZ(130px)"><span class="label">Cups</span></div>
+      <div class="face" id="f4" style="transform:rotateY(-90deg) translateZ(130px)"><span class="label">Swords</span></div>
+      <div class="face" id="f5" style="transform:rotateX(90deg) translateZ(130px)"><span class="label">Pentacles</span></div>
+      <div class="face" id="f6" style="transform:rotateX(-90deg) translateZ(130px)"><span class="label">Liber Seal</span></div>
+    </div>
+    <div style="margin-top:.5rem">
+      <button class="pill" id="stLeft">◀ Step Left</button>
+      <button class="pill" id="stRight">Step Right ▶</button>
+      <button class="pill" id="stUp">▲ Step Up</button>
+      <button class="pill" id="stDown">▼ Step Down</button>
+    </div>
+    <p class="caption" id="caption">Choose a mode. Use step to rotate one face at a time.</p>
+  </section>
+  <section>
+    <h2>Why the Tesseract</h2>
+    <p id="spirit"></p>
+  </section>
+</main>
+</body></html>

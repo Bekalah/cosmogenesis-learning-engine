@@ -1,0 +1,4 @@
+{ "id":"liber_arcanae","label":"Liber Arcanae",
+  "palette":{"bg":"#0d0b12","fg":"#eae6ff","accent":"#8a7fff"},
+  "labels":{"major":"Liber Seal","wands":"Sulphur","cups":"Salt","swords":"Air","pentacles":"Earth"}
+}
