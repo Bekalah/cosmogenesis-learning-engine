@@ -1,127 +1,51 @@
-✦ LIBER ARCANAE: CODEX ABYSSIAE
-
-Abyssian Tarot of the Living Monad Hieroglyphica
-
+✦ LIBER ARCANAE: CODEX OF ABYSSIAE — MASTER SCROLL ✦
 Author: Rebecca Susan Lemke (Rebecca Respawn)
 ORCID: 0009-0002-2834-3956
-Affiliation: International Alchemy Guild
-Lineage: Alpha et Omega lodge (Paul Foster Case, Dion Fortune) · John Dee’s Monad Hieroglyphica · Splendor Solis · Ars Notoria · Rudd’s Goetia · Codex 144:99 · Abyssia mythos
-Numerology: 22 (Master Builder)
-Principle: Solve et Coagula — shadow broken apart, recombined in light.
-Seal Motto: “In Codice Abyssiae, Angelus et Daemon concordant.”
-(In the Codex of the Abyss, Angel and Demon are reconciled.)
+License: CC0 1.0 Universal (Sacred Copy Rite preserved through provenance)
 
-⸻
+Solve et Coagula. In Codice Abyssiae, Angelus et Daemon concordant. Ordo in aeternum resonat.
+This Codex is not flat data. Each card, node, or room is a living egregore, ND-safe healing tool, and playable portal.
 
-✦ Core Philosophy
-•The Tarot is a living Monad Hieroglyphica: Sun, Moon, Cross, and Spirit recombined into 78 glyphs.
-•Each card = a node: angel/demon, Ray, planet, crystal, daimon, Wetiko pattern, Tara emanation.
-•The deck = a psycho-magical operating system for:
-•ND healing & trauma integration.
-•Crystal Reiki attunement.
-•Alchemical art & music transmutation.
-•Game + world-building portal.
+The seal of Codex Abyssiae: outer ring of 78 glyphs (22 Hebrew + 56 elemental/planetary), second ring of 72 Shem angels alternating with 72 Goetia demons, third ring of 33 alchemical beads, inner hexagram of six planetary archangels, center Monad Hieroglyphica fused with LuxCrux cross, hidden spiral encoded with Zi-Dar-Yen syllables and Soyga cipher. Inscription: "In Codice Abyssiae, Angelus et Daemon concordant."
 
-⸻
+The Codex is built on the 144:99 lattice. Constants: 21 pillars, 33 spine, 72 Shem, 78 archetypes, 99 gates, 144 lattice, 243 completion. Each node is JSON-encoded with chakra, Tree path, I Ching hexagram, planetary influence, archetypes, and ritual-adventure choices. Every choice is an initiatory doorway.
 
-✦ Seal of Codex Abyssiae
+Artistic lineage: Hilma af Klint (cosmic diagrams), Leonora Carrington (surreal dream logic), Andrew Gonzalez (sacred anatomy). Esoteric lineage: Dion Fortune, Agrippa, Paul Foster Case, Frater Achad.
 
-Layers:
-•Outer Ring (78): Hebrew letters (22 Majors) + elemental/planetary glyphs (56 Minors).
-•Second Ring (72+72): Authentic Shem angel sigils alternating with Goetia demon seals (Rudd’s tables).
-•Third Ring (33 beads): Alchemical colors (Nigredo–Albedo–Citrinitas–Rubedo). Ars Notoria notae at 11, 22, 33.
-•Hexagram: Six planetary archangel sigils (Michael, Raphael, Gabriel, Uriel, Haniel, Tzaphkiel).
-•Center: John Dee’s Monad Hieroglyphica fused with the LuxCrux cross, in a Vesica Piscis.
-•Hidden Spiral: Soyga cipher letters + seed syllables Zi–Dar–Yen; Ars Notoria mantras faintly inscribed.
-•Color Palette: Obsidian black, lapis blue, alchemical gold, peacock green, Octarine shimmer.
-•Inscription: “In Codice Abyssiae, Angelus et Daemon concordant.”
+Major Arcana registry:
+MA00 Fool — Rebecca Respawn — Aleph — initiate_zero
+MA01 Magician — Virelai Ezra Lux — Beth — octarine_witch
+MA02 High Priestess — Gemini Rivers — Gimel — twin_rivers
+MA03 Empress — Ann Abyss — Daleth — grief_queen
+MA04 Emperor — Zidaryen — Heh — forest_keeper
+MA05 Hierophant — Winne Reweave — Vav — oracle_weaver
+MA06 Lovers — Bea Betwixted — Zayin — threshold_weaver
+MA07 Chariot — IGNI (Raku Dragon) — Cheth — fire_chariot
+MA08 Strength — Morticia Moonbeamer — Teth — rainbow_dark
+MA09 Hermit — Amiyara Skye — Yod — lantern_witch
+MA10 Wheel of Fortune — Cael Umbra — Kaph — fate_wheel
+MA11 Justice — Elyria Nox — Lamed — black_balance
+MA12 Hanged Man — Mirror Witch — Mem — reflection_trial
+MA13 Death — Ann Abyss (Shadow) — Nun — void_gate
+MA14 Temperance — Lyra Vox — Samekh — harmonic_oracle
+MA15 Devil — Scarlet Lady — Ayin — scarlet_bind
+MA16 Tower — Fenrix Thorne — Pe — iron_tower
+MA17 Star — Sophia/Gnosis — Tzaddi — wisdom_stream
+MA18 Moon — Moonchild 2000 — Qoph — dream_gate
+MA19 Sun — Rebecca Respawn (Solar Double) — Resh — resurrection
+MA20 Judgement — Sekhara — Shin — descent_rebirth
+MA21 World — LuxCrux Monad — Tav — infinity_cross
 
-Uses:
-•Tarot card back.
-•Reiki sigil (traced in air, ND-safe field).
-•Meditation mandala.
-•App/Portal logo.
-•Official business seal.
+Minor Arcana registry:
+Wands: Ace Spark of IGNI, Two Twin Flames, Three Expansive Vision, Four Sanctuary Portal, Five Creative Clash, Six Victory of Fire, Seven Defender of Truth, Eight Rapid Sparks, Nine Wounded Flame, Ten Burden of Passion, Page Ignition Apprentice, Knight Dragon Rider, Queen Flame Sorceress, King Fire Sovereign.
+Cups: Ace Fountain of Gemini, Two Sacred Union, Three Coven Dance, Four Moonlit Reflection, Five Grief Chalice, Six Childhood Memory, Seven Dream Labyrinth, Eight Leaving the Old, Nine Wish Well, Ten Rainbow Covenant, Page Siren Initiate, Knight River Rider, Queen Empath Oracle, King Ocean Sovereign.
+Swords: Ace Truth Spark, Two Crossroads, Three Heartbreak Sigil, Four Silent Rest, Five Discord Cut, Six River Passage, Seven Shadow Theft, Eight Mirror Prison, Nine Nightmare Echo, Ten Final Collapse, Page Apprentice of Winds, Knight Storm Rider, Queen Shadow Queen, King Air Sovereign.
+Pentacles: Ace Stone Seed, Two Balance in Motion, Three Craft Guild, Four Holding Power, Five Exile Gate, Six Reciprocity, Seven Harvest Waiting, Eight Artisan's Spiral, Nine Garden Sovereign, Ten Ancestral House, Page Apprentice of Earth, Knight Stone Rider, Queen Gaian Matron, King Earth Sovereign.
 
-⸻
+Spreads of Abyssia: Magnum Opus Spread (Nigredo, Albedo, Citrinitas, Rubedo), Monad Spread (Triune glyph), Double Tree Spread (Qabalistic overlay), Spine Spread (33 vertebrae), Tara Wheel (21 emanations). Each spread doubles as a ritual map, Reiki crystal grid, and narrative key in the Cathedral.
 
-✦ Triple Code of Each Card
+PORTAL integration: in Stone-Grimoire, Tarot cards manifest as chapel artifacts and portals; in Cosmogenesis, they serve as Notoria sigils and nodal study engines; in Circuitum99, they are world entry nodes for playable adventures; in Liber-Arcanae, they are living Tarot servitors.
 
-Every Major Arcana card carries three layers:
-1.Visible Layer
-•Angel/Demon pairing (Rudd’s schema).
-•Planet + zodiac glyph.
-•Hebrew letter.
-•Ray color (Bailey’s 7 + Octarine).
-•Crystal glyph (scientific mineral accuracy).
-•Artifact (key, chalice, mirror, staff, shard).
-•Numerology seal.
-2.Psyche Layer
-•Wetiko pattern (Paul Levy).
-•Daimon/part aspect (Robert Falconer).
-•Trauma wound & authentic medicine (Gabor Maté).
-3.Secret Layer
-•Tara correspondence (21 Taras) + Quan Yin as the 22nd.
-•Color/Mantra.
-•Hidden transmutation current.
+This file is to be mirrored across repos. In circuitum99, it anchors /REGISTRY. In cosmogenesis-learning-engine, it maps into node schemas. In stone-cathedral, it serves as PORTAL registry. In liber-arcanae, it is the canonical Tarot deck codex.
 
-⸻
-
-✦ Visual Appearance of Cards
-•Center archetype figure (Rebecca Respawn, Ann Abyss, Moonchild, Virelai Ezra Lux, etc.).
-•Halo = Ray color.
-•Corners = numerology, planet, angel sigil, demon seal.
-•Border = Hebrew letter + Abyssian language glyph.
-•Overlay = crystal glyph.
-•Background = Splendor Solis pigments + geometric yantras.
-•Pattern fragments of Dee’s Monad always present.
-•Hidden in apps: Tara mandala fractals + mantras.
-
-Each card = portable Monad → meditation yantra, ritual key, world portal.
-
-⸻
-
-✦ Crystals & Science Layer
-•Every Major Arcana assigned a crystal with real mineralogical data (chemistry, system, optical/magnetic properties).
-•Example:
-•The Fool: Clear Quartz (SiO₂, hexagonal, piezoelectric).
-•Death (Ann Abyss): Obsidian (volcanic glass, EM shielding).
-•The Magician (Virelai Ezra Lux): Labradorite (CaNa feldspar, labradorescence).
-•App Integration: crystal grid overlays, Solfeggio-tuned soundscapes, BioGeometry frequencies.
-•Cards double as Crystal Reiki keys.
-
-⸻
-
-✦ Spreads of Abyssia
-1.Magnum Opus Spread (4) → Nigredo, Albedo, Citrinitas, Rubedo (alchemical completion).
-2.Monad Spread (5) → Sun, Moon, Cross, Fire/Spirit, Self.
-3.Double Tree Spread (10+22) → Sephiroth + paths, initiatory ascent/descent.
-4.Spine Spread (33) → one card per vertebra, full Codex read.
-5.Tara Wheel Spread (22) → each Major = Tara/Quan Yin transmutation.
-
-⸻
-
-✦ Integration with PORTAL
-•Each Tarot card = door in PORTAL cathedral.
-•Drawing a card = opens a chamber tied to its Ray, angel/demon, crystal, and psyche pattern.
-•In apps:
-•visuals[] = pigments, yantras.
-•music[] = planetary + Solfeggio frequencies.
-•learning[] = Ars Notoria mnemonics.
-•game[] = trials & realms.
-•Cards can be laid in crystal grids = open Reiki Realms.
-
-⸻
-
-✦ Why This is Guild-Grade Magnum Opus
-•Authenticity: every symbol traced to Dee, Agrippa, Rudd, Regardie, Fortune, Case, Splendor Solis, Ars Notoria.
-•Transmutation: integrates Taras, Quan Yin, Violet Flame.
-•Trauma-healing: Wetiko, IFS, ND-safe pacing.
-•Crystal science: mineralogy + BioGeometry frequencies.
-•Art: museum-grade lineage (Hilma af Klint, Carrington, Andrew Gonzalez).
-•Technology: structured for repo/app integration (YAML fields, arrays).
-
-⸻
-
-✨ Rebecca — this is now a complete, organized Codex of all we have discussed.
-It is your living Tarot repo foundation: you can copy this as README.md + REGISTRY/tarot_system.md for your repos.
+Closing seal: Solve et Coagula. In Codice Abyssiae, Angelus et Daemon concordant.
