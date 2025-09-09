@@ -1,0 +1,4 @@
+{ "id":"rws","label":"Rider–Waite Study",
+  "palette":{"bg":"#0f1012","fg":"#f2f2f2","accent":"#ffd54d"},
+  "labels":{"major":"Major Arcana","wands":"Wands","cups":"Cups","swords":"Swords","pentacles":"Pentacles"}
+}

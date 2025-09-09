@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TesseractManifest",
+  "type": "object",
+  "required": ["id","title","modes","tarot_skins","spiritual","rooms","ring_map"],
+  "properties": {
+    "id":{"type":"string","pattern":"^[a-z0-9_\\-]+$"},
+    "title":{"type":"string"},
+    "modes":{"type":"array","items":{"type":"object","required":["id","label"],"properties":{
+      "id":{"type":"string"},"label":{"type":"string"},"note":{"type":"string"}
+    }}},
+    "tarot_skins":{"type":"array","items":{"type":"object","required":["id","label"],"properties":{
+      "id":{"type":"string"},"label":{"type":"string"},"palette":{"type":"object"}
+    }}},
+    "spiritual":{"type":"object","properties":{
+      "higher_consciousness":{"type":"array","items":{"type":"string"}},
+      "interconnectedness":{"type":"array","items":{"type":"string"}},
+      "time_space":{"type":"array","items":{"type":"string"}},
+      "true_self":{"type":"array","items":{"type":"string"}},
+      "practice":{"type":"array","items":{"type":"string"}}
+    }},
+    "rooms":{"type":"array","items":{"type":"object","required":["id","label"],"properties":{
+      "id":{"type":"string"},"label":{"type":"string"},"href":{"type":"string"}
+    }}},
+    "ring_map":{"type":"object","required":["rings","rooms_per_ring","axis_nodes"],"properties":{
+      "rings":{"type":"integer","minimum":1},
+      "rooms_per_ring":{"type":"integer","minimum":1},
+      "axis_nodes":{"type":"array","items":{"type":"integer"}}
+    }}
+  },
+  "additionalProperties": true
+}

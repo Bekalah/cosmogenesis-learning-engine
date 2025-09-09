@@ -1,0 +1,4 @@
+{ "id":"thoth","label":"Thoth Study",
+  "palette":{"bg":"#0b0d10","fg":"#e6f0ff","accent":"#6de0ff"},
+  "labels":{"major":"Atu","wands":"Wands","cups":"Cups","swords":"Swords","pentacles":"Disks"}
+}
