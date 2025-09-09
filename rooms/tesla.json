@@ -1,0 +1,23 @@
+{
+  "roomId": "tesla",
+  "name": "Nikola Tesla",
+  "hexagramPosition": "Upper Right",
+  "tetragrammatonRole": "Vav",
+  "domain": "Electric Science / Visionary Invention",
+  "signatureWorks": ["Wardenclyffe Tower", "Magnifying Transmitter", "3-6-9 key"],
+  "codexRole": "Tower disruptor / Lightning Master",
+  "tarotOverlay": "XVI The Tower",
+  "astrologySymbolism": "Cancer Sun, inventor attuned to electricity and frequency",
+  "fusionNotes": [
+    "Embodied lightning as revelation",
+    "Saw the cosmos as vibration and number",
+    "Foreshadowed wireless lattice structures"
+  ],
+  "artifact": {
+    "type": "fusion-plate",
+    "description": "Lightning Coil Plate — a crystalline lattice that hums in solfeggio tones",
+    "function": "Resets structures through illumination and shock"
+  },
+  "connections": ["hypatia", "agrippa", "fortune"]
+}
+
