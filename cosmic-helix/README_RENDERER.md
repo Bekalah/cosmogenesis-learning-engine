@@ -10,6 +10,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 2. A 1440×900 canvas renders four static layers:
 
    - **Vesica field** — intersecting circles forming the womb of forms.
+
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
    - Vesica field — intersecting circles forming the womb of forms.
@@ -44,6 +45,7 @@ For a meditation on the tesseract as symbol of higher consciousness and non-line
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
+
 
 
 ## Related Lore
