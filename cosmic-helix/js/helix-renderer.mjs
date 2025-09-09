@@ -4,10 +4,10 @@
   ND-safe static renderer for layered sacred geometry.
 
   Layers:
-    1) Vesica field (intersecting circles)
-    2) Tree-of-Life scaffold (10 sephirot + 22 paths; simplified layout)
-    3) Fibonacci curve (log spiral polyline; static)
-    4) Double-helix lattice (two phase-shifted sine curves)
+    1) Vesica field (intersecting circles; Vesica Piscis from classical geometry)
+    2) Tree-of-Life scaffold (10 sephirot + 22 paths; from Kabbalistic diagrams)
+    3) Fibonacci curve (log spiral polyline; static, per Leonardo of Pisa's Liber Abaci)
+    4) Double-helix lattice (two phase-shifted sine curves echoing the 1953 DNA model)
 
   Rationale:
     - no motion or flashing; everything rendered once
@@ -28,6 +28,7 @@ export function renderHelix(ctx, opts) {
 
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
+  // Vesica Piscis grid seen in Euclid's Elements and Gothic rose windows
   const radius = Math.min(w, h) / N.THREE; // ensures soft overlap
   const step = radius / N.SEVEN; // grid density tuned by 7
   for (let y = radius; y <= h - radius; y += step) {
@@ -43,6 +44,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = 2;
 
+  // Sephirot layout adapted from traditional Kabbalistic charts
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
     { x: w * 0.25, y: h * 0.15 }, // 1 Chokmah
@@ -81,6 +83,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
+  // Sequence described in Leonardo of Pisa's 1202 text "Liber Abaci"
   const fib = [1, 1];
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
   const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
@@ -107,6 +110,7 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
     ctx.beginPath();
     for (let x = 0; x <= w; x += stepX) {
+      // Double helix echoes Watson and Crick's DNA structure
       const y =
         midY +
         amplitude * Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
