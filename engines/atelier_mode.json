@@ -1,0 +1,16 @@
+{
+  "mode": "atelier",
+  "rules": [
+    "creation is ritual",
+    "every attempt unlocks a path",
+    "no forced incantations, no strobe"
+  ],
+  "generators": {
+    "spiral_rooms": "enabled",
+    "geomancy_floor": "enabled",
+    "cube_space": "enabled",
+    "tara_mandala": "enabled"
+  },
+  "audio": { "opt_in": true, "levels": [-20, -18] },
+  "visual_safety": { "motion": "slow", "contrast": "soft", "blink_rate": "none" }
+}
