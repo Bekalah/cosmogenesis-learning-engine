@@ -1,5 +1,27 @@
 {
-  "bg": "#0b0b12",
-  "ink": "#e8e8f0",
-  "layers": ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+  "set": "Tara-21",
+  "notes": "Balanced, ND-safe. Hue shifts gentle—no strobe.",
+  "colors": [
+    {"name":"Green Tara","hex":"#2EA66F"},
+    {"name":"White Tara","hex":"#EDEBE6"},
+    {"name":"Red Tara","hex":"#C7323B"},
+    {"name":"Yellow Tara","hex":"#F2CB3D"},
+    {"name":"Blue Tara","hex":"#2C6ABF"},
+    {"name":"Black Tara","hex":"#1A1C22"},
+    {"name":"Violet Tara","hex":"#7A4BD9"},
+    {"name":"Orange Tara","hex":"#E77A2E"},
+    {"name":"Pink Tara","hex":"#E987A9"},
+    {"name":"Turquoise Tara","hex":"#3BC6B8"},
+    {"name":"Jade Tara","hex":"#1FA582"},
+    {"name":"Pearl Tara","hex":"#F4F0EA"},
+    {"name":"Saffron Tara","hex":"#F39B1A"},
+    {"name":"Indigo Tara","hex":"#3D2E7A"},
+    {"name":"Teal Tara","hex":"#1F8C86"},
+    {"name":"Crimson Tara","hex":"#8E0E2B"},
+    {"name":"Rose-Gold Tara","hex":"#D8A46C"},
+    {"name":"Sky Tara","hex":"#9CC8F6"},
+    {"name":"Obsidian Tara","hex":"#111418"},
+    {"name":"Silver Tara","hex":"#C9CED6"},
+    {"name":"Octarine Tara","hex":"#9B5CF2"}
+  ]
 }
