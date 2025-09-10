@@ -1,0 +1,301 @@
+[
+  {
+    "id": "OCTA-CROWLEY",
+    "name": "Aleister Crowley Octagram Tesseract",
+    "num": 901,
+    "palette": {
+      "primary": "#000000",
+      "secondary": "#FFD700",
+      "accent": "#8B0000"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": ["unicursal_hexagram", "babalon_star", "aeonic_spiral"]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Gate of True Will and Aeonic Spiral",
+    "locked": true,
+    "lineage": {
+      "school": "Thelema",
+      "keys": ["ABRAHADABRA", "N.O.X.", "Babalon"],
+      "texts": ["Liber AL", "Vision & Voice"]
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Crown", "Solar"],
+      "planet": ["Sun", "Mars"],
+      "element": ["Fire", "Air"],
+      "sf": [963, 741]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["octagram_field", "monad_grid", "cathedral_vault"],
+      "light": "golden_volumetric",
+      "audio": "solar_lvx_chant"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-FORTUNE",
+    "name": "Dion Fortune Octagram Tesseract",
+    "num": 902,
+    "palette": {
+      "primary": "#4B0082",
+      "secondary": "#DAA520",
+      "accent": "#E6E6FA"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": ["moon_temple", "inner_order_disc"]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Psychic Structure and the Moon Temples",
+    "locked": true,
+    "lineage": {
+      "school": "Rosy Cross (Inner Light)",
+      "keys": ["Psychic Self-Defense", "Mystical Qabalah"],
+      "temple": "Moon Court"
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Heart", "Third Eye"],
+      "planet": ["Moon", "Venus"],
+      "element": ["Water", "Air"],
+      "sf": [528, 852]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["lunar_ambulatory", "rose_cross_grid", "aqua_memory_vault"],
+      "light": "indigo_soft",
+      "audio": "moon_psalm_hush"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-ACHAD",
+    "name": "Frater Achad Octagram Tesseract",
+    "num": 903,
+    "palette": {
+      "primary": "#191970",
+      "secondary": "#00CED1",
+      "accent": "#FF69B4"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": ["maat_feather", "daath_gate", "paradox_keys"]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Keys of Paradox and the Maat Gate",
+    "locked": true,
+    "lineage": {
+      "school": "Maatian Qabalah",
+      "keys": ["Da’ath Bridge", "Liber 31"],
+      "motto": "Paradox Opens"
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Throat", "Third Eye"],
+      "planet": ["Saturn", "Uranus"],
+      "element": ["Air", "Ether"],
+      "sf": [741, 963]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["void_bridge", "feather_scale", "mirror_torus"],
+      "light": "teal_neon_line",
+      "audio": "maat_whisper_scale"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-AGRIPPA",
+    "name": "Agrippa Octagram Tesseract",
+    "num": 904,
+    "palette": {
+      "primary": "#2F4F4F",
+      "secondary": "#C0C0C0",
+      "accent": "#8B4513"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": [
+        "planetary_heptagram",
+        "elemental_quarters",
+        "word_virtue_wheel"
+      ]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Planetary Virtues and the Word of Power",
+    "locked": true,
+    "lineage": {
+      "school": "Hermetic Natural Magic",
+      "keys": ["Heptarchia", "Elements", "Numbers"],
+      "texts": ["De Occulta Philosophia"]
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Root", "Solar"],
+      "planet": ["All"],
+      "element": ["All"],
+      "sf": [396, 528, 741, 852, 963]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["planetary_floor", "orrey_dome", "sigil_atrium"],
+      "light": "bronze_sunshafts",
+      "audio": "planet_chime_lattice"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-PFCASE",
+    "name": "Paul Foster Case Octagram Tesseract",
+    "num": 905,
+    "palette": {
+      "primary": "#FFDE59",
+      "secondary": "#1E90FF",
+      "accent": "#32CD32"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": ["color_tone_paths", "hebrew_letter_arch", "bota_grid"]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Color–Tone Tarot and Pathworking",
+    "locked": true,
+    "lineage": {
+      "school": "B.O.T.A.",
+      "keys": ["Color Scales", "Tone Intelligences", "Hebrew Paths"]
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Crown", "Throat"],
+      "planet": ["Mercury", "Sun"],
+      "element": ["Air", "Light"],
+      "sf": [852, 963]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["letter_arcade", "chromatic_nave", "tone_rosette"],
+      "light": "prismatic_halo",
+      "audio": "tone_path_do_re_mi"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-SKINNER",
+    "name": "Stephen Skinner Octagram Tesseract",
+    "num": 906,
+    "palette": {
+      "primary": "#708090",
+      "secondary": "#87CEEB",
+      "accent": "#FFD700"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": ["geomancy_16", "angelic_tables", "enochian_grid"]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Geomancy and Angelic Operational Science",
+    "locked": true,
+    "lineage": {
+      "school": "Practical Angelic/Geomancy",
+      "keys": ["16 Figures", "Table of Practice", "Enochian Forms"]
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Solar", "Third Eye"],
+      "planet": ["Jupiter", "Mercury"],
+      "element": ["Earth", "Air"],
+      "sf": [528, 852]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["geomantic_floor", "table_of_practice", "glass_aeir"],
+      "light": "sky_column",
+      "audio": "angelic_scale_minor"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-OCTARINE",
+    "name": "Rebecca Respawn Octagram Tesseract — Octarine Ray",
+    "num": 907,
+    "palette": {
+      "primary": "#A020F0",
+      "secondary": "#00FFFF",
+      "accent": "#FFD700"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": ["luxcrux", "anthakarana_bridge", "vesica_axis"]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Octarine Gnosis and the Living Book",
+    "locked": true,
+    "lineage": {
+      "school": "Octarine Fusionism",
+      "keys": ["Zi-Dar-Yen", "LuxCrux", "Living Codex"],
+      "daimon": "Serpent of Sophian Transformation"
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144, 243],
+      "chakra": ["Root", "Heart", "Crown"],
+      "planet": ["All"],
+      "element": ["All"],
+      "sf": [417, 528, 852, 963]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": [
+        "tesseract_axis_mundi",
+        "octarine_ocean",
+        "cathedral_of_circuits"
+      ],
+      "light": "octarine_glow",
+      "audio": "gnosis_drone"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  },
+  {
+    "id": "OCTA-TARA",
+    "name": "Tibetan Tara / Reiki Octagram Tesseract",
+    "num": 908,
+    "palette": {
+      "primary": "#2E8B57",
+      "secondary": "#F5DEB3",
+      "accent": "#AFEEEE"
+    },
+    "geometry": {
+      "base": "octagram+tesseract",
+      "overlays": [
+        "tara_wheel_21",
+        "seed_syllables",
+        "karuna_grid",
+        "antahkarana_bridge"
+      ]
+    },
+    "node_type": "octagram_tesseract",
+    "narrative": "Compassion Frequencies and the Bridge of Light",
+    "locked": true,
+    "lineage": {
+      "school": "Tibetan / Usui / Karuna / Raku",
+      "keys": ["OM TARE TUTTARE TURE SOHA", "Dai Ko Myo", "Antahkarana"],
+      "hall": "Compassion Dome"
+    },
+    "codex": {
+      "anchors": [21, 33, 72, 78, 99, 144],
+      "chakra": ["Heart", "Crown"],
+      "planet": ["Moon", "Neptune"],
+      "element": ["Water", "Light"],
+      "sf": [528, 852, 963]
+    },
+    "render_profile": {
+      "disable": ["helix_renderer"],
+      "prefer": ["reiki_transept", "tara_mandala", "water_light_atrium"],
+      "light": "jade_milk",
+      "audio": "compassion_choir_soft"
+    },
+    "safety": { "nd_safe": true, "intensity_slider": true }
+  }
+]
