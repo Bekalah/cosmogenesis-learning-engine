@@ -13,6 +13,7 @@
     - no motion or flashing; everything rendered once
     - muted palette for calm contrast
     - numerology constants wire geometry to 3/7/9/11/22/33/99/144
+  Colors are provided via Tara-21 palette mapping upstream.
 */
 
 export function renderHelix(ctx, opts) {
