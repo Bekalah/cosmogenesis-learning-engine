@@ -26,9 +26,10 @@ export function renderHelix(ctx, opts) {
   drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], N);
 }
 
+// Layer 1: Vesica field — static circle grid tuned by 3 and 7.
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
-  const radius = Math.min(w, h) / N.THREE; // ensures soft overlap
+  const radius = Math.min(w, h) / N.THREE; // soft overlap, no motion
   const step = radius / N.SEVEN; // grid density tuned by 7
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
@@ -39,9 +40,10 @@ function drawVesicaField(ctx, w, h, color, N) {
   }
 }
 
+// Layer 2: Tree-of-Life scaffold — 10 sephirot, 22 static paths.
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 2; // thin lines keep contrast calm
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -78,6 +80,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   });
 }
 
+// Layer 3: Fibonacci curve — golden spiral polyline, no animation.
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
@@ -98,10 +101,11 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.stroke();
 }
 
+// Layer 4: Double-helix lattice — two phase-shifted sine tracks.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
-  const stepX = w / N.ONEFORTYFOUR;
+  const stepX = w / N.ONEFORTYFOUR; // static sampling rate
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
