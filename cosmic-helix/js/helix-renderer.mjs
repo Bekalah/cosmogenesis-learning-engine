@@ -53,14 +53,32 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
     { x: w * 0.25, y: h * 0.65 }, // 6 Netzach
     { x: w * 0.75, y: h * 0.65 }, // 7 Hod
     { x: w / 2, y: h * 0.75 }, // 8 Yesod
-    { x: w / 2, y: h * 0.9 } // 9 Malkuth
+    { x: w / 2, y: h * 0.9 }, // 9 Malkuth
   ];
 
   const paths = [
-    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
-    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
-    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
-    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
+    [0, 1],
+    [0, 2],
+    [0, 5],
+    [1, 2],
+    [1, 5],
+    [2, 5],
+    [1, 3],
+    [2, 4],
+    [3, 4],
+    [3, 5],
+    [4, 5],
+    [3, 6],
+    [4, 7],
+    [5, 6],
+    [5, 7],
+    [6, 7],
+    [6, 8],
+    [7, 8],
+    [5, 8],
+    [6, 9],
+    [7, 9],
+    [8, 9],
   ];
 
   paths.forEach(([a, b]) => {
@@ -82,7 +100,8 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   const fib = [1, 1];
-  while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
+  while (fib.length < N.NINE)
+    fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
   const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
   let angle = 0;
   let x = w / 2;
@@ -109,11 +128,11 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
     for (let x = 0; x <= w; x += stepX) {
       const y =
         midY +
-        amplitude * Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
+        amplitude *
+          Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
       if (x === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
     ctx.stroke();
   }
 }
-
