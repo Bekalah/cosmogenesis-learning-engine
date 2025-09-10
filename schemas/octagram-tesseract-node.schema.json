@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Octagram Tesseract Node",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "num",
+    "palette",
+    "geometry",
+    "node_type",
+    "narrative",
+    "locked",
+    "lineage",
+    "codex",
+    "render_profile",
+    "safety"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^OCTA-[A-Z0-9_\\-]+$" },
+    "name": { "type": "string", "minLength": 3 },
+    "num": { "type": "integer", "minimum": 1 },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "string", "pattern": "^#([0-9A-Fa-f]{6})$" },
+        "secondary": { "type": "string", "pattern": "^#([0-9A-Fa-f]{6})$" },
+        "accent": { "type": "string", "pattern": "^#([0-9A-Fa-f]{6})$" }
+      },
+      "required": ["primary", "secondary", "accent"]
+    },
+    "geometry": {
+      "type": "object",
+      "properties": {
+        "base": { "enum": ["octagram+tesseract"] },
+        "overlays": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["base", "overlays"]
+    },
+    "node_type": { "const": "octagram_tesseract" },
+    "narrative": { "type": "string" },
+    "locked": { "type": "boolean" },
+    "lineage": { "type": "object" },
+    "codex": {
+      "type": "object",
+      "properties": {
+        "anchors": { "type": "array", "items": { "type": "integer" } },
+        "chakra": { "type": "array", "items": { "type": "string" } },
+        "planet": { "type": "array", "items": { "type": "string" } },
+        "element": { "type": "array", "items": { "type": "string" } },
+        "sf": { "type": "array", "items": { "type": "number" } }
+      },
+      "required": ["anchors"]
+    },
+    "render_profile": {
+      "type": "object",
+      "properties": {
+        "disable": { "type": "array", "items": { "type": "string" } },
+        "prefer": { "type": "array", "items": { "type": "string" } },
+        "light": { "type": "string" },
+        "audio": { "type": "string" }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "properties": {
+        "nd_safe": { "type": "boolean" },
+        "intensity_slider": { "type": "boolean" },
+        "no_strobe": { "type": "boolean", "default": true },
+        "no_autoplay": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}
