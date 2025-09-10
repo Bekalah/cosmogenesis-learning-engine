@@ -20,6 +20,7 @@ export function renderHelix(ctx, opts) {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
 
+  // Layer order matters: background first, lattice last for depth.
   drawVesicaField(ctx, width, height, palette.layers[0], N);
   drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], N);
   drawFibonacci(ctx, width, height, palette.layers[3], N);
@@ -27,6 +28,7 @@ export function renderHelix(ctx, opts) {
 }
 
 function drawVesicaField(ctx, w, h, color, N) {
+  // Static circle grid; spacing via N.SEVEN keeps scene open.
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // ensures soft overlap
   const step = radius / N.SEVEN; // grid density tuned by 7
@@ -40,6 +42,7 @@ function drawVesicaField(ctx, w, h, color, N) {
 }
 
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
+  // Simplified scaffold for clarity; no overlapping paths.
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = 2;
 
@@ -82,6 +85,7 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   const fib = [1, 1];
+  // Finite sequence avoids infinite spiral and keeps render deterministic.
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
   const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
   let angle = 0;
@@ -99,6 +103,7 @@ function drawFibonacci(ctx, w, h, color, N) {
 }
 
 function drawHelix(ctx, w, h, colorA, colorB, N) {
+  // Two fixed sine tracks form a quiet lattice.
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
   const stepX = w / N.ONEFORTYFOUR;
