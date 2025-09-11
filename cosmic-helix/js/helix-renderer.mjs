@@ -28,8 +28,8 @@ export function renderHelix(ctx, opts) {
 
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
-  const radius = Math.min(w, h) / N.THREE; // ensures soft overlap
-  const step = radius / N.SEVEN; // grid density tuned by 7
+  const radius = Math.min(w, h) / N.THREE; // gentle scale: triples keep circles soft
+  const step = radius / N.SEVEN; // ND-safe: 7 controls density to avoid overwhelm
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -41,7 +41,7 @@ function drawVesicaField(ctx, w, h, color, N) {
 
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 2; // thin lines keep focus on nodes
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -73,7 +73,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.fillStyle = nodeColor;
   nodes.forEach((n) => {
     ctx.beginPath();
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // node radius tuned by 9 for balance
     ctx.fill();
   });
 }
@@ -83,14 +83,14 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.lineWidth = 2;
   const fib = [1, 1];
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
-  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
+  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // scale via 144 for sacred square
   let angle = 0;
   let x = w / 2;
   let y = h / 2;
   ctx.beginPath();
   ctx.moveTo(x, y);
   fib.forEach((f) => {
-    angle += Math.PI / 2;
+    angle += Math.PI / 2; // quarter-turns echo tetractys
     x += Math.cos(angle) * f * scale;
     y += Math.sin(angle) * f * scale;
     ctx.lineTo(x, y);
@@ -100,7 +100,7 @@ function drawFibonacci(ctx, w, h, color, N) {
 
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
-  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // soft spread: 99 + 11 keep curves steady
   const stepX = w / N.ONEFORTYFOUR;
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
@@ -113,7 +113,7 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
       if (x === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
-    ctx.stroke();
+    ctx.stroke(); // ND-safe: static double helix, no animation
   }
 }
 
