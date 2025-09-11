@@ -1,0 +1,9 @@
+{
+  "id": "C144N-034",
+  "title": "Helix Node 034",
+  "summary": "Codex seed linking to the cosmic helix renderer.",
+  "overlays": ["cosmic-helix/index.html"],
+  "lineage": { "codex": "144:99", "path": "nodes/034" },
+  "links": { "renderer": "cosmic-helix/index.html" },
+  "meta": { "author": "Rebecca Respawn", "version": "0.1.0", "license": "CC BY-NC-SA 4.0" }
+}

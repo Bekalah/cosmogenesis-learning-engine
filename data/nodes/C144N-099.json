@@ -1,0 +1,9 @@
+{
+  "id": "C144N-099",
+  "title": "Helix Node 099",
+  "summary": "Codex seed with vesica overlay reference.",
+  "overlays": ["cosmic-helix/index.html"],
+  "lineage": { "codex": "144:99", "path": "nodes/099" },
+  "links": { "renderer": "cosmic-helix/index.html" },
+  "meta": { "author": "Rebecca Respawn", "version": "0.1.0", "license": "CC BY-NC-SA 4.0" }
+}
