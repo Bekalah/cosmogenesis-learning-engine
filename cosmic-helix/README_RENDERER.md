@@ -44,6 +44,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
 <<<<<<< codex/outline-cathedral-of-circuits-project-xd29uw
+>>>>>>> origin/codex/summarize-node-operating-manual
  - **Tre   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
@@ -53,6 +54,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -62,6 +64,9 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 - Geometry parameters lean on numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
 
 ## Design Notes
+- Static HTML and Canvas keep rendering local and deterministic.
+- Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
+- Numerology constants live in `index.html` and are passed to the renderer so symbolic values remain explicit.
 - No animation, autoplay, or flashing; a single render call ensures ND safety.
 - Muted colors and generous spacing improve readability in dark and light modes.
 - Geometry routines use numerology constants (3,7,9,11,22,33,99,144) to honour
@@ -113,5 +118,3 @@ For a meditation on the tesseract as symbol of higher consciousness and non-line
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
 
-=======
->>>>>>> main
