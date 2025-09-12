@@ -24,7 +24,7 @@ network calls or heavy libraries, keeping the experience deterministic and
 motion-free.
 
 ## Usage
-1. Open `index.html` in any modern browser (no server needed).
+1. Double-click `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
 Static HTML and Canvas were chosen so the geometry renders locally without
 network calls or heavy libraries, keeping the experience deterministic and
@@ -78,6 +78,10 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -116,6 +120,13 @@ hierarchy.
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
+## Design notes
+- Code lives in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
+- Numerology constants live in `index.html` and are passed to the renderer so symbolic values stay explicit and easy to tweak.
+- Static HTML and Canvas keep rendering local and deterministic.
+
+## Extending
+The renderer is intentionally minimal. Future layers or overlays can extend `renderHelix` while preserving the calm visual hierarchy.
 
 ## Related Lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
@@ -213,7 +224,6 @@ For cosmological context, see [`docs/tesseract_spiritual.md`](../docs/tesseract_
 ## Extending
 
 The renderer is intentionally minimal. Future layers or overlays can be added by extending `renderHelix` with new draw functions while preserving the calm visual hierarchy.
-=======
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas draws four static layers:
@@ -235,4 +245,5 @@ The renderer is intentionally minimal. Future layers or overlays can be added by
 
 ## Extending
 Add new draw functions in `js/helix-renderer.mjs` while preserving ND-safe layer order.
->>>>>>> origin/codex/add-atelier-task-descriptions
+=======
+>>>>>>> origin/codex/add-configuration-for-rings-and-settings
