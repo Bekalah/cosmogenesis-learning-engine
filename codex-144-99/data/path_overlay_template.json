@@ -1,0 +1,22 @@
+{
+  "id": "path-id",
+  "title": "Path Title",
+  "mentors": [
+    { "name": "Mentor One", "role": "Guide", "source": "Book or lineage" }
+  ],
+  "realms": [
+    { "id": "REAL-XXX-001", "name": "Realm Name", "repo": "stone-grimoire" }
+  ],
+  "spells": [
+    { "name": "Spell Name", "effect": "What it does" }
+  ],
+  "artifacts": [
+    { "name": "Artifact Name", "effect": "What it does" }
+  ],
+  "tarot_overrides": {
+    "Card Name": "Overlayed Figure"
+  },
+  "color_scheme": ["#HEX1", "#HEX2", "#HEX3"],
+  "music_layer": "string",
+  "art_style": "string"
+}
