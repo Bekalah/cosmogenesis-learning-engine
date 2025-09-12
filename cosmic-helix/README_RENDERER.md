@@ -159,3 +159,14 @@ The renderer is intentionally minimal. New layers or overlays can be added by ex
 
 ## Related lore
 For cosmological context, see [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md).
+## Design notes
+
+- No animation, autoplay, or flashing; a single render call ensures ND safety.
+- Muted colors and generous spacing improve readability in dark and light modes.
+- Geometry routines use numerology constants to honour project canon.
+- Numerology constants live in `index.html` and are passed to the renderer so values stay explicit.
+- Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and ASCII quotes only.
+
+## Extending
+
+The renderer is intentionally minimal. Future layers or overlays can be added by extending `renderHelix` with new draw functions while preserving the calm visual hierarchy.
