@@ -1,9 +1,8 @@
 {
   "sources": [
-    { "repo": "circuitum99", "globs": ["nodes/**/node-*/node.json"] },
-    { "repo": "liber-arcanae", "globs": ["nodes/**/node-*/node.json"] },
-    { "repo": "stone-cathedral", "globs": ["nodes/**/node-*/node.json"] },
-    { "repo": "stone-grimoire", "globs": ["chapels/**/manifest.json"] },
-    { "repo": "magical-mystery-house", "globs": ["rooms/**/manifest.json"] }
+    { "repo": "cosmogenesis-learning-engine", "globs": ["nodes/**/node-*/node.json"] },
+    { "repo": "circuitum99",                  "globs": ["nodes/**/node-*/node.json"] },
+    { "repo": "liber-arcanae",                "globs": ["nodes/**/node-*/node.json"] },
+    { "repo": "stone-grimoire",               "globs": ["nodes/**/node-*/node.json"] }
   ]
 }

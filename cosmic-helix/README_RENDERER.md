@@ -107,6 +107,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 ## Design notes
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
+- Geometry routines use numerology constants (3, 7, 9, 11, 22, 33, 99, 144).
 - Numerology constants live in `index.html` and are passed to the renderer so the symbolic values remain explicit and easy to tweak.
 
 ## Extending
@@ -245,7 +246,6 @@ The renderer is intentionally minimal. Future layers or overlays can be added by
 
 ## Extending
 Add new draw functions in `js/helix-renderer.mjs` while preserving ND-safe layer order.
-=======
 2. A 1440x900 canvas renders four static layers:
 
    - **Vesica field** - intersecting circles forming the womb of forms.
@@ -266,4 +266,5 @@ Palette values live in `data/palette.json`. If the file is missing, the renderer
 
 ## Extending
 Add more layers by extending `renderHelix` with additional draw functions while preserving the calm visual hierarchy.
->>>>>>> origin/codex/add-authoritative-node-files-and-bundle
+=======
+>>>>>>> origin/codex/ensure-proper-json-format-for-nodes-3peieg
