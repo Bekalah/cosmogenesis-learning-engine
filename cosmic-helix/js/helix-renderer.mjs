@@ -1,4 +1,3 @@
-// Per Texturas Numerorum, Spira Loquitur.  //
 /*
   helix-renderer.mjs
   ND-safe static renderer for layered sacred geometry.
@@ -7,113 +6,167 @@
     1) Vesica field (intersecting circles)
     2) Tree-of-Life scaffold (10 sephirot + 22 paths; simplified layout)
     3) Fibonacci curve (log spiral polyline; static)
-    4) Double-helix lattice (two phase-shifted sine curves)
+    4) Double-helix lattice (two phase-shifted sine tracks)
 
   Rationale:
-    - no motion or flashing; everything rendered once
-    - muted palette for calm contrast
-    - numerology constants wire geometry to 3/7/9/11/22/33/99/144
+    - no motion or autoplay; single render call for calm focus
+    - muted palette for gentle contrast
+    - geometry uses numerology constants (3, 7, 9, 11, 22, 33, 99, 144)
 */
 
 export function renderHelix(ctx, opts) {
-  const { width, height, palette, NUM: N } = opts;
+  const { width, height, palette, NUM } = opts;
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
 
-  drawVesicaField(ctx, width, height, palette.layers[0], N);
-  drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], N);
-  drawFibonacci(ctx, width, height, palette.layers[3], N);
-  drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], N);
+  drawVesica(ctx, { width, height, color: palette.layers[0], NUM });
+  drawTreeOfLife(ctx, {
+    width,
+    height,
+    pathColor: palette.layers[1],
+    nodeColor: palette.layers[2],
+    NUM,
+  });
+  drawFibonacci(ctx, { width, height, color: palette.layers[3], NUM });
+  drawHelix(ctx, {
+    width,
+    height,
+    colors: [palette.layers[4], palette.layers[5]],
+    NUM,
+  });
 }
 
-function drawVesicaField(ctx, w, h, color, N) {
+// Layer 1: Vesica grid (11 x 9 -> 99 circles)
+function drawVesica(ctx, { width, height, color, NUM }) {
+  const cols = NUM.ELEVEN;
+  const rows = NUM.NINE;
+  const total = NUM.NINETYNINE; // explicit 99 count
+  const stepX = width / cols;
+  const stepY = height / rows;
+  const r = Math.min(stepX, stepY) * 0.6; // 60% overlap for womb effect
   ctx.strokeStyle = color;
-  const radius = Math.min(w, h) / N.THREE; // ensures soft overlap
-  const step = radius / N.SEVEN; // grid density tuned by 7
-  for (let y = radius; y <= h - radius; y += step) {
-    for (let x = radius; x <= w - radius; x += step) {
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.stroke();
-    }
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.35;
+  for (let i = 0; i < total; i++) {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    const x = stepX / 2 + col * stepX;
+    const y = stepY / 2 + row * stepY;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.stroke();
   }
+  ctx.globalAlpha = 1;
 }
 
-function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
-  ctx.strokeStyle = pathColor;
-  ctx.lineWidth = 2;
+// Layer 2: Tree-of-Life scaffold (10 nodes, 22 paths)
+function drawTreeOfLife(ctx, { width, height, pathColor, nodeColor, NUM }) {
+  const centerX = width / 2;
+  const yUnit = height / (NUM.SEVEN + 1); // seven vertical tiers
+  const xUnit = yUnit * 0.8;
 
   const nodes = [
-    { x: w / 2, y: h * 0.05 }, // 0 Kether
-    { x: w * 0.25, y: h * 0.15 }, // 1 Chokmah
-    { x: w * 0.75, y: h * 0.15 }, // 2 Binah
-    { x: w * 0.25, y: h * 0.35 }, // 3 Chesed
-    { x: w * 0.75, y: h * 0.35 }, // 4 Geburah
-    { x: w / 2, y: h * 0.45 }, // 5 Tiphereth
-    { x: w * 0.25, y: h * 0.65 }, // 6 Netzach
-    { x: w * 0.75, y: h * 0.65 }, // 7 Hod
-    { x: w / 2, y: h * 0.75 }, // 8 Yesod
-    { x: w / 2, y: h * 0.9 } // 9 Malkuth
-  ];
+    [0, 0],
+    [-1, 1],
+    [1, 1],
+    [-1.5, 2],
+    [1.5, 2],
+    [0, 3],
+    [-1.5, 4],
+    [1.5, 4],
+    [0, 5],
+    [0, 6],
+  ].map(([x, y]) => [centerX + x * xUnit, yUnit + y * yUnit]);
 
   const paths = [
-    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
-    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
-    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
-    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
-  ];
+    [0, 1], [0, 2], [1, 2],
+    [1, 3], [1, 5], [2, 4], [2, 5],
+    [3, 4], [3, 5], [4, 5],
+    [3, 6], [3, 8], [4, 7], [4, 8],
+    [5, 6], [5, 7], [6, 7],
+    [6, 8], [7, 8], [6, 9], [7, 9], [8, 9],
+  ].slice(0, NUM.TWENTYTWO); // enforce 22 paths
 
+  ctx.strokeStyle = pathColor;
+  ctx.lineWidth = 2;
   paths.forEach(([a, b]) => {
     ctx.beginPath();
-    ctx.moveTo(nodes[a].x, nodes[a].y);
-    ctx.lineTo(nodes[b].x, nodes[b].y);
+    ctx.moveTo(nodes[a][0], nodes[a][1]);
+    ctx.lineTo(nodes[b][0], nodes[b][1]);
     ctx.stroke();
   });
 
   ctx.fillStyle = nodeColor;
-  nodes.forEach((n) => {
+  const r = yUnit / 4;
+  nodes.forEach(([x, y]) => {
     ctx.beginPath();
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
+    ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fill();
   });
 }
 
-function drawFibonacci(ctx, w, h, color, N) {
+// Layer 3: Fibonacci curve (static log spiral)
+function drawFibonacci(ctx, { width, height, color, NUM }) {
+  const cx = width / 2;
+  const cy = height / 2;
+  const phi = (1 + Math.sqrt(5)) / 2;
+  const steps = NUM.ONEFORTYFOUR; // 144 segments for smoothness
+  const thetaMax = 4 * Math.PI; // two turns
+  const scale = Math.min(width, height) / NUM.THIRTYTHREE;
+
+  ctx.beginPath();
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * thetaMax;
+    const r = scale * Math.pow(phi, t / (2 * Math.PI));
+    const x = cx + r * Math.cos(t);
+    const y = cy + r * Math.sin(t);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
-  const fib = [1, 1];
-  while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
-  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
-  let angle = 0;
-  let x = w / 2;
-  let y = h / 2;
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  fib.forEach((f) => {
-    angle += Math.PI / 2;
-    x += Math.cos(angle) * f * scale;
-    y += Math.sin(angle) * f * scale;
-    ctx.lineTo(x, y);
-  });
   ctx.stroke();
 }
 
-function drawHelix(ctx, w, h, colorA, colorB, N) {
-  const midY = h / 2;
-  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
-  const stepX = w / N.ONEFORTYFOUR;
-  ctx.lineWidth = 2;
-  for (let phase = 0; phase < 2; phase++) {
-    ctx.strokeStyle = phase === 0 ? colorA : colorB;
-    ctx.beginPath();
-    for (let x = 0; x <= w; x += stepX) {
-      const y =
-        midY +
-        amplitude * Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
+// Layer 4: Double-helix lattice (two sine curves with rungs)
+function drawHelix(ctx, { width, height, colors, NUM }) {
+  const steps = NUM.ONEFORTYFOUR;
+  const amplitude = width / NUM.NINE;
+  const freq = (2 * Math.PI * NUM.THREE) / height; // three turns
+  const rungStep = Math.floor(steps / NUM.THIRTYTHREE); // 33 rungs
+
+  const curve = (phase) => {
+    const pts = [];
+    for (let i = 0; i <= steps; i++) {
+      const y = (i / steps) * height;
+      const x = width / 2 + amplitude * Math.sin(freq * y + phase);
+      pts.push([x, y]);
     }
+    return pts;
+  };
+
+  const a = curve(0);
+  const b = curve(Math.PI);
+
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = colors[0];
+  ctx.beginPath();
+  a.forEach(([x, y], i) => (i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)));
+  ctx.stroke();
+
+  ctx.strokeStyle = colors[1];
+  ctx.beginPath();
+  b.forEach(([x, y], i) => (i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)));
+  ctx.stroke();
+
+  ctx.strokeStyle = colors[0];
+  for (let i = 0; i <= steps; i += rungStep) {
+    const y = (i / steps) * height;
+    const x1 = a[i][0];
+    const x2 = b[i][0];
+    ctx.beginPath();
+    ctx.moveTo(x1, y);
+    ctx.lineTo(x2, y);
     ctx.stroke();
   }
 }
-
