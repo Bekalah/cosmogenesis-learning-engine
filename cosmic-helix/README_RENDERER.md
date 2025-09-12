@@ -322,6 +322,7 @@ Palette values live in `data/palette.json`. If the file is missing, the renderer
 
 ## Extending
 Add more layers by extending `renderHelix` with additional draw functions while preserving the calm visual hierarchy.
+- [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 
 =======
 >>>>>>> Stashed changes
