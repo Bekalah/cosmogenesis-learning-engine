@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "algorithms": [
+    {
+      "id": "phyllotaxis_quiet",
+      "n": 144,
+      "deg": 137.5,
+      "step": 2.6,
+      "opacity": 0.72
+    },
+    {
+      "id": "l_system_gentle",
+      "axiom": "F",
+      "rules": { "F": "F+F−F−F+F" },
+      "iterations": 2
+    }
+  ],
+  "palettes": [
+    { "id": "dream_indigo", "hex": ["#403d58", "#7a7ea3", "#e7e9f7"] },
+    { "id": "rose_saturn", "hex": ["#222326", "#9a8d70", "#e8d8b0"] }
+  ]
+}
