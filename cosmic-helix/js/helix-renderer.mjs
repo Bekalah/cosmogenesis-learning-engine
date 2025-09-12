@@ -20,16 +20,18 @@ export function renderHelix(ctx, opts) {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
 
+  // Layer order from base to foreground keeps depth readable without motion.
   drawVesicaField(ctx, width, height, palette.layers[0], N);
   drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], N);
   drawFibonacci(ctx, width, height, palette.layers[3], N);
   drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], N);
 }
 
+// Layer 1: Vesica field — static circle grid, no blending or motion.
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
-  const radius = Math.min(w, h) / N.THREE; // ensures soft overlap
-  const step = radius / N.SEVEN; // grid density tuned by 7
+  const radius = Math.min(w, h) / N.THREE; // gentle radius softens intersections
+  const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -39,9 +41,10 @@ function drawVesicaField(ctx, w, h, color, N) {
   }
 }
 
+// Layer 2: Tree-of-Life — fixed nodes and paths; thin strokes avoid harsh contrast.
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 2; // keeps edges soft for ND safety
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -73,14 +76,15 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.fillStyle = nodeColor;
   nodes.forEach((n) => {
     ctx.beginPath();
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // small node radius for gentle presence
     ctx.fill();
   });
 }
 
+// Layer 3: Fibonacci curve — static golden spiral polyline, no animation.
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 2; // consistent stroke width for calm reading
   const fib = [1, 1];
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
   const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
@@ -98,10 +102,11 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.stroke();
 }
 
+// Layer 4: Double-helix lattice — two still sine tracks; amplitude limited for calm weave.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
-  const stepX = w / N.ONEFORTYFOUR;
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
