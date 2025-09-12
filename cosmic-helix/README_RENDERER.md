@@ -27,6 +27,7 @@ network calls or heavy libraries, keeping the experience deterministic and
 motion-free.
 
 ## Usage
+
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming the womb of forms.
@@ -55,9 +56,14 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
 
+   - Vesica field — intersecting circles forming the womb of forms.
+   - Tree-of-Life scaffold — ten sephirot with twenty-two paths.
+   - Fibonacci curve — golden spiral polyline anchored to centre.
+   - Double-helix lattice — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
+
 - Static drawing; no animation or autoplay.
 - Calm contrast palette reduces sensory strain.
 - Layer order clarifies depth without flashing.
@@ -117,4 +123,14 @@ For a meditation on the tesseract as symbol of higher consciousness and non-line
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
+## Design notes
 
+- No animation, autoplay, or flashing; a single render call ensures ND safety.
+- Muted colors and generous spacing improve readability in dark and light modes.
+- Geometry routines use numerology constants to honour project canon.
+- Numerology constants live in `index.html` and are passed to the renderer so values stay explicit.
+- Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and ASCII quotes only.
+
+## Extending
+
+The renderer is intentionally minimal. Future layers or overlays can be added by extending `renderHelix` with new draw functions while preserving the calm visual hierarchy.
