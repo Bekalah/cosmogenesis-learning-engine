@@ -108,6 +108,10 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -133,7 +137,6 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 ## Design notes
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
-<<<<<<< Updated upstream
 - Geometry routines use numerology constants (3, 7, 9, 11, 22, 33, 99, 144).
 - Numerology constants live in `index.html` and are passed to the renderer so the symbolic values remain explicit and easy to tweak.
 
@@ -178,6 +181,7 @@ hierarchy.
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
+<<<<<<< main-upstream
 <<<<<<< codex/add-harmonic-data-to-json-structures-yc2b9q
 
 ## Related Lore
@@ -318,8 +322,8 @@ Palette values live in `data/palette.json`. If the file is missing, the renderer
 
 ## Extending
 Add more layers by extending `renderHelix` with additional draw functions while preserving the calm visual hierarchy.
-=======
 
 =======
->>>>>>> main
 >>>>>>> Stashed changes
+=======
+>>>>>>> origin/codex/add-bibliography-for-codex-144-99
