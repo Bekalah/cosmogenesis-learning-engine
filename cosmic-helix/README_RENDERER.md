@@ -55,11 +55,14 @@ motion-free.
 
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
  - **Tre   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
->>>>>>> main
    - **Vesica field** — intersecting circles forming the womb of forms.
    - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
 <<<   - **Tree-of-Life scaffold** — ten sephirot with twenty-two straight paths.
@@ -83,7 +86,6 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
-<<<<<<< codex/outline-cathedral-of-circuits-project-xd29uw
 >>>>>>> origin/codex/summarize-node-operating-manual
 >>>>>>> Stashed changes
  - **Tre   - **Tree‑of‑Life scaffold** — ten sephirot with twenty‑two straight paths.
@@ -112,6 +114,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+>>>>>>> origin/codex/organize-atelier-manual-contents-o8qabr
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -180,8 +183,9 @@ hierarchy.
 - [ ] Map Tree-of-Life nodes to sanctuaries like Avalon and mountain temples.
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
+<<<<<<< codex/organize-atelier-manual-contents-o8qabr
+- [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
-<<<<<<< main-upstream
 <<<<<<< codex/add-harmonic-data-to-json-structures-yc2b9q
 
 ## Related Lore
@@ -322,7 +326,9 @@ Palette values live in `data/palette.json`. If the file is missing, the renderer
 
 ## Extending
 Add more layers by extending `renderHelix` with additional draw functions while preserving the calm visual hierarchy.
+<<<<<<< main-upstream
 - [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
+=======
 
 =======
 >>>>>>> Stashed changes
