@@ -141,6 +141,8 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
 - Geometry routines use numerology constants (3, 7, 9, 11, 22, 33, 99, 144).
+- Muted colors and generous spacing improve readability in dark and light modes.
+- Geometry routines use numerology constants to honour project canon.
 - Numerology constants live in `index.html` and are passed to the renderer so the symbolic values remain explicit and easy to tweak.
 
 ## Extending
@@ -183,9 +185,9 @@ hierarchy.
 - [ ] Map Tree-of-Life nodes to sanctuaries like Avalon and mountain temples.
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
-<<<<<<< codex/organize-atelier-manual-contents-o8qabr
 - [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
+<<<<<<< main-upstream
 <<<<<<< codex/add-harmonic-data-to-json-structures-yc2b9q
 
 ## Related Lore
@@ -349,10 +351,10 @@ Add more layers by extending `renderHelix` with additional draw functions while 
 
 ## Related lore
 See [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md) for the wider cosmological frame.
-=======
 - [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 
 =======
->>>>>>> Stashed changes
 =======
 >>>>>>> origin/codex/add-bibliography-for-codex-144-99
+=======
+>>>>>>> origin/codex/add-usage-instructions-for-bridge
