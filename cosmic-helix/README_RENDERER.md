@@ -328,7 +328,6 @@ Palette values live in `data/palette.json`. If the file is missing, the renderer
 Add more layers by extending `renderHelix` with additional draw functions while preserving the calm visual hierarchy.
 <<<<<<< main-upstream
 - [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
-=======
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
@@ -350,6 +349,8 @@ Add more layers by extending `renderHelix` with additional draw functions while 
 
 ## Related lore
 See [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md) for the wider cosmological frame.
+=======
+- [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 
 =======
 >>>>>>> Stashed changes
