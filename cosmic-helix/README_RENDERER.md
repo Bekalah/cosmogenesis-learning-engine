@@ -119,6 +119,10 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty‑two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -375,6 +379,6 @@ See [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md) for the wide
 
 =======
 =======
->>>>>>> origin/codex/add-usage-instructions-for-bridge
-=======
 >>>>>>> origin/codex/add-documentation-for-ateliers-bbhxy7
+=======
+>>>>>>> origin/codex/implement-renderer-contract-for-scenes
