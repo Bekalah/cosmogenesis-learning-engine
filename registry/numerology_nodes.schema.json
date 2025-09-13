@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circuitum99.org/schemas/numerology_nodes.schema.json",
+  "title": "Codex 144:99 Numerology Node",
+  "type": "object",
+  "required": ["id", "label", "symbolism", "traditions", "correspondences", "nd_notes"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "integer", "minimum": 0, "maximum": 144 },
+    "label": { "type": "string", "minLength": 1 },
+    "symbolism": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "traditions": { "type": "object", "minProperties": 1, "additionalProperties": { "type": "string" } },
+    "correspondences": {
+      "type": "object",
+      "required": ["element", "planet", "zodiac", "tone", "frequency", "color"],
+      "additionalProperties": false,
+      "properties": {
+        "element": { "type": "array", "items": { "type": "string" } },
+        "planet": { "type": "array", "items": { "type": "string" } },
+        "zodiac": { "type": "array", "items": { "type": "string" } },
+        "tone": { "type": "array", "items": { "type": "string" } },
+        "frequency": { "type": "array", "items": { "type": "string" } },
+        "color": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "nd_notes": { "type": "string" },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "codex": { "type": "array", "items": { "type": "string" } },
+        "chapels": { "type": "array", "items": { "type": "string" } },
+        "tesseract_scenes": { "type": "array", "items": { "type": "string" } },
+        "tarot_refs": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
