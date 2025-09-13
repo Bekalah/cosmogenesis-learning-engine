@@ -31,10 +31,8 @@ function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // gentle radius softens intersections
   const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
-  // Radii derived from 3 keeps shapes large enough to breathe; step
-  // uses 7 so the grid remains gentle and non-distracting.
-  const radius = Math.min(w, h) / N.THREE;
-  const step = radius / N.SEVEN;
+  // Radii derived from 3 keep shapes large enough to breathe; step uses 7 so
+  // the grid remains gentle and non-distracting.
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -47,7 +45,7 @@ function drawVesicaField(ctx, w, h, color, N) {
 // Layer 2: Tree-of-Life — fixed nodes and paths; thin strokes avoid harsh contrast.
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
-  ctx.lineWidth = 2; // keeps edges soft for ND safety
+  ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // 2: gentle stroke width
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -67,7 +65,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
     [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
     [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
     [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
-  ];
+  ]; // 22 paths (N.TWENTYTWO)
 
   paths.forEach(([a, b]) => {
     ctx.beginPath();
@@ -79,9 +77,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.fillStyle = nodeColor;
   nodes.forEach((n) => {
     ctx.beginPath();
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // small node radius for gentle presence
-    // Node size tied to 9 to echo lunar cycles and stay readable.
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // node radius tied to 9
     ctx.fill();
   });
 }
@@ -112,10 +108,7 @@ function drawFibonacci(ctx, w, h, color, N) {
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
-  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
-  // Amplitude governed by 99 and 11 to echo twin pillars softly.
-  const amplitude = (h / N.NINETYNINE) * N.ELEVEN;
-  const stepX = w / N.ONEFORTYFOUR;
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
