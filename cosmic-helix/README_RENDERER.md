@@ -115,6 +115,10 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
 >>>>>>> origin/codex/organize-atelier-manual-contents-o8qabr
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -144,6 +148,9 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 - Muted colors and generous spacing improve readability in dark and light modes.
 - Geometry routines use numerology constants to honour project canon.
 - Numerology constants live in `index.html` and are passed to the renderer so the symbolic values remain explicit and easy to tweak.
+- Muted colors and generous spacing improve readability.
+- Numerology constants live in `index.html` and are passed to the renderer so symbolic values remain explicit.
+- Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and ASCII quotes only.
 
 ## Extending
 The renderer is intentionally minimal. Future layers or overlays can be added by
@@ -187,13 +194,13 @@ hierarchy.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
 - [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
-<<<<<<< main-upstream
 <<<<<<< codex/add-harmonic-data-to-json-structures-yc2b9q
 
 ## Related Lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
 
 
+<<<<<<< main-upstream
 ## Design notes
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
@@ -368,6 +375,6 @@ See [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md) for the wide
 
 =======
 =======
->>>>>>> origin/codex/add-bibliography-for-codex-144-99
-=======
 >>>>>>> origin/codex/add-usage-instructions-for-bridge
+=======
+>>>>>>> origin/codex/add-documentation-for-ateliers-bbhxy7
