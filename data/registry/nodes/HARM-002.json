@@ -1,0 +1,21 @@
+{
+  "id": "HARM-002",
+  "title": "Rose Cross Resonator",
+  "kind": "engine",
+  "lineage": { "codex": "144:99", "path": "registry/harmonics" },
+  "links": { "repo": "cosmogenesis-learning-engine", "relpath": "data/registry/nodes/HARM-002.json" },
+  "harmonics": {
+    "tuning": "Pythagorean",
+    "root": "A",
+    "interval": "M3",
+    "mode": "phrygian",
+    "tempo_bpm": 99,
+    "rhythm_signature": "4/4",
+    "geometry_key": "rose_cross_grid",
+    "geometry_params": { "phi_bias": 0.5, "thickness": 0.05, "bevel": 0.02 },
+    "story_key": "tarot_suit_wands",
+    "faction_mode": "suit_alliance",
+    "cosmology_mode": "hermetic",
+    "nd_safe": { "max_motion": 0.2, "glow_cap": 0.1, "no_strobe": true, "no_autoplay": true }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "codex_node.schema.json",
+  "title": "Codex Node",
+  "allOf": [
+    { "$ref": "node.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "harmonics": {
+          "type": "object",
+          "required": [
+            "tuning",
+            "root",
+            "interval",
+            "tempo_bpm",
+            "geometry_key",
+            "story_key"
+          ],
+          "properties": {
+            "tuning": {
+              "type": "string",
+              "enum": ["A432", "A440", "Just", "Pythagorean", "Meantone"],
+              "default": "A432"
+            },
+            "root": {
+              "description": "Root pitch class or frequency anchor",
+              "oneOf": [
+                { "type": "string", "enum": ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"] },
+                { "type": "number", "minimum": 16.0, "maximum": 10240.0 }
+              ],
+              "default": "D"
+            },
+            "interval": {
+              "type": "string",
+              "enum": [
+                "unison",
+                "m2",
+                "M2",
+                "m3",
+                "M3",
+                "P4",
+                "TT",
+                "P5",
+                "m6",
+                "M6",
+                "m7",
+                "M7",
+                "octave",
+                "perfect_fifth",
+                "perfect_fourth",
+                "golden_step"
+              ],
+              "default": "P5"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "ionian",
+                "dorian",
+                "phrygian",
+                "lydian",
+                "mixolydian",
+                "aeolian",
+                "locrian",
+                "pentatonic",
+                "custom"
+              ],
+              "default": "dorian"
+            },
+            "tempo_bpm": {
+              "type": "number",
+              "minimum": 10,
+              "maximum": 180,
+              "default": 72
+            },
+            "rhythm_signature": {
+              "type": "string",
+              "pattern": "^[0-9]+/[0-9]+$",
+              "default": "3/4"
+            },
+            "geometry_key": {
+              "type": "string",
+              "enum": [
+                "spiral_phi",
+                "dodeca_star",
+                "tesseract_axis",
+                "rose_cross_grid",
+                "vault_shell",
+                "shell_logarithmic",
+                "arch_kepler",
+                "mandala_kunz",
+                "hilma_spiral",
+                "avalon_tor",
+                "octagram_bridge"
+              ],
+              "default": "spiral_phi"
+            },
+            "geometry_params": {
+              "type": "object",
+              "properties": {
+                "phi_bias": { "type": "number", "minimum": 0.0, "maximum": 1.0, "default": 0.618 },
+                "thickness": { "type": "number", "minimum": 0.0, "maximum": 0.25, "default": 0.03 },
+                "bevel": { "type": "number", "minimum": 0.0, "maximum": 0.1, "default": 0.02 }
+              },
+              "additionalProperties": true
+            },
+            "story_key": {
+              "type": "string",
+              "enum": [
+                "tarot_suit_swords",
+                "tarot_suit_cups",
+                "tarot_suit_wands",
+                "tarot_suit_pentacles",
+                "hierophant_lineage",
+                "high_priestess_avalon",
+                "magician_enochian",
+                "temperance_alchemy",
+                "star_visionary",
+                "emperor_law",
+                "fool_origin"
+              ],
+              "default": "fool_origin"
+            },
+            "faction_mode": {
+              "type": "string",
+              "enum": [
+                "none",
+                "suit_alliance",
+                "lineage_chorus",
+                "angelic_conclave",
+                "tara_throne"
+              ],
+              "default": "none"
+            },
+            "cosmology_mode": {
+              "type": "string",
+              "enum": [
+                "hermetic",
+                "tibetan",
+                "celtic_druid",
+                "chaos_psych",
+                "scientific",
+                "syncretic"
+              ],
+              "default": "syncretic"
+            },
+            "nd_safe": {
+              "type": "object",
+              "properties": {
+                "max_motion": { "type": "number", "minimum": 0.0, "maximum": 1.0, "default": 0.35 },
+                "glow_cap": { "type": "number", "minimum": 0.0, "maximum": 1.0, "default": 0.12 },
+                "no_strobe": { "type": "boolean", "default": true },
+                "no_autoplay": { "type": "boolean", "default": true }
+              },
+              "required": ["max_motion", "glow_cap", "no_strobe", "no_autoplay"]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["harmonics"]
+    }
+  ]
+}
