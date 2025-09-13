@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "label": "Void / Zero Point",
+    "traditions": {
+      "Pythagorean": "The Monad, the womb of number.",
+      "Kabbalah": "Ain Soph — limitless light.",
+      "Alchemy": "Prima Materia, the undifferentiated source.",
+      "Modern": "Zero-point field, quantum vacuum."
+    },
+    "symbolism": ["Circle", "Seed", "Potential", "Nothingness"],
+    "nd_notes": "Zero is the trauma-safe 'pause' — a void where no demand is made."
+  },
+  {
+    "id": 1,
+    "label": "Monad / Unity",
+    "traditions": {
+      "Greek": "The indivisible source of all numbers.",
+      "Hermetic": "Kether on the Tree of Life.",
+      "Alchemy": "Gold, pure undivided spirit.",
+      "Modern": "Singularity, first-person awareness."
+    },
+    "symbolism": ["Point", "Origin", "Self"],
+    "nd_notes": "Safe anchor: start point for pattern recognition."
+  },
+  {
+    "id": 2,
+    "label": "Dyad / Polarity",
+    "traditions": {
+      "Greek": "The principle of otherness, duality.",
+      "Kabbalah": "Chokmah + Binah — Father and Mother.",
+      "Alchemy": "Sulfur and Mercury; red and white.",
+      "Modern": "Binary code, yin/yang."
+    },
+    "symbolism": ["Line", "Otherness", "Duality"],
+    "nd_notes": "Good for ND learners: polarity maps (yes/no, on/off)."
+  },
+  {
+    "id": 3,
+    "label": "Triad / Harmony",
+    "traditions": {
+      "Greek": "Number of completion — beginning, middle, end.",
+      "Kabbalah": "Supernal triangle.",
+      "Alchemy": "Tria Prima — sulfur, salt, mercury.",
+      "Modern": "Dialectic: thesis-antithesis-synthesis."
+    },
+    "symbolism": ["Triangle", "Balance", "Child of Two"],
+    "nd_notes": "Use triangular patterns, trines in astrology, triple rhythm."
+  }
+]
