@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "manifest.schema.json",
+  "title": "Export Manifest",
+  "type": "object",
+  "properties": {
+    "bundle_id": { "type": "string" },
+    "assets": { "type": "array", "items": { "type": "string" } },
+    "harmonics": {
+      "$ref": "../schemas/codex_node.schema.json#/allOf/1/properties/harmonics"
+    }
+  },
+  "required": ["bundle_id", "harmonics"],
+  "additionalProperties": true
+}

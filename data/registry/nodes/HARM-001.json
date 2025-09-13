@@ -1,0 +1,22 @@
+{
+  "id": "HARM-001",
+  "title": "Golden Spiral Anchor",
+  "kind": "engine",
+  "summary": "Prototype node embedding harmonic mappings.",
+  "lineage": { "codex": "144:99", "path": "registry/harmonics" },
+  "links": { "repo": "cosmogenesis-learning-engine", "relpath": "data/registry/nodes/HARM-001.json" },
+  "harmonics": {
+    "tuning": "A432",
+    "root": "D",
+    "interval": "P5",
+    "mode": "dorian",
+    "tempo_bpm": 72,
+    "rhythm_signature": "3/4",
+    "geometry_key": "spiral_phi",
+    "geometry_params": { "phi_bias": 0.618, "thickness": 0.03, "bevel": 0.02 },
+    "story_key": "fool_origin",
+    "faction_mode": "none",
+    "cosmology_mode": "syncretic",
+    "nd_safe": { "max_motion": 0.35, "glow_cap": 0.12, "no_strobe": true, "no_autoplay": true }
+  }
+}

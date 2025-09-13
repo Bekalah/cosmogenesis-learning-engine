@@ -1,0 +1,71 @@
+{
+  "tunings": {
+    "A432": { "hz": 432 },
+    "A440": { "hz": 440 },
+    "Just": { "description": "Just intonation reference" },
+    "Pythagorean": { "description": "Pythagorean tuning" },
+    "Meantone": { "description": "Meantone temperament" }
+  },
+  "intervals": {
+    "unison": "1/1",
+    "m2": "16/15",
+    "M2": "9/8",
+    "m3": "6/5",
+    "M3": "5/4",
+    "P4": "4/3",
+    "TT": "45/32",
+    "P5": "3/2",
+    "m6": "8/5",
+    "M6": "5/3",
+    "m7": "16/9",
+    "M7": "15/8",
+    "octave": "2/1",
+    "perfect_fifth": "3/2",
+    "perfect_fourth": "4/3",
+    "golden_step": "1.618"
+  },
+  "geometry_map": {
+    "spiral_phi": "golden spiral alignment",
+    "dodeca_star": "dodecahedral star lattice",
+    "tesseract_axis": "four-dimensional axis cross",
+    "rose_cross_grid": "rosicrucian cross grid",
+    "vault_shell": "arched vault shell",
+    "shell_logarithmic": "logarithmic shell pattern",
+    "arch_kepler": "keplerian arch sweep",
+    "mandala_kunz": "Kunz mandala layering",
+    "hilma_spiral": "Hilma af Klint spiral",
+    "avalon_tor": "Avalon torus spiral",
+    "octagram_bridge": "octagram bridging lattice"
+  },
+  "story_faction": {
+    "tarot_suit_swords": {
+      "faction": "suit_alliance",
+      "cosmology": "hermetic"
+    },
+    "tarot_suit_cups": { "faction": "suit_alliance", "cosmology": "tibetan" },
+    "tarot_suit_wands": { "faction": "suit_alliance", "cosmology": "hermetic" },
+    "tarot_suit_pentacles": {
+      "faction": "suit_alliance",
+      "cosmology": "celtic_druid"
+    },
+    "hierophant_lineage": {
+      "faction": "lineage_chorus",
+      "cosmology": "hermetic"
+    },
+    "high_priestess_avalon": {
+      "faction": "tara_throne",
+      "cosmology": "celtic_druid"
+    },
+    "magician_enochian": {
+      "faction": "angelic_conclave",
+      "cosmology": "hermetic"
+    },
+    "temperance_alchemy": {
+      "faction": "lineage_chorus",
+      "cosmology": "scientific"
+    },
+    "star_visionary": { "faction": "none", "cosmology": "syncretic" },
+    "emperor_law": { "faction": "lineage_chorus", "cosmology": "scientific" },
+    "fool_origin": { "faction": "none", "cosmology": "syncretic" }
+  }
+}

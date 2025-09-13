@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "arcana_intent.schema.json",
+  "title": "Arcana Intent",
+  "type": "object",
+  "properties": {
+    "cosmology": {
+      "type": "string",
+      "enum": ["hermetic", "tibetan", "celtic_druid", "chaos_psych", "scientific", "syncretic"],
+      "default": "syncretic"
+    },
+    "faction": {
+      "type": "string",
+      "enum": ["none", "suit_alliance", "lineage_chorus", "angelic_conclave", "tara_throne"],
+      "default": "none"
+    },
+    "suit_alliance": {
+      "type": "string",
+      "enum": ["swords", "cups", "wands", "pentacles", "none"],
+      "default": "none"
+    }
+  },
+  "required": ["cosmology", "faction", "suit_alliance"],
+  "additionalProperties": true
+}
