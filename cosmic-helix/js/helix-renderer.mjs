@@ -30,11 +30,9 @@ export function renderHelix(ctx, opts) {
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // gentle radius softens intersections
-  const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
-  // Radii derived from 3 keeps shapes large enough to breathe; step
-  // uses 7 so the grid remains gentle and non-distracting.
-  const radius = Math.min(w, h) / N.THREE;
-  const step = radius / N.SEVEN;
+  const step = radius / N.SEVEN; // density tuned by 7 for calm spacing
+  // Radii derived from 3 keep shapes large enough to breathe; step uses
+  // 7 so the grid remains gentle and non-distracting.
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -79,9 +77,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.fillStyle = nodeColor;
   nodes.forEach((n) => {
     ctx.beginPath();
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // small node radius for gentle presence
-    // Node size tied to 9 to echo lunar cycles and stay readable.
-    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // size tied to 9 for calm readability
     ctx.fill();
   });
 }
@@ -111,11 +107,8 @@ function drawFibonacci(ctx, w, h, color, N) {
 // Layer 4: Double-helix lattice — two still sine tracks; amplitude limited for calm weave.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
-  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
-  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
-  // Amplitude governed by 99 and 11 to echo twin pillars softly.
-  const amplitude = (h / N.NINETYNINE) * N.ELEVEN;
-  const stepX = w / N.ONEFORTYFOUR;
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // echo twin pillars softly
+  const stepX = w / N.ONEFORTYFOUR; // keeps curve smooth without motion
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
