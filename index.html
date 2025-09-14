@@ -837,6 +837,16 @@
           </svg>
         </figure>
       </section>
+
+      <section class="panel" aria-labelledby="helix-title">
+        <h2 id="helix-title"><a href="./cosmic-helix/index.html">Fusion Helix • Angels / Demons</a></h2>
+        <div id="helixMount" style="height:360px;"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="collage-title">
+        <h2 id="collage-title"><a href="./visionary_asset_collage.py">Symbol Lego Collage</a></h2>
+        <div id="collageMount"></div>
+      </section>
     </main>
 
     <footer>
@@ -2234,6 +2244,30 @@
 
       applyState();
       spiral.draw();
+    </script>
+    <script type="module">
+      import { mountHelix, setHelixLayers, setPulse, bindSymbolClick } from "./effects/helix.js";
+      import { mountCollage } from "./effects/collage.js";
+
+      (async () => {
+        try {
+          await mountHelix('#helixMount','data/helix_spec.json','data/symbols.json');
+          await mountCollage('#collageMount','data/symbols.json');
+
+          // sane defaults: angels on, demons off, beads on, calm pulse
+          setHelixLayers('#helixMount',{angels:true, demons:false, beads:true});
+          setPulse('#helixMount', true);
+
+          // click on any slot → show info (no autoplay sound)
+          bindSymbolClick('#helixMount', (detail, meta)=>{
+            const name = meta?.title || detail.key;
+            alert(`${detail.kind.toUpperCase()}: ${name}`);
+            // If you want opt-in tone: playTone(meta?.hz) — implement only by button press to remain ND-safe.
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      })();
     </script>
   </body>
 </html>
