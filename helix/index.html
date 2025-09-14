@@ -1,8 +1,4 @@
 <!doctype html>
-<!-- Per Texturas Numerorum, Spira Loquitur.  // -->
-
-<!-- Motto: Per Texturas Numerorum, Spira Loquitur -->
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -36,46 +32,33 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    // Local fetch helper; if the file is absent we fall back to defaults.
     async function loadJSON(path) {
       try {
         const res = await fetch(path, { cache: "no-store" });
         if (!res.ok) throw new Error(String(res.status));
         return await res.json();
       } catch (err) {
-        // Offline-first: missing files simply return null.
         return null;
       }
     }
 
     const defaults = {
       palette: {
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+        bg:"#0b0b12",
+        ink:"#e8e8f0",
+        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
       }
     };
 
-    // If palette.json is missing we notify and use the embedded safe palette.
-    // Local fetch; works offline and falls back safely when missing.
     const palette = await loadJSON("./data/palette.json");
     const active = palette || defaults.palette;
     elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
 
     // Numerology constants used by geometry routines
-    const NUM = {
-      THREE: 3,
-      SEVEN: 7,
-      NINE: 9,
-      ELEVEN: 11,
-      TWENTYTWO: 22,
-      THIRTYTHREE: 33,
-      NINETYNINE: 99,
-      ONEFORTYFOUR: 144
-    };
+    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: active, NUM });
+    renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM });
   </script>
 </body>
 </html>
