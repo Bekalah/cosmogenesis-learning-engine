@@ -39,6 +39,8 @@ function drawVesicaField(ctx, w, h, color, N) {
   const step = radius / N.SEVEN; // grid density tuned by 7 for gentle spacing
   const radius = Math.min(w, h) / N.THREE; // large circles, gentle intersections
   const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
+  // Radii derived from 3 keep shapes large enough to breathe; step uses 7 so
+  // the grid remains gentle and non-distracting.
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -52,6 +54,7 @@ function drawVesicaField(ctx, w, h, color, N) {
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = 2; // soft edges for ND safety
+  ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // 2: gentle stroke width
 
   const nodes = [
     { x: w / 2, y: h * 0.05 }, // 0 Kether
@@ -72,6 +75,11 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
     [3,6],[4,7],[5,6],[5,7],[6,7],
     [6,8],[7,8],[5,8],[6,9],[7,9],[8,9]
   ];
+    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
+    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
+    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
+  ]; // 22 paths (N.TWENTYTWO)
 
   paths.forEach(([a,b]) => {
     ctx.beginPath();
@@ -95,6 +103,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
     // Node size tied to 9 to echo lunar cycles and stay readable.
     ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
     ctx.arc(n.x, n.y, nodeRadius, 0, Math.PI * 2);
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // node radius tied to 9
     ctx.fill();
   });
 }
