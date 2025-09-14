@@ -1,0 +1,23 @@
+{
+  "version": "1.1.0",
+  "base_hz": 432,
+  "intervals": [
+    { "id": "unison", "ratio": 1.0, "name": "P1" },
+    { "id": "minor_third", "ratio": 1.2, "name": "m3" },
+    { "id": "major_third", "ratio": 1.25, "name": "M3" },
+    { "id": "perfect_fourth", "ratio": 1.3333333333, "name": "P4" },
+    { "id": "perfect_fifth", "ratio": 1.5, "name": "P5" },
+    { "id": "octave", "ratio": 2.0, "name": "P8" }
+  ],
+  "maps": [
+    { "family": "CRUX", "interval": "minor_third" },
+    { "family": "TARO", "interval": "perfect_fifth" },
+    { "family": "REAL", "interval": "perfect_fourth" }
+  ],
+  "nd_safe": {
+    "gain_max": 0.03,
+    "attack_s": 0.2,
+    "release_s": 2.0,
+    "autoplay": false
+  }
+}
