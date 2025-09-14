@@ -1,0 +1,31 @@
+{
+  "id": "ATEL-005",
+  "title": "Architecture Lab — Calm Vaults & Sacred Proportion",
+  "kind": "lineage",
+  "summary": "Procedural vaults, rib tracings, proportion studies. ND-safe stone and gold accents.",
+  "lineage": { "codex": "144:99", "path": "lab/architecture" },
+  "correspondences": {
+    "planet": "Sun",
+    "element": "Earth/Light",
+    "color_hex": "#D9B65A"
+  },
+  "assets": [{ "path": "data/atelier/architecture.json", "role": "plans" }],
+  "links": {
+    "repo": "cosmogenesis-learning-engine",
+    "relpath": "nodes/atelier/node-ATEL-005"
+  },
+  "meta": {
+    "author": "Virelai Ezra Lux",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": ["vault", "rosslyn", "tracing-board", "nd-safe"],
+    "version": "1.0.0"
+  },
+  "safe_use": "Limit shimmer; no screen-space flicker. Prefer static or ultra-slow light sweeps.",
+  "procedures": [
+    "Choose vault id (ribbed_semicircle or pointed_gothic).",
+    "Set span and rise proportions; trace ribs with even stroke.",
+    "Apply rosslyn_stone albedo; optional gold_accent at keystone.",
+    "Export plate; compose with pigment/geometry labs."
+  ],
+  "references": ["Rosslyn Chapel tracery studies, Vitruvian modules"]
+}

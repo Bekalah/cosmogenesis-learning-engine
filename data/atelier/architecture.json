@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "vaults": [
+    {
+      "id": "ribbed_semicircle",
+      "span_m": "param",
+      "rise": "param",
+      "notes": "calm rib traces for ND-safe render"
+    },
+    {
+      "id": "pointed_gothic",
+      "span_m": "param",
+      "rise": "param",
+      "notes": "two arcs; adjustable pointedness"
+    }
+  ],
+  "materials": [
+    {
+      "id": "rosslyn_stone",
+      "albedo_hex": "#7d7a73",
+      "roughness": 0.9,
+      "metalness": 0.0
+    },
+    {
+      "id": "gold_accent",
+      "albedo_hex": "#caa64f",
+      "roughness": 0.5,
+      "metalness": 0.2
+    }
+  ]
+}
