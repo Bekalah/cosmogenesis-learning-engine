@@ -99,13 +99,14 @@ Offline, ND‑safe canvas sketch for layered sacred geometry.
 3. Palette colours live in `data/palette.json`. If the file is missing, the renderer falls back to a safe default and shows a gentle notice.
 
 ## ND‑safe notes
+- Static drawing only; no animation or au## ND‑safe notes
 - Static drawing only; no animation or autoplay.
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without flashing.
 - Geometry routines lean on numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
 
-## Usage
-1. Open `index.html` in any modern browser (no server needed).
+>>>>>>>+main
+dex.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming a calm grid.
    - **Tree-of-Life scaffold** — ten sephirot linked by twenty-two paths.
@@ -155,7 +156,11 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 For wider cosmological context, see [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md).
 *Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
 
+<<<<<<< main
 Offline, ND-safe canvas sketch for layered sacred geometry.
+
+## Usage
+1. Open `indeOffline, ND-safe canvas sketch for layered sacred geometry.
 
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
@@ -303,11 +308,15 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
    - Fibonacci curve — golden spiral polyline anchored to centre.
    - Double-helix lattice — two phase-shifted sine tracks.
 3. Palette colours live in `data/palette.json`. If the file is missing, the renderer falls back to a safe default and shows a notice.
+>>>>>>>+main
+ - Fibon   - Vesica field — intersecting circles forming the womb of forms.
+   - Tree-of-Life scaffold — ten sephirot with twenty-two paths.
+   - Fibonacci curve — golden spiral polyline anchored to centre.
+   - Double-helix lattice — two phase-shifted sine tracks.
 
-## ND-safe notes
-- Static drawing; no animation or autoplay.
-- Muted contrast palette reduces sensory strain.
-- Layer order clarifies depth without flashing.
+3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
+>>>>>>>+codex/add-more-
+ashing.
 - Geometry routines use numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
 
 ## Design notes
@@ -363,7 +372,11 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
    - Double-helix lattice — two phase-shifted sine tracks.
 3. Palette colours live in `data/palette.json`. If the file is missing, the renderer falls back to a safe default and shows a gentle notice.
 
+<<<<<<< main
 ## ND-safe notes
+- Static drawing only; no motion, autoplay, or flashing.
+- Soft contrast palette and generous spacing reduce sensory strain.
+- Layer orde## ND-safe notes
 - Static drawing only; no motion, autoplay, or flashing.
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without animation.
@@ -391,12 +404,16 @@ Add new draw functions to `js/helix-renderer.mjs` while preserving ND-safe layer
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without flashing.
 - Geometry parameters lean on constants 3, 7, 9, 11, 22, 33, 99, 144.
+>>>>>>>+main
+js/helix## Design notes
+- Numerology constants live in `index.html` and are passed to the renderer so the symbolic values stay explicit.
+- Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and ASCII quotes only.
+- Static HTML and Canvas keep rendering local and deterministic.
 
-## Design notes
-3. Palette colours live in `data/palette.json`. If the file is missing, a gentle notice appears and safe defaults load.
-
-## ND-safe notes
-- Static drawing; no animation or autoplay.
+## Extending
+The renderer is intentionally minimal. Future layers can extend `renderHelix` with new draw functions while preserving the calm visual hierarchy.
+>>>>>>>+codex/add-more-
+wing; no animation or autoplay.
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without flashing.
 - Geometry parameters lean on constants 3, 7, 9, 11, 22, 33, 99, 144.
@@ -432,6 +449,7 @@ The renderer is intentionally minimal. Future layers or overlays can extend `ren
 - [ ] Map Tree-of-Life nodes to sanctuaries like Avalon and mountain temples.
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
 - [ ] Cross-link double-helix lattices with rune, tarot, and reiki lore.
+<<<<<<< main
 - [ ] Keep all additions ND-safe: no motion, calm contrast, pure functions.
 1. Open `index.html` in any modern browser (no server needed).
 1. Double-click `index.html` in any modern browser; no server or network required.
@@ -716,3 +734,4 @@ Add new layers by extending `renderHelix` while preserving the calm visual hiera
 
 ## Related lore
 See `docs/tesseract_spiritual.md` for cosmological context.
+- [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
