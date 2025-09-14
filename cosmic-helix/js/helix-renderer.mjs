@@ -31,6 +31,14 @@ function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // large circles keep intersections soft
   const step = radius / N.SEVEN; // spacing tuned by 7 for gentle density
+  const radius = Math.min(w, h) / N.THREE; // large enough to breathe
+  const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
+  // Radii derived from 3 keep shapes large enough to breathe; step uses 7 so
+  // the grid remains gentle and non-distracting.
+  const radius = Math.min(w, h) / N.THREE; // large circles keep space calm
+  const step = radius / N.SEVEN; // grid density tuned by 7 for gentle spacing
+  const radius = Math.min(w, h) / N.THREE; // large circles, gentle intersections
+  const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -59,13 +67,13 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ];
 
   const paths = [
-    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
-    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
-    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
-    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
+    [0,1],[0,2],[0,5],[1,2],[1,5],[2,5],
+    [1,3],[2,4],[3,4],[3,5],[4,5],
+    [3,6],[4,7],[5,6],[5,7],[6,7],
+    [6,8],[7,8],[5,8],[6,9],[7,9],[8,9]
   ];
 
-  paths.forEach(([a, b]) => {
+  paths.forEach(([a,b]) => {
     ctx.beginPath();
     ctx.moveTo(nodes[a].x, nodes[a].y);
     ctx.lineTo(nodes[b].x, nodes[b].y);
@@ -76,6 +84,16 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   const nodeRadius = N.NINE / 3; // node size tied to 9 for lunar echo
   nodes.forEach((n) => {
     ctx.beginPath();
+  const nodeRadius = N.NINE / 3; // echo lunar cycles, keep small
+  nodes.forEach(n => {
+    ctx.beginPath();
+    // Node size tied to 9 echoes lunar cycles and stays readable.
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // small node radius for gentle presence
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // node size tied to 9
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // radius tied to 9 echoes lunar cycles
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // size tied to 9 for lunar echo
+    // Node size tied to 9 to echo lunar cycles and stay readable.
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2);
     ctx.arc(n.x, n.y, nodeRadius, 0, Math.PI * 2);
     ctx.fill();
   });
@@ -86,14 +104,15 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2; // consistent stroke width for calm reading
   const fib = [1, 1];
+  const fib = [1,1];
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
-  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
+  const scale = Math.min(w,h) / N.ONEFORTYFOUR; // golden curve size
   let angle = 0;
   let x = w / 2;
   let y = h / 2;
   ctx.beginPath();
   ctx.moveTo(x, y);
-  fib.forEach((f) => {
+  fib.forEach(f => {
     angle += Math.PI / 2;
     x += Math.cos(angle) * f * scale;
     y += Math.sin(angle) * f * scale;
@@ -107,6 +126,14 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
   const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 & 11 echo twin pillars softly
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without motion
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // twin pillars softly
+  const stepX = w / N.ONEFORTYFOUR; // smooth curve without motion
+  // Amplitude governed by 99 and 11 to echo twin pillars softly.
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN;
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
@@ -119,4 +146,3 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
     ctx.stroke();
   }
 }
-
