@@ -39,6 +39,18 @@ The renderer is intentionally minimal. Future layers or overlays can extend `ren
 >>>>>>>+codex/add-batch
 >>>>> origin/codex/add-symbolic-correspondences-for-numbers
 2. A 1440×900 canvas renders four static layers:
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
+
+Offline, ND-safe canvas sketch for layered sacred geometry.
+
+Static HTML and Canvas were chosen so the geometry renders locally without
+network calls or heavy libraries, keeping the experience deterministic and
+motion-free.
+
+## Usage
+1. Open `index.html` directly in any modern browser; no server or network needed.
+2. A 1440×900 canvas draws four static layers:
+
    - **Vesica field** — intersecting circles forming a calm grid.
    - **Tree-of-Life scaffold** — ten sephirot linked by twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
@@ -171,6 +183,14 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 - Static drawing only; no motion, autoplay, or flashing.
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without animation.
+
+Palette values live in `data/palette.json`. Missing data triggers a gentle
+notice and safe defaults.
+
+## ND-safe notes
+- Static drawing only; no animation, autoplay, or flashing.
+- Muted contrast palette and generous spacing ease sensory load.
+- Layer order clarifies depth without motion.
 - Geometry routines lean on numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
 
 ## Design notes
@@ -200,3 +220,9 @@ Add new draw functions to `js/helix-renderer.mjs` while preserving ND-safe layer
 - Pure ES module (`js/helix-renderer.mjs`) with small, well-commented functions.
 - ASCII quotes only, UTF-8, LF newlines.
 - Works entirely offline by double-clicking `index.html`.
+- Works entirely offline by double-clicking `index.html`.
+
+## Extending
+Add new draw functions in `js/helix-renderer.mjs` while preserving the ND-safe
+layer order.
+
