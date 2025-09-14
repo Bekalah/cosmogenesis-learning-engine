@@ -2,6 +2,7 @@
 *Per Texturas Numerorum, Spira Loquitur.*
 
 *Per Texturas Numerorum, Spira Loquitur.*
+
 Per Texturas Numerorum, Spira Loquitur.
 
 Offline, ND-safe canvas sketch for layered sacred geometry.
@@ -91,6 +92,13 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm laye
 3. Palette colours live in `data/palette.json`. Missing data triggers a gentle notice and safe defaults.
 
 ## ND-safe notes
+   - **Vesica field** – intersecting circles forming a calm grid.
+   - **Tree-of-Life scaffold** – ten sephirot linked by twenty-two paths.
+   - **Fibonacci curve** – golden spiral polyline anchored to centre.
+   - **Double-helix lattice** – two phase-shifted sine tracks.
+3. Palette colours live in `data/palette.json`. Missing data triggers a gentle notice and safe defaults.
+
+## ND-safe notes
 - Static drawing; no animation, autoplay, or flashing.
 - Soft contrast palette and generous spacing improve readability.
 - Layer order clarifies depth without motion.
@@ -103,3 +111,9 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm laye
 
 ## Extending
 Add new draw functions in `js/helix-renderer.mjs` while keeping the calm visual hierarchy and ND-safe choices.
+- Pure ES module (`js/helix-renderer.mjs`) with small, well-commented functions.
+- ASCII quotes only, UTF-8, LF newlines.
+- Everything works offline by double-clicking `index.html`.
+
+## Extending
+Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visual hierarchy and ND-safe choices.
