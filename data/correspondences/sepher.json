@@ -1,0 +1,7 @@
+{
+  "paths": [
+    { "id": 11, "from": "Keter", "to": "Chokmah" },
+    { "id": 12, "from": "Keter", "to": "Binah" },
+    { "id": 13, "from": "Chokmah", "to": "Binah" }
+  ]
+}

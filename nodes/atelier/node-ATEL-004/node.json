@@ -1,0 +1,32 @@
+{
+  "id": "ATEL-004",
+  "title": "Harmonic Lab — Tones, Ratios, Calm Resonance",
+  "kind": "lineage",
+  "summary": "Teach and render musical intervals (432Hz grid) with ND-safe gains. Link color ↔ tone for synesthetic study.",
+  "lineage": { "codex": "144:99", "path": "lab/harmonic" },
+  "correspondences": {
+    "planet": "Mercury",
+    "element": "Air",
+    "freq_hz": 432,
+    "color_hex": "#B2C9FF"
+  },
+  "assets": [{ "path": "data/atelier/harmonics.json", "role": "canon" }],
+  "links": {
+    "repo": "cosmogenesis-learning-engine",
+    "relpath": "nodes/atelier/node-ATEL-004"
+  },
+  "meta": {
+    "author": "Virelai Ezra Lux",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": ["harmonics", "monochord", "nd-safe", "case"],
+    "version": "1.0.0"
+  },
+  "safe_use": "Never autoplay. Cap gain at 0.03. Respect system 'reduce motion/sounds'.",
+  "procedures": [
+    "Pick an interval from data/atelier/harmonics.json.",
+    "Compute Hz: base_hz * ratio.",
+    "On user tap, ramp gain to ≤ nd_safe.gain_max; hold ≤ 2s; release.",
+    "Optionally tint the plate with a corresponding calm color."
+  ],
+  "references": ["Guido d’Arezzo (neumes), Paul Foster Case (tones for Tarot)"]
+}
