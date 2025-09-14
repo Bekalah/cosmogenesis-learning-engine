@@ -1,0 +1,31 @@
+{
+  "id": "ATEL-006",
+  "title": "Psyche Lab — Quiet Mandalas & Visionary Discipline",
+  "kind": "lineage",
+  "summary": "Phyllotaxis and gentle L-systems for dream mandalas; Jung/von Franz informed symbolism with ND-safe palettes.",
+  "lineage": { "codex": "144:99", "path": "lab/psyche" },
+  "correspondences": {
+    "planet": "Saturn",
+    "element": "Water/Ether",
+    "color_hex": "#403D58"
+  },
+  "assets": [{ "path": "data/atelier/psyche.json", "role": "algorithms" }],
+  "links": {
+    "repo": "cosmogenesis-learning-engine",
+    "relpath": "nodes/atelier/node-ATEL-006"
+  },
+  "meta": {
+    "author": "Virelai Ezra Lux",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": ["mandala", "jung", "von-franz", "nd-safe"],
+    "version": "1.0.0"
+  },
+  "safe_use": "Soft edges; low saturation; allow pause; no recursive motion spirals.",
+  "procedures": [
+    "Pick 'phyllotaxis_quiet' from psyche.json; render 144 points at 137.5°.",
+    "Choose palette 'dream_indigo' or 'rose_saturn'; opacity ≤ 0.75.",
+    "Optionally place small planetary glyph at center (12–18% opacity).",
+    "Export 16-bit master and 2048px preview."
+  ],
+  "references": ["Jung — Liber Novus, Marie-Louise von Franz"]
+}
