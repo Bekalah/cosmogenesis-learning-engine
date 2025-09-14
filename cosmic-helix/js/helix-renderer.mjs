@@ -41,6 +41,7 @@ function drawVesicaField(ctx, w, h, color, N) {
   const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
   // Radii derived from 3 keep shapes large enough to breathe; step uses 7 so
   // the grid remains gentle and non-distracting.
+  // Radii derived from 3 keeps shapes large enough to breathe; step uses 7 so the grid remains gentle.
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -57,7 +58,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // 2: gentle stroke width
 
   const nodes = [
-    { x: w / 2, y: h * 0.05 }, // 0 Kether
+    { x: w / 2, y: h * 0.05 },  // 0 Kether
     { x: w * 0.25, y: h * 0.15 }, // 1 Chokmah
     { x: w * 0.75, y: h * 0.15 }, // 2 Binah
     { x: w * 0.25, y: h * 0.35 }, // 3 Chesed
@@ -66,7 +67,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
     { x: w * 0.25, y: h * 0.65 }, // 6 Netzach
     { x: w * 0.75, y: h * 0.65 }, // 7 Hod
     { x: w / 2, y: h * 0.75 }, // 8 Yesod
-    { x: w / 2, y: h * 0.9 } // 9 Malkuth
+    { x: w / 2, y: h * 0.9 }  // 9 Malkuth
   ];
 
   const paths = [
@@ -92,6 +93,9 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   const nodeRadius = N.NINE / 3; // node size tied to 9 for lunar echo
   nodes.forEach((n) => {
     ctx.beginPath();
+  nodes.forEach(n => {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // node radius ties to 9; calm presence
   const nodeRadius = N.NINE / 3; // echo lunar cycles, keep small
   nodes.forEach(n => {
     ctx.beginPath();
@@ -114,6 +118,9 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.lineWidth = 2; // consistent stroke width for calm reading
   const fib = [1, 1];
   const fib = [1,1];
+  // Only first 9 numbers used; spiral stays modest and deterministic.
+  while (fib.length < N.NINE) fib.push(fib[fib.length-1] + fib[fib.length-2]);
+  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
   const scale = Math.min(w,h) / N.ONEFORTYFOUR; // golden curve size
   let angle = 0;
@@ -133,6 +140,9 @@ function drawFibonacci(ctx, w, h, color, N) {
 // Layer 4: Double-helix lattice — two still sine tracks; amplitude limited for calm weave.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
+  // Amplitude governed by 99 and 11 to echo twin pillars softly.
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN;
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
   const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 & 11 echo twin pillars softly
