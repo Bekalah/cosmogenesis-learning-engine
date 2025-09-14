@@ -7,10 +7,6 @@
   - `data(stylepacks): <change>`
   - `safety: <change>`
 
-## Preservation
-- Tasks are append-only; mark completion with `[x]` but never delete entries.
-- Reference related `README_*` files when adding tasks to keep instructions linked.
-
 ## Priority Spiral (P1 → P3)
 
 ### Legacy Cleanup

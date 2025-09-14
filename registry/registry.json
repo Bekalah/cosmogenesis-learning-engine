@@ -1,173 +1,76 @@
 {
-  "version": "2025-09-12",
+  "version": "2025-09-05",
   "nodes": [
     {
-      "id": "ENGI-001",
-      "title": "Engine Core Node",
-      "kind": "engine",
-      "summary": "Cosmogenesis engine seed node.",
+      "id": "CRUX-011",
+      "title": "Vertebra 11 — Harmonic Compass",
+      "kind": "story",
+      "summary": "Spine node invoking harmonic ratio, witness, and navigation.",
       "lineage": {
-        "codex": "custom",
-        "path": "engine/core"
+        "codex": "33-spine",
+        "path": "spine/11"
       },
+      "correspondences": {
+        "planet": "Mercury",
+        "zodiac": "Gemini",
+        "element": "Air",
+        "chakra": "Third Eye",
+        "freq_hz": 852,
+        "color_hex": "#B0E0E6"
+      },
+      "assets": [
+        {
+          "path": "assets/glyph.png",
+          "role": "glyph"
+        },
+        {
+          "path": "assets/chant.mp3",
+          "role": "audio"
+        }
+      ],
       "links": {
-        "repo": "cosmogenesis-learning-engine",
-        "relpath": "nodes/node-ENGI-001"
+        "repo": "circuitum99",
+        "relpath": "nodes/144-99/node-CRUX-011"
       },
       "meta": {
         "author": "Rebecca Respawn",
         "license": "CC BY-NC-SA 4.0",
+        "tags": ["harmony", "witness", "ratio"],
         "version": "1.0.0"
       }
     },
     {
-      "id": "ATEL-001",
-      "title": "Scribal Lab — Manuscripts & Hermetic Calligraphy",
-      "kind": "lineage",
-      "summary": "Recreate rubricated manuscripts with parchment, oak-gall ink emulation, and calm goldleaf.",
-      "lineage": {
-        "codex": "144:99",
-        "path": "lab/scribal"
-      },
-      "correspondences": {
-        "planet": "Moon",
-        "element": "Water/Air",
-        "color_hex": "#F4F1E9"
-      },
-      "assets": [
-        {
-          "path": "assets/parchment/base.png",
-          "role": "texture"
-        },
-        {
-          "path": "assets/goldleaf/calm.png",
-          "role": "texture"
-        }
-      ],
+      "id": "ascii_figure_0",
+      "title": "Numerical Lattice",
+      "kind": "codex_node",
+      "num": 99,
+      "source": "Equinox I iii",
       "links": {
         "repo": "cosmogenesis-learning-engine",
-        "relpath": "nodes/atelier/node-ATEL-001"
-      },
-      "meta": {
-        "author": "Virelai Ezra Lux",
-        "license": "CC BY-NC-SA 4.0",
-        "tags": [
-          "scribal",
-          "calligraphy",
-          "illumination",
-          "nd-safe"
-        ],
-        "version": "1.0.0"
-      },
-      "safe_use": "Muted palettes; no high-contrast black/white; slow gestures; no flicker.",
-      "procedures": [
-        "Lay parchment ground; draw faint baselines at 6–8% opacity.",
-        "Set body text (EB Garamond) at gentle gray; rubricate initials in vermilion.",
-        "Apply goldleaf overlay to margins/initials; keep shimmer static (ND-safe).",
-        "Export: PNG preview; 16-bit TIFF master."
-      ],
-      "references": [
-        "Book of Kells (rubrication and interlace)",
-        "Ars Notoria (notae), Hermetic papyri"
-      ]
+        "relpath": "docs/sources/ascii/equinox_i_iii.txt"
+      }
     },
     {
-      "id": "ATEL-002",
-      "title": "Pigment Lab — Ultramarine, Vermilion, Malachite, Gold",
-      "kind": "lineage",
-      "summary": "Layered glazes emulating historical pigments in ND-safe color discipline.",
-      "lineage": {
-        "codex": "144:99",
-        "path": "lab/pigment"
-      },
-      "correspondences": {
-        "planet": "Venus",
-        "element": "Earth",
-        "freq_hz": 432,
-        "color_hex": "#26619C"
-      },
-      "assets": [
-        {
-          "path": "data/atelier/pigments.json",
-          "role": "palette"
-        }
-      ],
+      "id": "ascii_figure_1",
+      "title": "Triangle",
+      "kind": "ritual_diagram",
+      "num": 11,
+      "source": "Equinox I iii",
       "links": {
-        "repo": "cosmogenesis-learning-engine",
-        "relpath": "nodes/atelier/node-ATEL-002"
-      },
-      "meta": {
-        "author": "Virelai Ezra Lux",
-        "license": "CC BY-NC-SA 4.0",
-        "tags": [
-          "pigment",
-          "glaze",
-          "goldleaf",
-          "nd-safe"
-        ],
-        "version": "1.0.0"
-      },
-      "safe_use": "Digital emulation only; avoid neon; build 3–5 thin glazes.",
-      "procedures": [
-        "Ground: alabaster (#F4F1E9).",
-        "Glaze 1: ultramarine at 40–55% (multiply/soft-light).",
-        "Glaze 2: malachite at 25–40% (gentle hue shift).",
-        "Accents: vermilion sparingly; gold overlay < 10% area.",
-        "Export 16-bit TIFF master; create 2048px PNG preview."
-      ],
-      "references": [
-        "Fra Angelico (tempera, gilding)",
-        "Hilma af Klint (sacred color fields)",
-        "Splendor Solis (alchemical imagery)"
-      ]
+        "repo": "circuitum99",
+        "relpath": "docs/sources/ascii/equinox_i_iii.txt"
+      }
     },
     {
-      "id": "ATEL-003",
-      "title": "Geometry Lab — Vesica, Hexagram, Rose 12, Golden Rectangle",
-      "kind": "lineage",
-      "summary": "Exact constructions for cathedral geometry; parametric and ND-safe.",
-      "lineage": {
-        "codex": "144:99",
-        "path": "lab/geometry"
-      },
-      "correspondences": {
-        "planet": "Sun/Earth",
-        "element": "Air",
-        "color_hex": "#D9B65A"
-      },
-      "assets": [
-        {
-          "path": "data/atelier/geometry.json",
-          "role": "canon"
-        }
-      ],
+      "id": "ascii_figure_2",
+      "title": "Greek Cross",
+      "kind": "zodiacal_cross",
+      "num": 12,
+      "source": "Equinox I iii",
       "links": {
-        "repo": "cosmogenesis-learning-engine",
-        "relpath": "nodes/atelier/node-ATEL-003"
-      },
-      "meta": {
-        "author": "Virelai Ezra Lux",
-        "license": "CC BY-NC-SA 4.0",
-        "tags": [
-          "vesica",
-          "hexagram",
-          "rose_window",
-          "agrippa",
-          "nd-safe"
-        ],
-        "version": "1.0.0"
-      },
-      "safe_use": "Calm lines; no fast animation; exact math (no eyeballing).",
-      "procedures": [
-        "Vesica: centers separated by radius r; stroke width 6–10px.",
-        "Hexagram: 6 points at 60°; draw two equilateral triangles.",
-        "Rose 12: petals at 30° increments; keep petal symmetry clean.",
-        "Golden rectangle: subdivide by φ; optional quiet spiral."
-      ],
-      "references": [
-        "Agrippa (Occult Philosophy diagrams)",
-        "Chartres and Rosslyn tracery studies"
-      ]
+        "repo": "liber-arcanae",
+        "relpath": "docs/sources/ascii/equinox_i_iii.txt"
+      }
     }
   ]
 }
