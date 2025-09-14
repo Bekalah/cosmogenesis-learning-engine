@@ -1,0 +1,15 @@
+{
+  "manifest": "numerology",
+  "version": "1.0.0",
+  "constants": [21,33,72,78,99,144,243],
+  "bindings": {
+    "21":  { "radials": 21, "rings": 3,  "use": ["pillars","spokes"] },
+    "33":  { "rungs": 33,  "axis": true, "use": ["spine","anthakarana"] },
+    "72":  { "points": 72, "rings": 6,  "use": ["wreath","decans"] },
+    "78":  { "tesserae": 78, "use": ["rim_band"] },
+    "99":  { "gates": 99,  "groups": [33,33,33], "use": ["halo_gates"] },
+    "144": { "grid": [12,12], "use": ["lattice_underlay"] },
+    "243": { "tiers": 5, "use": ["nested_halos"] }
+  },
+  "nd_safe": { "strobe": false, "safe_stop": true, "intensity_slider": true }
+}

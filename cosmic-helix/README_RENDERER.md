@@ -339,6 +339,13 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+## Usage
+1. Open `index.html` in any modern browser (no server needed).
+2. A 1440×900 canvas renders four static layers:
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 ashing.
 - Geometry routines use numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
@@ -430,7 +437,6 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without animation.
 
-<<<<<<< codex/define-json-schema-for-node
 ## Design notes
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
@@ -451,6 +457,7 @@ notice and safe defaults.
 - Layer order clarifies depth without motion.
 - Geometry routines lean on numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
 
+<<<<<<< codex/add-geometry-and-card-mappings-vyshxw
 ## Design notes
 - Pure ES module (`js/helix-renderer.mjs`) with small, well-commented functions.
 - ASCII quotes, UTF-8, LF newlines.
@@ -491,6 +498,11 @@ wing; no animation or autoplay.
 - Static HTML and Canvas keep rendering local and deterministic.
 - Numerology constants live in `index.html` and are passed to the renderer so symbolic values remain explicit and easy to tweak.
 - Geometry routines live in `js/helix-renderer.mjs` with pure functions and ASCII quotes only.
+## Design Notes
+- No animation, autoplay, or flashing; a single render call ensures ND safety.
+- Muted colors and generous spacing improve readability in dark and light modes.
+- Geometry routines use numerology constants (3, 7, 9, 11, 22, 33, 99, 144) to honour project canon.
+- Numerology constants live in `index.html` and are passed to the renderer so the symbolic values remain explicit and easy to tweak.
 
 ## Extending
 The renderer is intentionally minimal. Future layers or overlays can extend `renderHelix` while preserving the calm visual hierarchy.
