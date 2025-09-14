@@ -58,6 +58,8 @@ motion-free.
 1. Open `index.html` directly in any modern browser; no server or network needed.
 2. A 1440×900 canvas draws four static layers:
 
+1. Open `index.html` in any modern browser; no server or network required.
+2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming a calm grid.
    - **Tree-of-Life scaffold** — ten sephirot linked by twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
@@ -173,6 +175,16 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm laye
 ## Extending
 Add new draw functions in `js/helix-renderer.mjs` while keeping the calm visual hierarchy and ND-safe choices.
 - Pure ES module (`js/helix-renderer.mjs`) with small, well-commented functions.
+3. Palette colours live in `data/palette.json`. If the file is missing, a gentle notice appears and a safe default palette is used.
+
+## ND-safe notes
+- Static drawing only; no animation or autoplay.
+- Soft contrast palette reduces sensory strain.
+- Layer order clarifies depth without flashing.
+- Geometry constants lean on 3, 7, 9, 11, 22, 33, 99, 144.
+
+## Design notes
+- Pure ES module `js/helix-renderer.mjs` with small, well-commented functions.
 - ASCII quotes only, UTF-8, LF newlines.
 - Everything works offline by double-clicking `index.html`.
 
@@ -245,3 +257,4 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 
 ## Related lore
 See [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md) for the wider cosmological frame.
+Add new draw functions in `js/helix-renderer.mjs` while preserving the calm hierarchy and ND-safe choices.
