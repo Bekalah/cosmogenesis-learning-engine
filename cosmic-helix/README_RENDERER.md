@@ -8,14 +8,10 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 ## Usage
 1. Open `index.html` in any modern browser (no server needed).
 2. A 1440×900 canvas renders four static layers:
-
    - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two straight paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
-   - Vesica field — intersecting circles forming the womb of forms.
-   - Tree-of-Life scaffold — ten sephirot with twenty-two paths.
-   - Fibonacci curve — golden spiral polyline anchored to centre.
-   - Double-helix lattice — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 
 ## ND-safe notes
@@ -37,8 +33,15 @@ The renderer is intentionally minimal. Future layers or overlays can be added by
 
 ## Related Lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
+## Design notes
+- Static HTML and Canvas keep rendering local and deterministic.
+- Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes only.
+- Numerology constants live in `index.html` and are passed to the renderer for clarity.
 
-## Task List
+## Extending
+The renderer is intentionally minimal. Future layers can extend `renderHelix` with new draw functions while preserving the calm visual hierarchy.
+
+## Task list
 - [ ] Weave cathedral-scale vesica grids to frame expansive worlds.
 - [ ] Map Tree-of-Life nodes to sanctuaries like Avalon and mountain temples.
 - [ ] Layer Fibonacci paths through oceans, rivers, and volcanic corridors.
@@ -56,5 +59,7 @@ For a meditation on the tesseract as symbol of higher consciousness and non-line
 
 ## Extending
 The renderer is intentionally minimal. Future layers can extend `renderHelix` while preserving the calm visual hierarchy.
+## Related lore
+For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [../docs/tesseract_spiritual.md](../docs/tesseract_spiritual.md). This companion note situates the helix within a wider cosmological frame.
 
 
