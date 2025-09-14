@@ -106,6 +106,18 @@ motion-free.
 
 1. Open `index.html` in any modern browser; no server or network required.
 2. A 1440×900 canvas renders four static layers:
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
+
+Offline, ND-safe canvas sketch for layered sacred geometry.
+
+Static HTML and Canvas were chosen so the geometry renders locally without
+network calls or heavy libraries, keeping the experience deterministic and
+motion-free.
+
+## Usage
+1. Open `index.html` directly in any modern browser; no server or network needed.
+2. A 1440×900 canvas draws four static layers:
+
    - **Vesica field** — intersecting circles forming a calm grid.
    - **Tree-of-Life scaffold** — ten sephirot linked by twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
@@ -249,6 +261,7 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 - Soft contrast palette and generous spacing reduce sensory strain.
 - Layer order clarifies depth without animation.
 
+
 Palette values live in `data/palette.json`. Missing data triggers a gentle
 notice and safe defaults.
 
@@ -305,3 +318,10 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 See [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md) for the wider cosmological frame.
 Add new draw functions in `js/helix-renderer.mjs` while preserving the calm hierarchy and ND-safe choices.
 >>>>>>> origin/main
+- ASCII quotes, UTF-8, LF newlines.
+- Works entirely offline by double-clicking `index.html`.
+
+## Extending
+Add new draw functions in `js/helix-renderer.mjs` while preserving the ND-safe
+layer order.
+
