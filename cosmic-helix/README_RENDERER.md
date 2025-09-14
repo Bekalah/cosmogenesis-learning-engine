@@ -7,6 +7,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming the womb of forms.
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two straight paths.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
@@ -27,6 +28,11 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 - Static HTML and Canvas keep rendering local and deterministic.
 - Geometry routines live in `js/helix-renderer.mjs` with small pure functions and ASCII quotes.
 - Numerology constants live in `index.html` so symbolic values remain explicit.
+## Design Notes
+- No animation, autoplay, or flashing; a single render call ensures ND safety.
+- Muted colors and generous spacing improve readability in dark and light modes.
+- Geometry routines use numerology constants; values are passed via `index.html` so they remain explicit and easy to tweak.
+- Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and ASCII quotes only.
 
 ## Extending
 The renderer is intentionally minimal. Future layers or overlays can extend `renderHelix` while preserving the calm visual hierarchy.
