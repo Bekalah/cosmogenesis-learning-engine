@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "notes": "Six consecration angels for hexagram heart; colors ND-safe; angles match mandala v2.",
+    "coord_system": "polar_degrees_from_top_clockwise"
+  },
+  "angels": [
+    {
+      "id": "MICHAEL",
+      "name": "Michael",
+      "planet": "Sun",
+      "sigil": "\u2609",
+      "color_hex": "#FFD700",
+      "role": "Guardian of illumination",
+      "angle_deg": -90,
+      "music_hz": 528
+    },
+    {
+      "id": "GABRIEL",
+      "name": "Gabriel",
+      "planet": "Moon",
+      "sigil": "\u263d",
+      "color_hex": "#C0C0C0",
+      "role": "Messenger of dreams",
+      "angle_deg": -30,
+      "music_hz": 432
+    },
+    {
+      "id": "RAPHAEL",
+      "name": "Raphael",
+      "planet": "Mercury",
+      "sigil": "\u263f",
+      "color_hex": "#3CB371",
+      "role": "Healer of paths",
+      "angle_deg": 30,
+      "music_hz": 852
+    },
+    {
+      "id": "TZAPHKIEL",
+      "name": "Tzaphkiel",
+      "planet": "Saturn",
+      "sigil": "\u2644",
+      "color_hex": "#483D8B",
+      "role": "Watcher of depth",
+      "angle_deg": 90,
+      "music_hz": 396
+    },
+    {
+      "id": "HANIEL",
+      "name": "Haniel",
+      "planet": "Venus",
+      "sigil": "\u2640",
+      "color_hex": "#FF69B4",
+      "role": "Harmonizer of love",
+      "angle_deg": 150,
+      "music_hz": 639
+    },
+    {
+      "id": "URIEL",
+      "name": "Uriel",
+      "planet": "Earth",
+      "sigil": "\u2295",
+      "color_hex": "#DAA520",
+      "role": "Keeper of ground",
+      "angle_deg": 210,
+      "music_hz": 285
+    }
+  ]
+}
