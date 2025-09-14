@@ -340,6 +340,13 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
    - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
+## Usage
+1. Open `index.html` in any modern browser (no server needed).
+2. A 1440×900 canvas renders four static layers:
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two connecting paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 >>>>>>>+codex/add-more-
 ashing.
@@ -460,6 +467,10 @@ Add new draw functions to `js/helix-renderer.mjs` while preserving ND-safe layer
 - Geometry parameters lean on constants 3, 7, 9, 11, 22, 33, 99, 144.
 js/helix## Design notes
 - Numerology constants live in `index.html` and are passed to the renderer so the symbolic values stay explicit.
+## Design Notes
+- No animation, autoplay, or flashing; a single render call ensures ND safety.
+- Muted colors and generous spacing improve readability in dark and light modes.
+- Numerology constants live in `index.html` and are passed to the renderer for clarity.
 - Code is modular ES module (`js/helix-renderer.mjs`) with pure functions and ASCII quotes only.
 - Static HTML and Canvas keep rendering local and deterministic.
 
@@ -2208,3 +2219,4 @@ See `docs/tesseract_spiritual.md` for cosmological context.
 >>>>>>> main
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
 >>>>>>> origin/main
+- [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
