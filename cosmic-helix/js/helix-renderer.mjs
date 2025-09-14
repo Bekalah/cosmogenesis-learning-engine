@@ -31,6 +31,8 @@ function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // gentle radius softens intersections
   const step = radius / N.SEVEN; // grid density tuned by 7 for calm spacing
+  // Radii derived from 3 keep shapes large enough to breathe; step uses 7 so
+  // the grid remains gentle and non-distracting.
   for (let y = radius; y <= h - radius; y += step) {
     for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
@@ -76,6 +78,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   nodes.forEach((n) => {
     ctx.beginPath();
     ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // node size tied to 9
+    ctx.arc(n.x, n.y, N.NINE / 3, 0, Math.PI * 2); // radius tied to 9 echoes lunar cycles
     ctx.fill();
   });
 }
@@ -107,6 +110,8 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // gentle vertical spread
   const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without animation
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 & 11 echo twin pillars softly
+  const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without motion
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
     ctx.strokeStyle = phase === 0 ? colorA : colorB;
