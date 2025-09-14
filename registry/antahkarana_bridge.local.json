@@ -1,0 +1,10 @@
+{
+  "name": "Antahkarana Bridge (Stone-Grimoire shim)",
+  "note": "Additive override to point realms at stone-grimoire without editing sealed files.",
+  "links": {
+    "stone_grimoire": "chapels/carrington-temple/index.html"
+  },
+  "nd_safe": true,
+  "no_strobe": true,
+  "no_autoplay": true
+}
