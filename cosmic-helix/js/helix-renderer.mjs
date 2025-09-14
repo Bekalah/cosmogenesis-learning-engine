@@ -67,13 +67,13 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ];
 
   const paths = [
-    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
-    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
-    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
-    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
+    [0,1],[0,2],[0,5],[1,2],[1,5],[2,5],
+    [1,3],[2,4],[3,4],[3,5],[4,5],
+    [3,6],[4,7],[5,6],[5,7],[6,7],
+    [6,8],[7,8],[5,8],[6,9],[7,9],[8,9]
   ];
 
-  paths.forEach(([a, b]) => {
+  paths.forEach(([a,b]) => {
     ctx.beginPath();
     ctx.moveTo(nodes[a].x, nodes[a].y);
     ctx.lineTo(nodes[b].x, nodes[b].y);
@@ -106,13 +106,13 @@ function drawFibonacci(ctx, w, h, color, N) {
   const fib = [1, 1];
   const fib = [1,1];
   while (fib.length < N.NINE) fib.push(fib[fib.length - 1] + fib[fib.length - 2]);
-  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // golden curve size
+  const scale = Math.min(w,h) / N.ONEFORTYFOUR; // golden curve size
   let angle = 0;
   let x = w / 2;
   let y = h / 2;
   ctx.beginPath();
   ctx.moveTo(x, y);
-  fib.forEach((f) => {
+  fib.forEach(f => {
     angle += Math.PI / 2;
     x += Math.cos(angle) * f * scale;
     y += Math.sin(angle) * f * scale;
@@ -146,4 +146,3 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
     ctx.stroke();
   }
 }
-
