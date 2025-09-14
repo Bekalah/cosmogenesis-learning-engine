@@ -1,0 +1,24 @@
+{
+  "id": "ATEL-003",
+  "title": "Geometry Lab — Vesica, Hexagram, Rose 12, Golden Rectangle",
+  "kind": "lineage",
+  "summary": "Exact constructions for cathedral geometry; parametric and ND-safe.",
+  "lineage": { "codex": "144:99", "path": "lab/geometry" },
+  "correspondences": { "planet": "Sun/Earth", "element": "Air", "color_hex": "#D9B65A" },
+  "assets": [
+    { "path": "data/atelier/geometry.json", "role": "canon" }
+  ],
+  "links": { "repo": "cosmogenesis-learning-engine", "relpath": "nodes/atelier/node-ATEL-003" },
+  "meta": { "author": "Virelai Ezra Lux", "license": "CC BY-NC-SA 4.0", "tags": ["vesica","hexagram","rose_window","agrippa","nd-safe"], "version": "1.0.0" },
+  "safe_use": "Calm lines; no fast animation; exact math (no eyeballing).",
+  "procedures": [
+    "Vesica: centers separated by radius r; stroke width 6–10px.",
+    "Hexagram: 6 points at 60°; draw two equilateral triangles.",
+    "Rose 12: petals at 30° increments; keep petal symmetry clean.",
+    "Golden rectangle: subdivide by φ; optional quiet spiral."
+  ],
+  "references": [
+    "Agrippa (Occult Philosophy diagrams)",
+    "Chartres and Rosslyn tracery studies"
+  ]
+}
