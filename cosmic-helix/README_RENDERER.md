@@ -38,6 +38,7 @@ The renderer is intentionally minimal. Future layers or overlays can extend `ren
 2. A 1440×900 canvas renders four static layers:
 >>>>>>>+codex/add-batch
 >>>>> origin/codex/add-symbolic-correspondences-for-numbers
+2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming a calm grid.
    - **Tree-of-Life scaffold** — ten sephirot linked by twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
@@ -178,6 +179,15 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
 
 ## Extending
 Add new draw functions to `js/helix-renderer.mjs` while preserving ND-safe layer order.
+3. Palette colours live in `data/palette.json`. If the file is missing, a gentle notice appears and safe defaults load.
+
+## ND-safe notes
+- Static drawing; no animation or autoplay.
+- Soft contrast palette and generous spacing reduce sensory strain.
+- Layer order clarifies depth without flashing.
+- Geometry parameters lean on constants 3, 7, 9, 11, 22, 33, 99, 144.
+
+## Design notes
 3. Palette colours live in `data/palette.json`. If the file is missing, a gentle notice appears and safe defaults load.
 
 ## ND-safe notes
