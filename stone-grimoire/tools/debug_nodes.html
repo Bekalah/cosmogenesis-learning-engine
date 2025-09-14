@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Debug Nodes</title><meta name="color-scheme" content="dark light">
+<body style="font:16px system-ui; background:#0d0f14; color:#e8e9f0; margin:0">
+<h1 style="padding:12px 16px">Debug: ATEL Nodes</h1>
+<pre id="out" style="white-space:pre-wrap; padding:12px 16px"></pre>
+<script>
+async function j(u){ const r=await fetch(u,{cache:'no-store'}); if(!r.ok) throw new Error(u+" "+r.status); return r.json(); }
+(async ()=>{
+  const base = "../../cosmogenesis-learning-engine/nodes/atelier";
+  const ids = ["node-ATEL-001","node-ATEL-002","node-ATEL-003"];
+  const out = document.getElementById('out');
+  for (const id of ids){
+    try {
+      const obj = await j(`${base}/${id}/node.json`);
+      out.textContent += `OK ${obj.id} — ${obj.title}\n`;
+    } catch(e){
+      out.textContent += `FAIL ${id} — ${e.message}\n`;
+    }
+  }
+})();
+</script>
+</body>

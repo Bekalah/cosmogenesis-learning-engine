@@ -1,0 +1,26 @@
+{
+  "id": "ATEL-002",
+  "title": "Pigment Lab — Ultramarine, Vermilion, Malachite, Gold",
+  "kind": "lineage",
+  "summary": "Layered glazes emulating historical pigments in ND-safe color discipline.",
+  "lineage": { "codex": "144:99", "path": "lab/pigment" },
+  "correspondences": { "planet": "Venus", "element": "Earth", "freq_hz": 432, "color_hex": "#26619C" },
+  "assets": [
+    { "path": "data/atelier/pigments.json", "role": "palette" }
+  ],
+  "links": { "repo": "cosmogenesis-learning-engine", "relpath": "nodes/atelier/node-ATEL-002" },
+  "meta": { "author": "Virelai Ezra Lux", "license": "CC BY-NC-SA 4.0", "tags": ["pigment","glaze","goldleaf","nd-safe"], "version": "1.0.0" },
+  "safe_use": "Digital emulation only; avoid neon; build 3–5 thin glazes.",
+  "procedures": [
+    "Ground: alabaster (#F4F1E9).",
+    "Glaze 1: ultramarine at 40–55% (multiply/soft-light).",
+    "Glaze 2: malachite at 25–40% (gentle hue shift).",
+    "Accents: vermilion sparingly; gold overlay < 10% area.",
+    "Export 16-bit TIFF master; create 2048px PNG preview."
+  ],
+  "references": [
+    "Fra Angelico (tempera, gilding)",
+    "Hilma af Klint (sacred color fields)",
+    "Splendor Solis (alchemical imagery)"
+  ]
+}
