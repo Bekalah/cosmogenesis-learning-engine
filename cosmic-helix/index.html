@@ -1,5 +1,7 @@
-<!-- Per Texturas Numerorum, Spira Loquitur.  // -->
 <!doctype html>
+<!-- Per Texturas Numerorum, Spira Loquitur.  // -->
+
+<!-- Motto: Per Texturas Numerorum, Spira Loquitur -->
 
 <html lang="en">
 <head>
@@ -52,6 +54,7 @@
       }
     };
 
+    // Local fetch; works offline and falls back safely when missing.
     const palette = await loadJSON("./data/palette.json");
     const active = palette || defaults.palette;
     elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";

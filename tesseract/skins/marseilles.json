@@ -1,0 +1,4 @@
+{ "id":"marseilles","label":"Marseilles Study",
+  "palette":{"bg":"#0a0c0f","fg":"#fffaf0","accent":"#ff6b6b"},
+  "labels":{"major":"Triomphes","wands":"Bâtons","cups":"Coupes","swords":"Épées","pentacles":"Deniers"}
+}

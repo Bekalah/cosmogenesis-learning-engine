@@ -1,0 +1,44 @@
+{
+  "id": "tesseract_chariot",
+  "title": "Tesseract — Chariot of Open-World Discovery",
+  "modes": [
+    {"id":"still","label":"Still Cube","note":"Study in place; no motion."},
+    {"id":"net","label":"Unfolded Net","note":"Lay the cube as a cross for mapping."},
+    {"id":"step","label":"Step Rotation","note":"Button-based 90° steps; no autoplay."}
+  ],
+  "tarot_skins": [
+    {"id":"liber_arcanae","label":"Liber Arcanae"},
+    {"id":"rws","label":"Rider–Waite Study"},
+    {"id":"thoth","label":"Thoth Study"},
+    {"id":"marseilles","label":"Marseilles Study"}
+  ],
+  "spiritual": {
+    "higher_consciousness": [
+      "Transcend 3D constraints through contemplative geometry",
+      "Expand perception with gentle, focused seeing"
+    ],
+    "interconnectedness":[
+      "Unify lineages as one weave",
+      "Move through the cosmic tapestry with care"
+    ],
+    "time_space":[
+      "Wrinkle linear time into insight",
+      "Touch timeless libraries of wisdom"
+    ],
+    "true_self":[
+      "Release karmic patterns in a kind container",
+      "Return to clear, sovereign self"
+    ],
+    "practice":[
+      "Jnana-style visualization (after Ouspensky)",
+      "Parts-safe focus: opt-in, stepwise"
+    ]
+  },
+  "rooms": [
+    {"id":"ouspensky","label":"Ouspensky Room","href":"/docs/ateliers/ouspensky.html"},
+    {"id":"atelier_constellation","label":"Atelier Constellation","href":"/docs/ateliers/atelier_constellation.html"},
+    {"id":"wisdom_towers","label":"Wisdom Towers","href":"/docs/ateliers/wisdom_towers.html"},
+    {"id":"vault_of_treasures","label":"Vault of Treasures","href":"/docs/ateliers/vault_of_treasures.html"}
+  ],
+  "ring_map": { "rings": 12, "rooms_per_ring": 12, "axis_nodes": [1,36,72,108,144] }
+}
