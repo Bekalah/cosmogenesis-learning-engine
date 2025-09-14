@@ -1,0 +1,25 @@
+{
+  "id": "ATEL-001",
+  "title": "Scribal Lab — Manuscripts & Hermetic Calligraphy",
+  "kind": "lineage",
+  "summary": "Recreate rubricated manuscripts with parchment, oak-gall ink emulation, and calm goldleaf.",
+  "lineage": { "codex": "144:99", "path": "lab/scribal" },
+  "correspondences": { "planet": "Moon", "element": "Water/Air", "color_hex": "#F4F1E9" },
+  "assets": [
+    { "path": "assets/parchment/base.png", "role": "texture" },
+    { "path": "assets/goldleaf/calm.png",  "role": "texture" }
+  ],
+  "links": { "repo": "cosmogenesis-learning-engine", "relpath": "nodes/atelier/node-ATEL-001" },
+  "meta": { "author": "Virelai Ezra Lux", "license": "CC BY-NC-SA 4.0", "tags": ["scribal","calligraphy","illumination","nd-safe"], "version": "1.0.0" },
+  "safe_use": "Muted palettes; no high-contrast black/white; slow gestures; no flicker.",
+  "procedures": [
+    "Lay parchment ground; draw faint baselines at 6–8% opacity.",
+    "Set body text (EB Garamond) at gentle gray; rubricate initials in vermilion.",
+    "Apply goldleaf overlay to margins/initials; keep shimmer static (ND-safe).",
+    "Export: PNG preview; 16-bit TIFF master."
+  ],
+  "references": [
+    "Book of Kells (rubrication and interlace)",
+    "Ars Notoria (notae), Hermetic papyri"
+  ]
+}
