@@ -326,6 +326,13 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
    - Fibonacci curve — golden spiral polyline anchored to centre.
    - Double-helix lattice — two phase-shifted sine tracks.
 
+## Usage
+1. Open `index.html` in any modern browser (no server needed).
+2. A 1440×900 canvas renders four static layers:
+   - **Vesica field** — intersecting circles forming the womb of forms.
+   - **Tree-of-Life scaffold** — ten sephirot with twenty-two paths.
+   - **Fibonacci curve** — golden spiral polyline anchored to centre.
+   - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette can be customized in `data/palette.json`. Missing data triggers a gentle inline notice with safe defaults.
 >>>>>>>+codex/add-more-
 ashing.
@@ -398,7 +405,6 @@ Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visu
    - Double-helix lattice — two phase-shifted sine tracks.
 3. Palette colours live in `data/palette.json`. If the file is missing, the renderer falls back to a safe default and shows a gentle notice.
 
-<<<<<<< main
 ## ND-safe notes
 - Static drawing only; no motion, autoplay, or flashing.
 - Soft contrast palette and generous spacing reduce sensory strain.
@@ -418,6 +424,7 @@ Add new layers by extending `renderHelix` with additional draw functions while p
 ## Related lore
 For a meditation on the tesseract as symbol of higher consciousness and non-linear learning, see [`docs/tesseract_spiritual.md`](../docs/tesseract_spiritual.md).
 
+<<<<<<< main
 Palette values live in `data/palette.json`. Missing data triggers a gentle
 notice and safe defaults.
 
@@ -463,6 +470,13 @@ wing; no animation or autoplay.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
    - **Double-helix lattice** — two phase-shifted sine tracks.
 3. Palette colours live in `data/palette.json`. If the file is missing, the renderer falls back to a safe default and shows a gentle notice.
+## Design notes
+- Static HTML and Canvas keep rendering local and deterministic.
+- Numerology constants live in `index.html` and are passed to the renderer so symbolic values remain explicit and easy to tweak.
+- Geometry routines live in `js/helix-renderer.mjs` with pure functions and ASCII quotes only.
+
+## Extending
+The renderer is intentionally minimal. Future layers or overlays can extend `renderHelix` while preserving the calm visual hierarchy.
 
 ## ND-safe notes
 - Static drawing; no animation or autoplay.
@@ -1424,3 +1438,4 @@ Add new layers by extending `renderHelix` while preserving the calm visual hiera
 See `docs/tesseract_spiritual.md` for cosmological context.
 - [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
 >>>>>>> main
+- [ ] Keep all additions ND-safe: no motion, high contrast, pure functions.
