@@ -1,6 +1,7 @@
 /*
   helix-renderer.mjs
   ND-safe static renderer for layered sacred geometry.
+  Offline-first; no external dependencies.
 
   Layers:
     1) Vesica field (intersecting circles)
