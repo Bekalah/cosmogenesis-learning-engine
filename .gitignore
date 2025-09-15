@@ -9,3 +9,7 @@ assets/figures-src/
 Thumbs.db
 __pycache__/
 *.pyc
+
+# Node packages
+node_modules/
+exports/progress.json
