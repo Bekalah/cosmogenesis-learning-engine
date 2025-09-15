@@ -15,18 +15,47 @@
 */
 
 export function renderHelix(ctx, opts) {
-  const { width, height, palette, NUM: N } = opts;
+  const { width, height, palette, NUM: N, notice } = opts;
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
 
+  const fallback = palette.ink || "#ffffff";
+  const layers = Array.isArray(palette.layers) ? palette.layers : [];
+
   // Layer order from base to foreground clarifies depth without motion.
-  drawVesicaField(ctx, width, height, palette.layers[0], N);
-  drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], N);
-  drawFibonacci(ctx, width, height, palette.layers[3], N);
-  drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], N);
+  drawVesicaField(ctx, width, height, layerColor(layers, fallback, 0), N);
+  drawTreeOfLife(
+    ctx,
+    width,
+    height,
+    layerColor(layers, fallback, 1),
+    layerColor(layers, fallback, 2),
+    N
+  );
+  drawFibonacci(ctx, width, height, layerColor(layers, fallback, 3), N);
+  drawHelix(
+    ctx,
+    width,
+    height,
+    layerColor(layers, fallback, 4),
+    layerColor(layers, fallback, 5),
+    N
+  );
+
+  if (notice) {
+    ctx.save();
+    ctx.font = "14px system-ui, -apple-system, Segoe UI, sans-serif";
+    ctx.fillStyle = fallback;
+    ctx.fillText(notice, 24, height - 24);
+    ctx.restore();
+  }
 }
 
-// Layer 1: Vesica field — static circle grid.
+function layerColor(layers, fallback, index) {
+  return layers[index] || fallback;
+}
+
+// Layer 1: Vesica field - static circle grid.
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // large circles keep space calm
@@ -40,7 +69,7 @@ function drawVesicaField(ctx, w, h, color, N) {
   }
 }
 
-// Layer 2: Tree-of-Life — fixed nodes and paths; thin strokes avoid harsh contrast.
+// Layer 2: Tree-of-Life - fixed nodes and paths; thin strokes avoid harsh contrast.
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // 2: gentle stroke width
@@ -81,7 +110,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   });
 }
 
-// Layer 3: Fibonacci curve — golden spiral polyline.
+// Layer 3: Fibonacci curve - golden spiral polyline.
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
@@ -105,7 +134,7 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.stroke();
 }
 
-// Layer 4: Double-helix lattice — two still sine tracks; amplitude limited for calm weave.
+// Layer 4: Double-helix lattice - two still sine tracks; amplitude limited for calm weave.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 & 11 echo twin pillars softly

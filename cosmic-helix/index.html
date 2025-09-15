@@ -18,8 +18,8 @@
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette…</div>
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
@@ -53,7 +53,8 @@
     // Local fetch; works offline and falls back safely when missing.
     const palette = await loadJSON("./data/palette.json");
     const active = palette || defaults.palette;
-    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+    const missingNotice = "Palette data missing; fallback colors applied.";
+    elStatus.textContent = palette ? "Palette loaded." : missingNotice;
 
     // Numerology constants used by geometry routines
     const NUM = {
@@ -68,7 +69,13 @@
     };
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: active, NUM });
+    renderHelix(ctx, {
+      width: canvas.width,
+      height: canvas.height,
+      palette: active,
+      NUM,
+      notice: palette ? null : missingNotice
+    });
   </script>
 </body>
 </html>
