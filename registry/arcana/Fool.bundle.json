@@ -1,0 +1,63 @@
+{
+  "arcana": "Fool",
+  "node": 0,
+  "name": "Node 00 — Aurora Gate",
+  "operators": [
+    {
+      "id": "op-leonora",
+      "label": "Leonora Carrington",
+      "role": "artist-magus"
+    }
+  ],
+  "symbols": ["vesica", "aurora", "mirror", "ladder", "cauldron"],
+  "crystals": ["obsidian", "rose_quartz", "clear_quartz"],
+  "crystal_defs": [
+    {
+      "id": "obsidian",
+      "label": "Obsidian",
+      "role": "shield / void mirror",
+      "gameplay": "blocks corruption",
+      "tags": ["root", "saturn"]
+    },
+    {
+      "id": "rose_quartz",
+      "label": "Rose Quartz",
+      "role": "compassion talisman",
+      "gameplay": "restores resolve",
+      "tags": ["heart", "venus"]
+    },
+    {
+      "id": "clear_quartz",
+      "label": "Clear Quartz",
+      "role": "amplifier / clarity key",
+      "gameplay": "boosts other crystals",
+      "tags": ["crown", "sun"]
+    }
+  ],
+  "links": {
+    "chapels": [
+      {
+        "repo": "stone-grimoire",
+        "id": "carrington-temple",
+        "path": "chapels/carrington-temple/index.html"
+      }
+    ],
+    "rooms": [
+      {
+        "repo": "magical-mystery-house",
+        "id": "room-00-aurora-kitchen",
+        "path": "rooms/00-aurora-kitchen/index.html"
+      }
+    ],
+    "quests": [
+      {
+        "repo": "circuitum99",
+        "id": "quest-00-aurora-gate",
+        "path": "docs/index.html#fool"
+      }
+    ]
+  },
+  "nd_safe": true,
+  "no_autoplay": true,
+  "no_strobe": true
+}
