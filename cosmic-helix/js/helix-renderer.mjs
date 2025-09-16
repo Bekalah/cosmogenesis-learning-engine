@@ -22,6 +22,9 @@
     - no motion or flashing; everything renders once on load
     - muted palette keeps contrast gentle for ND-safe viewing
     - numerology constants wire geometry to 3/7/9/11/22/33/99/144
+    - No motion or flashing; everything rendered once.
+    - Muted palette for calm contrast.
+    - Numerology constants wire geometry to 3, 7, 9, 11, 22, 33, 99, 144.
 */
 
 export function renderHelix(ctx, opts) {
@@ -90,6 +93,7 @@ function layerColor(layers, fallback, index) {
 }
 
 // Layer 1: Vesica field builds a calm lens grid using 3/7/9/11 counts.
+// Layer 1: Vesica field — static circle grid softened by numerology spacing.
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.save();
   ctx.strokeStyle = color;
@@ -105,6 +109,10 @@ function drawVesicaField(ctx, w, h, color, N) {
     const y = h / 2 + (row - (rows - 1) / 2) * verticalSpacing;
     horizontalOffsets.forEach((offset, index) => {
       const x = w / 2 + offset * (index === 1 ? 0 : 1);
+  const radius = Math.min(w, h) / N.THREE;
+  const step = radius / N.SEVEN; // 3 & 7 weave the vesica rhythm.
+  for (let y = radius; y <= h - radius; y += step) {
+    for (let x = radius; x <= w - radius; x += step) {
       ctx.beginPath();
       ctx.arc(x, y, baseRadius, 0, Math.PI * 2);
       ctx.stroke();
@@ -155,6 +163,27 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
 
   const nodes = getTreeNodes(w, h);
   const paths = getTreePaths();
+  ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // 22 paths, softened by pillar 11.
+
+  const nodes = [
+    { x: w / 2, y: h * 0.05 },  // Kether
+    { x: w * 0.25, y: h * 0.15 }, // Chokmah
+    { x: w * 0.75, y: h * 0.15 }, // Binah
+    { x: w * 0.25, y: h * 0.35 }, // Chesed
+    { x: w * 0.75, y: h * 0.35 }, // Geburah
+    { x: w / 2, y: h * 0.45 }, // Tiphereth
+    { x: w * 0.25, y: h * 0.65 }, // Netzach
+    { x: w * 0.75, y: h * 0.65 }, // Hod
+    { x: w / 2, y: h * 0.75 }, // Yesod
+    { x: w / 2, y: h * 0.9 }  // Malkuth
+  ];
+
+  const paths = [
+    [0, 1], [0, 2], [0, 5], [1, 2], [1, 5], [2, 5],
+    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
+    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
+  ]; // 22 paths (N.TWENTYTWO)
 
   paths.forEach(([a, b]) => {
     ctx.beginPath();
@@ -166,6 +195,8 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.fillStyle = nodeColor;
   const nodeRadius = N.NINE / 3; // equals 3 for compact discs.
   nodes.forEach(node => {
+  const nodeRadius = N.NINE / 3; // Node size tied to 9 for calm readability.
+  nodes.forEach(n => {
     ctx.beginPath();
     ctx.arc(node.x, node.y, nodeRadius, 0, Math.PI * 2);
     ctx.fill();
@@ -208,6 +239,10 @@ function getTreePaths() {
 }
 
 // Layer 3: Fibonacci curve uses a golden ratio log spiral traced slowly.
+  ctx.restore();
+}
+
+// Layer 3: Fibonacci curve — golden spiral polyline anchored to centre.
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.save();
   ctx.strokeStyle = color;
@@ -216,6 +251,12 @@ function drawFibonacci(ctx, w, h, color, N) {
 
   const fib = buildFibonacci(N.NINE);
   const scale = Math.min(w, h) / N.ONEFORTYFOUR;
+  const fib = [1, 1];
+  while (fib.length < N.NINE) {
+    const len = fib.length;
+    fib.push(fib[len - 1] + fib[len - 2]);
+  }
+  const scale = Math.min(w, h) / N.ONEFORTYFOUR; // 144 echoes the resonant square.
   let angle = 0;
   let x = w / 2;
   let y = h / 2;
@@ -353,6 +394,22 @@ function drawHelix(ctx, w, h, colorA, colorB, N) {
       if (x === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
       strand.points.push({ x, y });
+  const midY = h / 2;
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 & 11 echo twin pillars softly.
+  const stepX = w / N.ONEFORTYFOUR; // Small step keeps curve smooth without motion.
+  ctx.lineWidth = 2;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  for (let phase = 0; phase < 2; phase++) {
+    ctx.strokeStyle = phase === 0 ? colorA : colorB;
+    ctx.beginPath();
+    for (let x = 0; x <= w; x += stepX) {
+      const y = midY + amplitude * Math.sin((x / w) * N.THIRTYTHREE * Math.PI + phase * Math.PI);
+      if (x === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
     }
   });
   ctx.strokeStyle = color;
@@ -436,4 +493,5 @@ function getTreePaths() {
     [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
     [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
   ];
+  ctx.restore();
 }
