@@ -718,6 +718,11 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 ## Usage
 1. Double-click `index.html` in any modern browser; no server or network required.
 2. A 1440×900 canvas renders four static layers:
+Offline, ND-safe canvas sketch for layered sacred geometry.
+
+## Usage
+1. Double-click `index.html` in any modern browser; no server or network required.
+2. A 1440×900 canvas renders four static layers:
    - **Vesica field** — intersecting circles forming a calm grid.
    - **Tree-of-Life scaffold** — ten sephirot linked by twenty-two paths.
    - **Fibonacci curve** — golden spiral polyline anchored to centre.
@@ -1024,6 +1029,8 @@ Static, offline canvas renderer for layered sacred geometry.
 Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visual hierarchy and ND-safe choices.
 3. Palette colours live in `data/palette.json`. Missing data triggers a gentle notice and safe defaults.
 
+3. Palette colours live in `data/palette.json`. Missing data triggers a gentle notice and safe defaults.
+
 ## ND-safe notes
 - Static drawing only; no animation or autoplay.
 - Soft contrast palette and generous spacing reduce sensory strain.
@@ -1076,3 +1083,7 @@ Static, offline HTML+Canvas renderer for layered sacred geometry.
 ## Extending
 Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visual hierarchy and ND-safe principles.
 >>>>>>> main
+## Related lore
+For wider cosmological context, see `docs/tesseract_spiritual.md`.
+
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
