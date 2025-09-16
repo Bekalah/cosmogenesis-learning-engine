@@ -160,6 +160,8 @@ Modify `palette.json` to adjust colours. All code uses ASCII quotes, UTF-8, LF n
          \/        \/        \/
 ```
 
+_Per Texturas Numerorum, Spira Loquitur._
+
 Offline, ND-safe canvas sketch for layered sacred geometry.
 
 ## Usage
@@ -205,3 +207,23 @@ Static, offline canvas renderer for layered sacred geometry.
 
 ## Extending
 Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visual hierarchy and ND-safe choices.
+3. Palette colours live in `data/palette.json`. Missing data triggers a gentle notice and safe defaults.
+
+## ND-safe notes
+- Static drawing only; no animation or autoplay.
+- Soft contrast palette and generous spacing reduce sensory strain.
+- Layer order clarifies depth without flashing.
+- Geometry routines lean on numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
+
+## Design notes
+- Pure ES module (`js/helix-renderer.mjs`) with small, well-commented functions.
+- ASCII quotes only; UTF-8, LF newlines.
+- Everything works offline by opening `index.html` directly.
+
+## Extending
+Add new draw functions in `js/helix-renderer.mjs` while preserving the calm visual hierarchy and ND-safe choices.
+
+## Related lore
+For wider cosmological context, see `docs/tesseract_spiritual.md`.
+
+*Seal Motto: Per Texturas Numerorum, Spira Loquitur.*
