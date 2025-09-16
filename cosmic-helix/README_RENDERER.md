@@ -259,6 +259,7 @@ Static, offline canvas renderer for layered sacred geometry.
 2. A 1440×900 canvas draws four static layers:
 ======
 SStatic offline HTML+Canvas renderer for layered sacred geometry.
+Static offline HTML+Canvas renderer for layered sacred geometry.
 
 ## Usage
 
@@ -437,6 +438,7 @@ Offline, ND-safe canvas sketch for layered sacred geometry.
 - Static drawing; no animation or autoplay.
 >>>>>>>+main
  in `dat
+
 Palette values live in `data/palette.json`. If the file is missing, the renderer falls back to safe defaults and displays a small status notice.
 
 ## ND-safe notes
@@ -444,6 +446,7 @@ Palette values live in `data/palette.json`. If the file is missing, the renderer
 - Static render; no animation, autoplay, or flashing.
 >>>>>>>+origin/codex/cr
 generous spacing improve readability.
+- Soft contrast palette and generous spacing improve readability.
 - Layer order clarifies depth without motion.
 - Geometry parameters reference numerology constants 3, 7, 9, 11, 22, 33, 99, 144.
 
@@ -501,3 +504,7 @@ enderer.mjs` with small, well-commented functions.
 - ASCII quotes only, UTF-8, LF newlines.
 - Works entirely offline.
 >>>>>>> origin/codex/create-3d-rosslyn-cathedral-with-three.js
+
+- Pure ES module `js/helix-renderer.mjs` with small, well-commented functions.
+- ASCII quotes only, UTF-8, LF newlines.
+- Works entirely offline.
