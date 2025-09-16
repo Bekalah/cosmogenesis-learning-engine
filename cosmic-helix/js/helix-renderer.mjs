@@ -145,6 +145,10 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.save();
   ctx.strokeStyle = pathColor;
+// Layer 2: Tree-of-Life nodes and paths; gentle strokes avoid harsh edges.
+function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
+  ctx.save();
+  ctx.strokeStyle = pathColor;
   ctx.lineWidth = N.TWENTYTWO / N.ELEVEN;
   ctx.lineCap = "round";
 
@@ -200,6 +204,8 @@ function getTreePaths() {
 }
 
 // Layer 3: Fibonacci curve - static golden polyline.
+}
+
 // Layer 3: Fibonacci curve uses a golden ratio log spiral traced slowly.
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.save();
@@ -300,6 +306,31 @@ function strokePolyline(ctx, points, color) {
 // Layer 4: Double-helix lattice, two calm sine strands with light rungs.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   ctx.save();
+
+  const centerX = w / 2;
+  const centerY = h / 2;
+  const phi = (1 + Math.sqrt(5)) / 2;
+  const quarterTurns = N.SEVEN; // 7 quarter-turns keeps the arc within frame
+  const thetaMax = quarterTurns * (Math.PI / 2);
+  const startRadius = Math.min(w, h) / N.THIRTYTHREE;
+  const growth = Math.log(phi) / (Math.PI / 2);
+
+  ctx.beginPath();
+  for (let theta = 0; theta <= thetaMax; theta += Math.PI / N.TWENTYTWO) {
+    const radius = startRadius * Math.exp(growth * theta);
+    const x = centerX + radius * Math.cos(theta);
+    const y = centerY + radius * Math.sin(theta);
+    if (theta === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+// Layer 4: Double-helix lattice, two calm sine strands with light rungs.
+function drawHelix(ctx, w, h, colorA, colorB, N) {
+  ctx.save();
   const midY = h / 2;
   const amplitude = (h / N.NINETYNINE) * N.ELEVEN;
   const steps = N.ONEFORTYFOUR;
@@ -335,6 +366,20 @@ function drawHelixConnectors(ctx, trackA, trackB, color, N) {
     ctx.beginPath();
     ctx.moveTo(trackA[i].x, trackA[i].y);
     ctx.lineTo(trackB[i].x, trackB[i].y);
+    ctx.stroke();
+  });
+
+  // Draw gentle rungs to hint the lattice without sharp angles.
+  ctx.strokeStyle = colorB;
+  ctx.lineWidth = 1;
+  const rungStep = Math.max(1, Math.floor(strands[0].points.length / N.TWENTYTWO));
+  for (let i = 0; i < strands[0].points.length; i += rungStep) {
+    const left = strands[0].points[i];
+    const right = strands[1].points[i];
+    if (!left || !right) continue;
+    ctx.beginPath();
+    ctx.moveTo(left.x, left.y);
+    ctx.lineTo(right.x, right.y);
     ctx.stroke();
   });
 
