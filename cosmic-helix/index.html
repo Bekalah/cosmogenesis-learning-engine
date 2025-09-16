@@ -62,6 +62,7 @@
       }
     };
 
+    // Local fetch; no network requests. Missing data triggers a gentle notice and safe defaults.
     const palette = await loadJSON("./data/palette.json");
     const active = palette || defaults.palette;
     const missingNotice = "Palette data missing; fallback colors applied.";
