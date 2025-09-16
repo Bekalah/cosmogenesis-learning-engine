@@ -19,14 +19,14 @@ export function renderHelix(ctx, opts) {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
 
-  // Layer order from base to foreground clarifies depth without motion.
+  // why: layering from background to foreground keeps geometry readable without animation.
   drawVesicaField(ctx, width, height, palette.layers[0], N);
   drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], N);
   drawFibonacci(ctx, width, height, palette.layers[3], N);
   drawHelix(ctx, width, height, palette.layers[4], palette.layers[5], N);
 }
 
-// Layer 1: Vesica field — static circle grid.
+// Layer 1: Vesica field -- static circle grid. why: evokes womb of forms without motion.
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   const radius = Math.min(w, h) / N.THREE; // large circles keep space calm
@@ -40,7 +40,7 @@ function drawVesicaField(ctx, w, h, color, N) {
   }
 }
 
-// Layer 2: Tree-of-Life — fixed nodes and paths; thin strokes avoid harsh contrast.
+// Layer 2: Tree-of-Life -- fixed nodes and paths; thin strokes avoid harsh contrast. why: preserves ritual map clarity.
 function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // 2: gentle stroke width
@@ -81,7 +81,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   });
 }
 
-// Layer 3: Fibonacci curve — golden spiral polyline.
+// Layer 3: Fibonacci curve -- golden spiral polyline. why: invites growth narrative without dynamic animation.
 function drawFibonacci(ctx, w, h, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
@@ -105,10 +105,10 @@ function drawFibonacci(ctx, w, h, color, N) {
   ctx.stroke();
 }
 
-// Layer 4: Double-helix lattice — two still sine tracks; amplitude limited for calm weave.
+// Layer 4: Double-helix lattice -- two still sine tracks; amplitude limited for calm weave. why: echoes DNA without causing motion.
 function drawHelix(ctx, w, h, colorA, colorB, N) {
   const midY = h / 2;
-  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 & 11 echo twin pillars softly
+  const amplitude = (h / N.NINETYNINE) * N.ELEVEN; // 99 and 11 echo twin pillars softly
   const stepX = w / N.ONEFORTYFOUR; // small step keeps curve smooth without motion
   ctx.lineWidth = 2;
   for (let phase = 0; phase < 2; phase++) {
