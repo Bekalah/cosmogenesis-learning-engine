@@ -5,6 +5,7 @@
   <title>Cosmic Helix Renderer (ND-safe, Offline)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
+  <!-- Integration note: kept inside cosmic-helix/ so the primary index.html remains untouched; honours existing lore. -->
   <style>
     /* ND-safe: calm contrast, no motion, generous spacing */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
@@ -32,16 +33,6 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    async function loadJSON(path) {
-      try {
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-      } catch (err) {
-        return null;
-      }
-    }
-
     const defaults = {
       palette: {
         bg: "#0b0b12",
@@ -50,10 +41,65 @@
       }
     };
 
-    // Local fetch; works offline and falls back safely when missing.
-    const palette = await loadJSON("./data/palette.json");
+    async function loadJSONViaFetch(path) {
+      try {
+        const res = await fetch(path, { cache: "no-store" });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function loadJSONViaFrame(path) {
+      return new Promise(resolve => {
+        const frame = document.createElement("iframe");
+        frame.setAttribute("aria-hidden", "true");
+        frame.style.position = "absolute";
+        frame.style.width = "0";
+        frame.style.height = "0";
+        frame.style.border = "0";
+        const clean = () => frame.remove();
+        frame.onload = () => {
+          try {
+            const doc = frame.contentDocument || frame.contentWindow.document;
+            const raw = doc && doc.body ? doc.body.textContent : "";
+            const trimmed = raw ? raw.trim() : "";
+            resolve(trimmed ? JSON.parse(trimmed) : null);
+          } catch (err) {
+            resolve(null);
+          }
+          clean();
+        };
+        frame.onerror = () => {
+          clean();
+          resolve(null);
+        };
+        frame.src = path;
+        document.body.appendChild(frame);
+      });
+    }
+
+    async function loadPalette(path) {
+      const viaFetch = await loadJSONViaFetch(path);
+      if (viaFetch) {
+        elStatus.textContent = "Palette loaded.";
+        return viaFetch;
+      }
+
+      // Offline safeguard: iframe reader avoids file:// fetch restrictions.
+      const viaFrame = await loadJSONViaFrame(path);
+      if (viaFrame) {
+        elStatus.textContent = "Palette loaded via offline reader.";
+        return viaFrame;
+      }
+
+      elStatus.textContent = "Palette missing; using safe fallback.";
+      return null;
+    }
+
+    const palette = await loadPalette("./data/palette.json");
     const active = palette || defaults.palette;
-    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
 
     // Numerology constants used by geometry routines
     const NUM = {
@@ -67,7 +113,7 @@
       ONEFORTYFOUR: 144
     };
 
-    // ND-safe rationale: no motion, high readability, soft colors, layered order
+    // ND-safe rationale: no motion, high readability, soft colours, layered order.
     renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: active, NUM });
   </script>
 </body>
