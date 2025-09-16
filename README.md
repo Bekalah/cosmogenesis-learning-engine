@@ -53,3 +53,7 @@ for duplicates and optionally fix them:
 npm run dedupe        # report duplicate lines
 npm run dedupe -- --write  # remove duplicates in place
 ```
+
+### Cosmic Helix Renderer
+
+An ND-safe offline canvas sketch lives in `cosmic-helix/`. Double-click `cosmic-helix/index.html` to view layered geometry (vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double helix). Colours can be tweaked in `cosmic-helix/data/palette.json`.
