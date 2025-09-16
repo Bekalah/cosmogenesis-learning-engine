@@ -8,54 +8,80 @@
   <style>
     /* ND-safe: calm contrast, no motion, generous spacing */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
-    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
     header { padding:12px 16px; border-bottom:1px solid #1d1d2a; }
     .status { color:var(--muted); font-size:12px; }
-    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; }
+    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; background:var(--bg); }
     .note { max-width:900px; margin:0 auto 16px; color:var(--muted); }
     code { background:#11111a; padding:2px 4px; border-radius:3px; }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette…</div>
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette...</div>
+    <div><strong>Cosmic Helix Renderer</strong> -- layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
+  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const elStatus = document.getElementById("status");
+    const statusEl = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
+    // Local fetch helper: works offline and returns null on errors so we can fall back calmly.
     async function loadJSON(path) {
       try {
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-      } catch (err) {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
+      } catch (error) {
         return null;
       }
+    }
+
+    // Apply palette values to CSS custom properties so the chrome matches the canvas.
+    function applyPaletteColors(palette) {
+      const root = document.documentElement.style;
+      if (palette.bg) root.setProperty("--bg", palette.bg);
+      if (palette.ink) root.setProperty("--ink", palette.ink);
+      if (palette.muted) root.setProperty("--muted", palette.muted);
     }
 
     const defaults = {
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
+        muted: "#a6a6c1",
         layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
 
-    // Local fetch; works offline and falls back safely when missing.
+    // Local fetch; no network requests. Missing data triggers a gentle notice and safe defaults.
     const palette = await loadJSON("./data/palette.json");
     const active = palette || defaults.palette;
-    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+    const missingNotice = "Palette data missing; fallback colors applied.";
+    elStatus.textContent = palette ? "Palette loaded." : missingNotice;
+    // Local fetch keeps everything offline and falls back safely when the palette is absent.
+    const paletteData = await loadJSON("./data/palette.json");
+    const validPalette = paletteData && Array.isArray(paletteData.layers) && paletteData.layers.length >= 6;
+    const active = validPalette ? paletteData : defaults.palette;
+    elStatus.textContent = validPalette ? "Palette loaded." : "Palette missing or incomplete. Using safe fallback.";
 
-    // Numerology constants used by geometry routines
+    // Numerology constants wired into the geometry routines.
+    const activePalette = palette || defaults.palette;
+    applyPaletteColors(activePalette);
+
+    const paletteMessage = palette
+      ? "Palette loaded."
+      : "Palette missing; using safe fallback palette.";
+
+    // Numerology constants keep every layer in alignment with the codex instructions.
     const NUM = {
       THREE: 3,
       SEVEN: 7,
@@ -68,7 +94,25 @@
     };
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: active, NUM });
+    renderHelix(ctx, {
+      width: canvas.width,
+      height: canvas.height,
+      palette: active,
+      NUM,
+      notice: palette ? null : missingNotice
+    });
+    if (!ctx) {
+      elStatus.textContent = "Canvas unavailable. Rendering skipped.";
+    } else {
+      // ND-safe rationale: no motion, high readability, soft colors, layered order.
+      renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: active, NUM });
+    if (!ctx) {
+      statusEl.textContent = paletteMessage + " Canvas context unavailable; please try a modern browser.";
+    } else {
+      // ND-safe rationale: render once, no motion, gentle palette, layered order.
+      renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: activePalette, NUM });
+      statusEl.textContent = paletteMessage + " Geometry rendered.";
+    }
   </script>
 </body>
 </html>
