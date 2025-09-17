@@ -19,6 +19,40 @@
     #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; background:var(--bg); }
     .note { max-width:900px; margin:0 auto 16px; color:var(--muted); }
     code { background:#11111a; padding:2px 4px; border-radius:3px; }
+  <style>
+    /* ND-safe palette: calm contrast, no motion, generous spacing. */
+    :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    header {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1d1d2a;
+    }
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    #stage {
+      display: block;
+      margin: 16px auto 24px;
+      box-shadow: 0 0 0 1px #1d1d2a;
+      background: var(--bg);
+    }
+    .note {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+    }
+    code {
+      background: #11111a;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -34,11 +68,16 @@
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Static Vesica, Tree-of-Life, Fibonacci, and double-helix layers. No animation, no autoplay, no external libraries. Open this file directly.</p>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice are rendered once with a calm palette. No animation, no external libraries. Open this file directly.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const statusEl = document.getElementById("status");
+    const elStatus = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
@@ -56,6 +95,23 @@
     };
 
     function applyPaletteColors(palette) {
+    async function loadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function isValidPalette(candidate) {
+      if (!candidate || typeof candidate !== "object") return false;
+      if (!Array.isArray(candidate.layers)) return false;
+      return candidate.layers.length >= 6;
+    }
+
+    function applyPaletteToChrome(palette) {
       const root = document.documentElement.style;
       if (palette.bg) root.setProperty("--bg", palette.bg);
       if (palette.ink) root.setProperty("--ink", palette.ink);
@@ -116,6 +172,18 @@
       applyChromePalette(activePalette);
       statusEl.textContent = palette ? "Palette loaded." : "Palette unavailable; using safe fallback palette.";
 
+    const fetchedPalette = await loadJSON("./data/palette.json");
+    const palette = isValidPalette(fetchedPalette) ? fetchedPalette : defaults.palette;
+    applyPaletteToChrome(palette);
+
+    const usingFallback = !isValidPalette(fetchedPalette);
+    elStatus.textContent = usingFallback
+      ? "Palette missing or incomplete; using safe fallback."
+      : "Palette loaded.";
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas context unavailable.";
+    } else {
       const NUM = {
         THREE: 3,
         SEVEN: 7,
@@ -134,6 +202,12 @@
         palette: activePalette,
         NUM,
         notice
+      renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette,
+        NUM,
+        notice: usingFallback ? "Fallback palette active." : ""
       });
     }
   </script>
