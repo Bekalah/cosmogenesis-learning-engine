@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Aurora Gate - Node 00 (Twine Sketch)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --bg:#0f1120;
+      --panel:#16192a;
+      --ink:#e3e6f5;
+      --accent:#93c4ff;
+    }
+    html, body {
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:16px/1.6 "Atkinson Hyperlegible", system-ui, sans-serif;
+    }
+    main {
+      max-width:720px;
+      margin:0 auto;
+      padding:32px 20px 48px;
+    }
+    header {
+      margin-bottom:24px;
+    }
+    h1 {
+      font-size:28px;
+      margin:0 0 8px;
+    }
+    .subtitle {
+      color:#a7accb;
+      font-size:14px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+    .passage {
+      display:none;
+      background:var(--panel);
+      border:1px solid #272c45;
+      border-radius:12px;
+      padding:20px 24px;
+      margin-bottom:20px;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .passage.active {
+      display:block;
+    }
+    .choices {
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    button.choice {
+      background:#222742;
+      border:1px solid #2f3555;
+      border-radius:8px;
+      padding:8px 14px;
+      color:var(--ink);
+      cursor:pointer;
+      font-size:15px;
+    }
+    button.choice:hover,
+    button.choice:focus {
+      background:#2a3154;
+      border-color:var(--accent);
+    }
+    dl {
+      margin:0;
+    }
+    dt {
+      font-weight:600;
+      margin-top:12px;
+    }
+    dd {
+      margin:4px 0 0 0;
+    }
+    footer {
+      margin-top:32px;
+      color:#7c81a4;
+      font-size:13px;
+    }
+    a {
+      color:var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Aurora Gate - Node 00</h1>
+      <div class="subtitle">Twine-style modular sketch for Codex 144:99</div>
+      <p>This offline demo honours trauma-aware pacing: each layer unlocks when you choose it. No timers, no audio, and undo is as simple as revisiting the menu below.</p>
+    </header>
+
+    <section class="passage active" id="passage-start">
+      <p>The Gate rests in quiet starlight. Choose the key you wish to study first; every layer can be revisited without penalty.</p>
+      <div class="choices">
+        <button class="choice" data-target="numerology">Numerology Lens</button>
+        <button class="choice" data-target="tarot">Tarot & Angelic Choir</button>
+        <button class="choice" data-target="astrology">Astrological Pulse</button>
+        <button class="choice" data-target="crystal">Crystal & Geometry</button>
+        <button class="choice" data-target="pedagogy">Pedagogical Map</button>
+        <button class="choice" data-target="resources">OER Gallery</button>
+      </div>
+    </section>
+
+    <section class="passage" id="passage-numerology">
+      <h2>Numerology Lens</h2>
+      <p>Node 00 opens with <strong>0</strong> -> reduction <strong>0</strong> (void, full potential). Cross-tradition echoes:</p>
+      <ul>
+        <li><strong>Sefer Yetzirah</strong> speaks of the measuring line drawn from nothing.</li>
+        <li><strong>Pythagorean</strong> schools treat zero as the womb of number, source of Monad.</li>
+        <li><strong>Codex 144:99</strong> frames Node 00 as antechamber to 144 resonant pathways.</li>
+      </ul>
+      <div class="choices">
+        <button class="choice" data-target="start">Return to Gate</button>
+      </div>
+    </section>
+
+    <section class="passage" id="passage-tarot">
+      <h2>Tarot & Angelic Choir</h2>
+      <dl>
+        <dt>Major Arcana</dt>
+        <dd>The Fool (0) walks forward with trust; here the satchel holds modular lesson seeds.</dd>
+        <dt>Minor Arcana</dt>
+        <dd>Page of Swords - curious, reflective, learns by tracing sacred scripts.</dd>
+        <dt>Shem Angel</dt>
+        <dd>Vehuiah (0-5 deg Aries) ignites new studies with clear intention.</dd>
+        <dt>Counterbalance</dt>
+        <dd>Daemon Bael - reminder to dissolve overwhelm through grounded breath.</dd>
+      </dl>
+      <div class="choices">
+        <button class="choice" data-target="start">Return to Gate</button>
+      </div>
+    </section>
+
+    <section class="passage" id="passage-astrology">
+      <h2>Astrological Pulse</h2>
+      <p>Planetary steward: <strong>Uranus</strong> (sudden insight) co-ruled by <strong>Saturn</strong> (structure) for safe experimentation.</p>
+      <ul>
+        <li>Zodiac: 1st decan Aries - sparks initiative for the learning engine.</li>
+        <li>Decan caretakers: Vehuiah and Angel 01 provide calm ignition without shock.</li>
+        <li>Timing note: open sessions at civil twilight to maintain gentle light levels.</li>
+      </ul>
+      <div class="choices">
+        <button class="choice" data-target="start">Return to Gate</button>
+      </div>
+    </section>
+
+    <section class="passage" id="passage-crystal">
+      <h2>Crystal & Geometry</h2>
+      <p>Layered correspondences to mirror the Cosmic Helix renderer:</p>
+      <ul>
+        <li>Crystals: Clear Quartz (clarity), Labradorite (aurora shimmer), Angelite (soft blue calm).</li>
+        <li>Palette swatch: #121933, #3a4b72, #7bb6ff, #f2f5ff.</li>
+        <li>Sound anchor: 432 Hz drone + optional 528 Hz harmonic.</li>
+        <li>Geometry: Vesica gateway, Tree-of-Life spine, Fibonacci arc leading into double helix lattice.</li>
+      </ul>
+      <div class="choices">
+        <button class="choice" data-target="start">Return to Gate</button>
+      </div>
+    </section>
+
+    <section class="passage" id="passage-pedagogy">
+      <h2>Pedagogical Map</h2>
+      <ol>
+        <li><strong>Arrival Ritual</strong> - sensory check, choose light level, optional grounding script.</li>
+        <li><strong>Layer One</strong> - explore vesica field through tracing or the canvas renderer.</li>
+        <li><strong>Layer Two</strong> - introduce correspondences via cards and crystal toolkit snapshots.</li>
+        <li><strong>Layer Three</strong> - reflective journaling; provide undo/redo prompts for every action.</li>
+      </ol>
+      <p>Trauma-safe flag: <strong>enabled</strong>. All passages remain accessible; no hidden timers or forced progress.</p>
+      <div class="choices">
+        <button class="choice" data-target="start">Return to Gate</button>
+      </div>
+    </section>
+
+    <section class="passage" id="passage-resources">
+      <h2>OER Gallery</h2>
+      <ul>
+        <li><a href="https://www.oercommons.org/" target="_blank" rel="noopener">OER Commons - Art &amp; Design</a> (lesson prompts)</li>
+        <li><a href="https://digitalcollections.tcd.ie/collections/book-of-kells" target="_blank" rel="noopener">Book of Kells Open Access</a> (calligraphy references)</li>
+        <li><a href="https://github.com/materialsproject/crystaltoolkit-examples" target="_blank" rel="noopener">Crystal Toolkit Examples</a> (sacred structure datasets)</li>
+      </ul>
+      <p>If you remain offline, consult the provenance logs in <code>assets/oer</code>; each entry lists licensing details.</p>
+      <div class="choices">
+        <button class="choice" data-target="start">Return to Gate</button>
+      </div>
+    </section>
+
+    <footer>
+      Aurora Gate provenance - ORCID: 0009-0002-2834-3956 - GitHub: <a href="https://github.com/bekalah">bekalah</a>
+    </footer>
+  </main>
+
+  <script>
+    const passages = new Map();
+    document.querySelectorAll('.passage').forEach((section) => {
+      passages.set(section.id.replace('passage-', ''), section);
+    });
+
+    function showPassage(key) {
+      passages.forEach((section) => section.classList.remove('active'));
+      const target = passages.get(key) || passages.get('start');
+      target.classList.add('active');
+    }
+
+    document.querySelectorAll('button.choice').forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetKey = button.dataset.target;
+        showPassage(targetKey);
+      });
+    });
+  </script>
+</body>
+</html>

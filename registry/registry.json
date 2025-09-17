@@ -22,7 +22,7 @@
     },
     {
       "id": "ATEL-001",
-      "title": "Scribal Lab — Manuscripts & Hermetic Calligraphy",
+      "title": "Scribal Lab - Manuscripts & Hermetic Calligraphy",
       "kind": "lineage",
       "summary": "Recreate rubricated manuscripts with parchment, oak-gall ink emulation, and calm goldleaf.",
       "lineage": {
@@ -61,7 +61,7 @@
       },
       "safe_use": "Muted palettes; no high-contrast black/white; slow gestures; no flicker.",
       "procedures": [
-        "Lay parchment ground; draw faint baselines at 6–8% opacity.",
+        "Lay parchment ground; draw faint baselines at 6-8% opacity.",
         "Set body text (EB Garamond) at gentle gray; rubricate initials in vermilion.",
         "Apply goldleaf overlay to margins/initials; keep shimmer static (ND-safe).",
         "Export: PNG preview; 16-bit TIFF master."
@@ -69,11 +69,74 @@
       "references": [
         "Book of Kells (rubrication and interlace)",
         "Ars Notoria (notae), Hermetic papyri"
-      ]
+      ],
+      "layer_annotations": {
+        "numerology": {
+          "value": 72,
+          "reduction": 9,
+          "references": [
+            "Sefer Yetzirah: 32 paths + 40 letter gates",
+            "Book of Soyga angelic tables"
+          ],
+          "rationale": "Scribe node opens the 72-letter Shem ha-Mephorash cycle; reduction 9 anchors completion."
+        },
+        "tarot_angelic": {
+          "major": "II The High Priestess",
+          "minor": "Nine of Pentacles",
+          "shem_angel": "Yeliel (2-6 deg Taurus)",
+          "daemon": "Haiaiel",
+          "rationale": "High Priestess protects scrolls; Nine of Pentacles honours crafted manuscripts with calm abundance."
+        },
+        "astrology": {
+          "planet": "Moon",
+          "zodiac": "Taurus Decan I",
+          "decans": [
+            {
+              "name": "Luna in Taurus",
+              "degrees": "0-10 deg"
+            }
+          ],
+          "rationale": "Moon in Taurus supports steady, tactile calligraphy rituals."
+        },
+        "crystal_color_geometry": {
+          "crystals": ["Selenite", "Moonstone"],
+          "palette": ["#f4f1e9", "#d4c7a1", "#a8b4cc"],
+          "sound_frequency_hz": 432,
+          "geometry": "Vesica-hexagram manuscript grid",
+          "rationale": "Translucent crystals echo the parchment glow; geometry mirrors manuscript layout guides."
+        },
+        "pedagogy": {
+          "learning_outcome": "Learners construct rubricated folios while practicing trauma-aware pacing.",
+          "trauma_safe": true,
+          "progressive_disclosure": [
+            "Stage 1: breath + posture check-in",
+            "Stage 2: pencil under-drawing",
+            "Stage 3: ink lettering",
+            "Stage 4: gilding with optional assist"
+          ],
+          "rationale": "Stages keep control in the learner's hands; undo paths highlighted at every step."
+        },
+        "oer_resources": [
+          {
+            "title": "Digitised Book of Kells folios",
+            "type": "image set",
+            "source": "https://digitalcollections.tcd.ie/collections/book-of-kells",
+            "license": "CC BY",
+            "notes": "Provides exemplar rubrication patterns for copying exercises."
+          },
+          {
+            "title": "OER Commons: Illuminated Manuscript Basics",
+            "type": "lesson plan",
+            "source": "https://www.oercommons.org/courses/illuminated-manuscripts",
+            "license": "CC BY",
+            "notes": "Used for scaffolding reflection prompts."
+          }
+        ]
+      }
     },
     {
       "id": "ATEL-002",
-      "title": "Pigment Lab — Ultramarine, Vermilion, Malachite, Gold",
+      "title": "Pigment Lab - Ultramarine, Vermilion, Malachite, Gold",
       "kind": "lineage",
       "summary": "Layered glazes emulating historical pigments in ND-safe color discipline.",
       "lineage": {
@@ -107,11 +170,11 @@
         ],
         "version": "1.0.0"
       },
-      "safe_use": "Digital emulation only; avoid neon; build 3–5 thin glazes.",
+      "safe_use": "Digital emulation only; avoid neon; build 3-5 thin glazes.",
       "procedures": [
         "Ground: alabaster (#F4F1E9).",
-        "Glaze 1: ultramarine at 40–55% (multiply/soft-light).",
-        "Glaze 2: malachite at 25–40% (gentle hue shift).",
+        "Glaze 1: ultramarine at 40-55% (multiply/soft-light).",
+        "Glaze 2: malachite at 25-40% (gentle hue shift).",
         "Accents: vermilion sparingly; gold overlay < 10% area.",
         "Export 16-bit TIFF master; create 2048px PNG preview."
       ],
@@ -119,11 +182,74 @@
         "Fra Angelico (tempera, gilding)",
         "Hilma af Klint (sacred color fields)",
         "Splendor Solis (alchemical imagery)"
-      ]
+      ],
+      "layer_annotations": {
+        "numerology": {
+          "value": 33,
+          "reduction": 6,
+          "references": [
+            "Rosicrucian degrees",
+            "Pigment triad expansions (3x11)"
+          ],
+          "rationale": "Thirty-three layers frame the glaze sequence; reduction 6 grounds harmony."
+        },
+        "tarot_angelic": {
+          "major": "III The Empress",
+          "minor": "Seven of Cups",
+          "shem_angel": "Hahaiah (6-10 deg Taurus)",
+          "daemon": "Hoel",
+          "rationale": "Empress cultivates pigment gardens; Seven of Cups reminds learners to pace colour choices."
+        },
+        "astrology": {
+          "planet": "Venus",
+          "zodiac": "Taurus Decan II",
+          "decans": [
+            {
+              "name": "Venus in Taurus",
+              "degrees": "10-20 deg"
+            }
+          ],
+          "rationale": "Venusian earthiness keeps glaze building sensuous yet measured."
+        },
+        "crystal_color_geometry": {
+          "crystals": ["Lapis Lazuli", "Malachite", "Carnelian"],
+          "palette": ["#264a8c", "#2f8a68", "#c3473c", "#d9c16b"],
+          "sound_frequency_hz": 528,
+          "geometry": "Nested octagon mandala",
+          "rationale": "Crystals echo pigment minerals; octagon geometry balances four-colour glaze rotations."
+        },
+        "pedagogy": {
+          "learning_outcome": "Learners mix and layer digital pigments while documenting sensory thresholds.",
+          "trauma_safe": true,
+          "progressive_disclosure": [
+            "Stage 1: palette breathing exercise",
+            "Stage 2: base coat studies",
+            "Stage 3: glaze layering journal",
+            "Stage 4: reflective critique with opt-out prompts"
+          ],
+          "rationale": "Color work can overwhelm; journaling and opt-outs keep the lab ND-safe."
+        },
+        "oer_resources": [
+          {
+            "title": "OER Commons: Color Theory for Designers",
+            "type": "module",
+            "source": "https://www.oercommons.org/courses/color-theory-for-designers",
+            "license": "CC BY",
+            "notes": "Used to introduce glaze sequencing vocabulary."
+          },
+          {
+            "title": "Smithsonian Open Access: Mineral Pigment Collection",
+            "type": "image set",
+            "source": "https://www.si.edu/openaccess",
+            "license": "CC0",
+            "notes": "Provides texture references for lapis and malachite studies."
+          }
+        ]
+      }
     },
     {
       "id": "ATEL-003",
-      "title": "Geometry Lab — Vesica, Hexagram, Rose 12, Golden Rectangle",
+      "title": "Geometry Lab - Vesica, Hexagram, Rose 12, Golden Rectangle",
       "kind": "lineage",
       "summary": "Exact constructions for cathedral geometry; parametric and ND-safe.",
       "lineage": {
@@ -159,15 +285,78 @@
       },
       "safe_use": "Calm lines; no fast animation; exact math (no eyeballing).",
       "procedures": [
-        "Vesica: centers separated by radius r; stroke width 6–10px.",
-        "Hexagram: 6 points at 60°; draw two equilateral triangles.",
-        "Rose 12: petals at 30° increments; keep petal symmetry clean.",
-        "Golden rectangle: subdivide by φ; optional quiet spiral."
+        "Vesica: centers separated by radius r; stroke width 6-10px.",
+        "Hexagram: 6 points at 60 deg; draw two equilateral triangles.",
+        "Rose 12: petals at 30 deg increments; keep petal symmetry clean.",
+        "Golden rectangle: subdivide by phi; optional quiet spiral."
       ],
       "references": [
         "Agrippa (Occult Philosophy diagrams)",
         "Chartres and Rosslyn tracery studies"
-      ]
+      ],
+      "layer_annotations": {
+        "numerology": {
+          "value": 144,
+          "reduction": 9,
+          "references": [
+            "12x12 rose window grids",
+            "Platonic solid edge counts"
+          ],
+          "rationale": "One hundred forty-four segments map the vesica lattice; reduction 9 affirms completion."
+        },
+        "tarot_angelic": {
+          "major": "XIV Temperance",
+          "minor": "Ace of Swords",
+          "shem_angel": "Melahel (15-19 deg Cancer)",
+          "daemon": "Melahel",
+          "rationale": "Temperance balances geometries; Ace of Swords clears mental focus for constructions."
+        },
+        "astrology": {
+          "planet": "Sun",
+          "zodiac": "Leo Decan I",
+          "decans": [
+            {
+              "name": "Saturn in Leo",
+              "degrees": "0-10 deg"
+            }
+          ],
+          "rationale": "Solar clarity with Saturnine discipline keeps compass work precise."
+        },
+        "crystal_color_geometry": {
+          "crystals": ["Citrine", "Clear Quartz"],
+          "palette": ["#f5d779", "#eae7d1", "#9ec5d3"],
+          "sound_frequency_hz": 963,
+          "geometry": "Nested vesica and golden rectangles",
+          "rationale": "Crystals amplify light through geometric grids; frequency 963 Hz signals crown clarity."
+        },
+        "pedagogy": {
+          "learning_outcome": "Learners draft layered sacred geometries with compass and code, documenting each construction step.",
+          "trauma_safe": true,
+          "progressive_disclosure": [
+            "Stage 1: grounding breath + materials check",
+            "Stage 2: vesica scaffold",
+            "Stage 3: hexagram overlay",
+            "Stage 4: rose and rectangle synthesis"
+          ],
+          "rationale": "Sequenced reveals keep geometry approachable and allow pausing between layers."
+        },
+        "oer_resources": [
+          {
+            "title": "Met Open Access: Chartres Cathedral Rose Window",
+            "type": "image",
+            "source": "https://www.metmuseum.org/art/collection",
+            "license": "CC0",
+            "notes": "Reference for 12-fold rose studies."
+          },
+          {
+            "title": "Crystal Toolkit Examples",
+            "type": "dataset",
+            "source": "https://github.com/materialsproject/crystaltoolkit-examples",
+            "license": "MIT",
+            "notes": "Used for plotting sacred lattices alongside compass drafts."
+          }
+        ]
+      }
     }
   ]
 }
