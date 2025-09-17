@@ -332,8 +332,6 @@
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body class="pearlescent">
-    <!-- optional background aura (does nothing if CSS is missing) -->
-    <div class="violet-gate bg-soft" aria-hidden="true"></div>
 
     <header>
       <h1>Cosmogenesis Learning Engine</h1>
@@ -2268,6 +2266,109 @@
           console.error(e);
         }
       })();
+    </script>
+    <style>
+      :root {
+        --lattice: #89a3ff;
+        --halo: #d6b370;
+      }
+      .bg-lattice {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+      }
+      .lattice {
+        width: min(78vmin, 880px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        position: relative;
+        isolation: isolate;
+        /* wireframe: meridians + parallels */
+        background:
+          repeating-conic-gradient(
+            from 0deg,
+            transparent 0 10deg,
+            rgba(255, 255, 255, 0.08) 10deg 11deg
+          ),
+          repeating-radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0.08) 0 2px,
+            transparent 2px 38px
+          );
+        /* crisp ring */
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+          0 0 120px color-mix(in oklab, var(--lattice) 40%, transparent);
+        backdrop-filter: blur(0.5px);
+      }
+      .lattice::after {
+        /* Jovian middle ring */
+        content: "";
+        position: absolute;
+        inset: 14%;
+        border-radius: 50%;
+        border: 1px solid color-mix(in oklab, var(--halo) 75%, transparent);
+        box-shadow:
+          0 0 42px color-mix(in oklab, var(--halo) 30%, transparent) inset;
+        transform: perspective(700px) rotateX(62deg);
+      }
+    </style>
+    <div class="bg-lattice" aria-hidden="true">
+      <div class="lattice"></div>
+    </div>
+    <canvas
+      id="nodes"
+      width="1024"
+      height="1024"
+      style="position: fixed; inset: 0; z-index: -1; pointer-events: none;"
+    ></canvas>
+    <script>
+      (() => {
+        // Static luminous nodes: gentle glow without motion keeps the lattice ND-safe.
+        const canvas = document.getElementById("nodes");
+        const ctx = canvas?.getContext("2d");
+        if (!canvas || !ctx) return;
+        const ratio = window.devicePixelRatio || 1;
+        const size = Math.min(innerWidth, innerHeight) * 0.78;
+        canvas.width = canvas.height = size * ratio;
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
+        canvas.style.left = `${(innerWidth - size) / 2}px`;
+        canvas.style.top = `${(innerHeight - size) / 2}px`;
+        const nodeCount = 72;
+        const radius = (size * ratio * 0.94) / 2;
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < nodeCount; i += 1) {
+          const angle = (i / nodeCount) * Math.PI * 2;
+          const x = cx + Math.cos(angle) * radius;
+          const y = cy + Math.sin(angle * 1.618) * radius * 0.65;
+          const glow = ctx.createRadialGradient(
+            x,
+            y,
+            0,
+            x,
+            y,
+            10 * ratio
+          );
+          glow.addColorStop(0, "#ffffff");
+          glow.addColorStop(1, "rgba(137,163,255,.05)");
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(x, y, 4 * ratio, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      })();
+    </script>
+    <script>
+      window.addEventListener("cathedral:select", (e) => {
+        const tint = e.detail?.payload?.color || "#89a3ff";
+        document.documentElement.style.setProperty("--lattice", tint);
+      });
     </script>
   </body>
 </html>
