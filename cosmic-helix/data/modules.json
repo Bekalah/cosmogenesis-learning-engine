@@ -1,0 +1,92 @@
+{
+  "sephirot": [
+    { "id": "kether", "emoji": "👑", "title": "Kether", "meaning": "Crown" },
+    { "id": "chokmah", "emoji": "🔮", "title": "Chokmah", "meaning": "Wisdom" },
+    { "id": "binah", "emoji": "🌙", "title": "Binah", "meaning": "Understanding" },
+    { "id": "chesed", "emoji": "💙", "title": "Chesed", "meaning": "Mercy" },
+    { "id": "geburah", "emoji": "🔥", "title": "Geburah", "meaning": "Severity" },
+    { "id": "tiphareth", "emoji": "☀️", "title": "Tiphareth", "meaning": "Beauty" },
+    { "id": "netzach", "emoji": "🌿", "title": "Netzach", "meaning": "Victory" },
+    { "id": "hod", "emoji": "📖", "title": "Hod", "meaning": "Glory" },
+    { "id": "yesod", "emoji": "🌛", "title": "Yesod", "meaning": "Foundation" },
+    { "id": "malkuth", "emoji": "🌍", "title": "Malkuth", "meaning": "Kingdom" }
+  ],
+  "modules": [
+    {
+      "id": "cosmogenesis",
+      "symbol": "🌌",
+      "title": "Cosmogenesis Patterns",
+      "summary": "Explore creation myths through neurodivergent pattern recognition. Map the sacred geometry of universe birthing across cultures.",
+      "tags": ["Sacred Geometry", "Creation Myths", "ND Cognition"]
+    },
+    {
+      "id": "harmonic-research",
+      "symbol": "🎵",
+      "title": "Harmonic Resonance Lab",
+      "summary": "Investigate Schumann resonances, planetary frequencies, and solfeggio healing tones. Create custom frequency environments for research.",
+      "tags": ["Sound Healing", "Frequency", "Binaural"]
+    },
+    {
+      "id": "symbolic-cognition",
+      "symbol": "⚛️",
+      "title": "Symbolic Cognition Archive",
+      "summary": "Channel art-science fusion naturally. Study Jung's Red Book, temple geometry, and synesthetic artist archives.",
+      "tags": ["Jung", "Symbolism", "ND Minds"]
+    },
+    {
+      "id": "trauma-environments",
+      "symbol": "🛡️",
+      "title": "Trauma-Safe Spaces",
+      "summary": "Design healing environments using polyvagal theory, biophilic patterns, and RPG mechanics for nervous system regulation.",
+      "tags": ["PTSD", "Healing", "Safe Space"]
+    },
+    {
+      "id": "alchemical-psychology",
+      "symbol": "⚗️",
+      "title": "Alchemical Psychology",
+      "summary": "Following Dion Fortune, Paul Foster Case, and Agrippa. Transform lead consciousness into golden awareness.",
+      "tags": ["Alchemy", "Theosophy", "Mysticism"]
+    },
+    {
+      "id": "living-arcana",
+      "symbol": "🃏",
+      "title": "Living Arcana System",
+      "summary": "Dynamic tarot correspondences mapped to Tree of Life. Real-time archetypal pattern recognition and synthesis.",
+      "tags": ["Tarot", "Qabalah", "Hermetic"]
+    }
+  ],
+  "patterns": [
+    { "icon": "🌀", "title": "Fibonacci Spirals", "caption": "Nature's growth pattern" },
+    { "icon": "⬢", "title": "Metatron's Cube", "caption": "Sacred geometry matrix" },
+    { "icon": "✡", "title": "Star Tetrahedron", "caption": "Merkaba activation" }
+  ],
+  "workspace": {
+    "title": "Sacred Geometry Laboratory",
+    "controls": [
+      { "id": "recursion", "label": "Recursion Depth", "min": 1, "max": 12, "value": 6 },
+      { "id": "phi", "label": "Golden Ratio φ", "min": 0, "max": 100, "value": 61 },
+      { "id": "rotation", "label": "Rotation Speed", "min": 0, "max": 100, "value": 30 },
+      { "id": "complexity", "label": "Fractal Complexity", "min": 3, "max": 24, "value": 12 }
+    ]
+  },
+  "healing": {
+    "baseFrequency": 432,
+    "swatches": [
+      { "color": "#FF0000", "frequency": 428, "label": "Root" },
+      { "color": "#FFA500", "frequency": 480, "label": "Sacral" },
+      { "color": "#FFFF00", "frequency": 510, "label": "Solar" },
+      { "color": "#00FF00", "frequency": 528, "label": "Heart" },
+      { "color": "#00FFFF", "frequency": 600, "label": "Throat" },
+      { "color": "#0000FF", "frequency": 660, "label": "Third Eye" },
+      { "color": "#8B00FF", "frequency": 720, "label": "Crown" }
+    ]
+  },
+  "journal": [
+    {
+      "id": "entry-144",
+      "title": "Entry 144",
+      "timestamp": "Now",
+      "body": "The living engine awakens. Patterns emerge from the intersection of ancient wisdom and quantum possibility. The Tree of Life serves as our navigation system through consciousness layers. Each node connects to infinite others in a holographic dance of meaning. The Codex 144:99 represents completion meeting infinity."
+    }
+  ]
+}
