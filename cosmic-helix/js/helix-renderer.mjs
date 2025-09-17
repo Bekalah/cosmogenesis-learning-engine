@@ -103,8 +103,15 @@ export function renderHelix(ctx, opts) {
 
   ctx.save();
   ctx.fillStyle = cleaned.bg;
+
+  const width = options.width || ctx.canvas.width;
+  const height = options.height || ctx.canvas.height;
+  const palette = normalisePalette(options.palette);
+  const N = normaliseNumerology(options.NUM);
+
+  ctx.save();
+  ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, width, height);
-  ctx.restore();
 
   // Layer order from background to foreground keeps depth legible without motion.
   drawVesicaField(ctx, width, height, cleaned.layers[0], N);
@@ -320,6 +327,52 @@ function normalisePalette(palette) {
 }
 
 // Layer 1: Vesica field builds a calm lens grid using 3/7/9/11 counts.
+
+  ctx.restore();
+  return { ok: true };
+}
+
+function normalisePalette(raw = {}) {
+  const fallback = {
+    bg: "#0b0b12",
+    ink: "#e8e8f0",
+    layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+  };
+
+  const layers = Array.isArray(raw.layers) ? raw.layers : [];
+
+  return {
+    bg: raw.bg || fallback.bg,
+    ink: raw.ink || fallback.ink,
+    layers: fallback.layers.map((color, index) => layers[index] || color)
+  };
+}
+
+function normaliseNumerology(raw = {}) {
+  const defaults = {
+    THREE: 3,
+    SEVEN: 7,
+    NINE: 9,
+    ELEVEN: 11,
+    TWENTYTWO: 22,
+    THIRTYTHREE: 33,
+    NINETYNINE: 99,
+    ONEFORTYFOUR: 144
+  };
+
+  return {
+    THREE: raw.THREE || defaults.THREE,
+    SEVEN: raw.SEVEN || defaults.SEVEN,
+    NINE: raw.NINE || defaults.NINE,
+    ELEVEN: raw.ELEVEN || defaults.ELEVEN,
+    TWENTYTWO: raw.TWENTYTWO || defaults.TWENTYTWO,
+    THIRTYTHREE: raw.THIRTYTHREE || defaults.THIRTYTHREE,
+    NINETYNINE: raw.NINETYNINE || defaults.NINETYNINE,
+    ONEFORTYFOUR: raw.ONEFORTYFOUR || defaults.ONEFORTYFOUR
+  };
+}
+
+// Layer 1: Vesica field builds a calm lattice using numerology counts.
 function drawVesicaField(ctx, w, h, color, N) {
   ctx.save();
   ctx.strokeStyle = color;
@@ -513,6 +566,10 @@ neCap = "round";
     ctx.lineTo(b.x, b.y);
 // Layer 2: Tree-of-Life — slim paths and calm nodes keep focus without harsh edges.
 function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, N) {
+  ctx.save();
+  ctx.strokeStyle = pathColor;
+// Layer 2: Tree-of-Life scaffold — thin lines and soft nodes.
+function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.save();
   ctx.strokeStyle = pathColor;
 // Layer 2: Tree-of-Life scaffold — thin lines and soft nodes.
@@ -1039,6 +1096,18 @@ function createTreeNodes(w, h) {
     { x: 0.5, y: 0.84 },  // Yesod
     { x: 0.5, y: 0.94 }   // Malkuth
   ];
+    [1, 3], [2, 4], [3, 4], [3, 5], [4, 5],
+    [3, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+    [6, 8], [7, 8], [5, 8], [6, 9], [7, 9], [8, 9]
+  ];
+}
+
+// Layer 3: Fibonacci curve — static golden spiral polyline.
+function drawFibonacci(ctx, w, h, color, N) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.9;
 
 function getTreeNodes(w, h, N) {
   const topMargin = h / N.ELEVEN;
@@ -1066,6 +1135,11 @@ function buildSpiralPoints(center, span, N) {
       y: center.y + Math.sin(angle) * radius
     });
   }
+  const maxTheta = Math.PI * (N.NINE / N.THREE); // 3 full turns for calm pacing.
+  const steps = Math.max(N.ONEFORTYFOUR, 90);
+  const scale = Math.min(w, h) / 2.2;
+  const radiusFactor = Math.pow(phi, maxTheta / (Math.PI / 2));
+  const a = scale / radiusFactor;
 
   return points;
 }
@@ -1077,6 +1151,16 @@ function drawPolyline(ctx, points) {
   for (let i = 1; i < points.length; i += 1) {
     const point = points[i];
     ctx.lineTo(point.x, point.y);
+  for (let i = 0; i <= steps; i += 1) {
+    const t = (i / steps) * maxTheta;
+    const r = a * Math.pow(phi, t / (Math.PI / 2));
+    const x = centerX + r * Math.cos(t);
+    const y = centerY + r * Math.sin(t);
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
   }
   ctx.stroke();
 }
@@ -1105,6 +1189,27 @@ function drawHelixLattice(ctx, width, height, strandColor, rungColor, N) {
     const yB = baseline + Math.sin(angle + phaseShift) * amplitude;
     strandA.push({ x, y: yA });
     strandB.push({ x, y: yB });
+// Layer 4: Double-helix lattice — static strands with gentle cross ties.
+function drawHelix(ctx, w, h, strandA, strandB, tieColor, N) {
+  ctx.save();
+  const centerY = h * 0.62;
+  const amplitude = h / (N.ELEVEN * 1.2);
+  const cycles = N.THREE;
+  const steps = N.ONEFORTYFOUR;
+
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = strandA;
+  ctx.beginPath();
+  for (let i = 0; i <= steps; i += 1) {
+    const progress = i / steps;
+    const theta = progress * cycles * Math.PI * 2;
+    const x = progress * w;
+    const y = centerY - amplitude * Math.sin(theta);
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
   }
 
   ctx.strokeStyle = strandColor;
@@ -1139,6 +1244,13 @@ function drawHelix(ctx, w, h, strandA, strandB, tieColor, N) {
     const theta = progress * cycles * Math.PI * 2;
     const x = progress * w;
     const y = centerY - amplitude * Math.sin(theta);
+  ctx.strokeStyle = strandB;
+  ctx.beginPath();
+  for (let i = 0; i <= steps; i += 1) {
+    const progress = i / steps;
+    const theta = progress * cycles * Math.PI * 2 + Math.PI;
+    const x = progress * w;
+    const y = centerY + amplitude * Math.sin(theta);
     if (i === 0) {
       ctx.moveTo(x, y);
     } else {
@@ -1161,6 +1273,12 @@ function drawHelix(ctx, w, h, strandA, strandB, tieColor, N) {
     }
   }
   ctx.stroke();
+
+  ctx.globalAlpha = 0.35;
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = tieColor;
+  const rungInterval = Math.max(4, Math.floor(steps / N.TWENTYTWO));
+
 
   ctx.globalAlpha = 0.35;
   ctx.lineWidth = 1;
