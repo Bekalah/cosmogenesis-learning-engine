@@ -1,0 +1,74 @@
+{
+  "digits": {
+    "0": {
+      "name": "Zero / Void / Potential",
+      "cosmology": ["Ain Soph (Limitless)", "Egg of the World"],
+      "tarot": ["The Fool (0)"],
+      "qabalistic": ["Before Kether"],
+      "keywords": ["origin", "leap", "emptiness"]
+    },
+    "1": {
+      "name": "One / Unity",
+      "cosmology": ["Primordial Point"],
+      "tarot": ["Magician (I)"],
+      "qabalistic": ["Kether"],
+      "keywords": ["will", "spark", "start"]
+    },
+    "2": {
+      "name": "Two / Polarity",
+      "cosmology": ["Dyad"],
+      "tarot": ["High Priestess (II)"],
+      "qabalistic": ["Chokmah/Binah polarity"],
+      "keywords": ["threshold", "reflection"]
+    },
+    "3": {
+      "name": "Three / Synthesis",
+      "cosmology": ["Triad"],
+      "tarot": ["Empress (III)"],
+      "qabalistic": ["Supernal completion"],
+      "keywords": ["growth", "matrix"]
+    },
+    "4": {
+      "name": "Four / Structure",
+      "cosmology": ["Tetrad"],
+      "tarot": ["Emperor (IV)"],
+      "qabalistic": ["Chesed/Severity balance seed"],
+      "keywords": ["order", "foundation"]
+    },
+    "5": {
+      "name": "Five / Trial",
+      "cosmology": ["Pentad"],
+      "tarot": ["Hierophant (V)"],
+      "qabalistic": ["Geburah dynamics"],
+      "keywords": ["challenge", "calibration"]
+    },
+    "6": {
+      "name": "Six / Harmony",
+      "cosmology": ["Hexad"],
+      "tarot": ["Lovers (VI) / Sun geometry"],
+      "qabalistic": ["Tiphereth"],
+      "keywords": ["integration", "beauty"]
+    },
+    "7": {
+      "name": "Seven / Vector",
+      "cosmology": ["Heptad"],
+      "tarot": ["Chariot (VII)"],
+      "qabalistic": ["Netzach"],
+      "keywords": ["motion", "victory"]
+    },
+    "8": {
+      "name": "Eight / Field",
+      "cosmology": ["Octave / Octagram"],
+      "tarot": ["Strength (VIII)"],
+      "qabalistic": ["Hod"],
+      "keywords": ["signal", "resonance"]
+    },
+    "9": {
+      "name": "Nine / Gestation",
+      "cosmology": ["Ennead"],
+      "tarot": ["Hermit (IX)"],
+      "qabalistic": ["Yesod"],
+      "keywords": ["seed ready", "inner light"]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "project": "Cosmogenesis Learning Engine",
+    "codex": "144:99",
+    "rules": [
+      "Additive-only changes (no overwrites of sealed files).",
+      "Every node must include ND-safe flags (no strobe, no autoplay).",
+      "Every node's number must be mapped to cross-cosmology symbolism."
+    ]
+  },
+  "paths": {
+    "nodes": "data/nodes",
+    "codex_bundle": "data/codex14499",
+    "design_tokens": "ui/design-system/tokens.json",
+    "numerology_map": "data/numerology_map.json",
+    "protect_covenant": "PROTECT.md"
+  },
+  "checks": [
+    { "id": "protect-file", "desc": "PROTECT.md present", "type": "file_exists", "path_key": "protect_covenant" },
+    { "id": "design-tokens", "desc": "Design tokens exist", "type": "file_exists", "path_key": "design_tokens" },
+    { "id": "codex-bundle", "desc": "Codex bundle directory present", "type": "dir_exists", "path_key": "codex_bundle" },
+    { "id": "nodes-dir", "desc": "Nodes directory present", "type": "dir_exists", "path_key": "nodes" },
+    { "id": "numerology-map", "desc": "Numerology map present", "type": "file_exists", "path_key": "numerology_map" },
+    {
+      "id": "node-schema",
+      "desc": "Each node JSON conforms to schema",
+      "type": "json_schema",
+      "glob": "data/nodes/*.json",
+      "schema": {
+        "type": "object",
+        "required": ["id", "numerology", "layers", "safety"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^C144N-\\d{3}$" },
+          "numerology": {
+            "type": "object",
+            "required": ["value", "digit"],
+            "properties": {
+              "value": { "type": "integer", "minimum": 0 },
+              "digit": { "type": "integer", "minimum": 0, "maximum": 9 },
+              "links": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "layers": {
+            "type": "object",
+            "required": ["study_seed", "art", "research"],
+            "properties": {
+              "study_seed": { "type": "string" },
+              "art": { "type": "string" },
+              "research": { "type": "string" }
+            }
+          },
+          "safety": {
+            "type": "object",
+            "required": ["strobe", "autoplay", "motion"],
+            "properties": {
+              "strobe": { "type": "boolean", "const": false },
+              "autoplay": { "type": "boolean", "const": false },
+              "motion": { "type": "string", "enum": ["calm", "reduced"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "number-symbolism",
+      "desc": "Node number maps to cross-cosmology symbolism",
+      "type": "custom_rule",
+      "rule": "require_digit_mapping"
+    },
+    {
+      "id": "nd-safe-media",
+      "desc": "No strobe/autoplay anywhere in nodes",
+      "type": "custom_rule",
+      "rule": "enforce_nd_safe"
+    }
+  ]
+}

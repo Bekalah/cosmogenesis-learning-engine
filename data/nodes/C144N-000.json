@@ -1,0 +1,18 @@
+{
+  "id": "C144N-000",
+  "numerology": {
+    "value": 0,
+    "digit": 0,
+    "links": ["Ain Soph → Void → The Fool (0)"]
+  },
+  "layers": {
+    "study_seed": "Begin with emptiness; notice what arises.",
+    "art": "Trace vesica → spiral; leave center unfilled.",
+    "research": "Compare 'void' motifs across systems; note shared properties."
+  },
+  "safety": {
+    "strobe": false,
+    "autoplay": false,
+    "motion": "calm"
+  }
+}
