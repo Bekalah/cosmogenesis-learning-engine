@@ -469,6 +469,16 @@
     .node-label{font:600 12px/1 system-ui,Segoe UI,Roboto;fill:#fff;paint-order:stroke;stroke:#000;stroke-width:.6;letter-spacing:.2px}
 
     .status-line{margin-top:.5rem;color:var(--muted);font-size:.85rem}
+    .medallion-shell{margin:1.2rem 0;padding:1rem;border:1px solid var(--ring);border-radius:var(--radius);background:linear-gradient(180deg,var(--cathedral-bg,var(--card)) 0%,var(--card) 100%)}
+    .medallion-ring{position:relative;margin:1.5rem auto;width:min(420px,90%);aspect-ratio:1}
+    .medallion-ring button{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;padding:.6rem;border-radius:28px;border:2px solid var(--ring);background:linear-gradient(135deg,var(--hue-a),var(--hue-b));color:var(--cathedral-ink,var(--ink));font:600 .85rem/1.2 system-ui,Segoe UI,Roboto;text-align:center;cursor:pointer}
+    .medallion-ring button span{display:block;font-size:.9rem;margin-bottom:.2rem}
+    .medallion-ring button small{display:block;font-size:.7rem;color:var(--cathedral-ink);opacity:.9}
+    .medallion-ring button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+    .medallion-ring button[aria-checked="true"]{box-shadow:0 0 0 3px var(--focus);border-color:var(--focus)}
+    .medallion-caption{margin:0;text-align:center;color:var(--muted);font-size:.85rem}
+    .medallion-outlet{margin-top:1rem;padding:1rem;border:1px dashed var(--ring);border-radius:var(--radius);min-height:120px}
+    .medallion-outlet iframe{width:100%;min-height:280px;border:1px solid var(--ring);border-radius:16px}
   </style>
 </head>
 <body>
@@ -2245,6 +2255,8 @@
       applyState();
       spiral.draw();
     </script>
+    <script type="module" src="/codex/inject.loader.js"></script>
+    <script type="module" src="/src/main.js"></script>
     <script type="module">
       import { mountHelix, setHelixLayers, setPulse, bindSymbolClick } from "./effects/helix.js";
       import { mountCollage } from "./effects/collage.js";

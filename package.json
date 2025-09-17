@@ -12,10 +12,10 @@
   "scripts": {
     "registry": "node tools/build-registry.mjs",
     "validate": "node tools/validate.mjs",
-    "build": "npm run registry && npm run validate",
-    "dev": "http-server -p 5173 -c-1 .",
+    "build": "npm run registry && npm run validate && vite build",
+    "dev": "vite",
     "start": "npm run dev",
-    "preview": "http-server -p 8080 -c-1 .",
+    "preview": "vite preview",
     "test": "./scripts/run-tests.sh",
     "fmt": "prettier -w .",
     "lint": "eslint .",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "http-server": "^14.1.1",
+    "vite": "^6.0.3",
     "eslint": "^8.57.0",
     "prettier": "^3.4.2"
   },

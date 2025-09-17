@@ -1,0 +1,11 @@
+[build]
+  publish = "."
+  command = "git submodule update --init --recursive || true"
+
+[functions]
+  directory = ".netlify/functions"
+
+[[redirects]]
+  from = "/api/save-sculpture"
+  to = "/.netlify/functions/save-sculpture"
+  status = 200
