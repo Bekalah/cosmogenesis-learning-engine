@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Explore · Cosmogenesis Learning Engine</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Mode switch and quick links into the Grimoire web app.">
+  <style>
+    :root {
+      --bg:#0b0b12;
+      --ink:#f2f2f7;
+      --muted:#9ca3c7;
+      --panel:#141424;
+      --accent:#8ecae6;
+    }
+    body {
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    header,main {
+      max-width:960px;
+      margin:0 auto;
+      padding:32px 24px;
+    }
+    h1 {
+      margin:0 0 12px;
+      font-size:2.4rem;
+    }
+    .switcher {
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin:24px 0 32px;
+    }
+    .switcher button {
+      background:var(--panel);
+      border:1px solid rgba(142,202,230,0.3);
+      border-radius:999px;
+      padding:12px 20px;
+      color:var(--ink);
+      cursor:pointer;
+      font-size:1rem;
+    }
+    .switcher button[aria-pressed="true"] {
+      background:var(--accent);
+      color:#0b0b12;
+      border-color:var(--accent);
+    }
+    .mode-panel {
+      background:var(--panel);
+      border:1px solid rgba(142,202,230,0.2);
+      border-radius:14px;
+      padding:24px;
+      min-height:200px;
+    }
+    .mode-panel h2 {
+      margin-top:0;
+      font-size:1.6rem;
+    }
+    .mode-panel p {
+      color:var(--muted);
+    }
+    .quick-links {
+      margin:32px 0;
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    }
+    .quick-links a {
+      background:var(--panel);
+      border:1px solid rgba(142,202,230,0.2);
+      border-radius:12px;
+      padding:16px 18px;
+      color:var(--ink);
+      text-decoration:none;
+      font-weight:600;
+    }
+    .quick-links a span {
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-weight:400;
+      font-size:0.9rem;
+    }
+    .provenance-chip {
+      border-top:1px solid rgba(142,202,230,0.25);
+      padding:16px 24px 32px;
+      font-size:0.85rem;
+      color:var(--muted);
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Explore the Modes</h1>
+    <p>Select a mode to preview its focus, then jump straight into the Grimoire app section.</p>
+    <div class="switcher" role="toolbar" aria-label="Mode switch">
+      <button type="button" data-mode="art" aria-pressed="true">Art</button>
+      <button type="button" data-mode="learn" aria-pressed="false">Learn</button>
+      <button type="button" data-mode="play" aria-pressed="false">Play</button>
+      <button type="button" data-mode="study" aria-pressed="false">Study</button>
+    </div>
+  </header>
+  <main>
+    <section class="mode-panel" id="mode-panel" aria-live="polite">
+      <h2 id="mode-title">Art</h2>
+      <p id="mode-copy">Generate layered canvases from numerology constants, angelic lineages, and geometry registries. Export ND-safe PNG or WebP plates with provenance overlays.</p>
+      <p><a id="mode-link" href="../apps/grimoire-web/#/art">Launch Art mode</a></p>
+    </section>
+    <section>
+      <h2>Quick links</h2>
+      <div class="quick-links">
+        <a href="../apps/grimoire-web/#/atlas">Atlas<span>Registry browser for numerology, angels, rays, and crystals.</span></a>
+        <a href="../apps/grimoire-web/#/studio">Studio<span>Layered geometry renderer with Vesica, Tree-of-Life, and helix tools.</span></a>
+        <a href="../apps/grimoire-web/#/story">Story<span>Text-first adventures sourced from circuitum99 stories.</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="provenance-chip">© Rebecca Respawn · Codex 144:99 · CC-BY-SA-4.0 · Provenance</footer>
+  <script type="module">
+    const copy = {
+      art: {
+        title: "Art",
+        text: "Generate layered canvases from numerology constants, angelic lineages, and geometry registries. Export ND-safe PNG or WebP plates with provenance overlays.",
+        link: "../apps/grimoire-web/#/art"
+      },
+      learn: {
+        title: "Learn",
+        text: "Traverse the Recognition → Integration → Transmission exercises. Matrices cross-reference numerology, Taras, rays, and Solfeggio frequencies.",
+        link: "../apps/grimoire-web/#/learn"
+      },
+      play: {
+        title: "Play",
+        text: "Enter Circuitum99 story scrolls with trauma-aware pacing. Choices remain text-first and cite their source scrolls for provenance.",
+        link: "../apps/grimoire-web/#/play"
+      },
+      study: {
+        title: "Study",
+        text: "Survey provenance-first tables, export JSON or CSV slices, and trace citations across the registries.",
+        link: "../apps/grimoire-web/#/study"
+      }
+    };
+
+    const buttons = Array.from(document.querySelectorAll('.switcher button'));
+    const title = document.getElementById('mode-title');
+    const text = document.getElementById('mode-copy');
+    const link = document.getElementById('mode-link');
+
+    function setMode(mode) {
+      if (!copy[mode]) return;
+      buttons.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.mode === mode)));
+      title.textContent = copy[mode].title;
+      text.textContent = copy[mode].text;
+      link.href = copy[mode].link;
+      link.textContent = `Launch ${copy[mode].title} mode`;
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => setMode(btn.dataset.mode));
+      btn.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setMode(btn.dataset.mode);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

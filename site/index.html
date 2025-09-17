@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cosmogenesis Learning Engine</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ND-safe world-building generator for Codex 144:99.">
+  <style>
+    :root {
+      --bg:#0b0b12;
+      --ink:#f2f2f7;
+      --muted:#9ca3c7;
+      --card:#141424;
+      --accent:#8ecae6;
+    }
+    body {
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    header {
+      padding:32px 24px 16px;
+      max-width:960px;
+      margin:0 auto;
+    }
+    h1 {
+      margin:0 0 8px;
+      font-size:2.8rem;
+      letter-spacing:0.02em;
+    }
+    p.lede {
+      margin:0;
+      max-width:720px;
+      color:var(--muted);
+      font-size:1.1rem;
+    }
+    .cards {
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      padding:24px;
+      max-width:960px;
+      margin:0 auto 40px;
+    }
+    .card {
+      background:var(--card);
+      border:1px solid rgba(142,202,230,0.2);
+      border-radius:12px;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .card h2 {
+      margin:0;
+      font-size:1.5rem;
+    }
+    .card p {
+      margin:0;
+      color:var(--muted);
+    }
+    .card a {
+      align-self:flex-start;
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+    .card a:focus,
+    .card a:hover {
+      text-decoration:underline;
+    }
+    .provenance-chip {
+      border-top:1px solid rgba(142,202,230,0.25);
+      padding:16px 24px 32px;
+      font-size:0.85rem;
+      color:var(--muted);
+      text-align:center;
+    }
+    @media (max-width:600px) {
+      header {
+        padding:24px 16px 12px;
+      }
+      h1 {
+        font-size:2.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cosmogenesis Learning Engine</h1>
+    <p class="lede">A world-building generator for Codex 144:99. Layered geometry, trauma-informed learning, and provenance-first storytelling that links Art, Learn, and Play without forcing motion.</p>
+  </header>
+  <main>
+    <section class="cards" aria-label="Primary modes">
+      <article class="card">
+        <h2>Art</h2>
+        <p>Palette laboratories, geometry renderers, and ND-safe exports. Launch the Grimoire web app Art mode to sculpt plates from registry data.</p>
+        <a href="../apps/grimoire-web/#/art">Open Art Mode</a>
+      </article>
+      <article class="card">
+        <h2>Learn</h2>
+        <p>Cross-cosmology exercises that move from recognition to integration to transmission. Guided by the numerology and angelic registries.</p>
+        <a href="../apps/grimoire-web/#/learn">Open Learn Mode</a>
+      </article>
+      <article class="card">
+        <h2>Play</h2>
+        <p>Story labyrinths powered by Circuitum99. Step into text-first adventures that respect pacing and embed provenance cues throughout.</p>
+        <a href="../apps/grimoire-web/#/play">Open Play Mode</a>
+      </article>
+    </section>
+  </main>
+  <footer class="provenance-chip">© Rebecca Respawn · Codex 144:99 · CC-BY-SA-4.0 · Provenance</footer>
+</body>
+</html>

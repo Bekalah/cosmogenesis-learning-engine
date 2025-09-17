@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About · Cosmogenesis Learning Engine</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ND-safe summary of the Cosmogenesis Learning Engine.">
+  <style>
+    :root {
+      --bg:#0b0b12;
+      --ink:#f2f2f7;
+      --muted:#9ca3c7;
+      --accent:#8ecae6;
+      --panel:#141424;
+    }
+    body {
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.7;
+    }
+    header,main {
+      max-width:880px;
+      margin:0 auto;
+      padding:32px 24px;
+    }
+    h1 {
+      margin:0 0 12px;
+      font-size:2.4rem;
+    }
+    h2 {
+      margin:32px 0 12px;
+      font-size:1.6rem;
+    }
+    p {
+      margin:0 0 16px;
+      color:var(--muted);
+    }
+    ul {
+      margin:0 0 24px 20px;
+      color:var(--muted);
+    }
+    .panel {
+      background:var(--panel);
+      border:1px solid rgba(142,202,230,0.2);
+      border-radius:12px;
+      padding:20px;
+      margin:24px 0;
+    }
+    .panel strong {
+      color:var(--ink);
+    }
+    .provenance-chip {
+      border-top:1px solid rgba(142,202,230,0.25);
+      padding:16px 24px 32px;
+      font-size:0.85rem;
+      color:var(--muted);
+      text-align:center;
+    }
+    a {
+      color:var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About the Learning Engine</h1>
+    <p>The Cosmogenesis Learning Engine is a world-building generator for Codex 144:99. It assembles layered geometry, research registries, and interactive stories while preserving ND-safe pacing and provenance.</p>
+  </header>
+  <main>
+    <section>
+      <h2>What it hopes to achieve</h2>
+      <p>Give artists, educators, and ritual designers a calm toolkit for exploring sacred correspondences. Every mode &mdash; Art, Learn, Play, and Study &mdash; derives from the same registry data so changes remain consistent across the ecosystem.</p>
+    </section>
+    <section class="panel" aria-label="ND-safe pledge">
+      <h2>ND-safe pledge</h2>
+      <p><strong>No autoplay, no strobe, no forced motion.</strong> Controls stay in the visitor's hands, color palettes favor gentle contrast, and every scene includes opt-out paths.</p>
+      <p>Read the <a href="../../docs/covenant/covenant.md" aria-label="Covenant instructions">covenant</a> in Markdown form at <code>/docs/covenant/covenant.md</code>.</p>
+    </section>
+    <section>
+      <h2>How bridges connect</h2>
+      <ul>
+        <li><strong>tesseract-bridge</strong> &mdash; heavy geometry baking and ECS meshes.</li>
+        <li><strong>liber-arcanae</strong> &mdash; tarot overlays and advanced choose-your-own-adventure logic.</li>
+        <li><strong>data-ingest-pipeline</strong> &mdash; OCR and PDF-to-JSON tooling for new research scrolls.</li>
+      </ul>
+      <p>These bridges stay optional. The core repo runs offline without them.</p>
+    </section>
+  </main>
+  <footer class="provenance-chip">© Rebecca Respawn · Codex 144:99 · CC-BY-SA-4.0 · Provenance</footer>
+</body>
+</html>

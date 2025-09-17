@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Scrolls · Cosmogenesis Learning Engine</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Browse research scrolls and spine nodes with provenance excerpts.">
+  <style>
+    :root {
+      --bg:#0b0b12;
+      --ink:#f2f2f7;
+      --muted:#9ca3c7;
+      --panel:#141424;
+      --accent:#8ecae6;
+    }
+    body {
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    header,main {
+      max-width:1000px;
+      margin:0 auto;
+      padding:32px 24px;
+    }
+    h1 {
+      margin:0 0 12px;
+      font-size:2.4rem;
+    }
+    p {
+      margin:0 0 16px;
+      color:var(--muted);
+    }
+    .grid {
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+    article {
+      background:var(--panel);
+      border:1px solid rgba(142,202,230,0.2);
+      border-radius:12px;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    article h2 {
+      margin:0;
+      font-size:1.2rem;
+    }
+    article p {
+      margin:0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+    article a {
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+    article a:focus,
+    article a:hover {
+      text-decoration:underline;
+    }
+    .status {
+      margin:24px 0;
+      color:var(--muted);
+    }
+    .provenance-chip {
+      border-top:1px solid rgba(142,202,230,0.25);
+      padding:16px 24px 32px;
+      font-size:0.85rem;
+      color:var(--muted);
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Research Scrolls</h1>
+    <p>Every scroll is sourced from `/docs` or `/spine` and tagged with provenance snippets. Use this index to open the Markdown files directly.</p>
+    <p id="status" class="status">Loading manifest...</p>
+  </header>
+  <main>
+    <section class="grid" id="scroll-grid" aria-live="polite"></section>
+  </main>
+  <footer class="provenance-chip">© Rebecca Respawn · Codex 144:99 · CC-BY-SA-4.0 · Provenance</footer>
+  <script type="module">
+    const grid = document.getElementById('scroll-grid');
+    const status = document.getElementById('status');
+
+    async function loadManifest() {
+      try {
+        const response = await fetch('./scrolls-manifest.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Manifest missing');
+        const manifest = await response.json();
+        render(manifest.records || []);
+        status.textContent = `Loaded ${manifest.records.length} scrolls.`;
+      } catch (error) {
+        status.textContent = 'Manifest unavailable. Verify that scripts/projection.ts has been executed.';
+      }
+    }
+
+    function render(items) {
+      grid.innerHTML = '';
+      if (!items.length) {
+        const empty = document.createElement('p');
+        empty.textContent = 'No scrolls registered yet.';
+        empty.className = 'status';
+        grid.appendChild(empty);
+        return;
+      }
+      for (const item of items) {
+        const article = document.createElement('article');
+        const title = document.createElement('h2');
+        const excerpt = document.createElement('p');
+        const link = document.createElement('a');
+
+        title.textContent = item.title || item.slug;
+        excerpt.textContent = item.excerpt || 'Provenance excerpt unavailable.';
+        link.href = item.path;
+        link.textContent = 'Open scroll';
+
+        article.appendChild(title);
+        article.appendChild(excerpt);
+        article.appendChild(link);
+        grid.appendChild(article);
+      }
+    }
+
+    loadManifest();
+  </script>
+</body>
+</html>

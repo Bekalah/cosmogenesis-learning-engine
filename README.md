@@ -1,59 +1,19 @@
-# Cosmogenesis Learning Engine (Alpha 0.9.2)
+# Cosmogenesis Learning Engine
 
-Cosmogenesis is a portable plate engine for your Cathedral of Circuits. It renders an ND-safe spiral teacher with:
+World-building generator for Codex 144:99. It keeps Art, Learn, Play, and Study modes aligned through shared registries and ND-safe defaults.
 
-- **Ladder toggle (33 vertebrae)** for the 33-spine mythic map
-- **PNG export** for art plates
-- **META export** with provenance (SHA-256 of config)
-- **Reduced-motion respect** (no wobble when OS requests it)
-- **Harmony toggle** to translate node patterns into Solfeggio-based music
-- **Harmony toggle** to translate node patterns into per-node harmonics with art, music, and collage modes
+## Bridges
+- **tesseract-bridge** — optional heavy geometry and ECS baking.
+- **liber-arcanae** — tarot overlays plus advanced CYOA tooling.
+- **data-ingest-pipeline** — OCR and PDF-to-JSON ingestion for new scrolls.
 
-### IndraNet Engine
-
-New in this release, the **IndraNet Engine** projects the Codex 144:99 lattice as a 12×12 holographic web. The shared
-`bridge.json` now ships an `indraNet` block so any app can load the 144 jewel nodes and 99 gate clusters and render its own
-network without coupling to this repo's UI. `harmony_map.json` extends the net with optional Soyga, Tarot, I Ching, Tree of
-Life, planetary and numerology rings colored by Solfeggio tones.
-
-```javascript
-import { IndraNet } from "./app/engines/IndraNet.js";
-const net = new IndraNet();
-await net.load("/c99/bridge.json");
-net.mount(document.getElementById("viz")).render();
-```
+## Covenant
+Read the [ND-safe covenant](docs/covenant/covenant.md) before shipping changes. Every dataset entry must include citations and every page must surface provenance.
 
 ## Quickstart
-
 ```bash
-npm i
-npm run dev     # serves at http://localhost:5173
-# open /cosmogenesis/index.html
-npm test        # uses Node.js or Deno if available
+python scripts/compile_codex_to_numerology_full.py && \
+node scripts/projection.mjs && \
+node scripts/covenant-check.js && \
+npm run dev
 ```
-
-### Testing Without Node.js
-
-If your platform lacks a Node.js runtime (e.g. iPad or some Android setups),
-install [Deno](https://deno.com/) and run `npm test`. The test runner checks for
-Node.js first and falls back to Deno when available.
-
-### Formatting Without Node.js
-
-If the script cannot reach PyPI it will fall back to the system package manager. In completely offline environments, manually install a Pillow wheel (`pip install Pillow-*.whl`).
-`npm run check` verifies code formatting. On systems without Node.js, install
-[Deno](https://deno.com/) and run the same command — it automatically falls back to `deno fmt --check` for a limited set of files.
-
-### Duplicate Line Guard
-
-Accidental double-pastes can introduce repeated lines. Run the following to scan
-for duplicates and optionally fix them:
-
-```bash
-npm run dedupe        # report duplicate lines
-npm run dedupe -- --write  # remove duplicates in place
-```
-
-### Cosmic Helix Renderer
-
-An ND-safe offline canvas sketch lives in `cosmic-helix/`. Double-click `cosmic-helix/index.html` to view layered geometry (vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double helix). Colours can be tweaked in `cosmic-helix/data/palette.json`.

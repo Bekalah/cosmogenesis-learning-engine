@@ -1,0 +1,215 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "records": [
+    {
+      "id": 1,
+      "name": "Tara Swift and Courageous",
+      "quality": "First liberator who removes fear",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Tara Radiant Crown",
+      "quality": "Holds the moon disk and offers calm assurance",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Tara Golden Light",
+      "quality": "Illumines pathways with compassionate wisdom",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Tara Joyful Laughter",
+      "quality": "Dispels obstacles with blissful sound",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Tara Mara Subduer",
+      "quality": "Defeats inner demons and confusion",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Tara Nightmare Queller",
+      "quality": "Ends poison, plague, and terror",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Tara Invincible",
+      "quality": "Triumphs in ten directions",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Tara Pride Breaker",
+      "quality": "Crushes arrogance and false certainty",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Tara Hero Summoner",
+      "quality": "Calls allies from every realm",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Tara Foe Destroyer",
+      "quality": "Ends harm with fierce compassion",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Tara World Shaker",
+      "quality": "Strikes the earth to avert calamity",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Tara Guardian Calmer",
+      "quality": "Pacifies fierce protectors with peace",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Tara Victorious",
+      "quality": "Grants success in just endeavors",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Tara Three Worlds Subduer",
+      "quality": "Stabilizes heaven, earth, and underworld",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Tara Controller",
+      "quality": "Stops conflict and calms violent acts",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Tara Great Peace",
+      "quality": "Radiates serenity and clarity",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Tara Suffering Remover",
+      "quality": "Heals illness and sorrow",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Tara Calamity Dispeller",
+      "quality": "Prevents disaster and famine",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Tara Joy Garland",
+      "quality": "Cascades nectar of delight",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Tara Radiant Peace",
+      "quality": "Bathes beings in luminous composure",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Tara Mother of Liberation",
+      "quality": "Root wisdom of all Taras",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "Jetsunma Tenzin Palmo, Into the Heart of Life (2011)",
+        "Lama Tsultrim Allione, Wisdom Rising (2018)"
+      ]
+    }
+  ]
+}
