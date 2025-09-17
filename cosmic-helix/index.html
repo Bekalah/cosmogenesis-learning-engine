@@ -27,16 +27,31 @@
     /* ND-safe palette: calm contrast, no motion, generous spacing. */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
     html, body {
+  <!-- Integration note: lives in cosmic-helix/ so the wider cathedral index stays untouched; honours the lore boundaries. -->
+  <style>
+    /* ND-safe: calm contrast, no motion, generous spacing */
+    :root {
+      --bg: #0b0b12;
+      --ink: #e8e8f0;
+      --muted: #a6a6c1;
+    }
+
+    html,
+    body {
       margin: 0;
       padding: 0;
       background: var(--bg);
       color: var(--ink);
       font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+
     header {
       padding: 12px 16px;
       border-bottom: 1px solid #1d1d2a;
     }
+
     .status {
       color: var(--muted);
       font-size: 12px;
@@ -52,6 +67,20 @@
       margin: 0 auto 24px;
       color: var(--muted);
     }
+
+    #stage {
+      display: block;
+      margin: 16px auto;
+      box-shadow: 0 0 0 1px #1d1d2a;
+      background: var(--bg);
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 0 auto 16px;
+      color: var(--muted);
+    }
+
     code {
       background: #11111a;
       padding: 2px 4px;
@@ -114,6 +143,11 @@
   <p class="note">Static Vesica, Tree-of-Life, Fibonacci, and double-helix layers. No animation, no autoplay, no external libraries. Open this file directly.</p>
     <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
   </header>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Static renderer encoding Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice are rendered once with a calm palette. No animation, no external libraries. Open this file directly.</p>
@@ -487,6 +521,33 @@ ript type="module">
 >>>>>>>+main
 =
               // file:// requests often throw; calm fallback keeps the render ND-safe.
+      }
+    };
+
+    const NUM = {
+      THREE: 3,
+      SEVEN: 7,
+      NINE: 9,
+      ELEVEN: 11,
+      TWENTYTWO: 22,
+      THIRTYTHREE: 33,
+      NINETYNINE: 99,
+      ONEFORTYFOUR: 144
+    };
+
+    function applyChrome(palette) {
+      const style = document.documentElement.style;
+      style.setProperty("--bg", palette.bg);
+      style.setProperty("--ink", palette.ink);
+      style.setProperty("--muted", palette.muted || defaults.palette.muted);
+    }
+
+    async function loadPalette(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (error) {
         return null;
       }
     }
@@ -498,6 +559,25 @@ ript type="module">
     applyPaletteColors(activePalette);
 
     const statusMessage = palette ? "Palette loaded." : "Palette missing; using safe fallback palette.";
+    function isPaletteComplete(palette) {
+      return Boolean(
+        palette &&
+        Array.isArray(palette.layers) &&
+        palette.layers.length >= 6 &&
+        palette.bg &&
+        palette.ink
+      );
+    }
+
+    const paletteData = await loadPalette("./data/palette.json");
+    const paletteReady = isPaletteComplete(paletteData);
+    const activePalette = paletteReady ? paletteData : defaults.palette;
+
+    applyChrome(activePalette);
+
+    const paletteMessage = paletteReady
+      ? "Palette loaded."
+      : "Palette missing or blocked; safe fallback applied.";
 
     if (!ctx) {
       statusEl.textContent = statusMessage + " Canvas context unavailable; please try a modern browser.";
@@ -522,6 +602,8 @@ const NUM = {
             // ND-safe rationale: render once with layered calm colours; show notice if palette is missing.
 >>>>>>>+upstream/codex/
 renderHelix(ctx, {
+      const notice = paletteReady ? null : "Palette unavailable; using safe fallback.";
+      const result = renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette: activePalette,
@@ -552,6 +634,13 @@ renderHelix(ctx, {
         ? statusPrefix + " Geometry rendered."
         : "Rendering skipped: " + result.reason;
     })();
+        notice
+      });
+
+      statusEl.textContent = result.ok
+        ? paletteMessage + " Geometry rendered."
+        : paletteMessage + " Render skipped: " + (result.reason || "unknown");
+    }
   </script>
 </body>
 </html>
