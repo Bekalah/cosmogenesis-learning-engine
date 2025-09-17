@@ -1,0 +1,34 @@
+{
+  "node": "Aurora Gate - Node 00",
+  "updated": "2024-11-22",
+  "resources": [
+    {
+      "title": "Book of Kells - Folio 34v",
+      "type": "image",
+      "source_url": "https://digitalcollections.tcd.ie/home/#/details?resourceId=16872",
+      "license": "CC BY",
+      "credit": "Library of Trinity College Dublin",
+      "usage": "Calligraphy reference for scribal exercises.",
+      "stored": false
+    },
+    {
+      "title": "Crystal Toolkit Example - Quartz",
+      "type": "dataset",
+      "source_url": "https://github.com/materialsproject/crystaltoolkit-examples",
+      "license": "MIT",
+      "credit": "Materials Project",
+      "usage": "Static lattice snapshots for helix geometry overlays.",
+      "stored": false
+    },
+    {
+      "title": "Emma Kunz Work No. 020",
+      "type": "image",
+      "source_url": "https://sammlung.emmakunz.ch/en/works/werk-020/",
+      "license": "Public Domain",
+      "credit": "Emma Kunz Zentrum",
+      "usage": "Inspiration for vesica grid layering; derive colour palettes only.",
+      "stored": false
+    }
+  ],
+  "notes": "Logs comply with ND-safe brief: resources are optional and only referenced when learners opt in."
+}

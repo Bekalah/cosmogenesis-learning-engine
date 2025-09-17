@@ -7,6 +7,7 @@
   <meta name="color-scheme" content="light dark">
   <!-- Integration note: renderer lives in cosmic-helix/ so the primary index.html stays intact (why: preserves existing lore entry point). -->
   <!-- Integration note: this renderer stays inside cosmic-helix/ so the primary index.html lore remains intact. -->
+  <!-- Kept inside cosmic-helix/ so the site root remains untouched; honours existing lore layout. -->
   <style>
     /* ND-safe: calm contrast, no motion, generous breathing room */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
@@ -52,17 +53,52 @@
       background: #11111a;
       padding: 2px 4px;
       border-radius: 3px;
+    html, body {
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    }
+    header {
+      padding:12px 16px;
+      border-bottom:1px solid #1d1d2a;
+    }
+    header strong { font-weight:600; }
+    .status {
+      color:var(--muted);
+      font-size:12px;
+      margin-top:4px;
+    }
+    #stage {
+      display:block;
+      margin:16px auto;
+      box-shadow:0 0 0 1px #1d1d2a;
+      background:var(--bg);
+    }
+    .note {
+      max-width:900px;
+      margin:0 auto 16px;
+      color:var(--muted);
+    }
+    code {
+      background:#11111a;
+      padding:2px 4px;
+      border-radius:3px;
     }
   </style>
 </head>
 <body>
   <header>
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
+=====
+      <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+>>>>>>>+upstream/codex/
+  <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">Static rendering only: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
+<<  <p class="note">Static rendering only: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
     <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
   </header>
 
@@ -73,15 +109,18 @@
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice are rendered once with a calm palette. No animation, no external libraries. Open this file directly.</p>
-
-  <script type="module">
+>>>>>>>+main
+=
+  <p c  <p class="note">Static renderer encoding Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
+>>>>>>>+upstream/codex/
+ript type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
     const elStatus = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    if (!ctx) {
+<<<<<<    if (!ctx) {
       statusEl.textContent = "Canvas context unavailable; try a newer browser.";
     }
 
@@ -131,7 +170,22 @@
       root.setProperty("--bg", palette.bg || fallbackPalette.bg);
       root.setProperty("--ink", palette.ink || fallbackPalette.ink);
       root.setProperty("--muted", palette.muted || fallbackPalette.muted || fallbackPalette.ink);
-    }
+>>>>>>>+main
+=
+    co    const FALLBACK_PALETTE = {
+      bg: "#0b0b12",
+      ink: "#e8e8f0",
+      muted: "#a6a6c1",
+      layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+    };
+
+    // Applies palette colours to the chrome so the UI mirrors the canvas calmly.
+    function applyPaletteColors(palette) {
+      const rootStyle = document.documentElement.style;
+      if (palette.bg) rootStyle.setProperty("--bg", palette.bg);
+      if (palette.ink) rootStyle.setProperty("--ink", palette.ink);
+      if (palette.muted) rootStyle.setProperty("--muted", palette.muted);
+>>>>>>>+upstream/codex/
 
     async function loadPalette(path) {
       try {
@@ -139,7 +193,7 @@
         if (!response.ok) return null;
         return await response.json();
       } catch (error) {
-        return null;
+<<<<<<        return null;
       }
     }
 
@@ -184,7 +238,28 @@
     if (!ctx) {
       elStatus.textContent += " Canvas context unavailable.";
     } else {
-      const NUM = {
+>>>>>>>+main
+=
+              // file:// requests often throw; calm fallback keeps the render ND-safe.
+        return null;
+      }
+    }
+
+    const paletteData = await loadPalette("./data/palette.json");
+    const palette = paletteData && Array.isArray(paletteData.layers) ? paletteData : null;
+    const activePalette = palette || FALLBACK_PALETTE;
+
+    applyPaletteColors(activePalette);
+
+    const statusMessage = palette ? "Palette loaded." : "Palette missing; using safe fallback palette.";
+
+    if (!ctx) {
+      statusEl.textContent = statusMessage + " Canvas context unavailable; please try a modern browser.";
+    } else {
+      statusEl.textContent = statusMessage + " Geometry rendered.";
+
+>>>>>>>+upstream/codex/
+const NUM = {
         THREE: 3,
         SEVEN: 7,
         NINE: 9,
@@ -195,20 +270,240 @@
         ONEFORTYFOUR: 144
       };
 
-      const notice = paletteData ? null : "Palette missing; safe fallback applied.";
-      renderHelix(ctx, {
+<<<<<<      const notice = paletteData ? null : "Palette missing; safe fallback applied.";
+>>>>>>>+main
+=
+            // ND-safe rationale: render once with layered calm colours; show notice if palette is missing.
+>>>>>>>+upstream/codex/
+renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette: activePalette,
         NUM,
-        notice
+<<<<<<        notice
       renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette,
         NUM,
         notice: usingFallback ? "Fallback palette active." : ""
-      });
+>>>>>>>+main
+=
+              notice: palette ? null : "Palette data missing; fallback colours applied."
+>>>>>>>+upstream/codex/
+});
+    }
+  </script>
+</body>
+</html>
+    }
+  </style>
+</head>
+<body>
+  <header>
+<<<<<<<+main
+    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+=====
+      <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+>>>>>>>+upstream/codex/
+  <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+<<  <p class="note">Static rendering only: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Static Vesica, Tree-of-Life, Fibonacci, and double-helix layers. No animation, no autoplay, no external libraries. Open this file directly.</p>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice are rendered once with a calm palette. No animation, no external libraries. Open this file directly.</p>
+>>>>>>>+main
+=
+  <p c  <p class="note">Static renderer encoding Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
+>>>>>>>+upstream/codex/
+ript type="module">
+    import { renderHelix } from "./js/helix-renderer.mjs";
+
+    const elStatus = document.getElementById("status");
+    const canvas = document.getElementById("stage");
+    const ctx = canvas.getContext("2d");
+
+<<<<<<    if (!ctx) {
+      statusEl.textContent = "Canvas context unavailable; try a newer browser.";
+    }
+
+    const defaults = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    };
+
+    function applyPaletteColors(palette) {
+    async function loadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function isValidPalette(candidate) {
+      if (!candidate || typeof candidate !== "object") return false;
+      if (!Array.isArray(candidate.layers)) return false;
+      return candidate.layers.length >= 6;
+    }
+
+    function applyPaletteToChrome(palette) {
+      const root = document.documentElement.style;
+      if (palette.bg) root.setProperty("--bg", palette.bg);
+      if (palette.ink) root.setProperty("--ink", palette.ink);
+      if (palette.muted) root.setProperty("--muted", palette.muted);
+    }
+
+    // Local-only fetch keeps the renderer offline; errors fall back silently.
+    const fallbackPalette = {
+      bg: "#0b0b12",
+      ink: "#e8e8f0",
+      muted: "#a6a6c1",
+      layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+    };
+
+    function applyChromePalette(palette) {
+      const root = document.documentElement.style;
+      root.setProperty("--bg", palette.bg || fallbackPalette.bg);
+      root.setProperty("--ink", palette.ink || fallbackPalette.ink);
+      root.setProperty("--muted", palette.muted || fallbackPalette.muted || fallbackPalette.ink);
+>>>>>>>+main
+=
+    co    const FALLBACK_PALETTE = {
+      bg: "#0b0b12",
+      ink: "#e8e8f0",
+      muted: "#a6a6c1",
+      layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+    };
+
+    // Applies palette colours to the chrome so the UI mirrors the canvas calmly.
+    function applyPaletteColors(palette) {
+      const rootStyle = document.documentElement.style;
+      if (palette.bg) rootStyle.setProperty("--bg", palette.bg);
+      if (palette.ink) rootStyle.setProperty("--ink", palette.ink);
+      if (palette.muted) rootStyle.setProperty("--muted", palette.muted);
+>>>>>>>+upstream/codex/
+
+    async function loadPalette(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) return null;
+        return await response.json();
+      } catch (error) {
+<<<<<<        return null;
+      }
+    }
+
+    const paletteData = await loadPalette("./data/palette.json");
+    const activePalette = paletteData || defaults.palette;
+    applyPaletteColors(activePalette);
+
+    const paletteNotice = paletteData ? "Palette loaded." : "Palette missing; using safe fallback.";
+    statusEl.textContent = paletteNotice;
+
+    if (ctx) {
+        return null; // Offline-first: browsers often block fetch under file://.
+      }
+    }
+
+    function validatePalette(data) {
+      if (!data) return false;
+      if (!Array.isArray(data.layers)) return false;
+      return data.layers.length >= 6;
+    }
+
+    if (!ctx) {
+      statusEl.textContent = "Canvas 2D context unavailable in this browser.";
+    } else {
+      const paletteData = await loadPalette("./data/palette.json");
+      const palette = validatePalette(paletteData) ? paletteData : null;
+      const activePalette = palette || fallbackPalette;
+      const notice = palette ? null : "Palette fallback active.";
+
+      applyChromePalette(activePalette);
+      statusEl.textContent = palette ? "Palette loaded." : "Palette unavailable; using safe fallback palette.";
+
+    const fetchedPalette = await loadJSON("./data/palette.json");
+    const palette = isValidPalette(fetchedPalette) ? fetchedPalette : defaults.palette;
+    applyPaletteToChrome(palette);
+
+    const usingFallback = !isValidPalette(fetchedPalette);
+    elStatus.textContent = usingFallback
+      ? "Palette missing or incomplete; using safe fallback."
+      : "Palette loaded.";
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas context unavailable.";
+    } else {
+>>>>>>>+main
+=
+              // file:// requests often throw; calm fallback keeps the render ND-safe.
+        return null;
+      }
+    }
+
+    const paletteData = await loadPalette("./data/palette.json");
+    const palette = paletteData && Array.isArray(paletteData.layers) ? paletteData : null;
+    const activePalette = palette || FALLBACK_PALETTE;
+
+    applyPaletteColors(activePalette);
+
+    const statusMessage = palette ? "Palette loaded." : "Palette missing; using safe fallback palette.";
+
+    if (!ctx) {
+      statusEl.textContent = statusMessage + " Canvas context unavailable; please try a modern browser.";
+    } else {
+      statusEl.textContent = statusMessage + " Geometry rendered.";
+
+>>>>>>>+upstream/codex/
+const NUM = {
+        THREE: 3,
+        SEVEN: 7,
+        NINE: 9,
+        ELEVEN: 11,
+        TWENTYTWO: 22,
+        THIRTYTHREE: 33,
+        NINETYNINE: 99,
+        ONEFORTYFOUR: 144
+      };
+
+<<<<<<      const notice = paletteData ? null : "Palette missing; safe fallback applied.";
+>>>>>>>+main
+=
+            // ND-safe rationale: render once with layered calm colours; show notice if palette is missing.
+>>>>>>>+upstream/codex/
+renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette: activePalette,
+        NUM,
+<<<<<<        notice
+      renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette,
+        NUM,
+        notice: usingFallback ? "Fallback palette active." : ""
+>>>>>>>+main
+=
+              notice: palette ? null : "Palette data missing; fallback colours applied."
+>>>>>>>+upstream/codex/
+});
     }
   </script>
 </body>

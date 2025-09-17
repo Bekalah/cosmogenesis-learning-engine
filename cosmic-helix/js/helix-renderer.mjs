@@ -59,6 +59,38 @@ export function renderHelix(ctx, options) {
   drawTreeOfLife(ctx, width, height, pickLayer(1), pickLayer(2), N);
   drawFibonacci(ctx, width, height, pickLayer(3), N);
   drawHelix(ctx, width, height, pickLayer(4), pickLayer(5), N);
+  Layers (rendered back to front):
+    1) Vesica field - intersecting circle lenses keep the womb-of-forms visible.
+    2) Tree-of-Life scaffold - ten sephirot joined by twenty-two calm paths.
+    3) Fibonacci curve - logarithmic spiral polyline tuned to gentle growth.
+    4) Double-helix lattice - two static strands with soft cross ties.
+
+  ND-safe rationale:
+    - No motion or flashing; everything draws once per load.
+    - Muted palette keeps contrast gentle for neurodivergent viewers.
+    - Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) steer proportions.
+*/
+
+const FALLBACK_LAYERS = ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"];
+
+export function renderHelix(ctx, opts) {
+  if (!ctx) {
+    return { ok: false, reason: "missing-context" };
+  }
+
+  const { width, height, palette, NUM: N, notice } = opts;
+  const cleaned = normalisePalette(palette);
+
+  ctx.save();
+  ctx.fillStyle = cleaned.bg;
+  ctx.fillRect(0, 0, width, height);
+  ctx.restore();
+
+  // Layer order from background to foreground keeps depth legible without motion.
+  drawVesicaField(ctx, width, height, cleaned.layers[0], N);
+  drawTreeOfLife(ctx, width, height, cleaned.layers[1], cleaned.layers[2], N);
+  drawFibonacci(ctx, width, height, cleaned.layers[3], N);
+  drawHelix(ctx, width, height, cleaned.layers[4], cleaned.layers[5], N);
 
   if (opts.notice) {
     ctx.save();
@@ -137,12 +169,38 @@ function drawVesicaField(ctx, width, height, color, N) {
   ctx.strokeStyle = color;
   ctx.lineWidth = 1;
   ctx.globalAlpha = 0.35;
+=====
+      ctx.fillStyle = cleaned.notice;
+    ctx.textBaseline = "bottom";
+    ctx.fillText(notice, 24, height - 24);
+    ctx.restore();
+  }
 
-  const columns = N.ELEVEN;
+  return { ok: true };
+}
+
+function normalisePalette(palette) {
+  const input = palette || {};
+  const layers = Array.isArray(input.layers) ? input.layers : [];
+  return {
+    bg: input.bg || "#0b0b12",
+    notice: input.ink || "#e8e8f0",
+    layers: FALLBACK_LAYERS.map((fallbackColor, index) => layers[index] || fallbackColor)
+  };
+}
+
+// Layer 1: Vesica field builds a calm lens grid using 3/7/9/11 counts.
+function drawVesicaField(ctx, w, h, color, N) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.35; // gentle transparency keeps the grid quiet.
+>>>>>>>+upstream/codex/
+ const columns = N.ELEVEN;
   const rows = N.NINE;
   const spacingX = w / (columns + 2);
   const spacingY = h / (rows + 2);
-  const radius = Math.min(spacingX, spacingY) * (N.SEVEN / N.TWENTYTWO);
+<<  const radius = Math.min(spacingX, spacingY) * (N.SEVEN / N.TWENTYTWO);
   const offset = radius / N.THREE;
 
   for (let row = 0; row < rows; row += 1) {
@@ -207,14 +265,30 @@ function drawVesicaField(ctx, w, h, color, N) {
         const nextCy = marginY + spacingY * (row + 1);
         const lensCy = (cy + nextCy) / 2;
         strokeCircle(ctx, cx, lensCy, baseRadius);
-      }
+>>>>>>>+main
+===
+  co  const baseRadius = Math.min(spacingX, spacingY) / (N.THREE / 2);
+  const offset = baseRadius / N.THREE;
+
+  for (let row = 0; row < rows; row += 1) {
+    const cy = spacingY * (row + 1.5);
+    for (let col = 0; col < columns; col += 1) {
+      const cx = spacingX * (col + 1.5);
+      strokeCircle(ctx, cx - offset, cy, baseRadius);
+      strokeCircle(ctx, cx + offset, cy, baseRadius);
+
+      if ((row + col) % N.THREE === 0 && row < rows - 1) {
+        const nextCy = spacingY * (row + 2.5);
+        strokeCircle(ctx, cx, (cy + nextCy) / 2, baseRadius * (N.SEVEN / N.NINE));
+>>>>>>>+upstream/codex/
+  }
     }
   }
 
   ctx.restore();
 }
 
-function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
+<<<<function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
 // Layer 2: Tree-of-Life — ten sephirot with twenty-two gentle paths.
 function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, N) {
 /* Layer 2 — Tree-of-Life. Thin paths and calm nodes respect ND-safe contrast. */
@@ -228,7 +302,14 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
   ctx.globalAlpha = 0.6;
   ctx.strokeStyle = pathColor;
   ctx.lineWidth = Math.max(1, N.TWENTYTWO / N.ELEVEN); // 22 paths softened by pillar 11.
-  ctx.lineCap = "round";
+>>>>>>>+main
+// Layer// Layer 2: Tree-of-Life nodes and paths; gentle strokes avoid harsh edges.
+function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
+  ctx.save();
+  ctx.strokeStyle = pathColor;
+  ctx.lineWidth = N.TWENTYTWO / N.ELEVEN; // equals 2 for soft yet readable lines.
+>>>>>>>+upstream/codex/
+neCap = "round";
   ctx.globalAlpha = 0.85;
 
   const nodes = getTreeNodes(w, h, N);
@@ -252,7 +333,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
 
   ctx.globalAlpha = 0.9;
   ctx.fillStyle = nodeColor;
-  const nodeRadius = (Math.min(w, h) / N.ONEFORTYFOUR) * (N.SEVEN / N.ELEVEN);
+<<<<<<<   const nodeRadius = (Math.min(w, h) / N.ONEFORTYFOUR) * (N.SEVEN / N.ELEVEN);
 
   nodes.forEach((node) => {
   ctx.strokeStyle = nodeColor;
@@ -260,7 +341,11 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
 
   nodes.forEach(node => {
     strokeCircle(ctx, node.x, node.y, nodeRadius);
-    ctx.beginPath();
+>>>>>>>+main
+  const   const nodeRadius = N.NINE / 3;
+  nodes.forEach((node) => {
+>>>>>>>+upstream/codex/
+beginPath();
     ctx.arc(node.x, node.y, nodeRadius * 0.6, 0, Math.PI * 2);
     ctx.fill();
   ctx.lineWidth = strokeWidth;
@@ -274,7 +359,7 @@ function drawTreeOfLife(ctx, w, h, pathColor, nodeColor, N) {
     ctx.lineTo(end.x, end.y);
     ctx.stroke();
   });
-
+<<<<<<< 
   ctx.globalAlpha = 1;
   ctx.fillStyle = nodeColor;
   nodes.forEach((node) => {
@@ -309,13 +394,66 @@ function drawFibonacciSpiral(ctx, width, height, color, N) {
   const radiusBase = Math.min(w, h) / (N.THREE + N.SEVEN / N.NINE);
   const centerX = w / 2;
   const centerY = h / 2;
+>>>>>>>+main
+ ctx.res
+  ctx.restore();
+}
 
-  ctx.beginPath();
+function getTreeNodes(w, h) {
+  const verticalOffset = h * 0.05;
+  return [
+    { x: w / 2, y: verticalOffset + h * 0.00 },
+    { x: w * 0.28, y: verticalOffset + h * 0.12 },
+    { x: w * 0.72, y: verticalOffset + h * 0.12 },
+    { x: w * 0.28, y: verticalOffset + h * 0.32 },
+    { x: w * 0.72, y: verticalOffset + h * 0.32 },
+    { x: w / 2, y: verticalOffset + h * 0.44 },
+    { x: w * 0.28, y: verticalOffset + h * 0.64 },
+    { x: w * 0.72, y: verticalOffset + h * 0.64 },
+    { x: w / 2, y: verticalOffset + h * 0.76 },
+    { x: w / 2, y: verticalOffset + h * 0.92 }
+  ];
+}
+
+function getTreePaths() {
+  return [
+    [0, 1], [0, 2], [0, 5],
+    [1, 2], [1, 5], [2, 5],
+    [1, 3], [2, 4], [3, 4],
+    [3, 5], [4, 5], [3, 6],
+    [4, 7], [5, 6], [5, 7],
+    [6, 7], [6, 8], [7, 8],
+    [5, 8], [6, 9], [7, 9],
+    [8, 9]
+  ];
+}
+
+// Layer 3: Fibonacci curve - golden spiral polyline anchored at centre.
+function drawFibonacci(ctx, w, h, color, N) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.globalAlpha = 0.85;
+
+  const phi = (1 + Math.sqrt(5)) / 2;
+  const steps = N.ONEFORTYFOUR;
+  const turns = N.SEVEN; // seven quarter-turns keeps the spiral gentle.
+  const totalAngle = (Math.PI / 2) * turns;
+  const baseRadius = Math.min(w, h) / N.THREE;
+  const centerX = w * 0.44;
+  const centerY = h * 0.58;
+>>>>>>>+upstream/codex/
+inPath();
   for (let i = 0; i <= steps; i += 1) {
     const t = i / steps;
-    const angle = totalAngle * t;
+<<<<<<< ma    const angle = totalAngle * t;
     const radius = radiusBase * Math.pow(phi, angle / (Math.PI / 2));
-    const x = centerX + radius * Math.cos(angle);
+>>>>>>>+main
+  const     const angle = t * totalAngle;
+    const radius = (baseRadius / N.ELEVEN) * Math.pow(phi, angle / (Math.PI / 2));
+>>>>>>>+upstream/codex/
+x = centerX + radius * Math.cos(angle);
     const y = centerY + radius * Math.sin(angle);
     if (i === 0) {
       ctx.moveTo(x, y);
@@ -323,7 +461,7 @@ function drawFibonacciSpiral(ctx, width, height, color, N) {
       ctx.lineTo(x, y);
     }
   }
-/* Layer 3 — Fibonacci spiral approximated as a polyline to avoid flashing arcs. */
+<<<<<<< ma/* Layer 3 — Fibonacci spiral approximated as a polyline to avoid flashing arcs. */
 function drawFibonacci(ctx, w, h, color, N) {
   const cx = w / 2;
   const cy = h / 2;
@@ -343,11 +481,13 @@ function drawFibonacci(ctx, w, h, color, N) {
       ctx.lineTo(pt.x, pt.y);
     }
   });
+>>>>>>>+main
+>>> upstream/codex/add-weaving_symbols-documentation
   ctx.stroke();
   ctx.restore();
 }
 
-function drawHelix(ctx, w, h, strandColor, rungColor, N) {
+<<<<<<< mainfunction drawHelix(ctx, w, h, strandColor, rungColor, N) {
   ctx.save();
   const segments = N.ONEFORTYFOUR;
   const amplitude = Math.min(w, h) / (N.SEVEN + N.NINE);
@@ -370,10 +510,44 @@ function drawHelix(ctx, w, h, strandColor, rungColor, N) {
     } else {
       ctx.lineTo(x, y);
     }
-  }
-  ctx.stroke();
+>>>>>>>+main
+ayer 4: // Layer 4: Double-helix lattice - two strands plus calm cross ties.
+function drawHelix(ctx, w, h, strandColor, rungColor, N) {
+  ctx.save();
+  const centerY = h * 0.55;
+  const amplitude = h / N.NINETYNINE * N.ELEVEN;
+  const cycles = N.THREE; // three full twists keeps rhythm steady.
+  const steps = N.ONEFORTYFOUR;
 
-  ctx.beginPath();
+  const strandA = [];
+  const strandB = [];
+  for (let i = 0; i <= steps; i += 1) {
+    const t = i / steps;
+    const x = t * w;
+    const angle = t * cycles * Math.PI * 2;
+    const yA = centerY + Math.sin(angle) * amplitude;
+    const yB = centerY + Math.sin(angle + Math.PI) * amplitude;
+    strandA.push({ x, y: yA });
+    strandB.push({ x, y: yB });
+  }
+
+  drawPolyline(ctx, strandA, strandColor, 2);
+  drawPolyline(ctx, strandB, strandColor, 2);
+
+  ctx.strokeStyle = rungColor;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.6;
+  const rungCount = N.TWENTYTWO;
+  for (let i = 0; i <= rungCount; i += 1) {
+    const index = Math.floor((i / rungCount) * steps);
+    const a = strandA[index];
+    const b = strandB[index];
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
+>>>>>>>+upstream/codex/
+eginPath();
   for (let i = 0; i <= segments; i += 1) {
     const t = i / segments;
     const x = w * t;
@@ -417,7 +591,7 @@ function drawHelix(ctx, w, h, strandColor, rungColor, N) {
   ctx.restore();
 }
 
-// Layer 4: Double helix lattice — static sine strands with cross ties.
+<<<<<<< main// Layer 4: Double helix lattice — static sine strands with cross ties.
 function drawDoubleHelix(ctx, width, height, strandColor, rungColor, N) {
   ctx.save();
   const steps = N.ONEFORTYFOUR; // Sample density ties to 144 for lattice stability.
@@ -498,6 +672,24 @@ function drawHelix(ctx, w, h, primaryColor, secondaryColor, N) {
     ctx.lineTo(b.x, b.y);
     ctx.stroke();
   }
+>>>>>>>+main
+ drawPolyline(ctx, points, color, width) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.lineCap = "round";
+  ctx.globalAlpha = 0.85;
+
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
+  });
+  ctx.stroke();
+>>>>>>> upstream/codex/add-weaving_symbols-documentation
 
   ctx.restore();
 }
@@ -521,6 +713,7 @@ function strokeCircle(ctx, x, y, radius, filled) {
     ctx.stroke();
   }
 }
+<<<<<<< main
 
 function strokePolyline(ctx, points, color) {
   if (!points.length) return;
