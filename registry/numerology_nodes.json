@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Numerology Cosmology Atlas",
+  "description": "Cross-cultural numerology, symbolic design, and art/architecture toolkits for nodes 0–144.",
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "minimum": 0, "maximum": 144 },
+          "constants": { "type": "boolean", "description": "True if node is master constant (11, 22, 33, 72, 78, 99, 144, etc.)" },
+          "cosmologies": {
+            "type": "object",
+            "properties": {
+              "pythagorean": { "type": "string" },
+              "kabbalah": { "type": "string" },
+              "vedic": { "type": "string" },
+              "iching": { "type": "string" },
+              "mayan": { "type": "string" },
+              "chinese": { "type": "string" },
+              "tibetan": { "type": "string" },
+              "other": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "design_layers": {
+            "type": "object",
+            "properties": {
+              "color_palette": { "type": "string" },
+              "geometry": { "type": "string" },
+              "sound_interval": { "type": "string" },
+              "crystal": { "type": "string" },
+              "seed_syllable": { "type": "string" }
+            }
+          },
+          "pedagogy": {
+            "type": "object",
+            "properties": {
+              "learning_focus": { "type": "string" },
+              "exercise": { "type": "string" }
+            }
+          },
+          "architecture": {
+            "type": "object",
+            "properties": {
+              "patterns": { "type": "string" },
+              "application": { "type": "string" }
+            }
+          }
+        },
+        "required": ["id"]
+      }
+    }
+  }
+}
