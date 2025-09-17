@@ -1,0 +1,725 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "records": [
+    {
+      "id": 1,
+      "name": "Vehuiah",
+      "virtue": "Will & New Beginnings",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jeliel",
+      "virtue": "Love & Wisdom",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Sitael",
+      "virtue": "Construction & Stability",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Elemiah",
+      "virtue": "Divine Power",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Mahasiah",
+      "virtue": "Rectification",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Lelahel",
+      "virtue": "Healing Light",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Achaiah",
+      "virtue": "Patience",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Cahetel",
+      "virtue": "Blessings",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Haziel",
+      "virtue": "Mercy",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Aladiah",
+      "virtue": "Grace",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Lauviah",
+      "virtue": "Victory",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Hahaiah",
+      "virtue": "Refuge",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Iezalel",
+      "virtue": "Fidelity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Mebahel",
+      "virtue": "Justice",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Hariel",
+      "virtue": "Purification",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Hakamiah",
+      "virtue": "Loyalty",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Lauviah",
+      "virtue": "Understanding",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Caliel",
+      "virtue": "Truth",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Leuviah",
+      "virtue": "Expansion",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Pahaliah",
+      "virtue": "Redemption",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Nelchael",
+      "virtue": "Learning",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Yeiayel",
+      "virtue": "Fame",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Melahel",
+      "virtue": "Cures",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Haheuiah",
+      "virtue": "Protection",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Nith-Haiah",
+      "virtue": "Wisdom",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Haaiah",
+      "virtue": "Diplomacy",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Yerathel",
+      "virtue": "Propagation of Light",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Seheiah",
+      "virtue": "Longevity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Reiyel",
+      "virtue": "Liberation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Omael",
+      "virtue": "Fruitfulness",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Lecabel",
+      "virtue": "Talent",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Vasariah",
+      "virtue": "Justice",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Yehuiah",
+      "virtue": "Subordination",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Lehahiah",
+      "virtue": "Obedience",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Chavakiah",
+      "virtue": "Reconciliation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Menadel",
+      "virtue": "Work",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Aniel",
+      "virtue": "Courage",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Haamiah",
+      "virtue": "Ritual",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Rehael",
+      "virtue": "Healing",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Ieiazel",
+      "virtue": "Comfort",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Hahahel",
+      "virtue": "Mission",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Mikael",
+      "virtue": "Unity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Veuliah",
+      "virtue": "Prosperity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Yelaiah",
+      "virtue": "Combat",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Sealiah",
+      "virtue": "Motivation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Ariel",
+      "virtue": "Revelation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Asaliah",
+      "virtue": "Contemplation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Mihael",
+      "virtue": "Fertility",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Vehuel",
+      "virtue": "Elevation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Daniel",
+      "virtue": "Mercy",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 51,
+      "name": "Hahasiah",
+      "virtue": "Alchemy",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 52,
+      "name": "Imamiah",
+      "virtue": "Atonement",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Nanael",
+      "virtue": "Spiritual Communication",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Nithael",
+      "virtue": "Eternity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 55,
+      "name": "Mebaiah",
+      "virtue": "Inspiration",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Poyel",
+      "virtue": "Support",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 57,
+      "name": "Nemamiah",
+      "virtue": "Discernment",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 58,
+      "name": "Yeialel",
+      "virtue": "Mental Strength",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 59,
+      "name": "Harahel",
+      "virtue": "Intellectual Riches",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 60,
+      "name": "Mitzrael",
+      "virtue": "Reparation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 61,
+      "name": "Umabel",
+      "virtue": "Affinity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Iahhel",
+      "virtue": "Knowledge",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 63,
+      "name": "Anauel",
+      "virtue": "Unity",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 64,
+      "name": "Mehiel",
+      "virtue": "Inspiration",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 65,
+      "name": "Damabiah",
+      "virtue": "Wellspring",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 66,
+      "name": "Manakel",
+      "virtue": "Support",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Eyael",
+      "virtue": "Transformation",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 68,
+      "name": "Habuhiah",
+      "virtue": "Healing of Nature",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 69,
+      "name": "Rochel",
+      "virtue": "Restitution",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 70,
+      "name": "Jabamiah",
+      "virtue": "Alchemy",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 71,
+      "name": "Haiaiel",
+      "virtue": "Valor",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    },
+    {
+      "id": 72,
+      "name": "Mumiah",
+      "virtue": "Rebirth",
+      "citations": [
+        "data/angels.72.json",
+        "Gustav Davidson, A Dictionary of Angels (1967)",
+        "Lon Milo DuQuette, The Key to Solomon's Key (2001)"
+      ]
+    }
+  ]
+}

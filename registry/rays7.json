@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "records": [
+    {
+      "id": 1,
+      "name": "Ray of Will",
+      "color": "deep indigo",
+      "qualities": ["sovereignty", "focus"],
+      "citations": [
+        "docs/codex-14499-research.md · Tradition Currents",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Ray of Love-Wisdom",
+      "color": "emerald gold",
+      "qualities": ["compassion", "harmonic study"],
+      "citations": [
+        "docs/codex-14499-research.md · Tradition Currents",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Ray of Creative Intelligence",
+      "color": "amber",
+      "qualities": ["pattern making", "integration"],
+      "citations": [
+        "docs/codex-14499-research.md · Tradition Currents",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Ray of Harmony",
+      "color": "rose gold",
+      "qualities": ["art synthesis", "resonant healing"],
+      "citations": [
+        "docs/codex-14499-research.md · Tradition Currents",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Ray of Science",
+      "color": "solar yellow",
+      "qualities": ["analysis", "provenance"],
+      "citations": [
+        "docs/SCIENCE_REFERENCES.md",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Ray of Devotion",
+      "color": "crimson",
+      "qualities": ["ritual", "vow keeping"],
+      "citations": [
+        "docs/codex-14499-research.md · Tradition Currents",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Ray of Ceremonial Order",
+      "color": "violet",
+      "qualities": ["structure", "initiation"],
+      "citations": [
+        "docs/codex-14499-research.md · Tradition Currents",
+        "Alice A. Bailey, Esoteric Psychology I (1936)"
+      ]
+    }
+  ]
+}

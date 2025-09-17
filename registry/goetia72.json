@@ -1,0 +1,581 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "records": [
+    {
+      "id": 1,
+      "name": "Bael",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Agares",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Vassago",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Samigina",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Marbas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Valefor",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Amon",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Barbatos",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Paimon",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Buer",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Gusion",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Sitri",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Beleth",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Leraje",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Eligos",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Zepar",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Botis",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Bathin",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Sallos",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Purson",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Marax",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Ipos",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Aim",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Naberius",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Glasya-Labolas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Bune",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Ronove",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Berith",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Astaroth",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Forneus",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Foras",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Asmoday",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Gaap",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Furfur",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Marchosias",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Stolas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Phenex",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Halphas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Malphas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Raum",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Focalor",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Vepar",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Sabnock",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Shax",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Vine",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Bifrons",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Vual",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Haagenti",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Crocell",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Furcas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 51,
+      "name": "Balam",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 52,
+      "name": "Alloces",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Camio",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Murmur",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 55,
+      "name": "Orobas",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Gremory",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 57,
+      "name": "Ose",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 58,
+      "name": "Amy",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 59,
+      "name": "Orias",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 60,
+      "name": "Vapula",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 61,
+      "name": "Zagan",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Valac",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 63,
+      "name": "Andras",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 64,
+      "name": "Flauros",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 65,
+      "name": "Andrealphus",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 66,
+      "name": "Cimejes",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Amdusias",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 68,
+      "name": "Belial",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 69,
+      "name": "Decarabia",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 70,
+      "name": "Seere",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 71,
+      "name": "Dantalion",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    },
+    {
+      "id": 72,
+      "name": "Andromalius",
+      "citations": [
+        "codex-144-99/data/taxonomies/goetia_72.json",
+        "Lesser Key of Solomon (Mathers & Crowley, 1904)"
+      ]
+    }
+  ]
+}
