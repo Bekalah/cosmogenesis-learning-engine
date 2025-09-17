@@ -10,6 +10,9 @@
   <!-- Kept inside cosmic-helix/ so the site root remains untouched; honours existing lore layout. -->
   <style>
     /* ND-safe: calm contrast, no motion, generous breathing room */
+  <!-- Layered geometry stays within cosmic-helix/ to respect the broader Codex 144:99 (c99) structure. -->
+  <style>
+    /* ND-safe chrome: calm contrast, generous spacing, no motion cues */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
     html, body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
     header { padding:12px 16px; border-bottom:1px solid #1d1d2a; background:linear-gradient(180deg,#10101a,#0000); }
@@ -101,6 +104,11 @@
 <<  <p class="note">Static rendering only: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
     <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
   </header>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Static renderer for Vesica, Tree-of-Life, Fibonacci, and a double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Static Vesica, Tree-of-Life, Fibonacci, and double-helix layers. No animation, no autoplay, no external libraries. Open this file directly.</p>
@@ -135,11 +143,14 @@ ript type="module">
 
     function applyPaletteColors(palette) {
     async function loadJSON(path) {
+    // Offline-first loader: fetch may fail under file://, so errors fall back silently.
+    async function loadPalette(path) {
       try {
         const response = await fetch(path, { cache: "no-store" });
         if (!response.ok) return null;
         return await response.json();
       } catch (error) {
+      } catch (err) {
         return null;
       }
     }
@@ -151,6 +162,7 @@ ript type="module">
     }
 
     function applyPaletteToChrome(palette) {
+    function applyChromeColors(palette) {
       const root = document.documentElement.style;
       if (palette.bg) root.setProperty("--bg", palette.bg);
       if (palette.ink) root.setProperty("--ink", palette.ink);
@@ -418,6 +430,28 @@ ript type="module">
 
     if (ctx) {
         return null; // Offline-first: browsers often block fetch under file://.
+    (async () => {
+      const paletteData = await loadPalette("./data/palette.json");
+      const activePalette = paletteData || defaults.palette;
+      applyChromeColors(activePalette);
+
+      const notice = paletteData ? null : "Palette missing; using safe fallback palette.";
+      const statusPrefix = paletteData ? "Palette loaded." : "Fallback palette active.";
+
+      const NUM = {
+        THREE: 3,
+        SEVEN: 7,
+        NINE: 9,
+        ELEVEN: 11,
+        TWENTYTWO: 22,
+        THIRTYTHREE: 33,
+        NINETYNINE: 99,
+        ONEFORTYFOUR: 144
+      };
+
+      if (!ctx) {
+        statusEl.textContent = statusPrefix + " Canvas context unavailable; try a modern browser.";
+        return;
       }
     }
 
@@ -505,6 +539,19 @@ renderHelix(ctx, {
 >>>>>>>+upstream/codex/
 });
     }
+      // ND-safe rationale: render once, preserve layer order, no motion.
+      const result = renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette: activePalette,
+        NUM,
+        notice
+      });
+
+      statusEl.textContent = result.ok
+        ? statusPrefix + " Geometry rendered."
+        : "Rendering skipped: " + result.reason;
+    })();
   </script>
 </body>
 </html>
