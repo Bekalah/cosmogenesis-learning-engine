@@ -1,0 +1,5 @@
+{
+  "gpu_instancing": true,
+  "lod": true,
+  "texture_streaming": true
+}

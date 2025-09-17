@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cosmogenesis Learning Engine — Research Launchpad</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+</head>
+<body>
+  <header class="hero">
+    <img src="./assets/img/banner.png" alt="Cosmogenesis banner" class="hero__image">
+    <div class="hero__content">
+      <h1>Cosmogenesis Learning Engine</h1>
+      <p>Docs-first highlight + test launcher for modular, trauma-informed experimentation.</p>
+      <nav>
+        <ul>
+          <li><a href="../articles/cosmogenesis_research-highlight.md">Research Highlight</a></li>
+          <li><a href="../modernization/METRICS.md">Modernization Metrics</a></li>
+          <li><a href="https://github.com/bekalah" target="_blank" rel="noopener">Author ORCID Hub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Parallel Engine Strategy</h2>
+      <p>Stride and MonoGame sandboxes run in parallel so you can toggle feature flags without disturbing legacy code paths. The ECS seed and memory pool live in <code>core/</code> and serve both renderers.</p>
+    </section>
+
+    <section>
+      <h2>Living Arcana Data</h2>
+      <p>Arcana nodes unify traditional symbolism with practitioner notes, art assets, and branching narratives. These datasets mirror the Living Arcana schema described in the research highlight.</p>
+    </section>
+
+    <section>
+      <h2>Performance Levers</h2>
+      <p>Flip <code>performance/flags.json</code> and <code>config/features.json</code> to evaluate GPU instancing, LOD, and texture streaming across both engines.</p>
+    </section>
+  </main>
+
+  <footer>
+    <small>&copy; 2024 Cosmogenesis Learning Engine · Offline-first, ND-safe delivery.</small>
+  </footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+          console.warn('Service worker registration failed', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

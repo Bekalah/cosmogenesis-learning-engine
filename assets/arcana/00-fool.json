@@ -1,0 +1,22 @@
+{
+  "id": "00",
+  "traditional_name": "The Fool",
+  "practitioners": [
+    {
+      "name": "(example)",
+      "discipline": "Visionary Art"
+    }
+  ],
+  "art_references": [
+    "assets/img/fool.png"
+  ],
+  "research_connections": [
+    "papers/kunz_geometry.pdf"
+  ],
+  "narrative_branches": [
+    {
+      "choice": "left path",
+      "leads_to": "01-magician"
+    }
+  ]
+}

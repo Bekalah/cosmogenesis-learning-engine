@@ -1,0 +1,10 @@
+{
+  "use_stride": true,
+  "use_monogame": false,
+  "enable_ecs": true,
+  "perf": {
+    "gpu_instancing": true,
+    "lod": true,
+    "texture_streaming": true
+  }
+}
