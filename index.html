@@ -2,248 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cosmogenesis Learning Engine — Codex 144:99 Atlas</title>
+  <title>Cosmic Helix Renderer (ND-safe, Offline)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
-  <!-- Why: keep a calm landing page that organises datasets across the Codex trinity without erasing lore. -->
   <style>
-    /* ND-safe: calm palette, readable contrast, zero motion cues. */
-    :root {
-      --paper: #f8f5ef;
-      --ink: #141414;
-      --muted: #6b6b6b;
-      --focus: #1f6feb;
-      --panel: #ffffff;
-      --ring: #dedede;
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 12px 40px rgba(0, 0, 0, 0.06);
-      --radius: 16px;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --paper: #0f1012;
-        --ink: #e7e7ea;
-        --muted: #a0a0a7;
-        --panel: #16181b;
-        --ring: #2a2c30;
-        --shadow: 0 2px 6px rgba(0, 0, 0, 0.42), 0 22px 70px rgba(0, 0, 0, 0.36);
-      }
-    }
-    * {
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      margin: 0;
-      min-height: 100%;
-      background: var(--paper);
-      color: var(--ink);
-      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", Helvetica, Arial;
-    }
-    a {
-      color: var(--focus);
-      text-decoration: none;
-    }
-    a:hover,
-    a:focus {
-      text-decoration: underline;
-    }
-    :focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 2px;
-      border-radius: 10px;
-    }
-    header {
-      padding: 1.2rem 1.4rem;
-      border-bottom: 1px solid var(--ring);
-      background: linear-gradient(180deg, #ffffff12, #0000);
-    }
-    header h1 {
-      margin: 0 0 0.3rem;
-      font-size: 1.12rem;
-    }
-    header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-    .status-line {
-      margin-top: 0.6rem;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-    main {
-      display: grid;
-      gap: 1.2rem;
-      padding: 1.4rem;
-      grid-template-columns: minmax(280px, 340px) 1fr;
-      align-items: start;
-    }
-    @media (max-width: 980px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-    }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--ring);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .panel h2 {
-      margin: 0;
-      padding: 0.9rem 1.1rem;
-      border-bottom: 1px solid var(--ring);
-      font-size: 0.98rem;
-    }
-    .panel .body {
-      padding: 1.1rem;
-      display: grid;
-      gap: 1rem;
-    }
-    .repo-card,
-    .dataset-card {
-      border: 1px solid var(--ring);
-      border-radius: 12px;
-      padding: 0.9rem 1rem;
-      display: grid;
-      gap: 0.4rem;
-      background: transparent;
-    }
-    .repo-card strong {
-      font-size: 0.96rem;
-    }
-    .repo-card span {
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-    .repo-card code {
-      display: inline-flex;
-      padding: 0.15rem 0.4rem;
-      border-radius: 6px;
-      background: rgba(31, 111, 235, 0.08);
-      color: var(--ink);
-      font-size: 0.86rem;
-    }
-    .dataset-card h3 {
-      margin: 0;
-      font-size: 0.98rem;
-    }
-    .dataset-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    .dataset-meta {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 0.3rem;
-      font-size: 0.86rem;
-    }
-    .dataset-meta li {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      align-items: baseline;
-    }
-    .dataset-meta span {
-      color: var(--muted);
-    }
-    .dataset-meta code {
-      background: rgba(20, 20, 20, 0.08);
-      color: var(--ink);
-      padding: 0.1rem 0.35rem;
-      border-radius: 6px;
-      font-size: 0.84rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      .dataset-meta code {
-        background: rgba(231, 231, 234, 0.1);
-      }
-    }
-    .dataset-card[data-state="error"] {
-      border-color: #d97777;
-    }
-    .dataset-card[data-state="warning"] {
-      border-color: #f0ad4e;
-    }
-    .numerology {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 0.6rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .numerology li {
-      border: 1px solid var(--ring);
-      border-radius: 12px;
-      padding: 0.7rem;
-      text-align: center;
-      font-size: 0.9rem;
-      background: transparent;
-    }
-    footer {
-      padding: 1.2rem 1.4rem 2rem;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
+    /* ND-safe: calm contrast, no motion, generous spacing */
+    :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+    header { padding:12px 16px; border-bottom:1px solid #1d1d2a; }
+    .status { color:var(--muted); font-size:12px; margin-top:4px; }
+    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; }
+    .note { max-width:900px; margin:0 auto 16px; color:var(--muted); padding:0 16px; }
+    code { background:#11111a; padding:2px 4px; border-radius:3px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Cosmogenesis Learning Engine — Codex 144:99 Atlas</h1>
-    <p>Offline index linking the Soul (Circuitum 99), Mind (Cosmogenesis), Body (Stone Cathedral), and Tarot companions.</p>
-    <p class="status-line" id="status" role="status" aria-live="polite">Preparing dataset checks…</p>
+    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette…</div>
   </header>
 
-  <main>
-    <section class="panel">
-      <h2>Codex Trinity</h2>
-      <div class="body" data-repos>
-        <!-- Populated from data/system_parts.json so lore roles stay canonical. -->
-      </div>
-      <div class="body" style="border-top:1px solid var(--ring);">
-        <h3 style="margin:0;font-size:0.92rem;">Key Numerology</h3>
-        <p style="margin:0 0 0.6rem;color:var(--muted);font-size:0.86rem;">Geometry anchors these repeating counts. They stay visible for cross-repo rituals.</p>
-        <ul class="numerology" data-numerology></ul>
-      </div>
-    </section>
-
-    <section class="panel" style="grid-row: span 2;">
-      <h2>Geometry &amp; Design Datasets</h2>
-      <div class="body" data-datasets>
-        <!-- Filled with dataset cards once fetch completes. -->
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>Usage Notes</h2>
-      <div class="body">
-        <p style="margin:0;">Open this file directly or run <code>npm run dev</code> for a local server. No network calls are made; every fetch stays within this repository.</p>
-        <p style="margin:0;">If a dataset shows a fetch warning, browsers may block <code>file://</code> reads. Launch the lightweight dev server or trust local file access to review the JSON directly.</p>
-        <p style="margin:0;">All geometry assets remain layered (vesica, trees, lattices). Use the dataset paths above to drive renderers inside each repo without flattening the design.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    This atlas keeps datasets transparent while honouring the ND-safe covenant: no motion, gentle contrasts, and layered geometry ready for reuse across Circuitum 99, Cosmogenesis, Stone Cathedral, and Liber Arcanae.
-  </footer>
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
 
   <script type="module">
-    // ND-safe script: small pure helpers, descriptive comments, no global mutations beyond view wiring.
-    const statusEl = document.getElementById("status");
-    const reposEl = document.querySelector("[data-repos]");
-    const datasetsEl = document.querySelector("[data-datasets]");
-    const numerologyEl = document.querySelector("[data-numerology]");
+    import { renderHelix } from "./js/helix-renderer.mjs";
 
-    // Numerology anchors geometry counts for cross-repo work.
-    const NUM = Object.freeze({
+    const statusEl = document.getElementById("status");
+    const canvas = document.getElementById("stage");
+    const ctx = canvas.getContext("2d");
+
+    async function loadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+    }
+
+    const defaults = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    };
+
+    const palette = await loadJSON("./data/palette.json");
+    const activePalette = palette || defaults.palette;
+    statusEl.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty("--bg", activePalette.bg);
+    rootStyle.setProperty("--ink", activePalette.ink);
+
+    const NUM = {
       THREE: 3,
       SEVEN: 7,
       NINE: 9,
@@ -252,212 +66,15 @@
       THIRTYTHREE: 33,
       NINETYNINE: 99,
       ONEFORTYFOUR: 144
-    });
+    };
 
-    const NUM_LABELS = Object.freeze({
-      THREE: "Trinity base",
-      SEVEN: "Seven-ribbon bridge",
-      NINE: "Nine muses triad",
-      ELEVEN: "Master teacher channel",
-      TWENTYTWO: "Paths on the Tree",
-      THIRTYTHREE: "Spine vertebrae",
-      NINETYNINE: "Recursion gates",
-      ONEFORTYFOUR: "Crown lattice"
-    });
-
-    const DATASETS = [
-      {
-        id: "spiral-map",
-        title: "Spiral Map",
-        path: "./data/spiral_map.json",
-        description: "Node lattice for the 33 spine, 72 angel bands, and 144 crown array.",
-        focus: "geometry"
-      },
-      {
-        id: "aesthetic-realms",
-        title: "Aesthetic Realms",
-        path: "./data/aesthetic_realms.json",
-        description: "Mood boards and palettes for geometric plate design across the Codex.",
-        focus: "design"
-      },
-      {
-        id: "angel-ateliers",
-        title: "Angel Ateliers",
-        path: "./data/angels_ateliers.json",
-        description: "Workshop assignments that map angel lineages to creative disciplines.",
-        focus: "ritual geometry"
-      },
-      {
-        id: "correspondences",
-        title: "Correspondence Matrix",
-        path: "./data/correspondences.json",
-        description: "Chakra, rune, and Rosicrucian metal overlaps for layered geometry plates.",
-        focus: "crosswalk"
-      }
-    ];
-
-    let datasetsResolved = 0;
-    let datasetsOK = 0;
-    let datasetsWarn = 0;
-
-    function renderNumerology(map) {
-      numerologyEl.innerHTML = "";
-      Object.entries(map).forEach(([key, value]) => {
-        const li = document.createElement("li");
-        const count = document.createElement("strong");
-        count.textContent = value;
-        const label = document.createElement("div");
-        label.style.fontSize = "0.78rem";
-        label.style.color = "var(--muted)";
-        label.textContent = NUM_LABELS[key] || key.toLowerCase();
-        li.append(count, label);
-        numerologyEl.appendChild(li);
-      });
+    try {
+      renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: activePalette, NUM });
+      statusEl.textContent += " Rendering complete.";
+    } catch (error) {
+      statusEl.textContent = "Renderer error; see console for details.";
+      console.error("Cosmic Helix render error", error);
     }
-
-    function updateGlobalStatus() {
-      const total = DATASETS.length;
-      const summary = `${datasetsOK}/${total} datasets parsed`; 
-      const warnPart = datasetsWarn > 0 ? `, ${datasetsWarn} warning${datasetsWarn > 1 ? "s" : ""}` : "";
-      const pending = datasetsResolved < total ? ` — inspecting ${total - datasetsResolved} more…` : "";
-      statusEl.textContent = `${summary}${warnPart}${pending}`;
-    }
-
-    function createRepoCard(label, info) {
-      const article = document.createElement("article");
-      article.className = "repo-card";
-      const title = document.createElement("strong");
-      title.textContent = label;
-      const role = document.createElement("span");
-      role.textContent = info.function || "";
-      const path = document.createElement("code");
-      path.textContent = info.repo ? `./${info.repo}/` : "Unavailable";
-      article.append(title, role, path);
-      return article;
-    }
-
-    function createDatasetCard(definition) {
-      const article = document.createElement("article");
-      article.className = "dataset-card";
-      article.dataset.state = "pending";
-
-      const title = document.createElement("h3");
-      title.textContent = definition.title;
-      const desc = document.createElement("p");
-      desc.textContent = definition.description;
-
-      const list = document.createElement("ul");
-      list.className = "dataset-meta";
-
-      const pathItem = document.createElement("li");
-      const pathLabel = document.createElement("span");
-      pathLabel.textContent = "Path";
-      const pathCode = document.createElement("code");
-      pathCode.textContent = definition.path;
-      pathItem.append(pathLabel, pathCode);
-
-      const focusItem = document.createElement("li");
-      const focusLabel = document.createElement("span");
-      focusLabel.textContent = "Focus";
-      const focusValue = document.createElement("strong");
-      focusValue.textContent = definition.focus;
-      focusItem.append(focusLabel, focusValue);
-
-      const statusItem = document.createElement("li");
-      const statusLabel = document.createElement("span");
-      statusLabel.textContent = "Status";
-      const statusValue = document.createElement("strong");
-      statusValue.textContent = "Checking…";
-      statusValue.dataset.statusFor = definition.id;
-      statusItem.append(statusLabel, statusValue);
-
-      list.append(pathItem, focusItem, statusItem);
-      article.append(title, desc, list);
-      return { article, statusValue };
-    }
-
-    function summarisePayload(payload) {
-      if (Array.isArray(payload)) {
-        return `${payload.length} entries`;
-      }
-      if (payload && typeof payload === "object") {
-        if (Array.isArray(payload.nodes)) {
-          return `${payload.nodes.length} nodes`;
-        }
-        const keys = Object.keys(payload);
-        return `${keys.length} keys`;
-      }
-      return "Parsed";
-    }
-
-    async function fetchText(url) {
-      const response = await fetch(url, { cache: "no-store" });
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      return response.text();
-    }
-
-    async function inspectDataset(definition, view) {
-      const card = view.closest(".dataset-card");
-      try {
-        const text = await fetchText(definition.path);
-        let parsed;
-        try {
-          parsed = JSON.parse(text);
-        } catch (parseError) {
-          view.textContent = "Invalid JSON (needs cleanup)";
-          if (card) card.dataset.state = "warning";
-          datasetsWarn += 1;
-          return;
-        }
-        view.textContent = summarisePayload(parsed);
-        if (card) card.dataset.state = "ok";
-        datasetsOK += 1;
-      } catch (error) {
-        view.textContent = error.message.includes("Failed to fetch")
-          ? "Blocked by browser (file:// security)"
-          : error.message;
-        if (card) card.dataset.state = "error";
-        datasetsWarn += 1;
-      } finally {
-        datasetsResolved += 1;
-        updateGlobalStatus();
-      }
-    }
-
-    async function loadSystemParts() {
-      try {
-        const text = await fetchText("./data/system_parts.json");
-        const data = JSON.parse(text);
-        const entries = [
-          ["Mind — Cosmogenesis", data.mind],
-          ["Soul — Circuitum 99", data.soul],
-          ["Body — Stone Cathedral", data.body],
-          ["Tarot — Liber Arcanae", data.companion]
-        ];
-        entries.forEach(([label, info]) => {
-          if (!info) return;
-          reposEl.appendChild(createRepoCard(label, info));
-        });
-      } catch (error) {
-        const fallback = document.createElement("p");
-        fallback.style.margin = "0";
-        fallback.style.color = "var(--muted)";
-        fallback.textContent = `Unable to load system parts: ${error.message}`;
-        reposEl.appendChild(fallback);
-      }
-    }
-
-    // Initialise view.
-    renderNumerology(NUM);
-    loadSystemParts();
-    DATASETS.forEach(definition => {
-      const { article, statusValue } = createDatasetCard(definition);
-      datasetsEl.appendChild(article);
-      inspectDataset(definition, statusValue);
-    });
-    updateGlobalStatus();
   </script>
 </body>
 </html>
