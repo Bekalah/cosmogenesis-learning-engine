@@ -30,3 +30,4 @@ All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour th
 - Adjust colours by editing `data/palette.json`. Provide `bg`, `ink`, and a six colour `layers` array.
 - Override numerology constants in `index.html` before calling `renderHelix` if alternate ratios are desired.
 - Compose new layers by duplicating the helper pattern in `js/helix-renderer.mjs`. Keep additions static and well-commented to preserve ND safety.
+- The loader prefers JSON module imports when opened via `file://` to avoid network access. Browsers without JSON module support fall back to the bundled palette safely.

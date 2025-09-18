@@ -35,6 +35,15 @@
     async function loadJSON(path) {
       // Offline promise: only touches local file paths. If blocked (e.g. file:// fetch), null is returned.
       try {
+        if (window.location && window.location.protocol === "file:") {
+          try {
+            // Offline-first: JSON module import avoids blocked fetch calls under file:// origins.
+            const module = await import(path, { assert: { type: "json" } });
+            return module.default;
+          } catch (importError) {
+            // Silent fallback: some browsers reject JSON assertions, so we retry with fetch below.
+          }
+        }
         const res = await fetch(path, { cache: "no-store" });
         if (!res.ok) throw new Error(String(res.status));
         return await res.json();
@@ -59,6 +68,7 @@
     document.documentElement.style.setProperty("--bg", active.bg);
     document.documentElement.style.setProperty("--ink", active.ink);
 
+
     elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
 
     if (!ctx) {
@@ -70,6 +80,34 @@
       // ND-safe rationale: no motion, high readability, soft colors, layered order
       renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
     }
+
+
+    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
+
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas 2D context unavailable.";
+    } else {
+      // Numerology constants used by geometry routines
+      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+      // ND-safe rationale: no motion, high readability, soft colors, layered order
+      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
+    }
+
+    // ND-safe rationale: no motion, high readability, soft colors, layered order
+    renderHelix(
+      ctx,
+      {
+        width: canvas.width,
+        height: canvas.height,
+        palette: active,
+        NUM,
+        notice: usingFallback ? "Palette fallback active" : null
+      }
+    );
+
+
   </script>
 </body>
 </html>
