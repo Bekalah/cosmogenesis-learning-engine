@@ -1,66 +1,68 @@
-# Cosmic Helix Research Atlas (Offline, ND-safe)
+# Cosmic Helix Renderer (Offline, ND-safe)
 
 
-Static HTML + Canvas renderer that now pulls geometry, navigation, and module datasets from JSON files. The canvas still draws the requested four-layer cosmology on a fixed 1440×900 stage, while the surrounding interface renders the nodal modules, pattern cards, healing palette, and journal copy.
+Static HTML + Canvas capsule that renders the layered cosmology without motion. Double-clicking `index.html` paints a 1440x900
+canvas with four calm layers: vesica grid, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Everything runs
+offline with no build tools or external libraries.
 
 ## Files
-- `index.html` – offline entry point with calm chrome, dataset status messaging, and interface population helpers.
-- `js/helix-renderer.mjs` – ES module of pure drawing helpers; now parameterised by the geometry dataset.
-- `data/palette.json` – optional palette override; safe defaults are bundled when the file is missing.
-- `data/geometry.json` – vesica lattice counts, sephirot layout, Fibonacci curve parameters, and helix lattice settings.
-- `data/modules.json` – Tree-of-Life navigation data, research module cards, pattern board, healing palette, and journal entry.
+- `index.html` - offline entry point that loads the palette (with fallback), seeds numerology constants, and invokes the
+  renderer.
+- `js/helix-renderer.mjs` - ES module of small pure drawing helpers. Each helper documents why the ND-safe order matters.
+- `data/palette.json` - optional palette override. If missing, the renderer keeps a safe fallback and paints a notice on the
+  canvas.
 
 ## Usage (offline)
-1. Double-click `index.html` in any modern browser. No server or network connection is required.
-2. The header status reports whether each dataset loaded (`palette`, `geometry`, and `module` data). Missing files trigger calm fallbacks and add a notice string to the canvas corner.
-3. The canvas renders the four layers exactly once:
-   - **Layer 1 — Vesica field:** intersecting circle lattice spaced with the numerology constants 3/7/9/11 (rows/columns come from `geometry.json`).
-   - **Layer 2 — Tree-of-Life scaffold:** ten sephirot linked by twenty-two calm paths. Node positions, labels, and edges are read from `geometry.json` so you can remap the pillars without editing JS.
-   - **Layer 3 — Fibonacci curve:** golden spiral polyline sampled across 144 points for smooth, static growth. The `phi`, `turns`, and `baseRadiusDivisor` live in the dataset for easy tuning.
-   - **Layer 4 — Double-helix lattice:** two phase-shifted strands with thirty-three cross ties. Amplitude, phase offset, and cross-tie density are dataset-driven.
-
-If any JSON cannot be fetched (common under `file://`), the renderer automatically falls back to bundled data, updates the status line, and prints a gentle notice on the canvas.
-
-## ND-safe + trauma-informed choices
-- Single render pass only — there are no animations, timers, or autoplay hooks.
-- Muted palette and generous spacing keep contrast comfortable for neurodivergent viewers.
-- Layered depth is preserved without flattening geometry; comments explain why each layer draws in that order.
-- Geometry routines reference numerology constants (3, 7, 9, 11, 22, 33, 99, 144) and accept dataset overrides so symbolism stays explicit and editable.
-
-## Customising datasets
-- Update `data/palette.json` to swap colours. Keys remain `bg`, `ink`, `muted`, and `layers` (array of six hex codes).
-- Adjust `data/geometry.json` to move sephirot nodes, alter vesica spacing, or tweak helix density. All numbers are plain integers/floats so they can be versioned easily.
-- Edit `data/modules.json` to add or remove modules, patterns, healing swatches, or journal entries. The UI auto-renders any additional entries.
-
-Removing or renaming any dataset is safe — the renderer displays a small fallback notice and keeps drawing with the bundled defaults.
-
-## Extending safely
-When adding new geometry, compose additional pure helper functions inside `js/helix-renderer.mjs` and call them after the existing layers. Keep the ND-safe covenant in place: static rendering, ASCII quotes, UTF-8 with LF newlines, and inline comments that explain any lore additions or accessibility decisions. New datasets should follow the same calm fallback approach: load if present, otherwise fall back quietly and inform the status banner.
-=======
-Static HTML + Canvas renderer that draws the requested four-layer cosmology on a 1440x900 canvas. The module lives inside
-`cosmic-helix/` so the root index keeps its established lore-first entry point (why: preserves the wider narrative while adding
-this focused research plate).
-
-## Files in this capsule
-- `index.html` &mdash; entry point that loads the palette (with fallback), seeds numerology constants, and invokes the renderer.
-- `js/helix-renderer.mjs` &mdash; ES module of small pure drawing functions (one helper per layer plus utilities).
-- `data/palette.json` &mdash; optional colour overrides. Missing data triggers a calm fallback and a gentle notice.
+1. Open `cosmic-helix/index.html` directly in any modern browser. No server or network connection is required.
+2. The header status reports whether the palette loaded. Missing data keeps the fallback colours and adds a gentle notice to the
+   canvas corner.
+3. The canvas renders the four layers once using the numerology constants (3, 7, 9, 11, 22, 33, 99, 144) baked into the helper
+   functions.
 
 ## Layer order (back to front)
-1. **Vesica field** &mdash; intersecting circle lattice spaced with 3/7/9/11 ratios to set the womb-of-forms foundation.
-2. **Tree-of-Life scaffold** &mdash; ten sephirot nodes linked by twenty-two paths, scaled by 33/99/144 denominators for clarity.
-3. **Fibonacci curve** &mdash; logarithmic spiral polyline sampled over 144 points with golden-ratio pacing for gentle growth.
-4. **Double-helix lattice** &mdash; two static sine strands with rungs every few samples (144 total points, 22 rungs) to echo the
-   requested lattice.
+1. **Vesica field** - intersecting circle lattice spaced with 9x11 divisions to honour womb-of-forms geometry.
+2. **Tree-of-Life scaffold** - ten sephirot nodes joined by twenty-two steady paths, scaled by the numerology denominators for
+   clarity.
+3. **Fibonacci curve** - static logarithmic spiral sampled over 144 points with golden ratio pacing.
+4. **Double-helix lattice** - two phase-shifted strands with thirty-three cross ties and no motion.
+
+## ND-safe and trauma-informed choices
+- No animation or timers; everything draws once per load to avoid sensory spikes.
+- Calm palette defaults with status messaging explain fallbacks so nothing fails silently.
+- Comments explain why each layer order and spacing choice preserves depth without flattening geometry.
+- ASCII quotes, UTF-8, and LF newlines keep the module portable across offline environments.
+
+## Customising safely
+- Adjust `data/palette.json` to change colours. Keys remain `bg`, `ink`, `muted`, and `layers` (array of six hex strings).
+- Pass a custom geometry object when calling `renderHelix` if deeper tuning is required; the function validates numbers and
+  keeps the ND-safe structure intact.
+=======
+Static HTML + Canvas renderer that draws the requested four-layer cosmology on a fixed 1440x900 stage. It lives in `cosmic-helix/` so the wider site keeps its lore-first entry point.
+
+## Files
+- `index.html` - offline entry point that loads the optional palette, seeds numerology constants, and invokes the renderer.
+- `js/helix-renderer.mjs` - ES module of small pure drawing helpers (one layer per function plus shared utilities).
+- `data/palette.json` - optional colour overrides. Missing data triggers a calm fallback and a gentle notice.
 
 ## Usage (offline)
-1. Open `cosmic-helix/index.html` directly in any modern browser (no server or network required).
-2. The status line reports whether `data/palette.json` loaded or if the fallback palette is active.
-3. The canvas renders the four layers once. If the palette file is missing under `file://` conditions, the renderer posts a small
-   notice on the canvas while keeping safe colours.
+1. Open `cosmic-helix/index.html` directly in any modern browser (no server required).
+2. The header status reports whether `data/palette.json` loaded successfully.
+3. The canvas renders the four layers once. If the palette file is missing under `file://` rules, the renderer prints a small notice while using the sealed fallback palette.
 
-## Palette fallback
-Edit `data/palette.json` to supply custom colours:
+## Layer order (back to front)
+1. **Vesica field** - intersecting circle lattice spaced with 3/7/9/11 ratios to set the womb-of-forms foundation.
+2. **Tree-of-Life scaffold** - ten sephirot nodes linked by twenty-two paths, scaled by 33/99/144 denominators for clarity.
+3. **Fibonacci curve** - logarithmic spiral polyline sampled over 144 points with golden-ratio pacing.
+4. **Double-helix lattice** - two static sine strands with cross ties drawn across 33 anchor points.
+
+## ND-safe and trauma-informed choices
+- **No motion:** the renderer draws once per load with no timers or autoplay hooks.
+- **Calm palette:** palette validation keeps contrast comfortable and applies sealed fallbacks when JSON is absent.
+- **Layered depth:** geometry is rendered as separate layers instead of flattening sacred forms into one outline.
+- **Commented intent:** inline comments explain why safety choices exist for future stewards.
+
+## Customising safely
+Update `data/palette.json` to supply custom colours:
 
 ```json
 {
@@ -71,25 +73,7 @@ Edit `data/palette.json` to supply custom colours:
 }
 ```
 
-If the JSON is missing or malformed, `index.html` falls back to these bundled colours, updates the status line, and paints the
-same notice on the canvas so nothing fails silently.
+If the file is missing or malformed the renderer keeps the sealed palette, updates the status line, and posts the gentle notice on the canvas so nothing fails silently.
 
-## Numerology constants in use
-All geometry helpers receive a `NUM` object exposing the requested constants:
-- `3` seeds vesica symmetry.
-- `7` and `9` define grid counts and vertical spacing.
-- `11` drives margins and angle ratios.
-- `22` sets Tree-of-Life paths and helix rungs.
-- `33`, `99`, and `144` scale radii, sampling density, and curve pacing.
 
-## ND-safe and trauma-informed choices
-- **No motion:** every layer renders once; no timers, requestAnimationFrame, or interaction hooks.
-- **Calm contrast:** palette validation prevents harsh spikes and keeps text readable.
-- **Layered depth:** geometry is rendered in ordered layers instead of flattening into a single outline.
-- **Commented intent:** code comments explain why each safety choice exists for future stewards.
-
-## Extending carefully
-Add new geometry by composing additional pure helper functions in `js/helix-renderer.mjs`. Maintain the covenant: ASCII quotes
-only, UTF-8 with LF newlines, static rendering, calm palette, and inline commentary explaining any lore additions. Keep the module
-self-contained so it remains double-click runnable without build tools or network requests.
-
+Add new geometry by composing additional pure helpers inside `js/helix-renderer.mjs`. Maintain the covenant: ASCII quotes, UTF-8 with LF newlines, static rendering, and inline comments describing lore or safety rationale.

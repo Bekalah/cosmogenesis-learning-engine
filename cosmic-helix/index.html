@@ -2,88 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Cosmic Helix Research Atlas</title>
+  <title>Cosmic Helix Renderer (ND-safe, Offline)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
-
   <style>
-    /* ND-safe: calm gradients, no motion, generous breathing room */
 
-  <!-- Lives under cosmic-helix/ so the root index keeps its lore-forward entry point (why: preserves established narrative flow). -->
-  <style>
-    /* ND-safe chrome: calm contrast, generous spacing, no motion cues. */
-
+    /* ND-safe chrome: calm contrast, no motion, layered depth preserved (why: reduces sensory load). */
     :root {
-      --bg: #070710;
-      --surface: rgba(17, 17, 28, 0.88);
-      --surface-soft: rgba(20, 20, 34, 0.72);
-      --outline: #2d2d46;
-      --ink: #f3f3ff;
-      --muted: #b4b4d4;
-      --accent: #ffd700;
-      --accent-soft: #6b46c1;
-      --tag-bg: rgba(107, 70, 193, 0.3);
-      --tag-border: rgba(240, 240, 255, 0.25);
-      --swatch-border: rgba(255, 215, 0, 0.4);
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8f5ff;
-        --surface: rgba(244, 240, 255, 0.92);
-        --surface-soft: rgba(240, 236, 255, 0.8);
-        --outline: #d5cffe;
-        --ink: #1c1634;
-        --muted: #514a7a;
-        --tag-bg: rgba(107, 70, 193, 0.1);
-        --tag-border: rgba(107, 70, 193, 0.4);
-        --swatch-border: rgba(107, 70, 193, 0.5);
-      }
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
+      --bg: #0b0b12;
+      --ink: #e8e8f0;
+      --muted: #a6a6c1;
+      --outline: #1d1d2a;
     }
 
     html, body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, rgba(107, 70, 193, 0.35), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(15, 52, 96, 0.35), transparent 50%),
-        var(--bg);
+      background: var(--bg);
       color: var(--ink);
-
-      font: 15px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-    }
-
-    header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--outline);
-      background: linear-gradient(180deg, rgba(255, 215, 0, 0.08), rgba(0, 0, 0, 0));
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.35rem;
-      letter-spacing: 0.08em;
-    }
-
-    header p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      max-width: 960px;
-    }
-
-    .status {
-      margin-top: 12px;
-      font-size: 0.85rem;
-
-      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
 
     header {
       padding: 12px 16px;
-      border-bottom: 1px solid #1d1d2a;
+      border-bottom: 1px solid var(--outline);
       background: linear-gradient(180deg, #10101a, transparent);
     }
 
@@ -92,488 +34,93 @@
     }
 
     .status {
-      color: var(--muted);
-      font-size: 12px;
       margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
     }
 
     #stage {
       display: block;
-      margin: 16px auto 24px;
+      margin: 16px auto;
       width: 100%;
       max-width: 1440px;
-      box-shadow: 0 0 0 1px #1d1d2a;
+      box-shadow: 0 0 0 1px var(--outline);
       background: var(--bg);
     }
 
     .note {
       max-width: 900px;
-      margin: 0 auto 24px;
-
+      margin: 0 auto 16px;
+      padding: 0 16px 24px;
       color: var(--muted);
-      padding: 0 16px 40px;
     }
-
-
-    main {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 24px;
-      display: grid;
-      gap: 24px;
-    }
-
-    .section {
-      background: var(--surface);
-      border: 1px solid var(--outline);
-      border-radius: 18px;
-      padding: 24px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .section h2 {
-      margin: 0;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .section p {
-      margin: 0;
-    }
-
-    .tree-nav {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-    }
-
-    .sephirot-card {
-      background: var(--surface-soft);
-      border: 1px solid var(--outline);
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: grid;
-      gap: 6px;
-      text-align: center;
-    }
-
-    .sephirot-symbol {
-      font-size: 1.8rem;
-      line-height: 1;
-    }
-
-    .sephirot-title {
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .module-card {
-      background: var(--surface-soft);
-      border: 1px solid var(--outline);
-      border-radius: 16px;
-      padding: 18px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .module-symbol {
-      font-size: 1.7rem;
-      line-height: 1;
-    }
-
-    .module-title {
-      margin: 0;
-      font-size: 1.05rem;
-    }
-
-    .module-summary {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .module-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag {
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--tag-bg);
-      border: 1px solid var(--tag-border);
-      font-size: 0.82rem;
-    }
-
-    .control-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .control-card {
-      background: var(--surface-soft);
-      border: 1px solid var(--outline);
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .control-label {
-      font-weight: 600;
-    }
-
-    .control-range {
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    .canvas-block {
-      text-align: center;
-    }
-
-    #stage {
-      display: block;
-      margin: 0 auto;
-      max-width: 100%;
-      height: auto;
-      box-shadow: 0 0 0 1px var(--outline);
-      background: #0b0b12;
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .pattern-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-    }
-
-    .pattern-card {
-      background: var(--surface-soft);
-      border: 1px solid var(--outline);
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      display: grid;
-      gap: 8px;
-    }
-
-    .pattern-icon {
-      font-size: 2rem;
-    }
-
-    .frequency-display {
-      font-size: 2rem;
-      text-align: center;
-      letter-spacing: 0.1em;
-    }
-
-    .color-palette {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 14px;
-    }
-
-    .color-swatch {
-      border-radius: 50%;
-      aspect-ratio: 1;
-      border: 3px solid var(--swatch-border);
-      display: grid;
-      place-items: center;
-      font-size: 0.85rem;
-      color: var(--ink);
-    }
-
-    .journal-entry {
-      background: var(--surface-soft);
-      border: 1px solid var(--outline);
-      border-radius: 16px;
-      padding: 18px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .journal-meta {
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    @media (max-width: 720px) {
-      header {
-        padding: 16px 16px 20px;
-      }
-
-      main {
-        padding: 16px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Cosmic Helix Research Atlas</h1>
-    <p>Modular, nodal cosmogenesis interface. ND-safe, offline, and data-driven. Canvas renders sacred geometry while the surrounding panels load from JSON datasets.</p>
-    <p class="status" id="status" role="status" aria-live="polite">Preparing datasets…</p>
-  </header>
-
-  <main>
-    <section class="section">
-      <h2>Tree of Life Navigation</h2>
-      <ul class="tree-nav" id="sephirot-nav" role="list"></ul>
-    </section>
-
-    <section class="section">
-      <h2>Research Modules</h2>
-      <div class="module-grid" id="module-grid"></div>
-    </section>
-
-    <section class="section">
-      <h2 id="workspace-title">Sacred Geometry Laboratory</h2>
-      <p class="note">Control set remains static for calm viewing; values document the preferred numerology alignment.</p>
-      <div class="control-grid" id="workspace-controls"></div>
-    </section>
-
-    <section class="section canvas-block">
-      <h2>Layered Geometry Canvas</h2>
-      <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas" role="img"></canvas>
-      <p class="note">Layers render once: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and double-helix lattice. No motion, no network calls.</p>
-    </section>
-
-    <section class="section">
-      <h2>Pattern Recognition</h2>
-      <div class="pattern-grid" id="pattern-grid"></div>
-    </section>
-
-    <section class="section">
-      <h2>Frequency &amp; Color Healing</h2>
-      <div class="frequency-display" id="frequency-display">432 Hz</div>
-      <div class="color-palette" id="color-palette" role="list"></div>
-    </section>
-
-    <section class="section">
-      <h2>Research Journal</h2>
-      <div id="journal"></div>
-    </section>
-  </main>
 
     code {
       background: #11111a;
       padding: 2px 4px;
       border-radius: 3px;
     }
+
+    /* ND-safe: calm contrast, no motion, generous spacing */
+    :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    header { padding:12px 16px; border-bottom:1px solid #1d1d2a; background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent); }
+    header strong { font-weight:600; letter-spacing:0.06em; }
+    .status { margin-top:4px; color:var(--muted); font-size:12px; }
+    #stage { display:block; margin:16px auto; width:1440px; height:900px; box-shadow:0 0 0 1px #1d1d2a; background:var(--bg); max-width:calc(100vw - 32px); max-height:calc(100vh - 160px); }
+    canvas { width:100%; height:100%; display:block; }
+    .note { max-width:900px; margin:0 auto 24px; padding:0 16px; color:var(--muted); }
+    code { background:#11111a; padding:2px 4px; border-radius:3px; }
+
   </style>
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> &mdash; layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+
+    <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">
-    Static renderer for Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation,
-    no autoplay, no external libraries. Open this file directly; it works offline.
-  </p>
+  <p class="note">Static renderer for vesica grid, Tree-of-Life nodes, Fibonacci curve, and a double-helix lattice. Open this file directly (no server, no animation, ND-safe palette).</p>
+
+    <div class="status" id="status">Preparing palette...</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Static renderer encoding Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
 
-    const statusElement = document.getElementById("status");
-    const canvas = document.getElementById("stage");
-    const context = canvas.getContext("2d");
-
-    const defaults = {
+    const elStatus = document.getElementById("status");
 
     const statusEl = document.getElementById("status");
+
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    const FALLBACK = {
+    async function loadPalette(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
+        return await response.json();
+      } catch (error) {
+        return null;
 
+      }
+    }
+
+    const defaults = {
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
         muted: "#a6a6c1",
         layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-
-      },
-      geometry: {
-        vesica: {
-          rows: 9,
-          columns: 11,
-          paddingDivisor: 11,
-          radiusFactor: 1.5,
-          strokeDivisor: 99,
-          alpha: 0.55
-        },
-        treeOfLife: {
-          marginDivisor: 11,
-          radiusDivisor: 22,
-          labelOffset: -24,
-          labelFont: "13px system-ui, -apple-system, Segoe UI, sans-serif",
-          nodes: [
-            { id: "kether", title: "Kether", meaning: "Crown", level: 0, xFactor: 0.5 },
-            { id: "chokmah", title: "Chokmah", meaning: "Wisdom", level: 1, xFactor: 0.7 },
-            { id: "binah", title: "Binah", meaning: "Understanding", level: 1, xFactor: 0.3 },
-            { id: "chesed", title: "Chesed", meaning: "Mercy", level: 2, xFactor: 0.68 },
-            { id: "geburah", title: "Geburah", meaning: "Severity", level: 2, xFactor: 0.32 },
-            { id: "tiphareth", title: "Tiphareth", meaning: "Beauty", level: 3, xFactor: 0.5 },
-            { id: "netzach", title: "Netzach", meaning: "Victory", level: 4, xFactor: 0.66 },
-            { id: "hod", title: "Hod", meaning: "Glory", level: 4, xFactor: 0.34 },
-            { id: "yesod", title: "Yesod", meaning: "Foundation", level: 5, xFactor: 0.5 },
-            { id: "malkuth", title: "Malkuth", meaning: "Kingdom", level: 6, xFactor: 0.5 }
-          ],
-          edges: [
-            ["kether", "chokmah"],
-            ["kether", "binah"],
-            ["kether", "tiphareth"],
-            ["chokmah", "binah"],
-            ["chokmah", "tiphareth"],
-            ["chokmah", "chesed"],
-            ["chokmah", "netzach"],
-            ["binah", "tiphareth"],
-            ["binah", "geburah"],
-            ["binah", "hod"],
-            ["chesed", "geburah"],
-            ["chesed", "tiphareth"],
-            ["chesed", "netzach"],
-            ["geburah", "tiphareth"],
-            ["geburah", "hod"],
-            ["tiphareth", "netzach"],
-            ["tiphareth", "hod"],
-            ["tiphareth", "yesod"],
-            ["netzach", "hod"],
-            ["netzach", "yesod"],
-            ["hod", "yesod"],
-            ["yesod", "malkuth"]
-          ]
-        },
-        fibonacci: {
-          sampleCount: 144,
-          turns: 3,
-          baseRadiusDivisor: 3,
-          phi: 1.618033988749895,
-          alpha: 0.85
-        },
-        helix: {
-          sampleCount: 144,
-          cycles: 3,
-          amplitudeDivisor: 3,
-          phaseOffset: 180,
-          crossTieCount: 33,
-          strandAlpha: 0.85,
-          rungAlpha: 0.6
-        }
-      },
-      interface: {
-        sephirot: [
-          { id: "kether", emoji: "👑", title: "Kether", meaning: "Crown" },
-          { id: "chokmah", emoji: "🔮", title: "Chokmah", meaning: "Wisdom" },
-          { id: "binah", emoji: "🌙", title: "Binah", meaning: "Understanding" },
-          { id: "chesed", emoji: "💙", title: "Chesed", meaning: "Mercy" },
-          { id: "geburah", emoji: "🔥", title: "Geburah", meaning: "Severity" },
-          { id: "tiphareth", emoji: "☀️", title: "Tiphareth", meaning: "Beauty" },
-          { id: "netzach", emoji: "🌿", title: "Netzach", meaning: "Victory" },
-          { id: "hod", emoji: "📖", title: "Hod", meaning: "Glory" },
-          { id: "yesod", emoji: "🌛", title: "Yesod", meaning: "Foundation" },
-          { id: "malkuth", emoji: "🌍", title: "Malkuth", meaning: "Kingdom" }
-        ],
-        modules: [
-          {
-            id: "cosmogenesis",
-            symbol: "🌌",
-            title: "Cosmogenesis Patterns",
-            summary: "Explore creation myths through neurodivergent pattern recognition. Map the sacred geometry of universe birthing across cultures.",
-            tags: ["Sacred Geometry", "Creation Myths", "ND Cognition"]
-          },
-          {
-            id: "harmonic-research",
-            symbol: "🎵",
-            title: "Harmonic Resonance Lab",
-            summary: "Investigate Schumann resonances, planetary frequencies, and solfeggio healing tones. Create custom frequency environments for research.",
-            tags: ["Sound Healing", "Frequency", "Binaural"]
-          },
-          {
-            id: "symbolic-cognition",
-            symbol: "⚛️",
-            title: "Symbolic Cognition Archive",
-            summary: "Channel art-science fusion naturally. Study Jung's Red Book, temple geometry, and synesthetic artist archives.",
-            tags: ["Jung", "Symbolism", "ND Minds"]
-          },
-          {
-            id: "trauma-environments",
-            symbol: "🛡️",
-            title: "Trauma-Safe Spaces",
-            summary: "Design healing environments using polyvagal theory, biophilic patterns, and RPG mechanics for nervous system regulation.",
-            tags: ["PTSD", "Healing", "Safe Space"]
-          },
-          {
-            id: "alchemical-psychology",
-            symbol: "⚗️",
-            title: "Alchemical Psychology",
-            summary: "Following Dion Fortune, Paul Foster Case, and Agrippa. Transform lead consciousness into golden awareness.",
-            tags: ["Alchemy", "Theosophy", "Mysticism"]
-          },
-          {
-            id: "living-arcana",
-            symbol: "🃏",
-            title: "Living Arcana System",
-            summary: "Dynamic tarot correspondences mapped to Tree of Life. Real-time archetypal pattern recognition and synthesis.",
-            tags: ["Tarot", "Qabalah", "Hermetic"]
-          }
-        ],
-        patterns: [
-          { icon: "🌀", title: "Fibonacci Spirals", caption: "Nature's growth pattern" },
-          { icon: "⬢", title: "Metatron's Cube", caption: "Sacred geometry matrix" },
-          { icon: "✡", title: "Star Tetrahedron", caption: "Merkaba activation" }
-        ],
-        workspace: {
-          title: "Sacred Geometry Laboratory",
-          controls: [
-            { id: "recursion", label: "Recursion Depth", min: 1, max: 12, value: 6 },
-            { id: "phi", label: "Golden Ratio φ", min: 0, max: 100, value: 61 },
-            { id: "rotation", label: "Rotation Speed", min: 0, max: 100, value: 30 },
-            { id: "complexity", label: "Fractal Complexity", min: 3, max: 24, value: 12 }
-          ]
-        },
-        healing: {
-          baseFrequency: 432,
-          swatches: [
-            { color: "#FF0000", frequency: 428, label: "Root" },
-            { color: "#FFA500", frequency: 480, label: "Sacral" },
-            { color: "#FFFF00", frequency: 510, label: "Solar" },
-            { color: "#00FF00", frequency: 528, label: "Heart" },
-            { color: "#00FFFF", frequency: 600, label: "Throat" },
-            { color: "#0000FF", frequency: 660, label: "Third Eye" },
-            { color: "#8B00FF", frequency: 720, label: "Crown" }
-          ]
-        },
-        journal: [
-          {
-            id: "entry-144",
-            title: "Entry 144",
-            timestamp: "Now",
-            body: "The living engine awakens. Patterns emerge from the intersection of ancient wisdom and quantum possibility. The Tree of Life serves as our navigation system through consciousness layers. Each node connects to infinite others in a holographic dance of meaning. The Codex 144:99 represents completion meeting infinity."
-          }
-        ]
-
       }
     };
 
@@ -588,242 +135,59 @@
       ONEFORTYFOUR: 144
     };
 
-
-    async function loadJSON(path) {
-      try {
-        const response = await fetch(path, { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error(String(response.status));
-        }
-        return await response.json();
-      } catch (error) {
-        return null;
-      }
-    }
-
-    function updateStatus(messages) {
-      statusElement.textContent = messages.join(" • ");
-    }
-
-    function populateSephirot(nav, entries) {
-      nav.innerHTML = "";
-      entries.forEach((node) => {
-        const item = document.createElement("li");
-        item.className = "sephirot-card";
-        const symbol = document.createElement("span");
-        symbol.className = "sephirot-symbol";
-        symbol.setAttribute("aria-hidden", "true");
-        symbol.textContent = node.emoji;
-        const title = document.createElement("span");
-        title.className = "sephirot-title";
-        title.textContent = node.title;
-        const meaning = document.createElement("span");
-        meaning.className = "sephirot-meaning";
-        meaning.textContent = node.meaning;
-        item.appendChild(symbol);
-        item.appendChild(title);
-        item.appendChild(meaning);
-        nav.appendChild(item);
-      });
-    }
-
-    function populateModules(container, modules) {
-      container.innerHTML = "";
-      modules.forEach((module) => {
-        const card = document.createElement("article");
-        card.className = "module-card";
-        card.id = module.id;
-        const symbol = document.createElement("span");
-        symbol.className = "module-symbol";
-        symbol.setAttribute("aria-hidden", "true");
-        symbol.textContent = module.symbol;
-        const title = document.createElement("h3");
-        title.className = "module-title";
-        title.textContent = module.title;
-        const summary = document.createElement("p");
-        summary.className = "module-summary";
-        summary.textContent = module.summary;
-        const tagList = document.createElement("div");
-        tagList.className = "module-tags";
-        module.tags.forEach((tag) => {
-          const badge = document.createElement("span");
-          badge.className = "tag";
-          badge.textContent = tag;
-          tagList.appendChild(badge);
-        });
-        card.appendChild(symbol);
-        card.appendChild(title);
-        card.appendChild(summary);
-        card.appendChild(tagList);
-        container.appendChild(card);
-      });
-    }
-
-    function populateWorkspace(titleElement, controlContainer, workspace) {
-      titleElement.textContent = workspace.title;
-      controlContainer.innerHTML = "";
-      workspace.controls.forEach((control) => {
-        const card = document.createElement("div");
-        card.className = "control-card";
-        const label = document.createElement("span");
-        label.className = "control-label";
-        label.textContent = control.label;
-        const range = document.createElement("span");
-        range.className = "control-range";
-        range.textContent = `Range ${control.min}–${control.max}; preferred ${control.value}`;
-        card.appendChild(label);
-        card.appendChild(range);
-        controlContainer.appendChild(card);
-      });
-    }
-
-    function populatePatterns(container, patterns) {
-      container.innerHTML = "";
-      patterns.forEach((pattern) => {
-        const card = document.createElement("div");
-        card.className = "pattern-card";
-        const icon = document.createElement("span");
-        icon.className = "pattern-icon";
-        icon.setAttribute("aria-hidden", "true");
-        icon.textContent = pattern.icon;
-        const title = document.createElement("span");
-        title.className = "pattern-title";
-        title.textContent = pattern.title;
-        const caption = document.createElement("span");
-        caption.className = "pattern-caption";
-        caption.textContent = pattern.caption;
-        card.appendChild(icon);
-        card.appendChild(title);
-        card.appendChild(caption);
-        container.appendChild(card);
-      });
-    }
-
-    function populateHealing(display, paletteContainer, healing) {
-      display.textContent = `${healing.baseFrequency} Hz`;
-      paletteContainer.innerHTML = "";
-      healing.swatches.forEach((swatch) => {
-        const item = document.createElement("div");
-        item.className = "color-swatch";
-        item.style.background = swatch.color;
-        item.setAttribute("role", "listitem");
-        item.title = `${swatch.label}: ${swatch.frequency} Hz`;
-        const text = document.createElement("span");
-        text.textContent = swatch.label;
-        item.appendChild(text);
-        paletteContainer.appendChild(item);
-
-    if (!ctx) {
-      statusEl.textContent = "Canvas context unavailable in this browser.";
-    } else {
-      initialise();
-    }
-
-    async function initialise() {
+    (async () => {
       const palette = await loadPalette("./data/palette.json");
-      const usingFallback = !palette;
-      const activePalette = usingFallback ? FALLBACK.palette : palette;
-      const notice = usingFallback ? "Palette missing; using calm fallback colours." : "";
+      const activePalette = palette || defaults.palette;
+      const notice = palette ? "" : "Palette missing; using ND-safe fallback.";
+      elStatus.textContent = palette ? "Palette loaded." : "Palette missing; fallback active.";
 
-      const result = renderHelix(ctx, {
+      if (!ctx) {
+        elStatus.textContent = "Canvas unavailable in this browser.";
+        return;
+      }
+
+      // ND-safe order: draw once, preserve calm layering, flag fallbacks visually.
+      renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette: activePalette,
         NUM,
         notice
-
       });
+    })();
+
+      }
     }
 
+    const FALLBACK = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    };
 
-    function populateJournal(container, entries) {
-      container.innerHTML = "";
-      entries.forEach((entry) => {
-        const article = document.createElement("article");
-        article.className = "journal-entry";
-        const meta = document.createElement("div");
-        meta.className = "journal-meta";
-        meta.textContent = `${entry.title} — ${entry.timestamp}`;
-        const body = document.createElement("p");
-        body.textContent = entry.body;
-        article.appendChild(meta);
-        article.appendChild(body);
-        container.appendChild(article);
-      });
-    }
+    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
-    if (!context) {
-      updateStatus(["Canvas context unavailable; renderer cannot initialise."]);
+    const palette = await loadPalette("./data/palette.json");
+    const usingFallback = !palette;
+
+    const notice = usingFallback ? "Palette file missing - sealed fallback engaged." : "";
+    const result = renderHelix(ctx, {
+      width: canvas.width,
+      height: canvas.height,
+      palette: palette || FALLBACK.palette,
+      NUM,
+      notice
+    });
+
+    if (result.ok) {
+      statusEl.textContent = usingFallback ? "Palette missing; using sealed fallback palette." : "Palette loaded from data/palette.json.";
     } else {
-      (async () => {
-        const statusMessages = [];
-        const noticeMessages = [];
-
-        const paletteData = await loadJSON("./data/palette.json");
-        const palette = paletteData || defaults.palette;
-        statusMessages.push(paletteData ? "Palette loaded" : "Palette fallback active");
-        if (!paletteData) {
-          noticeMessages.push("Palette file missing");
-        }
-
-        const geometryData = await loadJSON("./data/geometry.json");
-        const geometry = geometryData || defaults.geometry;
-        statusMessages.push(geometryData ? "Geometry dataset loaded" : "Geometry fallback active");
-        if (!geometryData) {
-          noticeMessages.push("Geometry dataset missing");
-        }
-
-        const interfaceData = await loadJSON("./data/modules.json");
-        const interfaceSet = interfaceData || defaults.interface;
-        statusMessages.push(interfaceData ? "Module dataset loaded" : "Interface fallback active");
-        if (!interfaceData) {
-          noticeMessages.push("Interface dataset missing");
-        }
-
-        updateStatus(statusMessages);
-
-        const renderResult = renderHelix(context, {
-          width: canvas.width,
-          height: canvas.height,
-          palette,
-          NUM,
-          geometry,
-          notice: noticeMessages.join(" — ")
-        });
-
-        if (!renderResult.ok) {
-          statusMessages.push(`Renderer issue: ${renderResult.reason}`);
-          updateStatus(statusMessages);
-        }
-
-        populateSephirot(document.getElementById("sephirot-nav"), interfaceSet.sephirot);
-        populateModules(document.getElementById("module-grid"), interfaceSet.modules);
-        populateWorkspace(document.getElementById("workspace-title"), document.getElementById("workspace-controls"), interfaceSet.workspace);
-        populatePatterns(document.getElementById("pattern-grid"), interfaceSet.patterns);
-        populateHealing(document.getElementById("frequency-display"), document.getElementById("color-palette"), interfaceSet.healing);
-        populateJournal(document.getElementById("journal"), interfaceSet.journal);
-      })();
-=
-      if (!result.ok) {
-        statusEl.textContent = "Renderer could not initialise (" + result.reason + ").";
-        return;
-      }
-
-      statusEl.textContent = usingFallback ? "Palette missing; safe fallback applied." : "Palette loaded.";
+      statusEl.textContent = "Renderer error: " + (result.reason || "unknown");
     }
 
-    async function loadPalette(path) {
-      try {
-        const response = await fetch(path, { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error(String(response.status));
-        }
-        return await response.json();
-      } catch (error) {
-        return null;
-      }
-
-    }
   </script>
 </body>
 </html>

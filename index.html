@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <style>
+
     /* ND-safe: calm contrast, no motion, generous spacing */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
     html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
@@ -14,10 +15,73 @@
     #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; }
     .note { max-width:900px; margin:0 auto 16px; color:var(--muted); padding:0 16px; }
     code { background:#11111a; padding:2px 4px; border-radius:3px; }
+
+    /* ND-safe: calm contrast, no motion, layered layout for gentle focus */
+    :root {
+      --bg:#0b0b12;
+      --ink:#e8e8f0;
+      --muted:#a6a6c1;
+      --panel:#111120;
+      --ring:#1b1b2d;
+    }
+    html, body {
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    header {
+      padding:16px 20px 12px;
+      border-bottom:1px solid var(--ring);
+      background:linear-gradient(180deg,#16162a,#0b0b12);
+      box-shadow:0 6px 24px rgba(0,0,0,0.35);
+    }
+    header h1 {
+      margin:0 0 4px;
+      font-size:1.08rem;
+    }
+    header p {
+      margin:0;
+      color:var(--muted);
+      max-width:720px;
+      font-size:0.95rem;
+    }
+    .status-line {
+      margin-top:8px;
+      color:var(--muted);
+      font-size:0.85rem;
+    }
+    main {
+      padding:20px;
+      display:grid;
+      gap:18px;
+      justify-items:center;
+    }
+    canvas {
+      display:block;
+      width:100%;
+      max-width:1440px;
+      box-shadow:0 0 0 1px var(--ring),0 24px 80px rgba(0,0,0,0.45);
+    }
+    .notice {
+      color:var(--muted);
+      font-size:0.85rem;
+      max-width:960px;
+      text-align:center;
+    }
+    code {
+      padding:1px 5px;
+      border-radius:4px;
+      background:#1a1a2d;
+      color:var(--ink);
+    }
+
   </style>
 </head>
 <body>
   <header>
+
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
     <div class="status" id="status">Loading palette…</div>
   </header>
@@ -57,6 +121,51 @@
     rootStyle.setProperty("--bg", activePalette.bg);
     rootStyle.setProperty("--ink", activePalette.ink);
 
+
+    <h1>Cosmic Helix Renderer</h1>
+    <p>Static, layered sacred geometry fusing Vesica, Tree-of-Life, Fibonacci, and helix lattice forms. ND-safe palette, zero motion, offline-first.</p>
+    <div class="status-line" id="status" role="status" aria-live="polite">Loading palette…</div>
+  </header>
+  <main>
+    <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+    <p class="notice" id="notice">Open <code>index.html</code> directly; no servers or external networks are required.</p>
+  </main>
+  <script type="module">
+    import { renderHelix } from "./js/helix-renderer.mjs";
+
+    const elStatus = document.getElementById("status");
+    const elNotice = document.getElementById("notice");
+    const canvas = document.getElementById("stage");
+    const ctx = canvas.getContext("2d");
+
+    function setStatus(message) {
+      elStatus.textContent = message;
+    }
+
+    function setNotice(message) {
+      elNotice.textContent = message;
+    }
+
+    async function loadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return await response.json();
+      } catch (error) {
+        console.warn("Palette load fallback", error);
+        return null;
+      }
+    }
+
+    const FALLBACK = {
+      bg: "#0b0b12",
+      ink: "#e8e8f0",
+      layers: ["#8fb8ff", "#7ae6ff", "#9df5c8", "#ffd493", "#f4aaff", "#d8d8f6"]
+    };
+
+
     const NUM = {
       THREE: 3,
       SEVEN: 7,
@@ -68,12 +177,37 @@
       ONEFORTYFOUR: 144
     };
 
+
     try {
       renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: activePalette, NUM });
       statusEl.textContent += " Rendering complete.";
     } catch (error) {
       statusEl.textContent = "Renderer error; see console for details.";
       console.error("Cosmic Helix render error", error);
+
+
+    if (!ctx) {
+      setStatus("Canvas rendering is unavailable in this browser.");
+    } else {
+      const paletteData = await loadJSON("./data/palette.json");
+      const palette = paletteData || FALLBACK;
+      setStatus(paletteData ? "Palette loaded from data/palette.json." : "Palette missing; using safe fallback.");
+      if (!paletteData) {
+        setNotice("Palette data missing — rendering with fallback ND-safe hues.");
+      }
+
+      const result = renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette,
+        NUM,
+        notice: paletteData ? null : "Fallback palette in use"
+      });
+
+      if (result && result.summary) {
+        setStatus(`${elStatus.textContent} ${result.summary}`.trim());
+      }
+
     }
   </script>
 </body>
