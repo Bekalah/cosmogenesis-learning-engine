@@ -1,0 +1,46 @@
+[
+  {
+    "id": "00-void",
+    "name": "Void",
+    "type": "Origin",
+    "numerology": 0,
+    "lore": "The silent lumen holds the womb of all potential.",
+    "lab": "/labs/void-lab.html"
+  },
+  {
+    "id": "01-magician",
+    "name": "Magician",
+    "type": "Initiate",
+    "numerology": 1,
+    "lore": "The first spark weaves intention through the lattice.",
+    "lab": "https://cosmogenesis-learning-engine.net/labs/magician"
+  },
+  {
+    "id": "02-priestess",
+    "name": "High Priestess",
+    "type": "Oracle",
+    "numerology": 2,
+    "lore": "Moonlit veils translate subconscious patterns into safe rituals."
+  },
+  {
+    "id": "03-empress",
+    "name": "Empress",
+    "type": "Matrix",
+    "numerology": 3,
+    "lore": "Living gardens harmonize numerology constants with sensory grounding."
+  },
+  {
+    "id": "04-emperor",
+    "name": "Emperor",
+    "type": "Architect",
+    "numerology": 4,
+    "lore": "Framework steward aligning trauma-informed pacing with layered geometry."
+  },
+  {
+    "id": "05-hierophant",
+    "name": "Hierophant",
+    "type": "Bridge",
+    "numerology": 5,
+    "lore": "Choral lineages map canonical wisdom into the Cosmogenesis atelier."
+  }
+]
