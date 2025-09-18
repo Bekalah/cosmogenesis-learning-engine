@@ -1,4 +1,0 @@
-[
-  { "id":"00-void","name":"Void","type":"Axiom","numerology":0,"lore":"The silent ground of being.","lab":"./labs/void-lab.html" },
-  { "id":"01-magician","name":"Magician","type":"Arcana","numerology":1,"lore":"The will to pattern reality.","lab":"./labs/void-lab.html" }
-]
