@@ -5,124 +5,101 @@
   <title>Cosmic Helix Renderer (ND-safe, Offline)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
+  <meta name="author" content="Rebecca Respawn">
+  <meta name="license" content="CC-BY-SA-4.0">
+  <meta name="source" content="Cosmogenesis Learning Engine · cosmic-helix module">
   <style>
-
-    /* ND-safe chrome: calm contrast, no motion, layered depth preserved (why: reduces sensory load). */
     :root {
-      --bg: #0b0b12;
-      --ink: #e8e8f0;
-      --muted: #a6a6c1;
-      --outline: #1d1d2a;
+      --bg:#0b0b12;
+      --ink:#e8e8f0;
+      --muted:#a6a6c1;
+      --outline:#1d1d2a;
     }
 
     html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     }
 
     header {
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--outline);
-      background: linear-gradient(180deg, #10101a, transparent);
+      padding:16px 20px 12px;
+      border-bottom:1px solid var(--outline);
+      background:linear-gradient(180deg,#16162a,#0b0b12);
+      box-shadow:0 6px 24px rgba(0,0,0,0.35);
     }
 
-    header strong {
-      font-weight: 600;
+    header h1 {
+      margin:0;
+      font-size:1.1rem;
+      letter-spacing:0.04em;
     }
 
-    .status {
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--muted);
+    .status-line {
+      margin-top:6px;
+      color:var(--muted);
+      font-size:0.9rem;
     }
 
-    #stage {
-      display: block;
-      margin: 16px auto;
-      width: 100%;
-      max-width: 1440px;
-      box-shadow: 0 0 0 1px var(--outline);
-      background: var(--bg);
+    main {
+      padding:20px;
+      display:grid;
+      gap:18px;
+      justify-items:center;
+    }
+
+    canvas {
+      display:block;
+      width:100%;
+      max-width:1440px;
+      box-shadow:0 0 0 1px var(--outline),0 24px 80px rgba(0,0,0,0.45);
+      background:var(--bg);
     }
 
     .note {
-      max-width: 900px;
-      margin: 0 auto 16px;
-      padding: 0 16px 24px;
-      color: var(--muted);
+      max-width:960px;
+      margin:0 auto 16px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.95rem;
     }
 
-    code {
-      background: #11111a;
-      padding: 2px 4px;
-      border-radius: 3px;
+    .skip-link {
+      position:absolute;
+      left:-9999px;
+      top:1rem;
+      padding:0.5rem 1rem;
+      background:#000;
+      color:#fff;
+      border-radius:4px;
+      text-decoration:none;
+      z-index:1000;
     }
 
-    /* ND-safe: calm contrast, no motion, generous spacing */
-    :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
-    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-    header { padding:12px 16px; border-bottom:1px solid #1d1d2a; background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent); }
-    header strong { font-weight:600; letter-spacing:0.06em; }
-    .status { margin-top:4px; color:var(--muted); font-size:12px; }
-    #stage { display:block; margin:16px auto; width:1440px; height:900px; box-shadow:0 0 0 1px #1d1d2a; background:var(--bg); max-width:calc(100vw - 32px); max-height:calc(100vh - 160px); }
-    canvas { width:100%; height:100%; display:block; }
-    .note { max-width:900px; margin:0 auto 24px; padding:0 16px; color:var(--muted); }
-    code { background:#11111a; padding:2px 4px; border-radius:3px; }
-
+    .skip-link:focus {
+      left:1rem;
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to renderer</a>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-
-    <div class="status" id="status">Loading palette...</div>
+    <h1>Cosmic Helix Renderer</h1>
+    <div class="status-line" id="status" role="status" aria-live="polite">Loading palette…</div>
   </header>
-
-  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">Static renderer for vesica grid, Tree-of-Life nodes, Fibonacci curve, and a double-helix lattice. Open this file directly (no server, no animation, ND-safe palette).</p>
-
-    <div class="status" id="status">Preparing palette...</div>
-  </header>
-
-  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">Static renderer encoding Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
-
-
+  <main id="main">
+    <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+    <p class="note" id="notice">Open this file directly (no server). The renderer draws Vesica, Tree-of-Life, Fibonacci, and double-helix layers once with a calm palette.</p>
+  </main>
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-
-    const elStatus = document.getElementById("status");
-
     const statusEl = document.getElementById("status");
-
+    const noticeEl = document.getElementById("notice");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
-
-    async function loadPalette(path) {
-      try {
-        const response = await fetch(path, { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error(String(response.status));
-        }
-        return await response.json();
-      } catch (error) {
-        return null;
-
-      }
-    }
-
-    const defaults = {
-      palette: {
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        muted: "#a6a6c1",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-      }
-    };
 
     const NUM = {
       THREE: 3,
@@ -135,59 +112,72 @@
       ONEFORTYFOUR: 144
     };
 
-    (async () => {
-      const palette = await loadPalette("./data/palette.json");
-      const activePalette = palette || defaults.palette;
-      const notice = palette ? "" : "Palette missing; using ND-safe fallback.";
-      elStatus.textContent = palette ? "Palette loaded." : "Palette missing; fallback active.";
-
-      if (!ctx) {
-        elStatus.textContent = "Canvas unavailable in this browser.";
-        return;
-      }
-
-      // ND-safe order: draw once, preserve calm layering, flag fallbacks visually.
-      renderHelix(ctx, {
-        width: canvas.width,
-        height: canvas.height,
-        palette: activePalette,
-        NUM,
-        notice
-      });
-    })();
-
-      }
-    }
-
-    const FALLBACK = {
-      palette: {
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        muted: "#a6a6c1",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-      }
+    const FALLBACK_PALETTE = {
+      bg: "#0b0b12",
+      ink: "#e8e8f0",
+      muted: "#a6a6c1",
+      layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
     };
 
-    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
-
-    const palette = await loadPalette("./data/palette.json");
-    const usingFallback = !palette;
-
-    const notice = usingFallback ? "Palette file missing - sealed fallback engaged." : "";
-    const result = renderHelix(ctx, {
-      width: canvas.width,
-      height: canvas.height,
-      palette: palette || FALLBACK.palette,
-      NUM,
-      notice
-    });
-
-    if (result.ok) {
-      statusEl.textContent = usingFallback ? "Palette missing; using sealed fallback palette." : "Palette loaded from data/palette.json.";
-    } else {
-      statusEl.textContent = "Renderer error: " + (result.reason || "unknown");
+    function applyRootPalette(palette) {
+      const root = document.documentElement.style;
+      root.setProperty("--bg", palette.bg);
+      root.setProperty("--ink", palette.ink);
+      root.setProperty("--muted", palette.muted ?? FALLBACK_PALETTE.muted);
     }
 
+    async function loadPalette(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return await response.json();
+      } catch (error) {
+        console.warn("Palette fallback engaged", error);
+        return null;
+      }
+    }
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    function setNotice(message) {
+      noticeEl.textContent = message;
+    }
+
+    if (!ctx) {
+      setStatus("Canvas rendering is unavailable in this browser.");
+      setNotice("Your browser does not support Canvas 2D contexts. The renderer cannot draw the geometry layers.");
+    } else {
+      (async () => {
+        const paletteData = await loadPalette("./data/palette.json");
+        const palette = paletteData || FALLBACK_PALETTE;
+        const usingFallback = !paletteData;
+
+        applyRootPalette(palette);
+        setStatus(usingFallback ? "Palette missing; sealed fallback active." : "Palette loaded from data/palette.json.");
+        if (usingFallback) {
+          setNotice("Palette data not found; rendering with sealed ND-safe hues. Geometry remains static and layered.");
+        }
+
+        const result = renderHelix(ctx, {
+          width: canvas.width,
+          height: canvas.height,
+          palette,
+          NUM,
+          notice: usingFallback ? "Palette fallback active" : ""
+        });
+
+        if (!result.ok) {
+          setStatus(`Renderer error: ${result.reason}`);
+          setNotice("The helix renderer reported an error. See console for details.");
+        } else if (!usingFallback) {
+          setNotice("Renderer ready. Vesica → Tree-of-Life → Fibonacci → Helix layers painted once (no motion).");
+        }
+      })();
+    }
   </script>
 </body>
 </html>
