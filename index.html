@@ -18,8 +18,8 @@
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette...</div>
+    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette…</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
@@ -34,6 +34,15 @@
 
     async function loadJSON(path) {
       try {
+        if (window.location && window.location.protocol === "file:") {
+          try {
+            // Offline-first: JSON module import avoids blocked fetch calls under file:// origins.
+            const module = await import(path, { assert: { type: "json" } });
+            return module.default;
+          } catch (importError) {
+            // Silent fallback: some browsers reject JSON assertions, so we retry with fetch below.
+          }
+        }
         const res = await fetch(path, { cache: "no-store" });
         if (!res.ok) throw new Error(String(res.status));
         return await res.json();
@@ -59,7 +68,16 @@
     const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
+    renderHelix(
+      ctx,
+      {
+        width: canvas.width,
+        height: canvas.height,
+        palette: active,
+        NUM,
+        notice: usingFallback ? "Palette fallback active" : null
+      }
+    );
   </script>
 </body>
 </html>
