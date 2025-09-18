@@ -1,148 +1,61 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>COSMOGENESIS — Atelier of Sacred Geometry & Techno-Occult Research</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="A couture atelier for harmonic matrices, living arcana, and the bridge between science and art." />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@300;400;700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8">
+  <title>Cosmogenesis Learning Engine - Data Hub</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Shared cosmogenesis datasets for spokes in the network.">
   <style>
-    :root{
-      --noir:#000; --blanc:#fff; --or:#D4AF37; --argent:#C0C0C0; --pourpre:#6B3AA0;
-      --xs:.618rem; --sm:1rem; --md:1.618rem; --lg:2.618rem; --xl:4.236rem; --xxl:6.854rem;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Bodoni Moda','Didot',Georgia,serif; background:var(--noir); color:var(--blanc); overflow-x:hidden;
-      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="2" fill="white"/><circle cx="16" cy="16" r="8" fill="none" stroke="white" stroke-width="0.5" opacity="0.5"/></svg>'),auto;
-    }
-    .skip-link{position:absolute;left:-9999px}
-    .skip-link:focus{left:1rem;top:1rem;background:#000;color:#fff;padding:.5rem 1rem;z-index:10001;border:1px solid var(--or)}
-    .reduced-motion *{animation:none!important;transition:none!important}
-
-    /* Nav */
-    .atelier-nav{position:fixed;inset:0 0 auto 0;padding:1rem 2rem;z-index:1000;display:flex;gap:1rem;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(0,0,0,.9),transparent)}
-    .marque-logo{font-size:var(--md);letter-spacing:.3em;font-weight:300;color:var(--blanc);text-decoration:none;transition:letter-spacing .5s cubic-bezier(.23,1,.32,1)}
-    .marque-logo:hover{letter-spacing:.5em;color:var(--or)}
-    .nav-collection{display:flex;gap:2rem;list-style:none}
-    .nav-collection a{color:var(--argent);text-decoration:none;font-size:var(--xs);letter-spacing:.1em;text-transform:uppercase;position:relative}
-    .nav-collection a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:1px;background:var(--or);transition:width .3s}
-    .nav-collection a:hover::after{width:100%}
-    .btn{border:1px solid var(--or);background:transparent;color:var(--blanc);letter-spacing:.12em;text-transform:uppercase;padding:.5rem .8rem;font-size:var(--xs);cursor:pointer}
-
-    /* Hero */
-    .entrance{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:5rem}
-    .field{position:absolute;inset:0;opacity:.18;background:
-      radial-gradient(600px 400px at 50% 60%, rgba(212,175,55,.06), transparent 60%),
-      url('./assets/img/hero.webp') center/cover no-repeat}
-    .field::before,.field::after{content:'';position:absolute;top:50%;left:50%;width:500px;height:500px;border:1px solid var(--or);border-radius:50%;
-      transform:translate(-50%,-50%);animation:expand 8s ease-in-out infinite}
-    .field::after{border-color:var(--pourpre);transform:translate(-50%,-50%) rotate(45deg);animation-direction:reverse}
-    @keyframes expand{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.3}50%{transform:translate(-50%,-50%) scale(1.5);opacity:.08}}
-
-    .hero{z-index:1;max-width:1000px;padding:0 2rem;text-align:center}
-    .grand{font-size:var(--xxl);font-weight:300;letter-spacing:.1em;line-height:.9;margin-bottom:1rem;
-      background:linear-gradient(180deg,var(--blanc) 0%,var(--or) 55%,var(--blanc) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s ease-in-out infinite}
-    @keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.15)}}
-    .sous{font-size:var(--sm);font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--argent);margin-bottom:1.4rem}
-    .manif{font-size:var(--md);line-height:1.8;font-style:italic;opacity:.9;max-width:800px;margin:0 auto 1.4rem}
-    .actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-    .actions a,.actions button{padding:1rem 1.8rem}
-
-    /* Sections */
-    .section{padding:6rem 2rem}
-    .title{font-size:var(--xl);font-weight:300;letter-spacing:.15em;margin-bottom:.5rem;color:var(--or);text-align:center}
-    .sub{font-size:var(--sm);font-style:italic;color:var(--argent);text-align:center;margin-bottom:2.5rem}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
-    .card{border:1px solid rgba(212,175,55,.3);background:linear-gradient(135deg,rgba(255,255,255,.02),transparent);padding:2rem}
-    .card:hover{border-color:var(--or);transform:translateY(-6px);transition:.3s}
-
-    .footer{padding:3rem 2rem;border-top:1px solid rgba(212,175,55,.2);text-align:center}
-    .footer .brand{font-size:var(--lg);letter-spacing:.3em;margin-bottom:1rem;color:var(--or)}
-
-    @media (max-width:768px){.grand{font-size:var(--xl)} .nav-collection{display:none}}
+    :root{--bg:#08080f;--ink:#f0f0ff;--muted:#8a8aa8;--accent:#b8c2ff;--border:#1c1c2a;}
+    *,*::before,*::after{box-sizing:border-box;}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);}
+    header{padding:24px 18px;border-bottom:1px solid var(--border);text-align:center;}
+    header img{width:160px;height:auto;display:block;margin:0 auto 12px;border-radius:12px;box-shadow:0 0 0 1px var(--border);}
+    header h1{font-size:1.75rem;margin:0 0 8px;letter-spacing:0.08em;text-transform:uppercase;}
+    header p{margin:0;color:var(--muted);font-size:0.95rem;}
+    main{max-width:720px;margin:0 auto;padding:32px 18px;display:flex;flex-direction:column;gap:32px;}
+    section{border:1px solid var(--border);border-radius:12px;padding:24px;background:rgba(20,20,32,0.6);}
+    h2{margin:0 0 12px;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);} 
+    p{margin:0 0 12px;color:var(--muted);} 
+    code{font-family:"Fira Mono","SFMono-Regular",Menlo,monospace;font-size:0.9rem;background:rgba(255,255,255,0.05);padding:2px 4px;border-radius:4px;color:var(--ink);} 
+    a{color:var(--accent);} 
+    ul,ol{margin:0 0 12px 18px;padding:0;color:var(--muted);} 
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:0.85rem;border-top:1px solid var(--border);} 
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <nav class="atelier-nav" role="navigation" aria-label="Primary">
-    <a href="#collections" class="marque-logo">COSMOGENESIS</a>
-    <ul class="nav-collection">
-      <li><a href="#collections">Collections</a></li>
-      <li><a href="#arcana">Living Arcana</a></li>
-      <li><a href="#node-system">Node System</a></li>
-      <li><a href="#atelier">Atelier</a></li>
-    </ul>
-    <button id="calmToggle" class="btn" aria-pressed="false">Calm Mode</button>
-  </nav>
-
-  <header class="entrance" id="home">
-    <div class="field" aria-hidden="true"></div>
-    <div class="hero">
-      <h1 class="grand">COSMOGENESIS</h1>
-      <p class="sous">Atelier of Sacred Geometry & Techno-Occult Art</p>
-      <p class="manif">Where haute couture precision meets the mysteries of sacred number. A living cathedral for harmonic matrices, living arcana, and the alchemical bridge between science and art.</p>
-      <div class="actions">
-        <a class="btn" href="#collections">Enter the Atelier</a>
-        <a class="btn" href="#node-system">Explore Node System</a>
-        <a class="btn" href="./labs/void-lab.html" rel="noopener noreferrer">Open Void Lab</a>
-      </div>
-    </div>
+  <header>
+    <img src="./images/hero.webp" alt="Layered geometry vignette" loading="lazy">
+    <h1>Cosmogenesis Data Brain</h1>
+    <p>Static CDN for shared nodes, decks, and hero assets consumed by each spoke.</p>
   </header>
-
-  <main id="main">
-    <section class="section" id="collections" aria-label="Research Collections">
-      <h2 class="title">Research Collections</h2>
-      <p class="sub">Four chambers of alchemical investigation</p>
-      <div class="grid">
-        <article class="card"><h3>Harmonic Matrices</h3><p>432–963 Hz maps, cymatics, and φ-based composition.</p></article>
-        <article class="card"><h3>Living Arcana</h3><p>Interactive tarot & psychomagical interfaces.</p></article>
-        <article class="card"><h3>Sacred Geometry Engine</h3><p>Vesica to Tesseract projections.</p></article>
-        <article class="card"><h3>Techno-Occult Laboratory</h3><p>Sigils, I-Ching matrices, chaos protocols.</p></article>
-      </div>
+  <main>
+    <section>
+      <h2>Live dataset endpoints</h2>
+      <p>Versioned JSON is served with permissive CORS and a one hour cache. Spokes should pin to a versioned path.</p>
+      <ul>
+        <li><a href="./data/v1/nodes.min.json">/data/v1/nodes.min.json</a> - core node registry (&lt;= 50 KB).</li>
+        <li><a href="./data/v1/decks.min.json">/data/v1/decks.min.json</a> - optional deck groupings.</li>
+      </ul>
+      <p>Test from a spoke or terminal:</p>
+      <pre><code>curl -s https://cosmogenesis-learning-engine.netlify.app/data/v1/nodes.min.json</code></pre>
     </section>
-
-    <section class="section" id="node-system" aria-label="Node Catalog">
-      <h2 class="title">Modular Node System</h2>
-      <p class="sub">Programmable art via sacred mathematics</p>
-      <div id="node-list" class="grid" aria-live="polite"></div>
-      <!-- Inline dataset enables offline viewing; HTTP(S) will fetch /data/nodes.json instead -->
-      <script type="application/json" id="nodes-data">
-        [{"id":"00-void","name":"Void","type":"Axiom","numerology":0,"lore":"The silent ground of being.","lab":"./labs/void-lab.html"},
-         {"id":"01-magician","name":"Magician","type":"Arcana","numerology":1,"lore":"The will to pattern reality.","lab":"./labs/void-lab.html"}]
-      </script>
+    <section>
+      <h2>Usage pattern</h2>
+      <p>Each spoke ships the loader script that reads <code>#brain-config</code> from HTML, then fetches the selected version. If the fetch fails it falls back to the inline JSON block for offline review.</p>
+      <p>Deploy order reminder:</p>
+      <ol>
+        <li>Deploy the brain first and confirm the dataset returns JSON.</li>
+        <li>Deploy each spoke; they will hydrate from the configured origin.</li>
+        <li>Offline contexts silently use the inline fallback.</li>
+      </ol>
     </section>
-
-    <section class="section" id="arcana" aria-label="Living Arcana">
-      <h2 class="title">Living Arcana</h2>
-      <p class="sub">Masters & muses of the techno-occult renaissance</p>
-      <div class="grid">
-        <article class="card"><h3>Leonora Carrington</h3><p>Surrealist alchemy.</p></article>
-        <article class="card"><h3>Dion Fortune</h3><p>Mystical Qabalah.</p></article>
-        <article class="card"><h3>Heinrich Agrippa</h3><p>Renaissance correspondences.</p></article>
-      </div>
-    </section>
-
-    <section class="section" id="atelier" aria-label="The Atelier">
-      <h2 class="title">The Atelier</h2>
-      <p class="sub">Where couture meets consciousness</p>
-      <div class="grid">
-        <article class="card"><h3>Studio</h3><p>Commissions & collaboration.</p></article>
-        <article class="card"><h3>Scrolls</h3><p>Essays, diagrams, datasets.</p></article>
-        <article class="card"><h3>Provenance</h3><p>Licenses & lineage.</p></article> This keeps your atelier look while fixing the duplicates, the broken anchor, and adds Calm Mode per your accessibility goals and the progressive enhancement strategy.    
-
-
-      </div>
+    <section>
+      <h2>Update workflow</h2>
+      <p>Keep datasets human-auditable: edit the source JSON, then regenerate the minified file if required. Bump the version folder when breaking schema changes are introduced.</p>
+      <p>All assets stay below the agreed budgets: hero <= 200 KB, JSON <= 50 KB. No embedded media or scripts.</p>
     </section>
   </main>
-
-  <footer class="footer" role="contentinfo">
-    <div class="brand">COSMOGENESIS</div>
-    <p>© MMXXV — Atelier of Sacred Geometry & Consciousness Research</p>
-  </footer>
-
-  <script src="./js/calm.js" defer></script>
-  <script src="./js/nodes.js" defer></script>
+  <footer>&copy; Cosmogenesis Atelier - Data brain for liber-arcanae, circuitum99, and allied spokes.</footer>
 </body>
 </html>

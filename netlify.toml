@@ -1,19 +1,27 @@
-# /netlify.toml
+# cosmogenesis-learning-engine / Netlify configuration
+# Brain: serves small shared datasets + optional hero asset.
 [build]
   publish = "site"
   command = ""
 
-# keep your older app under /engine if needed
-[[redirects]]
-  from = "/engine/*"
-  to = "/app/index.html"
-  status = 200 # /netlify.toml
-[build]
-  publish = "site"
-  command = ""
+[build.environment]
+  GIT_LFS_ENABLED = "true"
 
-# keep your older app under /engine if needed
-[[redirects]]
-  from = "/engine/*"
-  to = "/app/index.html"
-  status = 200
+# Allow spokes to fetch shared data with permissive CORS and sensible caching.
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Type = "application/json; charset=utf-8"
+
+# Minimal security headers for the landing page or any ancillary files.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "accelerometer=(), camera=(), geolocation=()"

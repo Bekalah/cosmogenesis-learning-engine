@@ -44,6 +44,7 @@ export function renderHelix(ctx, input = {}) {
   const helixStats = drawHelixLattice(ctx, config.dims, config.palette, config.numbers);
 
   if (config.notice) {
+    // Inline notice reassures offline viewers that a safe fallback palette is active.
     drawCanvasNotice(ctx, config.dims, config.palette.ink, config.notice);
   }
 
