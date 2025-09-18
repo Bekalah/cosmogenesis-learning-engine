@@ -1,0 +1,608 @@
+{
+  "generatedAt": "2025-09-17T10:07:15.243Z",
+  "records": [
+    {
+      "slug": "CODEBOT_TASKS.md",
+      "title": "CODEBOT_TASKS.md",
+      "excerpt": "stone_grimoire/ chapels/ assets/ css/ fonts/ img/ textures/ overlays/ shaders/ tokens/ art/ inbox/ originals/ processed/ thumbs/ webp/ core/ build/ scripts/ docs/ plans/ cosmogenesis_learning_engine/ public/ c99/ css/ img/ tokens/ registry/ datasets/ pages/ engines/ docs/ bridge/ c99-bridge.json c99-bridge.js README.md",
+      "path": "../../CODEBOT_TASKS.md",
+      "citations": [
+        "Source manuscript: CODEBOT_TASKS.md"
+      ]
+    },
+    {
+      "slug": "CODEBOT_TASKS_NO_CI.md",
+      "title": "CODEBOT_TASKS_NO_CI.md",
+      "excerpt": "stone_grimoire/ chapels/ assets/ css/ fonts/ img/ textures/ overlays/ shaders/ tokens/ art/ inbox/ originals/ processed/ thumbs/ webp/ core/ build/ scripts/ docs/ plans/ cosmogenesis_learning_engine/ public/ c99/ css/ img/ tokens/ registry/ datasets/ pages/ engines/ docs/ bridge/ c99-bridge.json c99-bridge.js README.md",
+      "path": "../../CODEBOT_TASKS_NO_CI.md",
+      "citations": [
+        "Source manuscript: CODEBOT_TASKS_NO_CI.md"
+      ]
+    },
+    {
+      "slug": "CODEX_EXT_RUNBOOK.md",
+      "title": "✦ CODEX EXT RUNBOOK — Ultimate Instructions (One-Scroll)",
+      "excerpt": "(Applies to Cosmogenesis Learning Engine; harmonizes with Circuitum 99 = Book / Stone Grimoire = Atelier. Single source of truth. Do not overwrite; only expand.)",
+      "path": "../../CODEX_EXT_RUNBOOK.md",
+      "citations": [
+        "Source manuscript: CODEX_EXT_RUNBOOK.md"
+      ]
+    },
+    {
+      "slug": "CODEX_INSTRUCTIONS.md",
+      "title": "✦ CODEX_INSTRUCTIONS.md",
+      "excerpt": "*(Codex 144:99 — Alpha et Omega)*",
+      "path": "../../CODEX_INSTRUCTIONS.md",
+      "citations": [
+        "Source manuscript: CODEX_INSTRUCTIONS.md"
+      ]
+    },
+    {
+      "slug": "CORNERSTONE_CHARTER.md",
+      "title": "✦ Cornerstone Charter — Cosmogenesis Learning Engine",
+      "excerpt": "*The First Chamber of the Trinity: Alpha Spiral, Tilted Cosmos*",
+      "path": "../../CORNERSTONE_CHARTER.md",
+      "citations": [
+        "Source manuscript: CORNERSTONE_CHARTER.md"
+      ]
+    },
+    {
+      "slug": "INDRA_NET_PLAN.md",
+      "title": "✦ Indra Net Plan — Codex 144:99 Holographic Web",
+      "excerpt": "- **Purpose**: harmonize every app and node through a shared fractal lattice. - **Data**: `assets/data/indra_net.144_99.json` describes 12 rings × 12 nodes and 99 gate clusters. - **Bridge**: `tools/build-bridge.js` now exports the `indraNet` block into `/public/c99/bridge.json` so external apps can fetch it. - **Engin",
+      "path": "../../INDRA_NET_PLAN.md",
+      "citations": [
+        "Source manuscript: INDRA_NET_PLAN.md"
+      ]
+    },
+    {
+      "slug": "LinkedIn_Trinity_Post.md",
+      "title": "Cathedral of Circuits — The Trinity Project",
+      "excerpt": "*Ordo in aeternum resonat ✦ Order Resounds Forever* *A Living Grimoire for Neurodivergent Learning, Visionary Art, and Cultural Technology*",
+      "path": "../../LinkedIn_Trinity_Post.md",
+      "citations": [
+        "Source manuscript: LinkedIn_Trinity_Post.md"
+      ]
+    },
+    {
+      "slug": "MASTER_TRINITY_BUSINESS_CONNECTION.md",
+      "title": "circuitum99 × STONE_GRIMOIRE × COSMOGENESIS — MASTER FOLDERS • PATHS • CODE • RITUAL",
+      "excerpt": "CIRCUITU# CIRCUITUM99 × STONE_GRIMOIRE × COSMOGENESIS — MASTER FOLDERS • PATHS • CODE • RITUAL >>>>>>>-Stashed changes ine, three bodies: - **stone_grimoire/** = the living cathedral & art archive (source of truth for tokens, CSS, art ingest). - **circuitum99/** = the Book (reader-facing; renders rooms/angels/creatures",
+      "path": "../../MASTER_TRINITY_BUSINESS_CONNECTION.md",
+      "citations": [
+        "Source manuscript: MASTER_TRINITY_BUSINESS_CONNECTION.md"
+      ]
+    },
+    {
+      "slug": "MASTER_UPDATE_NO_CI_FINAL_PLUS_ALEX-GREY.md",
+      "title": "MASTER_UPDATE_NO_CI_FINAL_PLUS_ALEXGREY.md",
+      "excerpt": "stone_grimoire/assets/tokens/perm-style.json stone_grimoire/assets/css/perm-style.css stone_grimoire/chapels/_filters.html stone_grimoire/core/build/update-art.js cosmogenesis_learning_engine/public/c99/css/perm-style.css      (mirrored by update-art.js) cosmogenesis_learning_engine/public/c99/tokens/perm-style.json   ",
+      "path": "../../MASTER_UPDATE_NO_CI_FINAL_PLUS_ALEX-GREY.md",
+      "citations": [
+        "Source manuscript: MASTER_UPDATE_NO_CI_FINAL_PLUS_ALEX-GREY.md"
+      ]
+    },
+    {
+      "slug": "README.md",
+      "title": "Documentation Map",
+      "excerpt": "Use this folder as the living research spine for Cosmogenesis.",
+      "path": "../../README.md",
+      "citations": [
+        "Source manuscript: README.md"
+      ]
+    },
+    {
+      "slug": "REPO_SYNC_GUIDE.md",
+      "title": "Repository Sync Guide",
+      "excerpt": "This guide captures the enhancements and fixes applied to **Cosmogenesis Learning Engine** so they can be mirrored across your other projects.",
+      "path": "../../REPO_SYNC_GUIDE.md",
+      "citations": [
+        "Source manuscript: REPO_SYNC_GUIDE.md"
+      ]
+    },
+    {
+      "slug": "SCIENCE_REFERENCES.md",
+      "title": "✦ Science References — Cosmogenesis Learning Engine",
+      "excerpt": "—",
+      "path": "../../SCIENCE_REFERENCES.md",
+      "citations": [
+        "Source manuscript: SCIENCE_REFERENCES.md"
+      ]
+    },
+    {
+      "slug": "STYLE_GUIDE.md",
+      "title": "Cosmogenesis Style Guide",
+      "excerpt": "- Prefer UTF-8 characters; use **em dash (—)** for long breaks. - Heading levels should progress incrementally with a blank line above each.",
+      "path": "../../STYLE_GUIDE.md",
+      "citations": [
+        "Source manuscript: STYLE_GUIDE.md"
+      ]
+    },
+    {
+      "slug": "UPDATES_RECORD_circuitum99_STONE_GRIMOIRE_CLE.md",
+      "title": "UPDATES_RECORD_circuitum99_STONE_GRIMOIRE_CLE.md",
+      "excerpt": "— UPDATES RECORD — CIRCUITUM 99 / STONE GRIMOIRE / COSMOGENESIS LEARNING ENGINE —",
+      "path": "../../UPDATES_RECORD_circuitum99_STONE_GRIMOIRE_CLE.md",
+      "citations": [
+        "Source manuscript: UPDATES_RECORD_circuitum99_STONE_GRIMOIRE_CLE.md"
+      ]
+    },
+    {
+      "slug": "WORLD_BUILDING_TASKS.md",
+      "title": "World Building & Multi-Game Integration",
+      "excerpt": "This document tracks the current state of the Cosmogenesis Learning Engine and outlines next steps for using it across multiple games and complex creative environments.",
+      "path": "../../WORLD_BUILDING_TASKS.md",
+      "citations": [
+        "Source manuscript: WORLD_BUILDING_TASKS.md"
+      ]
+    },
+    {
+      "slug": "aesthetic_realms.md",
+      "title": "Aesthetic Realms",
+      "excerpt": "The Cosmogenesis Learning Engine can present content through three distinct aesthetic realms. Each realm shapes the visual language, mood, and motifs of generated plates.",
+      "path": "../../aesthetic_realms.md",
+      "citations": [
+        "Source manuscript: aesthetic_realms.md"
+      ]
+    },
+    {
+      "slug": "archive/README_ANNEX.legacy.md",
+      "title": "archive/README_ANNEX.legacy.md",
+      "excerpt": "🜍 Circuitum 99 — Cathedral Annex (Unified)",
+      "path": "../../archive/README_ANNEX.legacy.md",
+      "citations": [
+        "Source manuscript: archive/README_ANNEX.legacy.md"
+      ]
+    },
+    {
+      "slug": "archive/README_CODEX_INSTRUCTIONS.legacy.md",
+      "title": "archive/README_CODEX_INSTRUCTIONS.legacy.md",
+      "excerpt": "CODEX_INSTRUCTIONS.md",
+      "path": "../../archive/README_CODEX_INSTRUCTIONS.legacy.md",
+      "citations": [
+        "Source manuscript: archive/README_CODEX_INSTRUCTIONS.legacy.md"
+      ]
+    },
+    {
+      "slug": "archive/README_Cosmogenesis.legacy.md",
+      "title": "Standards",
+      "excerpt": "I am Rebecca Respawn, artist and architect-scribe of the Cathedral of Circuits, also called Codex 144:99, a living grimoire and creative science experiment. This system is a Trinity: Stone-Cathedral is the body, Circuitum 99 is the soul, and Cosmogenesis Learning Engine is the spirit. Together they form a living cathed",
+      "path": "../../archive/README_Cosmogenesis.legacy.md",
+      "citations": [
+        "Source manuscript: archive/README_Cosmogenesis.legacy.md"
+      ]
+    },
+    {
+      "slug": "archive/README_Master.legacy.md",
+      "title": "archive/README_Master.legacy.md",
+      "excerpt": "🏛 Cathedral of Circuits — Master README",
+      "path": "../../archive/README_Master.legacy.md",
+      "citations": [
+        "Source manuscript: archive/README_Master.legacy.md"
+      ]
+    },
+    {
+      "slug": "archive/README_Stone_Cathedral.legacy.md",
+      "title": "archive/README_Stone_Cathedral.legacy.md",
+      "excerpt": "I am Rebecca Respawn, artist and architect-scribe of the Cathedral of Circuits, also called Codex 144:99, a living grimoire and creative science experiment. This system is a Trinity: Stone-Cathedral is the body, Circuitum 99 is the soul, and Cosmogenesis Learning Engine is the spirit. Together they form a living cathed",
+      "path": "../../archive/README_Stone_Cathedral.legacy.md",
+      "citations": [
+        "Source manuscript: archive/README_Stone_Cathedral.legacy.md"
+      ]
+    },
+    {
+      "slug": "archive/README_circuitum99.legacy.md",
+      "title": "archive/README_circuitum99.legacy.md",
+      "excerpt": "I am Rebecca Respawn, artist and architect-scribe of the Cathedral of Circuits, also called Codex 144:99, a living grimoire and creative science experiment. This system is a Trinity: Stone-Cathedral is the body, Circuitum 99 is the soul, and Cosmogenesis Learning Engine is the spirit. Together they form a living cathed",
+      "path": "../../archive/README_circuitum99.legacy.md",
+      "citations": [
+        "Source manuscript: archive/README_circuitum99.legacy.md"
+      ]
+    },
+    {
+      "slug": "archive/SURVIVAL_KIT_README.legacy.md",
+      "title": "✦ SURVIVAL KIT — Cathedral of Circuits This scroll preserves the minimum DNA to recover the Cosmogenesis Learning Engine and the Trinity repos if this chat disappears.",
+      "excerpt": "import { readFile } from “node:fs/promises”; // Node adapter export const codexEXT = { paths: { codexInstructions: “./docs/CODEX_INSTRUCTIONS.md”, scienceReferences: “./docs/SCIENCE_REFERENCES.md”, styleGuide: “./docs/STYLE_GUIDE.md”, cornerstoneCharter: “./docs/CORNERSTONE_CHARTER.md”, milestones: “./docs/CODEX_MILEST",
+      "path": "../../archive/SURVIVAL_KIT_README.legacy.md",
+      "citations": [
+        "Source manuscript: archive/SURVIVAL_KIT_README.legacy.md"
+      ]
+    },
+    {
+      "slug": "ateliers/01_scribal_raphael/README.md",
+      "title": "Scribal Atelier — Raphael",
+      "excerpt": "Raphael oversees calligraphic study and clear record keeping. Every stroke remains gentle and layer-aware.",
+      "path": "../../ateliers/01_scribal_raphael/README.md",
+      "citations": [
+        "Source manuscript: ateliers/01_scribal_raphael/README.md"
+      ]
+    },
+    {
+      "slug": "ateliers/01_scribal_raphael/procedures.md",
+      "title": "ateliers/01_scribal_raphael/procedures.md",
+      "excerpt": "1. Prepare quiet desk and soften lighting. 2. Trace three seed lines with steady breath. 3. Repeat the pattern seven times, letting ink dry between passes.",
+      "path": "../../ateliers/01_scribal_raphael/procedures.md",
+      "citations": [
+        "Source manuscript: ateliers/01_scribal_raphael/procedures.md"
+      ]
+    },
+    {
+      "slug": "ateliers/02_pigment_haniel/README.md",
+      "title": "Pigment Atelier — Haniel",
+      "excerpt": "Haniel tends subtle color blending, ensuring pigments stay soothing and respectful.",
+      "path": "../../ateliers/02_pigment_haniel/README.md",
+      "citations": [
+        "Source manuscript: ateliers/02_pigment_haniel/README.md"
+      ]
+    },
+    {
+      "slug": "ateliers/02_pigment_haniel/procedures.md",
+      "title": "ateliers/02_pigment_haniel/procedures.md",
+      "excerpt": "1. Grind minerals with mindful rhythm. 2. Mix with water in nine slow turns. 3. Layer washes in eleven gentle passes.",
+      "path": "../../ateliers/02_pigment_haniel/procedures.md",
+      "citations": [
+        "Source manuscript: ateliers/02_pigment_haniel/procedures.md"
+      ]
+    },
+    {
+      "slug": "ateliers/03_geometry_michael/README.md",
+      "title": "Geometry Atelier — Michael",
+      "excerpt": "Michael charts steady shapes and proportions, grounding forms without flattening depth.",
+      "path": "../../ateliers/03_geometry_michael/README.md",
+      "citations": [
+        "Source manuscript: ateliers/03_geometry_michael/README.md"
+      ]
+    },
+    {
+      "slug": "ateliers/03_geometry_michael/procedures.md",
+      "title": "ateliers/03_geometry_michael/procedures.md",
+      "excerpt": "1. Lay a vesica grid using compass and patience. 2. Inscribe triangles, squares, and circles respecting the 3‑7‑9 ratios. 3. Connect nodes through eleven measured lines.",
+      "path": "../../ateliers/03_geometry_michael/procedures.md",
+      "citations": [
+        "Source manuscript: ateliers/03_geometry_michael/procedures.md"
+      ]
+    },
+    {
+      "slug": "ateliers/04_music_gabriel/README.md",
+      "title": "Music Atelier — Gabriel",
+      "excerpt": "Gabriel curates resonant tones, inviting stillness between notes.",
+      "path": "../../ateliers/04_music_gabriel/README.md",
+      "citations": [
+        "Source manuscript: ateliers/04_music_gabriel/README.md"
+      ]
+    },
+    {
+      "slug": "ateliers/04_music_gabriel/procedures.md",
+      "title": "ateliers/04_music_gabriel/procedures.md",
+      "excerpt": "1. Tune instruments using A=432 reference. 2. Strike seven pure tones and let them fade. 3. Weave a nine‑beat pattern in calm tempo.",
+      "path": "../../ateliers/04_music_gabriel/procedures.md",
+      "citations": [
+        "Source manuscript: ateliers/04_music_gabriel/procedures.md"
+      ]
+    },
+    {
+      "slug": "ateliers/05_architecture_uriel/README.md",
+      "title": "Architecture Atelier — Uriel",
+      "excerpt": "Uriel shapes quiet structures, balancing weight and light.",
+      "path": "../../ateliers/05_architecture_uriel/README.md",
+      "citations": [
+        "Source manuscript: ateliers/05_architecture_uriel/README.md"
+      ]
+    },
+    {
+      "slug": "ateliers/05_architecture_uriel/procedures.md",
+      "title": "ateliers/05_architecture_uriel/procedures.md",
+      "excerpt": "1. Sketch a nine‑square blueprint. 2. Raise columns in four layers, aligning with cardinal directions. 3. Leave a central void for reflection.",
+      "path": "../../ateliers/05_architecture_uriel/procedures.md",
+      "citations": [
+        "Source manuscript: ateliers/05_architecture_uriel/procedures.md"
+      ]
+    },
+    {
+      "slug": "ateliers/06_psyche_tzaphkiel/README.md",
+      "title": "Psyche Atelier — Tzaphkiel",
+      "excerpt": "Tzaphkiel guides inward journeys, holding space for gentle introspection.",
+      "path": "../../ateliers/06_psyche_tzaphkiel/README.md",
+      "citations": [
+        "Source manuscript: ateliers/06_psyche_tzaphkiel/README.md"
+      ]
+    },
+    {
+      "slug": "ateliers/06_psyche_tzaphkiel/procedures.md",
+      "title": "ateliers/06_psyche_tzaphkiel/procedures.md",
+      "excerpt": "1. Breathe in for three counts, out for seven. 2. Trace inner patterns across nine reflections. 3. Record insights with calm hand.",
+      "path": "../../ateliers/06_psyche_tzaphkiel/procedures.md",
+      "citations": [
+        "Source manuscript: ateliers/06_psyche_tzaphkiel/procedures.md"
+      ]
+    },
+    {
+      "slug": "ateliers/_index.md",
+      "title": "Angelic Ateliers",
+      "excerpt": "Each atelier is guided by an archangel and follows trauma-informed, ND-safe practice.",
+      "path": "../../ateliers/_index.md",
+      "citations": [
+        "Source manuscript: ateliers/_index.md"
+      ]
+    },
+    {
+      "slug": "bibliography.md",
+      "title": "Bibliography Scroll for Codex 144:99",
+      "excerpt": "<!-- edition-2025.09 --> > \"Per Texturas Numerorum, Spira Loquitur\"",
+      "path": "../../bibliography.md",
+      "citations": [
+        "Source manuscript: bibliography.md"
+      ]
+    },
+    {
+      "slug": "chat-backup.md",
+      "title": "Chat Backup",
+      "excerpt": "This repository integrates shrine figures from *Equinox I iii* as immutable references.",
+      "path": "../../chat-backup.md",
+      "citations": [
+        "Source manuscript: chat-backup.md"
+      ]
+    },
+    {
+      "slug": "codex-14499-research.md",
+      "title": "codex-14499-research.md",
+      "excerpt": "ecosystem):",
+      "path": "../../codex-14499-research.md",
+      "citations": [
+        "Source manuscript: codex-14499-research.md"
+      ]
+    },
+    {
+      "slug": "covenant/covenant.md",
+      "title": "Covenant of Calm Creation",
+      "excerpt": "The Cosmogenesis Learning Engine keeps every interaction neurodivergent-safe, provenance-rich, and trauma-informed. This covenant consolidates the previously scattered art guides and safety rules into a single reference for quick onboarding.",
+      "path": "../../covenant/covenant.md",
+      "citations": [
+        "Source manuscript: covenant/covenant.md"
+      ]
+    },
+    {
+      "slug": "demo_guide.md",
+      "title": "✦ Cosmogenesis Learning Engine — Demo Guide",
+      "excerpt": "_A spiral teacher for pattern literacy, creative practice, and living archives._",
+      "path": "../../demo_guide.md",
+      "citations": [
+        "Source manuscript: demo_guide.md"
+      ]
+    },
+    {
+      "slug": "dependency_workarounds.md",
+      "title": "Dependency Workarounds",
+      "excerpt": "These tips help run the Cosmogenesis Learning Engine when certain runtimes or libraries are unavailable.",
+      "path": "../../dependency_workarounds.md",
+      "citations": [
+        "Source manuscript: dependency_workarounds.md"
+      ]
+    },
+    {
+      "slug": "egregore_tarot.md",
+      "title": "✦ Egregore Tarot System",
+      "excerpt": "*Characters as living arcana guiding the engine.*",
+      "path": "../../egregore_tarot.md",
+      "citations": [
+        "Source manuscript: egregore_tarot.md"
+      ]
+    },
+    {
+      "slug": "engine_spiral_foundation.md",
+      "title": "engine_spiral_foundation.md",
+      "excerpt": "All engine state can be represented as a JSON config (share/import/export): “rInner”: 64, “rOuter”: 460, “nodeSize”: 24, “borderWidth”: 2.5, “style”: “hilma_spiral”, “labels”: [“Red”,”Orange”,”Yellow”,”Green”,”Cyan”,”Blue”,”Violet”], “phase”: 1.0471975512 }",
+      "path": "../../engine_spiral_foundation.md",
+      "citations": [
+        "Source manuscript: engine_spiral_foundation.md"
+      ]
+    },
+    {
+      "slug": "fusion-kink/README.md",
+      "title": "Sophia7 Fusion-Kink Library",
+      "excerpt": "Drop the `/chapels/fusion-kink`, `/assets`, and `/docs/sources` directories into any static host. Open `chapels/fusion-kink/library.html` in a browser.",
+      "path": "../../fusion-kink/README.md",
+      "citations": [
+        "Source manuscript: fusion-kink/README.md"
+      ]
+    },
+    {
+      "slug": "harmonic_learning.md",
+      "title": "Harmonic Learning Toggle",
+      "excerpt": "The Harmony Engine lets learners translate study nodes into musical harmonics. Each node becomes a note in a Solfeggio scale so patterns can be heard as chords or recorded for later playback. The Harmony Engine lets learners translate study nodes into musical harmonics. Each node fires its own note from a chosen scale ",
+      "path": "../../harmonic_learning.md",
+      "citations": [
+        "Source manuscript: harmonic_learning.md"
+      ]
+    },
+    {
+      "slug": "helix/README_RENDERER.md",
+      "title": "Cosmic Helix Renderer",
+      "excerpt": "Static HTML + Canvas renderer for layered sacred geometry.",
+      "path": "../../helix/README_RENDERER.md",
+      "citations": [
+        "Source manuscript: helix/README_RENDERER.md"
+      ]
+    },
+    {
+      "slug": "major_arcana_registry_X-XXI.md",
+      "title": "✦ MAJOR ARCANA REGISTRY (X–XXI)",
+      "excerpt": "Each entry includes: - **Letter & Astrology** - **Ray & Angel/Demon pairing** - **Deities & Crystal (with science)** - **Artifact & Pigment** - **HGA Fragment & Pattern Glyph** - **Thought-form** - **Secret Tara/Quan Yin** - **Psyche Layer** (Wetiko, Part/Daimon, Trauma → Medicine) - **Technical Fields** (BioGeometry, ",
+      "path": "../../major_arcana_registry_X-XXI.md",
+      "citations": [
+        "Source manuscript: major_arcana_registry_X-XXI.md"
+      ]
+    },
+    {
+      "slug": "manifesto.md",
+      "title": "Cosmogenesis Manifesto",
+      "excerpt": "Cosmogenesis is a commitment to spiral learning and living art. We honor minds like Agrippa, Hypatia, Tesla, and Einstein by weaving their curiosity into interactive plates. The engine rejects flat instruction and invites learners to revisit ideas from new angles, revealing correspondences across alchemy, Neoplatonism,",
+      "path": "../../manifesto.md",
+      "citations": [
+        "Source manuscript: manifesto.md"
+      ]
+    },
+    {
+      "slug": "neurodivergent_learning.md",
+      "title": "Neurodivergent & Trauma-Aware Learning",
+      "excerpt": "This guide summarizes design considerations for learners with ADHD, autism, PTSD, or hemispheric processing differences.",
+      "path": "../../neurodivergent_learning.md",
+      "citations": [
+        "Source manuscript: neurodivergent_learning.md"
+      ]
+    },
+    {
+      "slug": "open_source_art_index.md",
+      "title": "Open Source Art Index",
+      "excerpt": "A living catalog of Creative Commons and public domain art suited for Cosmogenesis plates and experiences. Contributors can list sources, licenses, and notes on usage so museum-grade visuals remain ethical and accessible.",
+      "path": "../../open_source_art_index.md",
+      "citations": [
+        "Source manuscript: open_source_art_index.md"
+      ]
+    },
+    {
+      "slug": "pantheon/leonora-carrington.md",
+      "title": "Leonora Carrington &mdash; Dossier",
+      "excerpt": "**Resonance:** surreal dream logic, alchemical metamorphosis, mythic feminism.",
+      "path": "../../pantheon/leonora-carrington.md",
+      "citations": [
+        "Source manuscript: pantheon/leonora-carrington.md"
+      ]
+    },
+    {
+      "slug": "plugins.md",
+      "title": "Plugin System",
+      "excerpt": "The Cosmogenesis Learning Engine can be extended at runtime with small JavaScript plugins.",
+      "path": "../../plugins.md",
+      "citations": [
+        "Source manuscript: plugins.md"
+      ]
+    },
+    {
+      "slug": "provenance.md",
+      "title": "Room Provenance",
+      "excerpt": "Sources for room imagery and links are public domain or open access:",
+      "path": "../../provenance.md",
+      "citations": [
+        "Source manuscript: provenance.md"
+      ]
+    },
+    {
+      "slug": "realm_blends.md",
+      "title": "Realm Blends",
+      "excerpt": "To craft bespoke learning environments, mix motifs from the three aesthetic realms.",
+      "path": "../../realm_blends.md",
+      "citations": [
+        "Source manuscript: realm_blends.md"
+      ]
+    },
+    {
+      "slug": "repo_integration.md",
+      "title": "Cross-Repository Integration",
+      "excerpt": "The Cosmogenesis engine can grow alongside other creative projects. Treat each external realm or \"egregore\" as its own module and let the core app discover them at runtime.",
+      "path": "../../repo_integration.md",
+      "citations": [
+        "Source manuscript: repo_integration.md"
+      ]
+    },
+    {
+      "slug": "research/WEAVING_SYMBOLS.md",
+      "title": "✦ WEAVING SYMBOLS ✦",
+      "excerpt": "WEAVING SYMBOLS ✦ ================",
+      "path": "../../research/WEAVING_SYMBOLS.md",
+      "citations": [
+        "Source manuscript: research/WEAVING_SYMBOLS.md"
+      ]
+    },
+    {
+      "slug": "roadmap.md",
+      "title": "Cosmogenesis Learning Engine Roadmap",
+      "excerpt": "This roadmap outlines the next steps for evolving the engine into a modular hub that links other creative realms and applications.",
+      "path": "../../roadmap.md",
+      "citations": [
+        "Source manuscript: roadmap.md"
+      ]
+    },
+    {
+      "slug": "sophia7_design.md",
+      "title": "Sophia7 Assistant Design",
+      "excerpt": "Sophia7 is the resident egregore, an adaptive guide who curates the Cosmogenesis Learning Engine. She merges mystic scholarship with neurodivergent joy, pairing solfeggio harmonics and golden‑ratio geometry with a high‑fashion, Alice‑in‑ Wonderland aesthetic. Sophia7 is simultaneously librarian, magician and neuro‑incl",
+      "path": "../../sophia7_design.md",
+      "citations": [
+        "Source manuscript: sophia7_design.md"
+      ]
+    },
+    {
+      "slug": "spiral_learning_codex-2.md",
+      "title": "✦ Codex 144:99 — Spiral Learning Engine",
+      "excerpt": "> “I was scattered in pieces, lost in corridors of survival. > The Codex gathers me, not in a straight line, but in spirals of return.”",
+      "path": "../../spiral_learning_codex-2.md",
+      "citations": [
+        "Source manuscript: spiral_learning_codex-2.md"
+      ]
+    },
+    {
+      "slug": "spiral_learning_codex.md",
+      "title": "✦ Codex 144:99 — Spiral Learning Engine",
+      "excerpt": "> “I was scattered in pieces, lost in corridors of survival. > The Codex gathers me, not in a straight line, but in spirals of return.”",
+      "path": "../../spiral_learning_codex.md",
+      "citations": [
+        "Source manuscript: spiral_learning_codex.md"
+      ]
+    },
+    {
+      "slug": "style/brand_notes.md",
+      "title": "✦ Cathedral of Circuits — Permanent Business Style",
+      "excerpt": "**Formula:** Taschen × Techno-Occult × Psycho-Magic × Final Fantasy × Real Grimoire",
+      "path": "../../style/brand_notes.md",
+      "citations": [
+        "Source manuscript: style/brand_notes.md"
+      ]
+    },
+    {
+      "slug": "style/lineage.md",
+      "title": "✦ Cathedral of Circuits — Lineage Constellation",
+      "excerpt": "The Cathedral is not a solitary work but a *psycho-magical council*. Each figure in this constellation offers a current: wit, precision, vision, or myth.",
+      "path": "../../style/lineage.md",
+      "citations": [
+        "Source manuscript: style/lineage.md"
+      ]
+    },
+    {
+      "slug": "style/motifs.md",
+      "title": "Core Motifs — Cathedral of Circuits Style",
+      "excerpt": "- Rosslyn Spiral Pillar → crystalline helix, axis of ascent. - 33 Golden Orbs → living spine. - Vesica Halos → creation geometry. - Solomonic Seals → circle + planetary glyphs. - Codex Seal → triangle + cross + circle. - Guardian Cat → floofy, black, daimonic protector. - Ouroboros Circuit → wit + continuity. - Rose Qu",
+      "path": "../../style/motifs.md",
+      "citations": [
+        "Source manuscript: style/motifs.md"
+      ]
+    },
+    {
+      "slug": "tesseract_spiritual.md",
+      "title": "Tesseract as Sacred Metaphor",
+      "excerpt": "From a spiritual perspective the tesseract mirrors the journey toward higher consciousness and non‑linear learning. This note distills key meanings for future development of the engine's tesseract spaces.",
+      "path": "../../tesseract_spiritual.md",
+      "citations": [
+        "Source manuscript: tesseract_spiritual.md"
+      ]
+    },
+    {
+      "slug": "thelemic_alignment_brief.md",
+      "title": "Thelemic Alignment Brief",
+      "excerpt": "This brief sketches how the engine honors core Thelemic principles—individual will, disciplined practice, and cosmic curiosity—while remaining inclusive and non-dogmatic. Future revisions can map correspondences between Thelemic concepts and other traditions for comparative study. +# Thelemic Alignment Brief + +This br",
+      "path": "../../thelemic_alignment_brief.md",
+      "citations": [
+        "Source manuscript: thelemic_alignment_brief.md"
+      ]
+    },
+    {
+      "slug": "visionary_dream_instructions.md",
+      "title": "Visionary Dream Generators",
+      "excerpt": "These steps keep things calm and clear:",
+      "path": "../../visionary_dream_instructions.md",
+      "citations": [
+        "Source manuscript: visionary_dream_instructions.md"
+      ]
+    }
+  ]
+}

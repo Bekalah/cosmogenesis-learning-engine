@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "records": [
+    {
+      "name": "Clear Quartz",
+      "formula": "SiO2",
+      "qualities": ["amplification", "clarity"],
+      "citations": [
+        "MAJOR_ARCANA_REGISTRY.md · The Fool",
+        "docs/SCIENCE_REFERENCES.md"
+      ]
+    },
+    {
+      "name": "Labradorite",
+      "formula": "(Ca,Na)(Al,Si)4O8",
+      "qualities": ["protective shimmer", "intuitive bridge"],
+      "citations": [
+        "MAJOR_ARCANA_REGISTRY.md · The Magician",
+        "docs/SCIENCE_REFERENCES.md"
+      ]
+    },
+    {
+      "name": "Rose Quartz",
+      "formula": "SiO2",
+      "qualities": ["heart opening", "gentle integration"],
+      "citations": [
+        "MAJOR_ARCANA_REGISTRY.md · The Empress",
+        "docs/SCIENCE_REFERENCES.md"
+      ]
+    },
+    {
+      "name": "Carnelian",
+      "formula": "SiO2",
+      "qualities": ["creative fire", "courage"],
+      "citations": [
+        "MAJOR_ARCANA_REGISTRY.md · The Chariot",
+        "docs/SCIENCE_REFERENCES.md"
+      ]
+    },
+    {
+      "name": "Selenite",
+      "formula": "CaSO4·2H2O",
+      "qualities": ["calming light", "cleansing"],
+      "citations": [
+        "registry/registry.json · ATEL-001 layer annotations",
+        "docs/SCIENCE_REFERENCES.md"
+      ]
+    },
+    {
+      "name": "Moonstone",
+      "formula": "(Na,K)AlSi3O8",
+      "qualities": ["dream recall", "cyclical balance"],
+      "citations": [
+        "MAJOR_ARCANA_REGISTRY.md · The High Priestess",
+        "docs/SCIENCE_REFERENCES.md"
+      ]
+    }
+  ]
+}

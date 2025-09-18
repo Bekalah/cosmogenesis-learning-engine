@@ -1,0 +1,68 @@
+{
+  "vesica": {
+    "rows": 9,
+    "columns": 11,
+    "paddingDivisor": 11,
+    "radiusFactor": 1.5,
+    "strokeDivisor": 99,
+    "alpha": 0.55
+  },
+  "treeOfLife": {
+    "marginDivisor": 11,
+    "radiusDivisor": 22,
+    "labelOffset": -24,
+    "nodes": [
+      { "id": "kether", "title": "Kether", "meaning": "Crown", "level": 0, "xFactor": 0.5 },
+      { "id": "chokmah", "title": "Chokmah", "meaning": "Wisdom", "level": 1, "xFactor": 0.7 },
+      { "id": "binah", "title": "Binah", "meaning": "Understanding", "level": 1, "xFactor": 0.3 },
+      { "id": "chesed", "title": "Chesed", "meaning": "Mercy", "level": 2, "xFactor": 0.68 },
+      { "id": "geburah", "title": "Geburah", "meaning": "Severity", "level": 2, "xFactor": 0.32 },
+      { "id": "tiphareth", "title": "Tiphareth", "meaning": "Beauty", "level": 3, "xFactor": 0.5 },
+      { "id": "netzach", "title": "Netzach", "meaning": "Victory", "level": 4, "xFactor": 0.66 },
+      { "id": "hod", "title": "Hod", "meaning": "Glory", "level": 4, "xFactor": 0.34 },
+      { "id": "yesod", "title": "Yesod", "meaning": "Foundation", "level": 5, "xFactor": 0.5 },
+      { "id": "malkuth", "title": "Malkuth", "meaning": "Kingdom", "level": 6, "xFactor": 0.5 }
+    ],
+    "edges": [
+      ["kether", "chokmah"],
+      ["kether", "binah"],
+      ["kether", "tiphareth"],
+      ["chokmah", "binah"],
+      ["chokmah", "tiphareth"],
+      ["chokmah", "chesed"],
+      ["chokmah", "netzach"],
+      ["binah", "tiphareth"],
+      ["binah", "geburah"],
+      ["binah", "hod"],
+      ["chesed", "geburah"],
+      ["chesed", "tiphareth"],
+      ["chesed", "netzach"],
+      ["geburah", "tiphareth"],
+      ["geburah", "hod"],
+      ["tiphareth", "netzach"],
+      ["tiphareth", "hod"],
+      ["tiphareth", "yesod"],
+      ["netzach", "hod"],
+      ["netzach", "yesod"],
+      ["hod", "yesod"],
+      ["yesod", "malkuth"]
+    ],
+    "labelFont": "13px system-ui, -apple-system, Segoe UI, sans-serif"
+  },
+  "fibonacci": {
+    "sampleCount": 144,
+    "turns": 3,
+    "baseRadiusDivisor": 3,
+    "phi": 1.618033988749895,
+    "alpha": 0.85
+  },
+  "helix": {
+    "sampleCount": 144,
+    "cycles": 3,
+    "amplitudeDivisor": 3,
+    "phaseOffset": 180,
+    "crossTieCount": 33,
+    "strandAlpha": 0.85,
+    "rungAlpha": 0.6
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "C144N-099",
+  "name": "Resonant Choir Matrix",
+  "layers": [
+    "indras-net node map",
+    "angelic ring",
+    "solfeggio spokes"
+  ],
+  "dimensions": {
+    "width": 1080,
+    "height": 1080
+  },
+  "citations": [
+    "docs/codex-14499-research.md · Core Identity",
+    "registry/registry.json · version header"
+  ]
+}
