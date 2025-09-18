@@ -1,6 +1,419 @@
 <!doctype html>
 <html lang="en">
 <head>
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Codex 144:99 · Cosmogenesis Learning Engine</title>
+<meta name="color-scheme" content="dark light"/>
+<style>
+/* --- RESET & TOKENS --- */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary-gold:#FFD700;
+  --sacred-purple:#6B46C1;
+  --deep-indigo:#1a1a2e;
+  --astral-blue:#16213e;
+  --mystical-green:#0f3460;
+  --spirit-red:#e94560;
+  --moon-silver:#C0C0C0;
+  --ink:#ffffff;
+  --paper:#0a0a0a;
+  --paper2:#0f3460;
+  --focus: #80C7FF;
+}
+@media (prefers-color-scheme: light){
+  :root{ --ink:#111; --paper:#F5F0E6; --paper2:#E8E2D6 }
+}
+html,body{min-height:100%}
+body{
+  font-family: ui-serif, Georgia, serif;
+  background: linear-gradient(135deg,var(--paper) 0%, var(--deep-indigo) 50%, var(--paper2) 100%);
+  color: var(--ink);
+  overflow-x:hidden;
+}
+
+/* --- BACKDROP CANVAS (gated by motion pref) --- */
+#sacred-canvas{
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:-1; opacity:.28;
+}
+
+/* --- TREE NAV --- */
+.tree-nav{
+  position:fixed; top:16px; right:16px; z-index:1000;
+  display:flex; flex-direction:column; gap:10px;
+  background:rgba(0,0,0,.25); backdrop-filter:saturate(120%) blur(8px);
+  border:1px solid rgba(255,255,255,.12); padding:10px; border-radius:12px;
+}
+.sephirah-node{
+  width:44px;height:44px;border-radius:50%;
+  background: radial-gradient(circle, var(--primary-gold), var(--sacred-purple));
+  border:2px solid var(--moon-silver);
+  display:grid;place-items:center;font-size:20px;cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+  box-shadow:0 0 14px rgba(255,215,0,.25);
+}
+.sephirah-node:focus-visible{ outline:2px solid var(--focus); outline-offset:2px }
+.sephirah-node:hover{ transform:translateY(-2px); box-shadow:0 0 24px rgba(255,215,0,.45) }
+
+/* --- PAGE LAYOUT --- */
+main{ max-width:1400px; margin:0 auto; padding:40px 20px; position:relative; z-index:10 }
+.header{ text-align:center; margin-bottom:48px }
+.codex-title{
+  font-size:clamp(1.8rem,4.5vw,3.5rem);
+  background: linear-gradient(45deg,var(--primary-gold),var(--moon-silver),var(--sacred-purple));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow: 0 0 18px rgba(255,215,0,.35);
+  letter-spacing:.08em; font-weight:700; margin-bottom:8px
+}
+.codex-subtitle{ font-size:1.05rem; color:var(--moon-silver); font-style:italic }
+
+/* --- GRID --- */
+.node-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px; margin:36px 0;
+}
+.module-node{
+  background: rgba(27,27,50,.78);
+  border:1.5px solid var(--primary-gold);
+  border-radius:12px; padding:22px; position:relative; overflow:hidden; cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.module-node:focus-visible{ outline:2px solid var(--focus); outline-offset:2px }
+.module-node::before{
+  content:""; position:absolute; inset:-50% -50%;
+  width:200%; height:200%;
+  background: radial-gradient(circle, transparent, rgba(255,215,0,.08), transparent);
+  animation: slow-rotate 18s linear infinite;
+  pointer-events:none;
+}
+.module-node:hover{ transform:translateY(-6px); box-shadow:0 16px 34px rgba(255,215,0,.22); border-color:var(--moon-silver) }
+.module-title{ font-size:1.25rem; color:var(--primary-gold); display:flex; gap:10px; align-items:center; margin-bottom:10px }
+.module-symbol{ font-size:1.5rem }
+.module-description{ color:#cfd3e6; line-height:1.6; margin-bottom:14px }
+.module-tags{ display:flex; flex-wrap:wrap; gap:8px }
+.tag{ background: rgba(107,70,193,.28); color:var(--moon-silver); padding:4px 10px; border-radius:14px; font-size:.82rem; border:1px solid rgba(192,192,192,.28) }
+
+/* --- WORKSPACE --- */
+.workspace{
+  background: rgba(15,52,96,.22); border:1.5px solid var(--sacred-purple);
+  border-radius:16px; padding:28px; margin:48px 0;
+}
+.workspace-title{ font-size:1.6rem; color:var(--primary-gold); text-align:center; margin-bottom:18px }
+.geometry-container{
+  width:100%; height:380px; background:rgba(0,0,0,.46);
+  border:1px solid var(--primary-gold); border-radius:10px; display:flex; align-items:center; justify-content:center;
+}
+#geometry-canvas{ width:100%; height:100% }
+.control-panel{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:16px; margin-top:18px; padding:14px; background:rgba(26,26,46,.55); border-radius:10px
+}
+.control-group{ display:flex; flex-direction:column; gap:8px }
+.control-label{ color:var(--primary-gold); font-size:.82rem; text-transform:uppercase; letter-spacing:.06em }
+.control-slider{ width:100%; height:6px; border-radius:3px; background:rgba(192,192,192,.28); outline:0; -webkit-appearance:none }
+.control-slider::-webkit-slider-thumb{
+  -webkit-appearance:none; width:18px; height:18px; border-radius:50%;
+  background:var(--primary-gold); box-shadow:0 0 10px rgba(255,215,0,.4); cursor:pointer
+}
+
+/* --- PATTERN CARDS --- */
+.pattern-display{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:26px 0 }
+.pattern-card{
+  background:rgba(107,70,193,.22); border:1px solid var(--sacred-purple);
+  padding:18px; border-radius:10px; text-align:center; transition:transform .15s ease, box-shadow .15s ease
+}
+.pattern-card:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(107,70,193,.35) }
+.pattern-icon{ font-size:2.4rem; margin-bottom:8px }
+
+/* --- HEALING INTERFACE --- */
+.healing-interface{
+  background:rgba(0,0,0,.6); border:1.5px solid var(--mystical-green);
+  border-radius:14px; padding:22px; margin:28px 0;
+}
+.frequency-display{
+  font-size:1.8rem; color:var(--primary-gold); text-align:center; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; margin:10px 0
+}
+.color-palette{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap }
+.color-swatch{
+  width:48px; height:48px; border-radius:50%; cursor:pointer; transition:transform .15s ease, border-color .15s ease; border:2px solid transparent
+}
+.color-swatch:hover{ transform:scale(1.12); border-color:var(--primary-gold) }
+
+/* --- JOURNAL --- */
+.journal-entry{ background:rgba(26,26,46,.78); border-left:4px solid var(--spirit-red); padding:16px; margin:18px 0; border-radius:6px }
+.journal-date{ color:var(--moon-silver); font-size:.9rem; margin-bottom:8px }
+.journal-content{ color:#dfe3f3; line-height:1.72 }
+
+/* --- MODAL --- */
+.modal{ display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,.92) }
+.modal-content{
+  position:relative; background:linear-gradient(135deg,#1a1a2e 0%, #0f3460 100%);
+  margin:5% auto; padding:28px; width:min(820px,90%); border:1.5px solid var(--primary-gold); border-radius:16px; max-height:80vh; overflow:auto
+}
+.close-modal{ color:var(--moon-silver); font-size:1.8rem; cursor:pointer; float:right }
+.close-modal:hover{ color:var(--primary-gold) }
+
+/* --- EXPERIMENTAL TOGGLE --- */
+.experimental-toggle{
+  position:fixed; bottom:20px; right:20px;
+  background:rgba(233,69,96,.9); color:#fff; padding:12px 18px; border-radius:28px; cursor:pointer;
+  font-weight:700; box-shadow:0 6px 18px rgba(233,69,96,.42)
+}
+
+/* --- FOOTER / PROVENANCE --- */
+footer{ margin:36px 0 20px; text-align:center; font-size:.85rem; color:var(--moon-silver) }
+footer small{ display:block; opacity:.9 }
+
+/* --- ANIMATIONS (soft; gated) --- */
+@keyframes slow-rotate{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+@media (prefers-reduced-motion: reduce){
+  .module-node::before{ animation:none }
+}
+@media (max-width:768px){
+  .node-grid{ grid-template-columns:1fr }
+  .pattern-display{ grid-template-columns:1fr }
+  .tree-nav{ flex-direction:row }
+  .sephirah-node{ width:40px;height:40px }
+}
+</style>
+</head>
+<body>
+<!-- Accessible landmarks -->
+<nav class="tree-nav" aria-label="Tree of Life Navigation">
+  <button class="sephirah-node" title="Kether – Crown" data-sephirah="kether" aria-label="Kether">👑</button>
+  <button class="sephirah-node" title="Chokmah – Wisdom" data-sephirah="chokmah" aria-label="Chokmah">🔮</button>
+  <button class="sephirah-node" title="Binah – Understanding" data-sephirah="binah" aria-label="Binah">🌙</button>
+  <button class="sephirah-node" title="Chesed – Mercy" data-sephirah="chesed" aria-label="Chesed">💙</button>
+  <button class="sephirah-node" title="Geburah – Severity" data-sephirah="geburah" aria-label="Geburah">🔥</button>
+  <button class="sephirah-node" title="Tiphareth – Beauty" data-sephirah="tiphareth" aria-label="Tiphareth">☀️</button>
+  <button class="sephirah-node" title="Netzach – Victory" data-sephirah="netzach" aria-label="Netzach">🌿</button>
+  <button class="sephirah-node" title="Hod – Glory" data-sephirah="hod" aria-label="Hod">📖</button>
+  <button class="sephirah-node" title="Yesod – Foundation" data-sephirah="yesod" aria-label="Yesod">🌛</button>
+  <button class="sephirah-node" title="Malkuth – Kingdom" data-sephirah="malkuth" aria-label="Malkuth">🌍</button>
+</nav>
+
+<canvas id="sacred-canvas" aria-hidden="true"></canvas>
+
+<main id="content" role="main">
+  <header class="header">
+    <h1 class="codex-title">CODEX 144:99</h1>
+    <p class="codex-subtitle">Circuitum99 · The Living Arcana Engine</p>
+  </header>
+
+  <section class="node-grid" aria-label="Modules">
+    <!-- Cards (same content you wrote, lightly trimmed) -->
+    <article class="module-node" data-module="cosmogenesis" tabindex="0">
+      <h3 class="module-title"><span class="module-symbol">🌌</span>Cosmogenesis Patterns</h3>
+      <p class="module-description">Explore creation myths through neurodivergent pattern recognition. Map sacred geometry of universe birthing across cultures.</p>
+      <div class="module-tags"><span class="tag">Sacred Geometry</span><span class="tag">Creation Myths</span><span class="tag">ND Cognition</span></div>
+    </article>
+
+    <article class="module-node" data-module="harmonic-research" tabindex="0">
+      <h3 class="module-title"><span class="module-symbol">🎵</span>Harmonic Resonance Lab</h3>
+      <p class="module-description">Investigate Schumann resonances, planetary frequencies, and solfeggio tones. Create custom frequency environments.</p>
+      <div class="module-tags"><span class="tag">Sound Healing</span><span class="tag">Frequency</span><span class="tag">Binaural</span></div>
+    </article>
+
+    <article class="module-node" data-module="symbolic-cognition" tabindex="0">
+      <h3 class="module-title"><span class="module-symbol">⚛️</span>Symbolic Cognition Archive</h3>
+      <p class="module-description">Art–science fusion. Study Red Book, temple geometry, synesthetic archives.</p>
+      <div class="module-tags"><span class="tag">Jung</span><span class="tag">Symbolism</span><span class="tag">ND Minds</span></div>
+    </article>
+
+    <article class="module-node" data-module="trauma-environments" tabindex="0">
+      <h3 class="module-title"><span class="module-symbol">🛡️</span>Trauma-Safe Spaces</h3>
+      <p class="module-description">Design healing environments with polyvagal theory, biophilic patterns, and RPG mechanics for regulation.</p>
+      <div class="module-tags"><span class="tag">PTSD</span><span class="tag">Healing</span><span class="tag">Safe Space</span></div>
+    </article>
+
+    <article class="module-node" data-module="alchemical-psychology" tabindex="0">
+      <h3 class="module-title"><span class="module-symbol">⚗️</span>Alchemical Psychology</h3>
+      <p class="module-description">In the line of Fortune, Case, Agrippa. Transform lead awareness into gold.</p>
+      <div class="module-tags"><span class="tag">Alchemy</span><span class="tag">Theosophy</span><span class="tag">Mysticism</span></div>
+    </article>
+
+    <article class="module-node" data-module="living-arcana" tabindex="0">
+      <h3 class="module-title"><span class="module-symbol">🃏</span>Living Arcana System</h3>
+      <p class="module-description">Dynamic Tarot ↔ Tree correspondences. Real-time archetypal pattern synthesis.</p>
+      <div class="module-tags"><span class="tag">Tarot</span><span class="tag">Qabalah</span><span class="tag">Hermetic</span></div>
+    </article>
+  </section>
+
+  <!-- Sacred Geometry Workspace -->
+  <section class="workspace" aria-label="Sacred Geometry Laboratory">
+    <h2 class="workspace-title">Sacred Geometry Laboratory</h2>
+    <div class="geometry-container"><canvas id="geometry-canvas" aria-label="Geometry Canvas"></canvas></div>
+    <div class="control-panel" role="group" aria-label="Geometry Controls">
+      <div class="control-group"><label class="control-label" for="recursion">Recursion Depth</label><input id="recursion" type="range" class="control-slider" min="1" max="12" value="6"/></div>
+      <div class="control-group"><label class="control-label" for="phi">Golden Ratio φ</label><input id="phi" type="range" class="control-slider" min="0" max="100" value="61"/></div>
+      <div class="control-group"><label class="control-label" for="rotation">Rotation Speed</label><input id="rotation" type="range" class="control-slider" min="0" max="100" value="30"/></div>
+      <div class="control-group"><label class="control-label" for="complexity">Fractal Complexity</label><input id="complexity" type="range" class="control-slider" min="3" max="24" value="12"/></div>
+    </div>
+  </section>
+
+  <!-- Healing interface (colors update from registry if present) -->
+  <section class="healing-interface" aria-label="Frequency & Color Healing">
+    <h3 style="text-align:center;color:var(--primary-gold);margin-bottom:12px">Frequency & Color Healing Chamber</h3>
+    <div class="frequency-display" id="freqReadout">432 Hz</div>
+    <div id="palette" class="color-palette" aria-live="polite">
+      <!-- Fallback swatches -->
+      <button class="color-swatch" style="background:#FF0000" data-freq="428" aria-label="Red 428 Hz"></button>
+      <button class="color-swatch" style="background:#FFA500" data-freq="480" aria-label="Orange 480 Hz"></button>
+      <button class="color-swatch" style="background:#FFFF00" data-freq="510" aria-label="Yellow 510 Hz"></button>
+      <button class="color-swatch" style="background:#00FF00" data-freq="528" aria-label="Green 528 Hz"></button>
+      <button class="color-swatch" style="background:#00FFFF" data-freq="600" aria-label="Cyan 600 Hz"></button>
+      <button class="color-swatch" style="background:#0000FF" data-freq="660" aria-label="Blue 660 Hz"></button>
+      <button class="color-swatch" style="background:#8B00FF" data-freq="720" aria-label="Violet 720 Hz"></button>
+    </div>
+  </section>
+
+  <!-- Journal -->
+  <article class="journal-entry" aria-label="Research Journal Entry">
+    <div class="journal-date">Entry 144 — Timestamp: Now</div>
+    <div class="journal-content">
+      The living engine awakens. Patterns emerge where ancient wisdom meets experimental research.
+      The Tree of Life navigates layers of consciousness; the Codex 144:99 frames completion (144) meeting the open spiral (99).
+    </div>
+  </article>
+
+  <footer>
+    © Rebecca Respawn · Codex 144:99 · CC-BY-SA-4.0 · <small>Provenance</small>
+  </footer>
+</main>
+
+<!-- Modal -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Deep Dive">
+  <div class="modal-content">
+    <button class="close-modal" aria-label="Close">×</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<button class="experimental-toggle" id="expToggle" aria-pressed="false" title="Experimental Mode">🧪 EXPERIMENTAL MODE</button>
+
+<script>
+/* ===== Motion Preference Gate ===== */
+const allowMotion = matchMedia('(prefers-reduced-motion: no-preference)').matches;
+
+/* ===== Backdrop Particles (ND-safe) ===== */
+const bg = document.getElementById('sacred-canvas');
+const g = bg.getContext('2d');
+function fitBG(){ bg.width = innerWidth; bg.height = innerHeight }
+fitBG(); addEventListener('resize', fitBG);
+
+const particles = Array.from({length: allowMotion ? 42 : 12}, () => ({
+  x: Math.random()*bg.width, y: Math.random()*bg.height,
+  vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+  r: Math.random()*2+0.8, life: Math.random()*0.8+0.2
+}));
+
+function drawBG(){
+  g.clearRect(0,0,bg.width,bg.height);
+  for(const p of particles){
+    p.x+=p.vx; p.y+=p.vy; p.life-=0.0015;
+    if(p.x<0||p.x>bg.width) p.vx*=-1;
+    if(p.y<0||p.y>bg.height) p.vy*=-1;
+    if(p.life<=0){ p.x=Math.random()*bg.width; p.y=Math.random()*bg.height; p.life=Math.random()*0.8+0.2 }
+    g.globalAlpha = p.life*0.6;
+    g.fillStyle = '#FFD700';
+    g.beginPath(); g.arc(p.x,p.y,p.r,0,Math.PI*2); g.fill();
+  }
+  if(allowMotion) requestAnimationFrame(drawBG);
+}
+allowMotion && drawBG();
+
+/* ===== Geometry Lab ===== */
+const geo = document.getElementById('geometry-canvas');
+const ctx = geo.getContext('2d');
+function fitGeo(){ geo.width = geo.clientWidth; geo.height = geo.clientHeight }
+fitGeo(); addEventListener('resize', fitGeo);
+
+let t=0;
+let rotationSpeed=.3, recursionDepth=6, phi=1.618, complexity=12;
+document.getElementById('recursion').addEventListener('input',e=>recursionDepth=+e.target.value);
+document.getElementById('phi').addEventListener('input',e=>phi=1+ (+e.target.value)/100);
+document.getElementById('rotation').addEventListener('input',e=>rotationSpeed=(+e.target.value)/100);
+document.getElementById('complexity').addEventListener('input',e=>complexity=+e.target.value);
+
+function flower(x,y,r,depth){
+  if(depth<=0) return;
+  ctx.strokeStyle=`hsla(${(t*2)%360},70%,60%,${depth/recursionDepth})`;
+  ctx.lineWidth=.5; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.stroke();
+  for(let i=0;i<6;i++){
+    const a = (Math.PI*2/6)*i + t*rotationSpeed;
+    const nx = x + Math.cos(a)*r, ny = y + Math.sin(a)*r;
+    ctx.beginPath(); ctx.arc(nx,ny,r,0,Math.PI*2); ctx.stroke();
+    if(depth>1) flower(nx,ny,r/phi,depth-1);
+  }
+}
+
+function loop(){
+  ctx.clearRect(0,0,geo.width,geo.height);
+  const r = Math.min(geo.width, geo.height)/ (2.6 + (12-complexity)/24);
+  flower(geo.width/2, geo.height/2, r, recursionDepth);
+  if(allowMotion){ t+=0.016; requestAnimationFrame(loop); }
+}
+allowMotion ? loop() : ( ()=>{ t=0; loop(); })();
+
+/* ===== Palette from Registry (graceful fallback) ===== */
+const freq = document.getElementById('freqReadout');
+function wirePalette(node){
+  if(!node) return;
+  node.addEventListener('click', e=>{
+    const btn = e.target.closest('.color-swatch');
+    if(!btn) return;
+    const hz = btn.getAttribute('data-freq')||'432';
+    freq.textContent = hz + ' Hz';
+  });
+}
+wirePalette(document.getElementById('palette'));
+
+// Try to fetch /dist/projection.json and hydrate colors if present
+fetch('/dist/projection.json').then(r=>r.ok?r.json():null).then(data=>{
+  if(!data) return;
+  const items = Array.isArray(data.items)?data.items:[];
+  // Example: look for solfeggio/crystals records
+  const tones = items.filter(x=>x.kind==='numerology' && /hz|tone|frequency/i.test(x.name||'')).slice(0,7);
+  if(tones.length){
+    const palette = document.getElementById('palette');
+    palette.innerHTML='';
+    tones.forEach((t,i)=>{
+      const sw=document.createElement('button');
+      const hz = (t.value||432);
+      const color = t.color || ['#FF0000','#FFA500','#FFFF00','#00FF00','#00FFFF','#0000FF','#8B00FF'][i%7];
+      sw.className='color-swatch'; sw.style.background=color; sw.setAttribute('data-freq', hz);
+      sw.setAttribute('aria-label', `${t.name||'Tone'} ${hz} Hz`); palette.appendChild(sw);
+    });
+    wirePalette(palette);
+  }
+}).catch(()=>{ /* silent: stay with fallback */ });
+
+/* ===== Modal (for deep dive cards) ===== */
+const modal = document.getElementById('modal');
+const modalBody = document.getElementById('modal-body');
+document.querySelector('.close-modal').addEventListener('click', ()=> modal.style.display='none');
+document.addEventListener('click', e=>{
+  const card = e.target.closest('.module-node');
+  if(!card) return;
+  modalBody.innerHTML = `
+    <h2 style="color:var(--primary-gold);margin-bottom:10px">${card.querySelector('.module-title').innerText}</h2>
+    <p style="color:#dfe3f3;line-height:1.7">${card.querySelector('.module-description').innerText}</p>
+  `;
+  modal.style.display='block';
+});
+
+/* ===== Experimental mode (state only; no autoplay) ===== */
+const exp = document.getElementById('expToggle');
+exp.addEventListener('click', ()=>{
+  const pressed = exp.getAttribute('aria-pressed')==='true';
+  exp.setAttribute('aria-pressed', String(!pressed));
+  exp.textContent = !pressed ? '🧪 EXPERIMENTAL MODE · ON' : '🧪 EXPERIMENTAL MODE';
+});
+</script>
+
   <meta charset="utf-8">
   <title>Cosmogenesis Learning Engine</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -113,5 +526,6 @@
     </section>
   </main>
   <footer class="provenance-chip">© Rebecca Respawn · Codex 144:99 · CC-BY-SA-4.0 · Provenance</footer>
+
 </body>
 </html>
