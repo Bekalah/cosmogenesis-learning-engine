@@ -1,4 +1,4 @@
-# Cosmic Helix Renderer (Offline, ND-safe)
+# Cosmic Helix Renderer
 
 Static, offline-first canvas renderer that layers Vesica geometry, the Tree-of-Life scaffold, a Fibonacci-inspired curve, and a static double-helix lattice. Designed for ND-safe review: calm palette, no motion, generous spacing, and inline comments that explain the numerology-driven proportions.
 
