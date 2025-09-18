@@ -1,12 +1,11 @@
 [
-
   {
     "id": "00-void",
     "name": "Void",
     "type": "Origin",
     "numerology": 0,
     "lore": "The silent lumen holds the womb of all potential.",
-    "lab": "/nodes/atelier/void.html"
+    "lab": "/labs/void-lab.html"
   },
   {
     "id": "01-magician",
@@ -44,8 +43,4 @@
     "numerology": 5,
     "lore": "Choral lineages map canonical wisdom into the Cosmogenesis atelier."
   }
-
-  { "id":"00-void","name":"Void","type":"Axiom","numerology":0,"lore":"The silent ground of being.","lab":"./labs/void-lab.html" },
-  { "id":"01-magician","name":"Magician","type":"Arcana","numerology":1,"lore":"The will to pattern reality.","lab":"./labs/void-lab.html" }
-
 ]
