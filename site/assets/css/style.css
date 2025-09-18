@@ -1,0 +1,240 @@
+/*
+  ND-safe light landing page styles.
+  Calm contrast, no animation, offline fonts.
+*/
+:root {
+  color-scheme: light dark;
+  --bg: #f7f6ff;
+  --ink: #141121;
+  --muted: #4b4860;
+  --panel: #ffffff;
+  --accent: #5245d4;
+  --accent-soft: #8c7fff;
+  --border: #d9d6eb;
+}
+
+body {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "URW Palladio L", serif;
+  background: linear-gradient(160deg, #f7f6ff 0%, #ece9ff 60%, #f7f6ff 100%);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+body.is-calm {
+  background: #f2f1fb;
+  color: #1c1930;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: #ffffff;
+  border-radius: 999px;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 1000;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+}
+
+body.is-calm .top-bar {
+  background: rgba(245, 244, 255, 0.9);
+}
+
+.brand {
+  font-size: 1.25rem;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+}
+
+nav[aria-label="Primary"] {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+nav[aria-label="Primary"] a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+nav[aria-label="Primary"] a:hover,
+nav[aria-label="Primary"] a:focus-visible {
+  color: var(--accent);
+}
+
+.calm-toggle {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+body.is-calm .calm-toggle {
+  border-color: var(--muted);
+  color: var(--muted);
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  display: grid;
+  gap: 3rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero-copy h1 {
+  margin-top: 0;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  letter-spacing: 0.4rem;
+  text-transform: uppercase;
+}
+
+.hero-copy p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+body.is-calm .btn,
+body.is-calm .btn.ghost {
+  border-color: var(--muted);
+  background: transparent;
+  color: var(--muted);
+}
+
+.hero-visual {
+  margin: 0;
+  text-align: center;
+}
+
+.hero-visual img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px rgba(20, 17, 33, 0.12);
+}
+
+.hero-visual figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 24px rgba(20, 17, 33, 0.08);
+}
+
+body.is-calm .panel {
+  background: #f5f4ff;
+  box-shadow: none;
+}
+
+.panel h2 {
+  margin-top: 0;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+
+.panel p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.feature-list {
+  margin: 1.5rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+  .top-bar {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  nav[aria-label="Primary"] {
+    justify-content: center;
+  }
+}
