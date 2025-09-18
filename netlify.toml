@@ -1,7 +1,7 @@
 # cosmogenesis-learning-engine / Netlify configuration
 # Brain: serves small shared datasets + optional hero asset.
 [build]
-  publish = "site"
+  publish = "site/publish"
   command = ""
 
 [build.environment]

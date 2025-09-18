@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cosmic Helix Atelier — Offline Renderer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Offline Cosmic Helix renderer with calm Atelier layout, hero asset, and trauma-informed notes.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* Atelier extensions: calm lists for node data */
+    .feature-item { display:flex; flex-direction:column; gap:0.25rem; padding:0.85rem 1rem; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,0.06); }
+    body.is-calm .feature-item { background:rgba(245,244,255,0.35); border-color:rgba(169,160,215,0.45); }
+    .feature-emoji { font-size:1.4rem; }
+    .feature-title { letter-spacing:0.12em; text-transform:uppercase; }
+    .feature-meaning { color:var(--muted); font-size:0.9rem; }
+    .tag-list { list-style:none; margin:1rem 0 0; padding:0; display:flex; gap:0.5rem; flex-wrap:wrap; }
+    .tag-list li { font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.35rem 0.75rem; border-radius:999px; border:1px solid var(--border); color:var(--muted); }
+    body.is-calm .tag-list li { border-color:rgba(169,160,215,0.5); }
+    .status-text { color:var(--muted); font-size:0.9rem; margin-top:0.5rem; }
+    canvas { width:100%; max-width:100%; border-radius:16px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="top-bar">
+    <div class="brand">COSMOGENESIS ATELIER</div>
+    <nav aria-label="Primary">
+      <a href="#renderer">Renderer</a>
+      <a href="#nodes">Tree of Life</a>
+      <a href="#modules">Study Modules</a>
+      <button type="button" class="calm-toggle" data-calm-toggle aria-pressed="false">Calm Mode</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">Cosmic Helix Atelier</h1>
+        <p>Layered sacred geometry renderer staged for offline study. Vesica grid, Tree-of-Life scaffold, Fibonacci curve, and static double-helix lattice draw once to honour ND-safe pacing.</p>
+        <div class="hero-actions">
+          <a class="btn" href="./data/palette.json" download>Download Palette</a>
+          <a class="btn ghost" href="./data/geometry.json" download>Geometry Spec</a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img src="./assets/img/helix-hero.png" width="720" height="480" alt="Indigo atelier gradient previewing the calm Cosmic Helix canvas.">
+        <figcaption>Hero asset: calm indigo gradient echoing the atelier palette.</figcaption>
+      </figure>
+    </section>
+
+    <section id="renderer" class="panel" aria-labelledby="renderer-title">
+      <h2 id="renderer-title">Layered Canvas</h2>
+      <p>The renderer loads offline palette and geometry copies. When JSON is missing, sealed fallbacks keep the canvas readable and note the adjustment inline.</p>
+      <canvas id="helix-stage" width="1440" height="900" aria-label="Cosmic Helix layered geometry canvas"></canvas>
+      <p class="status-text" data-status>Preparing calm palette…</p>
+      <p class="status-text" data-data-status hidden>Offline data fallbacks active.</p>
+    </section>
+
+    <section id="nodes" class="panel" aria-labelledby="nodes-title">
+      <h2 id="nodes-title">Tree-of-Life Nodes</h2>
+      <p>Sephirot descriptions surface alongside the canvas for readers who need textual anchors. Calm icons keep the cognitive load low.</p>
+      <ul class="feature-list" data-sephirot></ul>
+    </section>
+
+    <section id="modules" class="panel" aria-labelledby="modules-title">
+      <h2 id="modules-title">Research Modules</h2>
+      <p>Offline cards summarise atelier study tracks. Tags highlight numerology, harmonic, and ND-safety themes.</p>
+      <div class="grid" role="list" data-modules></div>
+    </section>
+
+    <section class="panel" aria-labelledby="offline-title">
+      <h2 id="offline-title">Offline Notes</h2>
+      <p>All assets live inside <code>site/publish/</code>. Double-click <code>index.html</code> to launch. Palette, geometry, and node data sit in <code>data/</code> so browsers can read them even without a server.</p>
+      <ul class="feature-list">
+        <li class="feature-item"><span class="feature-title">Numerology anchors</span><span class="feature-meaning">Constants {3, 7, 9, 11, 22, 33, 99, 144} drive spacing and calm ratios.</span></li>
+        <li class="feature-item"><span class="feature-title">ND-safe rationale</span><span class="feature-meaning">No motion, gentle contrasts, fallbacks explained onscreen, Calm Mode toggle mirrored in CSS.</span></li>
+        <li class="feature-item"><span class="feature-title">Offline data copies</span><span class="feature-meaning"><code>palette.json</code>, <code>geometry.json</code>, and <code>modules.json</code> mirror the defaults so the renderer never goes empty.</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Cosmic Helix Atelier — offline-first sacred geometry lab.</p>
+    <p><a href="https://github.com/circuitum99/cosmogenesis-learning-engine" rel="noopener">Repository</a></p>
+  </footer>
+
+  <script type="module">
+    import { renderHelix, DEFAULT_NUMBERS, DEFAULT_PALETTE, DEFAULT_GEOMETRY } from "./js/helix-renderer.mjs";
+    import { initCalmMode } from "./js/calm-mode.mjs";
+    import { renderSephirotList, renderModuleGrid } from "./js/node-renderer.mjs";
+
+    const calmButton = document.querySelector("[data-calm-toggle]");
+    initCalmMode(calmButton, { root: document.body });
+
+    const statusEl = document.querySelector("[data-status]");
+    const dataStatusEl = document.querySelector("[data-data-status]");
+    const canvas = document.getElementById("helix-stage");
+    const context = canvas ? canvas.getContext("2d") : null;
+
+    async function safeLoadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+    }
+
+    const [paletteData, geometryData, moduleData] = await Promise.all([
+      safeLoadJSON("./data/palette.json"),
+      safeLoadJSON("./data/geometry.json"),
+      safeLoadJSON("./data/modules.json")
+    ]);
+
+    const palette = paletteData || DEFAULT_PALETTE;
+    const geometry = geometryData || DEFAULT_GEOMETRY;
+    const numerology = DEFAULT_NUMBERS;
+
+    const fallbackNotices = [];
+    if (!paletteData) fallbackNotices.push("palette");
+    if (!geometryData) fallbackNotices.push("geometry");
+
+    if (context) {
+      const notice = fallbackNotices.length > 0
+        ? `Fallback active for ${fallbackNotices.join(", ")}.`
+        : null;
+      const result = renderHelix(context, {
+        width: canvas.width,
+        height: canvas.height,
+        palette,
+        geometry,
+        NUM: numerology,
+        notice
+      });
+      statusEl.textContent = result.ok ? result.summary : "Renderer error.";
+    } else {
+      statusEl.textContent = "Canvas unavailable in this browser.";
+    }
+
+    const sephirotOutcome = renderSephirotList(document.querySelector("[data-sephirot]"), moduleData?.sephirot);
+    const moduleOutcome = renderModuleGrid(document.querySelector("[data-modules]"), moduleData?.modules);
+
+    const dataFallbacks = [];
+    if (fallbackNotices.length > 0) {
+      dataFallbacks.push(`renderer ${fallbackNotices.join(", ")}`);
+    }
+    if (sephirotOutcome.usedFallback) {
+      dataFallbacks.push("sephirot list");
+    }
+    if (moduleOutcome.usedFallback) {
+      dataFallbacks.push("module cards");
+    }
+
+    if (dataFallbacks.length > 0 && dataStatusEl) {
+      dataStatusEl.hidden = false;
+      dataStatusEl.textContent = `Offline fallbacks engaged for ${dataFallbacks.join(", ")}.`;
+    }
+  </script>
+</body>
+</html>
