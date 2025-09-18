@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+
+  <meta charset="utf-8">
+  <title>Cosmogenesis Learning Engine</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="ND-safe atelier index for the Cosmogenesis Learning Engine.">
+  <link rel="preload" as="image" href="./assets/img/tesseract-chamber-1024.webp">
+  <link rel="stylesheet" href="./assets/css/atelier.css">
+
   <meta charset="utf-8" />
   <title>COSMOGENESIS — Atelier of Sacred Geometry & Techno-Occult Research</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -62,9 +70,114 @@
 
     @media (max-width:768px){.grand{font-size:var(--xl)} .nav-collection{display:none}}
   </style>
+
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="geometric-canvas" aria-hidden="true"></div>
+  <header class="atelier-header" id="top">
+    <nav class="atelier-nav" aria-label="Primary">
+      <a href="#collections" class="marque-logo">COSMOGENESIS</a>
+      <ul class="nav-collection">
+        <li><a data-route="true" href="#collections">Collections</a></li>
+        <li><a data-route="true" href="#arcana">Living Arcana</a></li>
+        <li><a data-route="true" href="#node-system">Node System</a></li>
+        <li><a data-route="true" href="#research">Research</a></li>
+        <li><a data-route="true" href="#atelier">Atelier</a></li>
+      </ul>
+      <button id="calmToggle" type="button" class="btn-couture" aria-pressed="false">Calm Mode</button>
+    </nav>
+  </header>
+
+
+  <main id="main" tabindex="-1">
+    <section id="collections" class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="hero-title">COSMOGENESIS</h1>
+        <p class="hero-subtitle">A couture codex weaving sacred geometry, trauma-informed pedagogy, and living arcana registries. Every layer breathes slowly and honours ND-safe pacing.</p>
+        <div class="hero-actions">
+          <a class="btn-outline" data-route="true" href="#arcana">Explore Collections</a>
+          <a class="btn-outline" data-route="true" href="#atelier">Enter Atelier</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img class="hero-image" src="./assets/img/tesseract-chamber-1024.webp" width="720" height="480" alt="Celestial chamber with layered sacred geometry." decoding="async">
+        <div class="atelier-loading" aria-hidden="true">
+          <span class="loader-ray" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="arcana" class="section" aria-labelledby="arcana-title">
+      <h2 id="arcana-title" class="section-titre">Living Arcana</h2>
+      <p class="section-sous-titre">Key codex collections bridging art, learn, and play. Hover or focus to open the modal chapel&mdash;no autoplay, only annotated pathways.</p>
+      <div class="module-grid">
+        <article class="module-card" tabindex="0" data-title="Cosmogenesis Patterns" data-description="Explore creation myths through neurodivergent pattern recognition. Map sacred geometry of universe birthing across cultures.">
+          <h3 class="module-title">Cosmogenesis Patterns</h3>
+          <p class="module-description">Explore creation myths through neurodivergent pattern recognition. Map sacred geometry of universe birthing across cultures.</p>
+          <div class="module-tags">
+            <span class="tag">Sacred Geometry</span>
+            <span class="tag">Creation Myths</span>
+            <span class="tag">ND Cognition</span>
+          </div>
+        </article>
+        <article class="module-card" tabindex="0" data-title="Harmonic Resonance Lab" data-description="Investigate Schumann resonances, planetary frequencies, and solfeggio tones. Create custom frequency environments.">
+          <h3 class="module-title">Harmonic Resonance Lab</h3>
+          <p class="module-description">Investigate Schumann resonances, planetary frequencies, and solfeggio tones. Create custom frequency environments.</p>
+          <div class="module-tags">
+            <span class="tag">Sound Healing</span>
+            <span class="tag">Frequency</span>
+            <span class="tag">Binaural</span>
+          </div>
+        </article>
+        <article class="module-card" tabindex="0" data-title="Symbolic Cognition Archive" data-description="Art-science fusion: Red Book, temple geometry, synesthetic archives--curated for nonlinear minds.">
+          <h3 class="module-title">Symbolic Cognition Archive</h3>
+          <p class="module-description">Art-science fusion. Study Red Book, temple geometry, synesthetic archives.</p>
+          <div class="module-tags">
+            <span class="tag">Jung</span>
+            <span class="tag">Symbolism</span>
+            <span class="tag">ND Minds</span>
+          </div>
+        </article>
+        <article class="module-card" tabindex="0" data-title="Trauma-Safe Spaces" data-description="Design healing environments with polyvagal theory, biophilic patterns, and RPG mechanics for regulation.">
+          <h3 class="module-title">Trauma-Safe Spaces</h3>
+          <p class="module-description">Design healing environments with polyvagal theory, biophilic patterns, and RPG mechanics for regulation.</p>
+          <div class="module-tags">
+            <span class="tag">PTSD</span>
+            <span class="tag">Healing</span>
+            <span class="tag">Safe Space</span>
+          </div>
+        </article>
+        <article class="module-card" tabindex="0" data-title="Alchemical Psychology" data-description="In the line of Fortune, Case, Agrippa. Transform lead awareness into gold through layered praxis.">
+          <h3 class="module-title">Alchemical Psychology</h3>
+          <p class="module-description">In the line of Fortune, Case, Agrippa. Transform lead awareness into gold.</p>
+          <div class="module-tags">
+            <span class="tag">Alchemy</span>
+            <span class="tag">Theosophy</span>
+            <span class="tag">Mysticism</span>
+          </div>
+        </article>
+        <article class="module-card" tabindex="0" data-title="Living Arcana System" data-description="Dynamic Tarot <-> Tree correspondences. Real-time archetypal pattern synthesis.">
+          <h3 class="module-title">Living Arcana System</h3>
+          <p class="module-description">Dynamic Tarot &lt;-&gt; Tree correspondences. Real-time archetypal pattern synthesis.</p>
+          <div class="module-tags">
+            <span class="tag">Tarot</span>
+            <span class="tag">Qabalah</span>
+            <span class="tag">Hermetic</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="node-system" class="section" aria-labelledby="node-title">
+      <h2 id="node-title" class="section-titre">Node System Laboratory</h2>
+      <p class="section-sous-titre">Layered geometry studio&mdash;calibrated to numerology constants {3, 7, 9, 11, 22, 33, 99, 144}. Motion pauses when Calm Mode is active.</p>
+      <div class="node-grid-wrapper" role="region" aria-labelledby="node-title" aria-live="polite">
+        <div id="node-loader" class="atelier-loading" role="status" aria-live="polite">
+          <span class="sr-only">Calibrating node registry...</span>
+          <span class="loader-ray" aria-hidden="true"></span>
+        </div>
+        <ul id="node-list" class="node-grid" aria-live="polite"></ul>
 
   <nav class="atelier-nav" role="navigation" aria-label="Primary">
     <a href="#collections" class="marque-logo">COSMOGENESIS</a>
@@ -121,6 +234,7 @@
         <article class="card"><h3>Leonora Carrington</h3><p>Surrealist alchemy.</p></article>
         <article class="card"><h3>Dion Fortune</h3><p>Mystical Qabalah.</p></article>
         <article class="card"><h3>Heinrich Agrippa</h3><p>Renaissance correspondences.</p></article>
+>
       </div>
     </section>
 
@@ -137,6 +251,25 @@
     </section>
   </main>
 
+  <footer class="maison-footer">
+    <div class="footer-marque">COSMOGENESIS</div>
+    <div class="footer-links">
+      <a href="#collections">Harmonic Research</a>
+      <a href="#node-system">Node System Docs</a>
+      <a href="https://github.com/Rebecca-Respawn/cosmogenesis-learning-engine" rel="noopener noreferrer">Open Source</a>
+      <a href="#atelier">Commissions</a>
+    </div>
+    <p class="copyright">© MMXXV — Atelier of Sacred Geometry &amp; Consciousness Research</p>
+  </footer>
+
+  <script type="module" src="./assets/js/boot.js"></script>
+  <script type="application/json" id="nodes-fallback">
+  [
+    {"id":"00-void","name":"Void","type":"Origin","numerology":0,"lore":"The silent lumen holds the womb of all potential."},
+    {"id":"01-magician","name":"Magician","type":"Initiate","numerology":1,"lore":"The first spark weaves intention through the lattice."}
+  ]
+  </script>
+
   <footer class="footer" role="contentinfo">
     <div class="brand">COSMOGENESIS</div>
     <p>© MMXXV — Atelier of Sacred Geometry & Consciousness Research</p>
@@ -144,5 +277,6 @@
 
   <script src="./js/calm.js" defer></script>
   <script src="./js/nodes.js" defer></script>
+
 </body>
 </html>
