@@ -1,4 +1,14 @@
 {
+  "bg": "#0d0d17",
+  "ink": "#ececf4",
+  "layers": [
+    "#8aa6ff",
+    "#6fd4ff",
+    "#7fdca4",
+    "#f7c687",
+    "#e3a4ff",
+    "#bfc3e6"
+
   "fuchs_palette": {
     "gold": [219, 184, 67],
     "violet": [108, 52, 131],
@@ -14,5 +24,6 @@
     "#ffd79b",
     "#f3aefc",
     "#d5d8ff"
+
   ]
 }
