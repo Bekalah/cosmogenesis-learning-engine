@@ -166,6 +166,21 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
   return { nodes: Object.keys(nodes).length, paths: paths.length };
 }
 
+/**
+ * Compute canvas coordinates for the 11 Tree of Life sephirot.
+ *
+ * Uses the canvas dimensions and numerology constants to produce a vertically distributed,
+ * numerology-anchored layout for the sephirot (kether, chokmah, binah, daath, chesed,
+ * geburah, tiphareth, netzach, hod, yesod, malkuth). Positions are in canvas pixels.
+ *
+ * The vertical placement is computed from a top/bottom margin and an inner height divided
+ * into eleven steps; several level multipliers are derived from the provided numeric
+ * constants so the geometry remains consistent with the module's numerology rules.
+ *
+ * @param {{width:number, height:number}} dims - Canvas dimensions in pixels.
+ * @param {Object<string, number>} numbers - Numerology constants (expects keys like THREE, SEVEN, ELEVEN, TWENTYTWO, THIRTYTHREE, NINE, ONEFORTYFOUR). These values are used to compute vertical levels and column spacing.
+ * @return {Object<string, {x:number,y:number}>} Mapping of sephirot names to their {x,y} canvas coordinates.
+ */
 function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
   const centerX = dims.width / 2;
