@@ -1,5 +1,18 @@
 /*
   helix-renderer.mjs
+
+  Static renderer for the Cosmic Helix canvas. All helpers are pure functions so the
+  module stays predictable and ND-safe (why: keeps rendering single-pass and calm).
+
+  Layer order (back to front):
+    1) Vesica field - intersecting circles establishing the womb-of-forms grid.
+    2) Tree-of-Life scaffold - ten sephirot linked by twenty-two steady paths.
+    3) Fibonacci curve - logarithmic spiral encoded with golden ratio pacing.
+    4) Double-helix lattice - two static strands with gentle cross ties.
+
+  Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) shape spacing, sampling,
+  and proportions throughout the helpers to honour the requested symbolism.
+
   ND-safe static renderer for layered sacred geometry.
 
   Layers (rendered back to front):
@@ -12,6 +25,7 @@
     - No animation: everything draws once on load to respect ND-safe pacing.
     - Calm palette: soft contrast keeps lines readable without sensory spikes.
     - Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) guide proportions.
+
 */
 
 const FALLBACK_PALETTE = {
@@ -33,6 +47,7 @@ const DEFAULT_NUM = {
 };
 
 const FALLBACK_GEOMETRY = {
+  // Vesica lattice references 9x11 grid divisions (why: ties to 9/11 numerology).
   vesica: {
     rows: 9,
     columns: 11,
@@ -41,6 +56,7 @@ const FALLBACK_GEOMETRY = {
     strokeDivisor: 99,
     alpha: 0.55
   },
+  // Tree-of-Life scaffold uses ten nodes with 22 connective paths.
   treeOfLife: {
     marginDivisor: 11,
     radiusDivisor: 22,
@@ -108,7 +124,6 @@ export function renderHelix(ctx, options = {}) {
 
   const width = toNumber(options.width, ctx.canvas.width);
   const height = toNumber(options.height, ctx.canvas.height);
-
   if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
     return { ok: false, reason: "invalid-dimensions" };
   }
@@ -119,9 +134,10 @@ export function renderHelix(ctx, options = {}) {
   const notice = typeof options.notice === "string" ? options.notice.trim() : "";
 
   ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   fillBackground(ctx, width, height, palette.bg);
 
-  // Layer order preserves depth without motion (why: ND-safe, trauma-informed viewing).
+  // Layer sequencing preserves depth without motion (why: layered geometry, ND-safe).
   drawVesicaField(ctx, width, height, palette.layers[0], numerology, geometry.vesica);
   drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], palette.ink, numerology, geometry.treeOfLife);
   drawFibonacciCurve(ctx, width, height, palette.layers[3], numerology, geometry.fibonacci);
@@ -137,7 +153,7 @@ export function renderHelix(ctx, options = {}) {
 
 function normalisePalette(input) {
   if (!input || typeof input !== "object") {
-    return { ...FALLBACK_PALETTE, layers: [...FALLBACK_PALETTE.layers] };
+    return clonePalette(FALLBACK_PALETTE);
   }
 
   const result = {
@@ -147,13 +163,22 @@ function normalisePalette(input) {
     layers: []
   };
 
-  const requestedLayers = Array.isArray(input.layers) ? input.layers : [];
+  const sourceLayers = Array.isArray(input.layers) ? input.layers : [];
   for (let index = 0; index < FALLBACK_PALETTE.layers.length; index += 1) {
-    const candidate = requestedLayers[index];
+    const candidate = sourceLayers[index];
     result.layers.push(typeof candidate === "string" ? candidate : FALLBACK_PALETTE.layers[index]);
   }
 
   return result;
+}
+
+function clonePalette(palette) {
+  return {
+    bg: palette.bg,
+    ink: palette.ink,
+    muted: palette.muted,
+    layers: [...palette.layers]
+  };
 }
 
 function normaliseNumerology(input) {
@@ -194,9 +219,9 @@ function normaliseTree(data) {
   const safe = data && typeof data === "object" ? data : {};
   const fallbackNodes = fallback.nodes;
   const providedNodes = Array.isArray(safe.nodes) && safe.nodes.length > 0 ? safe.nodes : fallbackNodes;
-  const normalisedNodes = providedNodes.map((node, index) => {
+  const nodes = providedNodes.map((node, index) => {
     const base = typeof node === "object" && node !== null ? node : {};
-    const reference = fallbackNodes.find((fallbackNode) => fallbackNode.id === base.id) || fallbackNodes[index % fallbackNodes.length];
+    const reference = fallbackNodes.find((item) => item.id === base.id) || fallbackNodes[index % fallbackNodes.length];
     return {
       id: typeof base.id === "string" && base.id ? base.id : reference.id,
       title: typeof base.title === "string" && base.title ? base.title : reference.title,
@@ -206,10 +231,10 @@ function normaliseTree(data) {
     };
   });
 
-  const nodeIds = new Set(normalisedNodes.map((node) => node.id));
-  const edgesSource = Array.isArray(safe.edges) && safe.edges.length > 0 ? safe.edges : fallback.edges;
-  const normalisedEdges = edgesSource
-    .map((edge) => Array.isArray(edge) ? edge.slice(0, 2) : [])
+  const nodeIds = new Set(nodes.map((node) => node.id));
+  const sourceEdges = Array.isArray(safe.edges) && safe.edges.length > 0 ? safe.edges : fallback.edges;
+  const edges = sourceEdges
+    .map((edge) => (Array.isArray(edge) ? edge.slice(0, 2) : []))
     .filter((edge) => edge.length === 2 && nodeIds.has(edge[0]) && nodeIds.has(edge[1]));
 
   return {
@@ -217,8 +242,8 @@ function normaliseTree(data) {
     radiusDivisor: positiveNumber(safe.radiusDivisor, fallback.radiusDivisor),
     labelOffset: finiteNumber(safe.labelOffset, fallback.labelOffset),
     labelFont: typeof safe.labelFont === "string" && safe.labelFont ? safe.labelFont : fallback.labelFont,
-    nodes: normalisedNodes,
-    edges: normalisedEdges
+    nodes,
+    edges
   };
 }
 
@@ -257,11 +282,20 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
   const rows = Math.max(2, settings.rows);
   const columns = Math.max(2, settings.columns);
   const padding = Math.min(width, height) / settings.paddingDivisor;
+
+  const horizontalSpan = width - padding * 2;
+  const verticalSpan = height - padding * 2;
+  const stepX = columns > 1 ? horizontalSpan / (columns - 1) : 0;
+  const stepY = rows > 1 ? verticalSpan / (rows - 1) : 0;
+  const radius = Math.min(stepX, stepY) / settings.radiusFactor;
+  const strokeWidth = Math.max(1, Math.min(width, height) / settings.strokeDivisor);
+
   const stepX = columns > 1 ? (width - padding * 2) / (columns - 1) : 0;
   const stepY = rows > 1 ? (height - padding * 2) / (rows - 1) : 0;
   const verticalStep = stepY * (N.SEVEN / N.NINE);
   const radius = Math.min(stepX, stepY) * (N.NINE / N.ELEVEN) / settings.radiusFactor;
   const strokeWidth = Math.max(1, Math.min(width, height) / settings.strokeDivisor) * (N.THIRTYTHREE / N.NINETYNINE);
+
 
   ctx.save();
   ctx.strokeStyle = colorWithAlpha(color, settings.alpha);
@@ -270,6 +304,14 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
 
   for (let row = 0; row < rows; row += 1) {
     const offset = row % 2 === 0 ? 0 : stepX / 2;
+
+    for (let column = 0; column < columns; column += 1) {
+      const x = padding + offset + column * stepX;
+      const y = padding + row * stepY;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
     for (let col = 0; col < columns; col += 1) {
       const x = padding + offset + col * stepX;
       if (x < padding || x > width - padding) {
@@ -285,11 +327,52 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
       if (mirroredY <= height - padding) {
         strokeCircle(ctx, x, mirroredY, radius);
       }
+
     }
   }
 
   ctx.restore();
 }
+
+
+function drawTreeOfLife(ctx, width, height, edgeColor, nodeColor, labelColor, N, settings) {
+  const margin = Math.min(width, height) / settings.marginDivisor;
+  const top = margin;
+  const bottom = height - margin;
+  const left = margin;
+  const right = width - margin;
+  const verticalSpan = bottom - top;
+  const horizontalSpan = right - left;
+  const radius = Math.max(4, Math.min(width, height) / settings.radiusDivisor);
+  const lineWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
+
+  const maxLevel = settings.nodes.reduce((acc, node) => Math.max(acc, node.level), 0);
+  const levelStep = maxLevel > 0 ? verticalSpan / maxLevel : 0;
+
+  const positions = new Map();
+  settings.nodes.forEach((node) => {
+    const x = left + clamp01(node.xFactor) * horizontalSpan;
+    const y = top + node.level * levelStep;
+    positions.set(node.id, { x, y, node });
+  });
+
+  // Calm connective lines first (why: keeps lattice behind node glyphs).
+  ctx.save();
+  ctx.strokeStyle = edgeColor;
+  ctx.lineWidth = lineWidth;
+  ctx.globalAlpha = 0.75;
+  ctx.lineCap = "round";
+  settings.edges.forEach((edge) => {
+    const start = positions.get(edge[0]);
+    const end = positions.get(edge[1]);
+    if (!start || !end) {
+      return;
+    }
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    ctx.lineTo(end.x, end.y);
+    ctx.stroke();
+  });
 
 function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N, tree) {
   const margin = Math.min(width, height) / tree.marginDivisor;
@@ -325,9 +408,26 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
     ctx.lineTo(end.x, end.y);
   }
   ctx.stroke();
+
   ctx.restore();
 
+  // Nodes overlay edges so depth stays readable.
   ctx.save();
+
+  ctx.fillStyle = nodeColor;
+  ctx.strokeStyle = labelColor;
+  ctx.lineWidth = Math.max(1, lineWidth * 0.75);
+  settings.nodes.forEach((node) => {
+    const point = positions.get(node.id);
+    if (!point) {
+      return;
+    }
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  });
+
   ctx.fillStyle = colorWithAlpha(nodeColor, 0.9);
   ctx.strokeStyle = colorWithAlpha(nodeColor, 0.9);
   ctx.lineWidth = Math.max(1, pathWidth * 0.75);
@@ -337,10 +437,24 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
     ctx.fill();
     ctx.stroke();
   }
+
   ctx.restore();
 
   ctx.save();
   ctx.fillStyle = labelColor;
+
+  ctx.font = settings.labelFont;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  settings.nodes.forEach((node) => {
+    const point = positions.get(node.id);
+    if (!point) {
+      return;
+    }
+    const labelY = point.y + settings.labelOffset;
+    ctx.fillText(node.title, point.x, labelY);
+  });
+
   ctx.font = tree.labelFont;
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
@@ -349,10 +463,36 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
     ctx.fillText(entry.node.title, entry.x, textY);
     ctx.fillText(entry.node.meaning, entry.x, textY + 14);
   }
+
   ctx.restore();
 }
 
 function drawFibonacciCurve(ctx, width, height, color, N, settings) {
+
+  const count = Math.max(2, settings.sampleCount);
+  const turns = settings.turns;
+  const phi = settings.phi;
+  const angleTotal = turns * Math.PI * 2;
+  const growth = Math.pow(phi, turns);
+  const maxRadius = Math.min(width, height) / settings.baseRadiusDivisor;
+  const baseRadius = maxRadius / growth;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const strokeWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = strokeWidth;
+  ctx.globalAlpha = settings.alpha;
+  ctx.beginPath();
+
+  for (let index = 0; index < count; index += 1) {
+    const t = count > 1 ? index / (count - 1) : 0;
+    const angle = t * angleTotal;
+    const radius = baseRadius * Math.pow(phi, t * turns);
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+
   const samples = Math.max(2, settings.sampleCount);
   const turns = Math.max(0, settings.turns);
   const totalAngle = turns * Math.PI * 2;
@@ -374,6 +514,7 @@ function drawFibonacciCurve(ctx, width, height, color, N, settings) {
     const radius = baseRadius * Math.pow(phi, t * turns);
     const x = centerX + radius * Math.cos(angle);
     const y = centerY + radius * Math.sin(angle);
+
     if (index === 0) {
       ctx.moveTo(x, y);
     } else {
@@ -385,6 +526,84 @@ function drawFibonacciCurve(ctx, width, height, color, N, settings) {
 }
 
 function drawHelixLattice(ctx, width, height, strandColor, rungColor, N, settings) {
+
+  const count = Math.max(2, settings.sampleCount);
+  const cycles = settings.cycles;
+  const amplitude = Math.min(width, height) / settings.amplitudeDivisor;
+  const phase = (settings.phaseOffset * Math.PI) / 180;
+  const topMargin = Math.min(width, height) / N.NINE;
+  const bottomMargin = topMargin;
+  const usableHeight = height - topMargin - bottomMargin;
+  const strokeWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
+  const strandA = [];
+  const strandB = [];
+
+  for (let index = 0; index < count; index += 1) {
+    const t = count > 1 ? index / (count - 1) : 0;
+    const angle = t * cycles * Math.PI * 2;
+    const y = topMargin + t * usableHeight;
+    const centerX = width / 2;
+    const xA = centerX + Math.sin(angle) * amplitude;
+    const xB = centerX + Math.sin(angle + phase) * amplitude;
+    strandA.push({ x: xA, y });
+    strandB.push({ x: xB, y });
+  }
+
+  ctx.save();
+  ctx.lineWidth = strokeWidth;
+  ctx.globalAlpha = settings.strandAlpha;
+  ctx.strokeStyle = strandColor;
+  drawPolyline(ctx, strandA);
+  drawPolyline(ctx, strandB);
+  ctx.restore();
+
+  const rungCount = settings.crossTieCount;
+  ctx.save();
+  ctx.lineWidth = strokeWidth * 0.85;
+  ctx.globalAlpha = settings.rungAlpha;
+  ctx.strokeStyle = rungColor;
+  for (let rung = 0; rung < rungCount; rung += 1) {
+    const t = rungCount > 1 ? rung / (rungCount - 1) : 0;
+    const index = Math.floor(t * (count - 1));
+    const start = strandA[index];
+    const end = strandB[index];
+    if (!start || !end) {
+      continue;
+    }
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    ctx.lineTo(end.x, end.y);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawPolyline(ctx, points) {
+  if (!points || points.length === 0) {
+    return;
+  }
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
+  });
+  ctx.stroke();
+}
+
+function drawNotice(ctx, width, height, color, message) {
+  const padding = 12;
+  ctx.save();
+  ctx.globalAlpha = 0.9;
+  ctx.fillStyle = color;
+  ctx.font = "12px system-ui, -apple-system, Segoe UI, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(message, padding, height - padding);
+  ctx.restore();
+
   const samples = Math.max(2, settings.sampleCount);
   const marginX = width / N.ELEVEN;
   const startX = marginX;
@@ -481,6 +700,12 @@ function strokeCircle(ctx, cx, cy, radius) {
 function toNumber(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
+
+}
+
+function toNumber(value, fallback) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : Number(fallback);
 }
 
 function positiveNumber(value, fallback) {
@@ -489,15 +714,48 @@ function positiveNumber(value, fallback) {
 }
 
 function positiveInteger(value, fallback) {
+
+  const number = Number(value);
+  return Number.isInteger(number) && number > 0 ? number : fallback;
+
   const parsed = Number(value);
   const rounded = Math.round(parsed);
   return Number.isFinite(parsed) && rounded > 0 ? rounded : fallback;
+
 }
 
 function finiteNumber(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
 }
+
+
+function clamp01(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    return 0;
+  }
+  if (number < 0) {
+    return 0;
+  }
+  if (number > 1) {
+    return 1;
+  }
+  return number;
+}
+
+function clampAlpha(value, fallback) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    return fallback;
+  }
+  if (number < 0) {
+    return 0;
+  }
+  if (number > 1) {
+    return 1;
+  }
+  return number;
 
 function clampAlpha(value, fallback) {
   const parsed = Number(value);
@@ -533,4 +791,5 @@ function colorWithAlpha(hex, alpha) {
   const b = parseInt(value.slice(4, 6), 16);
   const safeAlpha = clamp01(alpha);
   return `rgba(${r},${g},${b},${safeAlpha})`;
+
 }
