@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "records": [
+    {
+      "id": "MON-001",
+      "title": "Inner Book",
+      "purpose": "Psychic operating system weaving trauma-informed narrative.",
+      "citations": [
+        "registry/main_registry.md · INNER_BOOK section",
+        "LORE/living_laws.md"
+      ]
+    },
+    {
+      "id": "MON-002",
+      "title": "Mirror Witch",
+      "purpose": "Guardian of wound mirrors and reflective pedagogy.",
+      "citations": [
+        "registry/main_registry.md · Core Influences",
+        "docs/codex-14499-research.md · Lore Directive"
+      ]
+    },
+    {
+      "id": "MON-003",
+      "title": "Spiral Spine",
+      "purpose": "Thirty-three vertebrae schema guiding ascension exercises.",
+      "citations": [
+        "docs/codex-14499-research.md · Lore Directive",
+        "docs/codex-14499-research.md · Architecture"
+      ]
+    }
+  ]
+}

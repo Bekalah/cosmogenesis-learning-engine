@@ -1,0 +1,315 @@
+{
+  "generatedAt": "2025-09-17T10:03:08Z",
+  "records": [
+    {
+      "type": "constant",
+      "value": 3,
+      "name": "Triadic Seed",
+      "principles": [
+        "creation",
+        "body-mind-spirit",
+        "vesica layering"
+      ],
+      "applications": "Used for Recognition stage prompts and Vesica lens compositions.",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Architecture",
+        "docs/manifesto.md \u00b7 Guiding principles"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 7,
+      "name": "Seven Rays",
+      "principles": [
+        "auric rays",
+        "initiation steps",
+        "tone ladder"
+      ],
+      "applications": "Maps to ray-based palettes and pedagogical pacing.",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Tradition Currents",
+        "MAJOR_ARCANA_REGISTRY.md \u00b7 Ray & Angel notes"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 9,
+      "name": "Completion Spiral",
+      "principles": [
+        "cycles",
+        "angelic chorus",
+        "Indra net closure"
+      ],
+      "applications": "Frames Integration prompts and Solfeggio harmonics.",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Core Identity",
+        "registry/registry.json \u00b7 ATEL-001 layer annotations"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 11,
+      "name": "Twin Pillar Gate",
+      "principles": [
+        "threshold",
+        "mirror guardians",
+        "Aleph-Path"
+      ],
+      "applications": "Highlights double-column layouts in Study mode.",
+      "citations": [
+        "MAJOR_ARCANA_REGISTRY.md \u00b7 The Fool",
+        "docs/codex-14499-research.md \u00b7 Tradition Currents"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 22,
+      "name": "Path Matrix",
+      "principles": [
+        "tarot major arcana",
+        "letter-path bridges"
+      ],
+      "applications": "Aligns Play mode story beats with major arcana guardians.",
+      "citations": [
+        "TAROT_SYSTEM.md \u00b7 Major arcana registry",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 33,
+      "name": "Spinal Ladder",
+      "principles": [
+        "vertebrae",
+        "cathedral spine",
+        "initiation climbs"
+      ],
+      "applications": "Controls Study exports and cathedral navigation rails.",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Lore Directive",
+        "registry/main_registry.md \u00b7 INNER_BOOK section"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 99,
+      "name": "Resonant Choir",
+      "principles": [
+        "angelic cadence",
+        "node resonance"
+      ],
+      "applications": "Sets cadence for atlas pagination and soundbed selections.",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Core Identity",
+        "registry/registry.json \u00b7 metadata block"
+      ]
+    },
+    {
+      "type": "constant",
+      "value": 144,
+      "name": "Codex Grid",
+      "principles": [
+        "12x12 lattice",
+        "Indra net",
+        "node locking"
+      ],
+      "applications": "Primary address space for the world-building generator.",
+      "citations": [
+        "docs/codex-14499-research.md \u00b7 Architecture",
+        "registry/registry.json \u00b7 version header"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 1,
+      "name": "Crown of First Light",
+      "angel": "Vehuiah",
+      "daemon": "Bael",
+      "reduction": 1,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 2,
+      "name": "Gate of Silent Depth",
+      "angel": "Jeliel",
+      "daemon": "Agares",
+      "reduction": 2,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 3,
+      "name": "Serpent of Breath",
+      "angel": "Sitael",
+      "daemon": "Vassago",
+      "reduction": 3,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 4,
+      "name": "Furnace of Becoming",
+      "angel": "Elemiah",
+      "daemon": "Samigina",
+      "reduction": 4,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 5,
+      "name": "Lunar Well of Dreams",
+      "angel": "Mahasiah",
+      "daemon": "Marbas",
+      "reduction": 5,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 6,
+      "name": "Emerald Root of Gaia",
+      "angel": "Lelahel",
+      "daemon": "Valefor",
+      "reduction": 6,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 7,
+      "name": "Star Ladder of Knowledge",
+      "angel": "Achaiah",
+      "daemon": "Amon",
+      "reduction": 7,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 8,
+      "name": "Temple of Love-Wisdom",
+      "angel": "Kahethel",
+      "daemon": "Barbatos",
+      "reduction": 8,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 9,
+      "name": "Guardian of Thresholds",
+      "angel": "Haziel",
+      "daemon": "Paimon",
+      "reduction": 9,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 10,
+      "name": "Ancestral Echo Drum",
+      "angel": "Aladiah",
+      "daemon": "Buer",
+      "reduction": 1,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 11,
+      "name": "Solar Voice of Truth",
+      "angel": "Lauviah",
+      "daemon": "Gremory",
+      "reduction": 2,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 12,
+      "name": "Labyrinth of Saturn",
+      "angel": "Hahaiah",
+      "daemon": "Vine",
+      "reduction": 3,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 13,
+      "name": "Gate of Learning / Path of Aleph",
+      "angel": "Iezalel",
+      "daemon": "Beleth",
+      "reduction": 4,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 14,
+      "name": "Furnace of Fire / Path of Shin",
+      "angel": "Mebahel",
+      "daemon": "Leraje",
+      "reduction": 5,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 15,
+      "name": "Labyrinth of Time / Path of Tav",
+      "angel": "Hariel",
+      "daemon": "Eligos",
+      "reduction": 6,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    },
+    {
+      "type": "node",
+      "id": 16,
+      "name": "Voice of Spirit / Path of Resh",
+      "angel": "Hakamiah",
+      "daemon": "Zepar",
+      "reduction": 7,
+      "citations": [
+        "codex-144-99/data/codex_master_min.json",
+        "docs/codex-14499-research.md \u00b7 Dataset Anatomy"
+      ]
+    }
+  ]
+}

@@ -5,8 +5,14 @@
   <title>Cosmic Helix Research Atlas</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
+
   <style>
     /* ND-safe: calm gradients, no motion, generous breathing room */
+
+  <!-- Lives under cosmic-helix/ so the root index keeps its lore-forward entry point (why: preserves established narrative flow). -->
+  <style>
+    /* ND-safe chrome: calm contrast, generous spacing, no motion cues. */
+
     :root {
       --bg: #070710;
       --surface: rgba(17, 17, 28, 0.88);
@@ -46,6 +52,7 @@
         radial-gradient(circle at bottom right, rgba(15, 52, 96, 0.35), transparent 50%),
         var(--bg);
       color: var(--ink);
+
       font: 15px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
     }
 
@@ -70,8 +77,43 @@
     .status {
       margin-top: 12px;
       font-size: 0.85rem;
-      color: var(--muted);
+
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
+
+    header {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1d1d2a;
+      background: linear-gradient(180deg, #10101a, transparent);
+    }
+
+    header strong {
+      font-weight: 600;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    #stage {
+      display: block;
+      margin: 16px auto 24px;
+      width: 100%;
+      max-width: 1440px;
+      box-shadow: 0 0 0 1px #1d1d2a;
+      background: var(--bg);
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 0 auto 24px;
+
+      color: var(--muted);
+      padding: 0 16px 40px;
+    }
+
 
     main {
       max-width: 1220px;
@@ -329,19 +371,48 @@
     </section>
   </main>
 
+    code {
+      background: #11111a;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>Cosmic Helix Renderer</strong> &mdash; layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status" role="status" aria-live="polite">Loading palette...</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">
+    Static renderer for Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. No animation,
+    no autoplay, no external libraries. Open this file directly; it works offline.
+  </p>
+
+
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
+
 
     const statusElement = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const context = canvas.getContext("2d");
 
     const defaults = {
+
+    const statusEl = document.getElementById("status");
+    const canvas = document.getElementById("stage");
+    const ctx = canvas.getContext("2d");
+
+    const FALLBACK = {
+
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
         muted: "#a6a6c1",
         layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+
       },
       geometry: {
         vesica: {
@@ -502,6 +573,7 @@
             body: "The living engine awakens. Patterns emerge from the intersection of ancient wisdom and quantum possibility. The Tree of Life serves as our navigation system through consciousness layers. Each node connects to infinite others in a holographic dance of meaning. The Codex 144:99 represents completion meeting infinity."
           }
         ]
+
       }
     };
 
@@ -515,6 +587,7 @@
       NINETYNINE: 99,
       ONEFORTYFOUR: 144
     };
+
 
     async function loadJSON(path) {
       try {
@@ -639,8 +712,29 @@
         text.textContent = swatch.label;
         item.appendChild(text);
         paletteContainer.appendChild(item);
+
+    if (!ctx) {
+      statusEl.textContent = "Canvas context unavailable in this browser.";
+    } else {
+      initialise();
+    }
+
+    async function initialise() {
+      const palette = await loadPalette("./data/palette.json");
+      const usingFallback = !palette;
+      const activePalette = usingFallback ? FALLBACK.palette : palette;
+      const notice = usingFallback ? "Palette missing; using calm fallback colours." : "";
+
+      const result = renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette: activePalette,
+        NUM,
+        notice
+
       });
     }
+
 
     function populateJournal(container, entries) {
       container.innerHTML = "";
@@ -709,6 +803,26 @@
         populateHealing(document.getElementById("frequency-display"), document.getElementById("color-palette"), interfaceSet.healing);
         populateJournal(document.getElementById("journal"), interfaceSet.journal);
       })();
+=
+      if (!result.ok) {
+        statusEl.textContent = "Renderer could not initialise (" + result.reason + ").";
+        return;
+      }
+
+      statusEl.textContent = usingFallback ? "Palette missing; safe fallback applied." : "Palette loaded.";
+    }
+
+    async function loadPalette(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+
     }
   </script>
 </body>

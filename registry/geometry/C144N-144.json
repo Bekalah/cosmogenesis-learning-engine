@@ -1,0 +1,17 @@
+{
+  "id": "C144N-144",
+  "name": "Codex Grid Master",
+  "layers": [
+    "12x12 lattice",
+    "double helix rails",
+    "vesica chambers"
+  ],
+  "dimensions": {
+    "width": 1440,
+    "height": 1440
+  },
+  "citations": [
+    "docs/codex-14499-research.md · Architecture",
+    "registry/registry.json · version header"
+  ]
+}

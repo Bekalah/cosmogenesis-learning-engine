@@ -1,0 +1,19 @@
+{
+  "id": "C144N-033",
+  "name": "Spine Ladder Grid",
+  "layers": [
+    "vesica mesh",
+    "double tree",
+    "fibonacci overlay",
+    "helix lattice"
+  ],
+  "dimensions": {
+    "width": 1440,
+    "height": 900
+  },
+  "citations": [
+    "docs/codex-14499-research.md · Lore Directive",
+    "cosmic-helix/README_RENDERER.md",
+    "registry/main_registry.md · INNER_BOOK section"
+  ]
+}
