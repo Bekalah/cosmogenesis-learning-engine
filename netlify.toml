@@ -1,22 +1,19 @@
-# netlify.toml - Cosmogenesis Learning Engine static publish config
+# /netlify.toml
 [build]
   publish = "site"
   command = ""
 
+# keep your older app under /engine if needed
+[[redirects]]
+  from = "/engine/*"
+  to = "/app/index.html"
+  status = 200 # /netlify.toml
+[build]
+  publish = "site"
+  command = ""
+
+# keep your older app under /engine if needed
 [[redirects]]
   from = "/engine/*"
   to = "/app/index.html"
   status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self';"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    X-Frame-Options = "SAMEORIGIN"
