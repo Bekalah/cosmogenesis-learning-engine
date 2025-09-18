@@ -1,1 +1,501 @@
-<!doctype html>Circle of AteliersCircle of AteliersPrototype labs, plate press, color experiments.Return to Sophia7 Library
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cosmogenesis Atelier — Fusion Kink Chapel</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="author" content="Rebecca Respawn">
+  <meta name="license" content="CC-BY-SA-4.0">
+  <meta name="source" content="Cosmogenesis Learning Engine · chapels/fusion-kink/ateliers.html">
+  <style>
+    :root {
+      --noir:#07070d;
+      --ink:#f0f1ff;
+      --muted:#9ea3c7;
+      --accent:#9bd4ff;
+      --glow:#4f79ff;
+      --panel:#121225;
+      --outline:rgba(155,212,255,0.28);
+    }
+
+    body {
+      margin:0;
+      min-height:100vh;
+      font:15px/1.6 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:radial-gradient(circle at top,#111528 0%,#07070d 55%,#030308 100%);
+      color:var(--ink);
+      overflow-x:hidden;
+      cursor:url('calm-cursor.svg'),auto;
+    }
+
+    .skip-link {
+      position:absolute;
+      left:-9999px;
+      top:1rem;
+      background:#000;
+      color:#fff;
+      padding:0.6rem 1rem;
+      border-radius:0.5rem;
+      text-decoration:none;
+      z-index:1000;
+    }
+
+    .skip-link:focus {
+      left:1rem;
+    }
+
+    .atelier-nav {
+      position:sticky;
+      top:0;
+      z-index:900;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1.5rem;
+      padding:1.25rem clamp(1.25rem, 3vw, 2.5rem);
+      background:rgba(7,7,13,0.85);
+      backdrop-filter:saturate(130%) blur(18px);
+      border-bottom:1px solid var(--outline);
+    }
+
+    .marque-logo {
+      font-weight:700;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      color:var(--ink);
+      text-decoration:none;
+      font-size:0.9rem;
+      white-space:nowrap;
+    }
+
+    .nav-collection {
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+
+    .nav-collection a {
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      letter-spacing:0.05em;
+    }
+
+    .nav-collection a:focus-visible,
+    .nav-collection a:hover {
+      color:var(--accent);
+      text-decoration:underline;
+    }
+
+    .btn-couture {
+      background:linear-gradient(135deg,var(--accent),#6f8dff);
+      color:#050508;
+      border:none;
+      border-radius:999px;
+      padding:0.6rem 1.4rem;
+      font-weight:600;
+      letter-spacing:0.05em;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(79,121,255,0.25);
+      transition:transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .btn-couture:focus-visible,
+    .btn-couture:hover {
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px rgba(79,121,255,0.35);
+    }
+
+    main {
+      display:grid;
+      gap:3.5rem;
+      padding:3rem clamp(1.5rem, 4vw, 3rem) 4rem;
+    }
+
+    .hero {
+      position:relative;
+      display:grid;
+      gap:1.5rem;
+      max-width:980px;
+    }
+
+    .hero h1 {
+      font-size:clamp(2.4rem, 5vw, 3.6rem);
+      margin:0;
+      letter-spacing:0.35em;
+      text-transform:uppercase;
+    }
+
+    .hero p {
+      margin:0;
+      max-width:720px;
+      color:var(--muted);
+    }
+
+    .hero-list {
+      display:grid;
+      gap:0.8rem;
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+
+    .hero-list li {
+      display:flex;
+      gap:0.8rem;
+      align-items:flex-start;
+      color:var(--muted);
+    }
+
+    .hero-list span {
+      color:var(--accent);
+      font-weight:600;
+    }
+
+    .geometric-canvas {
+      position:absolute;
+      inset:auto 0 -8rem auto;
+      width:min(320px, 40vw);
+      height:min(320px, 40vw);
+      background:radial-gradient(circle at 40% 40%, rgba(79,121,255,0.28), transparent 62%),
+        radial-gradient(circle at 70% 70%, rgba(155,212,255,0.38), transparent 68%);
+      border:1px solid var(--outline);
+      border-radius:50%;
+      filter:drop-shadow(0 18px 48px rgba(79,121,255,0.45));
+      pointer-events:none;
+      transform-origin:center;
+    }
+
+    .geometric-canvas::before,
+    .geometric-canvas::after {
+      content:"";
+      position:absolute;
+      inset:16%;
+      border:1px solid rgba(240,241,255,0.25);
+      border-radius:50%;
+      animation:pulse 9s ease-in-out infinite;
+    }
+
+    .geometric-canvas::after {
+      inset:28%;
+      animation-delay:-4.5s;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity:0.3; }
+      50% { opacity:0.8; }
+    }
+
+    section {
+      background:rgba(18,18,37,0.72);
+      border:1px solid var(--outline);
+      border-radius:18px;
+      padding:2.2rem clamp(1.5rem, 3vw, 2.5rem);
+      box-shadow:0 20px 48px rgba(3,3,8,0.45);
+    }
+
+    section h2 {
+      margin:0 0 1rem;
+      font-size:1.6rem;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+
+    section p {
+      color:var(--muted);
+      margin:0 0 1rem;
+    }
+
+    .tile-grid {
+      display:grid;
+      gap:1.25rem;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      margin:1.5rem 0 0;
+      list-style:none;
+      padding:0;
+    }
+
+    .tile {
+      background:rgba(7,7,13,0.55);
+      border:1px solid rgba(79,121,255,0.32);
+      border-radius:16px;
+      padding:1.1rem;
+      display:grid;
+      gap:0.6rem;
+    }
+
+    .tile strong {
+      color:var(--accent);
+      letter-spacing:0.04em;
+    }
+
+    .tile a {
+      color:var(--ink);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .tile a:focus-visible,
+    .tile a:hover {
+      text-decoration:underline;
+    }
+
+    .research-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.75rem;
+      margin:1.2rem 0 0;
+    }
+
+    .research-links a {
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid rgba(155,212,255,0.4);
+      padding:0.45rem 0.75rem;
+      border-radius:999px;
+      font-size:0.9rem;
+    }
+
+    .research-links a:focus-visible,
+    .research-links a:hover {
+      background:rgba(155,212,255,0.12);
+    }
+
+    footer {
+      padding:3rem clamp(1.5rem, 4vw, 3rem) 4rem;
+      border-top:1px solid var(--outline);
+      background:rgba(5,5,9,0.9);
+    }
+
+    .footer-inner {
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .footer-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      justify-content:center;
+    }
+
+    .footer-links a {
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .footer-links a:focus-visible,
+    .footer-links a:hover {
+      text-decoration:underline;
+    }
+
+    .reduced-motion * {
+      animation:none !important;
+      transition:none !important;
+      transform:none !important;
+    }
+
+    @media (max-width:900px) {
+      .atelier-nav {
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+      .geometric-canvas {
+        position:relative;
+        inset:auto;
+        margin:2rem auto 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="atelier-nav" aria-label="Primary">
+    <a href="#collections" class="marque-logo">COSMOGENESIS</a>
+    <ul class="nav-collection">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#arcana">Living Arcana</a></li>
+      <li><a href="#node-system">Node System</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#atelier">Atelier Protocol</a></li>
+    </ul>
+    <button id="calmToggle" class="btn-couture" type="button" aria-pressed="false">Calm Mode</button>
+  </nav>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">COSMOGENESIS</h1>
+      <p>The Fusion Kink chapel hosts the atelier index for the Cosmogenesis Learning Engine. Every layer respects trauma-aware pacing: no autoplay, no forced animation, and provenance-first sourcing.</p>
+      <ul class="hero-list" aria-label="Atelier highlights">
+        <li><span>144</span> canvas-ready correspondences arranged as sealed collections.</li>
+        <li><span>22</span> path lines bridging the Tree-of-Life spine with the Living Arcana.</li>
+        <li><span>33</span> calibration prompts to keep rituals and lesson plans ND-safe.</li>
+      </ul>
+      <div class="geometric-canvas" aria-hidden="true"></div>
+    </section>
+
+    <section id="collections" aria-labelledby="collections-title">
+      <h2 id="collections-title">Collections Registry</h2>
+      <p>Curated sets map numerology constants to palettes, sonic motifs, and ritual aides. Start here when loading data from <code>data/atelier</code> or the registry exports.</p>
+      <ul class="tile-grid">
+        <li class="tile">
+          <strong>Harmonic Palette</strong>
+          <p>Colour constellations stored at <code>data/atelier/harmonics.json</code> keep the vesica field calm.</p>
+          <a href="../../data/atelier/harmonics.json">Open harmonics.json</a>
+        </li>
+        <li class="tile">
+          <strong>Architecture Studies</strong>
+          <p>Vesica vault plans and Rosslyn cues for large scale builds.</p>
+          <a href="../../data/atelier/architecture.json">Open architecture.json</a>
+        </li>
+        <li class="tile">
+          <strong>Psyche Toolkit</strong>
+          <p>Gentle prompts for grounding sessions and reflective journaling.</p>
+          <a href="../../data/atelier/psyche.json">Open psyche.json</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="arcana" aria-labelledby="arcana-title">
+      <h2 id="arcana-title">Living Arcana Links</h2>
+      <p>The Living Arcana system cross-references tarot, angelic choirs, and numerology. Use these entries to seed story nodes without duplicating research.</p>
+      <ul class="tile-grid">
+        <li class="tile">
+          <strong>Registry Bundles</strong>
+          <p>Primary arcana definitions, palettes, and correspondences.</p>
+          <a href="../../registry/arcana/Fool.bundle.json">Fool bundle</a>
+        </li>
+        <li class="tile">
+          <strong>Numerology Spine</strong>
+          <p>Core digits for progression pacing and ND-safe lesson scaling.</p>
+          <a href="../../registry/numerology.json">Open numerology registry</a>
+        </li>
+        <li class="tile">
+          <strong>Angel Atlas</strong>
+          <p>Choir matrices and ladder degrees to align with atelier tasks.</p>
+          <a href="../../registry/angels.json">Open angels registry</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="node-system" aria-labelledby="node-system-title">
+      <h2 id="node-system-title">Node System</h2>
+      <p>Nodes encode the physical ateliers. Each JSON file contains provenance, rituals, and safe-mode notes. Load them through <code>nodes/atelier</code>.</p>
+      <ul class="tile-grid">
+        <li class="tile">
+          <strong>Node ATEL-001</strong>
+          <p>Entry chamber with palette lab and harmonic loom.</p>
+          <a href="../../nodes/atelier/node-ATEL-001/node.json">View node</a>
+        </li>
+        <li class="tile">
+          <strong>Node ATEL-002</strong>
+          <p>Sigil drafting table with calm-mode lighting cues.</p>
+          <a href="../../nodes/atelier/node-ATEL-002/node.json">View node</a>
+        </li>
+        <li class="tile">
+          <strong>Node ATEL-003</strong>
+          <p>Soundwell tuned to 432 Hz with optional 528 Hz overlay.</p>
+          <a href="../../nodes/atelier/node-ATEL-003/node.json">View node</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="research" aria-labelledby="research-title">
+      <h2 id="research-title">Research Scrolls</h2>
+      <p>Canonical references live in <code>docs/</code>. Duplicated drafts were retired in favour of a single source; auxiliary stubs now link here so provenance remains intact.</p>
+      <div class="research-links">
+        <a href="../../docs/aurora_gate_node_00.html">Aurora Gate — Node 00 (canonical)</a>
+        <a href="../../docs/pantheon/leonora-carrington.md">Leonora Carrington dossier</a>
+        <a href="../../docs/research/WEAVING_SYMBOLS.md">Weaving Symbols notes</a>
+      </div>
+    </section>
+
+    <section id="atelier" aria-labelledby="atelier-title">
+      <h2 id="atelier-title">Atelier Protocol</h2>
+      <p>Before running workshops, review the covenant and safety overlays. Calm Mode must remain available on every station.</p>
+      <ul class="hero-list">
+        <li><span>Provenance</span> Cite source scrolls using <code>assets/oer/aurora_gate_provenance.json</code>.</li>
+        <li><span>Calm Lighting</span> Default to reduced motion. Only enable dynamics with consent.</li>
+        <li><span>Offline-first</span> Keep mirrored copies of data and HTML so the atelier runs without network access.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="#collections">Collections</a>
+        <a href="#node-system">Nodes</a>
+        <a href="https://github.com/Rebecca-Respawn/cosmogenesis-learning-engine" rel="noopener noreferrer">Source</a>
+        <a href="#research">Research</a>
+      </div>
+      <p>© Codex 144:99 — Cosmogenesis Learning Engine. Licensed CC-BY-SA-4.0.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    // ND-safe motion guard: honour system preferences and Calm Mode toggle.
+    const docEl = document.documentElement;
+    const calmButton = document.getElementById('calmToggle');
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const parallaxTarget = document.querySelector('.geometric-canvas');
+
+    function setReducedMotionState(active) {
+      docEl.classList.toggle('reduced-motion', active);
+      if (calmButton) {
+        calmButton.setAttribute('aria-pressed', String(active));
+        calmButton.textContent = active ? 'Calm Mode On' : 'Calm Mode';
+      }
+      if (active && parallaxTarget) {
+        parallaxTarget.style.transform = '';
+      }
+    }
+
+    setReducedMotionState(motionQuery.matches);
+
+    if (typeof motionQuery.addEventListener === 'function') {
+      motionQuery.addEventListener('change', (event) => {
+        setReducedMotionState(event.matches);
+      });
+    } else if (typeof motionQuery.addListener === 'function') {
+      motionQuery.addListener((event) => {
+        setReducedMotionState(event.matches);
+      });
+    }
+
+    calmButton?.addEventListener('click', () => {
+      const nextState = !docEl.classList.contains('reduced-motion');
+      setReducedMotionState(nextState);
+    });
+
+    if (parallaxTarget) {
+      let ticking = false;
+      const updateParallax = () => {
+        if (docEl.classList.contains('reduced-motion')) {
+          parallaxTarget.style.transform = '';
+          ticking = false;
+          return;
+        }
+        const offset = window.scrollY * 0.12;
+        parallaxTarget.style.transform = `translate3d(0, ${offset}px, 0)`;
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
