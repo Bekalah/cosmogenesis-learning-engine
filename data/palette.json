@@ -4,5 +4,15 @@
     "violet": [108, 52, 131],
     "turquoise": [26, 188, 156],
     "sapphire": [41, 128, 185]
-  }
+  },
+  "bg": "#080914",
+  "ink": "#f4f7ff",
+  "layers": [
+    "#7fa8ff",
+    "#6fe1f3",
+    "#8ef0c1",
+    "#ffd79b",
+    "#f3aefc",
+    "#d5d8ff"
+  ]
 }
