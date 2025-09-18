@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>COSMOGENESIS — Obsidian Atelier</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="COSMOGENESIS atelier index with collections, node documentation, and commissions. ND-safe, calm-mode supported.">
+  <style>
+    :root{
+      --noir-absolu:#07060a;
+      --noir-veil:#0f0a19;
+      --blanc-eternal:#f5f3ff;
+      --violet-astral:#6b3ad6;
+      --or-solaire:#c7a867;
+      --gris-brume:#9c8fb4;
+      --panel:rgba(18,12,28,0.78);
+      --line:rgba(255,255,255,0.08);
+      color-scheme:dark;
+    }
+
+    body{
+      font-family:'Bodoni Moda','Didot',Georgia,serif;
+      background:radial-gradient(circle at 20% 20%,rgba(107,58,214,0.18),transparent 55%),var(--noir-absolu);
+      color:var(--blanc-eternal);
+      overflow-x:hidden;
+      margin:0;
+      min-height:100vh;
+      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="2" fill="white"/><circle cx="16" cy="16" r="8" fill="none" stroke="white" stroke-width="0.5" opacity="0.5"/></svg>'), auto;
+    }
+
+    a{color:var(--blanc-eternal); text-decoration:none;}
+    a:hover,a:focus{text-decoration:underline;}
+
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;background:rgba(7,6,10,0.9);color:var(--blanc-eternal);padding:0.5rem 1rem;border:1px solid var(--blanc-eternal);z-index:10001;border-radius:999px;box-shadow:0 0 0 2px rgba(199,168,103,0.4);}
+
+    header.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:linear-gradient(180deg,rgba(7,6,10,0.9) 0%,rgba(7,6,10,0.5) 75%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);}    
+    .brand{font-size:1.125rem;letter-spacing:0.4rem;text-transform:uppercase;display:flex;align-items:center;gap:0.75rem;font-weight:600;}
+    .brand span{display:inline-block;padding:0.4rem 0.75rem;border:1px solid rgba(199,168,103,0.48);border-radius:999px;background:rgba(18,12,28,0.6);}    
+    nav[aria-label="Primary"] ul{list-style:none;margin:0;padding:0;display:flex;gap:1.75rem;align-items:center;font-size:0.95rem;letter-spacing:0.08em;}
+    nav[aria-label="Primary"] a{padding:0.35rem 0.25rem;border-bottom:1px solid transparent;}
+    nav[aria-label="Primary"] a:focus,nav[aria-label="Primary"] a:hover{border-bottom-color:var(--or-solaire);}    
+
+    .calm-toggle{background:rgba(107,58,214,0.2);border:1px solid rgba(199,168,103,0.5);color:var(--blanc-eternal);font-family:inherit;font-size:0.9rem;padding:0.45rem 1rem;border-radius:999px;cursor:pointer;transition:background 0.3s ease,border-color 0.3s ease;}
+    .calm-toggle:hover,.calm-toggle:focus{background:rgba(107,58,214,0.35);border-color:var(--or-solaire);}
+    .calm-toggle[aria-pressed="true"]{background:rgba(107,58,214,0.55);border-color:var(--or-solaire);box-shadow:0 0 0 2px rgba(199,168,103,0.25);}
+
+    .geometric-canvas{position:fixed;inset:0;z-index:-2;overflow:hidden;}
+    .geometric-canvas::before,.geometric-canvas::after{content:"";position:absolute;border:1px solid rgba(199,168,103,0.3);border-radius:50%;inset:10% 20%;background:radial-gradient(circle,rgba(107,58,214,0.24),transparent 70%);animation:pulse 18s ease-in-out infinite;mix-blend-mode:screen;}
+    .geometric-canvas::after{inset:18% 26%;animation:pulse-alt 24s ease-in-out infinite;opacity:0.6;}
+
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:0.7;}50%{transform:scale(1.08);opacity:0.4;}}
+    @keyframes pulse-alt{0%,100%{transform:scale(0.95);opacity:0.5;}50%{transform:scale(1.1);opacity:0.35;}}
+
+    .hero{padding:8rem 2.5rem 5rem;margin:0 auto;max-width:1100px;text-align:center;position:relative;z-index:1;}
+    .hero h1{margin:0;font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:0.6rem;text-transform:uppercase;font-weight:600;text-shadow:0 0 45px rgba(107,58,214,0.35);}
+    .hero p{margin:1.5rem auto 2rem;max-width:640px;color:var(--gris-brume);font-size:1.05rem;line-height:1.8;}
+    .loading-sigil{width:120px;height:120px;margin:3rem auto 0;border-radius:50%;border:1px solid rgba(199,168,103,0.45);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px rgba(199,168,103,0.2),0 0 30px rgba(107,58,214,0.4);position:relative;animation:revolve 22s linear infinite;}
+    .loading-sigil::before{content:"";position:absolute;width:60%;height:60%;border-radius:50%;border:1px solid rgba(255,255,255,0.25);animation:spin 8s linear infinite;}
+    @keyframes revolve{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+
+    main{position:relative;z-index:1;display:grid;gap:4rem;padding:0 2.5rem 6rem;margin:0 auto;max-width:1100px;}
+    section{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:2.75rem 2.5rem;box-shadow:0 10px 50px rgba(0,0,0,0.4);backdrop-filter:blur(8px);}    
+    section h2{margin-top:0;font-size:1.75rem;letter-spacing:0.3rem;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:0.75rem;margin-bottom:1.5rem;}
+    section p{color:var(--gris-brume);font-size:1rem;line-height:1.8;}
+    .grid{display:grid;gap:1.75rem;margin-top:2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .card{border:1px solid rgba(199,168,103,0.3);border-radius:18px;padding:1.5rem;background:rgba(12,8,22,0.7);box-shadow:0 12px 30px rgba(0,0,0,0.35);transition:transform 0.4s ease, box-shadow 0.4s ease;}
+    .card:hover,.card:focus-within{transform:translateY(-6px);box-shadow:0 18px 40px rgba(107,58,214,0.35);}
+    .card h3{margin-top:0;font-size:1.15rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blanc-eternal);}
+    .card p{margin-bottom:0;font-size:0.95rem;}
+
+    footer.maison-footer{position:relative;z-index:1;padding:3.5rem 2.5rem 2.5rem;text-align:center;background:linear-gradient(180deg,rgba(7,6,10,0) 0%,rgba(7,6,10,0.85) 65%,rgba(7,6,10,1) 100%);border-top:1px solid rgba(255,255,255,0.08);}
+    .footer-marque{font-size:1rem;letter-spacing:0.4rem;text-transform:uppercase;margin-bottom:1.5rem;display:inline-flex;gap:0.75rem;align-items:center;padding:0.75rem 1.25rem;border:1px solid rgba(199,168,103,0.4);border-radius:999px;background:rgba(12,8,22,0.65);}
+    .footer-links{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin-bottom:1.75rem;font-size:0.95rem;letter-spacing:0.08em;}
+    .footer-links a{padding:0.4rem 0.6rem;border-bottom:1px solid transparent;}
+    .footer-links a:hover,.footer-links a:focus{border-bottom-color:var(--or-solaire);}    
+    .copyright{margin:0;color:var(--gris-brume);font-size:0.85rem;letter-spacing:0.1em;}
+
+    .reduced-motion *{animation:none!important;transition:none!important;}
+    .reduced-motion .geometric-canvas::before,
+    .reduced-motion .geometric-canvas::after{animation:none!important;}
+    .reduced-motion .loading-sigil{animation:none!important;}
+
+    @media (prefers-reduced-motion: reduce){
+      .geometric-canvas::before,
+      .geometric-canvas::after,
+      .loading-sigil{animation:none!important;}
+    }
+
+    @media (max-width:960px){
+      header.site-header{padding:1rem 1.5rem;}
+      nav[aria-label="Primary"] ul{gap:1.1rem;font-size:0.85rem;}
+      .brand{letter-spacing:0.3rem;font-size:1rem;}
+      main, .hero{padding-left:1.5rem;padding-right:1.5rem;}
+    }
+
+    @media (max-width:720px){
+      header.site-header{flex-wrap:wrap;gap:0.75rem;}
+      nav[aria-label="Primary"] ul{flex-wrap:wrap;justify-content:flex-start;}
+      .hero h1{letter-spacing:0.4rem;}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="geometric-canvas" aria-hidden="true"></div>
+  <header class="site-header" id="top">
+    <a class="brand" href="#top"><span>COSMOGENESIS</span></a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#node-system">Node System</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#atelier">Atelier</a></li>
+        <li><button id="calmToggle" type="button" class="calm-toggle" aria-pressed="false">Calm Mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">COSMOGENESIS</h1>
+    <p>Obsidian-blue atelier dedicated to sacred geometry and consciousness research. Collections, node matrices, and atelier commissions remain layered, provenance-rich, and safe for neurodivergent visitors.</p>
+    <div class="loading-sigil" aria-hidden="true"></div>
+  </section>
+
+  <main id="main" tabindex="-1">
+    <section id="collections" class="collections" aria-label="Curated collections">
+      <h2>Collections</h2>
+      <p>Vaults of harmonic matrices, celestial diagrams, and violet codices arranged for contemplative study. Each frame keeps gold filigree edges and gentle gradients to preserve layered depth.</p>
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <h3>Harmonic Vault</h3>
+          <p>Seven resonance suites mapping Solfeggio tones to planetary sigils and Fibonacci shells. Exportable as layered PNG plates with citations.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Mythic Archive</h3>
+          <p>22 diagrammed nodes referencing tarot major arcana, each annotated with tree-of-life attributions and trauma-informed prompts.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Celestial Lab</h3>
+          <p>Research sketches on 33-node lattices and choir pathways, ready for bridging into the Cosmogenesis learning engine.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="node-system" aria-label="Node system documentation">
+      <h2>Node System</h2>
+      <p>The node system binds numerology constants (3, 7, 9, 11, 22, 33, 99, 144) to modular experiences. Documentation includes provenance metadata, safety notes, and integration recipes.</p>
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <h3>Node Registry</h3>
+          <p>Cross-referenced ledger for angels, resonant colors, and module availability, updated offline for studio use.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Integration Guides</h3>
+          <p>Stepwise briefs for weaving nodes into apps without triggering overload; every guide reiterates calm-mode requirements.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="research" class="collections" aria-label="Research Index">
+      <h2>Research Index</h2>
+      <p>Papers, diagrams, and datasets arranged for contemplative review. Citations trace back to circuitum99 (soul), cosmogenesis (mind), and stone cathedral (body) canons.</p>
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <h3>Geometry Studies</h3>
+          <p>Comparative analyses of vesica fields, double-helix lattices, and entheogenic line art.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Consciousness Lab</h3>
+          <p>Field notes on trauma-informed pedagogy and neurodiversity safety protocols embedded within the learning engine.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="atelier" aria-label="Atelier commissions">
+      <h2>Atelier</h2>
+      <p>Commission portal for bespoke plates, harmonic matrices, and coded rituals. Every commission begins with a calm-mode consult and layered geometry briefing.</p>
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <h3>Commissions</h3>
+          <p>Secure intake flow for custom cosmogenesis canvases, including accessibility questionnaires and palette agreements.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Residency</h3>
+          <p>Invite-only residency for research collaborators exploring ND-safe pedagogy and visionary craft.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="maison-footer">
+    <div class="footer-marque">COSMOGENESIS</div>
+    <div class="footer-links">
+      <a href="#collections">Harmonic Research</a>
+      <a href="#node-system">Node System Docs</a>
+      <a href="https://github.com/your-org/your-repo" rel="noopener noreferrer">Open Source</a>
+      <a href="#atelier">Commissions</a>
+    </div>
+    <p class="copyright">© MMXXV — Atelier of Sacred Geometry &amp; Consciousness Research</p>
+  </footer>
+
+  <script>
+    const docEl = document.documentElement;
+    const calmBtn = document.getElementById('calmToggle');
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let userOverride = false;
+
+    function setCalmMode(active){
+      docEl.classList.toggle('reduced-motion', active);
+      if (calmBtn){
+        calmBtn.setAttribute('aria-pressed', String(active));
+        calmBtn.textContent = active ? 'Calm Mode: On' : 'Calm Mode: Off';
+      }
+    }
+
+    setCalmMode(docEl.classList.contains('reduced-motion'));
+
+    const prefersReduced = motionQuery.matches;
+    if (prefersReduced){
+      setCalmMode(true);
+    }
+
+    motionQuery.addEventListener('change', (event) => {
+      if (userOverride) return;
+      setCalmMode(event.matches);
+    });
+
+    calmBtn?.addEventListener('click', () => {
+      const nextState = !docEl.classList.contains('reduced-motion');
+      userOverride = true;
+      setCalmMode(nextState);
+    });
+  </script>
+  <script>
+    (function(){
+      const canvas = document.querySelector('.geometric-canvas');
+      if (!canvas) return;
+      let ticking = false;
+      function updateParallax(){
+        if (docEl.classList.contains('reduced-motion')){
+          canvas.style.transform = '';
+          ticking = false;
+          return;
+        }
+        const y = window.scrollY * 0.5;
+        canvas.style.transform = `translateY(${y}px)`;
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking){
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive:true });
+      updateParallax();
+    })();
+  </script>
+</body>
+</html>
