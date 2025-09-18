@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <style>
+
     /* ND-safe chrome: calm contrast, no motion, layered depth preserved (why: reduces sensory load). */
     :root {
       --bg: #0b0b12;
@@ -59,21 +60,45 @@
       padding: 2px 4px;
       border-radius: 3px;
     }
+
+    /* ND-safe: calm contrast, no motion, generous spacing */
+    :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    header { padding:12px 16px; border-bottom:1px solid #1d1d2a; background:linear-gradient(180deg, rgba(255,255,255,0.05), transparent); }
+    header strong { font-weight:600; letter-spacing:0.06em; }
+    .status { margin-top:4px; color:var(--muted); font-size:12px; }
+    #stage { display:block; margin:16px auto; width:1440px; height:900px; box-shadow:0 0 0 1px #1d1d2a; background:var(--bg); max-width:calc(100vw - 32px); max-height:calc(100vh - 160px); }
+    canvas { width:100%; height:100%; display:block; }
+    .note { max-width:900px; margin:0 auto 24px; padding:0 16px; color:var(--muted); }
+    code { background:#11111a; padding:2px 4px; border-radius:3px; }
+
   </style>
 </head>
 <body>
   <header>
     <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+
     <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Static renderer for vesica grid, Tree-of-Life nodes, Fibonacci curve, and a double-helix lattice. Open this file directly (no server, no animation, ND-safe palette).</p>
 
+    <div class="status" id="status">Preparing palette...</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Static renderer encoding Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
+
+
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
+
     const elStatus = document.getElementById("status");
+
+    const statusEl = document.getElementById("status");
+
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
@@ -86,6 +111,7 @@
         return await response.json();
       } catch (error) {
         return null;
+
       }
     }
 
@@ -129,6 +155,39 @@
         notice
       });
     })();
+
+      }
+    }
+
+    const FALLBACK = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    };
+
+    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+    const palette = await loadPalette("./data/palette.json");
+    const usingFallback = !palette;
+
+    const notice = usingFallback ? "Palette file missing - sealed fallback engaged." : "";
+    const result = renderHelix(ctx, {
+      width: canvas.width,
+      height: canvas.height,
+      palette: palette || FALLBACK.palette,
+      NUM,
+      notice
+    });
+
+    if (result.ok) {
+      statusEl.textContent = usingFallback ? "Palette missing; using sealed fallback palette." : "Palette loaded from data/palette.json.";
+    } else {
+      statusEl.textContent = "Renderer error: " + (result.reason || "unknown");
+    }
+
   </script>
 </body>
 </html>
