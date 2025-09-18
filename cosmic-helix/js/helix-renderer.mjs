@@ -1,31 +1,18 @@
 /*
   helix-renderer.mjs
 
-  Static renderer for the Cosmic Helix canvas. All helpers are pure functions so the
-  module stays predictable and ND-safe (why: keeps rendering single-pass and calm).
+  Static offline renderer for the Cosmic Helix canvas. All helpers are pure and
+  deterministic so the drawing happens once and stays ND-safe (why: avoids
+  surprise motion and keeps sensory load gentle).
 
   Layer order (back to front):
-    1) Vesica field - intersecting circles establishing the womb-of-forms grid.
-    2) Tree-of-Life scaffold - ten sephirot linked by twenty-two steady paths.
-    3) Fibonacci curve - logarithmic spiral encoded with golden ratio pacing.
-    4) Double-helix lattice - two static strands with gentle cross ties.
+    1) Vesica field - intersecting circles forming the womb-of-forms grid.
+    2) Tree-of-Life scaffold - ten sephirot linked by twenty-two calm paths.
+    3) Fibonacci curve - logarithmic spiral encoded with golden-ratio pacing.
+    4) Double-helix lattice - two static strands stitched with thirty-three rungs.
 
-  Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) shape spacing, sampling,
-  and proportions throughout the helpers to honour the requested symbolism.
-
-  ND-safe static renderer for layered sacred geometry.
-
-  Layers (rendered back to front):
-    1) Vesica field - intersecting circle lattice for the womb-of-forms motif.
-    2) Tree-of-Life scaffold - ten sephirot joined by twenty-two calm paths.
-    3) Fibonacci curve - logarithmic spiral polyline with golden-ratio pacing.
-    4) Double-helix lattice - two still strands with gentle cross ties.
-
-  Rationale:
-    - No animation: everything draws once on load to respect ND-safe pacing.
-    - Calm palette: soft contrast keeps lines readable without sensory spikes.
-    - Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) guide proportions.
-
+  Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) shape spacing and
+  sampling so the render stays faithful to the declared cosmology.
 */
 
 const FALLBACK_PALETTE = {
@@ -47,7 +34,7 @@ const DEFAULT_NUM = {
 };
 
 const FALLBACK_GEOMETRY = {
-  // Vesica lattice references 9x11 grid divisions (why: ties to 9/11 numerology).
+  // Vesica lattice references 9x11 grid divisions (why: honours 9/11 numerology).
   vesica: {
     rows: 9,
     columns: 11,
@@ -56,7 +43,7 @@ const FALLBACK_GEOMETRY = {
     strokeDivisor: 99,
     alpha: 0.55
   },
-  // Tree-of-Life scaffold uses ten nodes with 22 connective paths.
+  // Tree-of-Life scaffold keeps ten nodes with twenty-two connective paths.
   treeOfLife: {
     marginDivisor: 11,
     radiusDivisor: 22,
@@ -110,7 +97,7 @@ const FALLBACK_GEOMETRY = {
     sampleCount: 144,
     cycles: 3,
     amplitudeDivisor: 3,
-    phaseOffset: 180,
+    phaseOffset: Math.PI,
     crossTieCount: 33,
     strandAlpha: 0.85,
     rungAlpha: 0.6
@@ -137,7 +124,7 @@ export function renderHelix(ctx, options = {}) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   fillBackground(ctx, width, height, palette.bg);
 
-  // Layer sequencing preserves depth without motion (why: layered geometry, ND-safe).
+  // Layer sequencing preserves depth without motion (why: layered geometry covenant).
   drawVesicaField(ctx, width, height, palette.layers[0], numerology, geometry.vesica);
   drawTreeOfLife(ctx, width, height, palette.layers[1], palette.layers[2], palette.ink, numerology, geometry.treeOfLife);
   drawFibonacciCurve(ctx, width, height, palette.layers[3], numerology, geometry.fibonacci);
@@ -282,20 +269,12 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
   const rows = Math.max(2, settings.rows);
   const columns = Math.max(2, settings.columns);
   const padding = Math.min(width, height) / settings.paddingDivisor;
-
   const horizontalSpan = width - padding * 2;
   const verticalSpan = height - padding * 2;
   const stepX = columns > 1 ? horizontalSpan / (columns - 1) : 0;
-  const stepY = rows > 1 ? verticalSpan / (rows - 1) : 0;
-  const radius = Math.min(stepX, stepY) / settings.radiusFactor;
-  const strokeWidth = Math.max(1, Math.min(width, height) / settings.strokeDivisor);
-
-  const stepX = columns > 1 ? (width - padding * 2) / (columns - 1) : 0;
-  const stepY = rows > 1 ? (height - padding * 2) / (rows - 1) : 0;
-  const verticalStep = stepY * (N.SEVEN / N.NINE);
-  const radius = Math.min(stepX, stepY) * (N.NINE / N.ELEVEN) / settings.radiusFactor;
+  const verticalStep = rows > 1 ? verticalSpan / (rows - 1) : 0;
+  const radius = Math.min(stepX, verticalStep) * (N.NINE / N.ELEVEN) / settings.radiusFactor;
   const strokeWidth = Math.max(1, Math.min(width, height) / settings.strokeDivisor) * (N.THIRTYTHREE / N.NINETYNINE);
-
 
   ctx.save();
   ctx.strokeStyle = colorWithAlpha(color, settings.alpha);
@@ -304,492 +283,247 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
 
   for (let row = 0; row < rows; row += 1) {
     const offset = row % 2 === 0 ? 0 : stepX / 2;
-
+    const y = padding + row * verticalStep;
     for (let column = 0; column < columns; column += 1) {
       const x = padding + offset + column * stepX;
-      const y = padding + row * stepY;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.stroke();
-
-    for (let col = 0; col < columns; col += 1) {
-      const x = padding + offset + col * stepX;
-      if (x < padding || x > width - padding) {
+      if (x < padding - radius || x > width - padding + radius) {
         continue;
       }
-      const y = padding + row * verticalStep;
       strokeCircle(ctx, x, y, radius);
-      const mirroredX = x + stepX / 2;
-      if (mirroredX <= width - padding) {
-        strokeCircle(ctx, mirroredX, y, radius);
-      }
-      const mirroredY = y + verticalStep / 2;
-      if (mirroredY <= height - padding) {
+      const mirroredY = y + verticalStep * (N.SEVEN / N.NINE);
+      if (mirroredY <= height - padding + radius) {
         strokeCircle(ctx, x, mirroredY, radius);
       }
-
     }
   }
 
   ctx.restore();
 }
 
-
-function drawTreeOfLife(ctx, width, height, edgeColor, nodeColor, labelColor, N, settings) {
-  const margin = Math.min(width, height) / settings.marginDivisor;
-  const top = margin;
-  const bottom = height - margin;
-  const left = margin;
-  const right = width - margin;
-  const verticalSpan = bottom - top;
-  const horizontalSpan = right - left;
-  const radius = Math.max(4, Math.min(width, height) / settings.radiusDivisor);
-  const lineWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
-
-  const maxLevel = settings.nodes.reduce((acc, node) => Math.max(acc, node.level), 0);
-  const levelStep = maxLevel > 0 ? verticalSpan / maxLevel : 0;
-
-  const positions = new Map();
-  settings.nodes.forEach((node) => {
-    const x = left + clamp01(node.xFactor) * horizontalSpan;
-    const y = top + node.level * levelStep;
-    positions.set(node.id, { x, y, node });
-  });
-
-  // Calm connective lines first (why: keeps lattice behind node glyphs).
-  ctx.save();
-  ctx.strokeStyle = edgeColor;
-  ctx.lineWidth = lineWidth;
-  ctx.globalAlpha = 0.75;
-  ctx.lineCap = "round";
-  settings.edges.forEach((edge) => {
-    const start = positions.get(edge[0]);
-    const end = positions.get(edge[1]);
-    if (!start || !end) {
-      return;
-    }
-    ctx.beginPath();
-    ctx.moveTo(start.x, start.y);
-    ctx.lineTo(end.x, end.y);
-    ctx.stroke();
-  });
-
 function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N, tree) {
   const margin = Math.min(width, height) / tree.marginDivisor;
   const top = margin;
   const bottom = height - margin;
+  const usableWidth = width - margin * 2;
   const maxLevel = tree.nodes.reduce((acc, node) => Math.max(acc, node.level), 0);
   const levelStep = maxLevel > 0 ? (bottom - top) / maxLevel : 0;
-  const radius = Math.min(width, height) / tree.radiusDivisor;
+  const radius = Math.max(4, Math.min(width, height) / tree.radiusDivisor);
   const pathWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
 
   const positions = new Map();
   for (const node of tree.nodes) {
     const clampedLevel = Math.max(0, Math.min(maxLevel, node.level));
-    const usableWidth = width - margin * 2;
     const x = margin + clamp01(node.xFactor) * usableWidth;
     const y = top + clampedLevel * levelStep;
     positions.set(node.id, { x, y, node });
   }
 
+  // Calm connective lines drawn first (why: keeps lattice behind node glyphs).
   ctx.save();
-  ctx.strokeStyle = colorWithAlpha(pathColor, 0.66);
+  ctx.strokeStyle = colorWithAlpha(pathColor, 0.72);
   ctx.lineWidth = pathWidth;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
-  ctx.beginPath();
   for (const edge of tree.edges) {
     const start = positions.get(edge[0]);
     const end = positions.get(edge[1]);
     if (!start || !end) {
       continue;
     }
+    ctx.beginPath();
     ctx.moveTo(start.x, start.y);
     ctx.lineTo(end.x, end.y);
+    ctx.stroke();
   }
-  ctx.stroke();
 
-  ctx.restore();
-
-  // Nodes overlay edges so depth stays readable.
-  ctx.save();
-
+  // Nodes rendered after paths to preserve layered depth.
   ctx.fillStyle = nodeColor;
-  ctx.strokeStyle = labelColor;
-  ctx.lineWidth = Math.max(1, lineWidth * 0.75);
-  settings.nodes.forEach((node) => {
-    const point = positions.get(node.id);
-    if (!point) {
-      return;
-    }
+  ctx.strokeStyle = colorWithAlpha(nodeColor, 0.4);
+  ctx.lineWidth = pathWidth / 2;
+  for (const { x, y, node } of positions.values()) {
     ctx.beginPath();
-    ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-  });
-
-  ctx.fillStyle = colorWithAlpha(nodeColor, 0.9);
-  ctx.strokeStyle = colorWithAlpha(nodeColor, 0.9);
-  ctx.lineWidth = Math.max(1, pathWidth * 0.75);
-  for (const entry of positions.values()) {
-    ctx.beginPath();
-    ctx.arc(entry.x, entry.y, radius, 0, Math.PI * 2);
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
   }
 
-  ctx.restore();
-
-  ctx.save();
+  // Labels stay minimal to avoid clutter while remaining readable.
   ctx.fillStyle = labelColor;
-
-  ctx.font = settings.labelFont;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  settings.nodes.forEach((node) => {
-    const point = positions.get(node.id);
-    if (!point) {
-      return;
-    }
-    const labelY = point.y + settings.labelOffset;
-    ctx.fillText(node.title, point.x, labelY);
-  });
-
   ctx.font = tree.labelFont;
   ctx.textAlign = "center";
-  ctx.textBaseline = "top";
-  for (const entry of positions.values()) {
-    const textY = entry.y + tree.labelOffset;
-    ctx.fillText(entry.node.title, entry.x, textY);
-    ctx.fillText(entry.node.meaning, entry.x, textY + 14);
+  ctx.textBaseline = "middle";
+  for (const { x, y, node } of positions.values()) {
+    ctx.fillText(node.title, x, y + tree.labelOffset * (1 / N.THREE));
   }
 
   ctx.restore();
 }
 
 function drawFibonacciCurve(ctx, width, height, color, N, settings) {
-
-  const count = Math.max(2, settings.sampleCount);
-  const turns = settings.turns;
-  const phi = settings.phi;
-  const angleTotal = turns * Math.PI * 2;
-  const growth = Math.pow(phi, turns);
-  const maxRadius = Math.min(width, height) / settings.baseRadiusDivisor;
-  const baseRadius = maxRadius / growth;
+  const samples = Math.max(2, settings.sampleCount);
+  const maxTheta = settings.turns * Math.PI * 2;
+  const baseRadius = Math.min(width, height) / settings.baseRadiusDivisor;
   const centerX = width / 2;
   const centerY = height / 2;
-  const strokeWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
+  const path = [];
 
-  ctx.save();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = strokeWidth;
-  ctx.globalAlpha = settings.alpha;
-  ctx.beginPath();
-
-  for (let index = 0; index < count; index += 1) {
-    const t = count > 1 ? index / (count - 1) : 0;
-    const angle = t * angleTotal;
-    const radius = baseRadius * Math.pow(phi, t * turns);
-    const x = centerX + Math.cos(angle) * radius;
-    const y = centerY + Math.sin(angle) * radius;
-
-  const samples = Math.max(2, settings.sampleCount);
-  const turns = Math.max(0, settings.turns);
-  const totalAngle = turns * Math.PI * 2;
-  const centerX = width * 0.72;
-  const centerY = height * 0.35;
-  const baseRadius = Math.min(width, height) / settings.baseRadiusDivisor;
-  const phi = Math.max(1.0001, settings.phi);
-  const lineWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
+  for (let index = 0; index < samples; index += 1) {
+    const t = index / (samples - 1);
+    const theta = t * maxTheta;
+    const growth = Math.pow(settings.phi, theta / (Math.PI * 2));
+    const radius = baseRadius * growth * (N.THREE / N.ELEVEN);
+    const x = centerX + radius * Math.cos(theta);
+    const y = centerY + radius * Math.sin(theta);
+    path.push({ x, y });
+  }
 
   ctx.save();
   ctx.strokeStyle = colorWithAlpha(color, settings.alpha);
-  ctx.lineWidth = lineWidth;
-  ctx.lineCap = "round";
+  ctx.lineWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
   ctx.lineJoin = "round";
+  ctx.lineCap = "round";
   ctx.beginPath();
-  for (let index = 0; index < samples; index += 1) {
-    const t = index / (samples - 1);
-    const angle = t * totalAngle;
-    const radius = baseRadius * Math.pow(phi, t * turns);
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-
-    if (index === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
+  ctx.moveTo(path[0].x, path[0].y);
+  for (let index = 1; index < path.length; index += 1) {
+    ctx.lineTo(path[index].x, path[index].y);
   }
   ctx.stroke();
   ctx.restore();
 }
 
 function drawHelixLattice(ctx, width, height, strandColor, rungColor, N, settings) {
-
-  const count = Math.max(2, settings.sampleCount);
-  const cycles = settings.cycles;
-  const amplitude = Math.min(width, height) / settings.amplitudeDivisor;
-  const phase = (settings.phaseOffset * Math.PI) / 180;
-  const topMargin = Math.min(width, height) / N.NINE;
-  const bottomMargin = topMargin;
-  const usableHeight = height - topMargin - bottomMargin;
-  const strokeWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
-  const strandA = [];
-  const strandB = [];
-
-  for (let index = 0; index < count; index += 1) {
-    const t = count > 1 ? index / (count - 1) : 0;
-    const angle = t * cycles * Math.PI * 2;
-    const y = topMargin + t * usableHeight;
-    const centerX = width / 2;
-    const xA = centerX + Math.sin(angle) * amplitude;
-    const xB = centerX + Math.sin(angle + phase) * amplitude;
-    strandA.push({ x: xA, y });
-    strandB.push({ x: xB, y });
-  }
-
-  ctx.save();
-  ctx.lineWidth = strokeWidth;
-  ctx.globalAlpha = settings.strandAlpha;
-  ctx.strokeStyle = strandColor;
-  drawPolyline(ctx, strandA);
-  drawPolyline(ctx, strandB);
-  ctx.restore();
-
-  const rungCount = settings.crossTieCount;
-  ctx.save();
-  ctx.lineWidth = strokeWidth * 0.85;
-  ctx.globalAlpha = settings.rungAlpha;
-  ctx.strokeStyle = rungColor;
-  for (let rung = 0; rung < rungCount; rung += 1) {
-    const t = rungCount > 1 ? rung / (rungCount - 1) : 0;
-    const index = Math.floor(t * (count - 1));
-    const start = strandA[index];
-    const end = strandB[index];
-    if (!start || !end) {
-      continue;
-    }
-    ctx.beginPath();
-    ctx.moveTo(start.x, start.y);
-    ctx.lineTo(end.x, end.y);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function drawPolyline(ctx, points) {
-  if (!points || points.length === 0) {
-    return;
-  }
-  ctx.beginPath();
-  points.forEach((point, index) => {
-    if (index === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
-    }
-  });
-  ctx.stroke();
-}
-
-function drawNotice(ctx, width, height, color, message) {
-  const padding = 12;
-  ctx.save();
-  ctx.globalAlpha = 0.9;
-  ctx.fillStyle = color;
-  ctx.font = "12px system-ui, -apple-system, Segoe UI, sans-serif";
-  ctx.textAlign = "left";
-  ctx.textBaseline = "bottom";
-  ctx.fillText(message, padding, height - padding);
-  ctx.restore();
-
   const samples = Math.max(2, settings.sampleCount);
-  const marginX = width / N.ELEVEN;
-  const startX = marginX;
-  const endX = width - marginX;
-  const amplitude = Math.min(height / settings.amplitudeDivisor, height / 3);
-  const baseline = height / 2;
-  const cycles = Math.max(0, settings.cycles);
-  const totalAngle = cycles * Math.PI * 2;
-  const phase = (settings.phaseOffset * Math.PI) / 180;
-  const strandWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
+  const centerX = width / 2;
+  const top = Math.min(width, height) / settings.amplitudeDivisor;
+  const amplitude = top * (N.SEVEN / N.ELEVEN);
+  const verticalStep = height / (samples - 1);
+  const angularFrequency = settings.cycles * Math.PI * 2;
 
   const strandA = [];
   const strandB = [];
   for (let index = 0; index < samples; index += 1) {
-    const t = samples === 1 ? 0 : index / (samples - 1);
-    const x = startX + t * (endX - startX);
-    const angle = t * totalAngle;
-    const yA = baseline + amplitude * Math.sin(angle);
-    const yB = baseline + amplitude * Math.sin(angle + phase);
-    strandA.push({ x, y: yA });
-    strandB.push({ x, y: yB });
+    const y = index * verticalStep;
+    const phase = (angularFrequency * index) / (samples - 1);
+    const offset = Math.sin(phase) * amplitude;
+    const offsetB = Math.sin(phase + settings.phaseOffset) * amplitude;
+    strandA.push({ x: centerX - offset, y });
+    strandB.push({ x: centerX - offsetB, y });
   }
 
   ctx.save();
-  ctx.strokeStyle = colorWithAlpha(strandColor, settings.strandAlpha);
-  ctx.lineWidth = strandWidth;
+  ctx.lineWidth = Math.max(1, Math.min(width, height) / N.NINETYNINE);
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
-  ctx.beginPath();
-  for (let index = 0; index < strandA.length; index += 1) {
-    const point = strandA[index];
-    if (index === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
-    }
-  }
-  ctx.stroke();
-  ctx.restore();
 
-  ctx.save();
   ctx.strokeStyle = colorWithAlpha(strandColor, settings.strandAlpha);
-  ctx.lineWidth = strandWidth;
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
   ctx.beginPath();
-  for (let index = 0; index < strandB.length; index += 1) {
-    const point = strandB[index];
-    if (index === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
-    }
+  ctx.moveTo(strandA[0].x, strandA[0].y);
+  for (let index = 1; index < strandA.length; index += 1) {
+    ctx.lineTo(strandA[index].x, strandA[index].y);
   }
   ctx.stroke();
-  ctx.restore();
 
-  const rungCount = Math.max(1, settings.crossTieCount);
-  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(strandB[0].x, strandB[0].y);
+  for (let index = 1; index < strandB.length; index += 1) {
+    ctx.lineTo(strandB[index].x, strandB[index].y);
+  }
+  ctx.stroke();
+
+  // Cross ties keep the double helix bonded without motion.
   ctx.strokeStyle = colorWithAlpha(rungColor, settings.rungAlpha);
-  ctx.lineWidth = Math.max(1, strandWidth * 0.75);
-  ctx.lineCap = "round";
+  const rungCount = Math.min(settings.crossTieCount, samples);
   for (let rung = 0; rung < rungCount; rung += 1) {
-    const t = rungCount === 1 ? 0 : rung / (rungCount - 1);
-    const indexA = Math.round(t * (strandA.length - 1));
-    const indexB = Math.round(t * (strandB.length - 1));
-    const pointA = strandA[indexA];
-    const pointB = strandB[indexB];
+    const t = rungCount > 1 ? rung / (rungCount - 1) : 0;
+    const index = Math.round(t * (samples - 1));
+    const a = strandA[index];
+    const b = strandB[index];
     ctx.beginPath();
-    ctx.moveTo(pointA.x, pointA.y);
-    ctx.lineTo(pointB.x, pointB.y);
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
     ctx.stroke();
   }
+
   ctx.restore();
 }
 
 function drawNotice(ctx, width, height, color, message) {
-  const padding = Math.min(width, height) / DEFAULT_NUM.THIRTYTHREE;
   ctx.save();
-  ctx.fillStyle = colorWithAlpha(color, 0.85);
+  ctx.fillStyle = colorWithAlpha(color, 0.8);
   ctx.font = "12px system-ui, -apple-system, Segoe UI, sans-serif";
   ctx.textAlign = "left";
   ctx.textBaseline = "bottom";
+  const padding = 16;
   ctx.fillText(message, padding, height - padding);
   ctx.restore();
 }
 
-function strokeCircle(ctx, cx, cy, radius) {
+function colorWithAlpha(hex, alpha) {
+  const { r, g, b } = hexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function strokeCircle(ctx, x, y, radius) {
   ctx.beginPath();
-  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
   ctx.stroke();
 }
 
-function toNumber(value, fallback) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
-
+function hexToRgb(hex) {
+  const cleaned = typeof hex === "string" ? hex.replace(/[^0-9a-fA-F]/g, "") : "";
+  if (cleaned.length === 3) {
+    const r = parseInt(cleaned[0] + cleaned[0], 16);
+    const g = parseInt(cleaned[1] + cleaned[1], 16);
+    const b = parseInt(cleaned[2] + cleaned[2], 16);
+    return { r, g, b };
+  }
+  if (cleaned.length === 6) {
+    const r = parseInt(cleaned.slice(0, 2), 16);
+    const g = parseInt(cleaned.slice(2, 4), 16);
+    const b = parseInt(cleaned.slice(4, 6), 16);
+    return { r, g, b };
+  }
+  return { r: 255, g: 255, b: 255 };
 }
 
 function toNumber(value, fallback) {
-  const number = Number(value);
-  return Number.isFinite(number) ? number : Number(fallback);
+  const num = Number(value);
+  return Number.isFinite(num) ? num : fallback;
 }
 
 function positiveNumber(value, fallback) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+  const num = Number(value);
+  return Number.isFinite(num) && num > 0 ? num : fallback;
 }
 
 function positiveInteger(value, fallback) {
-
-  const number = Number(value);
-  return Number.isInteger(number) && number > 0 ? number : fallback;
-
-  const parsed = Number(value);
-  const rounded = Math.round(parsed);
-  return Number.isFinite(parsed) && rounded > 0 ? rounded : fallback;
-
+  const num = Number(value);
+  return Number.isInteger(num) && num > 0 ? num : fallback;
 }
 
 function finiteNumber(value, fallback) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
-
-function clamp01(value) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) {
-    return 0;
-  }
-  if (number < 0) {
-    return 0;
-  }
-  if (number > 1) {
-    return 1;
-  }
-  return number;
+  const num = Number(value);
+  return Number.isFinite(num) ? num : fallback;
 }
 
 function clampAlpha(value, fallback) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) {
-    return fallback;
-  }
-  if (number < 0) {
-    return 0;
-  }
-  if (number > 1) {
-    return 1;
-  }
-  return number;
-
-function clampAlpha(value, fallback) {
-  const parsed = Number(value);
-  if (Number.isFinite(parsed)) {
-    return Math.min(1, Math.max(0, parsed));
+  const num = Number(value);
+  if (Number.isFinite(num)) {
+    if (num < 0) return 0;
+    if (num > 1) return 1;
+    return num;
   }
   return fallback;
 }
 
 function clamp01(value) {
-  const parsed = Number(value);
-  if (!Number.isFinite(parsed)) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) {
     return 0;
   }
-  if (parsed < 0) {
-    return 0;
-  }
-  if (parsed > 1) {
-    return 1;
-  }
-  return parsed;
+  if (num < 0) return 0;
+  if (num > 1) return 1;
+  return num;
 }
 
-function colorWithAlpha(hex, alpha) {
-  const normalized = typeof hex === "string" ? hex.trim() : "";
-  const value = normalized.startsWith("#") ? normalized.slice(1) : normalized;
-  if (value.length !== 6) {
-    const safeAlpha = clamp01(alpha);
-    return `rgba(255,255,255,${safeAlpha})`;
-  }
-  const r = parseInt(value.slice(0, 2), 16);
-  const g = parseInt(value.slice(2, 4), 16);
-  const b = parseInt(value.slice(4, 6), 16);
-  const safeAlpha = clamp01(alpha);
-  return `rgba(${r},${g},${b},${safeAlpha})`;
-
-}
+export default renderHelix;
