@@ -170,19 +170,29 @@ function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
   const centerX = dims.width / 2;
   const column = dims.width / numbers.THREE;
-  const stepY = (dims.height - marginY * 2) / (numbers.ELEVEN);
+  const innerHeight = dims.height - marginY * 2;
+  const stepY = innerHeight / numbers.ELEVEN;
+  const level = multiplier => marginY + stepY * multiplier;
+
+  // Multipliers derive from combinations of the covenant numbers to keep the geometry numerologically anchored.
+  const chokmahBinahLevel = numbers.THIRTYTHREE / numbers.TWENTYTWO; // 33/22 = 1.5 -> gentle descent from Kether.
+  const daathLevel = (numbers.TWENTYTWO + numbers.SEVEN) / numbers.ELEVEN; // (22+7)/11 ≈ 2.636 keeps Daath between the upper triad and Chesed/Geburah.
+  const chesedGeburahLevel = (numbers.THIRTYTHREE + numbers.NINE) / numbers.ELEVEN; // 42/11 ≈ 3.818 maintains balance on both pillars.
+  const tipharethLevel = (numbers.THIRTYTHREE + numbers.TWENTYTWO) / numbers.ELEVEN; // 55/11 = 5 holds the heart centre.
+  const netzachHodLevel = (numbers.ONEFORTYFOUR - numbers.TWENTYTWO) / numbers.TWENTYTWO; // 122/22 ≈ 5.545 descends smoothly from Tiphareth.
+  const yesodLevel = (numbers.ONEFORTYFOUR - numbers.THREE) / numbers.TWENTYTWO; // 141/22 ≈ 6.409 anchors the foundation before Malkuth.
 
   return {
     kether: { x: centerX, y: marginY },
-    chokmah: { x: centerX + column / 2, y: marginY + stepY * 1.5 },
-    binah: { x: centerX - column / 2, y: marginY + stepY * 1.5 },
-    daath: { x: centerX, y: marginY + stepY * 2.6 },
-    chesed: { x: centerX + column / 2, y: marginY + stepY * 3.8 },
-    geburah: { x: centerX - column / 2, y: marginY + stepY * 3.8 },
-    tiphareth: { x: centerX, y: marginY + stepY * 5.1 },
-    netzach: { x: centerX + column / 2, y: marginY + stepY * 6.7 },
-    hod: { x: centerX - column / 2, y: marginY + stepY * 6.7 },
-    yesod: { x: centerX, y: marginY + stepY * 8.4 },
+    chokmah: { x: centerX + column / 2, y: level(chokmahBinahLevel) },
+    binah: { x: centerX - column / 2, y: level(chokmahBinahLevel) },
+    daath: { x: centerX, y: level(daathLevel) },
+    chesed: { x: centerX + column / 2, y: level(chesedGeburahLevel) },
+    geburah: { x: centerX - column / 2, y: level(chesedGeburahLevel) },
+    tiphareth: { x: centerX, y: level(tipharethLevel) },
+    netzach: { x: centerX + column / 2, y: level(netzachHodLevel) },
+    hod: { x: centerX - column / 2, y: level(netzachHodLevel) },
+    yesod: { x: centerX, y: level(yesodLevel) },
     malkuth: { x: centerX, y: dims.height - marginY }
   };
 }
