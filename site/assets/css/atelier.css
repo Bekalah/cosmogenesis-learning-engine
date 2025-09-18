@@ -1,0 +1,412 @@
+/*
+  Atelier styles shared across the consolidated site.
+  ND-safe guidance: calm contrast palette, optional Calm Mode reduces motion.
+*/
+:root {
+  --noir: #000000;
+  --blanc: #ffffff;
+  --or: #d4af37;
+  --argent: #c0c0c0;
+  --pourpre: #6b3aa0;
+  --xs: 0.618rem;
+  --sm: 1rem;
+  --md: 1.618rem;
+  --lg: 2.618rem;
+  --xl: 4.236rem;
+  --xxl: 6.854rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Bodoni Moda', 'Didot', Georgia, serif;
+  background: var(--noir);
+  color: var(--blanc);
+  overflow-x: hidden;
+}
+
+body a {
+  color: inherit;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: #000000;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  z-index: 10001;
+  border: 1px solid var(--or);
+}
+
+.reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+}
+
+.atelier-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  padding: 1rem 2rem;
+  z-index: 1000;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.marque-logo {
+  font-size: var(--md);
+  letter-spacing: 0.3em;
+  font-weight: 300;
+  color: var(--blanc);
+  text-decoration: none;
+  transition: letter-spacing 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.marque-logo:hover,
+.marque-logo:focus-visible {
+  letter-spacing: 0.5em;
+  color: var(--or);
+}
+
+.nav-collection {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-collection a {
+  color: var(--argent);
+  text-decoration: none;
+  font-size: var(--xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.nav-collection a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--or);
+  transition: width 0.3s ease;
+}
+
+.nav-collection a:hover::after,
+.nav-collection a:focus-visible::after {
+  width: 100%;
+}
+
+.btn {
+  border: 1px solid var(--or);
+  background: transparent;
+  color: var(--blanc);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.8rem;
+  font-size: var(--xs);
+  cursor: pointer;
+}
+
+.entrance {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 5rem;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background:
+    radial-gradient(600px 400px at 50% 60%, rgba(212, 175, 55, 0.06), transparent 60%),
+    url('../img/hero.webp') center/cover no-repeat;
+}
+
+.field::before,
+.field::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  border: 1px solid var(--or);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: expand 8s ease-in-out infinite;
+}
+
+.field::after {
+  border-color: var(--pourpre);
+  transform: translate(-50%, -50%) rotate(45deg);
+  animation-direction: reverse;
+}
+
+@keyframes expand {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.08;
+  }
+}
+
+.hero {
+  z-index: 1;
+  max-width: 1000px;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.grand {
+  font-size: var(--xxl);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  line-height: 0.9;
+  margin-bottom: 1rem;
+  background: linear-gradient(180deg, var(--blanc) 0%, var(--or) 55%, var(--blanc) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+
+.sous {
+  font-size: var(--sm);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--argent);
+  margin-bottom: 1.4rem;
+}
+
+.manif {
+  font-size: var(--md);
+  line-height: 1.8;
+  font-style: italic;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto 1.4rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.actions a,
+.actions button {
+  padding: 1rem 1.8rem;
+}
+
+.section {
+  padding: 6rem 2rem;
+}
+
+.title {
+  font-size: var(--xl);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  color: var(--or);
+  text-align: center;
+}
+
+.sub {
+  font-size: var(--sm);
+  font-style: italic;
+  color: var(--argent);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.grid,
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collection-grid {
+  list-style: none;
+  padding: 0;
+}
+
+.card,
+.collection-piece {
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
+  padding: 2rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card:hover,
+.collection-piece:hover {
+  border-color: var(--or);
+  transform: translateY(-6px);
+  transition: 0.3s ease;
+}
+
+.collection-piece h3 {
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collection-description,
+.collection-piece p {
+  color: var(--argent);
+  line-height: 1.6;
+}
+
+.collection-piece button,
+.collection-piece a {
+  justify-self: start;
+  border: 1px solid var(--or);
+  background: transparent;
+  color: var(--blanc);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.8rem;
+  font-size: var(--xs);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.collections {
+  padding: 6rem 2rem 4rem;
+  display: grid;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collections > h1 {
+  text-align: center;
+}
+
+.section-titre {
+  font-size: var(--xl);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--or);
+  text-align: center;
+}
+
+.section-sous-titre {
+  font-size: var(--sm);
+  font-style: italic;
+  color: var(--argent);
+  text-align: center;
+}
+
+.maison-footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.maison-footer a {
+  color: var(--argent);
+  text-decoration: none;
+}
+
+.footer {
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  text-align: center;
+}
+
+.footer .brand {
+  font-size: var(--lg);
+  letter-spacing: 0.3em;
+  margin-bottom: 1rem;
+  color: var(--or);
+}
+
+.atelier-statement {
+  padding: 6rem 2rem 4rem;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.statement-text {
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--argent);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: var(--xs);
+}
+
+@media (max-width: 768px) {
+  .grand {
+    font-size: var(--xl);
+  }
+
+  .nav-collection {
+    display: none;
+  }
+
+  .collections,
+  .section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}

@@ -6,73 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="A couture atelier for harmonic matrices, living arcana, and the bridge between science and art." />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@300;400;700&display=swap" rel="stylesheet" />
-  <style>
-    :root{
-      --noir:#000; --blanc:#fff; --or:#D4AF37; --argent:#C0C0C0; --pourpre:#6B3AA0;
-      --xs:.618rem; --sm:1rem; --md:1.618rem; --lg:2.618rem; --xl:4.236rem; --xxl:6.854rem;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Bodoni Moda','Didot',Georgia,serif; background:var(--noir); color:var(--blanc); overflow-x:hidden;
-      cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="2" fill="white"/><circle cx="16" cy="16" r="8" fill="none" stroke="white" stroke-width="0.5" opacity="0.5"/></svg>'),auto;
-    }
-    .skip-link{position:absolute;left:-9999px}
-    .skip-link:focus{left:1rem;top:1rem;background:#000;color:#fff;padding:.5rem 1rem;z-index:10001;border:1px solid var(--or)}
-    .reduced-motion *{animation:none!important;transition:none!important}
-
-    /* Nav */
-    .atelier-nav{position:fixed;inset:0 0 auto 0;padding:1rem 2rem;z-index:1000;display:flex;gap:1rem;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(0,0,0,.9),transparent)}
-    .marque-logo{font-size:var(--md);letter-spacing:.3em;font-weight:300;color:var(--blanc);text-decoration:none;transition:letter-spacing .5s cubic-bezier(.23,1,.32,1)}
-    .marque-logo:hover{letter-spacing:.5em;color:var(--or)}
-    .nav-collection{display:flex;gap:2rem;list-style:none}
-    .nav-collection a{color:var(--argent);text-decoration:none;font-size:var(--xs);letter-spacing:.1em;text-transform:uppercase;position:relative}
-    .nav-collection a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:1px;background:var(--or);transition:width .3s}
-    .nav-collection a:hover::after{width:100%}
-    .btn{border:1px solid var(--or);background:transparent;color:var(--blanc);letter-spacing:.12em;text-transform:uppercase;padding:.5rem .8rem;font-size:var(--xs);cursor:pointer}
-
-    /* Hero */
-    .entrance{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:5rem}
-    .field{position:absolute;inset:0;opacity:.18;background:
-      radial-gradient(600px 400px at 50% 60%, rgba(212,175,55,.06), transparent 60%),
-      url('./assets/img/hero.webp') center/cover no-repeat}
-    .field::before,.field::after{content:'';position:absolute;top:50%;left:50%;width:500px;height:500px;border:1px solid var(--or);border-radius:50%;
-      transform:translate(-50%,-50%);animation:expand 8s ease-in-out infinite}
-    .field::after{border-color:var(--pourpre);transform:translate(-50%,-50%) rotate(45deg);animation-direction:reverse}
-    @keyframes expand{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.3}50%{transform:translate(-50%,-50%) scale(1.5);opacity:.08}}
-
-    .hero{z-index:1;max-width:1000px;padding:0 2rem;text-align:center}
-    .grand{font-size:var(--xxl);font-weight:300;letter-spacing:.1em;line-height:.9;margin-bottom:1rem;
-      background:linear-gradient(180deg,var(--blanc) 0%,var(--or) 55%,var(--blanc) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s ease-in-out infinite}
-    @keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.15)}}
-    .sous{font-size:var(--sm);font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--argent);margin-bottom:1.4rem}
-    .manif{font-size:var(--md);line-height:1.8;font-style:italic;opacity:.9;max-width:800px;margin:0 auto 1.4rem}
-    .actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-    .actions a,.actions button{padding:1rem 1.8rem}
-
-    /* Sections */
-    .section{padding:6rem 2rem}
-    .title{font-size:var(--xl);font-weight:300;letter-spacing:.15em;margin-bottom:.5rem;color:var(--or);text-align:center}
-    .sub{font-size:var(--sm);font-style:italic;color:var(--argent);text-align:center;margin-bottom:2.5rem}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
-    .card{border:1px solid rgba(212,175,55,.3);background:linear-gradient(135deg,rgba(255,255,255,.02),transparent);padding:2rem}
-    .card:hover{border-color:var(--or);transform:translateY(-6px);transition:.3s}
-
-    .footer{padding:3rem 2rem;border-top:1px solid rgba(212,175,55,.2);text-align:center}
-    .footer .brand{font-size:var(--lg);letter-spacing:.3em;margin-bottom:1rem;color:var(--or)}
-
-    @media (max-width:768px){.grand{font-size:var(--xl)} .nav-collection{display:none}}
-  </style>
+  <link rel="stylesheet" href="./assets/css/atelier.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="atelier-nav" role="navigation" aria-label="Primary">
-    <a href="#collections" class="marque-logo">COSMOGENESIS</a>
+    <a href="./" class="marque-logo">COSMOGENESIS</a>
     <ul class="nav-collection">
       <li><a href="#collections">Collections</a></li>
-      <li><a href="#arcana">Living Arcana</a></li>
-      <li><a href="#node-system">Node System</a></li>
-      <li><a href="#atelier">Atelier</a></li>
+      <li><a href="/liber/">Liber Arcanae</a></li>
+      <li><a href="/circuitum/">Circuitum99</a></li>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/gallery/">Gallery</a></li>
+      <li><a href="/contact/">Contact</a></li>
     </ul>
     <button id="calmToggle" class="btn" aria-pressed="false">Calm Mode</button>
   </nav>
@@ -106,11 +53,13 @@
     <section class="section" id="node-system" aria-label="Node Catalog">
       <h2 class="title">Modular Node System</h2>
       <p class="sub">Programmable art via sacred mathematics</p>
-      <div id="node-list" class="grid" aria-live="polite"></div>
-      <!-- Inline dataset enables offline viewing; HTTP(S) will fetch /data/nodes.json instead -->
-      <script type="application/json" id="nodes-data">
-        [{"id":"00-void","name":"Void","type":"Axiom","numerology":0,"lore":"The silent ground of being.","lab":"./labs/void-lab.html"},
-         {"id":"01-magician","name":"Magician","type":"Arcana","numerology":1,"lore":"The will to pattern reality.","lab":"./labs/void-lab.html"}]
+      <div id="node-list" class="collection-grid" aria-live="polite"></div>
+      <script type="application/json" id="brain-config">
+        {"origin":location.origin,"path":"/data/v1/nodes.min.json"}
+      </script>
+      <script type="application/json" id="nodes-fallback">
+        [{"id":"00-void","name":"Void","type":"Axiom","numerology":0,"lore":"The silent ground of being.","lab":"/apps/liber-arcanae/index.html"},
+         {"id":"01-magician","name":"Magician","type":"Arcana","numerology":1,"lore":"The will to pattern reality.","lab":"/apps/circuitum99/index.html"}]
       </script>
     </section>
 
@@ -130,19 +79,24 @@
       <div class="grid">
         <article class="card"><h3>Studio</h3><p>Commissions & collaboration.</p></article>
         <article class="card"><h3>Scrolls</h3><p>Essays, diagrams, datasets.</p></article>
-        <article class="card"><h3>Provenance</h3><p>Licenses & lineage.</p></article> This keeps your atelier look while fixing the duplicates, the broken anchor, and adds Calm Mode per your accessibility goals and the progressive enhancement strategy.    
-
-
+        <article class="card"><h3>Provenance</h3><p>Licenses & lineage.</p></article>
       </div>
     </section>
   </main>
 
   <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#collections">Collections</a>
+      <a href="/liber/">Liber Arcanae</a>
+      <a href="/circuitum/">Circuitum99</a>
+      <a href="/research/">Research</a>
+      <a href="/gallery/">Gallery</a>
+      <a href="/contact/">Contact</a>
+    </nav>
     <div class="brand">COSMOGENESIS</div>
     <p>© MMXXV — Atelier of Sacred Geometry & Consciousness Research</p>
   </footer>
 
-  <script src="./js/calm.js" defer></script>
-  <script src="./js/nodes.js" defer></script>
+  <script src="./js/boot.js" defer></script>
 </body>
 </html>

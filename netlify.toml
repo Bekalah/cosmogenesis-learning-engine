@@ -1,19 +1,32 @@
-# /netlify.toml
 [build]
   publish = "site"
   command = ""
 
-# keep your older app under /engine if needed
-[[redirects]]
-  from = "/engine/*"
-  to = "/app/index.html"
-  status = 200 # /netlify.toml
-[build]
-  publish = "site"
-  command = ""
+  [build.environment]
+    GIT_LFS_ENABLED = "true"
 
-# keep your older app under /engine if needed
+# spokes under one roof
 [[redirects]]
-  from = "/engine/*"
-  to = "/app/index.html"
+  from = "/liber/*"
+  to   = "/apps/liber-arcanae/index.html"
   status = 200
+
+[[redirects]]
+  from = "/circuitum/*"
+  to   = "/apps/circuitum99/index.html"
+  status = 200
+
+# SPA catch-all for plain folders like /research, /gallery, /contact (static works too)
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200
+
+# minimal headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options        = "SAMEORIGIN"
+    Referrer-Policy        = "no-referrer"
+    Permissions-Policy     = "accelerometer=(), camera=(), geolocation=()"
