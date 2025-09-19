@@ -18,7 +18,15 @@
 </head>
 <body>
   <header>
+
     <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+
+
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+
+    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+
+
     <div class="status" id="status">Loading palette...</div>
   </header>
 
@@ -34,6 +42,7 @@
 
     const defaults = {
       palette: {
+
         bg:"#0b0b12",
         ink:"#e8e8f0",
         layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
@@ -41,6 +50,7 @@
     };
 
     async function importJSONModule(path) {
+
       // Try modern import attributes first, then legacy import assertions.
       try {
         // Modern
@@ -55,6 +65,20 @@
           const err = new Error("JSON module import failed");
           err.cause = e2;
           throw err;
+
+      try {
+        const m = await import(path, { with: { type: "json" } });
+        if (m && m.default) return m.default;
+        throw new Error("JSON module missing default export");
+      } catch (e1) {
+        // Fallback for older Chromium builds that used `assert`
+        try {
+          const mOld = await import(path, { assert: { type: "json" } });
+          if (mOld && mOld.default) return mOld.default;
+          throw new Error("JSON module (assert) missing default export");
+        } catch (e2) {
+          throw e2;
+
         }
       }
     }
@@ -78,7 +102,7 @@
           return { palette: modulePalette, notice: null };
         } catch (moduleError) {
           // Fallback to fetch below; some browsers decline JSON module assertions.
-        }
+
       }
 
       const fetchedPalette = await fetchJSON("./data/palette.json");
@@ -93,8 +117,70 @@
 
     const { palette: activePalette, notice } = await resolvePalette();
 
-    // Numerology constants used by geometry routines
-    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+
+      }
+
+      const fetchedPalette = await fetchJSON("./data/palette.json");
+      if (fetchedPalette) {
+        elStatus.textContent = "Palette loaded.";
+        return { palette: fetchedPalette, notice: null };
+      }
+
+      elStatus.textContent = "Palette missing; using safe fallback.";
+      return { palette: defaults.palette, notice: "Palette fallback active" };
+    }
+
+    const { palette: activePalette, notice } = await resolvePalette();
+
+    const NUM = {
+      THREE: 3,
+      SEVEN: 7,
+      NINE: 9,
+      ELEVEN: 11,
+      TWENTYTWO: 22,
+      THIRTYTHREE: 33,
+      NINETYNINE: 99,
+      ONEFORTYFOUR: 144
+    };
+
+    initialise();
+
+    const statusParts = [usingFallback ? "Palette missing; using safe fallback." : "Palette loaded."];
+
+    if (!ctx) {
+      statusParts.push("Canvas 2D context unavailable; geometry skipped.");
+    } else {
+      // Numerology constants used by geometry routines
+      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+      // ND-safe rationale: no motion, high readability, soft colors, layered order
+      const outcome = renderHelix(ctx, {
+
+    async function initialise() {
+      const palette = await loadPalette("./data/palette.json");
+      const active = palette || defaults.palette;
+
+
+      applyChromePalette(active);
+
+      const usingFallback = !palette;
+      elStatus.textContent = usingFallback
+        ? "Palette missing; using safe fallback."
+        : "Palette loaded.";
+
+      if (!ctx) {
+        elStatus.textContent += " Canvas 2D context unavailable.";
+        return;
+      }
+
+      // ND-safe: renderer executes once with static geometry and optional notice when fallbacks are active.
+      renderHelix(ctx, {
+
+
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
     const renderConfig = {
@@ -106,6 +192,59 @@
     };
 
     renderHelix(ctx, renderConfig);
+
+        width: canvas.width,
+        height: canvas.height,
+        palette: active,
+        NUM,
+        notice: usingFallback ? "Palette fallback active" : null
+      });
+
+
+      if (outcome && typeof outcome.summary === "string") {
+        statusParts.push(outcome.summary);
+      } else {
+        statusParts.push("Geometry rendered once.");
+      }
+    }
+
+    elStatus.textContent = statusParts.join(" ");
+
+    }
+
+    async function loadPalette(path) {
+      if (typeof path !== "string") return null;
+
+      // Offline-first: when opened via file:// we avoid fetch (blocked in many browsers) and rely on JSON module support.
+      if (window.location && window.location.protocol === "file:") {
+        try {
+          const module = await import(path, { assert: { type: "json" } });
+          return module.default;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      try {
+        const res = await fetch(path, { cache: "no-store" });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+
+    function applyChromePalette(palette) {
+      document.documentElement.style.setProperty("--bg", palette.bg);
+      document.documentElement.style.setProperty("--ink", palette.ink);
+      const muted = Array.isArray(palette.layers) && palette.layers.length > 0
+        ? palette.layers[palette.layers.length - 1]
+        : palette.ink;
+      document.documentElement.style.setProperty("--muted", muted);
+    }
+
+
   </script>
 </body>
 </html>
