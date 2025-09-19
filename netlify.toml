@@ -25,3 +25,15 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "no-referrer"
     Permissions-Policy = "accelerometer=(), camera=(), geolocation=()"
+    Content-Type = "text/html; charset=UTF-8"
+
+# Explicit content-types for primary static assets to remain ND-safe and predictable offline.
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=UTF-8"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=UTF-8"
