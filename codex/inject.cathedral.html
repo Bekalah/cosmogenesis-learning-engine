@@ -1,0 +1,22 @@
+<!-- Cathedral lattice backdrop: static, ND-safe geometry with no motion. -->
+<style>
+:root{ --lattice:#89a3ff; --halo:#d6b370; }
+.bg-lattice{position:fixed; inset:0; z-index:-1; display:grid; place-items:center; pointer-events:none}
+.lattice{
+  width:min(78vmin,880px); aspect-ratio:1; border-radius:50%; position:relative; isolation:isolate;
+  background:
+   repeating-conic-gradient(from 0deg, transparent 0 10deg, rgba(255,255,255,.08) 10deg 11deg),
+   repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 2px, transparent 2px 38px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.10) inset,
+    0 0 120px color-mix(in oklab, var(--lattice) 40%, transparent);
+  backdrop-filter: blur(0.5px);
+}
+.lattice::after{
+  content:""; position:absolute; inset:14%; border-radius:50%;
+  border:1px solid color-mix(in oklab, var(--halo) 75%, transparent);
+  box-shadow: 0 0 42px color-mix(in oklab, var(--halo) 30%, transparent) inset;
+  transform: perspective(700px) rotateX(62deg);
+}
+</style>
+<div class="bg-lattice" aria-hidden="true"><div class="lattice"></div></div>
