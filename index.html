@@ -19,7 +19,7 @@
 <body>
   <header>
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette…</div>
+    <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
@@ -68,30 +68,31 @@
     document.documentElement.style.setProperty("--bg", active.bg);
     document.documentElement.style.setProperty("--ink", active.ink);
 
-    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
-
+    const statusParts = [usingFallback ? "Palette missing; using safe fallback." : "Palette loaded."];
 
     if (!ctx) {
-      elStatus.textContent += " Canvas 2D context unavailable.";
+      statusParts.push("Canvas 2D context unavailable; geometry skipped.");
     } else {
       // Numerology constants used by geometry routines
       const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
       // ND-safe rationale: no motion, high readability, soft colors, layered order
-      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    }
-
-    // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(
-      ctx,
-      {
+      const outcome = renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette: active,
         NUM,
         notice: usingFallback ? "Palette fallback active" : null
+      });
+
+      if (outcome && typeof outcome.summary === "string") {
+        statusParts.push(outcome.summary);
+      } else {
+        statusParts.push("Geometry rendered once.");
       }
-    );
+    }
+
+    elStatus.textContent = statusParts.join(" ");
 
   </script>
 </body>

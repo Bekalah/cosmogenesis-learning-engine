@@ -30,8 +30,9 @@ const DEFAULT_NUMBERS = {
 };
 
 export function renderHelix(ctx, input = {}) {
-  if (!ctx || typeof ctx.canvas === "undefined") {
-    throw new Error("renderHelix requires a 2D canvas context.");
+  if (!ctx || typeof ctx.canvas === "undefined" || typeof ctx.save !== "function") {
+    // Calm skip keeps the offline shell quiet when contexts are denied (rare on hardened browsers).
+    return { summary: "Canvas context unavailable; rendering skipped." };
   }
 
   const config = normaliseConfig(ctx, input);
@@ -168,32 +169,40 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
 
 function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
-  const centerX = dims.width / 2;
-  const column = dims.width / numbers.THREE;
   const innerHeight = dims.height - marginY * 2;
-  const stepY = innerHeight / numbers.ELEVEN;
-  const level = multiplier => marginY + stepY * multiplier;
+  const verticalUnit = innerHeight / numbers.ONEFORTYFOUR; // 144-step descent honours the covenant ladder.
+  const centerX = dims.width / 2;
 
-  // Multipliers derive from combinations of the covenant numbers to keep the geometry numerologically anchored.
-  const chokmahBinahLevel = numbers.THIRTYTHREE / numbers.TWENTYTWO; // 33/22 = 1.5 -> gentle descent from Kether.
-  const daathLevel = (numbers.TWENTYTWO + numbers.SEVEN) / numbers.ELEVEN; // (22+7)/11 ≈ 2.636 keeps Daath between the upper triad and Chesed/Geburah.
-  const chesedGeburahLevel = (numbers.THIRTYTHREE + numbers.NINE) / numbers.ELEVEN; // 42/11 ≈ 3.818 maintains balance on both pillars.
-  const tipharethLevel = (numbers.THIRTYTHREE + numbers.TWENTYTWO) / numbers.ELEVEN; // 55/11 = 5 holds the heart centre.
-  const netzachHodLevel = (numbers.ONEFORTYFOUR - numbers.TWENTYTWO) / numbers.TWENTYTWO; // 122/22 ≈ 5.545 descends smoothly from Tiphareth.
-  const yesodLevel = (numbers.ONEFORTYFOUR - numbers.THREE) / numbers.TWENTYTWO; // 141/22 ≈ 6.409 anchors the foundation before Malkuth.
+  const horizontalUnit = dims.width / numbers.ONEFORTYFOUR;
+  const pillarShift = horizontalUnit * numbers.THIRTYTHREE; // 33-step shift keeps the side pillars tethered to 144.
+  const rightPillarX = centerX + pillarShift;
+  const leftPillarX = centerX - pillarShift;
+
+  const level = multiplier => marginY + verticalUnit * multiplier;
+
+  const levels = {
+    kether: 0,
+    chokmahBinah: numbers.THIRTYTHREE / numbers.THREE, // 33/3 = 11 -> supernal step anchored by 3 and 33.
+    daath: numbers.TWENTYTWO + numbers.SEVEN, // 22+7 = 29 holds the hidden gate between triads.
+    chesedGeburah: numbers.THIRTYTHREE + numbers.NINE, // 33+9 = 42 -> balanced mercy and strength.
+    tiphareth: numbers.THIRTYTHREE + numbers.TWENTYTWO, // 55 -> heart of the tree sits on 33 and 22 combined.
+    netzachHod: numbers.NINETYNINE - numbers.THREE, // 99-3 = 96 -> harmonics of 3 underpin the lower intellect/emotion pair.
+    yesod: numbers.ONEFORTYFOUR - numbers.THREE, // 144-3 = 141 anchors the foundation just above the base.
+    malkuth: numbers.ONEFORTYFOUR // full descent touches earth at 144.
+  };
 
   return {
-    kether: { x: centerX, y: marginY },
-    chokmah: { x: centerX + column / 2, y: level(chokmahBinahLevel) },
-    binah: { x: centerX - column / 2, y: level(chokmahBinahLevel) },
-    daath: { x: centerX, y: level(daathLevel) },
-    chesed: { x: centerX + column / 2, y: level(chesedGeburahLevel) },
-    geburah: { x: centerX - column / 2, y: level(chesedGeburahLevel) },
-    tiphareth: { x: centerX, y: level(tipharethLevel) },
-    netzach: { x: centerX + column / 2, y: level(netzachHodLevel) },
-    hod: { x: centerX - column / 2, y: level(netzachHodLevel) },
-    yesod: { x: centerX, y: level(yesodLevel) },
-    malkuth: { x: centerX, y: dims.height - marginY }
+    kether: { x: centerX, y: level(levels.kether) },
+    chokmah: { x: rightPillarX, y: level(levels.chokmahBinah) },
+    binah: { x: leftPillarX, y: level(levels.chokmahBinah) },
+    daath: { x: centerX, y: level(levels.daath) },
+    chesed: { x: rightPillarX, y: level(levels.chesedGeburah) },
+    geburah: { x: leftPillarX, y: level(levels.chesedGeburah) },
+    tiphareth: { x: centerX, y: level(levels.tiphareth) },
+    netzach: { x: rightPillarX, y: level(levels.netzachHod) },
+    hod: { x: leftPillarX, y: level(levels.netzachHod) },
+    yesod: { x: centerX, y: level(levels.yesod) },
+    malkuth: { x: centerX, y: level(levels.malkuth) }
   };
 }
 
