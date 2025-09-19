@@ -31,17 +31,20 @@ const FALLBACK_NUMBERS = Object.freeze({
 });
 
 /**
- * Render the Cosmic Helix layers in a single, motion-free pass.
+ * Render the four layered "Cosmic Helix" composition onto a 2D canvas.
  *
- * @param {CanvasRenderingContext2D} ctx - Target 2D canvas context.
+ * Renders (back-to-front) the Vesica field, Tree-of-Life scaffold, Fibonacci spiral,
+ * and double-helix lattice in a single, static pass. Validates inputs and returns
+ * an explicit status object rather than throwing.
+ *
  * @param {Object} [options] - Rendering options.
- * @param {number} [options.width] - Explicit width override; defaults to ctx.canvas.width.
- * @param {number} [options.height] - Explicit height override; defaults to ctx.canvas.height.
- * @param {Object} [options.palette] - Optional palette overrides (bg, ink, muted, layers).
- * @param {Object} [options.NUM] - Optional numerology overrides.
- * @param {Object} [options.geometry] - Optional geometry overrides per layer.
- * @param {string} [options.notice] - Optional canvas notice drawn near the footer.
- * @returns {{ok: true, summary: string}|{ok: false, reason: string}} Summary or failure reason.
+ * @param {number} [options.width] - Optional explicit canvas width (overrides ctx.canvas.width).
+ * @param {number} [options.height] - Optional explicit canvas height (overrides ctx.canvas.height).
+ * @param {Object} [options.palette] - Palette overrides; merged with defaults (bg, ink, muted, layers).
+ * @param {Object} [options.NUM] - Numerology overrides; merged with default numeric constants.
+ * @param {Object} [options.geometry] - Per-layer geometry overrides (vesica, treeOfLife, fibonacci, helix).
+ * @param {string} [options.notice] - Optional footer notice string to draw on the canvas.
+ * @returns {{ok: true, summary: string}|{ok: false, reason: string}} If successful returns { ok: true, summary } where summary is a one-line description of rendered layer statistics. On failure returns { ok: false, reason } with reason one of: "missing-context" (invalid ctx) or "invalid-dimensions" (invalid width/height).
  */
 export function renderHelix(ctx, options = {}) {
   if (!ctx || typeof ctx.canvas !== "object" || typeof ctx.save !== "function") {
@@ -83,6 +86,18 @@ export function renderHelix(ctx, options = {}) {
   };
 }
 
+/**
+ * Resolve positive width and height from the provided options (falling back to the canvas)
+ * and apply them to the canvas if they differ.
+ *
+ * If either resolved dimension is not a positive finite number, the function returns null.
+ * This function mutates ctx.canvas.width and/or ctx.canvas.height when a change is needed.
+ *
+ * @param {Object} options - Optional dimension overrides.
+ * @param {number} [options.width] - Desired canvas width in pixels; used only if a positive finite number.
+ * @param {number} [options.height] - Desired canvas height in pixels; used only if a positive finite number.
+ * @returns {{width: number, height: number} | null} The applied dimensions, or null if validation failed.
+ */
 function normaliseDimensions(ctx, options) {
   const width = toPositiveNumber(options.width) || ctx.canvas.width;
   const height = toPositiveNumber(options.height) || ctx.canvas.height;
@@ -98,10 +113,27 @@ function normaliseDimensions(ctx, options) {
   return { width, height };
 }
 
+/**
+ * Return the input if it is a finite positive number, otherwise null.
+ *
+ * Accepts only number values; non-number, non-finite, zero, or negative inputs yield null.
+ * @param {any} value - Value to validate as a positive finite number.
+ * @returns {number|null} The original number when > 0 and finite, or null otherwise.
+ */
 function toPositiveNumber(value) {
   return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : null;
 }
 
+/**
+ * Merge a candidate numerology object with the default FALLBACK_NUMBERS.
+ *
+ * If `candidate` is missing or not an object, returns a copy of FALLBACK_NUMBERS.
+ * For each key present in FALLBACK_NUMBERS, a numeric, finite, positive value in
+ * `candidate` overrides the default; all other keys keep their fallback values.
+ *
+ * @param {Object} [candidate] - Partial numerology overrides (numeric values expected).
+ * @return {Object} A complete numerology object with defaults filled in and valid overrides applied.
+ */
 function normaliseNumbers(candidate) {
   if (!candidate || typeof candidate !== "object") {
     return { ...FALLBACK_NUMBERS };
@@ -115,6 +147,17 @@ function normaliseNumbers(candidate) {
   return merged;
 }
 
+/**
+ * Produce a complete palette by merging a partial candidate with the FALLBACK_PALETTE.
+ *
+ * If `candidate` is missing or not an object, returns a shallow clone of FALLBACK_PALETTE.
+ * When `candidate.layers` is provided, extra entries are truncated to the default length
+ * and missing entries are filled from the fallback. Top-level `bg`, `ink`, and `muted`
+ * are accepted when they are strings; otherwise fallback values are used.
+ *
+ * @param {Object|null|undefined} candidate - Partial palette to merge; may contain `bg`, `ink`, `muted`, and `layers` (array of colors).
+ * @return {{bg: string, ink: string, muted: string, layers: string[]}} A normalized palette object with `layers` length matching the fallback.
+ */
 function normalisePalette(candidate) {
   if (!candidate || typeof candidate !== "object") {
     return clonePalette(FALLBACK_PALETTE);
@@ -133,6 +176,15 @@ function normalisePalette(candidate) {
   };
 }
 
+/**
+ * Return a shallow clone of a palette, copying the layers array.
+ *
+ * The returned object reuses the same string values for bg, ink, and muted,
+ * but provides a new array instance for `layers` (shallow-copied).
+ *
+ * @param {{bg: string, ink: string, muted: string, layers: string[]}} palette - Palette to clone.
+ * @return {{bg: string, ink: string, muted: string, layers: string[]}} A new palette object with a copied layers array.
+ */
 function clonePalette(palette) {
   return {
     bg: palette.bg,
@@ -142,6 +194,20 @@ function clonePalette(palette) {
   };
 }
 
+/**
+ * Build a complete geometry configuration by merging a user-supplied patch onto the default geometry.
+ *
+ * If `candidate` is missing or not an object, the function returns a fresh default geometry produced
+ * by `createDefaultGeometry(numbers)`. When `candidate` is an object, each layer's geometry is
+ * produced by merging the corresponding patch (if any) into the layer defaults via the layer-specific
+ * merge helpers (`mergeVesicaGeometry`, `mergeTreeGeometry`, `mergeFibonacciGeometry`, `mergeHelixGeometry`).
+ *
+ * @param {Object|undefined|null} candidate - Optional partial geometry overrides; may contain
+ *   `vesica`, `treeOfLife`, `fibonacci`, and/or `helix` sub-objects.
+ * @param {Object} numbers - Numerology constants used to produce the base default geometry.
+ * @return {Object} A complete geometry object with `vesica`, `treeOfLife`, `fibonacci`, and `helix`
+ *   properties, each guaranteed to be populated (either from defaults or merged overrides).
+ */
 function normaliseGeometry(candidate, numbers) {
   const base = createDefaultGeometry(numbers);
   if (!candidate || typeof candidate !== "object") {
@@ -155,6 +221,21 @@ function normaliseGeometry(candidate, numbers) {
   };
 }
 
+/**
+ * Create the default per-layer geometry used by the renderer.
+ *
+ * Returns a geometry configuration object for the four layers (vesica, treeOfLife,
+ * fibonacci, helix). Numeric fields are derived from the provided numerology set
+ * and are suitable as sensible defaults for rendering; tree node and edge lists
+ * are populated via buildTreeNodes() and buildTreeEdges().
+ *
+ * @param {Object} num - Numerology constants (e.g., THREE, SEVEN, NINE, ELEVEN, etc.).
+ * @return {Object} Geometry defaults with the following top-level keys:
+ *   - vesica: { rows, columns, paddingDivisor, radiusScale, strokeDivisor, alpha }
+ *   - treeOfLife: { marginDivisor, radiusDivisor, pathDivisor, nodeAlpha, pathAlpha, labelAlpha, nodes, edges }
+ *   - fibonacci: { sampleCount, turns, baseRadiusDivisor, centerXFactor, centerYFactor, phi, markerInterval, alpha }
+ *   - helix: { sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha }
+ */
 function createDefaultGeometry(num) {
   return {
     vesica: {
@@ -197,6 +278,18 @@ function createDefaultGeometry(num) {
   };
 }
 
+/**
+ * Merge a partial vesica geometry patch into a base vesica geometry, returning a new validated geometry object.
+ *
+ * The function copies the base when the patch is missing or not an object. For each numeric field in the patch
+ * a validated override is used when appropriate: positive numbers replace base values for rows, columns,
+ * paddingDivisor, and strokeDivisor; radiusScale must be a positive number; alpha is clamped to [0, 1].
+ *
+ * @param {Object} base - The base vesica geometry to merge into (unchanged).
+ * @param {Object} [patch] - Partial geometry overrides; fields may include rows, columns, paddingDivisor,
+ *   radiusScale, strokeDivisor, and alpha. Invalid or missing fields are ignored in favor of base values.
+ * @return {Object} A new vesica geometry object with merged and validated fields.
+ */
 function mergeVesicaGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
     return { ...base };
@@ -211,6 +304,20 @@ function mergeVesicaGeometry(base, patch) {
   };
 }
 
+/**
+ * Merge a Tree-of-Life geometry patch into a base configuration, producing a normalized geometry object.
+ *
+ * Returns a new geometry object where numeric fields are validated and replaced only when the patch provides
+ * valid values; alpha fields are clamped to [0,1]. Node and edge lists are cloned from the base unless the
+ * patch supplies its own arrays — supplied nodes are normalized via normaliseTreeNode and supplied edges are
+ * filtered to two-element arrays. If patch is null/invalid, returns a shallow copy of base with cloned node
+ * and edge arrays.
+ *
+ * @param {Object} base - The base tree geometry (must include numeric divisors, alpha values, `nodes` array and `edges` array).
+ * @param {Object|null|undefined} patch - Partial geometry to merge; may contain numeric overrides, alpha overrides,
+ *                                        `nodes` (array of node-like objects) and `edges` (array of 2-item arrays).
+ * @return {Object} A merged, validated, and safe-to-use tree geometry object.
+ */
 function mergeTreeGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
     return {
@@ -235,6 +342,18 @@ function mergeTreeGeometry(base, patch) {
   };
 }
 
+/**
+ * Normalize a Tree-of-Life node object into the renderer's canonical node shape.
+ *
+ * Converts and fills missing fields to predictable defaults:
+ * - `id` is coerced to a string (empty string if missing).
+ * - `title` is used if a non-empty string; otherwise falls back to the stringified `id`.
+ * - `level` is kept if a number, otherwise defaults to 0.
+ * - `xFactor` is kept if a number, otherwise defaults to 0.5.
+ *
+ * @param {Object} node - Partial node object. May contain `id`, `title`, `level`, and `xFactor`.
+ * @return {{id: string, title: string, level: number, xFactor: number}} Normalized node.
+ */
 function normaliseTreeNode(node) {
   return {
     id: String(node.id || ""),
@@ -244,6 +363,25 @@ function normaliseTreeNode(node) {
   };
 }
 
+/**
+ * Merge a Fibonacci-layer geometry patch into a base geometry, validating and clamping fields.
+ *
+ * Returns a new geometry object where numeric overrides from `patch` replace `base` values only if
+ * they pass validation: positive numbers use `positiveOrDefault`, `centerXFactor`/`centerYFactor`
+ * are clamped to [0,1], `alpha` is clamped to [0,1], and `phi` is accepted only when > 1.
+ *
+ * @param {Object} base - The baseline Fibonacci geometry to use as defaults.
+ * @param {number} base.sampleCount
+ * @param {number} base.turns
+ * @param {number} base.baseRadiusDivisor
+ * @param {number} base.centerXFactor
+ * @param {number} base.centerYFactor
+ * @param {number} base.phi
+ * @param {number} base.markerInterval
+ * @param {number} base.alpha
+ * @param {Object|null|undefined} patch - Partial geometry overrides; invalid or missing fields are ignored.
+ * @return {Object} A new geometry object with merged and validated fields.
+ */
 function mergeFibonacciGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
     return { ...base };
@@ -260,6 +398,20 @@ function mergeFibonacciGeometry(base, patch) {
   };
 }
 
+/**
+ * Merge a helix geometry patch onto a base geometry, validating and clamping values.
+ *
+ * Returns a new geometry object where numeric fields from `patch` override `base`
+ * only when they are positive finite numbers; alpha fields are accepted only when
+ * numeric and are clamped to [0, 1]. If `patch` is missing or not an object, a
+ * shallow copy of `base` is returned.
+ *
+ * @param {object} base - The base helix geometry to merge into. Expected shape includes
+ *   { sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha }.
+ * @param {object} [patch] - Partial geometry overrides. Only valid positive numeric fields
+ *   replace corresponding base values; `strandAlpha` and `rungAlpha` (if numeric) are clamped to [0,1].
+ * @return {object} The merged helix geometry object.
+ */
 function mergeHelixGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
     return { ...base };
@@ -275,14 +427,37 @@ function mergeHelixGeometry(base, patch) {
   };
 }
 
+/**
+ * Return `value` if it is a positive finite number; otherwise return `fallback`.
+ * @param {number} value - Candidate number to validate.
+ * @param {number} fallback - Value returned when `value` is not a positive finite number.
+ * @return {number} The original `value` when valid, or `fallback` otherwise.
+ */
 function positiveOrDefault(value, fallback) {
   return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : fallback;
 }
 
+/**
+ * Constrain a number to the inclusive range [min, max].
+ * @param {number} value - The number to clamp.
+ * @param {number} min - Lower bound (inclusive).
+ * @param {number} max - Upper bound (inclusive).
+ * @return {number} The input limited to the specified range.
+ */
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+/**
+ * Paints the canvas background with a solid color and a subtle radial glow.
+ *
+ * Fills the full drawing area defined by dims with bgColor, then overlays a
+ * soft radial gradient (lighter center fading to transparent) to add depth.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D canvas rendering context to draw into.
+ * @param {{width: number, height: number}} dims - Drawing dimensions; both must be positive numbers.
+ * @param {string} bgColor - CSS color string used as the base background color.
+ */
 function fillBackground(ctx, dims, bgColor) {
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, dims.width, dims.height);
@@ -303,6 +478,25 @@ function fillBackground(ctx, dims, bgColor) {
   ctx.fillRect(0, 0, dims.width, dims.height);
 }
 
+/**
+ * Render a vesica (grid of overlapping circles) across the canvas and return the count of circles drawn.
+ *
+ * Renders a rectangular grid of stroked circles centered inside the provided dimensions, then draws
+ * light axis guides through the geometric center. Circle spacing, radius, stroke width and opacity
+ * are derived from the passed `config`. The function preserves and restores the canvas state.
+ *
+ * @param {{width:number, height:number}} dims - Canvas drawing area dimensions.
+ * @param {string} color - Stroke color for the circles and guides (any valid CSS color).
+ * @param {object} numbers - Numerology/config numbers used elsewhere in the renderer (not modified here).
+ * @param {object} config - Vesica geometry and style controls. Expected numeric fields:
+ *   - columns: desired number of columns (will be rounded and clamped to >= 2)
+ *   - rows: desired number of rows (will be rounded and clamped to >= 2)
+ *   - paddingDivisor: divisor of the smallest dimension to compute outer padding
+ *   - radiusScale: multiplier applied to the computed step to get circle radius
+ *   - strokeDivisor: divisor of the smallest dimension to compute stroke width
+ *   - alpha: global opacity for these shapes (0..1)
+ * @return {{circles:number}} Object with `circles` equal to the total number of circles stroked.
+ */
 function drawVesicaField(ctx, dims, color, numbers, config) {
   const cols = Math.max(2, Math.round(config.columns));
   const rows = Math.max(2, Math.round(config.rows));
@@ -344,6 +538,23 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
   return { circles };
 }
 
+/**
+ * Render the Tree-of-Life layer onto a 2D canvas context.
+ *
+ * Draws connecting edges, circular nodes, and node labels according to the supplied geometry and palette.
+ * The canvas context state is saved and restored; drawing uses pixel units from dims and scales node size and font from dims and numerology.
+ *
+ * @param {Object} dims - Dimension object with numeric `width` and `height` in pixels.
+ * @param {Object} palette - Palette object (expects a `layers` array and `ink` color); layer indices are used for path and node colors.
+ * @param {Object} numbers - Numerology constants object (e.g., provides SEVEN, THREE) used for sizing heuristics.
+ * @param {Object} config - Tree geometry and rendering options. Expected fields used here:
+ *   - nodes: Array of node objects ({ id, title, level, xFactor }) positioned by level and xFactor.
+ *   - edges: Array of [fromId, toId] pairs describing connections between nodes.
+ *   - marginDivisor, radiusDivisor, pathDivisor: numeric divisors controlling margin, node radius, and path stroke sizing.
+ *   - pathAlpha, nodeAlpha, labelAlpha: numeric alpha values in [0,1] for path, node, and label inks.
+ *
+ * @return {{nodes: number, paths: number}} Counts of nodes and edges processed (lengths of config.nodes and config.edges).
+ */
 function drawTreeOfLife(ctx, dims, palette, numbers, config) {
   const margin = Math.min(dims.width, dims.height) / config.marginDivisor;
   const maxLevel = Math.max(...config.nodes.map((node) => node.level));
@@ -407,6 +618,30 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
   return { nodes: config.nodes.length, paths: config.edges.length };
 }
 
+/**
+ * Draws a logarithmic (Fibonacci-style) spiral on the given canvas and marks points along it.
+ *
+ * Renders a spiral sampled across `config.sampleCount` points spanning `config.turns` π radians,
+ * using an exponential radius growth controlled by `config.phi`. The curve is stroked with
+ * `color` and filled circular markers are drawn at every `config.markerInterval` sample.
+ *
+ * Parameters of `config` that affect rendering:
+ * - `sampleCount` (number): number of samples along the spiral (minimum 2).
+ * - `turns` (number): number of half-turns (multiplied by π to compute theta range).
+ * - `baseRadiusDivisor` (number): divisor applied to the smallest canvas dimension to compute base radius.
+ * - `centerXFactor`, `centerYFactor` (number): normalized [0..1] center position for the spiral.
+ * - `phi` (number): base of the exponential radius growth per π radians.
+ * - `alpha` (number): global alpha applied to the spiral stroke.
+ * - `markerInterval` (number): step between samples at which markers are drawn.
+ *
+ * `numbers` provides numeric constants used for line width and marker sizing (e.g. NINETYNINE, THREE, ONEFORTYFOUR).
+ *
+ * @param {Object} dims - Canvas dimensions { width, height } used to compute scale and center.
+ * @param {string} color - Stroke/fill color for the spiral and markers (CSS color string).
+ * @param {Object} numbers - Numerology constants used for scale calculations.
+ * @param {Object} config - Per-curve configuration (see description for fields).
+ * @return {{samples: number, markers: number}} Counts of sampled points and markers drawn.
+ */
 function drawFibonacciCurve(ctx, dims, color, numbers, config) {
   const samples = Math.max(2, Math.round(config.sampleCount));
   const maxTheta = config.turns * Math.PI;
@@ -452,6 +687,29 @@ function drawFibonacciCurve(ctx, dims, color, numbers, config) {
   return { samples, markers };
 }
 
+/**
+ * Draws a double-helix lattice (two sinusoidal strands with cross-ties) onto a canvas.
+ *
+ * The function samples two sinusoidal strands across the width of the canvas using geometry
+ * derived from dims, numbers, and config, strokes each strand with colors from the palette,
+ * and draws cross-ties between strands at configured intervals.
+ *
+ * @param {Object} dims - Normalized canvas dimensions { width, height }.
+ * @param {Object} palette - Color palette; this function reads layer colors at indexes 4 and 5 and uses muted/ink for ties.
+ * @param {Object} numbers - Numerology constants used to scale stroke width.
+ * @param {Object} config - Helix geometry and style configuration:
+ *   - {number} sampleCount: number of sample points per strand (clamped to >=2).
+ *   - {number} amplitudeDivisor: divisor applied to the smaller canvas dimension to compute sine amplitude.
+ *   - {number} strandSeparationDivisor: divisor applied to the smaller canvas dimension to compute vertical strand separation.
+ *   - {number} cycles: number of full sine cycles across the canvas width.
+ *   - {number} strandAlpha: global alpha used when stroking the strands.
+ *   - {number} rungAlpha: global alpha used when stroking cross-ties.
+ *   - {number} crossTieCount: number of cross-ties to draw (clamped to >=1).
+ *
+ * @return {{ strandPoints: number, crossTies: number }} Counts of rendered geometry:
+ *   - strandPoints: total sample points drawn across both strands (sampleCount * 2).
+ *   - crossTies: number of cross-ties actually attempted (at least 1).
+ */
 function drawHelixLattice(ctx, dims, palette, numbers, config) {
   const samples = Math.max(2, Math.round(config.sampleCount));
   const minDim = Math.min(dims.width, dims.height);
@@ -520,6 +778,18 @@ function drawHelixLattice(ctx, dims, palette, numbers, config) {
   return { strandPoints: samples * 2, crossTies: ties };
 }
 
+/**
+ * Draws a small footer notice box with translucent background and text in the lower-left corner of the canvas.
+ *
+ * The box size, padding, and font scale with the canvas dimensions. If `muted` is falsy the `ink` color is used
+ * (semi-opaque) for the box background. The function does not return a value and restores the canvas state before exit.
+ *
+ * @param {CanvasRenderingContext2D} ctx - Rendering context to draw into.
+ * @param {{width: number, height: number}} dims - Canvas dimensions used to compute padding and font size.
+ * @param {string} ink - Primary text color (CSS color string).
+ * @param {string|null|undefined} muted - Optional background color for the notice; falls back to `ink` when not provided.
+ * @param {string} text - The notice text to render.
+ */
 function drawCanvasNotice(ctx, dims, ink, muted, text) {
   ctx.save();
   ctx.globalAlpha = 1;
@@ -541,6 +811,21 @@ function drawCanvasNotice(ctx, dims, ink, muted, text) {
   ctx.restore();
 }
 
+/**
+ * Produce a one-line human-readable summary of per-layer rendering statistics.
+ *
+ * @param {Object} stats - Aggregated statistics from each rendered layer.
+ * @param {Object} stats.vesicaStats - Vesica field statistics.
+ * @param {number} stats.vesicaStats.circles - Number of circles drawn in the Vesica field.
+ * @param {Object} stats.treeStats - Tree-of-Life statistics.
+ * @param {number} stats.treeStats.paths - Number of connecting paths drawn.
+ * @param {number} stats.treeStats.nodes - Number of nodes drawn.
+ * @param {Object} stats.fibonacciStats - Fibonacci spiral statistics.
+ * @param {number} stats.fibonacciStats.samples - Number of samples (points) along the spiral.
+ * @param {Object} stats.helixStats - Helix lattice statistics.
+ * @param {number} stats.helixStats.crossTies - Number of cross-ties drawn between helix strands.
+ * @return {string} A concise summary string like "Vesica X circles · Paths Y / Nodes Z · Spiral S samples · Helix T ties".
+ */
 function summariseLayers(stats) {
   const vesicaPart = `Vesica ${stats.vesicaStats.circles} circles`;
   const treePart = `Paths ${stats.treeStats.paths} / Nodes ${stats.treeStats.nodes}`;
@@ -549,6 +834,17 @@ function summariseLayers(stats) {
   return `${vesicaPart} · ${treePart} · ${fibPart} · ${helixPart}`;
 }
 
+/**
+ * Convert a hex color string to an RGBA CSS color with the given alpha.
+ *
+ * Accepts `#rgb` and `#rrggbb` hex formats (case-insensitive). If `color` is not
+ * a hex string beginning with `#`, the original `color` value is returned
+ * unchanged. The returned alpha is clamped to the [0, 1] range.
+ *
+ * @param {string} color - A CSS color, expected as `#rgb` or `#rrggbb`. Non-hex inputs are returned as-is.
+ * @param {number} alpha - Desired alpha opacity (will be clamped between 0 and 1).
+ * @return {string} An `rgba(r, g, b, a)` CSS color string, or the original `color` if it wasn't a hex string.
+ */
 function withAlpha(color, alpha) {
   const value = typeof color === "string" ? color.trim() : "";
   if (!value.startsWith("#")) {
@@ -564,6 +860,17 @@ function withAlpha(color, alpha) {
   return `rgba(${r}, ${g}, ${b}, ${clamp(alpha, 0, 1)})`;
 }
 
+/**
+ * Return the default set of Tree-of-Life nodes used by the renderer.
+ *
+ * Each entry is an object with the following properties:
+ *   - id: unique string key for the node
+ *   - title: human-readable label
+ *   - level: integer layer index (0 = top)
+ *   - xFactor: horizontal placement factor (0.0–1.0) relative to level width
+ *
+ * @return {Array<{id: string, title: string, level: number, xFactor: number}>} The canonical list of 10 nodes in drawing order.
+ */
 function buildTreeNodes() {
   return [
     { id: "kether", title: "Kether", level: 0, xFactor: 0.5 },
@@ -579,6 +886,15 @@ function buildTreeNodes() {
   ];
 }
 
+/**
+ * Return the canonical list of Tree-of-Life edges.
+ *
+ * Each entry is a two-element array [fromId, toId] of node id strings representing
+ * a connection between nodes in the Tree-of-Life scaffold. The list contains the
+ * default 22 edges used by the renderer and preserves a stable ordering.
+ *
+ * @return {Array.<[string,string]>} Array of 2-element string tuples (source, target).
+ */
 function buildTreeEdges() {
   return [
     ["kether", "chokmah"],
