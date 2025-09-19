@@ -1,21 +1,21 @@
 /*
   helix-renderer.mjs
-  ND-safe static renderer for layered sacred geometry.
+  ND-safe static renderer for layered sacred geometry tuned to the luminous cathedral style.
 
   Layers:
-    1) Vesica field (intersecting circles)
-    2) Tree-of-Life scaffold (10 sephirot + 22 paths; simplified layout)
-    3) Fibonacci curve (log spiral polyline; static)
-    4) Double-helix lattice (two phase-shifted strands with lattice rungs)
+    1) Vesica field (intersecting circles and mandorla halos)
+    2) Tree-of-Life scaffold (10 sephirot + 22 paths + architectural vault)
+    3) Fibonacci curve (logarithmic halo traced with calm markers)
+    4) Double-helix lattice (two phase-shifted strands with static pedestals)
 
-  Why: encodes layered cosmology with calm colors, zero animation, and
+  Why: encodes layered cosmology with calm colours, zero animation, and
   comments explaining numerology-driven choices for offline review.
 */
 
 const DEFAULT_PALETTE = {
-  bg: "#0b0b12",
-  ink: "#e8e8f0",
-  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+  bg: "#0a0c16",
+  ink: "#f4e3c6",
+  layers: ["#1f3f63", "#265f7f", "#c4974b", "#f6d58b", "#c987d6", "#2c3b5d"]
 };
 
 const DEFAULT_NUMBERS = {
@@ -36,7 +36,7 @@ export function renderHelix(ctx, input = {}) {
 
   const config = normaliseConfig(ctx, input);
   ctx.save();
-  clearStage(ctx, config.dims, config.palette.bg);
+  clearStage(ctx, config.dims, config.palette, config.numbers);
 
   const vesicaStats = drawVesicaField(ctx, config.dims, config.palette, config.numbers);
   const treeStats = drawTreeOfLife(ctx, config.dims, config.palette, config.numbers);
@@ -89,17 +89,59 @@ function mergeNumbers(candidate) {
   return merged;
 }
 
-function clearStage(ctx, dims, bg) {
-  ctx.fillStyle = bg;
+function clearStage(ctx, dims, palette, numbers) {
+  ctx.fillStyle = palette.bg;
+  ctx.fillRect(0, 0, dims.width, dims.height);
+  applyBackgroundGlow(ctx, dims, palette, numbers);
+}
+
+function applyBackgroundGlow(ctx, dims, palette, numbers) {
+  // Layered glow: central halo and floor wash keep depth without motion.
+  const centreX = dims.width / 2;
+  const crownY = dims.height / numbers.NINE;
+  const outerRadius = Math.max(dims.width, dims.height) / (numbers.THREE * 0.9);
+  const glow = ctx.createRadialGradient(centreX, crownY * 1.4, outerRadius / numbers.SEVEN, centreX, dims.height / 2, outerRadius);
+  glow.addColorStop(0, withAlpha(palette.ink, 0.22));
+  glow.addColorStop(0.45, withAlpha(palette.layers[3], 0.16));
+  glow.addColorStop(1, withAlpha(palette.bg, 0));
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, dims.width, dims.height);
+
+  const floorGradient = ctx.createLinearGradient(0, dims.height * 0.68, 0, dims.height);
+  floorGradient.addColorStop(0, withAlpha(palette.layers[5], 0.02));
+  floorGradient.addColorStop(0.4, withAlpha(palette.layers[2], 0.09));
+  floorGradient.addColorStop(1, withAlpha(palette.bg, 0.85));
+  ctx.fillStyle = floorGradient;
   ctx.fillRect(0, 0, dims.width, dims.height);
 }
 
 function drawVesicaField(ctx, dims, palette, numbers) {
-  ctx.save();
-  ctx.globalAlpha = 0.65; // ND-safe softness keeps layer readable without glare.
-  ctx.strokeStyle = palette.layers[0];
-  ctx.lineWidth = Math.max(1, dims.width / (numbers.ONEFORTYFOUR * 1.8));
+  const grid = buildVesicaGrid(dims, numbers);
 
+  ctx.save();
+  ctx.globalAlpha = 0.66; // ND-safe softness keeps layer readable without glare.
+  ctx.strokeStyle = palette.layers[0];
+  ctx.lineWidth = Math.max(1.1, dims.width / (numbers.ONEFORTYFOUR * 1.6));
+  for (const cell of grid.cells) {
+    drawVesicaPair(ctx, cell);
+  }
+
+  ctx.globalAlpha = 0.82;
+  ctx.strokeStyle = palette.layers[5];
+  ctx.lineWidth = Math.max(1.2, dims.width / numbers.ONEFORTYFOUR);
+  drawVesicaHalo(ctx, dims, numbers);
+
+  ctx.globalAlpha = 0.5;
+  ctx.strokeStyle = palette.layers[2];
+  ctx.setLineDash([numbers.TWENTYTWO, numbers.TWENTYTWO]);
+  drawVesicaAxis(ctx, dims, numbers);
+  ctx.setLineDash([]);
+
+  ctx.restore();
+  return { circles: grid.cells.length * 2 + 2, radius: grid.radius };
+}
+
+function buildVesicaGrid(dims, numbers) {
   const rows = numbers.SEVEN;
   const cols = numbers.THREE;
   const margin = dims.width / numbers.THIRTYTHREE;
@@ -110,24 +152,54 @@ function drawVesicaField(ctx, dims, palette, numbers) {
   const radius = Math.min(horizontalStep, verticalStep) * (numbers.NINE / numbers.TWENTYTWO);
   const offset = radius * (numbers.ELEVEN / numbers.TWENTYTWO);
 
+  const cells = [];
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
       const cx = margin + col * horizontalStep;
       const cy = margin + row * verticalStep;
-      drawVesica(ctx, cx, cy, radius, offset);
+      cells.push({ cx, cy, radius, offset });
     }
   }
-
-  ctx.restore();
-  return { circles: rows * cols * 2, radius };
+  return { cells, radius };
 }
 
-function drawVesica(ctx, cx, cy, radius, offset) {
+function drawVesicaPair(ctx, cell) {
   ctx.beginPath();
-  ctx.arc(cx - offset, cy, radius, 0, Math.PI * 2);
+  ctx.arc(cell.cx - cell.offset, cell.cy, cell.radius, 0, Math.PI * 2);
   ctx.stroke();
   ctx.beginPath();
-  ctx.arc(cx + offset, cy, radius, 0, Math.PI * 2);
+  ctx.arc(cell.cx + cell.offset, cell.cy, cell.radius, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+function drawVesicaHalo(ctx, dims, numbers) {
+  const centreX = dims.width / 2;
+  const centreY = dims.height / 2.2;
+  const outerRadius = Math.min(dims.width, dims.height) / (numbers.THREE * 0.82);
+  const innerRadius = outerRadius * (numbers.SEVEN / numbers.ELEVEN);
+
+  ctx.beginPath();
+  ctx.arc(centreX, centreY, outerRadius, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(centreX, centreY, innerRadius, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+function drawVesicaAxis(ctx, dims, numbers) {
+  const centreX = dims.width / 2;
+  const startY = dims.height / numbers.NINE;
+  const endY = dims.height * 0.9;
+  ctx.beginPath();
+  ctx.moveTo(centreX, startY);
+  ctx.lineTo(centreX, endY);
+  ctx.stroke();
+
+  const baseRadiusX = dims.width / numbers.THREE;
+  const baseRadiusY = dims.height / numbers.TWENTYTWO;
+  ctx.beginPath();
+  ctx.ellipse(centreX, dims.height * 0.87, baseRadiusX, baseRadiusY, 0, 0, Math.PI * 2);
   ctx.stroke();
 }
 
@@ -137,11 +209,13 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
   const nodeRadius = Math.max(6, dims.width / numbers.NINETYNINE);
 
   ctx.save();
+  drawTreeVault(ctx, dims, palette, numbers, nodes);
+  drawTreeColumn(ctx, dims, palette, numbers, nodes);
+
   ctx.globalAlpha = 0.9;
   ctx.strokeStyle = palette.layers[1];
-  ctx.lineWidth = Math.max(1.2, dims.width / (numbers.ONEFORTYFOUR * 2.5));
+  ctx.lineWidth = Math.max(1.4, dims.width / (numbers.ONEFORTYFOUR * 2));
   ctx.lineJoin = "round";
-
   for (const [fromKey, toKey] of paths) {
     const from = nodes[fromKey];
     const to = nodes[toKey];
@@ -153,6 +227,7 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
 
   ctx.fillStyle = palette.layers[2];
   ctx.strokeStyle = palette.ink;
+  ctx.globalAlpha = 0.96;
   ctx.lineWidth = 1;
   for (const key of Object.keys(nodes)) {
     const node = nodes[key];
@@ -162,6 +237,7 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
     ctx.stroke();
   }
 
+  drawTreeStar(ctx, dims, palette, numbers, nodes.kether);
   ctx.restore();
   return { nodes: Object.keys(nodes).length, paths: paths.length };
 }
@@ -170,7 +246,7 @@ function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
   const centerX = dims.width / 2;
   const column = dims.width / numbers.THREE;
-  const stepY = (dims.height - marginY * 2) / (numbers.ELEVEN);
+  const stepY = (dims.height - marginY * 2) / numbers.ELEVEN;
 
   return {
     kether: { x: centerX, y: marginY },
@@ -214,23 +290,111 @@ function buildTreePaths() {
   ];
 }
 
+function drawTreeVault(ctx, dims, palette, numbers, nodes) {
+  ctx.save();
+  ctx.globalAlpha = 0.42;
+  ctx.strokeStyle = withAlpha(palette.layers[0], 0.7);
+  ctx.lineWidth = Math.max(1, dims.width / (numbers.ONEFORTYFOUR * 1.2));
+
+  const baseY = dims.height * 0.88;
+  const innerBase = dims.height * 0.82;
+  const leftX = dims.width * 0.18;
+  const rightX = dims.width * 0.82;
+  const archRadius = (rightX - leftX) / 2;
+  const archCenterY = nodes.kether.y + archRadius * 0.65;
+
+  ctx.beginPath();
+  ctx.moveTo(leftX, baseY);
+  ctx.lineTo(leftX, archCenterY);
+  ctx.arc(dims.width / 2, archCenterY, archRadius, Math.PI, 0, false);
+  ctx.lineTo(rightX, baseY);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(leftX + archRadius / numbers.SEVEN, innerBase);
+  ctx.lineTo(leftX + archRadius / numbers.SEVEN, archCenterY + archRadius / numbers.ELEVEN);
+  ctx.arc(dims.width / 2, archCenterY + archRadius / numbers.ELEVEN, archRadius * 0.78, Math.PI, 0, false);
+  ctx.lineTo(rightX - archRadius / numbers.SEVEN, innerBase);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawTreeColumn(ctx, dims, palette, numbers, nodes) {
+  ctx.save();
+  const columnWidth = Math.max(dims.width / numbers.NINETYNINE, 6);
+  const gradient = ctx.createLinearGradient(nodes.kether.x, nodes.kether.y, nodes.malkuth.x, nodes.malkuth.y);
+  gradient.addColorStop(0, withAlpha(palette.layers[3], 0.36));
+  gradient.addColorStop(0.5, withAlpha(palette.layers[2], 0.18));
+  gradient.addColorStop(1, withAlpha(palette.layers[1], 0.05));
+  ctx.fillStyle = gradient;
+  ctx.fillRect(nodes.kether.x - columnWidth / 2, nodes.kether.y, columnWidth, nodes.malkuth.y - nodes.kether.y);
+
+  ctx.strokeStyle = withAlpha(palette.ink, 0.5);
+  ctx.lineWidth = Math.max(1, columnWidth / numbers.THREE);
+  ctx.beginPath();
+  ctx.moveTo(nodes.kether.x, nodes.kether.y);
+  ctx.lineTo(nodes.malkuth.x, nodes.malkuth.y);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawTreeStar(ctx, dims, palette, numbers, kether) {
+  if (!kether) {
+    return;
+  }
+  ctx.save();
+  const outer = Math.max(dims.width / numbers.ONEFORTYFOUR * numbers.THREE, 14);
+  const inner = outer / numbers.THREE;
+  const rays = numbers.NINE;
+  ctx.beginPath();
+  for (let i = 0; i < rays; i += 1) {
+    const angle = (Math.PI * 2 * i) / rays - Math.PI / 2;
+    const radius = i % 2 === 0 ? outer : inner;
+    const x = kether.x + Math.cos(angle) * radius;
+    const y = kether.y + Math.sin(angle) * radius;
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+  ctx.closePath();
+  ctx.fillStyle = withAlpha(palette.layers[3], 0.32);
+  ctx.strokeStyle = palette.ink;
+  ctx.lineWidth = 1;
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.strokeStyle = withAlpha(palette.layers[4], 0.7);
+  ctx.beginPath();
+  ctx.moveTo(kether.x, kether.y - outer * 1.5);
+  ctx.lineTo(kether.x, kether.y + outer * numbers.THREE);
+  ctx.stroke();
+  ctx.restore();
+}
+
 function drawFibonacciCurve(ctx, dims, palette, numbers) {
   const sequence = buildFibonacciSequence(numbers.ONEFORTYFOUR);
   const points = buildSpiralPoints(sequence, dims, numbers);
 
   ctx.save();
-  ctx.globalAlpha = 0.85;
+  ctx.globalAlpha = 0.92;
   ctx.strokeStyle = palette.layers[3];
-  ctx.lineWidth = Math.max(1.2, dims.width / numbers.NINETYNINE);
+  ctx.lineWidth = Math.max(1.4, dims.width / numbers.NINETYNINE);
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
   ctx.beginPath();
-  points.forEach((point, index) => {
-    if (index === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
-    }
-  });
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i += 1) {
+    const prev = points[i - 1];
+    const current = points[i];
+    const midX = (prev.x + current.x) / 2;
+    const midY = (prev.y + current.y) / 2;
+    ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
+  }
   ctx.stroke();
+
+  drawSpiralMarkers(ctx, points, palette, numbers);
   ctx.restore();
 
   return { points: points.length };
@@ -240,20 +404,24 @@ function buildFibonacciSequence(limit) {
   const seq = [1, 1];
   while (true) {
     const next = seq[seq.length - 1] + seq[seq.length - 2];
-    if (next > limit) break;
+    if (next > limit) {
+      break;
+    }
     seq.push(next);
   }
   return seq;
 }
 
 function buildSpiralPoints(sequence, dims, numbers) {
-  const centerX = dims.width * 0.72;
-  const centerY = dims.height * 0.28;
-  const scale = Math.min(dims.width, dims.height) / (numbers.ONEFORTYFOUR * 0.9);
-  const goldenAngle = Math.PI * 2 / numbers.ELEVEN; // gentle rotation anchored to numerology
+  const centerX = dims.width / 2;
+  const centerY = dims.height / numbers.THREE;
+  const maxValue = sequence[sequence.length - 1];
+  const scale = Math.min(dims.width, dims.height) / (Math.sqrt(maxValue) * numbers.TWENTYTWO / numbers.ELEVEN);
+  const goldenAngle = Math.PI * 2 * (numbers.SEVEN / numbers.TWENTYTWO);
+  const rotation = Math.PI / numbers.NINE;
 
   const points = sequence.map((value, index) => {
-    const angle = goldenAngle * index;
+    const angle = rotation + goldenAngle * index;
     const radius = Math.sqrt(value) * scale;
     return {
       x: centerX + radius * Math.cos(angle),
@@ -261,33 +429,53 @@ function buildSpiralPoints(sequence, dims, numbers) {
     };
   });
 
-  // Always include centre to anchor the spiral visually
   return [{ x: centerX, y: centerY }, ...points];
+}
+
+function drawSpiralMarkers(ctx, points, palette, numbers) {
+  ctx.save();
+  ctx.fillStyle = palette.ink;
+  const step = Math.max(1, Math.floor(points.length / numbers.TWENTYTWO));
+  const dotRadius = Math.max(2, ctx.canvas.width / numbers.ONEFORTYFOUR / 1.8);
+  for (let i = 0; i < points.length; i += step) {
+    const point = points[i];
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, dotRadius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
 }
 
 function drawHelixLattice(ctx, dims, palette, numbers) {
   const rails = buildHelixRails(dims, numbers);
 
   ctx.save();
-  ctx.strokeStyle = palette.layers[4];
-  ctx.lineWidth = Math.max(1.2, dims.width / numbers.ONEFORTYFOUR);
+  drawHelixGuide(ctx, dims, palette, numbers);
 
-  // Draw first rail
+  ctx.strokeStyle = palette.layers[4];
+  ctx.lineWidth = Math.max(1.4, dims.width / numbers.ONEFORTYFOUR);
+  ctx.lineJoin = "round";
   ctx.beginPath();
   rails.a.forEach((point, index) => {
-    if (index === 0) ctx.moveTo(point.x, point.y); else ctx.lineTo(point.x, point.y);
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
   });
   ctx.stroke();
 
-  // Draw second rail
   ctx.strokeStyle = palette.layers[5];
   ctx.beginPath();
   rails.b.forEach((point, index) => {
-    if (index === 0) ctx.moveTo(point.x, point.y); else ctx.lineTo(point.x, point.y);
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
   });
   ctx.stroke();
 
-  // Draw lattice rungs
   ctx.strokeStyle = palette.ink;
   ctx.lineWidth = Math.max(1, dims.width / numbers.ONEFORTYFOUR);
   rails.rungs.forEach(rung => {
@@ -297,15 +485,16 @@ function drawHelixLattice(ctx, dims, palette, numbers) {
     ctx.stroke();
   });
 
+  drawHelixAnchors(ctx, rails, palette, numbers);
   ctx.restore();
   return { rungs: rails.rungs.length };
 }
 
 function buildHelixRails(dims, numbers) {
   const length = numbers.TWENTYTWO;
-  const startX = dims.width * 0.12;
-  const endX = dims.width * 0.88;
-  const amplitude = dims.height / numbers.ELEVEN;
+  const startX = dims.width * 0.18;
+  const endX = dims.width * 0.82;
+  const amplitude = dims.height / numbers.SEVEN;
   const centreY = dims.height * 0.72;
   const phaseShift = Math.PI / numbers.THREE;
   const step = (endX - startX) / (length - 1);
@@ -313,7 +502,6 @@ function buildHelixRails(dims, numbers) {
   const a = [];
   const b = [];
   const rungs = [];
-
   for (let i = 0; i < length; i += 1) {
     const x = startX + step * i;
     const angle = (Math.PI * 2 * i) / numbers.ELEVEN;
@@ -327,8 +515,57 @@ function buildHelixRails(dims, numbers) {
       rungs.push({ a: pointA, b: pointB });
     }
   }
-
   return { a, b, rungs };
+}
+
+function drawHelixGuide(ctx, dims, palette, numbers) {
+  ctx.save();
+  const centreX = dims.width / 2;
+  const baseY = dims.height * 0.86;
+  const radiusX = dims.width / numbers.THREE;
+  const radiusY = dims.height / numbers.TWENTYTWO;
+
+  ctx.fillStyle = withAlpha(palette.layers[1], 0.08);
+  ctx.beginPath();
+  ctx.ellipse(centreX, baseY, radiusX, radiusY, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = withAlpha(palette.layers[0], 0.5);
+  ctx.lineWidth = Math.max(1, dims.width / numbers.ONEFORTYFOUR);
+  ctx.beginPath();
+  ctx.ellipse(centreX, baseY, radiusX, radiusY, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  const walkwayWidth = radiusX * (numbers.TWENTYTWO / numbers.ELEVEN);
+  const walkwayHeight = dims.height / numbers.TWENTYTWO;
+  ctx.fillStyle = withAlpha(palette.layers[4], 0.08);
+  ctx.fillRect(centreX - walkwayWidth / 2, baseY - walkwayHeight, walkwayWidth, walkwayHeight);
+  ctx.strokeStyle = withAlpha(palette.layers[0], 0.35);
+  ctx.lineWidth = Math.max(1, dims.width / numbers.ONEFORTYFOUR);
+  ctx.strokeRect(centreX - walkwayWidth / 2, baseY - walkwayHeight, walkwayWidth, walkwayHeight);
+  ctx.restore();
+}
+
+function drawHelixAnchors(ctx, rails, palette, numbers) {
+  ctx.save();
+  const anchors = [rails.a[0], rails.a[rails.a.length - 1], rails.b[0], rails.b[rails.b.length - 1]];
+  const radius = Math.max(4, ctx.canvas.width / numbers.ONEFORTYFOUR);
+  ctx.strokeStyle = withAlpha(palette.ink, 0.7);
+  ctx.fillStyle = withAlpha(palette.layers[3], 0.18);
+  anchors.forEach(point => {
+    if (!point) {
+      return;
+    }
+    ctx.beginPath();
+    ctx.moveTo(point.x, point.y - radius);
+    ctx.lineTo(point.x + radius, point.y);
+    ctx.lineTo(point.x, point.y + radius);
+    ctx.lineTo(point.x - radius, point.y);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  });
+  ctx.restore();
 }
 
 function drawCanvasNotice(ctx, dims, color, message) {
@@ -346,4 +583,15 @@ function summariseLayers(stats) {
   const fibonacci = `${stats.fibonacciStats.points} spiral points`;
   const helix = `${stats.helixStats.rungs} helix rungs`;
   return `Layers rendered - ${vesica}; ${tree}; ${fibonacci}; ${helix}.`;
+}
+
+function withAlpha(hex, alpha) {
+  const normalized = typeof hex === "string" ? hex.replace(/^#/, "") : "";
+  if (normalized.length !== 6) {
+    return `rgba(0,0,0,${alpha})`;
+  }
+  const r = parseInt(normalized.slice(0, 2), 16);
+  const g = parseInt(normalized.slice(2, 4), 16);
+  const b = parseInt(normalized.slice(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
 }

@@ -1,29 +1,29 @@
 # Cosmic Helix Renderer
 
-Static, offline-first canvas capsule that renders four calm layers: the vesica lattice, Tree-of-Life scaffold, Fibonacci spiral, and a static double-helix lattice. Everything is ND-safe - no motion, soft contrast, and clear commentary.
+Static, offline-first canvas capsule tuned to the luminous cathedral reference (vesica vault, Tree-of-Life column, Fibonacci halo, and double-helix lattice). Everything remains ND-safe: no motion, soft gradients, and detailed commentary on why the geometry is layered.
 
 ## Files
-- `index.html` - offline entry point that loads the optional palette, seeds numerology constants, and invokes the renderer.
-- `js/helix-renderer.mjs` - pure ES module of drawing helpers. Each function documents why the ND-safe order matters.
-- `data/palette.json` - optional colour override. If missing the renderer applies its sealed fallback, posts a status message, and prints a canvas notice.
+- `index.html` - offline entry point that loads the optional palette, seeds numerology constants, and invokes the renderer while reporting layer stats in the header.
+- `js/helix-renderer.mjs` - pure ES module of drawing helpers. Each function documents how the ND-safe order preserves depth.
+- `data/palette.json` - optional colour override. If missing the renderer applies its sealed fallback, posts a status message, and paints a canvas notice.
 
 ## Usage
 1. Download or clone the repository.
 2. Double-click `index.html`. No build step or server is required.
-3. If `data/palette.json` is blocked by `file://` rules, the fallback palette activates automatically and a notice appears on the canvas footer.
+3. If `data/palette.json` is blocked by `file://` rules, the fallback palette activates automatically, the header notes the fallback, and a calm notice appears near the canvas base.
 
 ## Layer order (back to front)
-1. **Vesica field** - seven by three grid of intersecting circles, softened alpha to avoid glare.
-2. **Tree-of-Life scaffold** - ten sephirot nodes tied by twenty-two calm paths derived from numerology constants.
-3. **Fibonacci curve** - static logarithmic spiral sampled from Fibonacci numbers up to 144.
-4. **Double-helix lattice** - two phase-shifted strands with alternating rungs; entirely static.
+1. **Vesica field** - seven-by-three grid of intersecting circles with mandorla halos and a dashed axis to echo the reference vault.
+2. **Tree-of-Life scaffold** - ten sephirot nodes, twenty-two numerological paths, vaulted arches, and a luminous central column.
+3. **Fibonacci curve** - static logarithmic halo sampled from Fibonacci numbers up to 144, rendered with smooth quadratics and marker pearls.
+4. **Double-helix lattice** - two phase-shifted strands with alternating rungs, pedestals, and anchor diamonds. Everything is static.
 
-All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour the cosmology canon.
+All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour the cosmology canon while keeping the numerology adjustable.
 
 ## Accessibility & ND-safe rationale
 - No animation, autoplay, or async loops. Rendering happens once per load.
 - Calm palette defaults with clear status messaging when fallbacks are in play.
-- Layered drawing order maintains geometric depth without flattening into a single outline.
+- Layered drawing order maintains geometric depth without flattening into a single outline, matching the reference architecture without motion.
 - ASCII quotes, UTF-8, LF newlines, and small pure functions keep the module portable offline.
 
 ## Customisation
