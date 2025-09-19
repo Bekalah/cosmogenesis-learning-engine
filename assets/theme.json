@@ -1,0 +1,11 @@
+{
+  "mural": "/assets/img/tesseract_mural.jpg",
+  "glassTexture": "/assets/img/prism_noise.png",
+  "chapels": [
+    "kabbalah",
+    "iching",
+    "solfeggio",
+    "harmonics",
+    "geometry"
+  ]
+}
