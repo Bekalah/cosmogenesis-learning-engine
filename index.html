@@ -18,8 +18,8 @@
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette…</div>
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
@@ -32,25 +32,6 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    async function loadJSON(path) {
-      try {
-        if (window.location && window.location.protocol === "file:") {
-          try {
-            // Offline-first: JSON module import avoids blocked fetch calls under file:// origins.
-            const module = await import(path, { assert: { type: "json" } });
-            return module.default;
-          } catch (importError) {
-            // Silent fallback: some browsers reject JSON assertions, so we retry with fetch below.
-          }
-        }
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-      } catch (err) {
-        return null;
-      }
-    }
-
     const defaults = {
       palette: {
         bg:"#0b0b12",
@@ -59,25 +40,62 @@
       }
     };
 
-    const palette = await loadJSON("./data/palette.json");
-    const usingFallback = !palette;
-    const active = palette || defaults.palette;
-    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+    async function importJSONModule(path) {
+      const module = await import(path, { assert: { type: "json" } });
+      if (module && module.default) {
+        return module.default;
+      }
+      throw new Error("JSON module missing default export");
+    }
+
+    async function fetchJSON(path) {
+      try {
+        const res = await fetch(path, { cache: "no-store" });
+        if (!res.ok) throw new Error(String(res.status));
+        return await res.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+    async function resolvePalette() {
+      const isFileOrigin = typeof window !== "undefined" && window.location && window.location.protocol === "file:";
+
+      if (isFileOrigin) {
+        try {
+          const modulePalette = await importJSONModule("./data/palette.json");
+          elStatus.textContent = "Palette loaded via JSON module.";
+          return { palette: modulePalette, notice: null };
+        } catch (moduleError) {
+          // Fallback to fetch below; some browsers decline JSON module assertions.
+        }
+      }
+
+      const fetchedPalette = await fetchJSON("./data/palette.json");
+      if (fetchedPalette) {
+        elStatus.textContent = "Palette loaded.";
+        return { palette: fetchedPalette, notice: null };
+      }
+
+      elStatus.textContent = "Palette missing; using safe fallback.";
+      return { palette: defaults.palette, notice: "Palette fallback active" };
+    }
+
+    const { palette: activePalette, notice } = await resolvePalette();
 
     // Numerology constants used by geometry routines
     const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(
-      ctx,
-      {
-        width: canvas.width,
-        height: canvas.height,
-        palette: active,
-        NUM,
-        notice: usingFallback ? "Palette fallback active" : null
-      }
-    );
+    const renderConfig = {
+      width: canvas.width,
+      height: canvas.height,
+      palette: activePalette,
+      NUM,
+      notice
+    };
+
+    renderHelix(ctx, renderConfig);
   </script>
 </body>
 </html>

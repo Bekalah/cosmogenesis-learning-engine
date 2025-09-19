@@ -10,7 +10,7 @@ Static, offline-first canvas capsule that renders four calm layers: the vesica l
 ## Usage
 1. Download or clone the repository.
 2. Double-click `index.html`. No build step or server is required.
-3. If `data/palette.json` is blocked by `file://` rules, the fallback palette activates automatically and a notice appears on the canvas footer.
+3. When opened via `file://`, the loader first attempts a JSON module import of `data/palette.json`. If the browser declines JSON modules, it falls back to a fetch attempt and ultimately the sealed palette with a notice when none are available.
 
 ## Layer order (back to front)
 1. **Vesica field** - seven by three grid of intersecting circles, softened alpha to avoid glare.
@@ -30,4 +30,4 @@ All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour th
 - Adjust colours by editing `data/palette.json`. Provide `bg`, `ink`, and a six colour `layers` array.
 - Override numerology constants in `index.html` before calling `renderHelix` if alternate ratios are desired.
 - Compose new layers by duplicating the helper pattern in `js/helix-renderer.mjs`. Keep additions static and well-commented to preserve ND safety.
-- The loader prefers JSON module imports when opened via `file://` to avoid network access. Browsers without JSON module support fall back to the bundled palette safely.
+- On `file://` origins the loader prefers JSON module imports to keep everything offline-first. If JSON modules are unavailable the fetch path takes over, and if that also fails the bundled palette and notice keep rendering safe.
