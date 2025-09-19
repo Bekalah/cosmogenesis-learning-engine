@@ -1,0 +1,15 @@
+{
+  "bridge": "antahkarana",
+  "nd_safe": true,
+  "categories": ["art", "magic", "science", "psychology", "quantum", "psycho-occult", "pattern-research"],
+  "tesseract_registry": "cosmogenesis/registry/octagram_tesseracts.json",
+  "chapel_index": "stone-cathedral/chapels/bridge-of-eight/index.md",
+  "arcana_switch_hook": "circuitum99/hooks/onArcanaSwitch.js",
+  "liber_arcana_links": "liber-arcanae/cards/_links/octagram_index.json",
+  "intensity_slider": { "enabled": true, "min": 0, "max": 1, "step": 0.11, "default": 0.33 },
+  "notes": [
+    "Bind art, magic, science, psychology, quantum, psycho-occult, and pattern-research into one living lattice.",
+    "Every activation must call activate(id,{nd_safe:true}).",
+    "Palette references data/palettes/tara_21.json for ND-safe hues."
+  ]
+}

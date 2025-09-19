@@ -1,0 +1,30 @@
+{
+  "name": "tara_21",
+  "nd_safe": true,
+  "background": "#0b0e18",
+  "ink": "#f6f2de",
+  "layers": [
+    { "id": 1, "name": "Radiant Crown", "hex": "#f6f2de" },
+    { "id": 2, "name": "Moonlit Sapphire", "hex": "#3f5a7c" },
+    { "id": 3, "name": "Ocean Jade", "hex": "#2f7a82" },
+    { "id": 4, "name": "Lotus Mist", "hex": "#8ab6a6" },
+    { "id": 5, "name": "Amber Lantern", "hex": "#f2c27b" },
+    { "id": 6, "name": "Amethyst Veil", "hex": "#d7a9e3" },
+    { "id": 7, "name": "Pale Dawn", "hex": "#f7f1c7" },
+    { "id": 8, "name": "Celestial Indigo", "hex": "#45516d" },
+    { "id": 9, "name": "Emerald Breath", "hex": "#7aa795" },
+    { "id": 10, "name": "Rose Aurora", "hex": "#f3b8c4" },
+    { "id": 11, "name": "Iris Whisper", "hex": "#9caee4" },
+    { "id": 12, "name": "Golden Stillness", "hex": "#e9d6a0" },
+    { "id": 13, "name": "Teal Mercy", "hex": "#4f9b92" },
+    { "id": 14, "name": "Silver Quiet", "hex": "#c9d1e6" },
+    { "id": 15, "name": "Fern Sanctuary", "hex": "#84b48d" },
+    { "id": 16, "name": "Rosewood Glow", "hex": "#d9a6a6" },
+    { "id": 17, "name": "Violet Promise", "hex": "#bfa5d9" },
+    { "id": 18, "name": "Topaz Hearth", "hex": "#dcae74" },
+    { "id": 19, "name": "Mist Halo", "hex": "#d9dfec" },
+    { "id": 20, "name": "Seafoam Prayer", "hex": "#8fc7b2" },
+    { "id": 21, "name": "Quiet Twilight", "hex": "#32405b" }
+  ],
+  "notes": "Palette curated from the 21 Taras descriptions; all tones are soft, low saturation, and ND-safe."
+}

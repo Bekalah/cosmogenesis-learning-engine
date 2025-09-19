@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "cosmogenesis-learning-engine/schemas/octagram_tesseract.schema.json",
+  "title": "Octagram Tesseract Node",
+  "description": "Schema for ND-safe octagram tesseract nodes integrated with the trauma-informed renderer.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "arcana",
+    "arcana_key",
+    "nd_safe",
+    "lineages",
+    "render_profile",
+    "filters",
+    "story_mood",
+    "lattice",
+    "geometry",
+    "correspondences",
+    "links",
+    "rpg"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^C144N-[0-9]{3}$" },
+    "title": { "type": "string", "minLength": 3 },
+    "arcana": { "type": "string", "minLength": 3 },
+    "arcana_key": { "type": "string", "enum": [
+      "OCTA-OCTARINE",
+      "OCTA-CROWLEY",
+      "OCTA-FORTUNE",
+      "OCTA-ACHAD",
+      "OCTA-AGRIPPA",
+      "OCTA-PFCASE",
+      "OCTA-SKINNER",
+      "OCTA-TARA"
+    ] },
+    "nd_safe": { "const": true },
+    "lineages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "art",
+          "magic",
+          "science",
+          "psychology",
+          "quantum",
+          "psycho-occult",
+          "pattern-research"
+        ]
+      },
+      "minItems": 1
+    },
+    "render_profile": {
+      "type": "object",
+      "required": ["prefer", "light", "audio"],
+      "properties": {
+        "prefer": { "type": "string" },
+        "light": { "type": "string" },
+        "audio": { "type": "string" }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "mood": { "type": "string" },
+        "light": { "type": "string" },
+        "audio": { "type": "string" }
+      }
+    },
+    "story_mood": { "type": "string" },
+    "lattice": {
+      "type": "object",
+      "required": ["pillar", "gate", "intensity"],
+      "properties": {
+        "pillar": { "type": "integer", "minimum": 1, "maximum": 21 },
+        "gate": { "type": "integer", "minimum": 1, "maximum": 99 },
+        "intensity": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "required": ["layer", "angle", "radius"],
+      "properties": {
+        "layer": { "type": "string" },
+        "angle": { "type": "number" },
+        "radius": { "type": "number" }
+      }
+    },
+    "correspondences": {
+      "type": "object",
+      "required": ["tarot", "angel", "demon", "tara", "planetary_hour"],
+      "properties": {
+        "tarot": { "type": "string" },
+        "angel": { "type": "string" },
+        "demon": { "type": "string" },
+        "tara": { "type": "string" },
+        "planetary_hour": {
+          "type": "string",
+          "enum": ["Saturn", "Jupiter", "Mars", "Sun", "Venus", "Mercury", "Moon"]
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "archive": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "wikidata": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "gutenberg": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "rpg": {
+      "type": "object",
+      "required": ["role", "stats", "skills", "backstory"],
+      "properties": {
+        "role": { "type": "string" },
+        "stats": {
+          "type": "object",
+          "required": ["mind", "body", "spirit"],
+          "properties": {
+            "mind": { "type": "integer" },
+            "body": { "type": "integer" },
+            "spirit": { "type": "integer" }
+          }
+        },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "backstory": { "type": "string" }
+      }
+    }
+  }
+}

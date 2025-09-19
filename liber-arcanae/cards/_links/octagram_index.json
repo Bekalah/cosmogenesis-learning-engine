@@ -1,0 +1,62 @@
+{
+  "generated": "2025-02-14T00:00:00.000Z",
+  "summary": "Mappings from arcana to octagram tesseract nodes for ND-safe switching.",
+  "entries": [
+    {
+      "arcana": "The Hierophant:Moonchild",
+      "octagram": "OCTA-OCTARINE",
+      "node": "C144N-001",
+      "card": "liber-arcanae/cards/MA05_Hierophant.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-moonchild"
+    },
+    {
+      "arcana": "The Tower",
+      "octagram": "OCTA-CROWLEY",
+      "node": "C144N-002",
+      "card": "liber-arcanae/cards/MA16_Tower.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-crowley"
+    },
+    {
+      "arcana": "The High Priestess",
+      "octagram": "OCTA-FORTUNE",
+      "node": "C144N-003",
+      "card": "liber-arcanae/cards/MA02_High_Priestess.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-fortune"
+    },
+    {
+      "arcana": "The Fool",
+      "octagram": "OCTA-ACHAD",
+      "node": "C144N-004",
+      "card": "liber-arcanae/cards/MA00_Fool.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-achad"
+    },
+    {
+      "arcana": "The Magician",
+      "octagram": "OCTA-AGRIPPA",
+      "node": "C144N-005",
+      "card": "liber-arcanae/cards/MA01_Magician.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-agrippa"
+    },
+    {
+      "arcana": "Temperance",
+      "octagram": "OCTA-PFCASE",
+      "node": "C144N-006",
+      "card": "liber-arcanae/cards/MA14_Temperance.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-pfcase"
+    },
+    {
+      "arcana": "Justice",
+      "octagram": "OCTA-SKINNER",
+      "node": "C144N-007",
+      "card": "liber-arcanae/cards/MA11_Justice.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-skinner"
+    },
+    {
+      "arcana": "The Star",
+      "octagram": "OCTA-TARA",
+      "node": "C144N-008",
+      "card": "liber-arcanae/cards/MA17_Star.json",
+      "registry": "cosmogenesis/registry/octagram_tesseracts.json#octa-tara"
+    }
+  ]
+}

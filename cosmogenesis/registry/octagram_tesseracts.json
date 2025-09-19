@@ -1,0 +1,78 @@
+{
+  "generated": "2025-02-14T00:00:00.000Z",
+  "description": "Bridge registry linking octagram tesseract nodes to chapel seals and arcana hooks.",
+  "nodes": [
+    {
+      "id": "octa-moonchild",
+      "node": "C144N-001",
+      "arcana": "The Hierophant:Moonchild",
+      "octagram_key": "OCTA-OCTARINE",
+      "chapel": "bridge-of-eight/moonchild",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#moonchild",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#moonchild"
+    },
+    {
+      "id": "octa-crowley",
+      "node": "C144N-002",
+      "arcana": "The Tower",
+      "octagram_key": "OCTA-CROWLEY",
+      "chapel": "bridge-of-eight/catharsis",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#crowley",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#crowley"
+    },
+    {
+      "id": "octa-fortune",
+      "node": "C144N-003",
+      "arcana": "The High Priestess",
+      "octagram_key": "OCTA-FORTUNE",
+      "chapel": "bridge-of-eight/oracle",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#fortune",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#fortune"
+    },
+    {
+      "id": "octa-achad",
+      "node": "C144N-004",
+      "arcana": "The Fool",
+      "octagram_key": "OCTA-ACHAD",
+      "chapel": "bridge-of-eight/pathfinder",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#achad",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#achad"
+    },
+    {
+      "id": "octa-agrippa",
+      "node": "C144N-005",
+      "arcana": "The Magician",
+      "octagram_key": "OCTA-AGRIPPA",
+      "chapel": "bridge-of-eight/weaver",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#agrippa",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#agrippa"
+    },
+    {
+      "id": "octa-pfcase",
+      "node": "C144N-006",
+      "arcana": "Temperance",
+      "octagram_key": "OCTA-PFCASE",
+      "chapel": "bridge-of-eight/choir",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#pfcase",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#pfcase"
+    },
+    {
+      "id": "octa-skinner",
+      "node": "C144N-007",
+      "arcana": "Justice",
+      "octagram_key": "OCTA-SKINNER",
+      "chapel": "bridge-of-eight/archive",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#skinner",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#skinner"
+    },
+    {
+      "id": "octa-tara",
+      "node": "C144N-008",
+      "arcana": "The Star",
+      "octagram_key": "OCTA-TARA",
+      "chapel": "bridge-of-eight/radiant",
+      "hook": "circuitum99/hooks/onArcanaSwitch.js#tara",
+      "card_link": "liber-arcanae/cards/_links/octagram_index.json#tara"
+    }
+  ]
+}

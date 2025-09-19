@@ -1,0 +1,322 @@
+[
+  {
+    "id": "C144N-001",
+    "title": "Moonchild Hierophant Seal",
+    "arcana": "The Hierophant:Moonchild",
+    "arcana_key": "OCTA-OCTARINE",
+    "nd_safe": true,
+    "lineages": ["art", "magic", "psycho-occult", "pattern-research"],
+    "render_profile": {
+      "prefer": "story",
+      "light": "indigo fog",
+      "audio": "choral hush"
+    },
+    "filters": {
+      "mood": "moonlit guidance",
+      "light": "indigo fog",
+      "audio": "choral hush"
+    },
+    "story_mood": "moonlit guidance",
+    "lattice": { "pillar": 1, "gate": 11, "intensity": 0.33 },
+    "geometry": { "layer": "vesica", "angle": 0.0, "radius": 0.46 },
+    "correspondences": {
+      "tarot": "The Hierophant",
+      "angel": "Haamiah",
+      "demon": "Vapula",
+      "tara": "Tara Radiant Crown",
+      "planetary_hour": "Venus"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/kybalionnewstudy1908"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q42890"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/12699"],
+      "notes": ["Moonchild canon thread", "Bridge-of-eight seal one"]
+    },
+    "rpg": {
+      "role": "Archive Mentor",
+      "stats": { "mind": 9, "body": 3, "spirit": 7 },
+      "skills": ["Mnemonic weaving", "Ceremonial attunement"],
+      "backstory": "Raised in the stone cathedral scriptorium, guiding visitors to ND-safe lore portals."
+    }
+  },
+  {
+    "id": "C144N-002",
+    "title": "Crowley Tower Beacon",
+    "arcana": "The Tower",
+    "arcana_key": "OCTA-CROWLEY",
+    "nd_safe": true,
+    "lineages": ["magic", "science", "psycho-occult", "pattern-research"],
+    "render_profile": {
+      "prefer": "insight",
+      "light": "amber warning",
+      "audio": "low brass drone"
+    },
+    "filters": {
+      "mood": "cathartic clarity",
+      "light": "amber warning",
+      "audio": "low brass drone"
+    },
+    "story_mood": "cathartic clarity",
+    "lattice": { "pillar": 3, "gate": 72, "intensity": 0.44 },
+    "geometry": { "layer": "tesseract", "angle": 1.57, "radius": 0.58 },
+    "correspondences": {
+      "tarot": "The Tower",
+      "angel": "Mebahel",
+      "demon": "Belial",
+      "tara": "Tara Nightmare Queller",
+      "planetary_hour": "Mars"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/777andotherqabalisticwritings"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q188861"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/14030"],
+      "notes": ["Arc tower remapped to octagram gate"]
+    },
+    "rpg": {
+      "role": "Tower Warden",
+      "stats": { "mind": 7, "body": 5, "spirit": 6 },
+      "skills": ["Resilience protocol", "Pattern rupture sensing"],
+      "backstory": "Former lightning rod engineer who now safeguards safe-stop rituals."
+    }
+  },
+  {
+    "id": "C144N-003",
+    "title": "Fortune Veil Oracle",
+    "arcana": "The High Priestess",
+    "arcana_key": "OCTA-FORTUNE",
+    "nd_safe": true,
+    "lineages": ["art", "psychology", "psycho-occult", "pattern-research"],
+    "render_profile": {
+      "prefer": "healing",
+      "light": "silver mist",
+      "audio": "soft water bells"
+    },
+    "filters": {
+      "mood": "still intuition",
+      "light": "silver mist",
+      "audio": "soft water bells"
+    },
+    "story_mood": "still intuition",
+    "lattice": { "pillar": 5, "gate": 33, "intensity": 0.29 },
+    "geometry": { "layer": "fibonacci", "angle": 2.44, "radius": 0.52 },
+    "correspondences": {
+      "tarot": "The High Priestess",
+      "angel": "Gabriel",
+      "demon": "Vual",
+      "tara": "Tara Golden Light",
+      "planetary_hour": "Moon"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/hilmars-paintings"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q128299"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/1193"],
+      "notes": ["Psychic net of the octagram veil"]
+    },
+    "rpg": {
+      "role": "Dream Cartographer",
+      "stats": { "mind": 8, "body": 3, "spirit": 9 },
+      "skills": ["Oneirography", "Aura reading"],
+      "backstory": "Keeps the memory palace maps tuned to neurodivergent visitors."
+    }
+  },
+  {
+    "id": "C144N-004",
+    "title": "Achad Fool Wanderer",
+    "arcana": "The Fool",
+    "arcana_key": "OCTA-ACHAD",
+    "nd_safe": true,
+    "lineages": ["art", "science", "psychology", "pattern-research"],
+    "render_profile": {
+      "prefer": "exploration",
+      "light": "aurora haze",
+      "audio": "gentle wind harp"
+    },
+    "filters": {
+      "mood": "curious dawn",
+      "light": "aurora haze",
+      "audio": "gentle wind harp"
+    },
+    "story_mood": "curious dawn",
+    "lattice": { "pillar": 7, "gate": 78, "intensity": 0.38 },
+    "geometry": { "layer": "vesica", "angle": 3.14, "radius": 0.62 },
+    "correspondences": {
+      "tarot": "The Fool",
+      "angel": "Metatron",
+      "demon": "Orobas",
+      "tara": "Tara Joyful Laughter",
+      "planetary_hour": "Sun"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/achad-qabalah"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q489448"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/2500"],
+      "notes": ["Guides visitors toward the adventure interface"]
+    },
+    "rpg": {
+      "role": "Pathfinder",
+      "stats": { "mind": 6, "body": 6, "spirit": 7 },
+      "skills": ["Narrative prompt crafting", "Curiosity mapping"],
+      "backstory": "Wanders the lattice inviting gentle quests with opt-in consent gates."
+    }
+  },
+  {
+    "id": "C144N-005",
+    "title": "Agrippa Magus Loom",
+    "arcana": "The Magician",
+    "arcana_key": "OCTA-AGRIPPA",
+    "nd_safe": true,
+    "lineages": ["magic", "science", "quantum", "pattern-research"],
+    "render_profile": {
+      "prefer": "ritual",
+      "light": "copper sparks",
+      "audio": "slow harmonium"
+    },
+    "filters": {
+      "mood": "focused weaving",
+      "light": "copper sparks",
+      "audio": "slow harmonium"
+    },
+    "story_mood": "focused weaving",
+    "lattice": { "pillar": 9, "gate": 21, "intensity": 0.42 },
+    "geometry": { "layer": "tesseract", "angle": 3.92, "radius": 0.55 },
+    "correspondences": {
+      "tarot": "The Magician",
+      "angel": "Raziel",
+      "demon": "Paimon",
+      "tara": "Tara Swift and Courageous",
+      "planetary_hour": "Mercury"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/threebooksofoccultphilosophy"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q312602"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/19038"],
+      "notes": ["Integrates planetary-hours-js approximation"]
+    },
+    "rpg": {
+      "role": "Correspondence Weaver",
+      "stats": { "mind": 9, "body": 4, "spirit": 6 },
+      "skills": ["Sigil crafting", "Node harmonics"],
+      "backstory": "Maintains the planetary hour switches with safe intensity sliders."
+    }
+  },
+  {
+    "id": "C144N-006",
+    "title": "PF Case Temperance Choir",
+    "arcana": "Temperance",
+    "arcana_key": "OCTA-PFCASE",
+    "nd_safe": true,
+    "lineages": ["art", "magic", "psychology", "science"],
+    "render_profile": {
+      "prefer": "healing",
+      "light": "rose gold",
+      "audio": "breath choir"
+    },
+    "filters": {
+      "mood": "balanced breath",
+      "light": "rose gold",
+      "audio": "breath choir"
+    },
+    "story_mood": "balanced breath",
+    "lattice": { "pillar": 11, "gate": 33, "intensity": 0.36 },
+    "geometry": { "layer": "fibonacci", "angle": 4.71, "radius": 0.48 },
+    "correspondences": {
+      "tarot": "Temperance",
+      "angel": "Sachiel",
+      "demon": "Marbas",
+      "tara": "Tara Great Peace",
+      "planetary_hour": "Jupiter"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/thebookoftoke"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q161519"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/15508"],
+      "notes": ["Choir overlays the double helix rungs"]
+    },
+    "rpg": {
+      "role": "Harmonic Mediator",
+      "stats": { "mind": 7, "body": 4, "spirit": 8 },
+      "skills": ["Resonance tuning", "Breath pacing"],
+      "backstory": "Conducts restorative rituals to keep the helix geometry calm."
+    }
+  },
+  {
+    "id": "C144N-007",
+    "title": "Skinner Justice Archive",
+    "arcana": "Justice",
+    "arcana_key": "OCTA-SKINNER",
+    "nd_safe": true,
+    "lineages": ["science", "psychology", "quantum", "pattern-research"],
+    "render_profile": {
+      "prefer": "insight",
+      "light": "cool teal",
+      "audio": "measured strings"
+    },
+    "filters": {
+      "mood": "lucid balance",
+      "light": "cool teal",
+      "audio": "measured strings"
+    },
+    "story_mood": "lucid balance",
+    "lattice": { "pillar": 13, "gate": 44, "intensity": 0.31 },
+    "geometry": { "layer": "tesseract", "angle": 5.49, "radius": 0.5 },
+    "correspondences": {
+      "tarot": "Justice",
+      "angel": "Anael",
+      "demon": "Buer",
+      "tara": "Tara Invincible",
+      "planetary_hour": "Saturn"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/skinerritualmagic"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q752055"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/12540"],
+      "notes": ["Maintains ND-safe compliance logs"]
+    },
+    "rpg": {
+      "role": "Compliance Scribe",
+      "stats": { "mind": 8, "body": 4, "spirit": 6 },
+      "skills": ["Protocol drafting", "Data sanctuary"],
+      "backstory": "Tracks trauma-informed metrics and ensures safe-stop toggles remain active."
+    }
+  },
+  {
+    "id": "C144N-008",
+    "title": "Tara Star Resonator",
+    "arcana": "The Star",
+    "arcana_key": "OCTA-TARA",
+    "nd_safe": true,
+    "lineages": ["art", "magic", "psychology", "quantum"],
+    "render_profile": {
+      "prefer": "healing",
+      "light": "opal glow",
+      "audio": "soft drone"
+    },
+    "filters": {
+      "mood": "serene radiance",
+      "light": "opal glow",
+      "audio": "soft drone"
+    },
+    "story_mood": "serene radiance",
+    "lattice": { "pillar": 15, "gate": 21, "intensity": 0.35 },
+    "geometry": { "layer": "fibonacci", "angle": 6.0, "radius": 0.66 },
+    "correspondences": {
+      "tarot": "The Star",
+      "angel": "Uriel",
+      "demon": "Astaroth",
+      "tara": "Tara Great Peace",
+      "planetary_hour": "Moon"
+    },
+    "links": {
+      "archive": ["https://archive.org/details/alexgreytransfigurations"],
+      "wikidata": ["https://www.wikidata.org/wiki/Q283202"],
+      "gutenberg": ["https://www.gutenberg.org/ebooks/378"],
+      "notes": ["Links chapel drones to Tone.js safe drones"]
+    },
+    "rpg": {
+      "role": "Radiant Guide",
+      "stats": { "mind": 7, "body": 3, "spirit": 9 },
+      "skills": ["Luminosity tuning", "Gentle storytelling"],
+      "backstory": "Serves as the calm beacon for all eight chapels of the bridge."
+    }
+  }
+]
