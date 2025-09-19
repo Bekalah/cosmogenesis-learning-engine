@@ -6,14 +6,47 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <style>
-    /* ND-safe: calm contrast, no motion, generous spacing */
-    :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
-    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-    header { padding:12px 16px; border-bottom:1px solid #1d1d2a; }
-    .status { color:var(--muted); font-size:12px; }
-    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; }
-    .note { max-width:900px; margin:0 auto 16px; color:var(--muted); }
-    code { background:#11111a; padding:2px 4px; border-radius:3px; }
+    /* ND-safe: calm contrast, no motion, layered background glow for depth */
+    :root {
+      --bg:#0a0c16;
+      --ink:#f4e3c6;
+      --muted:#b49f82;
+      --edge:#1c2338;
+    }
+    html,body {
+      margin:0;
+      padding:0;
+      background:radial-gradient(circle at 50% 18%, #1b2742 0%, var(--bg) 58%);
+      color:var(--ink);
+      font:14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      padding:12px 16px 10px 16px;
+      border-bottom:1px solid var(--edge);
+      background:linear-gradient(180deg, rgba(27,39,66,0.8), rgba(10,12,22,0.95));
+    }
+    .status {
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
+    }
+    #stage {
+      display:block;
+      margin:18px auto 12px auto;
+      box-shadow:0 0 0 1px var(--edge), 0 12px 44px rgba(7,9,18,0.55);
+      background-color:transparent;
+    }
+    .note {
+      max-width:920px;
+      margin:0 auto 18px;
+      color:var(--muted);
+      padding:0 16px 18px 16px;
+    }
+    code {
+      background:#13182a;
+      padding:2px 4px;
+      border-radius:3px;
+    }
   </style>
 </head>
 <body>
@@ -31,7 +64,7 @@
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
+  <p class="note">Static, offline canvas tuned to the cathedral style reference: vesica grid foundation, Tree-of-Life vault, Fibonacci halo, and double-helix lattice. Palette loads locally with a safe fallback notice for ND assurance.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
@@ -92,6 +125,13 @@
       }
     }
 
+
+    const defaults = {
+      palette: {
+        bg:"#0a0c16",
+        ink:"#f4e3c6",
+        layers:["#1f3f63","#265f7f","#c4974b","#f6d58b","#c987d6","#2c3b5d"]
+
     async function resolvePalette() {
       const isFileOrigin = typeof window !== "undefined" && window.location && window.location.protocol === "file:";
 
@@ -128,6 +168,7 @@
       if (fetchedPalette) {
         elStatus.textContent = "Palette loaded.";
         return { palette: fetchedPalette, notice: null };
+
       }
 
       elStatus.textContent = "Palette missing; using safe fallback.";
@@ -146,6 +187,12 @@
       NINETYNINE: 99,
       ONEFORTYFOUR: 144
     };
+
+
+    const palette = await loadJSON("./data/palette.json");
+    const usingFallback = !palette;
+    const active = palette || defaults.palette;
+    const baseStatus = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
 
     initialise();
 
@@ -181,6 +228,9 @@
       renderHelix(ctx, {
 
 
+    // ND-safe rationale: no motion, high readability, soft glow, preserved layer order
+    const result = renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
+    elStatus.textContent = result && result.summary ? `${baseStatus} ${result.summary}` : baseStatus;
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
     const renderConfig = {
@@ -243,6 +293,7 @@
         : palette.ink;
       document.documentElement.style.setProperty("--muted", muted);
     }
+
 
 
   </script>
