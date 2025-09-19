@@ -6,58 +6,63 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <style>
-    /* ND-safe: calm contrast, no motion, layered background glow for depth */
+    /* ND-safe shell: calm contrast, no motion, maintain spacious margins */
     :root {
-      --bg:#0a0c16;
-      --ink:#f4e3c6;
-      --muted:#b49f82;
-      --edge:#1c2338;
+      --bg:#0b0b12;
+      --ink:#e8e8f0;
+      --muted:#a6a6c1;
+      --edge:#1e2030;
     }
-    html,body {
+    html, body {
       margin:0;
       padding:0;
-      background:radial-gradient(circle at 50% 18%, #1b2742 0%, var(--bg) 58%);
+      background:var(--bg);
       color:var(--ink);
-      font:14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     }
     header {
       padding:12px 16px 10px 16px;
       border-bottom:1px solid var(--edge);
-      background:linear-gradient(180deg, rgba(27,39,66,0.8), rgba(10,12,22,0.95));
     }
     .status {
+      margin-top:2px;
       color:var(--muted);
       font-size:12px;
-      margin-top:2px;
     }
     #stage {
       display:block;
       margin:18px auto 12px auto;
-      box-shadow:0 0 0 1px var(--edge), 0 12px 44px rgba(7,9,18,0.55);
+      width:1440px;
+      height:900px;
+      box-shadow:0 0 0 1px var(--edge),0 18px 48px rgba(0,0,0,0.45);
       background-color:transparent;
     }
     .note {
       max-width:920px;
-      margin:0 auto 18px;
+      margin:0 auto 24px auto;
+      padding:0 16px;
       color:var(--muted);
-      padding:0 16px 18px 16px;
     }
-    code {
-      background:#13182a;
-      padding:2px 4px;
-      border-radius:3px;
+    @media (max-width:1500px) {
+      #stage {
+        width:100%;
+        height:auto;
+        max-width:1440px;
+        aspect-ratio:1440/900;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-
-
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+
+    <div class="status" id="status">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">This static renderer paints four calm layers — vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. Open directly; no network or build steps are required.</p>
+
 
 
     <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
@@ -74,22 +79,24 @@
 
   <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
+
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const elStatus = document.getElementById("status");
+    const statusEl = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
     const defaults = {
       // Fallback palette + registry ensures offline resilience when JSON files are missing.
+    const DEFAULTS = {
       palette: {
-
         bg:"#0b0b12",
         ink:"#e8e8f0",
         layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
       }
     };
+
 
     async function importJSONModule(path) {
 
@@ -250,16 +257,19 @@
       ]
     };
 
+
     const NUM = {
-      THREE: 3,
-      SEVEN: 7,
-      NINE: 9,
-      ELEVEN: 11,
-      TWENTYTWO: 22,
-      THIRTYTHREE: 33,
-      NINETYNINE: 99,
-      ONEFORTYFOUR: 144
+      THREE:3,
+      SEVEN:7,
+      NINE:9,
+      ELEVEN:11,
+      TWENTYTWO:22,
+      THIRTYTHREE:33,
+      NINETYNINE:99,
+      ONEFORTYFOUR:144
     };
+
+
 
 
     const palette = await loadJSON("./data/palette.json");
@@ -269,18 +279,8 @@
     const active = palette || defaults.palette;
     const baseStatus = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
 
+
     initialise();
-
-    const statusParts = [usingFallback ? "Palette missing; using safe fallback." : "Palette loaded."];
-
-    if (!ctx) {
-      statusParts.push("Canvas 2D context unavailable; geometry skipped.");
-    } else {
-      // Numerology constants used by geometry routines
-      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
-
-      // ND-safe rationale: no motion, high readability, soft colors, layered order
-      const outcome = renderHelix(ctx, {
 
     async function initialise() {
       const paletteData = await loadJSON("./data/palette.json");
@@ -311,13 +311,26 @@
       }
 
       elStatus.textContent = statusParts.join(" ");
+      const paletteData = await loadPalette("./data/palette.json");
+      const usingFallback = !paletteData;
+      const palette = paletteData || DEFAULTS.palette;
+
+      applyChromePalette(palette);
 
       if (!ctx) {
-        elStatus.textContent += " Canvas 2D context unavailable.";
+        updateStatus(composeStatus(usingFallback, "Canvas 2D context unavailable; geometry skipped."));
         return;
       }
 
       // ND-safe: renderer executes once with static geometry and optional notices when fallbacks are active.
+<
+      // Single-pass render keeps the scene static: no loops, no animation, ND-safe.
+      const outcome = renderHelix(ctx, {
+        width:canvas.width,
+        height:canvas.height,
+        palette,
+
+      // ND-safe: renderer executes once with static geometry and optional notice when fallbacks are active.
       renderHelix(ctx, {
 
 
@@ -354,20 +367,16 @@
         height: canvas.height,
         palette: activePalette,
         registry: activeRegistry,
+        palette: active,
+
         NUM,
         notice: notices.length ? notices.join(" · ") : null
       });
 
-
-      if (outcome && typeof outcome.summary === "string") {
-        statusParts.push(outcome.summary);
-      } else {
-        statusParts.push("Geometry rendered once.");
-      }
-    }
-
-    elStatus.textContent = statusParts.join(" ");
-
+      const summary = outcome && typeof outcome.summary === "string"
+        ? outcome.summary
+        : "Geometry rendered once.";
+      updateStatus(composeStatus(usingFallback, summary));
     }
 
     async function loadJSON(path) {
@@ -381,17 +390,21 @@
         } catch (err) {
           return null;
         }
+    async function loadPalette(path) {
+      if (typeof path !== "string") {
+        return null;
       }
-
       try {
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) return null;
-        return await res.json();
-      } catch (err) {
+        const response = await fetch(path, { cache:"no-store" });
+        if (!response || !response.ok) {
+          return null;
+        }
+        return await response.json();
+      } catch (error) {
+        // Offline-first: browsers often block fetch for file:// origins; fallback keeps ND safety intact.
         return null;
       }
     }
-
 
     function applyChromePalette(palette) {
       document.documentElement.style.setProperty("--bg", palette.bg);
@@ -399,50 +412,21 @@
       const muted = Array.isArray(palette.layers) && palette.layers.length > 0
         ? palette.layers[palette.layers.length - 1]
         : palette.ink;
+      // Muted tone mirrors the outer lattice layer so notes remain legible on both schemes.
       document.documentElement.style.setProperty("--muted", muted);
     }
 
-
-
-  </script>
-  <style>
-  :root{ --lattice:#89a3ff; --halo:#d6b370; }
-  .bg-lattice{position:fixed; inset:0; z-index:-1; display:grid; place-items:center; pointer-events:none}
-  .lattice{
-    width:min(78vmin,880px); aspect-ratio:1; border-radius:50%; position:relative; isolation:isolate;
-    /* wireframe: meridians + parallels */
-    background:
-     repeating-conic-gradient(from 0deg, transparent 0 10deg, rgba(255,255,255,.08) 10deg 11deg),
-     repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 2px, transparent 2px 38px);
-    /* crisp ring */
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.10) inset,
-      0 0 120px color-mix(in oklab, var(--lattice) 40%, transparent);
-    backdrop-filter: blur(0.5px);
-  }
-  .lattice::after{ /* Jovian middle ring */
-    content:""; position:absolute; inset:14%; border-radius:50%;
-    border:1px solid color-mix(in oklab, var(--halo) 75%, transparent);
-    box-shadow: 0 0 42px color-mix(in oklab, var(--halo) 30%, transparent) inset;
-    transform: perspective(700px) rotateX(62deg);
-  }
-  </style>
-  <div class="bg-lattice" aria-hidden="true"><div class="lattice"></div></div>
-  <canvas id="nodes" width="1024" height="1024" style="position:fixed;inset:0;z-index:-1;pointer-events:none;"></canvas>
-  <script>
-  (() => {
-    const c = document.getElementById('nodes'); const d = c.getContext('2d'); const S = Math.min(innerWidth, innerHeight)*0.78;
-    c.width = c.height = S * devicePixelRatio; c.style.width = c.style.height = S+'px';
-    c.style.left = ((innerWidth - S)/2)+'px'; c.style.top = ((innerHeight - S)/2)+'px';
-    const N=72, R = (S*devicePixelRatio)/2 * 0.94, cx = c.width/2, cy = c.height/2;
-    d.clearRect(0,0,c.width,c.height);
-    for(let i=0;i<N;i++){
-      const a = (i/N)*Math.PI*2;
-      const x = cx + Math.cos(a)*R, y = cy + Math.sin(a*1.618)*R*0.65;
-      const g = d.createRadialGradient(x,y,0,x,y,10*devicePixelRatio);
-      g.addColorStop(0,'#ffffff'); g.addColorStop(1,'rgba(137,163,255,.05)');
-      d.fillStyle = g; d.beginPath(); d.arc(x,y,4*devicePixelRatio,0,Math.PI*2); d.fill();
+    function composeStatus(usingFallback, tail) {
+      const base = usingFallback
+        ? "Palette missing; using safe fallback."
+        : "Palette loaded.";
+      return `${base} ${tail}`;
     }
+
+    function updateStatus(message) {
+      statusEl.textContent = message;
+    }
+
   })();
   </script>
   <script>
@@ -451,6 +435,7 @@
     document.documentElement.style.setProperty('--lattice', tint);
   });
     }
+
   </script>
 </body>
 </html>
