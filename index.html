@@ -60,6 +60,7 @@
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
 
 
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
     <div class="status" id="status">Loading palette...</div>
   </header>
 
@@ -71,6 +72,7 @@
 
   <p class="note">Static, offline canvas tuned to the cathedral style reference: vesica grid foundation, Tree-of-Life vault, Fibonacci halo, and double-helix lattice. Palette loads locally with a safe fallback notice for ND assurance.</p>
 
+  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
@@ -126,6 +128,20 @@
         const res = await fetch(path, { cache: "no-store" });
         if (!res.ok) throw new Error(String(res.status));
         return await res.json();
+    async function loadPalette(path) {
+      // Offline promise: only touches local paths. When browsers block file:// fetch we attempt a JSON module import first.
+      try {
+        if (window.location && window.location.protocol === "file:") {
+          try {
+            const module = await import(path, { assert: { type: "json" } });
+            return module.default;
+          } catch (importError) {
+            // Silent fallback: some engines reject JSON assertions when opened straight from disk.
+          }
+        }
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
       } catch (err) {
         return null;
       }
@@ -175,6 +191,9 @@
         elStatus.textContent = "Palette loaded.";
         return { palette: fetchedPalette, notice: null };
 
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
 
       elStatus.textContent = "Palette missing; using safe fallback.";
@@ -196,6 +215,8 @@
 
 
     const palette = await loadJSON("./data/palette.json");
+    const palette = await loadPalette("./data/palette.json");
+    const active = palette || defaults.palette;
     const usingFallback = !palette;
     const active = palette || defaults.palette;
     const baseStatus = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
@@ -249,6 +270,20 @@
 
     renderHelix(ctx, renderConfig);
 
+    // Sync CSS tokens with whichever palette resolved so the chrome mirrors the canvas.
+    document.documentElement.style.setProperty("--bg", active.bg);
+    document.documentElement.style.setProperty("--ink", active.ink);
+
+    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas 2D context unavailable.";
+    } else {
+      // Numerology constants used by geometry routines.
+      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+      // ND-safe rationale: no motion, high readability, soft colors, layered order.
+      renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette: active,
@@ -348,6 +383,7 @@
     const tint = e.detail?.payload?.color || '#89a3ff';
     document.documentElement.style.setProperty('--lattice', tint);
   });
+    }
   </script>
 </body>
 </html>
