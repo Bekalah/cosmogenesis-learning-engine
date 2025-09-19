@@ -1,0 +1,9 @@
+{
+  "paths": {
+    "kabbalah": ["/cle/data/kabbalah.sephirot.json", "/data/kabbalah.sephirot.json"],
+    "iching": ["/cle/data/iching.hexagrams.json", "/data/iching.hexagrams.min.json"],
+    "solfeggio": ["/cle/data/solfeggio.json", "/data/solfeggio.json"],
+    "harmonics": ["/cle/data/harmonics.ratios.json", "/data/harmonics.ratios.json"],
+    "geometry": ["/cle/data/geometry.patterns.json", "/data/geometry.patterns.json"]
+  }
+}

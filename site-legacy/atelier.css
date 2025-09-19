@@ -1,0 +1,157 @@
+:root{
+  /* low-fatigue base (grimoire) */
+  --bg-primary:#212830;        /* CAD-tested low-strain background */
+  --text-luminous:#F5F5DC;     /* warm white for legibility */
+  --sacred-gold:#DAA520;       /* grimoire gold accents */
+  --spiritual-blue:#4169E1;    /* spiritual signal */
+  --earth-brown:#8B4513;       /* manuscript ink */
+  --ethereal-purple:#9370DB;   /* mystical elements */
+  --energy-cyan:#20B2AA;       /* energetic accents */
+  --shadow-gentle:rgba(135,135,135,.10);
+  --glow-subtle:rgba(255,255,255,.05);
+}
+
+/* site shell */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg-primary);
+  color:var(--text-luminous);
+  font-family:'Bodoni Moda','Didot',Georgia,serif;
+  line-height:1.6;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--sacred-gold);text-decoration:none}
+a:hover,a:focus-visible{color:var(--energy-cyan)}
+button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
+
+.skip-link{position:absolute;left:-9999px;top:auto;padding:.5rem 1rem;background:var(--text-luminous);color:var(--bg-primary);border-radius:999px;z-index:1000}
+.skip-link:focus{left:1rem;top:1rem}
+
+.atelier-nav{
+  position:sticky;
+  top:0;
+  z-index:900;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+  padding:clamp(1rem,4vw,1.8rem) clamp(1.2rem,6vw,3rem);
+  background:linear-gradient(180deg,rgba(33,40,48,0.92),rgba(33,40,48,0.68));
+  border-bottom:1px solid rgba(250,250,240,0.08);
+  backdrop-filter:blur(18px);
+}
+.marque-logo{letter-spacing:.32em;text-transform:uppercase;font-weight:600;color:var(--text-luminous)}
+.nav-collection{list-style:none;display:flex;flex-wrap:wrap;gap:1rem;margin:0;padding:0}
+.nav-collection a{color:rgba(245,245,220,0.72);letter-spacing:.12em;text-transform:uppercase;font-size:.85rem}
+.nav-collection a:hover,.nav-collection a:focus-visible{color:var(--text-luminous)}
+.btn-couture{border:1px solid var(--sacred-gold);padding:.7rem 1.2rem;border-radius:999px;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem;color:var(--sacred-gold);transition:background .3s ease,color .3s ease}
+.btn-couture.primary{background:linear-gradient(90deg,var(--sacred-gold),transparent);color:#000}
+.btn-couture:hover,.btn-couture:focus-visible{background:var(--sacred-gold);color:var(--bg-primary)}
+
+main{flex:1;display:grid;gap:clamp(3rem,7vw,6rem);padding:clamp(2rem,6vw,6rem) clamp(1rem,6vw,5rem)}
+section{position:relative}
+
+/* Vesica layout */
+.hero-vesica{
+  position:relative;min-height:80svh;display:grid;place-items:center;
+  padding:clamp(2rem,5vw,6rem) 1rem;isolation:isolate;overflow:hidden;
+}
+/* background field: soft star/mandala ambiance (very light) */
+.hero-vesica::before{
+  content:"";position:absolute;inset:-20%;
+  background:
+    radial-gradient(80rem 80rem at 50% 120%, rgba(255,255,255,0.04), transparent 60%),
+    radial-gradient(60rem 60rem at -10% 20%, rgba(64,128,255,0.05), transparent 60%),
+    radial-gradient(60rem 60rem at 110% 30%, rgba(255,224,160,0.05), transparent 60%);
+  filter:blur(2px);z-index:-2;
+}
+/* the two circles */
+.vesica{position:absolute;inset:0;display:grid;place-items:center;z-index:-1}
+.vesica .circle{
+  position:absolute;width:min(68svh,78vw);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(255,255,255,.08), transparent 70%);
+  box-shadow:0 0 80px 20px var(--glow-subtle) inset;
+}
+.vesica .left{transform:translateX(-18%);}
+.vesica .right{transform:translateX(18%);}
+/* mandorla (the vesica overlap) */
+.vesica .mandorla{
+  position:absolute;width:min(68svh,78vw);aspect-ratio:1;mix-blend-mode:screen;
+  background:
+    radial-gradient(60% 40% at 50% 50%, rgba(218,165,32,.20), transparent 70%),
+    radial-gradient(50% 35% at 50% 50%, rgba(147,112,219,.18), transparent 70%),
+    radial-gradient(45% 30% at 50% 50%, rgba(32,178,170,.16), transparent 70%);
+  filter:blur(6px);
+  -webkit-mask:
+    radial-gradient(120% 100% at 35% 50%, #000 59%, transparent 61%) 
+    intersect radial-gradient(120% 100% at 65% 50%, #000 59%, transparent 61%);
+          mask:
+    radial-gradient(120% 100% at 35% 50%, #000 59%, transparent 61%)
+    intersect radial-gradient(120% 100% at 65% 50%, #000 59%, transparent 61%);
+}
+/* copy */
+.hero-copy{max-width:60ch;text-align:center;display:grid;gap:1rem}
+.hero-copy h1{letter-spacing:.06em;font-weight:700;margin:0;font-size:clamp(2.8rem,8vw,5rem)}
+.hero-copy p{opacity:.9;margin:0;font-size:1.1rem}
+.cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+
+/* Sephirah anchors (Queen-scale inspired themes) */
+.theme--kether     { --room: #ffffff; --ink:#000; }
+.theme--chokmah    { --room: #9397FF; --ink:#05103a; }
+.theme--binah      { --room: #8f6f8f; --ink:#0e0a0e; }
+.theme--chesed     { --room: #33a1ff; --ink:#001425; }
+.theme--geburah    { --room: #ff3b3b; --ink:#280000; }
+.theme--tiferet    { --room: #ffdf6f; --ink:#3a2800; }
+.theme--netzach    { --room: #6fdc6f; --ink:#06250a; }
+.theme--hod        { --room: #f2a6ff; --ink:#2b002f; }
+.theme--yesod      { --room: #cdb7f6; --ink:#130b20; }
+.theme--malkuth    { --room: #bfa36b; --ink:#1d1402; }
+
+/* Example path/card accents (apply to page section wrapper) */
+.arcana--magician  { --accent: var(--spiritual-blue); }
+.arcana--highpriestess { --accent:#b0c7ff; }
+.arcana--empress   { --accent:#ffd1e6; }
+.arcana--emperor   { --accent:#cc3a3a; }
+.arcana--hierophant{ --accent:#ffd87a; }
+.arcana--lovers    { --accent:#f5a6ff; }
+
+/* how it applies inside a “room” */
+.room{
+  background:linear-gradient(180deg, color-mix(in oklab, var(--room) 25%, transparent), transparent 60%),
+             radial-gradient(80rem 60rem at 50% -10%, color-mix(in oklab, var(--accent, var(--sacred-gold)) 25%, transparent), transparent 60%);
+  border-radius:2rem;padding:clamp(1rem,3vw,2.5rem);box-shadow:0 10px 60px var(--shadow-gentle);
+  color: var(--ink,#111);
+  border:1px solid rgba(255,255,255,0.08);
+  display:grid;gap:1.2rem;
+}
+.room h2{margin:0;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:.18em;text-transform:uppercase}
+.room p{margin:0;color:color-mix(in oklab,var(--ink,#111) 80%,#000 20%);max-width:60ch}
+.room a{color:var(--ink,#111);font-weight:600}
+.room a:hover,.room a:focus-visible{color:color-mix(in srgb,var(--accent, var(--sacred-gold)) 80%,#fff 20%)}
+
+.flow-band{padding:clamp(2rem,5vw,6rem) 1rem}
+.soft-list{list-style:none;padding:0;margin:1rem 0;display:grid;gap:.6rem}
+.soft-list li{padding:.5rem 0;border-bottom:1px dashed color-mix(in oklab, var(--accent, var(--sacred-gold)) 40%, transparent)}
+.soft-list li:last-child{border-bottom:none}
+
+.maison-footer{margin:4rem 0 2.5rem;text-align:center;color:rgba(245,245,220,0.72);font-size:.85rem;letter-spacing:.08em;display:grid;gap:.8rem;padding:0 clamp(1rem,5vw,2rem)}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem}
+.footer-links a{color:rgba(245,245,220,0.72)}
+.footer-links a:hover,.footer-links a:focus-visible{color:var(--text-luminous)}
+
+.reduced-motion .hero-vesica::before{display:none}
+.reduced-motion .vesica .circle{box-shadow:none}
+
+@media (max-width:900px){
+  .nav-collection{gap:.6rem}
+  .btn-couture{letter-spacing:.12em}
+}
+@media (max-width:720px){
+  .atelier-nav{flex-wrap:wrap;justify-content:center}
+  .marque-logo{order:-1}
+}
