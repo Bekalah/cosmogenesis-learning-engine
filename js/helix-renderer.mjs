@@ -29,6 +29,15 @@ const DEFAULT_NUMBERS = {
   ONEFORTYFOUR: 144
 };
 
+/**
+ * Render a static four-layer helix composition onto a canvas.
+ *
+ * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a double-helix lattice,
+ * then optionally renders an inline notice. If the provided canvas context is invalid or lacks `save()`,
+ * the function returns immediately with a quiet summary object instead of throwing.
+ *
+ * @param {Object} [input={}] - Optional overrides for rendering (palette, numeric constants, notice text, explicit dimensions).
+ * @return {{summary: string}} An object with a human-readable summary of which layers were rendered and basic counts.
 export function renderHelix(ctx, input = {}) {
   if (!ctx || typeof ctx.canvas === "undefined" || typeof ctx.save !== "function") {
     // Calm skip keeps the offline shell quiet when contexts are denied (rare on hardened browsers).
@@ -167,6 +176,17 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
   return { nodes: Object.keys(nodes).length, paths: paths.length };
 }
 
+/**
+ * Compute coordinates for the 12 Tree of Life sephirot laid out on a dual-pillar 144-step grid.
+ *
+ * The layout maps a 144-step vertical "covenant ladder" onto the available canvas dimensions,
+ * placing nodes on a centered spine or on left/right pillars offset by a 33-step horizontal shift.
+ * Y coordinates increase downward (canvas coordinate space).
+ *
+ * @param {{width: number, height: number}} dims - Drawing area dimensions; used to derive margins and scale.
+ * @param {Object} numbers - Numeric constants (expects numeric properties such as ONEFORTYFOUR, THIRTYTHREE, TWENTYTWO, SEVEN, NINE, THREE, NINETYNINE). These drive the 144-step vertical scaling and pillar offsets.
+ * @return {Object.<string,{x:number,y:number}>} An object mapping sephirot keys (kether, chokmah, binah, daath, chesed, geburah, tiphareth, netzach, hod, yesod, malkuth) to their {x,y} canvas coordinates.
+ */
 function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
   const innerHeight = dims.height - marginY * 2;
