@@ -14,6 +14,18 @@
     - Layer separation keeps sacred geometry three-dimensional instead of flattened.
     - Numerology constants (3, 7, 9, 11, 22, 33, 99, 144) shape spacing and sampling.
     - Pure helper functions keep the module portable for offline review.
+
+*/
+
+const DEFAULT_PALETTE = {
+  bg: "#0b0b12",
+  ink: "#e8e8f0",
+  muted: "#a6a6c1",
+  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"],
+};
+
+const DEFAULT_NUMBERS = {
+
 */
 
 const DEFAULT_PALETTE = {
@@ -41,6 +53,7 @@ const DEFAULT_NUMBERS = {
 
 const DEFAULT_N
 
+
   THREE: 3,
   SEVEN: 7,
   NINE: 9,
@@ -60,6 +73,7 @@ const DEFAULT_GEOMETRY = {
     radiusFactor: 1.5,
     strokeDivisor: 99,
     alpha: 0.6,
+
 
 
   ONEFORTYFOUR: 144
@@ -101,6 +115,7 @@ const FALLBACK_GEOMETRY = {
       { id: "yesod", title: "Yesod", level: 5, xFactor: 0.5 },
       { id: "malkuth", title: "Malkuth", level: 6, xFactor: 0.5 },
 
+
       { id: "kether", title: "Kether", meaning: "Crown", level: 0, xFactor: 0.5 },
       { id: "chokmah", title: "Chokmah", meaning: "Wisdom", level: 1, xFactor: 0.72 },
       { id: "binah", title: "Binah", meaning: "Understanding", level: 1, xFactor: 0.28 },
@@ -111,6 +126,7 @@ const FALLBACK_GEOMETRY = {
       { id: "hod", title: "Hod", meaning: "Glory", level: 4, xFactor: 0.3 },
       { id: "yesod", title: "Yesod", meaning: "Foundation", level: 5, xFactor: 0.5 },
       { id: "malkuth", title: "Malkuth", meaning: "Kingdom", level: 6, xFactor: 0.5 }
+
 
 
     ],
@@ -150,7 +166,11 @@ const FALLBACK_GEOMETRY = {
 
     alpha: 0.85,
 
+
+    alpha: 0.85,
+
     alpha: 0.88
+
 
 
   },
@@ -165,10 +185,12 @@ const FALLBACK_GEOMETRY = {
     rungAlpha: 0.6,
   },
 
+
     crossTieCount: DEFAULT_NUM.THIRTYTHREE,
     strandAlpha: 0.82,
     rungAlpha: 0.65
   }
+
 
 
 };
@@ -250,11 +272,15 @@ export function renderHelix(ctx, options = {}) {
   drawHelixLattice(ctx, width, height, palette.layers[4], palette.layers[5], numerology, geometry.helix);
 
 
+
   if (notice) {
     drawCanvasNotice(ctx, dims, palette.ink, notice);
   }
 
   ctx.restore();
+
+
+  return {
 
 
   return {
@@ -265,6 +291,7 @@ export function renderHelix(ctx, options = {}) {
   return {
     
 
+
     ok: true,
     summary: summariseLayers({
       vesicaStats,
@@ -274,6 +301,7 @@ export function renderHelix(ctx, options = {}) {
     }),
   };
 }
+
 
 /**
  * Return safe, positive drawing dimensions for the canvas.
@@ -287,10 +315,34 @@ export function renderHelix(ctx, options = {}) {
  * @return {{width: number, height: number}} Normalized positive width and height suitable for drawing.
  */
 
+
 function normaliseDimensions(ctx, options) {
   const width = toPositiveNumber(options.width, ctx.canvas.width);
   const height = toPositiveNumber(options.height, ctx.canvas.height);
   return { width, height };
+
+}
+
+function mergePalette(candidate = {}) {
+  const layers = Array.isArray(candidate.layers)
+    ? candidate.layers.slice(0, DEFAULT_PALETTE.layers.length)
+    : [];
+  while (layers.length < DEFAULT_PALETTE.layers.length) {
+    layers.push(DEFAULT_PALETTE.layers[layers.length]);
+  }
+  return {
+    bg: typeof candidate.bg === "string" ? candidate.bg : DEFAULT_PALETTE.bg,
+    ink:
+      typeof candidate.ink === "string" ? candidate.ink : DEFAULT_PALETTE.ink,
+    muted:
+      typeof candidate.muted === "string"
+        ? candidate.muted
+        : DEFAULT_PALETTE.muted,
+    layers,
+  };
+}
+
+
 }
 
 
@@ -352,6 +404,7 @@ function mergePalette(candidate = {}) {
 }
 
 
+
 function mergeNumbers(candidate = {}) {
   const merged = { ...DEFAULT_NUMBERS };
   for (const key of Object.keys(DEFAULT_NUMBERS)) {
@@ -362,6 +415,7 @@ function mergeNumbers(candidate = {}) {
   }
   return merged;
 }
+
 
 
 /**
@@ -379,6 +433,7 @@ function mergeNumbers(candidate = {}) {
  * @return {Object} A merged geometry object with keys: `vesica`, `treeOfLife`, `fibonacci`, and `helix`.
  */
 
+
 function mergeGeometry(candidate = {}) {
   return {
     vesica: mergeVesica(candidate.vesica),
@@ -387,6 +442,7 @@ function mergeGeometry(candidate = {}) {
     helix: mergeHelix(candidate.helix),
   };
 }
+
 
 /**
  * Merge and sanitize vesica geometry settings with defaults.
@@ -411,6 +467,7 @@ function mergeGeometry(candidate = {}) {
  *  - alpha {number}
  */
 
+
 function mergeVesica(config = {}) {
   const base = DEFAULT_GEOMETRY.vesica;
   return {
@@ -425,6 +482,7 @@ function mergeVesica(config = {}) {
     alpha: clampAlpha(config.alpha, base.alpha),
   };
 }
+
 
 /**
  * Merge and sanitize Tree-of-Life geometry configuration, returning a complete, safe structure.
@@ -453,6 +511,7 @@ function mergeVesica(config = {}) {
  *   - edges {Array<Array<string>>} (filtered valid id pairs)
  */
 
+
 function mergeTree(config = {}) {
   const base = DEFAULT_GEOMETRY.treeOfLife;
   const nodes =
@@ -462,6 +521,18 @@ function mergeTree(config = {}) {
   const safeNodes = nodes.map((node, index) => {
     const reference = base.nodes[index % base.nodes.length];
     const data = typeof node === "object" && node !== null ? node : {};
+
+    return {
+      id: typeof data.id === "string" && data.id ? data.id : reference.id,
+      title:
+        typeof data.title === "string" && data.title
+          ? data.title
+          : reference.title,
+      level: Number.isFinite(data.level) ? data.level : reference.level,
+      xFactor: clamp01(
+        Number.isFinite(data.xFactor) ? data.xFactor : reference.xFactor,
+      ),
+
 
     return {
       id: typeof data.id === "string" && data.id ? data.id : reference.id,
@@ -533,6 +604,11 @@ function normaliseTree(data) {
   };
 }
 
+
+
+  };
+}
+
 /**
  * Merge and validate Fibonacci-curve geometry settings, filling missing values from DEFAULT_GEOMETRY.fibonacci.
  *
@@ -560,6 +636,7 @@ function normaliseTree(data) {
 }
 
 
+
 function mergeFibonacci(config = {}) {
   const base = DEFAULT_GEOMETRY.fibonacci;
   return {
@@ -573,6 +650,7 @@ function mergeFibonacci(config = {}) {
     alpha: clampAlpha(config.alpha, base.alpha),
   };
 }
+
 
 
 /**
@@ -591,6 +669,7 @@ function mergeFibonacci(config = {}) {
  * @param {number} [config.rungAlpha] - Alpha for rung strokes; clamped to [0,1] (0 preserved) with a default fallback.
  * @return {Object} Merged helix geometry with keys: sampleCount, cycles, amplitudeDivisor, phaseOffset, crossTieCount, strandAlpha, rungAlpha.
  */
+
 
 function mergeHelix(config = {}) {
   const base = DEFAULT_GEOMETRY.helix;
@@ -611,6 +690,7 @@ function mergeHelix(config = {}) {
 }
 
 
+
 /**
  * Fill the canvas drawing area with a solid color.
  *
@@ -621,10 +701,12 @@ function mergeHelix(config = {}) {
  * @param {string} color - CSS color string to use as the fill style (e.g. '#000', 'rgba(0,0,0,0.5)').
  */
 
+
 function clearStage(ctx, dims, color) {
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, dims.width, dims.height);
 }
+
 
 /**
  * Render a grid of overlapping "vesica" circle pairs across the padded drawable area.
@@ -646,6 +728,7 @@ function clearStage(ctx, dims, color) {
  * @return {{circles: number, radius: number}} Total circles stroked and the radius (px) used for each circle.
  */
 
+
 function drawVesicaField(ctx, dims, color, numbers, settings) {
   const rows = Math.max(1, settings.rows);
   const columns = Math.max(1, settings.columns);
@@ -654,6 +737,14 @@ function drawVesicaField(ctx, dims, color, numbers, settings) {
   const availableHeight = dims.height - padding * 2;
   const stepX = columns > 1 ? availableWidth / (columns - 1) : 0;
   const stepY = rows > 1 ? availableHeight / (rows - 1) : 0;
+
+  const radius = Math.min(stepX, stepY) / settings.radiusFactor;
+  const offset = radius * (numbers.ELEVEN / numbers.TWENTYTWO);
+  const strokeWidth = Math.max(
+    1,
+    Math.min(dims.width, dims.height) / settings.strokeDivisor,
+  );
+
 
   const radius = Math.min(stepX, stepY) / settings.radiusFactor;
   const offset = radius * (numbers.ELEVEN / numbers.TWENTYTWO);
@@ -682,10 +773,21 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
 
 
 
+
   ctx.save();
   ctx.strokeStyle = colorWithAlpha(color, settings.alpha);
   ctx.lineWidth = strokeWidth;
   ctx.lineCap = "round";
+
+
+  let circles = 0;
+  for (let row = 0; row < rows; row += 1) {
+    for (let column = 0; column < columns; column += 1) {
+      const cx = padding + column * stepX;
+      const cy = padding + row * stepY;
+      strokeVesicaPair(ctx, cx, cy, radius, offset);
+      circles += 2;
+
 
 
   let circles = 0;
@@ -721,11 +823,13 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
       strokeCircle(ctx, x, y, radius);
 
 
+
     }
   }
 
   ctx.restore();
   return { circles, radius };
+
 }
 
 /**
@@ -739,6 +843,16 @@ function drawVesicaField(ctx, width, height, color, N, settings) {
  * @param {number} radius - Radius of each circle (expected > 0).
  * @param {number} offset - Horizontal distance from the anchor to each circle's center.
  */
+function strokeVesicaPair(ctx, cx, cy, radius, offset) {
+  ctx.beginPath();
+  ctx.arc(cx - offset, cy, radius, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx + offset, cy, radius, 0, Math.PI * 2);
+  ctx.stroke();
+
+}
+
 function strokeVesicaPair(ctx, cx, cy, radius, offset) {
   ctx.beginPath();
   ctx.arc(cx - offset, cy, radius, 0, Math.PI * 2);
@@ -783,6 +897,7 @@ function strokeVesicaPair(ctx, cx, cy, radius, offset) {
 }
 
 
+
 function drawTreeOfLife(ctx, dims, palette, numbers, settings) {
   const margin = Math.min(dims.width, dims.height) / settings.marginDivisor;
   const usableWidth = dims.width - margin * 2;
@@ -801,6 +916,13 @@ function drawTreeOfLife(ctx, dims, palette, numbers, settings) {
     0,
   );
   const levelStep = maxLevel > 0 ? usableHeight / maxLevel : 0;
+
+
+  const positions = new Map();
+  for (const node of settings.nodes) {
+    const x = margin + clamp01(node.xFactor) * usableWidth;
+    const y = margin + node.level * levelStep;
+
 
 
   const positions = new Map();
@@ -855,10 +977,15 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
     const x = margin + clamp01(node.xFactor) * (width - margin * 2);
     const y = top + node.level * levelStep;
 
+
     positions.set(node.id, { x, y, node });
   });
 
+
+  ctx.save();
+
   // Calm connective lines first so nodes remain readable (why: layered depth).
+
 
   ctx.strokeStyle = colorWithAlpha(palette.layers[1], 0.7);
   ctx.lineWidth = pathWidth;
@@ -882,6 +1009,7 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
   ctx.strokeStyle = palette.ink;
   ctx.lineWidth = Math.max(1, pathWidth * 0.75);
   for (const point of positions.values()) {
+d
 
   ctx.strokeStyle = colorWithAlpha(pathColor, 0.75);
   ctx.lineWidth = lineWidth;
@@ -907,10 +1035,13 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
   positions.forEach((entry) => {
 
 
+
     ctx.beginPath();
     ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
+
+
 
   }
   ctx.restore();
@@ -929,6 +1060,23 @@ function drawTreeOfLife(ctx, width, height, pathColor, nodeColor, labelColor, N,
   }
 
   return { nodes: positions.size, paths: settings.edges.length };
+
+}
+
+function drawFibonacciCurve(ctx, dims, color, numbers, settings) {
+  const samples = Math.max(2, settings.sampleCount);
+  const turns = settings.turns;
+  const phi = Math.max(1.0001, settings.phi);
+  const totalAngle = turns * Math.PI * 2;
+  const baseRadius =
+    Math.min(dims.width, dims.height) / settings.baseRadiusDivisor;
+  const lineWidth = Math.max(
+    1,
+    Math.min(dims.width, dims.height) / numbers.NINETYNINE,
+  );
+  const centerX = dims.width * 0.72;
+  const centerY = dims.height * 0.28;
+
 
 }
 
@@ -1016,12 +1164,17 @@ function drawFibonacciCurve(ctx, width, height, color, N, settings) {
 
 
 
+
   ctx.save();
   ctx.strokeStyle = colorWithAlpha(color, settings.alpha);
   ctx.lineWidth = lineWidth;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
   ctx.beginPath();
+
+
+  for (let index = 0; index < samples; index += 1) {
+    const t = samples > 1 ? index / (samples - 1) : 0;
 
   for (let index = 0; index < samples; index += 1) {
     const t = samples > 1 ? index / (samples - 1) : 0;
@@ -1032,6 +1185,7 @@ function drawFibonacciCurve(ctx, width, height, color, N, settings) {
 
   for (let index = 0; index < sampleCount; index += 1) {
     const t = sampleCount > 1 ? index / (sampleCount - 1) : 0;
+
 
     const angle = t * totalAngle;
     const radius = baseRadius * Math.pow(phi, t * turns);
@@ -1046,6 +1200,11 @@ function drawFibonacciCurve(ctx, width, height, color, N, settings) {
 
   ctx.stroke();
   ctx.restore();
+
+
+  return { points: samples };
+}
+
 
   return { points: samples };
 }
@@ -1076,6 +1235,7 @@ function drawFibonacciCurve(ctx, width, height, color, N, settings) {
 }
 
 
+
 function drawHelixLattice(ctx, dims, palette, numbers, settings) {
   const samples = Math.max(2, settings.sampleCount);
   const cycles = settings.cycles;
@@ -1095,6 +1255,7 @@ function drawHelixLattice(ctx, dims, palette, numbers, settings) {
     const angle = angleStep * index;
     const yA = centerY + Math.sin(angle) * amplitude;
     const yB = centerY + Math.sin(angle + phase) * amplitude;
+
 
 function drawHelixLattice(ctx, width, height, strandColor, rungColor, N, settings) {
   const sampleCount = Math.max(2, settings.sampleCount);
@@ -1116,6 +1277,7 @@ function drawHelixLattice(ctx, width, height, strandColor, rungColor, N, setting
     const angle = t * totalAngle;
     const yA = baseline + Math.sin(angle) * amplitude;
     const yB = baseline + Math.sin(angle + phase) * amplitude;
+
 
     strandA.push({ x, y: yA });
     strandB.push({ x, y: yB });
@@ -1177,6 +1339,12 @@ function drawPolyline(ctx, points) {
   for (let index = 1; index < points.length; index += 1) {
     const point = points[index];
     ctx.lineTo(point.x, point.y);
+
+  }
+  ctx.stroke();
+}
+
+=======
   }
   ctx.stroke();
 }
@@ -1243,6 +1411,7 @@ function drawPolyline(ctx, points) {
 }
 
 
+
 function drawCanvasNotice(ctx, dims, color, message) {
   const padding =
     Math.min(dims.width, dims.height) / DEFAULT_NUMBERS.THIRTYTHREE;
@@ -1254,6 +1423,7 @@ function drawCanvasNotice(ctx, dims, color, message) {
   ctx.fillText(message, dims.width / 2, dims.height - padding);
   ctx.restore();
 }
+
 
 
 /**
@@ -1275,6 +1445,7 @@ function drawCanvasNotice(ctx, dims, color, message) {
  * @returns {string} One-line summary, e.g. "Layers rendered - 72 vesica circles; 9 paths / 10 nodes; 128 spiral points; 24 helix rungs."
  */
 
+
 function summariseLayers(stats) {
   const vesica = `${stats.vesicaStats.circles} vesica circles`;
   const tree = `${stats.treeStats.paths} paths / ${stats.treeStats.nodes} nodes`;
@@ -1282,6 +1453,7 @@ function summariseLayers(stats) {
   const helix = `${stats.helixStats.rungs} helix rungs`;
   return `Layers rendered - ${vesica}; ${tree}; ${fibonacci}; ${helix}.`;
 }
+
 
 /**
  * Convert a 6-digit hex color (with or without leading '#') to an `rgba(...)` CSS string, clamping alpha to [0,1].
@@ -1292,6 +1464,7 @@ function summariseLayers(stats) {
  * @param {number} alpha - Desired alpha value; will be clamped to the [0,1] range.
  * @returns {string} An `rgba(r,g,b,a)` CSS color string.
  */
+
 
 function colorWithAlpha(hex, alpha) {
   const normalized = typeof hex === "string" ? hex.trim() : "";
@@ -1305,6 +1478,17 @@ function colorWithAlpha(hex, alpha) {
   const b = parseInt(value.slice(4, 6), 16);
   return `rgba(${r},${g},${b},${safeAlpha})`;
 }
+
+
+function toPositiveNumber(value, fallback) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : Number(fallback);
+}
+
+function toPositiveInteger(value, fallback) {
+  const number = Number(value);
+  const rounded = Math.round(number);
+  return Number.isFinite(number) && rounded > 0 ? rounded : Number(fallback);
 
 /**
  * Coerce a value to a finite positive number; otherwise return the numeric coercion of a fallback.
@@ -1387,8 +1571,8 @@ function finiteNumber(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
 
-}
 
+}
 
 function clamp01(value) {
   const parsed = Number(value);
@@ -1452,5 +1636,6 @@ function colorWithAlpha(hex, alpha) {
   const b = parseInt(stripped.slice(4, 6), 16);
   const safeAlpha = clamp01(alpha);
   return `rgba(${r},${g},${b},${safeAlpha})`;
+
 
 }

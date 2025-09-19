@@ -30,6 +30,7 @@ Static HTML + Canvas renderer that paints the requested four-layer cosmology on 
 - Tune spacing by editing `data/geometry.json` or by passing a `geometry` object to `renderHelix`. The module validates every override to keep ND-safe bounds.
 - Compose new layers by following the pure helper pattern inside `js/helix-renderer.mjs`. Keep additions static and well-commented to honour the covenant.
 
+
 Static HTML + Canvas capsule that renders the layered cosmology with no motion. Double-clicking `index.html` paints a
 1440x900 canvas in four calm passes: vesica field, Tree-of-Life scaffold, Fibonacci curve, and the static double helix.
 Everything runs offline with zero dependencies so the lore remains portable.
