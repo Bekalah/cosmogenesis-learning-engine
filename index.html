@@ -21,7 +21,11 @@
 
     <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
 
+
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+
 
     <div class="status" id="status">Loading palette...</div>
   </header>
@@ -46,6 +50,22 @@
     };
 
     async function importJSONModule(path) {
+
+      // Try modern import attributes first, then legacy import assertions.
+      try {
+        // Modern
+        const m = await import(path, { with: { type: "json" } });
+        return m?.default ?? m;
+      } catch (e1) {
+        try {
+          // Legacy
+          const m = await import(path, { assert: { type: "json" } });
+          return m?.default ?? m;
+        } catch (e2) {
+          const err = new Error("JSON module import failed");
+          err.cause = e2;
+          throw err;
+
       try {
         const m = await import(path, { with: { type: "json" } });
         if (m && m.default) return m.default;
@@ -58,6 +78,7 @@
           throw new Error("JSON module (assert) missing default export");
         } catch (e2) {
           throw e2;
+
         }
       }
     }
@@ -81,7 +102,21 @@
           return { palette: modulePalette, notice: null };
         } catch (moduleError) {
           // Fallback to fetch below; some browsers decline JSON module assertions.
-        }
+
+      }
+
+      const fetchedPalette = await fetchJSON("./data/palette.json");
+      if (fetchedPalette) {
+        elStatus.textContent = "Palette loaded.";
+        return { palette: fetchedPalette, notice: null };
+      }
+
+      elStatus.textContent = "Palette missing; using safe fallback.";
+      return { palette: defaults.palette, notice: "Palette fallback active" };
+    }
+
+    const { palette: activePalette, notice } = await resolvePalette();
+
 
         bg: "#0b0b12",
         ink: "#e8e8f0",
@@ -146,6 +181,7 @@
       renderHelix(ctx, {
 
 
+
     // ND-safe rationale: no motion, high readability, soft colors, layered order
     const renderConfig = {
       width: canvas.width,
@@ -207,6 +243,7 @@
         : palette.ink;
       document.documentElement.style.setProperty("--muted", muted);
     }
+
 
   </script>
 </body>

@@ -13,8 +13,12 @@ Static, offline-first canvas capsule that renders four calm layers: the vesica l
 
 3. When opened via `file://`, the loader first attempts a JSON module import of `data/palette.json`. If the browser declines JSON modules, it falls back to a fetch attempt and ultimately the sealed palette with a notice when none are available.
 
+
+3. When opened via `file://`, the loader first attempts a JSON module import of `data/palette.json`. If the browser declines JSON modules, it falls back to a fetch attempt and ultimately the sealed palette with a notice when none are available.
+
 3. If `data/palette.json` is blocked by `file://` rules, the fallback palette activates automatically, the page chrome updates to the safe defaults, and a notice appears on the canvas footer.
 4. The status line reiterates whether the fallback is active, reports the render summary, and confirms when geometry is skipped because the browser withholds a 2D context.
+
 
 
 ## Layer order (back to front)
