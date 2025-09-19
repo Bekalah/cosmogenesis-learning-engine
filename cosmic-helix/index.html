@@ -7,6 +7,11 @@
   <meta name="color-scheme" content="light dark">
   <style>
 
+    /* ND-safe chrome: calm contrast, no motion, layered depth preserved (why: reduces sensory load). */
+
+
+    /* ND-safe chrome: calm contrast, no motion, layered geometry preserved. */
+
     :root {
       --bg: #0b0b12;
       --ink: #e8e8f0;
@@ -36,9 +41,11 @@
 
       letter-spacing: 0.05em;
 
+
+      letter-spacing: 0.05em;
+
       font-weight: 600;
       letter-spacing: 0.06em;
-
 
     }
 
@@ -58,6 +65,11 @@
       height: 900px;
       max-width: calc(100vw - 32px);
       max-height: calc(100vh - 160px);
+
+
+      background: var(--bg);
+      box-shadow: 0 0 0 1px var(--outline);
+
     
       background: var(--bg);
       box-shadow: 0 0 0 1px var(--outline);
@@ -65,11 +77,19 @@
       background: var(--bg);
       box-shadow: 0 0 0 1px var(--outline);
 
+
       box-shadow: 0 0 0 1px var(--outline);
       background: var(--bg);
       max-width: calc(100vw - 32px);
       max-height: calc(100vh - 160px);
 
+
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     canvas {
@@ -94,6 +114,14 @@
 </head>
 <body>
   <header>
+
+    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">Static renderer for Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Open this file directly (no server, no animation, ND-safe palette).</p>
+
     <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
     <div class="status" id="status">Loading palette...</div>
   </header>
@@ -105,15 +133,21 @@
 
   <p class="note">Static renderer encoding the vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Open this file directly; no build tools, no animation, ND-safe palette only.</p>
 
+  <p class="note">Static renderer encoding the vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Open this file directly; no build tools, no animation, ND-safe palette only.</p>
+
   <p class="note">This static renderer encodes the vesica field, Tree-of-Life scaffold, Fibonacci curve, and static double helix. Open
 
     this file directly - no build tools, no animation, ND-safe palette.</p>
 
+
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
+
     const statusEl = document.getElementById("status");
     const canvas = document.getElementById("stage");
+
+    const ctx = canvas.getContext("2d");
 
 
     const DEFAULTS = {
@@ -126,6 +160,22 @@
     };
 
     const NUM = { THREE: 3, SEVEN: 7, NINE: 9, ELEVEN: 11, TWENTYTWO: 22, THIRTYTHREE: 33, NINETYNINE: 99, ONEFORTYFOUR: 144 };
+
+
+
+
+    const DEFAULTS = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    };
+
+    const NUM = { THREE: 3, SEVEN: 7, NINE: 9, ELEVEN: 11, TWENTYTWO: 22, THIRTYTHREE: 33, NINETYNINE: 99, ONEFORTYFOUR: 144 };
+
+
 
     async function loadJSON(path) {
       try {
@@ -174,6 +224,15 @@
       ONEFORTYFOUR: 144
     });
 
+    (async () => {
+      const palette = await loadJSON("./data/palette.json");
+      const activePalette = palette || defaults.palette;
+      const notice = palette ? "" : "Palette missing; ND-safe fallback active.";
+
+      if (!ctx) {
+        statusEl.textContent = "Canvas unavailable in this browser.";
+        return;
+
     const FALLBACK = Object.freeze({
       palette: {
         bg: "#0b0b12",
@@ -197,6 +256,7 @@
         return await response.json();
       } catch (error) {
         return null;
+
       }
     }
 
@@ -209,6 +269,7 @@
     }
 
 
+
     if (!ctx) {
       statusEl.textContent = "Canvas unavailable in this browser.";
     } else {
@@ -216,6 +277,11 @@
       const geometryData = await loadJSON("./data/geometry.json");
       const palette = paletteData || DEFAULTS.palette;
       applyTheme(palette);
+
+
+      const notice = paletteData ? "" : "Palette fallback active.";
+      const result = renderHelix(ctx, {
+
 
 
       const notice = paletteData ? "" : "Palette fallback active.";
@@ -236,6 +302,11 @@
       const result = renderHelix(context, {
 
 
+
+      statusEl.textContent = palette ? "Palette loaded." : "Palette missing; fallback in use.";
+
+      renderHelix(ctx, {
+
         width: canvas.width,
         height: canvas.height,
         palette,
@@ -244,10 +315,18 @@
         notice
       });
 
+    })();
+
+
+
+      if (result.ok) {
+
+
 
       if (result.ok) {
 
       if (result.ok) {
+
 
 
         const paletteMessage = paletteData ? "Palette loaded." : "Palette missing; using sealed fallback.";
@@ -256,13 +335,16 @@
       } else {
         statusEl.textContent = "Renderer error: " + (result.reason || "unknown");
 
+
         updateStatus(palette ? "Palette loaded." : "Palette missing; fallback active.");
       } else {
         updateStatus(`Render failed: ${result.reason}`);
 
 
+
       }
     }
+
   </script>
 </body>
 </html>
