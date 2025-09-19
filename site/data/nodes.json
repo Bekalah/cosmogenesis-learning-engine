@@ -1,0 +1,76 @@
+[
+  {
+    "id": "00-void",
+    "name": "Void",
+    "type": "Chapel",
+    "thelemicPath": "Aleph",
+    "blend": "vesica-aurora",
+    "lore": "The silent organ of genesis; breath before word.",
+    "lab": "labs/void-lab.html",
+    "curriculum": [
+      { "title": "Primordial breath pattern" },
+      { "title": "Aleph meditation brief" }
+    ],
+    "labProtocol": [
+      { "title": "Null field alignment" }
+    ],
+    "assets": [
+      { "title": "Vesica glyph study", "href": "assets/img/hero.webp" }
+    ]
+  },
+  {
+    "id": "01-magician",
+    "name": "The Magus",
+    "type": "Chapel",
+    "thelemicPath": "Beth",
+    "blend": "vesica-aurora",
+    "lore": "Mercurial hand weaving circuits & spirit.",
+    "lab": "labs/magus-lab.html",
+    "curriculum": [
+      { "title": "Mercury circuit weaving" },
+      { "title": "Beth correspondence primer" }
+    ],
+    "labProtocol": [
+      { "title": "Sigil conduction checklist" }
+    ],
+    "assets": [
+      { "title": "Circuit sigil board", "href": "assets/img/tesseract-chamber-1024.webp" }
+    ]
+  },
+  {
+    "id": "02-priestess",
+    "name": "The Priestess",
+    "type": "Chapel",
+    "thelemicPath": "Gimel",
+    "blend": "vesica-aurora",
+    "lore": "Veiled threshold tuning lunar memory to data streams.",
+    "lab": "labs/priestess-lab.html",
+    "curriculum": [
+      { "title": "Veil breathing sequence" }
+    ],
+    "labProtocol": [
+      { "title": "Moon chamber calibration" }
+    ],
+    "assets": [
+      { "title": "Lunar gate archive still", "href": "images/hero.webp" }
+    ]
+  },
+  {
+    "id": "03-empress",
+    "name": "The Empress",
+    "type": "Chapel",
+    "thelemicPath": "Daleth",
+    "blend": "vesica-aurora",
+    "lore": "Rose lattice inviting embodied abundance without overload.",
+    "lab": "labs/empress-lab.html",
+    "curriculum": [
+      { "title": "Daleth garden prompts" }
+    ],
+    "labProtocol": [
+      { "title": "Heart field harmonics" }
+    ],
+    "assets": [
+      { "title": "Arcadian bloom sketch", "href": "assets/img/hero.webp" }
+    ]
+  }
+]
