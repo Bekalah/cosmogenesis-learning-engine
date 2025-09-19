@@ -7,10 +7,6 @@
   <meta name="color-scheme" content="light dark">
   <style>
 
-    /* ND-safe chrome: calm contrast, no motion, layered geometry preserved. */
-
-    /* ND-safe chrome: calm contrast, no motion, layered depth preserved (why: reduces sensory load). */
-
     :root {
       --bg: #0b0b12;
       --ink: #e8e8f0;
@@ -37,8 +33,12 @@
 
       letter-spacing: 0.05em;
 
+
+      letter-spacing: 0.05em;
+
       font-weight: 600;
       letter-spacing: 0.06em;
+
 
     }
 
@@ -58,6 +58,10 @@
       height: 900px;
       max-width: calc(100vw - 32px);
       max-height: calc(100vh - 160px);
+    
+      background: var(--bg);
+      box-shadow: 0 0 0 1px var(--outline);
+
       background: var(--bg);
       box-shadow: 0 0 0 1px var(--outline);
 
@@ -98,7 +102,11 @@
 
   <p class="note">Static renderer encoding the vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Open this file directly; no build tools, no animation, ND-safe palette only.</p>
 
+
+  <p class="note">Static renderer encoding the vesica field, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Open this file directly; no build tools, no animation, ND-safe palette only.</p>
+
   <p class="note">This static renderer encodes the vesica field, Tree-of-Life scaffold, Fibonacci curve, and static double helix. Open
+
     this file directly - no build tools, no animation, ND-safe palette.</p>
 
   <script type="module">
@@ -106,6 +114,38 @@
 
     const statusEl = document.getElementById("status");
     const canvas = document.getElementById("stage");
+
+
+    const DEFAULTS = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    };
+
+    const NUM = { THREE: 3, SEVEN: 7, NINE: 9, ELEVEN: 11, TWENTYTWO: 22, THIRTYTHREE: 33, NINETYNINE: 99, ONEFORTYFOUR: 144 };
+
+    async function loadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
+        return await response.json();
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function applyTheme(palette) {
+      const root = document.documentElement;
+      root.style.setProperty("--bg", palette.bg);
+      root.style.setProperty("--ink", palette.ink);
+      root.style.setProperty("--muted", palette.muted || palette.ink);
+    }
+
 
     const ctx = canvas.getContext("2d");
 
@@ -168,6 +208,7 @@
       root.style.setProperty("--muted", palette.muted || palette.ink);
     }
 
+
     if (!ctx) {
       statusEl.textContent = "Canvas unavailable in this browser.";
     } else {
@@ -175,6 +216,11 @@
       const geometryData = await loadJSON("./data/geometry.json");
       const palette = paletteData || DEFAULTS.palette;
       applyTheme(palette);
+
+
+      const notice = paletteData ? "" : "Palette fallback active.";
+      const result = renderHelix(ctx, {
+
 
       const notice = paletteData ? "" : "Palette fallback active.";
       const result = renderHelix(ctx, {
@@ -189,6 +235,7 @@
       // Draw once: calm sequencing keeps ND-safe pacing.
       const result = renderHelix(context, {
 
+
         width: canvas.width,
         height: canvas.height,
         palette,
@@ -197,7 +244,11 @@
         notice
       });
 
+
       if (result.ok) {
+
+      if (result.ok) {
+
 
         const paletteMessage = paletteData ? "Palette loaded." : "Palette missing; using sealed fallback.";
         const geometryMessage = geometryData ? " Geometry loaded." : " Geometry fallback in use.";
@@ -208,6 +259,7 @@
         updateStatus(palette ? "Palette loaded." : "Palette missing; fallback active.");
       } else {
         updateStatus(`Render failed: ${result.reason}`);
+
 
       }
     }
