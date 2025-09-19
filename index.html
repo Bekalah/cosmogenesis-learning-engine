@@ -33,6 +33,7 @@
     const ctx = canvas.getContext("2d");
 
     async function loadJSON(path) {
+      // Offline promise: only touches local file paths. If blocked (e.g. file:// fetch), null is returned.
       try {
         if (window.location && window.location.protocol === "file:") {
           try {
@@ -60,12 +61,39 @@
     };
 
     const palette = await loadJSON("./data/palette.json");
-    const usingFallback = !palette;
     const active = palette || defaults.palette;
-    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+    const usingFallback = !palette;
 
-    // Numerology constants used by geometry routines
-    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+    // Sync CSS tokens with whichever palette resolved so the chrome mirrors the canvas.
+    document.documentElement.style.setProperty("--bg", active.bg);
+    document.documentElement.style.setProperty("--ink", active.ink);
+
+
+    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas 2D context unavailable.";
+    } else {
+      // Numerology constants used by geometry routines
+      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+      // ND-safe rationale: no motion, high readability, soft colors, layered order
+      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
+    }
+
+
+    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
+
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas 2D context unavailable.";
+    } else {
+      // Numerology constants used by geometry routines
+      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+      // ND-safe rationale: no motion, high readability, soft colors, layered order
+      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
+    }
 
     // ND-safe rationale: no motion, high readability, soft colors, layered order
     renderHelix(
@@ -78,6 +106,8 @@
         notice: usingFallback ? "Palette fallback active" : null
       }
     );
+
+
   </script>
 </body>
 </html>
