@@ -41,13 +41,21 @@
     };
 
     async function importJSONModule(path) {
-      const module = await import(path, { assert: { type: "json" } });
-      if (module && module.default) {
-        return module.default;
+      try {
+        const m = await import(path, { with: { type: "json" } });
+        if (m && m.default) return m.default;
+        throw new Error("JSON module missing default export");
+      } catch (e1) {
+        // Fallback for older Chromium builds that used `assert`
+        try {
+          const mOld = await import(path, { assert: { type: "json" } });
+          if (mOld && mOld.default) return mOld.default;
+          throw new Error("JSON module (assert) missing default export");
+        } catch (e2) {
+          throw e2;
+        }
       }
-      throw new Error("JSON module missing default export");
     }
-
     async function fetchJSON(path) {
       try {
         const res = await fetch(path, { cache: "no-store" });
