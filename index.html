@@ -4,186 +4,95 @@
   <meta charset="utf-8">
   <title>Cosmic Helix Renderer (ND-safe, Offline)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="dark light">
   <style>
-    /* ND-safe: calm contrast, no motion, layered background glow for depth */
+    /* ND-safe chrome: calm contrast, layered depth, no motion (why: reduces sensory load). */
     :root {
-      --bg:#0a0c16;
-      --ink:#f4e3c6;
-      --muted:#b49f82;
-      --edge:#1c2338;
+      --bg: #0b0b12;
+      --ink: #e8e8f0;
+      --muted: #a6a6c1;
+      --outline: #1f1f2d;
     }
-    html,body {
-      margin:0;
-      padding:0;
-      background:radial-gradient(circle at 50% 18%, #1b2742 0%, var(--bg) 58%);
-      color:var(--ink);
-      font:14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
+
     header {
-      padding:12px 16px 10px 16px;
-      border-bottom:1px solid var(--edge);
-      background:linear-gradient(180deg, rgba(27,39,66,0.8), rgba(10,12,22,0.95));
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--outline);
+      background: linear-gradient(180deg, rgba(25, 25, 40, 0.9), rgba(11, 11, 18, 0.6));
     }
+
+    header strong {
+      letter-spacing: 0.06em;
+    }
+
     .status {
-      color:var(--muted);
-      font-size:12px;
-      margin-top:2px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
     }
+
     #stage {
-      display:block;
-      margin:18px auto 12px auto;
-      box-shadow:0 0 0 1px var(--edge), 0 12px 44px rgba(7,9,18,0.55);
-      background-color:transparent;
+      display: block;
+      margin: 18px auto 12px;
+      width: 1440px;
+      height: 900px;
+      max-width: calc(100vw - 32px);
+      max-height: calc(100vh - 168px);
+      box-shadow: 0 0 0 1px var(--outline), 0 20px 60px rgba(6, 6, 12, 0.55);
+      background: var(--bg);
     }
+
     .note {
-      max-width:920px;
-      margin:0 auto 18px;
-      color:var(--muted);
-      padding:0 16px 18px 16px;
+      max-width: 920px;
+      margin: 0 auto 18px;
+      color: var(--muted);
+      padding: 0 16px 18px;
     }
+
     code {
-      background:#13182a;
-      padding:2px 4px;
-      border-radius:3px;
+      background: #11111c;
+      padding: 2px 4px;
+      border-radius: 3px;
     }
   </style>
 </head>
 <body>
   <header>
-
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-
-
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-
-
-    <div class="status" id="status">Loading palette...</div>
+    <div class="status" id="status">Preparing canvas…</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-
-  <div id="chapel-ring" style="position:relative;width:min(80vmin,820px);aspect-ratio:1;margin:40px auto"></div>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
-  <script type="module" src="./codex/inject.loader.js"></script>
-
-  <p class="note">Static, offline canvas tuned to the cathedral style reference: vesica grid foundation, Tree-of-Life vault, Fibonacci halo, and double-helix lattice. Palette loads locally with a safe fallback notice for ND assurance.</p>
-
+  <p class="note">
+    Static HTML + Canvas capsule encoding four calm layers: Vesica field, Tree-of-Life scaffold, Fibonacci curve,
+    and a static double-helix lattice. Open this file directly; there are no network requests, build steps, or timers.
+  </p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const elStatus = document.getElementById("status");
+    const statusEl = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    const defaults = {
+    const FALLBACK = {
       palette: {
-
-        bg:"#0b0b12",
-        ink:"#e8e8f0",
-        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
 
-    async function importJSONModule(path) {
-
-      // Try modern import attributes first, then legacy import assertions.
-      try {
-        // Modern
-        const m = await import(path, { with: { type: "json" } });
-        return m?.default ?? m;
-      } catch (e1) {
-        try {
-          // Legacy
-          const m = await import(path, { assert: { type: "json" } });
-          return m?.default ?? m;
-        } catch (e2) {
-          const err = new Error("JSON module import failed");
-          err.cause = e2;
-          throw err;
-
-      try {
-        const m = await import(path, { with: { type: "json" } });
-        if (m && m.default) return m.default;
-        throw new Error("JSON module missing default export");
-      } catch (e1) {
-        // Fallback for older Chromium builds that used `assert`
-        try {
-          const mOld = await import(path, { assert: { type: "json" } });
-          if (mOld && mOld.default) return mOld.default;
-          throw new Error("JSON module (assert) missing default export");
-        } catch (e2) {
-          throw e2;
-
-        }
-      }
-    }
-    async function fetchJSON(path) {
-      try {
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-      } catch (err) {
-        return null;
-      }
-    }
-
-
-    const defaults = {
-      palette: {
-        bg:"#0a0c16",
-        ink:"#f4e3c6",
-        layers:["#1f3f63","#265f7f","#c4974b","#f6d58b","#c987d6","#2c3b5d"]
-
-    async function resolvePalette() {
-      const isFileOrigin = typeof window !== "undefined" && window.location && window.location.protocol === "file:";
-
-      if (isFileOrigin) {
-        try {
-          const modulePalette = await importJSONModule("./data/palette.json");
-          elStatus.textContent = "Palette loaded via JSON module.";
-          return { palette: modulePalette, notice: null };
-        } catch (moduleError) {
-          // Fallback to fetch below; some browsers decline JSON module assertions.
-
-      }
-
-      const fetchedPalette = await fetchJSON("./data/palette.json");
-      if (fetchedPalette) {
-        elStatus.textContent = "Palette loaded.";
-        return { palette: fetchedPalette, notice: null };
-      }
-
-      elStatus.textContent = "Palette missing; using safe fallback.";
-      return { palette: defaults.palette, notice: "Palette fallback active" };
-    }
-
-    const { palette: activePalette, notice } = await resolvePalette();
-
-
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-
-      }
-
-      const fetchedPalette = await fetchJSON("./data/palette.json");
-      if (fetchedPalette) {
-        elStatus.textContent = "Palette loaded.";
-        return { palette: fetchedPalette, notice: null };
-
-      }
-
-      elStatus.textContent = "Palette missing; using safe fallback.";
-      return { palette: defaults.palette, notice: "Palette fallback active" };
-    }
-
-    const { palette: activePalette, notice } = await resolvePalette();
-
-    const NUM = {
+    const NUM = Object.freeze({
       THREE: 3,
       SEVEN: 7,
       NINE: 9,
@@ -192,162 +101,61 @@
       THIRTYTHREE: 33,
       NINETYNINE: 99,
       ONEFORTYFOUR: 144
-    };
+    });
 
-
-    const palette = await loadJSON("./data/palette.json");
-    const usingFallback = !palette;
-    const active = palette || defaults.palette;
-    const baseStatus = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
-
-    initialise();
-
-    const statusParts = [usingFallback ? "Palette missing; using safe fallback." : "Palette loaded."];
-
-    if (!ctx) {
-      statusParts.push("Canvas 2D context unavailable; geometry skipped.");
-    } else {
-      // Numerology constants used by geometry routines
-      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
-
-      // ND-safe rationale: no motion, high readability, soft colors, layered order
-      const outcome = renderHelix(ctx, {
-
-    async function initialise() {
-      const palette = await loadPalette("./data/palette.json");
-      const active = palette || defaults.palette;
-
-
-      applyChromePalette(active);
-
-      const usingFallback = !palette;
-      elStatus.textContent = usingFallback
-        ? "Palette missing; using safe fallback."
-        : "Palette loaded.";
-
-      if (!ctx) {
-        elStatus.textContent += " Canvas 2D context unavailable.";
-        return;
-      }
-
-      // ND-safe: renderer executes once with static geometry and optional notice when fallbacks are active.
-      renderHelix(ctx, {
-
-
-    // ND-safe rationale: no motion, high readability, soft glow, preserved layer order
-    const result = renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    elStatus.textContent = result && result.summary ? `${baseStatus} ${result.summary}` : baseStatus;
-
-    // ND-safe rationale: no motion, high readability, soft colors, layered order
-    const renderConfig = {
-      width: canvas.width,
-      height: canvas.height,
-      palette: activePalette,
-      NUM,
-      notice
-    };
-
-    renderHelix(ctx, renderConfig);
-
-        width: canvas.width,
-        height: canvas.height,
-        palette: active,
-        NUM,
-        notice: usingFallback ? "Palette fallback active" : null
-      });
-
-
-      if (outcome && typeof outcome.summary === "string") {
-        statusParts.push(outcome.summary);
-      } else {
-        statusParts.push("Geometry rendered once.");
-      }
-    }
-
-    elStatus.textContent = statusParts.join(" ");
-
+    function applyChrome(palette) {
+      const root = document.documentElement;
+      root.style.setProperty("--bg", palette.bg);
+      root.style.setProperty("--ink", palette.ink);
+      root.style.setProperty("--muted", palette.muted || palette.ink);
     }
 
     async function loadPalette(path) {
-      if (typeof path !== "string") return null;
-
-      // Offline-first: when opened via file:// we avoid fetch (blocked in many browsers) and rely on JSON module support.
-      if (window.location && window.location.protocol === "file:") {
-        try {
-          const module = await import(path, { assert: { type: "json" } });
-          return module.default;
-        } catch (err) {
+      if (typeof fetch !== "function") {
+        return null;
+      }
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) {
           return null;
         }
-      }
-
-      try {
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) return null;
-        return await res.json();
-      } catch (err) {
+        return await response.json();
+      } catch (error) {
         return null;
       }
     }
 
-
-    function applyChromePalette(palette) {
-      document.documentElement.style.setProperty("--bg", palette.bg);
-      document.documentElement.style.setProperty("--ink", palette.ink);
-      const muted = Array.isArray(palette.layers) && palette.layers.length > 0
-        ? palette.layers[palette.layers.length - 1]
-        : palette.ink;
-      document.documentElement.style.setProperty("--muted", muted);
+    function updateStatus(message) {
+      statusEl.textContent = message;
     }
 
+    if (!ctx) {
+      updateStatus("Canvas 2D context unavailable in this browser.");
+    } else {
+      (async () => {
+        const paletteData = await loadPalette("./data/palette.json");
+        const palette = paletteData && typeof paletteData === "object" ? paletteData : FALLBACK.palette;
+        const usingFallback = !paletteData;
 
+        applyChrome(palette);
 
-  </script>
-  <style>
-  :root{ --lattice:#89a3ff; --halo:#d6b370; }
-  .bg-lattice{position:fixed; inset:0; z-index:-1; display:grid; place-items:center; pointer-events:none}
-  .lattice{
-    width:min(78vmin,880px); aspect-ratio:1; border-radius:50%; position:relative; isolation:isolate;
-    /* wireframe: meridians + parallels */
-    background:
-     repeating-conic-gradient(from 0deg, transparent 0 10deg, rgba(255,255,255,.08) 10deg 11deg),
-     repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 2px, transparent 2px 38px);
-    /* crisp ring */
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.10) inset,
-      0 0 120px color-mix(in oklab, var(--lattice) 40%, transparent);
-    backdrop-filter: blur(0.5px);
-  }
-  .lattice::after{ /* Jovian middle ring */
-    content:""; position:absolute; inset:14%; border-radius:50%;
-    border:1px solid color-mix(in oklab, var(--halo) 75%, transparent);
-    box-shadow: 0 0 42px color-mix(in oklab, var(--halo) 30%, transparent) inset;
-    transform: perspective(700px) rotateX(62deg);
-  }
-  </style>
-  <div class="bg-lattice" aria-hidden="true"><div class="lattice"></div></div>
-  <canvas id="nodes" width="1024" height="1024" style="position:fixed;inset:0;z-index:-1;pointer-events:none;"></canvas>
-  <script>
-  (() => {
-    const c = document.getElementById('nodes'); const d = c.getContext('2d'); const S = Math.min(innerWidth, innerHeight)*0.78;
-    c.width = c.height = S * devicePixelRatio; c.style.width = c.style.height = S+'px';
-    c.style.left = ((innerWidth - S)/2)+'px'; c.style.top = ((innerHeight - S)/2)+'px';
-    const N=72, R = (S*devicePixelRatio)/2 * 0.94, cx = c.width/2, cy = c.height/2;
-    d.clearRect(0,0,c.width,c.height);
-    for(let i=0;i<N;i++){
-      const a = (i/N)*Math.PI*2;
-      const x = cx + Math.cos(a)*R, y = cy + Math.sin(a*1.618)*R*0.65;
-      const g = d.createRadialGradient(x,y,0,x,y,10*devicePixelRatio);
-      g.addColorStop(0,'#ffffff'); g.addColorStop(1,'rgba(137,163,255,.05)');
-      d.fillStyle = g; d.beginPath(); d.arc(x,y,4*devicePixelRatio,0,Math.PI*2); d.fill();
+        const notice = usingFallback ? "Palette missing; sealed ND-safe fallback in use." : "";
+        const result = renderHelix(ctx, {
+          width: canvas.width,
+          height: canvas.height,
+          palette,
+          NUM,
+          notice
+        });
+
+        if (result.ok) {
+          const prefix = usingFallback ? "Fallback palette active. " : "Palette loaded. ";
+          updateStatus(prefix + result.summary);
+        } else {
+          updateStatus("Render failed: " + result.reason);
+        }
+      })();
     }
-  })();
-  </script>
-  <script>
-  window.addEventListener('cathedral:select', e => {
-    const tint = e.detail?.payload?.color || '#89a3ff';
-    document.documentElement.style.setProperty('--lattice', tint);
-  });
   </script>
 </body>
 </html>
