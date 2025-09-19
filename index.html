@@ -32,41 +32,26 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    async function loadJSON(path) {
-      // Offline promise: only touches local file paths. If blocked (e.g. file:// fetch), null is returned.
-      try {
-        if (window.location && window.location.protocol === "file:") {
-          try {
-            // Offline-first: JSON module import avoids blocked fetch calls under file:// origins.
-            const module = await import(path, { assert: { type: "json" } });
-            return module.default;
-          } catch (importError) {
-            // Silent fallback: some browsers reject JSON assertions, so we retry with fetch below.
-          }
-        }
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-      } catch (err) {
-        return null;
-      }
-    }
-
     const defaults = {
       palette: {
-        bg:"#0b0b12",
-        ink:"#e8e8f0",
-        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
 
-    const palette = await loadJSON("./data/palette.json");
-    const active = palette || defaults.palette;
-    const usingFallback = !palette;
+    const NUM = {
+      THREE: 3,
+      SEVEN: 7,
+      NINE: 9,
+      ELEVEN: 11,
+      TWENTYTWO: 22,
+      THIRTYTHREE: 33,
+      NINETYNINE: 99,
+      ONEFORTYFOUR: 144
+    };
 
-    // Sync CSS tokens with whichever palette resolved so the chrome mirrors the canvas.
-    document.documentElement.style.setProperty("--bg", active.bg);
-    document.documentElement.style.setProperty("--ink", active.ink);
+    initialise();
 
     const statusParts = [usingFallback ? "Palette missing; using safe fallback." : "Palette loaded."];
 
@@ -78,12 +63,33 @@
 
       // ND-safe rationale: no motion, high readability, soft colors, layered order
       const outcome = renderHelix(ctx, {
+
+    async function initialise() {
+      const palette = await loadPalette("./data/palette.json");
+      const active = palette || defaults.palette;
+
+      applyChromePalette(active);
+
+      const usingFallback = !palette;
+      elStatus.textContent = usingFallback
+        ? "Palette missing; using safe fallback."
+        : "Palette loaded.";
+
+      if (!ctx) {
+        elStatus.textContent += " Canvas 2D context unavailable.";
+        return;
+      }
+
+      // ND-safe: renderer executes once with static geometry and optional notice when fallbacks are active.
+      renderHelix(ctx, {
+
         width: canvas.width,
         height: canvas.height,
         palette: active,
         NUM,
         notice: usingFallback ? "Palette fallback active" : null
       });
+
 
       if (outcome && typeof outcome.summary === "string") {
         statusParts.push(outcome.summary);
@@ -94,6 +100,39 @@
 
     elStatus.textContent = statusParts.join(" ");
 
+    }
+
+    async function loadPalette(path) {
+      if (typeof path !== "string") return null;
+
+      // Offline-first: when opened via file:// we avoid fetch (blocked in many browsers) and rely on JSON module support.
+      if (window.location && window.location.protocol === "file:") {
+        try {
+          const module = await import(path, { assert: { type: "json" } });
+          return module.default;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      try {
+        const res = await fetch(path, { cache: "no-store" });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+
+    function applyChromePalette(palette) {
+      document.documentElement.style.setProperty("--bg", palette.bg);
+      document.documentElement.style.setProperty("--ink", palette.ink);
+      const muted = Array.isArray(palette.layers) && palette.layers.length > 0
+        ? palette.layers[palette.layers.length - 1]
+        : palette.ink;
+      document.documentElement.style.setProperty("--muted", muted);
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,212 @@
+{
+  "chapels": [
+    {
+      "id": "00-void",
+      "name": "Void",
+      "type": "Chapel",
+      "thelemicPath": "Aleph",
+      "blend": "vesica-aurora",
+      "lore": "The silent organ of genesis; breath before word.",
+      "lab": "labs/void-lab.html",
+      "curriculum": [
+        { "title": "Primordial breath pattern" },
+        { "title": "Aleph meditation brief" }
+      ],
+      "labProtocol": [
+        { "title": "Null field alignment" }
+      ],
+      "assets": [
+        { "title": "Vesica glyph study", "href": "assets/img/hero.webp" }
+      ]
+    },
+    {
+      "id": "01-magician",
+      "name": "The Magus",
+      "type": "Chapel",
+      "thelemicPath": "Beth",
+      "blend": "vesica-aurora",
+      "lore": "Mercurial hand weaving circuits & spirit.",
+      "lab": "labs/magus-lab.html",
+      "curriculum": [
+        { "title": "Mercury circuit weaving" },
+        { "title": "Beth correspondence primer" }
+      ],
+      "labProtocol": [
+        { "title": "Sigil conduction checklist" }
+      ],
+      "assets": [
+        { "title": "Circuit sigil board", "href": "assets/img/tesseract-chamber-1024.webp" }
+      ]
+    },
+    {
+      "id": "02-priestess",
+      "name": "The Priestess",
+      "type": "Chapel",
+      "thelemicPath": "Gimel",
+      "blend": "vesica-aurora",
+      "lore": "Veiled threshold tuning lunar memory to data streams.",
+      "lab": "labs/priestess-lab.html",
+      "curriculum": [
+        { "title": "Veil breathing sequence" }
+      ],
+      "labProtocol": [
+        { "title": "Moon chamber calibration" }
+      ],
+      "assets": [
+        { "title": "Lunar gate archive still", "href": "images/hero.webp" }
+      ]
+    },
+    {
+      "id": "03-empress",
+      "name": "The Empress",
+      "type": "Chapel",
+      "thelemicPath": "Daleth",
+      "blend": "vesica-aurora",
+      "lore": "Rose lattice inviting embodied abundance without overload.",
+      "lab": "labs/empress-lab.html",
+      "curriculum": [
+        { "title": "Daleth garden prompts" }
+      ],
+      "labProtocol": [
+        { "title": "Heart field harmonics" }
+      ],
+      "assets": [
+        { "title": "Arcadian bloom sketch", "href": "assets/img/hero.webp" }
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "letter": "Aleph",
+      "primary": "#82A7FF",
+      "secondary": "#6ED4C8",
+      "accents": ["#C7D8FF", "#8DE9DA"]
+    },
+    {
+      "letter": "Beth",
+      "primary": "#F4C38E",
+      "secondary": "#7FA9FF",
+      "accents": ["#FBE1B7", "#A6C6FF"]
+    },
+    {
+      "letter": "Gimel",
+      "primary": "#E59EC4",
+      "secondary": "#6ECFF0",
+      "accents": ["#F3C2DC", "#95E5F6"]
+    },
+    {
+      "letter": "Daleth",
+      "primary": "#F4A8A0",
+      "secondary": "#B7C7FF",
+      "accents": ["#FAD1CC", "#D5E0FF"]
+    },
+    {
+      "letter": "Heh",
+      "primary": "#F0D28C",
+      "secondary": "#8FDBD2",
+      "accents": ["#F7E6B8", "#B6EDE5"]
+    },
+    {
+      "letter": "Vav",
+      "primary": "#9FA0F4",
+      "secondary": "#74D4F4",
+      "accents": ["#C0C1FF", "#9FE8FB"]
+    },
+    {
+      "letter": "Zayin",
+      "primary": "#C6A6F0",
+      "secondary": "#F2C0D4",
+      "accents": ["#DEC7F7", "#F7D7E3"]
+    },
+    {
+      "letter": "Cheth",
+      "primary": "#A6E4B5",
+      "secondary": "#7DB1F2",
+      "accents": ["#C7F1D2", "#A7C9FB"]
+    },
+    {
+      "letter": "Teth",
+      "primary": "#F0B78C",
+      "secondary": "#9FD6AB",
+      "accents": ["#F7D1B8", "#C4E5CB"]
+    },
+    {
+      "letter": "Yod",
+      "primary": "#A7D4F7",
+      "secondary": "#E2A9E8",
+      "accents": ["#C4E3FB", "#EDC5F4"]
+    },
+    {
+      "letter": "Kaph",
+      "primary": "#D6B4F2",
+      "secondary": "#74CFC2",
+      "accents": ["#E5CBF8", "#9FE2D8"]
+    },
+    {
+      "letter": "Lamed",
+      "primary": "#F2A5C2",
+      "secondary": "#7FC6F4",
+      "accents": ["#F6C4D7", "#A9DBFA"]
+    },
+    {
+      "letter": "Mem",
+      "primary": "#8FC9F2",
+      "secondary": "#5FD0B5",
+      "accents": ["#B6DDF8", "#89E2CB"]
+    },
+    {
+      "letter": "Nun",
+      "primary": "#F0B3D6",
+      "secondary": "#86D0EB",
+      "accents": ["#F6CBE3", "#ACE1F3"]
+    },
+    {
+      "letter": "Samekh",
+      "primary": "#97BFF7",
+      "secondary": "#E3C59A",
+      "accents": ["#BAD4FB", "#F0DABF"]
+    },
+    {
+      "letter": "Ayin",
+      "primary": "#A3E0D8",
+      "secondary": "#C7B1F6",
+      "accents": ["#C7EFE8", "#DCCBF9"]
+    },
+    {
+      "letter": "Peh",
+      "primary": "#F2C1A9",
+      "secondary": "#88C2F5",
+      "accents": ["#F8D6C6", "#ADD7FA"]
+    },
+    {
+      "letter": "Tzaddi",
+      "primary": "#E5A6F0",
+      "secondary": "#7ED6C8",
+      "accents": ["#F0C4F7", "#A6E9DB"]
+    },
+    {
+      "letter": "Qoph",
+      "primary": "#A5C9F2",
+      "secondary": "#E4B2A0",
+      "accents": ["#C2DDF8", "#F1D0C4"]
+    },
+    {
+      "letter": "Resh",
+      "primary": "#F2B089",
+      "secondary": "#9DBAF6",
+      "accents": ["#F8CBB0", "#C2D2FA"]
+    },
+    {
+      "letter": "Shin",
+      "primary": "#FFB5C0",
+      "secondary": "#86D6E8",
+      "accents": ["#FFD1D8", "#ABE5F1"]
+    },
+    {
+      "letter": "Tau",
+      "primary": "#D7B9F5",
+      "secondary": "#94D4B5",
+      "accents": ["#E6CDF9", "#B6E6CD"]
+    }
+  ]
+}
