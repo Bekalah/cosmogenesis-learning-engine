@@ -34,6 +34,19 @@ export const FALLBACK_MODULES = [
   }
 ];
 
+/**
+ * Render a list of sephirot items into a DOM container.
+ *
+ * If `records` is a non-empty array it will be rendered; otherwise the module's
+ * FALLBACK_SEPHIROT data is used. If `container` is not a DOM Element the
+ * function returns immediately with count 0 and `usedFallback: true`.
+ *
+ * @param {Element} container - Target DOM element that will receive the rendered items.
+ * @param {Array<Object>} [records] - Optional array of sephirot records to render; each record
+ *   may contain { id, emoji, title, meaning }.
+ * @return {{count: number, usedFallback: boolean}} Object with the number of items rendered and
+ *   a flag indicating whether fallback data was used.
+ */
 export function renderSephirotList(container, records) {
   if (!isElement(container)) {
     return { count: 0, usedFallback: true };
@@ -46,6 +59,17 @@ export function renderSephirotList(container, records) {
   return { count: nodes.length, usedFallback };
 }
 
+/**
+ * Render a grid of module cards into the given container element.
+ *
+ * If `records` is a non-empty array it is rendered; otherwise a built-in fallback
+ * module list is used. The container's existing children are synchronously
+ * replaced with the generated module card elements.
+ *
+ * @param {Element} container - Destination DOM element for the module grid. If not a DOM Element the function returns { count: 0, usedFallback: true } and makes no DOM changes.
+ * @param {Array<Object>} [records] - Optional array of module records to render. Each record may include { id, symbol, title, summary, tags }.
+ * @returns {{ count: number, usedFallback: boolean }} Number of rendered modules and whether the fallback dataset was used.
+ */
 export function renderModuleGrid(container, records) {
   if (!isElement(container)) {
     return { count: 0, usedFallback: true };
@@ -58,6 +82,11 @@ export function renderModuleGrid(container, records) {
   return { count: modules.length, usedFallback };
 }
 
+/**
+ * Create a list-item DOM node representing a sephirot entry (emoji, title, meaning).
+ * @param {{id?: string, emoji?: string, title?: string, meaning?: string}} record - Data for the item; `emoji` falls back to "✶", `title` falls back to `id`, and `meaning` falls back to an empty string.
+ * @return {HTMLLIElement} A constructed `<li>` element with class "feature-item" containing children with classes "feature-emoji", "feature-title", and "feature-meaning".
+ */
 function createSephirotItem(record) {
   const item = document.createElement("li");
   item.className = "feature-item";
@@ -78,6 +107,22 @@ function createSephirotItem(record) {
   return item;
 }
 
+/**
+ * Build a DOM card element representing a module record.
+ *
+ * The returned <article> has class "card" and role "listitem", contains an H3 title
+ * (uses `record.symbol` or "✶" plus `record.title` or `record.id`), a paragraph
+ * with `record.summary` (falls back to "Layered research capsule."), and — if
+ * `record.tags` is a non-empty array — a UL.tag-list with each tag as an LI.
+ *
+ * @param {Object} record - Module data.
+ * @param {string} [record.id] - Identifier used when `title` is missing.
+ * @param {string} [record.symbol] - Symbol prefix for the title.
+ * @param {string} [record.title] - Human-readable title.
+ * @param {string} [record.summary] - Short summary shown in the card.
+ * @param {string[]} [record.tags] - Optional list of tag strings; rendered as a tag list when non-empty.
+ * @return {HTMLElement} The constructed article element ready to be inserted into the DOM.
+ */
 function createModuleCard(record) {
   const article = document.createElement("article");
   article.className = "card";
@@ -105,6 +150,15 @@ function createModuleCard(record) {
   return article;
 }
 
+/**
+ * Replace all children of a container with the provided nodes.
+ *
+ * Clears every existing child node from the container, then appends each node
+ * from `nodes` in order. Nodes are moved into the container (not cloned).
+ *
+ * @param {Element} container - The DOM element whose children will be replaced.
+ * @param {Iterable<Node>} nodes - Iterable of DOM nodes to append as the new children.
+ */
 function replaceChildren(container, nodes) {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
@@ -114,6 +168,15 @@ function replaceChildren(container, nodes) {
   });
 }
 
+/**
+ * Checks whether a value is a DOM Element.
+ *
+ * Safely returns true only if the global `Element` constructor exists and `candidate`
+ * is an instance of `Element`. Returns false in non-DOM or non-browser environments.
+ *
+ * @param {*} candidate - Value to test.
+ * @return {boolean} True if `candidate` is a DOM Element, otherwise false.
+ */
 function isElement(candidate) {
   return typeof Element !== "undefined" && candidate instanceof Element;
 }
