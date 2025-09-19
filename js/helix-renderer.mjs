@@ -29,6 +29,24 @@ const DEFAULT_NUMBERS = {
   ONEFORTYFOUR: 144
 };
 
+const DEFAULT_REGISTRY = {
+  arcana: [],
+  sephirot: [
+    { id: null, name: "Kether", type: "sephirah", numerology: 1, lore: "Crown unity", lab: null },
+    { id: null, name: "Chokmah", type: "sephirah", numerology: 2, lore: "Wisdom force", lab: null },
+    { id: null, name: "Binah", type: "sephirah", numerology: 3, lore: "Understanding form", lab: null },
+    { id: null, name: "Daath", type: "sephirah", numerology: null, lore: "Hidden knowledge", lab: null },
+    { id: null, name: "Chesed", type: "sephirah", numerology: 4, lore: "Mercy pillar", lab: null },
+    { id: null, name: "Geburah", type: "sephirah", numerology: 5, lore: "Severity pillar", lab: null },
+    { id: null, name: "Tiphareth", type: "sephirah", numerology: 6, lore: "Solar heart", lab: null },
+    { id: null, name: "Netzach", type: "sephirah", numerology: 7, lore: "Victory", lab: null },
+    { id: null, name: "Hod", type: "sephirah", numerology: 8, lore: "Splendour", lab: null },
+    { id: null, name: "Yesod", type: "sephirah", numerology: 9, lore: "Foundation", lab: null },
+    { id: null, name: "Malkuth", type: "sephirah", numerology: 10, lore: "Kingdom", lab: null }
+  ],
+  paths: []
+};
+
 export function renderHelix(ctx, input = {}) {
   if (!ctx || typeof ctx.canvas === "undefined") {
     throw new Error("renderHelix requires a 2D canvas context.");
@@ -39,9 +57,9 @@ export function renderHelix(ctx, input = {}) {
   clearStage(ctx, config.dims, config.palette.bg);
 
   const vesicaStats = drawVesicaField(ctx, config.dims, config.palette, config.numbers);
-  const treeStats = drawTreeOfLife(ctx, config.dims, config.palette, config.numbers);
+  const treeStats = drawTreeOfLife(ctx, config.dims, config.palette, config.numbers, config.registry);
   const fibonacciStats = drawFibonacciCurve(ctx, config.dims, config.palette, config.numbers);
-  const helixStats = drawHelixLattice(ctx, config.dims, config.palette, config.numbers);
+  const helixStats = drawHelixLattice(ctx, config.dims, config.palette, config.numbers, config.registry);
 
   if (config.notice) {
     // Inline notice reassures offline viewers that a safe fallback palette is active.
@@ -51,7 +69,7 @@ export function renderHelix(ctx, input = {}) {
   ctx.restore();
 
   return {
-    summary: summariseLayers({ vesicaStats, treeStats, fibonacciStats, helixStats })
+    summary: summariseLayers({ vesicaStats, treeStats, fibonacciStats, helixStats }, config.registry)
   };
 }
 
@@ -62,7 +80,8 @@ function normaliseConfig(ctx, input) {
   const palette = mergePalette(input.palette || {});
   const numbers = mergeNumbers(input.NUM || {});
   const notice = typeof input.notice === "string" ? input.notice : null;
-  return { dims, palette, numbers, notice };
+  const registry = normaliseRegistry(input.registry);
+  return { dims, palette, numbers, notice, registry };
 }
 
 function mergePalette(candidate) {
@@ -87,6 +106,148 @@ function mergeNumbers(candidate) {
     }
   }
   return merged;
+}
+
+function normaliseRegistry(candidate) {
+  const registry = cloneRegistry(DEFAULT_REGISTRY);
+  const partitions = partitionRegistry(candidate);
+
+  const arcana = partitions.arcana
+    .map(record => sanitiseRecord(record, "arcana"))
+    .filter(Boolean);
+  const paths = partitions.paths
+    .map(record => sanitiseRecord(record, "path"))
+    .filter(Boolean);
+  const sephirot = partitions.sephirot
+    .map(record => sanitiseRecord(record, "sephirah"))
+    .filter(Boolean);
+
+  if (arcana.length > 0) {
+    registry.arcana = arcana;
+  }
+
+  if (paths.length > 0) {
+    registry.paths = paths;
+  }
+
+  if (sephirot.length > 0) {
+    const index = new Map();
+    registry.sephirot.forEach(entry => {
+      index.set(canonicalKey(entry.name), entry);
+    });
+    sephirot.forEach(entry => {
+      const key = canonicalKey(entry.name);
+      if (!key) return;
+      if (index.has(key)) {
+        mergeSephirotEntry(index.get(key), entry);
+      } else {
+        registry.sephirot.push(entry);
+        index.set(key, entry);
+      }
+    });
+  }
+
+  ensureDaathEntry(registry.sephirot);
+  return registry;
+}
+
+function cloneRegistry(template) {
+  return {
+    arcana: Array.isArray(template.arcana) ? template.arcana.map(entry => ({ ...entry })) : [],
+    sephirot: Array.isArray(template.sephirot) ? template.sephirot.map(entry => ({ ...entry })) : [],
+    paths: Array.isArray(template.paths) ? template.paths.map(entry => ({ ...entry })) : []
+  };
+}
+
+function partitionRegistry(candidate) {
+  const result = { arcana: [], sephirot: [], paths: [] };
+  if (!candidate) return result;
+
+  if (Array.isArray(candidate)) {
+    candidate.forEach(item => distributeRecord(result, item));
+    return result;
+  }
+
+  if (typeof candidate === "object") {
+    distributeCollection(result.arcana, candidate.arcana, "arcana");
+    distributeCollection(result.sephirot, candidate.sephirot, "sephirah");
+    distributeCollection(result.paths, candidate.paths, "path");
+  }
+
+  return result;
+}
+
+function distributeRecord(result, item) {
+  if (!item || typeof item !== "object") return;
+  const type = typeof item.type === "string" ? item.type.toLowerCase() : "";
+  if (type === "arcana") {
+    result.arcana.push({ ...item });
+  } else if (type === "sephirah") {
+    result.sephirot.push({ ...item });
+  } else if (type === "path") {
+    result.paths.push({ ...item });
+  }
+}
+
+function distributeCollection(target, source, fallbackType) {
+  if (!Array.isArray(source)) return;
+  source.forEach(item => {
+    if (!item || typeof item !== "object") return;
+    const record = { ...item };
+    if (!record.type && fallbackType) {
+      record.type = fallbackType;
+    }
+    target.push(record);
+  });
+}
+
+function sanitiseRecord(record, forcedType) {
+  if (!record || typeof record !== "object") return null;
+  const name = typeof record.name === "string" ? record.name.trim() : "";
+  if (!name) return null;
+  const id = typeof record.id === "number" && Number.isFinite(record.id) ? record.id : null;
+  const type = forcedType || (typeof record.type === "string" ? record.type : "");
+  const numerology = typeof record.numerology === "number" && Number.isFinite(record.numerology)
+    ? record.numerology
+    : null;
+  const lore = typeof record.lore === "string" ? record.lore.trim() : "";
+  const labRaw = typeof record.lab === "string" ? record.lab.trim() : "";
+  const lab = labRaw.length > 0 ? labRaw : null;
+  return { id, name, type, numerology, lore, lab };
+}
+
+function mergeSephirotEntry(target, source) {
+  if (!target || !source) return;
+  target.id = source.id !== null ? source.id : target.id;
+  target.name = source.name || target.name;
+  if (source.numerology !== null) {
+    target.numerology = source.numerology;
+  }
+  if (source.lore) {
+    target.lore = source.lore;
+  }
+  if (source.lab) {
+    target.lab = source.lab;
+  }
+}
+
+function ensureDaathEntry(sephirot) {
+  if (!Array.isArray(sephirot)) return;
+  const hasDaath = sephirot.some(entry => canonicalKey(entry.name) === "daath");
+  if (!hasDaath) {
+    const insertIndex = Math.min(3, sephirot.length);
+    sephirot.splice(insertIndex, 0, { id: null, name: "Daath", type: "sephirah", numerology: null, lore: "Hidden knowledge", lab: null });
+  }
+}
+
+function canonicalKey(name) {
+  return String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function capitaliseKey(key) {
+  const text = String(key || "");
+  if (!text) return "";
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 function clearStage(ctx, dims, bg) {
@@ -131,7 +292,7 @@ function drawVesica(ctx, cx, cy, radius, offset) {
   ctx.stroke();
 }
 
-function drawTreeOfLife(ctx, dims, palette, numbers) {
+function drawTreeOfLife(ctx, dims, palette, numbers, registry) {
   const nodes = buildTreeNodes(dims, numbers);
   const paths = buildTreePaths();
   const nodeRadius = Math.max(6, dims.width / numbers.NINETYNINE);
@@ -163,7 +324,14 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
   }
 
   ctx.restore();
-  return { nodes: Object.keys(nodes).length, paths: paths.length };
+  const sephirotRecords = registry && Array.isArray(registry.sephirot) ? registry.sephirot : [];
+  const labelStats = drawSephirahLabels(ctx, nodes, dims, palette, numbers, nodeRadius, sephirotRecords);
+  return {
+    nodes: Object.keys(nodes).length,
+    paths: paths.length,
+    labels: labelStats.labels,
+    labs: labelStats.labs
+  };
 }
 
 /**
@@ -239,6 +407,67 @@ function buildTreePaths() {
   ];
 }
 
+function drawSephirahLabels(ctx, nodes, dims, palette, numbers, nodeRadius, sephirotRecords) {
+  if (!nodes || typeof nodes !== "object") {
+    return { labels: 0, labs: 0 };
+  }
+
+  const records = Array.isArray(sephirotRecords) ? sephirotRecords : [];
+  if (records.length === 0) {
+    return { labels: 0, labs: 0 };
+  }
+
+  const map = new Map();
+  records.forEach(record => {
+    const key = canonicalKey(record.name);
+    if (key) {
+      map.set(key, record);
+    }
+  });
+
+  const centerX = dims.width / 2;
+  const fontSize = Math.max(16, dims.width / (numbers.ONEFORTYFOUR * 0.85));
+  const labSize = Math.max(11, fontSize * 0.68);
+  const offset = nodeRadius * (numbers.THIRTYTHREE / numbers.TWENTYTWO);
+  let labels = 0;
+  let labs = 0;
+
+  ctx.save();
+  ctx.textBaseline = "middle";
+
+  for (const key of Object.keys(nodes)) {
+    const node = nodes[key];
+    if (!node) continue;
+    const canonical = canonicalKey(key);
+    const record = map.get(canonical);
+    const baseName = record ? record.name : capitaliseKey(key);
+    const numeral = record && record.numerology !== null ? ` · ${record.numerology}` : "";
+    const labelText = `${baseName}${numeral}`;
+    const align = node.x >= centerX ? "left" : "right";
+    const labelX = align === "left" ? node.x + nodeRadius + offset : node.x - nodeRadius - offset;
+    const labelY = node.y;
+
+    ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
+    ctx.textAlign = align;
+    ctx.fillStyle = palette.ink;
+    ctx.fillText(labelText, labelX, labelY);
+    labels += 1;
+
+    if (record && record.lab) {
+      ctx.font = `${labSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
+      ctx.textBaseline = "top";
+      ctx.fillStyle = palette.layers[5] || palette.ink;
+      const labLabel = record.lab.replace(/[-_]/g, " ");
+      ctx.fillText(labLabel, labelX, labelY + fontSize * 0.55);
+      ctx.textBaseline = "middle";
+      labs += 1;
+    }
+  }
+
+  ctx.restore();
+  return { labels, labs };
+}
+
 function drawFibonacciCurve(ctx, dims, palette, numbers) {
   const sequence = buildFibonacciSequence(numbers.ONEFORTYFOUR);
   const points = buildSpiralPoints(sequence, dims, numbers);
@@ -290,7 +519,7 @@ function buildSpiralPoints(sequence, dims, numbers) {
   return [{ x: centerX, y: centerY }, ...points];
 }
 
-function drawHelixLattice(ctx, dims, palette, numbers) {
+function drawHelixLattice(ctx, dims, palette, numbers, registry) {
   const rails = buildHelixRails(dims, numbers);
 
   ctx.save();
@@ -322,8 +551,70 @@ function drawHelixLattice(ctx, dims, palette, numbers) {
     ctx.stroke();
   });
 
+  const arcanaRecords = registry && Array.isArray(registry.arcana) ? registry.arcana : [];
+  const markerStats = drawArcanaMarkers(ctx, rails, dims, palette, numbers, arcanaRecords);
+
   ctx.restore();
-  return { rungs: rails.rungs.length };
+  return {
+    rungs: rails.rungs.length,
+    markers: markerStats.markers,
+    labs: markerStats.labs
+  };
+}
+
+function drawArcanaMarkers(ctx, rails, dims, palette, numbers, arcanaRecords) {
+  const records = Array.isArray(arcanaRecords) ? arcanaRecords : [];
+  if (records.length === 0) {
+    return { markers: 0, labs: 0 };
+  }
+
+  const radius = Math.max(8, dims.width / (numbers.ONEFORTYFOUR * 1.1));
+  const fontSize = Math.max(11, radius * 1.35);
+  let markers = 0;
+  let labs = 0;
+
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
+
+  const limit = Math.min(records.length, rails.a.length);
+  for (let i = 0; i < limit; i += 1) {
+    const record = records[i];
+    if (!record || typeof record !== "object") continue;
+    const rail = i % 2 === 0 ? rails.a : rails.b;
+    const point = rail[i];
+    if (!point) continue;
+
+    const fill = i % 2 === 0 ? palette.layers[4] : palette.layers[5];
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = fill;
+    ctx.fill();
+    ctx.strokeStyle = palette.ink;
+    ctx.lineWidth = Math.max(0.8, radius / 3);
+    ctx.stroke();
+
+    const numeral = typeof record.numerology === "number" && Number.isFinite(record.numerology)
+      ? record.numerology
+      : i;
+    ctx.fillStyle = palette.ink;
+    ctx.fillText(String(numeral), point.x, point.y);
+
+    if (record.lab) {
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, radius * 1.35, 0, Math.PI * 2);
+      ctx.strokeStyle = palette.layers[2];
+      ctx.lineWidth = Math.max(0.6, radius / 4);
+      ctx.stroke();
+      labs += 1;
+    }
+
+    markers += 1;
+  }
+
+  ctx.restore();
+  return { markers, labs };
 }
 
 function buildHelixRails(dims, numbers) {
@@ -365,10 +656,22 @@ function drawCanvasNotice(ctx, dims, color, message) {
   ctx.restore();
 }
 
-function summariseLayers(stats) {
+function summariseLayers(stats, registry) {
   const vesica = `${stats.vesicaStats.circles} vesica circles`;
-  const tree = `${stats.treeStats.paths} paths / ${stats.treeStats.nodes} nodes`;
+  const treeBase = `${stats.treeStats.paths} paths / ${stats.treeStats.nodes} nodes`;
+  const treeLabels = stats.treeStats.labels > 0 ? ` / ${stats.treeStats.labels} labels` : "";
+  const treeLabs = stats.treeStats.labs > 0 ? ` (${stats.treeStats.labs} labs)` : "";
+  const tree = `${treeBase}${treeLabels}${treeLabs}`;
   const fibonacci = `${stats.fibonacciStats.points} spiral points`;
-  const helix = `${stats.helixStats.rungs} helix rungs`;
-  return `Layers rendered - ${vesica}; ${tree}; ${fibonacci}; ${helix}.`;
+  let helix = `${stats.helixStats.rungs} helix rungs`;
+  if (stats.helixStats.markers > 0) {
+    helix += ` / ${stats.helixStats.markers} arcana markers`;
+  }
+  if (stats.helixStats.labs > 0) {
+    helix += ` (${stats.helixStats.labs} lab rings)`;
+  }
+  const arcanaCount = registry && Array.isArray(registry.arcana) ? registry.arcana.length : 0;
+  const sephirotCount = registry && Array.isArray(registry.sephirot) ? registry.sephirot.length : 0;
+  const registryNote = `registry ${arcanaCount} arcana, ${sephirotCount} sephirot`;
+  return `Layers rendered - ${vesica}; ${tree}; ${fibonacci}; ${helix}; ${registryNote}.`;
 }

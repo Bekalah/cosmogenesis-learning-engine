@@ -6,17 +6,18 @@ Static, offline-first canvas capsule that renders four calm layers: the vesica l
 - `index.html` - offline entry point that loads the optional palette, syncs the chrome colours, seeds numerology constants, and invokes the renderer.
 - `js/helix-renderer.mjs` - pure ES module of drawing helpers. Each function documents why the ND-safe order matters and references the covenant numbers.
 - `data/palette.json` - optional colour override. If missing the renderer applies its sealed fallback, posts a status message, and paints a canvas notice.
+- `data/cosmic-nodes.json` - optional registry of arcana, sephirot, and paths. Labels and helix markers draw from this list; when absent the defaults embedded in `index.html` keep the canvas layered and annotated.
 
 ## Usage
 1. Download or clone the repository.
 2. Double-click `index.html`. No build step or server is required.
-3. If `data/palette.json` is blocked by `file://` rules, the fallback palette activates automatically, the page chrome updates to the safe defaults, and a notice appears on the canvas footer.
+3. If either JSON file is blocked by `file://` rules, the sealed fallbacks activate automatically, the page chrome updates to the safe defaults, and a notice appears on the canvas footer.
 
 ## Layer order (back to front)
 1. **Vesica field** - seven by three grid of intersecting circles, softened alpha to avoid glare.
-2. **Tree-of-Life scaffold** - ten sephirot nodes tied by twenty-two calm paths. Vertical placement uses combinations of {3, 7, 9, 11, 22, 33, 99, 144} so the descent honours the numerology covenant.
+2. **Tree-of-Life scaffold** - ten sephirot nodes tied by twenty-two calm paths. Vertical placement uses combinations of {3, 7, 9, 11, 22, 33, 99, 144} so the descent honours the numerology covenant, and each node receives a registry-driven label plus optional lab subtitle.
 3. **Fibonacci curve** - static logarithmic spiral sampled from Fibonacci numbers up to 144.
-4. **Double-helix lattice** - two phase-shifted strands with alternating rungs; entirely static.
+4. **Double-helix lattice** - two phase-shifted strands with alternating rungs; entirely static. Arcana markers ride the rails, numbered by their numerology, with lab entries encircled for quick orientation.
 
 All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour the cosmology canon.
 
@@ -28,6 +29,7 @@ All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour th
 
 ## Customisation
 - Adjust colours by editing `data/palette.json`. Provide `bg`, `ink`, and a six colour `layers` array.
+- Adjust labels and helix markers by editing `data/cosmic-nodes.json`. Each record may carry `name`, `numerology`, and an optional `lab` tag for emphasis.
 - Override numerology constants in `index.html` before calling `renderHelix` if alternate ratios are desired.
 - Compose new layers by duplicating the helper pattern in `js/helix-renderer.mjs`. Keep additions static and well-commented to preserve ND safety.
 - The loader prefers JSON module imports when opened via `file://` to avoid network access. Browsers without JSON module support fall back to the bundled palette safely.
