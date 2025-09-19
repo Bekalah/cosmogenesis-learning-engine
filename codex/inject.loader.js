@@ -1,7 +1,20 @@
 (async()=>{
-  const theme = await fetch('/assets/theme.json').then(r=>r.json()).catch(()=>null);
+(async()=>{
+  const themeURL = new URL('../assets/theme.json', import.meta.url);
+  const mapURL = new URL('./data.map.json', import.meta.url);
+  async function loadJSON(url){
+    try{
+      if (location.protocol === 'file:') {
+        try { const m = await import(url, { assert:{ type:'json' } }); return m.default; } catch {}
+      }
+      const r = await fetch(url, { cache:'no-store' }); if(!r.ok) throw new Error(r.status);
+      return await r.json();
+    } catch { return null; }
+  }
+  const theme = await loadJSON(themeURL.href);
   if(theme?.mural){ document.body.style.setProperty('--mural', `url(${theme.mural})`); document.body.classList.add('has-mural'); }
-  const map = await fetch('/codex/data.map.json').then(r=>r.json()).catch(()=>({paths:{}}));
+  const map = await loadJSON(mapURL.href) || { paths:{} };
+})();
   async function firstOk(list){ for(const p of list||[]){ try{const h=await fetch(p,{method:'HEAD'}); if(h.ok) return p;}catch{} } return (list||[]).at(-1); }
   const key = (theme?.chapels?.[0]) || 'kabbalah';
   const url = await firstOk(map.paths[key]); const data = url? await fetch(url).then(r=>r.json()).catch(()=>[]) : [];
