@@ -6,257 +6,102 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <style>
-    /* ND-safe shell: calm contrast, no motion, maintain spacious margins */
+    /* ND-safe: calm contrast, no motion, layered geometry shell */
     :root {
       --bg:#0b0b12;
       --ink:#e8e8f0;
       --muted:#a6a6c1;
-      --edge:#1e2030;
+      --edge:#1d1d2a;
     }
     html, body {
       margin:0;
       padding:0;
       background:var(--bg);
       color:var(--ink);
-      font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     }
     header {
-      padding:12px 16px 10px 16px;
+      padding:12px 16px;
       border-bottom:1px solid var(--edge);
     }
     .status {
-      margin-top:2px;
       color:var(--muted);
       font-size:12px;
+      margin-top:2px;
     }
     #stage {
       display:block;
-      margin:18px auto 12px auto;
+      margin:16px auto 12px auto;
       width:1440px;
       height:900px;
-      box-shadow:0 0 0 1px var(--edge),0 18px 48px rgba(0,0,0,0.45);
+      max-width:100%;
+      box-shadow:0 0 0 1px var(--edge);
       background-color:transparent;
     }
     .note {
-      max-width:920px;
+      max-width:900px;
       margin:0 auto 24px auto;
       padding:0 16px;
       color:var(--muted);
-    }
-    @media (max-width:1500px) {
-      #stage {
-        width:100%;
-        height:auto;
-        max-width:1440px;
-        aspect-ratio:1440/900;
-      }
     }
   </style>
 </head>
 <body>
   <header>
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-
     <div class="status" id="status">Loading palette…</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">This static renderer paints four calm layers — vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. Open directly; no network or build steps are required.</p>
-
-
-
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette...</div>
-  </header>
-
-  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-
-  <div id="chapel-ring" style="position:relative;width:min(80vmin,820px);aspect-ratio:1;margin:40px auto"></div>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
-  <script type="module" src="./codex/inject.loader.js"></script>
-
-  <p class="note">Static, offline canvas tuned to the cathedral style reference: vesica grid foundation, Tree-of-Life vault, Fibonacci halo, and double-helix lattice. Palette loads locally with a safe fallback notice for ND assurance.</p>
-
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
-
+  <p class="note">This static renderer encodes the vesica grid, Tree-of-Life scaffold, Fibonacci curve, and a double-helix lattice. Open this file directly; no network calls beyond optional local JSON loads.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const statusEl = document.getElementById("status");
+    const elStatus = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    const defaults = {
-      // Fallback palette + registry ensures offline resilience when JSON files are missing.
-    const DEFAULTS = {
-      palette: {
-        bg:"#0b0b12",
-        ink:"#e8e8f0",
-        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
-      }
-    };
-
-
-    async function importJSONModule(path) {
-
-      // Try modern import attributes first, then legacy import assertions.
+    async function loadJSON(path) {
       try {
-        // Modern
-        const m = await import(path, { with: { type: "json" } });
-        return m?.default ?? m;
-      } catch (e1) {
-        try {
-          // Legacy
-          const m = await import(path, { assert: { type: "json" } });
-          return m?.default ?? m;
-        } catch (e2) {
-          const err = new Error("JSON module import failed");
-          err.cause = e2;
-          throw err;
-
-      try {
-        const m = await import(path, { with: { type: "json" } });
-        if (m && m.default) return m.default;
-        throw new Error("JSON module missing default export");
-      } catch (e1) {
-        // Fallback for older Chromium builds that used `assert`
-        try {
-          const mOld = await import(path, { assert: { type: "json" } });
-          if (mOld && mOld.default) return mOld.default;
-          throw new Error("JSON module (assert) missing default export");
-        } catch (e2) {
-          throw e2;
-
-        }
-      }
-    }
-    async function fetchJSON(path) {
-      try {
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-    async function loadPalette(path) {
-      // Offline promise: only touches local paths. When browsers block file:// fetch we attempt a JSON module import first.
-      try {
-        if (window.location && window.location.protocol === "file:") {
-          try {
-            const module = await import(path, { assert: { type: "json" } });
-            return module.default;
-          } catch (importError) {
-            // Silent fallback: some engines reject JSON assertions when opened straight from disk.
-          }
-        }
         const response = await fetch(path, { cache: "no-store" });
-        if (!response.ok) throw new Error(String(response.status));
+        if (!response.ok) {
+          throw new Error(String(response.status));
+        }
         return await response.json();
-      } catch (err) {
+      } catch (error) {
         return null;
       }
     }
 
-
-    const defaults = {
-      palette: {
-        bg:"#0a0c16",
-        ink:"#f4e3c6",
-        layers:["#1f3f63","#265f7f","#c4974b","#f6d58b","#c987d6","#2c3b5d"]
-
-    async function resolvePalette() {
-      const isFileOrigin = typeof window !== "undefined" && window.location && window.location.protocol === "file:";
-
-      if (isFileOrigin) {
-        try {
-          const modulePalette = await importJSONModule("./data/palette.json");
-          elStatus.textContent = "Palette loaded via JSON module.";
-          return { palette: modulePalette, notice: null };
-        } catch (moduleError) {
-          // Fallback to fetch below; some browsers decline JSON module assertions.
-
-      }
-
-      const fetchedPalette = await fetchJSON("./data/palette.json");
-      if (fetchedPalette) {
-        elStatus.textContent = "Palette loaded.";
-        return { palette: fetchedPalette, notice: null };
-      }
-
-      elStatus.textContent = "Palette missing; using safe fallback.";
-      return { palette: defaults.palette, notice: "Palette fallback active" };
-    }
-
-    const { palette: activePalette, notice } = await resolvePalette();
-
-
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-
-      }
-
-      const fetchedPalette = await fetchJSON("./data/palette.json");
-      if (fetchedPalette) {
-        elStatus.textContent = "Palette loaded.";
-        return { palette: fetchedPalette, notice: null };
-
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-      }
-
-      elStatus.textContent = "Palette missing; using safe fallback.";
-      return { palette: defaults.palette, notice: "Palette fallback active" };
-    }
-
-    const { palette: activePalette, notice } = await resolvePalette();
-      },
-      registry: [
-        { "id": 0, "name": "The Fool", "type": "arcana", "numerology": 0, "lore": "Pure potential, leap into the abyss, Aleph breath of beginning", "lab": "respawn-meditation" },
-        { "id": 1, "name": "The Magician", "type": "arcana", "numerology": 1, "lore": "Will manifested, Mercury's messenger, tools of transformation", "lab": "beth-house-ritual" },
-        { "id": 2, "name": "High Priestess", "type": "arcana", "numerology": 2, "lore": "Veiled wisdom, lunar mysteries, guardian of thresholds", "lab": "gimel-camel-path" },
-        { "id": 3, "name": "The Empress", "type": "arcana", "numerology": 3, "lore": "Venus fertile, creative abundance, nature's sovereignty" },
-        { "id": 4, "name": "The Emperor", "type": "arcana", "numerology": 4, "lore": "Cubic throne, Mars authority, structure and order" },
-        { "id": 5, "name": "Hierophant", "type": "arcana", "numerology": 5, "lore": "Taurus teaching, bridge between worlds, sacred tradition" },
-        { "id": 6, "name": "The Lovers", "type": "arcana", "numerology": 6, "lore": "Zayin sword divides, conscious choice, sacred union" },
-        { "id": 7, "name": "The Chariot", "type": "arcana", "numerology": 7, "lore": "Cancer's shell, sphinx guardians, triumphant will" },
-        { "id": 8, "name": "Strength", "type": "arcana", "numerology": 8, "lore": "Serpent power, Leo's courage, infinite lemniscate" },
-        { "id": 9, "name": "Hermit", "type": "arcana", "numerology": 9, "lore": "Virgo's lamp, Yod hand of God, inner guidance" },
-        { "id": 10, "name": "Wheel of Fortune", "type": "arcana", "numerology": 10, "lore": "Jupiter's expansion, karma cycles, sphinx wisdom" },
-        { "id": 11, "name": "Justice", "type": "arcana", "numerology": 11, "lore": "Libra's balance, Lamed ox-goad, karmic adjustment" },
-        { "id": 12, "name": "Hanged Man", "type": "arcana", "numerology": 12, "lore": "Neptune's water, suspended mind, reversal wisdom" },
-        { "id": 13, "name": "Death", "type": "arcana", "numerology": 13, "lore": "Scorpio transformation, Nun fish, ego dissolution", "lab": "death-rebirth" },
-        { "id": 14, "name": "Temperance", "type": "arcana", "numerology": 14, "lore": "Sagittarius arrow, alchemical mixture, middle path" },
-        { "id": 15, "name": "Devil", "type": "arcana", "numerology": 15, "lore": "Capricorn matter, Ayin eye opens, shadow integration" },
-        { "id": 16, "name": "Tower", "type": "arcana", "numerology": 16, "lore": "Mars lightning, false crown falls, liberation shock", "lab": "tower-catalyst" },
-        { "id": 17, "name": "Star", "type": "arcana", "numerology": 17, "lore": "Aquarius pours, seven chakras, cosmic consciousness" },
-        { "id": 18, "name": "Moon", "type": "arcana", "numerology": 18, "lore": "Pisces dreams, Qoph back of head, astral journey", "lab": "moon-veil" },
-        { "id": 19, "name": "Sun", "type": "arcana", "numerology": 19, "lore": "Solar child, Resh head renewal, conscious joy" },
-        { "id": 20, "name": "Judgement", "type": "arcana", "numerology": 20, "lore": "Pluto rises, Shin tooth/fire, eternal calling" },
-        { "id": 21, "name": "World", "type": "arcana", "numerology": 21, "lore": "Saturn completes, Tau cross manifest, cosmic dance" },
-        { "id": 22, "name": "Kether", "type": "sephirah", "numerology": 1, "lore": "Crown unity, source point, pure will undifferentiated" },
-        { "id": 23, "name": "Chokmah", "type": "sephirah", "numerology": 2, "lore": "Wisdom force, Zodiac sphere, active principle" },
-        { "id": 24, "name": "Binah", "type": "sephirah", "numerology": 3, "lore": "Understanding form, Saturn's restriction, divine mother" },
-        { "id": 25, "name": "Chesed", "type": "sephirah", "numerology": 4, "lore": "Jupiter mercy, building power, benevolent king" },
-        { "id": 26, "name": "Geburah", "type": "sephirah", "numerology": 5, "lore": "Mars severity, destroying force, necessary restriction" },
-        { "id": 27, "name": "Tiphareth", "type": "sephirah", "numerology": 6, "lore": "Solar beauty, Christ center, harmonious balance" },
-        { "id": 28, "name": "Netzach", "type": "sephirah", "numerology": 7, "lore": "Venus victory, desire nature, creative force" },
-        { "id": 29, "name": "Hod", "type": "sephirah", "numerology": 8, "lore": "Mercury splendor, mental forms, magical image" },
-        { "id": 30, "name": "Yesod", "type": "sephirah", "numerology": 9, "lore": "Lunar foundation, astral light, subconscious machinery" },
-        { "id": 31, "name": "Malkuth", "type": "sephirah", "numerology": 10, "lore": "Kingdom manifest, four elements, physical completion" },
-        { "id": 32, "name": "Aleph Path", "type": "path", "numerology": 11, "lore": "Fool's breath, Kether to Chokmah, spirit descends" },
-        { "id": 33, "name": "Beth Path", "type": "path", "numerology": 12, "lore": "Magician's house, Kether to Binah, will directed" },
-        { "id": 34, "name": "Gimel Path", "type": "path", "numerology": 13, "lore": "Priestess veil, Kether to Tiphareth, unity to beauty" },
-        { "id": 35, "name": "Daleth Path", "type": "path", "numerology": 14, "lore": "Empress door, Chokmah to Binah, wisdom meets form" },
-        { "id": 36, "name": "Samekh Path", "type": "path", "numerology": 25, "lore": "Temperance arrow, Tiphareth to Yesod, testing ground" },
-        { "id": 37, "name": "Ayin Path", "type": "path", "numerology": 26, "lore": "Devil's eye, Tiphareth to Hod, material test" },
-        { "id": 38, "name": "Peh Path", "type": "path", "numerology": 27, "lore": "Tower's mouth, Netzach to Hod, force meets form" },
-        { "id": 39, "name": "Tzaddi Path", "type": "path", "numerology": 28, "lore": "Star's hook, Netzach to Yesod, desire crystallizes" },
-        { "id": 40, "name": "Qoph Path", "type": "path", "numerology": 29, "lore": "Moon's sleep, Netzach to Malkuth, dream manifest" },
-        { "id": 41, "name": "Shin Path", "type": "path", "numerology": 31, "lore": "Judgement fire, Hod to Malkuth, mind materializes" },
-        { "id": 42, "name": "Tau Path", "type": "path", "numerology": 32, "lore": "World's cross, Yesod to Malkuth, foundation complete" }
-      ]
+    const FALLBACK = {
+      bg:"#0b0b12",
+      ink:"#e8e8f0",
+      layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
     };
 
+    function applyShellPalette(palette) {
+      const root = document.documentElement;
+      root.style.setProperty("--bg", palette.bg);
+      root.style.setProperty("--ink", palette.ink);
+      root.style.setProperty("--muted", withAlpha(palette.ink, 0.6));
+    }
+
+    function withAlpha(hex, alpha) {
+      const normalised = String(hex || "").replace(/^#/, "");
+      if (normalised.length !== 6) {
+        return hex;
+      }
+      const r = parseInt(normalised.slice(0, 2), 16);
+      const g = parseInt(normalised.slice(2, 4), 16);
+      const b = parseInt(normalised.slice(4, 6), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    const palette = await loadJSON("./data/palette.json");
+    const active = palette || FALLBACK;
+    applyShellPalette(active);
+    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
 
     const NUM = {
       THREE:3,
@@ -269,173 +114,17 @@
       ONEFORTYFOUR:144
     };
 
-
-
-
-    const palette = await loadJSON("./data/palette.json");
-    const palette = await loadPalette("./data/palette.json");
-    const active = palette || defaults.palette;
-    const usingFallback = !palette;
-    const active = palette || defaults.palette;
-    const baseStatus = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
-
-
-    initialise();
-
-    async function initialise() {
-      const paletteData = await loadJSON("./data/palette.json");
-      const registryData = await loadJSON("./data/cosmic-nodes.json");
-
-      const activePalette = paletteData || defaults.palette;
-      const activeRegistry = registryData || defaults.registry;
-
-      applyChromePalette(activePalette);
-
-      const statusParts = [];
-      const notices = [];
-
-
-      applyChromePalette(active);
-      if (paletteData) {
-        statusParts.push("Palette loaded.");
-      } else {
-        statusParts.push("Palette missing; using safe fallback.");
-        notices.push("Palette fallback active");
-      }
-
-      if (registryData) {
-        statusParts.push("Registry loaded.");
-      } else {
-        statusParts.push("Registry missing; using sealed dataset.");
-        notices.push("Registry fallback active");
-      }
-
-      elStatus.textContent = statusParts.join(" ");
-      const paletteData = await loadPalette("./data/palette.json");
-      const usingFallback = !paletteData;
-      const palette = paletteData || DEFAULTS.palette;
-
-      applyChromePalette(palette);
-
-      if (!ctx) {
-        updateStatus(composeStatus(usingFallback, "Canvas 2D context unavailable; geometry skipped."));
-        return;
-      }
-
-      // ND-safe: renderer executes once with static geometry and optional notices when fallbacks are active.
-<
-      // Single-pass render keeps the scene static: no loops, no animation, ND-safe.
-      const outcome = renderHelix(ctx, {
+    if (ctx && typeof ctx.save === "function") {
+      renderHelix(ctx, {
         width:canvas.width,
         height:canvas.height,
-        palette,
-
-      // ND-safe: renderer executes once with static geometry and optional notice when fallbacks are active.
-      renderHelix(ctx, {
-
-
-    // ND-safe rationale: no motion, high readability, soft glow, preserved layer order
-    const result = renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    elStatus.textContent = result && result.summary ? `${baseStatus} ${result.summary}` : baseStatus;
-
-    // ND-safe rationale: no motion, high readability, soft colors, layered order
-    const renderConfig = {
-      width: canvas.width,
-      height: canvas.height,
-      palette: activePalette,
-      NUM,
-      notice
-    };
-
-    renderHelix(ctx, renderConfig);
-
-    // Sync CSS tokens with whichever palette resolved so the chrome mirrors the canvas.
-    document.documentElement.style.setProperty("--bg", active.bg);
-    document.documentElement.style.setProperty("--ink", active.ink);
-
-    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
-
-    if (!ctx) {
-      elStatus.textContent += " Canvas 2D context unavailable.";
-    } else {
-      // Numerology constants used by geometry routines.
-      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
-
-      // ND-safe rationale: no motion, high readability, soft colors, layered order.
-      renderHelix(ctx, {
-        width: canvas.width,
-        height: canvas.height,
-        palette: activePalette,
-        registry: activeRegistry,
-        palette: active,
-
+        palette:active,
         NUM,
-        notice: notices.length ? notices.join(" · ") : null
+        notice: palette ? null : "Palette fallback active"
       });
-
-      const summary = outcome && typeof outcome.summary === "string"
-        ? outcome.summary
-        : "Geometry rendered once.";
-      updateStatus(composeStatus(usingFallback, summary));
+    } else {
+      elStatus.textContent = "Canvas context unavailable; rendering skipped.";
     }
-
-    async function loadJSON(path) {
-      if (typeof path !== "string") return null;
-
-      // Offline-first: when opened via file:// prefer JSON modules to avoid fetch restrictions.
-      if (window.location && window.location.protocol === "file:") {
-        try {
-          const module = await import(path, { assert: { type: "json" } });
-          return module && typeof module.default !== "undefined" ? module.default : module;
-        } catch (err) {
-          return null;
-        }
-    async function loadPalette(path) {
-      if (typeof path !== "string") {
-        return null;
-      }
-      try {
-        const response = await fetch(path, { cache:"no-store" });
-        if (!response || !response.ok) {
-          return null;
-        }
-        return await response.json();
-      } catch (error) {
-        // Offline-first: browsers often block fetch for file:// origins; fallback keeps ND safety intact.
-        return null;
-      }
-    }
-
-    function applyChromePalette(palette) {
-      document.documentElement.style.setProperty("--bg", palette.bg);
-      document.documentElement.style.setProperty("--ink", palette.ink);
-      const muted = Array.isArray(palette.layers) && palette.layers.length > 0
-        ? palette.layers[palette.layers.length - 1]
-        : palette.ink;
-      // Muted tone mirrors the outer lattice layer so notes remain legible on both schemes.
-      document.documentElement.style.setProperty("--muted", muted);
-    }
-
-    function composeStatus(usingFallback, tail) {
-      const base = usingFallback
-        ? "Palette missing; using safe fallback."
-        : "Palette loaded.";
-      return `${base} ${tail}`;
-    }
-
-    function updateStatus(message) {
-      statusEl.textContent = message;
-    }
-
-  })();
-  </script>
-  <script>
-  window.addEventListener('cathedral:select', e => {
-    const tint = e.detail?.payload?.color || '#89a3ff';
-    document.documentElement.style.setProperty('--lattice', tint);
-  });
-    }
-
   </script>
 </body>
 </html>

@@ -1,22 +1,11 @@
 /*
   helix-renderer.mjs
-  ND-safe static renderer for layered sacred geometry tuned to the luminous cathedral style.
+  ND-safe static renderer for layered sacred geometry.
 
-  Layers:
-    1) Vesica field (intersecting circles and mandorla halos)
-    2) Tree-of-Life scaffold (10 sephirot + 22 paths + architectural vault)
-    3) Fibonacci curve (logarithmic halo traced with calm markers)
-    4) Double-helix lattice (two phase-shifted strands with static pedestals)
-
-  Why: encodes layered cosmology with calm colours, zero animation, and
-  comments explaining numerology-driven choices for offline review.
+  The renderer paints four calm layers in order: vesica field, Tree-of-Life scaffold,
+  Fibonacci spiral, and double-helix lattice. Each helper function stays small and
+  explains how the numerology constants keep depth without motion.
 */
-
-const DEFAULT_PALETTE = {
-  bg: "#0b0b12",
-  ink: "#e8e8f0",
-  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-};
 
 const DEFAULT_NUMBERS = {
   THREE: 3,
@@ -29,108 +18,101 @@ const DEFAULT_NUMBERS = {
   ONEFORTYFOUR: 144
 };
 
-/**
- * Render a static, four-layer sacred-geometry helix composition onto a 2D canvas.
- *
- * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a
- * double-helix lattice. The renderer saves/restores the canvas state, applies an optional
- * inline notice when fallbacks are active, and summarises the geometry counts for the
- * caller.
- *
- * @param {CanvasRenderingContext2D} ctx - Canvas 2D context to draw into.
- * @param {Object} [input={}] - Optional configuration overrides (palette, NUM values, dims, notice).
- * @returns {{summary: string}} A calm human-readable description of the rendered layers.
- */
-
- * Render a static four-layer helix composition onto a canvas.
- *
- * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a double-helix lattice,
- * then optionally renders an inline notice. If the provided canvas context is invalid or lacks `save()`,
- * the function returns immediately with a quiet summary object instead of throwing.
- *
- * @param {Object} [input={}] - Optional overrides for rendering (palette, numeric constants, notice text, explicit dimensions).
- * @return {{summary: string}} An object with a human-readable summary of which layers were rendered and basic counts.
-const DEFAULT_REGISTRY = {
-  arcana: [],
-  sephirot: [
-    { id: null, name: "Kether", type: "sephirah", numerology: 1, lore: "Crown unity", lab: null },
-    { id: null, name: "Chokmah", type: "sephirah", numerology: 2, lore: "Wisdom force", lab: null },
-    { id: null, name: "Binah", type: "sephirah", numerology: 3, lore: "Understanding form", lab: null },
-    { id: null, name: "Daath", type: "sephirah", numerology: null, lore: "Hidden knowledge", lab: null },
-    { id: null, name: "Chesed", type: "sephirah", numerology: 4, lore: "Mercy pillar", lab: null },
-    { id: null, name: "Geburah", type: "sephirah", numerology: 5, lore: "Severity pillar", lab: null },
-    { id: null, name: "Tiphareth", type: "sephirah", numerology: 6, lore: "Solar heart", lab: null },
-    { id: null, name: "Netzach", type: "sephirah", numerology: 7, lore: "Victory", lab: null },
-    { id: null, name: "Hod", type: "sephirah", numerology: 8, lore: "Splendour", lab: null },
-    { id: null, name: "Yesod", type: "sephirah", numerology: 9, lore: "Foundation", lab: null },
-    { id: null, name: "Malkuth", type: "sephirah", numerology: 10, lore: "Kingdom", lab: null }
-  ],
-  paths: []
+const DEFAULT_PALETTE = {
+  bg: "#0b0b12",
+  ink: "#e8e8f0",
+  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
 };
 
-export function renderHelix(ctx, input = {}) {
-  if (!ctx || typeof ctx.canvas === "undefined" || typeof ctx.save !== "function") {
-    // Calm skip keeps the offline shell quiet when contexts are denied (rare on hardened browsers).
+const TREE_TEMPLATE = [
+  { key: "kether", name: "Kether", column: "centre", level: 9, lab: "Crown" },
+  { key: "chokmah", name: "Chokmah", column: "right", level: 20, lab: "Wisdom" },
+  { key: "binah", name: "Binah", column: "left", level: 20, lab: "Understanding" },
+  { key: "daath", name: "Daath", column: "centre", level: 29, lab: "Hidden" },
+  { key: "chesed", name: "Chesed", column: "right", level: 42, lab: "Mercy" },
+  { key: "geburah", name: "Geburah", column: "left", level: 42, lab: "Severity" },
+  { key: "tiphareth", name: "Tiphareth", column: "centre", level: 55, lab: "Beauty" },
+  { key: "netzach", name: "Netzach", column: "right", level: 96, lab: "Victory" },
+  { key: "hod", name: "Hod", column: "left", level: 96, lab: "Splendour" },
+  { key: "yesod", name: "Yesod", column: "centre", level: 141, lab: "Foundation" },
+  { key: "malkuth", name: "Malkuth", column: "centre", level: 144, lab: "Kingdom" }
+];
+
+const TREE_CONNECTIONS = [
+  ["kether", "chokmah"],
+  ["kether", "binah"],
+  ["kether", "tiphareth"],
+  ["chokmah", "binah"],
+  ["chokmah", "chesed"],
+  ["chokmah", "tiphareth"],
+  ["binah", "geburah"],
+  ["binah", "tiphareth"],
+  ["chesed", "geburah"],
+  ["chesed", "tiphareth"],
+  ["chesed", "netzach"],
+  ["geburah", "tiphareth"],
+  ["geburah", "hod"],
+  ["tiphareth", "netzach"],
+  ["tiphareth", "hod"],
+  ["tiphareth", "yesod"],
+  ["netzach", "hod"],
+  ["netzach", "yesod"],
+  ["netzach", "malkuth"],
+  ["hod", "yesod"],
+  ["hod", "malkuth"],
+  ["yesod", "malkuth"]
+];
+
+export function renderHelix(ctx, options = {}) {
+  if (!ctx || typeof ctx.save !== "function") {
     return { summary: "Canvas context unavailable; rendering skipped." };
   }
 
-  const config = normaliseConfig(ctx, input);
+  const dims = resolveDimensions(ctx, options);
+  const palette = mergePalette(options.palette);
+  const numbers = mergeNumbers(options.NUM);
+  const notice = typeof options.notice === "string" ? options.notice : null;
+
   ctx.save();
-  clearStage(ctx, config.dims, config.palette, config.numbers);
+  clearStage(ctx, dims, palette, numbers);
 
-  const vesicaStats = drawVesicaField(ctx, config.dims, config.palette, config.numbers);
-  const treeStats = drawTreeOfLife(ctx, config.dims, config.palette, config.numbers, config.registry);
-  const fibonacciStats = drawFibonacciCurve(ctx, config.dims, config.palette, config.numbers);
-  const helixStats = drawHelixLattice(ctx, config.dims, config.palette, config.numbers, config.registry);
+  const vesicaStats = drawVesicaField(ctx, dims, palette, numbers);
+  const treeStats = drawTreeOfLife(ctx, dims, palette, numbers);
+  const fibonacciStats = drawFibonacciCurve(ctx, dims, palette, numbers);
+  const helixStats = drawHelixLattice(ctx, dims, palette, numbers);
 
-  if (config.notice) {
-    // Inline notice reassures offline viewers that a safe fallback palette is active.
-    drawCanvasNotice(ctx, config.dims, config.palette.ink, config.notice);
+  if (notice) {
+    drawCanvasNotice(ctx, dims, palette, notice);
   }
 
   ctx.restore();
-
-  return {
-    summary: summariseLayers({ vesicaStats, treeStats, fibonacciStats, helixStats }, config.registry)
-  };
+  return { summary: summariseLayers({ vesicaStats, treeStats, fibonacciStats, helixStats }) };
 }
 
-function normaliseConfig(ctx, input) {
-  const width = typeof input.width === "number" ? input.width : ctx.canvas.width;
-  const height = typeof input.height === "number" ? input.height : ctx.canvas.height;
-  const dims = { width, height };
-  const palette = mergePalette(input.palette || {});
-  const numbers = mergeNumbers(input.NUM || {});
-  const notice = typeof input.notice === "string" ? input.notice : null;
-  const registry = normaliseRegistry(input.registry);
-  return { dims, palette, numbers, notice, registry };
+function resolveDimensions(ctx, options) {
+  const width = typeof options.width === "number" ? options.width : ctx.canvas.width;
+  const height = typeof options.height === "number" ? options.height : ctx.canvas.height;
+  return { width, height };
 }
 
 function mergePalette(candidate) {
-  const layers = Array.isArray(candidate.layers) && candidate.layers.length > 0
-    ? candidate.layers.slice(0, DEFAULT_PALETTE.layers.length)
-    : DEFAULT_PALETTE.layers.slice();
-  while (layers.length < DEFAULT_PALETTE.layers.length) {
-    layers.push(DEFAULT_PALETTE.layers[layers.length]);
+  const fallback = DEFAULT_PALETTE.layers;
+  const layers = Array.isArray(candidate?.layers) ? candidate.layers.slice(0, fallback.length) : [];
+  while (layers.length < fallback.length) {
+    layers.push(fallback[layers.length]);
   }
   return {
-    bg: typeof candidate.bg === "string" ? candidate.bg : DEFAULT_PALETTE.bg,
-    ink: typeof candidate.ink === "string" ? candidate.ink : DEFAULT_PALETTE.ink,
+    bg: typeof candidate?.bg === "string" ? candidate.bg : DEFAULT_PALETTE.bg,
+    ink: typeof candidate?.ink === "string" ? candidate.ink : DEFAULT_PALETTE.ink,
     layers
   };
 }
 
-/**
- * Merge user-provided numeric overrides into the default numeric constants.
- *
- * Returns a shallow copy of DEFAULT_NUMBERS where any key present in the
- * input `candidate` that is a finite number replaces the corresponding default.
- *
- * @param {Object} candidate - Object whose numeric properties override defaults.
- * @return {Object} A new numbers object combining DEFAULT_NUMBERS with valid overrides.
- */
 function mergeNumbers(candidate) {
   const merged = { ...DEFAULT_NUMBERS };
+  if (!candidate || typeof candidate !== "object") {
+    return merged;
+  }
   for (const key of Object.keys(DEFAULT_NUMBERS)) {
     if (typeof candidate[key] === "number" && Number.isFinite(candidate[key])) {
       merged[key] = candidate[key];
@@ -139,222 +121,39 @@ function mergeNumbers(candidate) {
   return merged;
 }
 
-/**
- * Clear the canvas to the configured background and apply the layered background glow.
- *
- * Clears the entire drawing surface with palette.bg then delegates to applyBackgroundGlow
- * to paint the central radial halo and floor wash based on dims and numbers.
- * @param {CanvasRenderingContext2D} ctx - 2D canvas context to draw into.
- * @param {{width: number, height: number, cx?: number, cy?: number}} dims - Rendering dimensions and optional center coordinates.
- * @param {{bg: string, ink?: string, layers?: string[]}} palette - Palette object; bg is used as the fill color.
- * @param {Object} numbers - Numeric configuration (spacing/scales) used by the glow routine.
- */
 function clearStage(ctx, dims, palette, numbers) {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, dims.width, dims.height);
   applyBackgroundGlow(ctx, dims, palette, numbers);
 }
 
-/**
- * Draws layered background glow: a central radial halo and a floor wash to add depth.
- *
- * Paints a radial halo near the top-center and a vertical floor gradient using colors
- * from the provided palette and sizing from the numeric constants. This mutates the
- * supplied 2D canvas context by filling the full canvas area.
- *
- * @param {Object} dims - Rendering dimensions; must include `width` and `height`.
- * @param {Object} palette - Color palette containing `bg`, `ink`, and a `layers` array used for gradients.
- * @param {Object} numbers - Numeric constants (e.g. THREE, NINE, SEVEN) that control radii and positions.
- */
 function applyBackgroundGlow(ctx, dims, palette, numbers) {
-  // Layered glow: central halo and floor wash keep depth without motion.
-  const centreX = dims.width / 2;
-  const crownY = dims.height / numbers.NINE;
-  const outerRadius = Math.max(dims.width, dims.height) / (numbers.THREE * 0.9);
-  const glow = ctx.createRadialGradient(centreX, crownY * 1.4, outerRadius / numbers.SEVEN, centreX, dims.height / 2, outerRadius);
-  glow.addColorStop(0, withAlpha(palette.ink, 0.22));
-  glow.addColorStop(0.45, withAlpha(palette.layers[3], 0.16));
-  glow.addColorStop(1, withAlpha(palette.bg, 0));
-  ctx.fillStyle = glow;
+  const cx = dims.width / 2;
+  const cy = dims.height / numbers.THREE;
+  const radius = Math.max(dims.width, dims.height) / (numbers.THREE * 0.9);
+  const halo = ctx.createRadialGradient(cx, cy, radius / numbers.SEVEN, cx, cy, radius);
+  halo.addColorStop(0, withAlpha(palette.layers[3], 0.2));
+  halo.addColorStop(0.6, withAlpha(palette.layers[0], 0.08));
+  halo.addColorStop(1, withAlpha(palette.bg, 0));
+  ctx.fillStyle = halo;
   ctx.fillRect(0, 0, dims.width, dims.height);
 
-  const floorGradient = ctx.createLinearGradient(0, dims.height * 0.68, 0, dims.height);
-  floorGradient.addColorStop(0, withAlpha(palette.layers[5], 0.02));
-  floorGradient.addColorStop(0.4, withAlpha(palette.layers[2], 0.09));
-  floorGradient.addColorStop(1, withAlpha(palette.bg, 0.85));
-  ctx.fillStyle = floorGradient;
-function normaliseRegistry(candidate) {
-  const registry = cloneRegistry(DEFAULT_REGISTRY);
-  const partitions = partitionRegistry(candidate);
-
-  const arcana = partitions.arcana
-    .map(record => sanitiseRecord(record, "arcana"))
-    .filter(Boolean);
-  const paths = partitions.paths
-    .map(record => sanitiseRecord(record, "path"))
-    .filter(Boolean);
-  const sephirot = partitions.sephirot
-    .map(record => sanitiseRecord(record, "sephirah"))
-    .filter(Boolean);
-
-  if (arcana.length > 0) {
-    registry.arcana = arcana;
-  }
-
-  if (paths.length > 0) {
-    registry.paths = paths;
-  }
-
-  if (sephirot.length > 0) {
-    const index = new Map();
-    registry.sephirot.forEach(entry => {
-      index.set(canonicalKey(entry.name), entry);
-    });
-    sephirot.forEach(entry => {
-      const key = canonicalKey(entry.name);
-      if (!key) return;
-      if (index.has(key)) {
-        mergeSephirotEntry(index.get(key), entry);
-      } else {
-        registry.sephirot.push(entry);
-        index.set(key, entry);
-      }
-    });
-  }
-
-  ensureDaathEntry(registry.sephirot);
-  return registry;
-}
-
-function cloneRegistry(template) {
-  return {
-    arcana: Array.isArray(template.arcana) ? template.arcana.map(entry => ({ ...entry })) : [],
-    sephirot: Array.isArray(template.sephirot) ? template.sephirot.map(entry => ({ ...entry })) : [],
-    paths: Array.isArray(template.paths) ? template.paths.map(entry => ({ ...entry })) : []
-  };
-}
-
-function partitionRegistry(candidate) {
-  const result = { arcana: [], sephirot: [], paths: [] };
-  if (!candidate) return result;
-
-  if (Array.isArray(candidate)) {
-    candidate.forEach(item => distributeRecord(result, item));
-    return result;
-  }
-
-  if (typeof candidate === "object") {
-    distributeCollection(result.arcana, candidate.arcana, "arcana");
-    distributeCollection(result.sephirot, candidate.sephirot, "sephirah");
-    distributeCollection(result.paths, candidate.paths, "path");
-  }
-
-  return result;
-}
-
-function distributeRecord(result, item) {
-  if (!item || typeof item !== "object") return;
-  const type = typeof item.type === "string" ? item.type.toLowerCase() : "";
-  if (type === "arcana") {
-    result.arcana.push({ ...item });
-  } else if (type === "sephirah") {
-    result.sephirot.push({ ...item });
-  } else if (type === "path") {
-    result.paths.push({ ...item });
-  }
-}
-
-function distributeCollection(target, source, fallbackType) {
-  if (!Array.isArray(source)) return;
-  source.forEach(item => {
-    if (!item || typeof item !== "object") return;
-    const record = { ...item };
-    if (!record.type && fallbackType) {
-      record.type = fallbackType;
-    }
-    target.push(record);
-  });
-}
-
-function sanitiseRecord(record, forcedType) {
-  if (!record || typeof record !== "object") return null;
-  const name = typeof record.name === "string" ? record.name.trim() : "";
-  if (!name) return null;
-  const id = typeof record.id === "number" && Number.isFinite(record.id) ? record.id : null;
-  const type = forcedType || (typeof record.type === "string" ? record.type : "");
-  const numerology = typeof record.numerology === "number" && Number.isFinite(record.numerology)
-    ? record.numerology
-    : null;
-  const lore = typeof record.lore === "string" ? record.lore.trim() : "";
-  const labRaw = typeof record.lab === "string" ? record.lab.trim() : "";
-  const lab = labRaw.length > 0 ? labRaw : null;
-  return { id, name, type, numerology, lore, lab };
-}
-
-function mergeSephirotEntry(target, source) {
-  if (!target || !source) return;
-  target.id = source.id !== null ? source.id : target.id;
-  target.name = source.name || target.name;
-  if (source.numerology !== null) {
-    target.numerology = source.numerology;
-  }
-  if (source.lore) {
-    target.lore = source.lore;
-  }
-  if (source.lab) {
-    target.lab = source.lab;
-  }
-}
-
-function ensureDaathEntry(sephirot) {
-  if (!Array.isArray(sephirot)) return;
-  const hasDaath = sephirot.some(entry => canonicalKey(entry.name) === "daath");
-  if (!hasDaath) {
-    const insertIndex = Math.min(3, sephirot.length);
-    sephirot.splice(insertIndex, 0, { id: null, name: "Daath", type: "sephirah", numerology: null, lore: "Hidden knowledge", lab: null });
-  }
-}
-
-function canonicalKey(name) {
-  return String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-}
-
-function capitaliseKey(key) {
-  const text = String(key || "");
-  if (!text) return "";
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function clearStage(ctx, dims, bg) {
-  ctx.fillStyle = bg;
+  const floor = ctx.createLinearGradient(0, dims.height * 0.65, 0, dims.height);
+  floor.addColorStop(0, withAlpha(palette.layers[5], 0.05));
+  floor.addColorStop(1, withAlpha(palette.bg, 0.8));
+  ctx.fillStyle = floor;
   ctx.fillRect(0, 0, dims.width, dims.height);
 }
 
-/**
- * Render the Vesica field layer: a grid of paired vesica circles, a central halo, and a vertical axis.
- *
- * Renders positioned vesica pairs for each grid cell, a concentric halo near the canvas center,
- * and a dashed central axis. Returns lightweight statistics used by the caller to summarize the
- * rendered layer.
- *
- * @param {CanvasRenderingContext2D} ctx - 2D canvas drawing context to render into.
- * @param {{width: number, height: number}} dims - Canvas dimensions and derived layout bounds.
- * @param {{layers: string[]}} palette - Color palette object; uses palette.layers indices for strokes.
- * @param {{ONEFORTYFOUR: number, TWENTYTWO: number}} numbers - Numeric constants used for sizing and dashing.
- * @return {{circles: number, radius: number}} Statistics: total circle count (pairs + halo) and the grid radius.
- */
 function drawVesicaField(ctx, dims, palette, numbers) {
   const grid = buildVesicaGrid(dims, numbers);
-
   ctx.save();
-  ctx.globalAlpha = 0.66; // ND-safe softness keeps layer readable without glare.
+  ctx.globalAlpha = 0.68;
   ctx.strokeStyle = palette.layers[0];
-  ctx.lineWidth = Math.max(1.1, dims.width / (numbers.ONEFORTYFOUR * 1.6));
-  for (const cell of grid.cells) {
-    drawVesicaPair(ctx, cell);
-  }
+  ctx.lineWidth = Math.max(1.5, dims.width / (numbers.ONEFORTYFOUR * 1.2));
+  grid.cells.forEach(cell => drawVesicaPair(ctx, cell));
 
-  ctx.globalAlpha = 0.82;
+  ctx.globalAlpha = 0.85;
   ctx.strokeStyle = palette.layers[5];
   ctx.lineWidth = Math.max(1.2, dims.width / numbers.ONEFORTYFOUR);
   drawVesicaHalo(ctx, dims, numbers);
@@ -362,62 +161,33 @@ function drawVesicaField(ctx, dims, palette, numbers) {
   ctx.globalAlpha = 0.5;
   ctx.strokeStyle = palette.layers[2];
   ctx.setLineDash([numbers.TWENTYTWO, numbers.TWENTYTWO]);
-  drawVesicaAxis(ctx, dims, numbers);
-  ctx.setLineDash([]);
-
+  drawVesicaAxis(ctx, dims);
   ctx.restore();
-  return { circles: grid.cells.length * 2 + 2, radius: grid.radius };
+  return { pairs: grid.cells.length, radius: grid.radius };
 }
 
-/**
- * Build a rectangular grid of vesica cell descriptors for the canvas.
- *
- * Produces a rows x cols grid (rows and cols taken from `numbers`) of cell objects
- * positioned inside a uniform margin derived from `dims.width`. Each cell contains
- * the computed center coordinates and sizing used by vesica pair rendering.
- *
- * @param {Object} dims - Rendering dimensions; expects numeric `width` and `height`.
- * @param {Object} numbers - Numeric constants used for layout (expects `SEVEN`, `THREE`, `THIRTYTHREE`, `NINE`, `TWENTYTWO`, `ELEVEN`).
- * @return {{cells: Array<{cx:number, cy:number, radius:number, offset:number}>, radius: number}}
- *   An object with:
- *   - cells: Array of cell descriptors ({cx, cy, radius, offset}) for each grid position.
- *   - radius: the computed base radius applied to every cell.
- */
 function buildVesicaGrid(dims, numbers) {
   const rows = numbers.SEVEN;
   const cols = numbers.THREE;
   const margin = dims.width / numbers.THIRTYTHREE;
   const innerWidth = dims.width - margin * 2;
   const innerHeight = dims.height - margin * 2;
-  const horizontalStep = cols > 1 ? innerWidth / (cols - 1) : 0;
-  const verticalStep = rows > 1 ? innerHeight / (rows - 1) : 0;
-  const radius = Math.min(horizontalStep, verticalStep) * (numbers.NINE / numbers.TWENTYTWO);
+  const xStep = cols > 1 ? innerWidth / (cols - 1) : innerWidth;
+  const yStep = rows > 1 ? innerHeight / (rows - 1) : innerHeight;
+  const radius = Math.min(xStep, yStep) * (numbers.NINE / numbers.TWENTYTWO);
   const offset = radius * (numbers.ELEVEN / numbers.TWENTYTWO);
 
   const cells = [];
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
-      const cx = margin + col * horizontalStep;
-      const cy = margin + row * verticalStep;
+      const cx = margin + col * xStep;
+      const cy = margin + row * yStep;
       cells.push({ cx, cy, radius, offset });
     }
   }
   return { cells, radius };
 }
 
-/**
- * Draws a pair of stroked circles (a vesica pair) centered horizontally around a cell.
- *
- * The function issues two stroked arcs on the provided 2D canvas context: one centered at
- * (cell.cx - cell.offset, cell.cy) and the other at (cell.cx + cell.offset, cell.cy),
- * both using cell.radius.
- *
- * @param {Object} cell - Geometry describing the vesica pair.
- * @param {number} cell.cx - X coordinate of the cell center.
- * @param {number} cell.cy - Y coordinate of the cell center.
- * @param {number} cell.radius - Radius of each circle.
- * @param {number} cell.offset - Horizontal offset from the center to each circle.
- */
 function drawVesicaPair(ctx, cell) {
   ctx.beginPath();
   ctx.arc(cell.cx - cell.offset, cell.cy, cell.radius, 0, Math.PI * 2);
@@ -427,531 +197,155 @@ function drawVesicaPair(ctx, cell) {
   ctx.stroke();
 }
 
-/**
- * Draws a two-ring vesica halo: an outer and a scaled inner circle centered above the canvas midpoint.
- *
- * The outer radius is computed from the smaller canvas dimension divided by (THREE * 0.82).
- * The inner radius is a scaled proportion of the outer radius using the numeric ratio SEVEN / ELEVEN.
- * Uses the current canvas stroke style and line width; does not modify canvas state stack.
- *
- * @param {{width:number,height:number}} dims - Canvas dimensions; used to compute the halo center and radii.
- * @param {{THREE:number,SEVEN:number,ELEVEN:number}} numbers - Numeric constants referenced to compute radii.
- */
 function drawVesicaHalo(ctx, dims, numbers) {
-  const centreX = dims.width / 2;
-  const centreY = dims.height / 2.2;
-  const outerRadius = Math.min(dims.width, dims.height) / (numbers.THREE * 0.82);
-  const innerRadius = outerRadius * (numbers.SEVEN / numbers.ELEVEN);
-
+  const cx = dims.width / 2;
+  const cy = dims.height / numbers.NINE;
+  const radius = Math.min(dims.width, dims.height) / (numbers.THREE * 0.9);
   ctx.beginPath();
-  ctx.arc(centreX, centreY, outerRadius, 0, Math.PI * 2);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(centreX, centreY, innerRadius, 0, Math.PI * 2);
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
   ctx.stroke();
 }
 
-/**
- * Draws the central vertical axis and an elliptical base for the vesica field.
- *
- * The vertical axis runs from a top offset (1/NINE of the canvas height) down to 90% of the canvas height.
- * An elliptical "base" is drawn near the lower area to anchor the composition.
- *
- * @param {Object} dims - Rendering dimensions; expected to include `width` and `height` (pixels).
- * @param {Object} numbers - Numeric constants used for layout; must provide `NINE`, `THREE`, and `TWENTYTWO`.
- */
-function drawVesicaAxis(ctx, dims, numbers) {
-  const centreX = dims.width / 2;
-  const startY = dims.height / numbers.NINE;
-  const endY = dims.height * 0.9;
+function drawVesicaAxis(ctx, dims) {
+  const cx = dims.width / 2;
   ctx.beginPath();
-  ctx.moveTo(centreX, startY);
-  ctx.lineTo(centreX, endY);
-  ctx.stroke();
-
-  const baseRadiusX = dims.width / numbers.THREE;
-  const baseRadiusY = dims.height / numbers.TWENTYTWO;
-  ctx.beginPath();
-  ctx.ellipse(centreX, dims.height * 0.87, baseRadiusX, baseRadiusY, 0, 0, Math.PI * 2);
+  ctx.moveTo(cx, 0);
+  ctx.lineTo(cx, dims.height);
   ctx.stroke();
 }
 
-/**
- * Render the Tree of Life layer onto the provided 2D canvas context.
- *
- * Draws a vaulted arch and central column, renders canonical Tree of Life connections,
- * paints each sephirot as a filled circle with an outline, and adds a decorative star at
- * the kether position. Colors are taken from the provided palette; sizing uses numeric
- * constants.
- *
- * @param {Object} dims - Normalized drawing dimensions; must include at least { width, height, cx, cy }.
- * @param {Object} palette - Color palette (expects usable values at palette.layers[1], palette.layers[2], and palette.ink).
- * @param {Object} numbers - Numeric constants used for layout (e.g., NINETYNINE, ONEFORTYFOUR) that influence node radius and stroke widths.
- * @return {{nodes: number, paths: number}} Counts of sephirot nodes drawn and connecting paths stroked.
- */
 function drawTreeOfLife(ctx, dims, palette, numbers) {
-function drawTreeOfLife(ctx, dims, palette, numbers, registry) {
-  const nodes = buildTreeNodes(dims, numbers);
-  const paths = buildTreePaths();
-  const nodeRadius = Math.max(6, dims.width / numbers.NINETYNINE);
-
+  const layout = buildTreeLayout(dims, numbers);
   ctx.save();
-  drawTreeVault(ctx, dims, palette, numbers, nodes);
-  drawTreeColumn(ctx, dims, palette, numbers, nodes);
-
-  ctx.globalAlpha = 0.9;
-  ctx.strokeStyle = palette.layers[1];
-  ctx.lineWidth = Math.max(1.4, dims.width / (numbers.ONEFORTYFOUR * 2));
-  ctx.lineJoin = "round";
-  for (const [fromKey, toKey] of paths) {
-    const from = nodes[fromKey];
-    const to = nodes[toKey];
+  ctx.strokeStyle = palette.layers[3];
+  ctx.lineWidth = Math.max(1.4, dims.width / numbers.ONEFORTYFOUR);
+  TREE_CONNECTIONS.forEach(([fromKey, toKey]) => {
+    const from = layout.get(fromKey);
+    const to = layout.get(toKey);
+    if (!from || !to) {
+      return;
+    }
     ctx.beginPath();
     ctx.moveTo(from.x, from.y);
     ctx.lineTo(to.x, to.y);
     ctx.stroke();
-  }
-
-  ctx.fillStyle = palette.layers[2];
-  ctx.strokeStyle = palette.ink;
-  ctx.globalAlpha = 0.96;
-  ctx.lineWidth = 1;
-  for (const key of Object.keys(nodes)) {
-    const node = nodes[key];
-    ctx.beginPath();
-    ctx.arc(node.x, node.y, nodeRadius, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-  }
-
-  drawTreeStar(ctx, dims, palette, numbers, nodes.kether);
-  ctx.restore();
-  const sephirotRecords = registry && Array.isArray(registry.sephirot) ? registry.sephirot : [];
-  const labelStats = drawSephirahLabels(ctx, nodes, dims, palette, numbers, nodeRadius, sephirotRecords);
-  return {
-    nodes: Object.keys(nodes).length,
-    paths: paths.length,
-    labels: labelStats.labels,
-    labs: labelStats.labs
-  };
-}
-
-/**
- * Compute pixel coordinates for the Tree-of-Life sephiroth using a covenant-ladder projection.
- *
- * Projects a 144-step vertical scale with a 33-step horizontal pillar offset to position
- * the 11 canonical sephiroth (including Daath as a centered, "hidden" node) across the canvas.
- * Positions are returned in pixels and are anchored so the two side pillars are offset from
- * center by 33 steps of a 144-step grid (keeps relative layout consistent across sizes).
- *
- * @param {{width:number,height:number}} dims - Canvas dimensions in pixels.
- * @param {Object<string,number>} numbers - Numeric constants (expects keys like ONEFORTYFOUR, THIRTYTHREE, THREE, etc.)
- * @return {Object<string,{x:number,y:number}>} Map of sephirah names to {x, y} pixel coordinates.
- */
-function buildTreeNodes(dims, numbers) {
-  const marginY = dims.height / numbers.THIRTYTHREE;
-  const innerHeight = dims.height - marginY * 2;
-  const verticalUnit = innerHeight / numbers.ONEFORTYFOUR; // 144-step descent honours the covenant ladder.
-  const centerX = dims.width / 2;
-
-  const horizontalUnit = dims.width / numbers.ONEFORTYFOUR;
-  const pillarShift = horizontalUnit * numbers.THIRTYTHREE; // 33-step shift keeps the side pillars tethered to 144.
-  const rightPillarX = centerX + pillarShift;
-  const leftPillarX = centerX - pillarShift;
-
-  const level = multiplier => marginY + verticalUnit * multiplier;
-
-  const levels = {
-    kether: 0,
-    chokmahBinah: numbers.THIRTYTHREE / numbers.THREE, // 33/3 = 11 -> supernal step anchored by 3 and 33.
-    daath: numbers.TWENTYTWO + numbers.SEVEN, // 22+7 = 29 holds the hidden gate between triads.
-    chesedGeburah: numbers.THIRTYTHREE + numbers.NINE, // 33+9 = 42 -> balanced mercy and strength.
-    tiphareth: numbers.THIRTYTHREE + numbers.TWENTYTWO, // 55 -> heart of the tree sits on 33 and 22 combined.
-    netzachHod: numbers.NINETYNINE - numbers.THREE, // 99-3 = 96 -> harmonics of 3 underpin the lower intellect/emotion pair.
-    yesod: numbers.ONEFORTYFOUR - numbers.THREE, // 144-3 = 141 anchors the foundation just above the base.
-    malkuth: numbers.ONEFORTYFOUR // full descent touches earth at 144.
-  };
-
-
-  return {
-    kether: { x: centerX, y: level(levels.kether) },
-    chokmah: { x: rightPillarX, y: level(levels.chokmahBinah) },
-    binah: { x: leftPillarX, y: level(levels.chokmahBinah) },
-    daath: { x: centerX, y: level(levels.daath) },
-    chesed: { x: rightPillarX, y: level(levels.chesedGeburah) },
-    geburah: { x: leftPillarX, y: level(levels.chesedGeburah) },
-    tiphareth: { x: centerX, y: level(levels.tiphareth) },
-    netzach: { x: rightPillarX, y: level(levels.netzachHod) },
-    hod: { x: leftPillarX, y: level(levels.netzachHod) },
-    yesod: { x: centerX, y: level(levels.yesod) },
-    malkuth: { x: centerX, y: level(levels.malkuth) }
-  };
-}
-
-/**
- * Returns the canonical Tree-of-Life connectivity as an array of node-pair paths.
- *
- * Each element is a 2-element array [from, to] of sephirot names describing a connection.
- * The list encodes the standard pathways between kether, chokmah, binah, chesed, geburah,
- * tiphareth, netzach, hod, yesod, malkuth and includes daath-related links where present.
- *
- * @return {string[][]} Array of 2-string arrays representing edges between named nodes.
- */
-function buildTreePaths() {
-  return [
-    ["kether", "chokmah"],
-    ["kether", "binah"],
-    ["chokmah", "binah"],
-    ["chokmah", "chesed"],
-    ["binah", "geburah"],
-    ["chesed", "geburah"],
-    ["chesed", "tiphareth"],
-    ["geburah", "tiphareth"],
-    ["tiphareth", "netzach"],
-    ["tiphareth", "hod"],
-    ["netzach", "hod"],
-    ["netzach", "yesod"],
-    ["hod", "yesod"],
-    ["yesod", "malkuth"],
-    ["kether", "daath"],
-    ["daath", "tiphareth"],
-    ["daath", "chesed"],
-    ["daath", "geburah"],
-    ["chesed", "netzach"],
-    ["geburah", "hod"],
-    ["netzach", "malkuth"],
-    ["hod", "malkuth"]
-  ];
-}
-
-/**
- * Draws an architectural vaulted arch and inner arc behind the Tree of Life.
- *
- * Renders a two-tiered vault (outer arch with base pillars and a smaller inner arch)
- * centered horizontally and positioned relative to the canvas height and the
- * `kether` node's y coordinate. The function temporarily adjusts canvas state,
- * stroke style, line width, and global alpha, then restores the context.
- *
- * @param {Object} dims - Rendering dimensions; must include numeric `width` and `height`.
- * @param {Object} nodes - Tree node coordinates; expects `nodes.kether.y` to position the arch vertically.
- */
-function drawTreeVault(ctx, dims, palette, numbers, nodes) {
-  ctx.save();
-  ctx.globalAlpha = 0.42;
-  ctx.strokeStyle = withAlpha(palette.layers[0], 0.7);
-  ctx.lineWidth = Math.max(1, dims.width / (numbers.ONEFORTYFOUR * 1.2));
-
-  const baseY = dims.height * 0.88;
-  const innerBase = dims.height * 0.82;
-  const leftX = dims.width * 0.18;
-  const rightX = dims.width * 0.82;
-  const archRadius = (rightX - leftX) / 2;
-  const archCenterY = nodes.kether.y + archRadius * 0.65;
-
-  ctx.beginPath();
-  ctx.moveTo(leftX, baseY);
-  ctx.lineTo(leftX, archCenterY);
-  ctx.arc(dims.width / 2, archCenterY, archRadius, Math.PI, 0, false);
-  ctx.lineTo(rightX, baseY);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(leftX + archRadius / numbers.SEVEN, innerBase);
-  ctx.lineTo(leftX + archRadius / numbers.SEVEN, archCenterY + archRadius / numbers.ELEVEN);
-  ctx.arc(dims.width / 2, archCenterY + archRadius / numbers.ELEVEN, archRadius * 0.78, Math.PI, 0, false);
-  ctx.lineTo(rightX - archRadius / numbers.SEVEN, innerBase);
-  ctx.stroke();
-  ctx.restore();
-}
-
-/**
- * Draws a vertical decorative column between the Tree-of-Life top (Kether) and bottom (Malkuth).
- *
- * Renders a filled column using a vertical gradient derived from the palette and paints a central stroked seam from `nodes.kether` down to `nodes.malkuth`.
- *
- * @param {Object} nodes - Coordinates used to position the column.
- * @param {{x: number, y: number}} nodes.kether - Top coordinate (Kether).
- * @param {{x: number, y: number}} nodes.malkuth - Bottom coordinate (Malkuth).
- */
-function drawTreeColumn(ctx, dims, palette, numbers, nodes) {
-  ctx.save();
-  const columnWidth = Math.max(dims.width / numbers.NINETYNINE, 6);
-  const gradient = ctx.createLinearGradient(nodes.kether.x, nodes.kether.y, nodes.malkuth.x, nodes.malkuth.y);
-  gradient.addColorStop(0, withAlpha(palette.layers[3], 0.36));
-  gradient.addColorStop(0.5, withAlpha(palette.layers[2], 0.18));
-  gradient.addColorStop(1, withAlpha(palette.layers[1], 0.05));
-  ctx.fillStyle = gradient;
-  ctx.fillRect(nodes.kether.x - columnWidth / 2, nodes.kether.y, columnWidth, nodes.malkuth.y - nodes.kether.y);
-
-  ctx.strokeStyle = withAlpha(palette.ink, 0.5);
-  ctx.lineWidth = Math.max(1, columnWidth / numbers.THREE);
-  ctx.beginPath();
-  ctx.moveTo(nodes.kether.x, nodes.kether.y);
-  ctx.lineTo(nodes.malkuth.x, nodes.malkuth.y);
-  ctx.stroke();
-  ctx.restore();
-}
-
-/**
- * Draws a decorative star motif centered on the provided `kether` coordinates and a vertical emphasis line.
- *
- * If `kether` is falsy the function returns without drawing.
- *
- * @param {CanvasRenderingContext2D} ctx - 2D canvas context to draw on.
- * @param {Object} dims - Canvas dimensions (expects a numeric `width`) used to scale the star.
- * @param {Object} palette - Color palette (expects `layers` array and `ink`) used for fill and stroke colors.
- * @param {Object} numbers - Numeric constants used for sizing (expects `ONEFORTYFOUR`, `THREE`, `NINE`).
- * @param {{x:number,y:number}} kether - Position where the star is centered.
- */
-function drawTreeStar(ctx, dims, palette, numbers, kether) {
-  if (!kether) {
-    return;
-  }
-  ctx.save();
-  const outer = Math.max(dims.width / numbers.ONEFORTYFOUR * numbers.THREE, 14);
-  const inner = outer / numbers.THREE;
-  const rays = numbers.NINE;
-  ctx.beginPath();
-  for (let i = 0; i < rays; i += 1) {
-    const angle = (Math.PI * 2 * i) / rays - Math.PI / 2;
-    const radius = i % 2 === 0 ? outer : inner;
-    const x = kether.x + Math.cos(angle) * radius;
-    const y = kether.y + Math.sin(angle) * radius;
-    if (i === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
-  }
-  ctx.closePath();
-  ctx.fillStyle = withAlpha(palette.layers[3], 0.32);
-  ctx.strokeStyle = palette.ink;
-  ctx.lineWidth = 1;
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.strokeStyle = withAlpha(palette.layers[4], 0.7);
-  ctx.beginPath();
-  ctx.moveTo(kether.x, kether.y - outer * 1.5);
-  ctx.lineTo(kether.x, kether.y + outer * numbers.THREE);
-  ctx.stroke();
-  ctx.restore();
-}
-
-/**
- * Draws a smooth Fibonacci-based spiral on the provided 2D canvas context and renders periodic markers along it.
- *
- * The function generates a Fibonacci sequence, maps it to 2D spiral coordinates, renders a smoothed path
- * through those points using quadratic segments, and then draws small markers along the spiral. Stroke
- * thickness and opacity are scaled relative to the canvas dimensions and numeric constants.
- *
- * @param {CanvasRenderingContext2D} ctx - 2D drawing context (canvas rendering surface).
- * @param {Object} dims - Rendering dimensions and derived layout values (expects at least width/height).
- * @param {Object} palette - Palette object providing layer colors; the spiral uses palette.layers[3].
- * @param {Object} numbers - Numeric constants used for sizing and limits (e.g., ONEFORTYFOUR, NINETYNINE).
- * @returns {{points: number}} An object containing the number of spiral points rendered (property `points`).
- */
-function drawSephirahLabels(ctx, nodes, dims, palette, numbers, nodeRadius, sephirotRecords) {
-  if (!nodes || typeof nodes !== "object") {
-    return { labels: 0, labs: 0 };
-  }
-
-  const records = Array.isArray(sephirotRecords) ? sephirotRecords : [];
-  if (records.length === 0) {
-    return { labels: 0, labs: 0 };
-  }
-
-  const map = new Map();
-  records.forEach(record => {
-    const key = canonicalKey(record.name);
-    if (key) {
-      map.set(key, record);
-    }
   });
 
-  const centerX = dims.width / 2;
-  const fontSize = Math.max(16, dims.width / (numbers.ONEFORTYFOUR * 0.85));
-  const labSize = Math.max(11, fontSize * 0.68);
-  const offset = nodeRadius * (numbers.THIRTYTHREE / numbers.TWENTYTWO);
-  let labels = 0;
-  let labs = 0;
-
-  ctx.save();
-  ctx.textBaseline = "middle";
-
-  for (const key of Object.keys(nodes)) {
-    const node = nodes[key];
-    if (!node) continue;
-    const canonical = canonicalKey(key);
-    const record = map.get(canonical);
-    const baseName = record ? record.name : capitaliseKey(key);
-    const numeral = record && record.numerology !== null ? ` · ${record.numerology}` : "";
-    const labelText = `${baseName}${numeral}`;
-    const align = node.x >= centerX ? "left" : "right";
-    const labelX = align === "left" ? node.x + nodeRadius + offset : node.x - nodeRadius - offset;
-    const labelY = node.y;
-
-    ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
-    ctx.textAlign = align;
-    ctx.fillStyle = palette.ink;
-    ctx.fillText(labelText, labelX, labelY);
-    labels += 1;
-
-    if (record && record.lab) {
-      ctx.font = `${labSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
-      ctx.textBaseline = "top";
-      ctx.fillStyle = palette.layers[5] || palette.ink;
-      const labLabel = record.lab.replace(/[-_]/g, " ");
-      ctx.fillText(labLabel, labelX, labelY + fontSize * 0.55);
-      ctx.textBaseline = "middle";
-      labs += 1;
-    }
-  }
-
+  ctx.fillStyle = palette.layers[4];
+  layout.forEach(node => drawTreeNode(ctx, node, palette));
   ctx.restore();
-  return { labels, labs };
+  return { nodes: layout.size, paths: TREE_CONNECTIONS.length };
 }
 
-unction drawFibonacciCurve(ctx, dims, palette, numbers) {
+function buildTreeLayout(dims, numbers) {
+  const map = new Map();
+  const centreX = dims.width / 2;
+  const columnOffset = dims.width / numbers.THREE;
+  const unit = dims.height / numbers.ONEFORTYFOUR;
+
+  TREE_TEMPLATE.forEach(template => {
+    const x = template.column === "left"
+      ? centreX - columnOffset
+      : template.column === "right"
+        ? centreX + columnOffset
+        : centreX;
+    const y = template.level * unit;
+    map.set(template.key, {
+      key: template.key,
+      name: template.name,
+      label: template.lab,
+      x,
+      y
+    });
+  });
+  return map;
+}
+
+function drawTreeNode(ctx, node, palette) {
+  const radius = 14;
+  ctx.beginPath();
+  ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = palette.ink;
+  ctx.lineWidth = 1.2;
+  ctx.stroke();
+  ctx.fillStyle = palette.ink;
+  ctx.font = "12px/1.4 system-ui";
+  ctx.textAlign = "center";
+  ctx.fillText(node.name, node.x, node.y - radius - 8);
+  if (node.label) {
+    ctx.fillStyle = withAlpha(palette.ink, 0.7);
+    ctx.font = "10px/1.4 system-ui";
+    ctx.fillText(node.label, node.x, node.y + radius + 14);
+    ctx.fillStyle = palette.ink;
+  }
+}
+
+function drawFibonacciCurve(ctx, dims, palette, numbers) {
   const sequence = buildFibonacciSequence(numbers.ONEFORTYFOUR);
-  const points = buildSpiralPoints(sequence, dims, numbers);
+  const points = buildFibonacciPoints(sequence, dims, numbers);
 
   ctx.save();
-  ctx.globalAlpha = 0.92;
-  ctx.strokeStyle = palette.layers[3];
-  ctx.lineWidth = Math.max(1.4, dims.width / numbers.NINETYNINE);
+  ctx.strokeStyle = palette.layers[1];
+  ctx.lineWidth = Math.max(1.5, dims.width / numbers.ONEFORTYFOUR);
   ctx.lineJoin = "round";
-  ctx.lineCap = "round";
   ctx.beginPath();
-  ctx.moveTo(points[0].x, points[0].y);
-  for (let i = 1; i < points.length; i += 1) {
-    const prev = points[i - 1];
-    const current = points[i];
-    const midX = (prev.x + current.x) / 2;
-    const midY = (prev.y + current.y) / 2;
-    ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
-  }
+  points.forEach((point, index) => {
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
+  });
   ctx.stroke();
 
-  drawSpiralMarkers(ctx, points, palette, numbers);
+  ctx.fillStyle = palette.layers[1];
+  points.forEach(point => {
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+    ctx.fill();
+  });
   ctx.restore();
-
   return { points: points.length };
 }
 
-/**
- * Build a Fibonacci sequence starting with [1, 1], including values up to and including the largest value that does not exceed `limit`.
- * @param {number} limit - Maximum allowed value in the sequence (inclusive). Should be a finite number.
- * @returns {number[]} Fibonacci sequence beginning with [1, 1] where each element is <= `limit`.
- * If `limit` is less than 1 the function still returns the initial [1, 1].
- */
 function buildFibonacciSequence(limit) {
   const seq = [1, 1];
-  while (true) {
+  while (seq[seq.length - 1] < limit) {
     const next = seq[seq.length - 1] + seq[seq.length - 2];
-    if (next > limit) {
+    seq.push(next);
+    if (next === limit) {
       break;
     }
-    seq.push(next);
+    if (next > limit) {
+      seq.pop();
+      break;
+    }
   }
   return seq;
 }
 
-/**
- * Convert a numeric sequence into 2D spiral coordinates centered on the canvas.
- *
- * Maps each value in `sequence` to a point by using a radius proportional to the square root
- * of the value and an angular progression based on a golden-angle-like step. The spiral is
- * centered horizontally at canvas midpoint and vertically at one-third from the top.
- *
- * @param {number[]} sequence - Ordered numeric sequence (e.g., Fibonacci numbers); should be non-empty and increasing so scale computation is meaningful.
- * @param {{width: number, height: number}} dims - Canvas dimensions; used to compute center and scaling.
- * @param {Object} numbers - Numeric constants object (expects properties like THREE, SEVEN, NINE, ELEVEN, TWENTYTWO) used to control scaling and angular increments.
- * @return {{x: number, y: number}[]} Array of 2D points for the spiral; the first element is the computed spiral center followed by points for each sequence value.
- */
-function buildSpiralPoints(sequence, dims, numbers) {
-  const centerX = dims.width / 2;
-  const centerY = dims.height / numbers.THREE;
-  const maxValue = sequence[sequence.length - 1];
-  const scale = Math.min(dims.width, dims.height) / (Math.sqrt(maxValue) * numbers.TWENTYTWO / numbers.ELEVEN);
-  const goldenAngle = Math.PI * 2 * (numbers.SEVEN / numbers.TWENTYTWO);
-  const rotation = Math.PI / numbers.NINE;
-
-  const points = sequence.map((value, index) => {
-    const angle = rotation + goldenAngle * index;
-    const radius = Math.sqrt(value) * scale;
+function buildFibonacciPoints(sequence, dims, numbers) {
+  const centreX = dims.width / 2;
+  const centreY = dims.height / 2;
+  const base = Math.min(dims.width, dims.height) / (numbers.ONEFORTYFOUR / numbers.NINE);
+  return sequence.map((value, index) => {
+    const angle = index * (Math.PI / numbers.THREE);
+    const radius = value * base / numbers.ONEFORTYFOUR;
     return {
-      x: centerX + radius * Math.cos(angle),
-      y: centerY + radius * Math.sin(angle)
+      x: centreX + Math.cos(angle) * radius * numbers.THIRTYTHREE,
+      y: centreY + Math.sin(angle) * radius * numbers.THIRTYTHREE
     };
   });
-
-  return [{ x: centerX, y: centerY }, ...points];
 }
 
-</**
- * Draws small filled markers at regular intervals along a list of spiral points.
- *
- * The function samples the provided points array using a step of
- * `max(1, floor(points.length / numbers.TWENTYTWO))`, draws filled circles
- * at those sampled coordinates using `palette.ink`, and sizes each marker
- * with a canvas-width–relative radius of `max(2, ctx.canvas.width / numbers.ONEFORTYFOUR / 1.8)`.
- *
- * @param {Array<{x: number, y: number}>} points - Ordered 2D points defining the spiral; markers are placed at sampled indices.
- */
-function drawSpiralMarkers(ctx, points, palette, numbers) {
-  ctx.save();
-  ctx.fillStyle = palette.ink;
-  const step = Math.max(1, Math.floor(points.length / numbers.TWENTYTWO));
-  const dotRadius = Math.max(2, ctx.canvas.width / numbers.ONEFORTYFOUR / 1.8);
-  for (let i = 0; i < points.length; i += step) {
-    const point = points[i];
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, dotRadius, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.restore();
-}
-
-/**
- * Render the double-helix lattice (two sinusoidal rails, connecting rungs, and endpoint anchors).
- *
- * Draws both helix rails with distinct layer colors, strokes the rung connections using the ink color,
- * renders a subtle guide and decorative anchors, and returns simple statistics about the lattice.
- *
- * @param {CanvasRenderingContext2D} ctx - 2D drawing context to render into.
- * @param {{width:number,height:number}} dims - Canvas dimensions used to scale line widths and geometry.
- * @param {{ink:string,layers:string[]}} palette - Color palette; expects `layers[4]` and `layers[5]` for the two rails and `ink` for rungs.
- * @param {Object} numbers - Numeric constants used for layout and stroke scaling (e.g., ONEFORTYFOUR).
- * @return {{rungs:number}} Object with the number of rung segments drawn.
- */
 function drawHelixLattice(ctx, dims, palette, numbers) {
->>>>>>>+main
-====
-funfunction drawHelixLattice(ctx, dims, palette, numbers, registry) {
->>>>>>>+origin/codex/ad
-onst rails = buildHelixRails(dims, numbers);
-
+  const rails = buildHelixRails(dims, numbers);
   ctx.save();
-  drawHelixGuide(ctx, dims, palette, numbers);
-
-  ctx.strokeStyle = palette.layers[4];
-  ctx.lineWidth = Math.max(1.4, dims.width / numbers.ONEFORTYFOUR);
-  ctx.lineJoin = "round";
-  ctx.beginPath();
-  rails.a.forEach((point, index) => {
-    if (index === 0) {
-      ctx.moveTo(point.x, point.y);
-    } else {
-      ctx.lineTo(point.x, point.y);
-    }
-  });
-  ctx.stroke();
-
   ctx.strokeStyle = palette.layers[5];
+  ctx.lineWidth = Math.max(1.4, dims.width / numbers.ONEFORTYFOUR);
   ctx.beginPath();
-  rails.b.forEach((point, index) => {
+  rails.left.forEach((point, index) => {
     if (index === 0) {
       ctx.moveTo(point.x, point.y);
     } else {
@@ -960,276 +354,88 @@ onst rails = buildHelixRails(dims, numbers);
   });
   ctx.stroke();
 
-  ctx.strokeStyle = palette.ink;
-  ctx.lineWidth = Math.max(1, dims.width / numbers.ONEFORTYFOUR);
-  rails.rungs.forEach(rung => {
-    ctx.beginPath();
-    ctx.moveTo(rung.a.x, rung.a.y);
-    ctx.lineTo(rung.b.x, rung.b.y);
-    ctx.stroke();
+  ctx.beginPath();
+  rails.right.forEach((point, index) => {
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
   });
-
-<<<  drawHelixAnchors(ctx, rails, palette, numbers);
->>>>>>>+main
-====
-  c  const arcanaRecords = registry && Array.isArray(registry.arcana) ? registry.arcana : [];
-  const markerStats = drawArcanaMarkers(ctx, rails, dims, palette, numbers, arcanaRecords);
-
->>>>>>>+origin/codex/ad
-tx.restore();
-  return {
-    rungs: rails.rungs.length,
-    markers: markerStats.markers,
-    labs: markerStats.labs
-  };
-}
-
-function drawArcanaMarkers(ctx, rails, dims, palette, numbers, arcanaRecords) {
-  const records = Array.isArray(arcanaRecords) ? arcanaRecords : [];
-  if (records.length === 0) {
-    return { markers: 0, labs: 0 };
-  }
-
-  const radius = Math.max(8, dims.width / (numbers.ONEFORTYFOUR * 1.1));
-  const fontSize = Math.max(11, radius * 1.35);
-  let markers = 0;
-  let labs = 0;
-
-  ctx.save();
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.font = `${fontSize}px system-ui, -apple-system, Segoe UI, sans-serif`;
-
-  const limit = Math.min(records.length, rails.a.length);
-  for (let i = 0; i < limit; i += 1) {
-    const record = records[i];
-    if (!record || typeof record !== "object") continue;
-    const rail = i % 2 === 0 ? rails.a : rails.b;
-    const point = rail[i];
-    if (!point) continue;
-
-    const fill = i % 2 === 0 ? palette.layers[4] : palette.layers[5];
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
-    ctx.fillStyle = fill;
-    ctx.fill();
-    ctx.strokeStyle = palette.ink;
-    ctx.lineWidth = Math.max(0.8, radius / 3);
-    ctx.stroke();
-
-    const numeral = typeof record.numerology === "number" && Number.isFinite(record.numerology)
-      ? record.numerology
-      : i;
-    ctx.fillStyle = palette.ink;
-    ctx.fillText(String(numeral), point.x, point.y);
-
-    if (record.lab) {
-      ctx.beginPath();
-      ctx.arc(point.x, point.y, radius * 1.35, 0, Math.PI * 2);
-      ctx.strokeStyle = palette.layers[2];
-      ctx.lineWidth = Math.max(0.6, radius / 4);
-      ctx.stroke();
-      labs += 1;
-    }
-
-    markers += 1;
-  }
-
-  ctx.restore();
-  return { markers, labs };
-}
-
-/**
- * Build two sinusoidal helix rails across the horizontal span and a list of evenly spaced rungs connecting them.
- *
- * @param {Object} dims - Rendering dimensions; must include numeric `width` and `height`.
- * @param {Object} numbers - Numeric constants used for layout; this function reads `TWENTYTWO`, `SEVEN`, `THREE`, and `ELEVEN`.
- * @return {{a: Array<{x:number,y:number}>, b: Array<{x:number,y:number}>, rungs: Array<{a:{x:number,y:number}, b:{x:number,y:number}}>} }
- * An object containing:
- * - `a`: points for rail A (array of {x,y}).
- * - `b`: points for rail B (array of {x,y}, phase-shifted from A).
- * - `rungs`: array of connections (every second index) each with `{a, b}` referencing the corresponding rail points.
- */
-function buildHelixRails(dims, numbers) {
-  const length = numbers.TWENTYTWO;
-  const startX = dims.width * 0.18;
-  const endX = dims.width * 0.82;
-  const amplitude = dims.height / numbers.SEVEN;
-  const centreY = dims.height * 0.72;
-  const phaseShift = Math.PI / numbers.THREE;
-  const step = (endX - startX) / (length - 1);
-
-  const a = [];
-  const b = [];
-  const rungs = [];
-  for (let i = 0; i < length; i += 1) {
-    const x = startX + step * i;
-    const angle = (Math.PI * 2 * i) / numbers.ELEVEN;
-    const yA = centreY + Math.sin(angle) * amplitude;
-    const yB = centreY + Math.sin(angle + phaseShift) * amplitude;
-    const pointA = { x, y: yA };
-    const pointB = { x, y: yB };
-    a.push(pointA);
-    b.push(pointB);
-    if (i % 2 === 0) {
-      rungs.push({ a: pointA, b: pointB });
-    }
-  }
-  return { a, b, rungs };
-}
-
-/**
- * Draws a subtle guide ellipse and an inner "walkway" band near the bottom-center to suggest the helix region.
- *
- * Renders a faint filled ellipse with an outline and a narrow rectangular walkway inside it. Uses
- * colors from palette.layers and sizing from numbers to compute the ellipse radii, stroke widths,
- * and walkway dimensions. Saves and restores the canvas state so calling code's context transforms
- * and styles are preserved.
- *
- * @param {CanvasRenderingContext2D} ctx - 2D canvas context to draw into.
- * @param {{width:number,height:number}} dims - Rendering dimensions; used to position and scale the guide.
- * @param {object} palette - Palette object; expects a layers array where specific indices provide fill/ink colors.
- * @param {object} numbers - Numeric constants (e.g. THREE, TWENTYTWO, ELEVEN, ONEFORTYFOUR) used for layout math.
- */
-function drawHelixGuide(ctx, dims, palette, numbers) {
-  ctx.save();
-  const centreX = dims.width / 2;
-  const baseY = dims.height * 0.86;
-  const radiusX = dims.width / numbers.THREE;
-  const radiusY = dims.height / numbers.TWENTYTWO;
-
-  ctx.fillStyle = withAlpha(palette.layers[1], 0.08);
-  ctx.beginPath();
-  ctx.ellipse(centreX, baseY, radiusX, radiusY, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.strokeStyle = withAlpha(palette.layers[0], 0.5);
-  ctx.lineWidth = Math.max(1, dims.width / numbers.ONEFORTYFOUR);
-  ctx.beginPath();
-  ctx.ellipse(centreX, baseY, radiusX, radiusY, 0, 0, Math.PI * 2);
   ctx.stroke();
 
-  const walkwayWidth = radiusX * (numbers.TWENTYTWO / numbers.ELEVEN);
-  const walkwayHeight = dims.height / numbers.TWENTYTWO;
-  ctx.fillStyle = withAlpha(palette.layers[4], 0.08);
-  ctx.fillRect(centreX - walkwayWidth / 2, baseY - walkwayHeight, walkwayWidth, walkwayHeight);
-  ctx.strokeStyle = withAlpha(palette.layers[0], 0.35);
+  ctx.strokeStyle = withAlpha(palette.layers[5], 0.6);
   ctx.lineWidth = Math.max(1, dims.width / numbers.ONEFORTYFOUR);
-  ctx.strokeRect(centreX - walkwayWidth / 2, baseY - walkwayHeight, walkwayWidth, walkwayHeight);
+  rails.rungs.forEach(rung => drawHelixRung(ctx, rung));
+
   ctx.restore();
+  return { stations: rails.rungs.length };
 }
 
-/**
- * Draws decorative diamond anchors at the start and end points of the two helix rails.
- *
- * Uses the first and last points of rails.a and rails.b (if present) to render small
- * filled-and-stroked diamond markers. Marker size scales with canvas width and
- * falls back to a minimum radius. Stroke uses `palette.ink` at 70% alpha; fill uses
- * the helix layer color (palette.layers[3]) at 18% alpha.
- *
- * @param {{a: Array<{x:number,y:number}>, b: Array<{x:number,y:number}>}} rails - Rail point arrays; anchors are taken from the first and last elements of each array.
- * @param {{ink:string, layers:string[]}} palette - Colour palette; expects an `ink` string and a `layers` array containing the helix layer at index 3.
- * @param {{ONEFORTYFOUR:number}} numbers - Numeric constants object; used to compute a responsive marker radius.
- */
-function drawHelixAnchors(ctx, rails, palette, numbers) {
-  ctx.save();
-  const anchors = [rails.a[0], rails.a[rails.a.length - 1], rails.b[0], rails.b[rails.b.length - 1]];
-  const radius = Math.max(4, ctx.canvas.width / numbers.ONEFORTYFOUR);
-  ctx.strokeStyle = withAlpha(palette.ink, 0.7);
-  ctx.fillStyle = withAlpha(palette.layers[3], 0.18);
-  anchors.forEach(point => {
-    if (!point) {
-      return;
+function buildHelixRails(dims, numbers) {
+  const steps = numbers.THIRTYTHREE;
+  const centreX = dims.width / 2;
+  const amplitude = dims.width / numbers.THIRTYTHREE;
+  const strandOffset = dims.width / numbers.THREE;
+  const stepY = dims.height / (steps - 1);
+
+  const left = [];
+  const right = [];
+  const rungs = [];
+
+  for (let i = 0; i < steps; i += 1) {
+    const y = i * stepY;
+    const phase = (i / (steps - 1)) * Math.PI * 2;
+    const sinShift = Math.sin(phase) * amplitude;
+    const leftX = centreX - strandOffset + sinShift;
+    const rightX = centreX + strandOffset - sinShift;
+    left.push({ x: leftX, y });
+    right.push({ x: rightX, y });
+
+    if (i % numbers.THREE === 0) {
+      rungs.push({ leftX, rightX, y });
     }
-    ctx.beginPath();
-    ctx.moveTo(point.x, point.y - radius);
-    ctx.lineTo(point.x + radius, point.y);
-    ctx.lineTo(point.x, point.y + radius);
-    ctx.lineTo(point.x - radius, point.y);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-  });
-  ctx.restore();
+  }
+
+  return { left, right, rungs };
 }
 
-/**
- * Draws a centered notice line near the bottom of the canvas.
- *
- * Renders `message` horizontally centered and positioned just above the bottom edge using a responsive font size derived from `dims.width`. The function saves and restores the canvas context so it does not leave side effects on drawing state.
- *
- * @param {{width: number, height: number}} dims - Canvas dimensions used to compute position and font size.
- * @param {string} color - CSS color string for the text fill.
- * @param {string} message - The text to render.
- */
-function drawCanvasNotice(ctx, dims, color, message) {
+function drawHelixRung(ctx, rung) {
+  ctx.beginPath();
+  ctx.moveTo(rung.leftX, rung.y);
+  ctx.lineTo(rung.rightX, rung.y);
+  ctx.stroke();
+}
+
+function drawCanvasNotice(ctx, dims, palette, text) {
   ctx.save();
-  ctx.fillStyle = color;
-  ctx.font = `${Math.max(14, dims.width / 72)}px system-ui, -apple-system, Segoe UI, sans-serif`;
+  ctx.fillStyle = withAlpha(palette.ink, 0.7);
+  ctx.font = "12px/1.4 system-ui";
   ctx.textAlign = "center";
-  ctx.fillText(message, dims.width / 2, dims.height - dims.height / 40);
+  ctx.fillText(text, dims.width / 2, dims.height - 16);
   ctx.restore();
 }
 
-<<</**
- * Create a human-readable summary of rendered layer statistics.
- *
- * Builds a single-line summary describing counts returned by each layer renderer:
- * vesica circle count, tree paths/nodes, fibonacci spiral points, and helix rungs.
- *
- * @param {Object} stats - Aggregated layer statistics.
- * @param {Object} stats.vesicaStats - Vesica layer stats.
- * @param {number} stats.vesicaStats.circles - Number of vesica circles drawn.
- * @param {Object} stats.treeStats - Tree-of-life layer stats.
- * @param {number} stats.treeStats.paths - Number of tree paths drawn.
- * @param {number} stats.treeStats.nodes - Number of tree nodes drawn.
- * @param {Object} stats.fibonacciStats - Fibonacci/spiral layer stats.
- * @param {number} stats.fibonacciStats.points - Number of spiral points drawn.
- * @param {Object} stats.helixStats - Helix layer stats.
- * @param {number} stats.helixStats.rungs - Number of helix rungs drawn.
- * @return {string} A single-line summary suitable for logs or UI.
- */
 function summariseLayers(stats) {
->>>>>>>+main
-====
-function summariseLayers(stats, registry) {
->>>>>>> origin/codex/add-arcana-and-sephirah-lore-data
-  const vesica = `${stats.vesicaStats.circles} vesica circles`;
-  const treeBase = `${stats.treeStats.paths} paths / ${stats.treeStats.nodes} nodes`;
-  const treeLabels = stats.treeStats.labels > 0 ? ` / ${stats.treeStats.labels} labels` : "";
-  const treeLabs = stats.treeStats.labs > 0 ? ` (${stats.treeStats.labs} labs)` : "";
-  const tree = `${treeBase}${treeLabels}${treeLabs}`;
-  const fibonacci = `${stats.fibonacciStats.points} spiral points`;
-  let helix = `${stats.helixStats.rungs} helix rungs`;
-  if (stats.helixStats.markers > 0) {
-    helix += ` / ${stats.helixStats.markers} arcana markers`;
-  }
-  if (stats.helixStats.labs > 0) {
-    helix += ` (${stats.helixStats.labs} lab rings)`;
-  }
-  const arcanaCount = registry && Array.isArray(registry.arcana) ? registry.arcana.length : 0;
-  const sephirotCount = registry && Array.isArray(registry.sephirot) ? registry.sephirot.length : 0;
-  const registryNote = `registry ${arcanaCount} arcana, ${sephirotCount} sephirot`;
-  return `Layers rendered - ${vesica}; ${tree}; ${fibonacci}; ${helix}; ${registryNote}.`;
+  return [
+    `Vesica ${formatCount(stats.vesicaStats?.pairs)} pairs`,
+    `Tree ${formatCount(stats.treeStats?.nodes)} nodes/${formatCount(stats.treeStats?.paths)} paths`,
+    `Fibonacci ${formatCount(stats.fibonacciStats?.points)} markers`,
+    `Helix ${formatCount(stats.helixStats?.stations)} rungs`
+  ].join(" | ");
 }
 
-/**
- * Convert a 6-digit hex color to an `rgba(...)` string with the given alpha.
- *
- * Accepts a hex string with or without a leading `#`. If `hex` is not a valid
- * 6-character hex code the function returns `rgba(0,0,0,alpha)`.
- *
- * @param {string} hex - A 6-digit hex color (e.g. `"#ffddaa"` or `"ffddaa"`).
- * @param {number} alpha - Alpha transparency between 0 and 1.
- * @return {string} An `rgba(r,g,b,a)` CSS color string.
- */
+function formatCount(value) {
+  return typeof value === "number" && Number.isFinite(value) ? value : 0;
+}
+
 function withAlpha(hex, alpha) {
-  const normalized = typeof hex === "string" ? hex.replace(/^#/, "") : "";
-  if (normalized.length !== 6) {
-    return `rgba(0,0,0,${alpha})`;
+  const value = String(hex || "").replace(/^#/, "");
+  if (value.length !== 6) {
+    return hex;
   }
-  const r = parseInt(normalized.slice(0, 2), 16);
-  const g = parseInt(normalized.slice(2, 4), 16);
-  const b = parseInt(normalized.slice(4, 6), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
+  const r = parseInt(value.slice(0, 2), 16);
+  const g = parseInt(value.slice(2, 4), 16);
+  const b = parseInt(value.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
