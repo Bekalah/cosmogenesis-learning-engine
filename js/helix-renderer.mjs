@@ -12,12 +12,20 @@
   (3, 7, 9, 11, 22, 33, 99, 144), and keeps functions pure and well-commented for offline review.
 */
 
+
 const FALLBACK_PALETTE = Object.freeze({
   bg: "#0b0b12",
   ink: "#e8e8f0",
   muted: "#a6a6c1",
   layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
 });
+
+const DEFAULT_PALETTE = {
+  bg: "#0b0b12",
+  ink: "#e8e8f0",
+  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+};
+
 
 const FALLBACK_NUMBERS = Object.freeze({
   THREE: 3,
@@ -31,6 +39,7 @@ const FALLBACK_NUMBERS = Object.freeze({
 });
 
 /**
+
  * Render the four layered "Cosmic Helix" composition onto a 2D canvas.
  *
  * Renders (back-to-front) the Vesica field, Tree-of-Life scaffold, Fibonacci spiral,
@@ -54,6 +63,23 @@ export function renderHelix(ctx, options = {}) {
   const dims = normaliseDimensions(ctx, options);
   if (!dims) {
     return { ok: false, reason: "invalid-dimensions" };
+
+ * Render a static, four-layer sacred-geometry helix composition onto a 2D canvas.
+ *
+ * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a
+ * double-helix lattice. The renderer saves/restores the canvas state, applies an optional
+ * inline notice when fallbacks are active, and summarises the geometry counts for the
+ * caller.
+ *
+ * @param {CanvasRenderingContext2D} ctx - Canvas 2D context to draw into.
+ * @param {Object} [input={}] - Optional configuration overrides (palette, NUM values, dims, notice).
+ * @returns {{summary: string}} A calm human-readable description of the rendered layers.
+ */
+export function renderHelix(ctx, input = {}) {
+  if (!ctx || typeof ctx.canvas === "undefined" || typeof ctx.save !== "function") {
+    // Calm skip keeps the offline shell quiet when contexts are denied (rare on hardened browsers).
+    return { summary: "Canvas context unavailable; rendering skipped." };
+
   }
 
   const numbers = normaliseNumbers(options.NUM);
@@ -364,6 +390,7 @@ function normaliseTreeNode(node) {
 }
 
 /**
+
  * Merge a Fibonacci-layer geometry patch into a base geometry, validating and clamping fields.
  *
  * Returns a new geometry object where numeric overrides from `patch` replace `base` values only if
@@ -381,6 +408,19 @@ function normaliseTreeNode(node) {
  * @param {number} base.alpha
  * @param {Object|null|undefined} patch - Partial geometry overrides; invalid or missing fields are ignored.
  * @return {Object} A new geometry object with merged and validated fields.
+=======
+ * Render the Tree of Life layer onto the provided 2D canvas context.
+ *
+ * Draws a vaulted arch and central column, renders canonical Tree of Life connections,
+ * paints each sephirot as a filled circle with an outline, and adds a decorative star at
+ * the kether position. Colors are taken from the provided palette; sizing uses numeric
+ * constants.
+ *
+ * @param {Object} dims - Normalized drawing dimensions; must include at least { width, height, cx, cy }.
+ * @param {Object} palette - Color palette (expects usable values at palette.layers[1], palette.layers[2], and palette.ink).
+ * @param {Object} numbers - Numeric constants used for layout (e.g., NINETYNINE, ONEFORTYFOUR) that influence node radius and stroke widths.
+ * @return {{nodes: number, paths: number}} Counts of sephirot nodes drawn and connecting paths stroked.
+
  */
 function mergeFibonacciGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
@@ -399,6 +439,7 @@ function mergeFibonacciGeometry(base, patch) {
 }
 
 /**
+
  * Merge a helix geometry patch onto a base geometry, validating and clamping values.
  *
  * Returns a new geometry object where numeric fields from `patch` override `base`
@@ -416,6 +457,44 @@ function mergeHelixGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
     return { ...base };
   }
+
+ * Compute pixel coordinates for the Tree-of-Life sephiroth using a covenant-ladder projection.
+ *
+ * Projects a 144-step vertical scale with a 33-step horizontal pillar offset to position
+ * the 11 canonical sephiroth (including Daath as a centered, "hidden" node) across the canvas.
+ * Positions are returned in pixels and are anchored so the two side pillars are offset from
+ * center by 33 steps of a 144-step grid (keeps relative layout consistent across sizes).
+ *
+ * @param {{width:number,height:number}} dims - Canvas dimensions in pixels.
+ * @param {Object<string,number>} numbers - Numeric constants (expects keys like ONEFORTYFOUR, THIRTYTHREE, THREE, etc.)
+ * @return {Object<string,{x:number,y:number}>} Map of sephirah names to {x, y} pixel coordinates.
+ */
+function buildTreeNodes(dims, numbers) {
+  const marginY = dims.height / numbers.THIRTYTHREE;
+  const innerHeight = dims.height - marginY * 2;
+  const verticalUnit = innerHeight / numbers.ONEFORTYFOUR; // 144-step descent honours the covenant ladder.
+  const centerX = dims.width / 2;
+
+  const horizontalUnit = dims.width / numbers.ONEFORTYFOUR;
+  const pillarShift = horizontalUnit * numbers.THIRTYTHREE; // 33-step shift keeps the side pillars tethered to 144.
+  const rightPillarX = centerX + pillarShift;
+  const leftPillarX = centerX - pillarShift;
+
+  const level = multiplier => marginY + verticalUnit * multiplier;
+
+  const levels = {
+    kether: 0,
+    chokmahBinah: numbers.THIRTYTHREE / numbers.THREE, // 33/3 = 11 -> supernal step anchored by 3 and 33.
+    daath: numbers.TWENTYTWO + numbers.SEVEN, // 22+7 = 29 holds the hidden gate between triads.
+    chesedGeburah: numbers.THIRTYTHREE + numbers.NINE, // 33+9 = 42 -> balanced mercy and strength.
+    tiphareth: numbers.THIRTYTHREE + numbers.TWENTYTWO, // 55 -> heart of the tree sits on 33 and 22 combined.
+    netzachHod: numbers.NINETYNINE - numbers.THREE, // 99-3 = 96 -> harmonics of 3 underpin the lower intellect/emotion pair.
+    yesod: numbers.ONEFORTYFOUR - numbers.THREE, // 144-3 = 141 anchors the foundation just above the base.
+    malkuth: numbers.ONEFORTYFOUR // full descent touches earth at 144.
+  };
+
+
+ 
   return {
     sampleCount: positiveOrDefault(patch.sampleCount, base.sampleCount),
     cycles: positiveOrDefault(patch.cycles, base.cycles),
