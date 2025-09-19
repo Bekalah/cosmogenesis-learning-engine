@@ -13,9 +13,9 @@
 */
 
 const DEFAULT_PALETTE = {
-  bg: "#0a0c16",
-  ink: "#f4e3c6",
-  layers: ["#1f3f63", "#265f7f", "#c4974b", "#f6d58b", "#c987d6", "#2c3b5d"]
+  bg: "#0b0b12",
+  ink: "#e8e8f0",
+  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
 };
 
 const DEFAULT_NUMBERS = {
@@ -30,29 +30,17 @@ const DEFAULT_NUMBERS = {
 };
 
 /**
-
  * Render a static, four-layer sacred-geometry helix composition onto a 2D canvas.
  *
- * Draws a Vesica field, Tree of Life scaffold, Fibonacci spiral, and double-helix lattice
- * in sequence using a normalized configuration derived from `input`. Saves and restores
- * the canvas state around the operation and may render an optional bottom notice.
+ * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a
+ * double-helix lattice. The renderer saves/restores the canvas state, applies an optional
+ * inline notice when fallbacks are active, and summarises the geometry counts for the
+ * caller.
  *
- * @param {CanvasRenderingContext2D} ctx - A 2D canvas rendering context to draw into.
- * @param {Object} [input] - Optional rendering configuration (palette, numbers, dims, notice).
- *   Only keys with non-default meanings need to be provided; missing values are filled by the renderer.
- * @returns {{summary: string}} An object containing a human-readable summary of the rendered layer counts.
- * @throws {Error} If `ctx` is not a valid 2D canvas context.
+ * @param {CanvasRenderingContext2D} ctx - Canvas 2D context to draw into.
+ * @param {Object} [input={}] - Optional configuration overrides (palette, NUM values, dims, notice).
+ * @returns {{summary: string}} A calm human-readable description of the rendered layers.
  */
-
- * Render a static four-layer helix composition onto a canvas.
- *
- * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a double-helix lattice,
- * then optionally renders an inline notice. If the provided canvas context is invalid or lacks `save()`,
- * the function returns immediately with a quiet summary object instead of throwing.
- *
- * @param {Object} [input={}] - Optional overrides for rendering (palette, numeric constants, notice text, explicit dimensions).
- * @return {{summary: string}} An object with a human-readable summary of which layers were rendered and basic counts.
-
 export function renderHelix(ctx, input = {}) {
   if (!ctx || typeof ctx.canvas === "undefined" || typeof ctx.save !== "function") {
     // Calm skip keeps the offline shell quiet when contexts are denied (rare on hardened browsers).
@@ -370,52 +358,20 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
 }
 
 /**
-
- * Compute 2D canvas coordinates for the 11 sephirot (Tree of Life nodes).
+ * Compute canvas coordinates for each Tree-of-Life sephirah using the covenant ladder.
  *
- * Uses canvas dimensions and numeric constants to place nodes in a vertical scaffold
- * with horizontal offsets for left/right columns and calibrated vertical spacing.
+ * Projects a 144-step vertical scale with 33-step pillar offsets so the geometry stays
+ * anchored to {3, 7, 9, 11, 22, 33, 99, 144}. Returns an object keyed by sephirah name.
  *
- * @param {{width:number,height:number}} dims - Canvas dimensions; must include width and height.
- * @param {{THREE:number, ELEVEN:number, THIRTYTHREE:number}} numbers - Numeric constants used for layout spacing.
- * @return {{kether:{x:number,y:number}, chokmah:{x:number,y:number}, binah:{x:number,y:number}, daath:{x:number,y:number}, chesed:{x:number,y:number}, geburah:{x:number,y:number}, tiphareth:{x:number,y:number}, netzach:{x:number,y:number}, hod:{x:number,y:number}, yesod:{x:number,y:number}, malkuth:{x:number,y:number}}}
-
-
- * Compute coordinates for the 12 Tree of Life sephirot laid out on a dual-pillar 144-step grid.
- *
- * The layout maps a 144-step vertical "covenant ladder" onto the available canvas dimensions,
- * placing nodes on a centered spine or on left/right pillars offset by a 33-step horizontal shift.
- * Y coordinates increase downward (canvas coordinate space).
- *
- * @param {{width: number, height: number}} dims - Drawing area dimensions; used to derive margins and scale.
- * @param {Object} numbers - Numeric constants (expects numeric properties such as ONEFORTYFOUR, THIRTYTHREE, TWENTYTWO, SEVEN, NINE, THREE, NINETYNINE). These drive the 144-step vertical scaling and pillar offsets.
- * @return {Object.<string,{x:number,y:number}>} An object mapping sephirot keys (kether, chokmah, binah, daath, chesed, geburah, tiphareth, netzach, hod, yesod, malkuth) to their {x,y} canvas coordinates.
-
- * Compute canvas coordinates for the 11 Tree of Life sephirot.
- *
- * Uses the canvas dimensions and numerology constants to produce a vertically distributed,
- * numerology-anchored layout for the sephirot (kether, chokmah, binah, daath, chesed,
- * geburah, tiphareth, netzach, hod, yesod, malkuth). Positions are in canvas pixels.
- *
- * The vertical placement is computed from a top/bottom margin and an inner height divided
- * into eleven steps; several level multipliers are derived from the provided numeric
- * constants so the geometry remains consistent with the module's numerology rules.
- *
- * @param {{width:number, height:number}} dims - Canvas dimensions in pixels.
- * @param {Object<string, number>} numbers - Numerology constants (expects keys like THREE, SEVEN, ELEVEN, TWENTYTWO, THIRTYTHREE, NINE, ONEFORTYFOUR). These values are used to compute vertical levels and column spacing.
- * @return {Object<string, {x:number,y:number}>} Mapping of sephirot names to their {x,y} canvas coordinates.
-
-
+ * @param {{width:number,height:number}} dims - Canvas dimensions in pixels.
+ * @param {Object<string,number>} numbers - Numerology constants controlling spacing.
+ * @return {Object<string,{x:number,y:number}>} Pixel coordinates for each sephirah.
  */
 function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
   const innerHeight = dims.height - marginY * 2;
   const verticalUnit = innerHeight / numbers.ONEFORTYFOUR; // 144-step descent honours the covenant ladder.
   const centerX = dims.width / 2;
-
-  const column = dims.width / numbers.THREE;
-  const stepY = (dims.height - marginY * 2) / numbers.ELEVEN;
-
 
   const horizontalUnit = dims.width / numbers.ONEFORTYFOUR;
   const pillarShift = horizontalUnit * numbers.THIRTYTHREE; // 33-step shift keeps the side pillars tethered to 144.
