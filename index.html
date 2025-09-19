@@ -41,13 +41,23 @@
     };
 
     async function importJSONModule(path) {
-      const module = await import(path, { assert: { type: "json" } });
-      if (module && module.default) {
-        return module.default;
+      // Try modern import attributes first, then legacy import assertions.
+      try {
+        // Modern
+        const m = await import(path, { with: { type: "json" } });
+        return m?.default ?? m;
+      } catch (e1) {
+        try {
+          // Legacy
+          const m = await import(path, { assert: { type: "json" } });
+          return m?.default ?? m;
+        } catch (e2) {
+          const err = new Error("JSON module import failed");
+          err.cause = e2;
+          throw err;
+        }
       }
-      throw new Error("JSON module missing default export");
     }
-
     async function fetchJSON(path) {
       try {
         const res = await fetch(path, { cache: "no-store" });
