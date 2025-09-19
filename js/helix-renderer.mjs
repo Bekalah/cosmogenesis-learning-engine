@@ -306,17 +306,17 @@ function drawVesicaAxis(ctx, dims, numbers) {
 }
 
 /**
- * Render the "Tree of Life" layer into the provided 2D canvas context.
+ * Render the Tree of Life layer onto the provided 2D canvas context.
  *
- * Draws an architectural vault and central column, renders the Tree of Life node positions
- * and connecting paths, paints each sephirot as a filled-and-outlined circle, and adds a
- * decorative star motif at the kether node. Uses colors from the provided palette and
- * numeric constants for sizing.
+ * Draws a vaulted arch and central column, renders canonical Tree of Life connections,
+ * paints each sephirot as a filled circle with an outline, and adds a decorative star at
+ * the kether position. Colors are taken from the provided palette; sizing uses numeric
+ * constants.
  *
- * @param {Object} dims - Normalized drawing dimensions (at least { width, height, cx, cy }).
- * @param {Object} palette - Color palette object (expects layer and ink colors used by this layer).
- * @param {Object} numbers - Numeric constants used for layout and scaling.
- * @return {{nodes: number, paths: number}} Summary statistics: number of nodes drawn and number of connecting paths.
+ * @param {Object} dims - Normalized drawing dimensions; must include at least { width, height, cx, cy }.
+ * @param {Object} palette - Color palette (expects usable values at palette.layers[1], palette.layers[2], and palette.ink).
+ * @param {Object} numbers - Numeric constants used for layout (e.g., NINETYNINE, ONEFORTYFOUR) that influence node radius and stroke widths.
+ * @return {{nodes: number, paths: number}} Counts of sephirot nodes drawn and connecting paths stroked.
  */
 function drawTreeOfLife(ctx, dims, palette, numbers) {
   const nodes = buildTreeNodes(dims, numbers);
@@ -358,14 +358,16 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
 }
 
 /**
- * Compute canvas coordinates for each Tree-of-Life sephirah using the covenant ladder.
+ * Compute pixel coordinates for the Tree-of-Life sephiroth using a covenant-ladder projection.
  *
- * Projects a 144-step vertical scale with 33-step pillar offsets so the geometry stays
- * anchored to {3, 7, 9, 11, 22, 33, 99, 144}. Returns an object keyed by sephirah name.
+ * Projects a 144-step vertical scale with a 33-step horizontal pillar offset to position
+ * the 11 canonical sephiroth (including Daath as a centered, "hidden" node) across the canvas.
+ * Positions are returned in pixels and are anchored so the two side pillars are offset from
+ * center by 33 steps of a 144-step grid (keeps relative layout consistent across sizes).
  *
  * @param {{width:number,height:number}} dims - Canvas dimensions in pixels.
- * @param {Object<string,number>} numbers - Numerology constants controlling spacing.
- * @return {Object<string,{x:number,y:number}>} Pixel coordinates for each sephirah.
+ * @param {Object<string,number>} numbers - Numeric constants (expects keys like ONEFORTYFOUR, THIRTYTHREE, THREE, etc.)
+ * @return {Object<string,{x:number,y:number}>} Map of sephirah names to {x, y} pixel coordinates.
  */
 function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
