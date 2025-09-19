@@ -1,8 +1,8 @@
 /* 
 Test framework note:
-- This repository appears to use a Node-based test runner. These tests are written to be compatible with Jest in ESM mode using the JSDOM environment.
-- If using Vitest, they are also compatible with minor adjustments (describe/it/expect are identical).
-- No new dependencies are introduced; tests rely on the runner's built-in globals.
+- These tests are designed to run on Jest (ESM) or Vitest using a jsdom environment.
+- No new dependencies are introduced; if your runner does not expose a DOM, install jsdom or run with a jsdom test environment.
+- The suite auto-detects Jest's globals; otherwise it uses a minimal expect shim.
 
 Focus: index.html inline module script logic from the PR diff.
 */

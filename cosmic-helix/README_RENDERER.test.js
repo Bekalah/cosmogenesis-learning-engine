@@ -194,3 +194,118 @@ describe('Documentation quality checks', () => {
     expect(bullets.length).toBeGreaterThanOrEqual(8);
   });
 });
+// ===== Additional auto-generated tests: helper robustness and doc invariants =====
+// Detected test framework: Jest/Vitest-compatible (describe/it/expect)
+
+describe('Helper: extractSection edge cases', () => {
+  const sampleMd = [
+    '# Title',
+    'Prelude text.',
+    '## Files',
+    'files body line 1',
+    '### Sub under Files',
+    'details line A',
+    '## Special [chars]? (v2.0) ^$.*+',
+    'Body with specials',
+    '## Tail',
+    'Tail content'
+  ].join('\\n');
+
+  it('extracts exact section content until the next level-2 heading', () => {
+    const section = extractSection(sampleMd, 'Files');
+    expect(section.split('\\n')[0]).toBe('## Files');
+    expect(section).toContain('files body line 1');
+    expect(section).toContain('### Sub under Files'); // stays within section
+    expect(section).not.toContain('## Tail');
+  });
+
+  it('escapes regex metacharacters in headings safely', () => {
+    const section = extractSection(sampleMd, 'Special [chars]? (v2.0) ^$.*+');
+    expect(section).toMatch(/^##\s+Special \[chars]\?\s+\(v2\.0\)\s+\^\$\.\*\+$/m);
+    expect(section).toContain('Body with specials');
+  });
+
+  it('returns empty string when the heading is missing', () => {
+    expect(extractSection(sampleMd, 'Does Not Exist')).toBe('');
+  });
+
+  it('is case-sensitive by design', () => {
+    expect(extractSection(sampleMd, 'files')).toBe('');
+  });
+
+  it('handles a heading at the end of the document', () => {
+    const md = sampleMd + '\\n## Last\\nlast body line';
+    const section = extractSection(md, 'Last');
+    expect(section).toMatch(/^##\s+Last/m);
+    expect(section).toContain('last body line');
+  });
+});
+
+describe('Helper: readEmbeddedReadme edge cases', () => {
+  const os = require('os');
+  let tmpRoot;
+
+  beforeAll(() => {
+    expect(fs).toBeTruthy();
+    expect(path).toBeTruthy();
+    tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ch-readme-'));
+  });
+
+  afterAll(() => {
+    try {
+      // Node >=14
+      fs.rmSync(tmpRoot, { recursive: true, force: true });
+    } catch (e) {
+      // Fallback for older Node
+      try { fs.rmdirSync(tmpRoot, { recursive: true }); } catch (_) {}
+    }
+  });
+
+  it('throws a clear error if no block comment exists', () => {
+    const p = path.join(tmpRoot, 'no-block.js');
+    fs.writeFileSync(p, '// no block comment here', 'utf8');
+    expect(() => readEmbeddedReadme(p)).toThrow(/Embedded README block comment not found/);
+  });
+
+  it('returns only the first /* ... */ block when multiple exist', () => {
+    const p = path.join(tmpRoot, 'multi-block.js');
+    fs.writeFileSync(p, '/* FIRST */\\nconsole.log("x");\\n/* SECOND */', 'utf8');
+    const block = readEmbeddedReadme(p);
+    expect(block).toBe('FIRST');
+  });
+
+  it('strips delimiters and trims surrounding whitespace', () => {
+    const p = path.join(tmpRoot, 'trimmed.js');
+    fs.writeFileSync(p, '/*\\n   hello world   \\n*/', 'utf8');
+    const block = readEmbeddedReadme(p);
+    expect(block).toBe('hello world');
+  });
+});
+
+describe('Top-level section order and uniqueness', () => {
+  const md = readEmbeddedReadme(__filename);
+  const headings = [
+    'Files',
+    'Usage (offline)',
+    'Layer order (back to front)',
+    'ND-safe and trauma-informed choices',
+    'Customising safely'
+  ];
+
+  it('each expected top-level heading appears exactly once', () => {
+    for (const h of headings) {
+      const re = new RegExp('^##\\s+' + h.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + '\\s*$', 'gm');
+      const matches = md.match(re) || [];
+      expect(matches.length).toBe(1);
+    }
+  });
+
+  it('top-level headings appear in the documented order', () => {
+    let prev = -1;
+    for (const h of headings) {
+      const idx = md.indexOf('\\n## ' + h);
+      expect(idx).toBeGreaterThan(prev);
+      prev = idx;
+    }
+  });
+});

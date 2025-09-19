@@ -273,3 +273,115 @@ test('drawCanvasNotice renders bottom-centered message with responsive font', as
   assert.ok(fillText, 'fillText should be called once');
   assert.equal(fillText[1], 'Notice');
 });
+/**
+ * Additional tests appended by automation.
+ * Testing framework: Node's built-in test runner (node:test) with node:assert/strict.
+ * These tests extend coverage on clamping, immutability, rendering summaries, and canvas state usage.
+ */
+
+test('renderHelix balances save/restore across a full render', async () => {
+  const { renderHelix } = await loadModule();
+  const ctx = createMockCtx({ width: 800, height: 500 });
+  const out = renderHelix(ctx, {});
+  assert.equal(out.ok, true);
+  const saves = ctx._calls.filter(c => c[0] === 'save').length;
+  const restores = ctx._calls.filter(c => c[0] === 'restore').length;
+  assert.equal(saves, restores, 'canvas context save/restore calls should be balanced');
+});
+
+test('renderHelix tolerates unusual option types and still renders', async () => {
+  const { renderHelix } = await loadModule();
+  const ctx = createMockCtx({ width: 512, height: 384 });
+  const out = renderHelix(ctx, {
+    palette: { bg: null, layers: 'not-array', ink: 42 },
+    NUM: { ELEVEN: 'NaN', NINETYNINE: -999, THIRTYTHREE: 0 },
+    geometry: {
+      vesica: { rows: '0', columns: null, alpha: 'x' },
+      fibonacci: { sampleCount: 'NaN', phi: '1.x' },
+      helix: { crossTieCount: -10, strandAlpha: 2, rungAlpha: -5 }
+    },
+    notice: 12345
+  });
+  assert.equal(out.ok, true);
+  assert.match(out.summary, /helix rungs\.$/);
+});
+
+test('helpers: colorWithAlpha supports 3-digit hex and clamps alpha', async () => {
+  const m = await loadModule();
+  assert.equal(m.colorWithAlpha('#0fa', 1.5), 'rgba(0,255,170,1)');
+  assert.equal(m.colorWithAlpha('#ABC', 0), 'rgba(170,187,204,0)');
+  assert.equal(m.colorWithAlpha('#ggg', 0.3), 'rgba(255,255,255,0.3)');
+});
+
+test('helpers: toPositiveNumber/Integer handle Infinity and numeric strings', async () => {
+  const m = await loadModule();
+  assert.equal(m.toPositiveNumber(Infinity, 3), 3, 'non-finite should fall back to default');
+  assert.equal(m.toPositiveInteger('3.2', 1), 4, 'string numeric coerced and rounded up');
+  assert.equal(m.toPositiveInteger(-5, 2), 2, 'negative should fall back to default');
+});
+
+test('mergePalette and mergeVesica do not mutate input objects', async () => {
+  const m = await loadModule();
+
+  const paletteIn = { bg: '#010101', layers: ['#ff0000'], ink: '#00ff00' };
+  const paletteSnapshot = JSON.stringify(paletteIn);
+  const paletteOut = m.mergePalette(paletteIn);
+  assert.equal(JSON.stringify(paletteIn), paletteSnapshot, 'mergePalette must not mutate its input');
+  assert.ok(Array.isArray(paletteOut.layers) && paletteOut.layers.length >= 1);
+
+  const vesIn = { rows: '7', columns: 2, alpha: -0.1 };
+  const vesSnapshot = JSON.stringify(vesIn);
+  const vesOut = m.mergeVesica(vesIn);
+  assert.equal(JSON.stringify(vesIn), vesSnapshot, 'mergeVesica must not mutate its input');
+  assert.equal(vesOut.rows, 7);
+  assert.equal(vesOut.alpha, 0);
+});
+
+test('drawHelixLattice honors crossTieCount (minimum) and reports rung count', async () => {
+  const m = await loadModule();
+  const ctx = createMockCtx({ width: 300, height: 200 });
+  const dims = { width: 300, height: 200 };
+  const out = m.drawHelixLattice(
+    ctx,
+    dims,
+    m.DEFAULT_PALETTE,
+    m.DEFAULT_NUMBERS,
+    { sampleCount: 16, cycles: 1, amplitudeDivisor: 3, phaseOffset: 0, crossTieCount: 4, strandAlpha: 0.8, rungAlpha: 0.7 }
+  );
+  assert.ok(out.rungs >= 4, 'expected at least crossTieCount rungs to be drawn');
+});
+
+test('drawCanvasNotice sets centered alignment and bottom baseline', async () => {
+  const m = await loadModule();
+  const ctx = createMockCtx({ width: 330, height: 200 });
+  const dims = { width: 330, height: 200 };
+  m.drawCanvasNotice(ctx, dims, '#ffffff', 'Hi');
+  const align = ctx._calls.filter(c => c[0] === 'prop' && c[1] === 'textAlign').pop();
+  const base = ctx._calls.filter(c => c[0] === 'prop' && c[1] === 'textBaseline').pop();
+  assert.ok(align && align[2] === 'center', 'textAlign should be set to center');
+  assert.ok(base && base[2] === 'bottom', 'textBaseline should be set to bottom');
+});
+
+test('drawVesicaField minimal case draws expected circle arcs', async () => {
+  const m = await loadModule();
+  const ctx = createMockCtx({ width: 120, height: 240 });
+  const dims = { width: 120, height: 240 };
+  const settings = { rows: 1, columns: 1, paddingDivisor: 11, radiusFactor: 2, strokeDivisor: 90, alpha: 0.6 };
+  const out = m.drawVesicaField(ctx, dims, '#00ff00', m.DEFAULT_NUMBERS, settings);
+  assert.equal(out.circles, 2);
+  const arcCalls = ctx._calls.filter(c => c[0] === 'arc');
+  assert.equal(arcCalls.length, 2);
+});
+
+test('renderHelix summary reflects requested fibonacci sampleCount and helix rungs lower bound', async () => {
+  const { renderHelix } = await loadModule();
+  const ctx = createMockCtx({ width: 700, height: 500 });
+  const out = renderHelix(ctx, { geometry: { fibonacci: { sampleCount: 8 }, helix: { crossTieCount: 7 } } });
+  assert.equal(out.ok, true);
+  const m = out.summary.match(/(\d+) spiral points; (\d+) helix rungs/);
+  assert.ok(m, 'summary should contain spiral points and helix rungs counts');
+  const points = Number(m[1]);
+  const rungs = Number(m[2]);
+  assert.equal(points, 8);
+  assert.ok(rungs >= 7);
+});
