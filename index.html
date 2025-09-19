@@ -23,7 +23,9 @@
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <div id="chapel-ring" style="position:relative;width:min(80vmin,820px);aspect-ratio:1;margin:40px auto"></div>
   <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
+  <script type="module" src="./codex/inject.loader.js"></script>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
@@ -108,6 +110,52 @@
     );
 
 
+  </script>
+  <style>
+  :root{ --lattice:#89a3ff; --halo:#d6b370; }
+  .bg-lattice{position:fixed; inset:0; z-index:-1; display:grid; place-items:center; pointer-events:none}
+  .lattice{
+    width:min(78vmin,880px); aspect-ratio:1; border-radius:50%; position:relative; isolation:isolate;
+    /* wireframe: meridians + parallels */
+    background:
+     repeating-conic-gradient(from 0deg, transparent 0 10deg, rgba(255,255,255,.08) 10deg 11deg),
+     repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 2px, transparent 2px 38px);
+    /* crisp ring */
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.10) inset,
+      0 0 120px color-mix(in oklab, var(--lattice) 40%, transparent);
+    backdrop-filter: blur(0.5px);
+  }
+  .lattice::after{ /* Jovian middle ring */
+    content:""; position:absolute; inset:14%; border-radius:50%;
+    border:1px solid color-mix(in oklab, var(--halo) 75%, transparent);
+    box-shadow: 0 0 42px color-mix(in oklab, var(--halo) 30%, transparent) inset;
+    transform: perspective(700px) rotateX(62deg);
+  }
+  </style>
+  <div class="bg-lattice" aria-hidden="true"><div class="lattice"></div></div>
+  <canvas id="nodes" width="1024" height="1024" style="position:fixed;inset:0;z-index:-1;pointer-events:none;"></canvas>
+  <script>
+  (() => {
+    const c = document.getElementById('nodes'); const d = c.getContext('2d'); const S = Math.min(innerWidth, innerHeight)*0.78;
+    c.width = c.height = S * devicePixelRatio; c.style.width = c.style.height = S+'px';
+    c.style.left = ((innerWidth - S)/2)+'px'; c.style.top = ((innerHeight - S)/2)+'px';
+    const N=72, R = (S*devicePixelRatio)/2 * 0.94, cx = c.width/2, cy = c.height/2;
+    d.clearRect(0,0,c.width,c.height);
+    for(let i=0;i<N;i++){
+      const a = (i/N)*Math.PI*2;
+      const x = cx + Math.cos(a)*R, y = cy + Math.sin(a*1.618)*R*0.65;
+      const g = d.createRadialGradient(x,y,0,x,y,10*devicePixelRatio);
+      g.addColorStop(0,'#ffffff'); g.addColorStop(1,'rgba(137,163,255,.05)');
+      d.fillStyle = g; d.beginPath(); d.arc(x,y,4*devicePixelRatio,0,Math.PI*2); d.fill();
+    }
+  })();
+  </script>
+  <script>
+  window.addEventListener('cathedral:select', e => {
+    const tint = e.detail?.payload?.color || '#89a3ff';
+    document.documentElement.style.setProperty('--lattice', tint);
+  });
   </script>
 </body>
 </html>
