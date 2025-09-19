@@ -29,6 +29,19 @@ const DEFAULT_NUMBERS = {
   ONEFORTYFOUR: 144
 };
 
+/**
+ * Render a static, four-layer sacred-geometry helix composition onto a 2D canvas.
+ *
+ * Draws a Vesica field, Tree of Life scaffold, Fibonacci spiral, and double-helix lattice
+ * in sequence using a normalized configuration derived from `input`. Saves and restores
+ * the canvas state around the operation and may render an optional bottom notice.
+ *
+ * @param {CanvasRenderingContext2D} ctx - A 2D canvas rendering context to draw into.
+ * @param {Object} [input] - Optional rendering configuration (palette, numbers, dims, notice).
+ *   Only keys with non-default meanings need to be provided; missing values are filled by the renderer.
+ * @returns {{summary: string}} An object containing a human-readable summary of the rendered layer counts.
+ * @throws {Error} If `ctx` is not a valid 2D canvas context.
+ */
 export function renderHelix(ctx, input = {}) {
   if (!ctx || typeof ctx.canvas === "undefined") {
     throw new Error("renderHelix requires a 2D canvas context.");
@@ -79,6 +92,15 @@ function mergePalette(candidate) {
   };
 }
 
+/**
+ * Merge user-provided numeric overrides into the default numeric constants.
+ *
+ * Returns a shallow copy of DEFAULT_NUMBERS where any key present in the
+ * input `candidate` that is a finite number replaces the corresponding default.
+ *
+ * @param {Object} candidate - Object whose numeric properties override defaults.
+ * @return {Object} A new numbers object combining DEFAULT_NUMBERS with valid overrides.
+ */
 function mergeNumbers(candidate) {
   const merged = { ...DEFAULT_NUMBERS };
   for (const key of Object.keys(DEFAULT_NUMBERS)) {
@@ -89,12 +111,33 @@ function mergeNumbers(candidate) {
   return merged;
 }
 
+/**
+ * Clear the canvas to the configured background and apply the layered background glow.
+ *
+ * Clears the entire drawing surface with palette.bg then delegates to applyBackgroundGlow
+ * to paint the central radial halo and floor wash based on dims and numbers.
+ * @param {CanvasRenderingContext2D} ctx - 2D canvas context to draw into.
+ * @param {{width: number, height: number, cx?: number, cy?: number}} dims - Rendering dimensions and optional center coordinates.
+ * @param {{bg: string, ink?: string, layers?: string[]}} palette - Palette object; bg is used as the fill color.
+ * @param {Object} numbers - Numeric configuration (spacing/scales) used by the glow routine.
+ */
 function clearStage(ctx, dims, palette, numbers) {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, dims.width, dims.height);
   applyBackgroundGlow(ctx, dims, palette, numbers);
 }
 
+/**
+ * Draws layered background glow: a central radial halo and a floor wash to add depth.
+ *
+ * Paints a radial halo near the top-center and a vertical floor gradient using colors
+ * from the provided palette and sizing from the numeric constants. This mutates the
+ * supplied 2D canvas context by filling the full canvas area.
+ *
+ * @param {Object} dims - Rendering dimensions; must include `width` and `height`.
+ * @param {Object} palette - Color palette containing `bg`, `ink`, and a `layers` array used for gradients.
+ * @param {Object} numbers - Numeric constants (e.g. THREE, NINE, SEVEN) that control radii and positions.
+ */
 function applyBackgroundGlow(ctx, dims, palette, numbers) {
   // Layered glow: central halo and floor wash keep depth without motion.
   const centreX = dims.width / 2;
@@ -115,6 +158,19 @@ function applyBackgroundGlow(ctx, dims, palette, numbers) {
   ctx.fillRect(0, 0, dims.width, dims.height);
 }
 
+/**
+ * Render the Vesica field layer: a grid of paired vesica circles, a central halo, and a vertical axis.
+ *
+ * Renders positioned vesica pairs for each grid cell, a concentric halo near the canvas center,
+ * and a dashed central axis. Returns lightweight statistics used by the caller to summarize the
+ * rendered layer.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D canvas drawing context to render into.
+ * @param {{width: number, height: number}} dims - Canvas dimensions and derived layout bounds.
+ * @param {{layers: string[]}} palette - Color palette object; uses palette.layers indices for strokes.
+ * @param {{ONEFORTYFOUR: number, TWENTYTWO: number}} numbers - Numeric constants used for sizing and dashing.
+ * @return {{circles: number, radius: number}} Statistics: total circle count (pairs + halo) and the grid radius.
+ */
 function drawVesicaField(ctx, dims, palette, numbers) {
   const grid = buildVesicaGrid(dims, numbers);
 
@@ -141,6 +197,20 @@ function drawVesicaField(ctx, dims, palette, numbers) {
   return { circles: grid.cells.length * 2 + 2, radius: grid.radius };
 }
 
+/**
+ * Build a rectangular grid of vesica cell descriptors for the canvas.
+ *
+ * Produces a rows x cols grid (rows and cols taken from `numbers`) of cell objects
+ * positioned inside a uniform margin derived from `dims.width`. Each cell contains
+ * the computed center coordinates and sizing used by vesica pair rendering.
+ *
+ * @param {Object} dims - Rendering dimensions; expects numeric `width` and `height`.
+ * @param {Object} numbers - Numeric constants used for layout (expects `SEVEN`, `THREE`, `THIRTYTHREE`, `NINE`, `TWENTYTWO`, `ELEVEN`).
+ * @return {{cells: Array<{cx:number, cy:number, radius:number, offset:number}>, radius: number}}
+ *   An object with:
+ *   - cells: Array of cell descriptors ({cx, cy, radius, offset}) for each grid position.
+ *   - radius: the computed base radius applied to every cell.
+ */
 function buildVesicaGrid(dims, numbers) {
   const rows = numbers.SEVEN;
   const cols = numbers.THREE;
@@ -163,6 +233,19 @@ function buildVesicaGrid(dims, numbers) {
   return { cells, radius };
 }
 
+/**
+ * Draws a pair of stroked circles (a vesica pair) centered horizontally around a cell.
+ *
+ * The function issues two stroked arcs on the provided 2D canvas context: one centered at
+ * (cell.cx - cell.offset, cell.cy) and the other at (cell.cx + cell.offset, cell.cy),
+ * both using cell.radius.
+ *
+ * @param {Object} cell - Geometry describing the vesica pair.
+ * @param {number} cell.cx - X coordinate of the cell center.
+ * @param {number} cell.cy - Y coordinate of the cell center.
+ * @param {number} cell.radius - Radius of each circle.
+ * @param {number} cell.offset - Horizontal offset from the center to each circle.
+ */
 function drawVesicaPair(ctx, cell) {
   ctx.beginPath();
   ctx.arc(cell.cx - cell.offset, cell.cy, cell.radius, 0, Math.PI * 2);
@@ -172,6 +255,16 @@ function drawVesicaPair(ctx, cell) {
   ctx.stroke();
 }
 
+/**
+ * Draws a two-ring vesica halo: an outer and a scaled inner circle centered above the canvas midpoint.
+ *
+ * The outer radius is computed from the smaller canvas dimension divided by (THREE * 0.82).
+ * The inner radius is a scaled proportion of the outer radius using the numeric ratio SEVEN / ELEVEN.
+ * Uses the current canvas stroke style and line width; does not modify canvas state stack.
+ *
+ * @param {{width:number,height:number}} dims - Canvas dimensions; used to compute the halo center and radii.
+ * @param {{THREE:number,SEVEN:number,ELEVEN:number}} numbers - Numeric constants referenced to compute radii.
+ */
 function drawVesicaHalo(ctx, dims, numbers) {
   const centreX = dims.width / 2;
   const centreY = dims.height / 2.2;
@@ -187,6 +280,15 @@ function drawVesicaHalo(ctx, dims, numbers) {
   ctx.stroke();
 }
 
+/**
+ * Draws the central vertical axis and an elliptical base for the vesica field.
+ *
+ * The vertical axis runs from a top offset (1/NINE of the canvas height) down to 90% of the canvas height.
+ * An elliptical "base" is drawn near the lower area to anchor the composition.
+ *
+ * @param {Object} dims - Rendering dimensions; expected to include `width` and `height` (pixels).
+ * @param {Object} numbers - Numeric constants used for layout; must provide `NINE`, `THREE`, and `TWENTYTWO`.
+ */
 function drawVesicaAxis(ctx, dims, numbers) {
   const centreX = dims.width / 2;
   const startY = dims.height / numbers.NINE;
@@ -203,6 +305,19 @@ function drawVesicaAxis(ctx, dims, numbers) {
   ctx.stroke();
 }
 
+/**
+ * Render the "Tree of Life" layer into the provided 2D canvas context.
+ *
+ * Draws an architectural vault and central column, renders the Tree of Life node positions
+ * and connecting paths, paints each sephirot as a filled-and-outlined circle, and adds a
+ * decorative star motif at the kether node. Uses colors from the provided palette and
+ * numeric constants for sizing.
+ *
+ * @param {Object} dims - Normalized drawing dimensions (at least { width, height, cx, cy }).
+ * @param {Object} palette - Color palette object (expects layer and ink colors used by this layer).
+ * @param {Object} numbers - Numeric constants used for layout and scaling.
+ * @return {{nodes: number, paths: number}} Summary statistics: number of nodes drawn and number of connecting paths.
+ */
 function drawTreeOfLife(ctx, dims, palette, numbers) {
   const nodes = buildTreeNodes(dims, numbers);
   const paths = buildTreePaths();
@@ -242,6 +357,16 @@ function drawTreeOfLife(ctx, dims, palette, numbers) {
   return { nodes: Object.keys(nodes).length, paths: paths.length };
 }
 
+/**
+ * Compute 2D canvas coordinates for the 11 sephirot (Tree of Life nodes).
+ *
+ * Uses canvas dimensions and numeric constants to place nodes in a vertical scaffold
+ * with horizontal offsets for left/right columns and calibrated vertical spacing.
+ *
+ * @param {{width:number,height:number}} dims - Canvas dimensions; must include width and height.
+ * @param {{THREE:number, ELEVEN:number, THIRTYTHREE:number}} numbers - Numeric constants used for layout spacing.
+ * @return {{kether:{x:number,y:number}, chokmah:{x:number,y:number}, binah:{x:number,y:number}, daath:{x:number,y:number}, chesed:{x:number,y:number}, geburah:{x:number,y:number}, tiphareth:{x:number,y:number}, netzach:{x:number,y:number}, hod:{x:number,y:number}, yesod:{x:number,y:number}, malkuth:{x:number,y:number}}}
+ */
 function buildTreeNodes(dims, numbers) {
   const marginY = dims.height / numbers.THIRTYTHREE;
   const centerX = dims.width / 2;
@@ -263,6 +388,15 @@ function buildTreeNodes(dims, numbers) {
   };
 }
 
+/**
+ * Returns the canonical Tree-of-Life connectivity as an array of node-pair paths.
+ *
+ * Each element is a 2-element array [from, to] of sephirot names describing a connection.
+ * The list encodes the standard pathways between kether, chokmah, binah, chesed, geburah,
+ * tiphareth, netzach, hod, yesod, malkuth and includes daath-related links where present.
+ *
+ * @return {string[][]} Array of 2-string arrays representing edges between named nodes.
+ */
 function buildTreePaths() {
   return [
     ["kether", "chokmah"],
@@ -290,6 +424,17 @@ function buildTreePaths() {
   ];
 }
 
+/**
+ * Draws an architectural vaulted arch and inner arc behind the Tree of Life.
+ *
+ * Renders a two-tiered vault (outer arch with base pillars and a smaller inner arch)
+ * centered horizontally and positioned relative to the canvas height and the
+ * `kether` node's y coordinate. The function temporarily adjusts canvas state,
+ * stroke style, line width, and global alpha, then restores the context.
+ *
+ * @param {Object} dims - Rendering dimensions; must include numeric `width` and `height`.
+ * @param {Object} nodes - Tree node coordinates; expects `nodes.kether.y` to position the arch vertically.
+ */
 function drawTreeVault(ctx, dims, palette, numbers, nodes) {
   ctx.save();
   ctx.globalAlpha = 0.42;
@@ -319,6 +464,15 @@ function drawTreeVault(ctx, dims, palette, numbers, nodes) {
   ctx.restore();
 }
 
+/**
+ * Draws a vertical decorative column between the Tree-of-Life top (Kether) and bottom (Malkuth).
+ *
+ * Renders a filled column using a vertical gradient derived from the palette and paints a central stroked seam from `nodes.kether` down to `nodes.malkuth`.
+ *
+ * @param {Object} nodes - Coordinates used to position the column.
+ * @param {{x: number, y: number}} nodes.kether - Top coordinate (Kether).
+ * @param {{x: number, y: number}} nodes.malkuth - Bottom coordinate (Malkuth).
+ */
 function drawTreeColumn(ctx, dims, palette, numbers, nodes) {
   ctx.save();
   const columnWidth = Math.max(dims.width / numbers.NINETYNINE, 6);
@@ -338,6 +492,17 @@ function drawTreeColumn(ctx, dims, palette, numbers, nodes) {
   ctx.restore();
 }
 
+/**
+ * Draws a decorative star motif centered on the provided `kether` coordinates and a vertical emphasis line.
+ *
+ * If `kether` is falsy the function returns without drawing.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D canvas context to draw on.
+ * @param {Object} dims - Canvas dimensions (expects a numeric `width`) used to scale the star.
+ * @param {Object} palette - Color palette (expects `layers` array and `ink`) used for fill and stroke colors.
+ * @param {Object} numbers - Numeric constants used for sizing (expects `ONEFORTYFOUR`, `THREE`, `NINE`).
+ * @param {{x:number,y:number}} kether - Position where the star is centered.
+ */
 function drawTreeStar(ctx, dims, palette, numbers, kether) {
   if (!kether) {
     return;
@@ -373,6 +538,19 @@ function drawTreeStar(ctx, dims, palette, numbers, kether) {
   ctx.restore();
 }
 
+/**
+ * Draws a smooth Fibonacci-based spiral on the provided 2D canvas context and renders periodic markers along it.
+ *
+ * The function generates a Fibonacci sequence, maps it to 2D spiral coordinates, renders a smoothed path
+ * through those points using quadratic segments, and then draws small markers along the spiral. Stroke
+ * thickness and opacity are scaled relative to the canvas dimensions and numeric constants.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D drawing context (canvas rendering surface).
+ * @param {Object} dims - Rendering dimensions and derived layout values (expects at least width/height).
+ * @param {Object} palette - Palette object providing layer colors; the spiral uses palette.layers[3].
+ * @param {Object} numbers - Numeric constants used for sizing and limits (e.g., ONEFORTYFOUR, NINETYNINE).
+ * @returns {{points: number}} An object containing the number of spiral points rendered (property `points`).
+ */
 function drawFibonacciCurve(ctx, dims, palette, numbers) {
   const sequence = buildFibonacciSequence(numbers.ONEFORTYFOUR);
   const points = buildSpiralPoints(sequence, dims, numbers);
@@ -400,6 +578,12 @@ function drawFibonacciCurve(ctx, dims, palette, numbers) {
   return { points: points.length };
 }
 
+/**
+ * Build a Fibonacci sequence starting with [1, 1], including values up to and including the largest value that does not exceed `limit`.
+ * @param {number} limit - Maximum allowed value in the sequence (inclusive). Should be a finite number.
+ * @returns {number[]} Fibonacci sequence beginning with [1, 1] where each element is <= `limit`.
+ * If `limit` is less than 1 the function still returns the initial [1, 1].
+ */
 function buildFibonacciSequence(limit) {
   const seq = [1, 1];
   while (true) {
@@ -412,6 +596,18 @@ function buildFibonacciSequence(limit) {
   return seq;
 }
 
+/**
+ * Convert a numeric sequence into 2D spiral coordinates centered on the canvas.
+ *
+ * Maps each value in `sequence` to a point by using a radius proportional to the square root
+ * of the value and an angular progression based on a golden-angle-like step. The spiral is
+ * centered horizontally at canvas midpoint and vertically at one-third from the top.
+ *
+ * @param {number[]} sequence - Ordered numeric sequence (e.g., Fibonacci numbers); should be non-empty and increasing so scale computation is meaningful.
+ * @param {{width: number, height: number}} dims - Canvas dimensions; used to compute center and scaling.
+ * @param {Object} numbers - Numeric constants object (expects properties like THREE, SEVEN, NINE, ELEVEN, TWENTYTWO) used to control scaling and angular increments.
+ * @return {{x: number, y: number}[]} Array of 2D points for the spiral; the first element is the computed spiral center followed by points for each sequence value.
+ */
 function buildSpiralPoints(sequence, dims, numbers) {
   const centerX = dims.width / 2;
   const centerY = dims.height / numbers.THREE;
@@ -432,6 +628,16 @@ function buildSpiralPoints(sequence, dims, numbers) {
   return [{ x: centerX, y: centerY }, ...points];
 }
 
+/**
+ * Draws small filled markers at regular intervals along a list of spiral points.
+ *
+ * The function samples the provided points array using a step of
+ * `max(1, floor(points.length / numbers.TWENTYTWO))`, draws filled circles
+ * at those sampled coordinates using `palette.ink`, and sizes each marker
+ * with a canvas-width–relative radius of `max(2, ctx.canvas.width / numbers.ONEFORTYFOUR / 1.8)`.
+ *
+ * @param {Array<{x: number, y: number}>} points - Ordered 2D points defining the spiral; markers are placed at sampled indices.
+ */
 function drawSpiralMarkers(ctx, points, palette, numbers) {
   ctx.save();
   ctx.fillStyle = palette.ink;
@@ -446,6 +652,18 @@ function drawSpiralMarkers(ctx, points, palette, numbers) {
   ctx.restore();
 }
 
+/**
+ * Render the double-helix lattice (two sinusoidal rails, connecting rungs, and endpoint anchors).
+ *
+ * Draws both helix rails with distinct layer colors, strokes the rung connections using the ink color,
+ * renders a subtle guide and decorative anchors, and returns simple statistics about the lattice.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D drawing context to render into.
+ * @param {{width:number,height:number}} dims - Canvas dimensions used to scale line widths and geometry.
+ * @param {{ink:string,layers:string[]}} palette - Color palette; expects `layers[4]` and `layers[5]` for the two rails and `ink` for rungs.
+ * @param {Object} numbers - Numeric constants used for layout and stroke scaling (e.g., ONEFORTYFOUR).
+ * @return {{rungs:number}} Object with the number of rung segments drawn.
+ */
 function drawHelixLattice(ctx, dims, palette, numbers) {
   const rails = buildHelixRails(dims, numbers);
 
@@ -490,6 +708,17 @@ function drawHelixLattice(ctx, dims, palette, numbers) {
   return { rungs: rails.rungs.length };
 }
 
+/**
+ * Build two sinusoidal helix rails across the horizontal span and a list of evenly spaced rungs connecting them.
+ *
+ * @param {Object} dims - Rendering dimensions; must include numeric `width` and `height`.
+ * @param {Object} numbers - Numeric constants used for layout; this function reads `TWENTYTWO`, `SEVEN`, `THREE`, and `ELEVEN`.
+ * @return {{a: Array<{x:number,y:number}>, b: Array<{x:number,y:number}>, rungs: Array<{a:{x:number,y:number}, b:{x:number,y:number}}>} }
+ * An object containing:
+ * - `a`: points for rail A (array of {x,y}).
+ * - `b`: points for rail B (array of {x,y}, phase-shifted from A).
+ * - `rungs`: array of connections (every second index) each with `{a, b}` referencing the corresponding rail points.
+ */
 function buildHelixRails(dims, numbers) {
   const length = numbers.TWENTYTWO;
   const startX = dims.width * 0.18;
@@ -518,6 +747,19 @@ function buildHelixRails(dims, numbers) {
   return { a, b, rungs };
 }
 
+/**
+ * Draws a subtle guide ellipse and an inner "walkway" band near the bottom-center to suggest the helix region.
+ *
+ * Renders a faint filled ellipse with an outline and a narrow rectangular walkway inside it. Uses
+ * colors from palette.layers and sizing from numbers to compute the ellipse radii, stroke widths,
+ * and walkway dimensions. Saves and restores the canvas state so calling code's context transforms
+ * and styles are preserved.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D canvas context to draw into.
+ * @param {{width:number,height:number}} dims - Rendering dimensions; used to position and scale the guide.
+ * @param {object} palette - Palette object; expects a layers array where specific indices provide fill/ink colors.
+ * @param {object} numbers - Numeric constants (e.g. THREE, TWENTYTWO, ELEVEN, ONEFORTYFOUR) used for layout math.
+ */
 function drawHelixGuide(ctx, dims, palette, numbers) {
   ctx.save();
   const centreX = dims.width / 2;
@@ -546,6 +788,18 @@ function drawHelixGuide(ctx, dims, palette, numbers) {
   ctx.restore();
 }
 
+/**
+ * Draws decorative diamond anchors at the start and end points of the two helix rails.
+ *
+ * Uses the first and last points of rails.a and rails.b (if present) to render small
+ * filled-and-stroked diamond markers. Marker size scales with canvas width and
+ * falls back to a minimum radius. Stroke uses `palette.ink` at 70% alpha; fill uses
+ * the helix layer color (palette.layers[3]) at 18% alpha.
+ *
+ * @param {{a: Array<{x:number,y:number}>, b: Array<{x:number,y:number}>}} rails - Rail point arrays; anchors are taken from the first and last elements of each array.
+ * @param {{ink:string, layers:string[]}} palette - Colour palette; expects an `ink` string and a `layers` array containing the helix layer at index 3.
+ * @param {{ONEFORTYFOUR:number}} numbers - Numeric constants object; used to compute a responsive marker radius.
+ */
 function drawHelixAnchors(ctx, rails, palette, numbers) {
   ctx.save();
   const anchors = [rails.a[0], rails.a[rails.a.length - 1], rails.b[0], rails.b[rails.b.length - 1]];
@@ -568,6 +822,15 @@ function drawHelixAnchors(ctx, rails, palette, numbers) {
   ctx.restore();
 }
 
+/**
+ * Draws a centered notice line near the bottom of the canvas.
+ *
+ * Renders `message` horizontally centered and positioned just above the bottom edge using a responsive font size derived from `dims.width`. The function saves and restores the canvas context so it does not leave side effects on drawing state.
+ *
+ * @param {{width: number, height: number}} dims - Canvas dimensions used to compute position and font size.
+ * @param {string} color - CSS color string for the text fill.
+ * @param {string} message - The text to render.
+ */
 function drawCanvasNotice(ctx, dims, color, message) {
   ctx.save();
   ctx.fillStyle = color;
@@ -577,6 +840,24 @@ function drawCanvasNotice(ctx, dims, color, message) {
   ctx.restore();
 }
 
+/**
+ * Create a human-readable summary of rendered layer statistics.
+ *
+ * Builds a single-line summary describing counts returned by each layer renderer:
+ * vesica circle count, tree paths/nodes, fibonacci spiral points, and helix rungs.
+ *
+ * @param {Object} stats - Aggregated layer statistics.
+ * @param {Object} stats.vesicaStats - Vesica layer stats.
+ * @param {number} stats.vesicaStats.circles - Number of vesica circles drawn.
+ * @param {Object} stats.treeStats - Tree-of-life layer stats.
+ * @param {number} stats.treeStats.paths - Number of tree paths drawn.
+ * @param {number} stats.treeStats.nodes - Number of tree nodes drawn.
+ * @param {Object} stats.fibonacciStats - Fibonacci/spiral layer stats.
+ * @param {number} stats.fibonacciStats.points - Number of spiral points drawn.
+ * @param {Object} stats.helixStats - Helix layer stats.
+ * @param {number} stats.helixStats.rungs - Number of helix rungs drawn.
+ * @return {string} A single-line summary suitable for logs or UI.
+ */
 function summariseLayers(stats) {
   const vesica = `${stats.vesicaStats.circles} vesica circles`;
   const tree = `${stats.treeStats.paths} paths / ${stats.treeStats.nodes} nodes`;
@@ -585,6 +866,16 @@ function summariseLayers(stats) {
   return `Layers rendered - ${vesica}; ${tree}; ${fibonacci}; ${helix}.`;
 }
 
+/**
+ * Convert a 6-digit hex color to an `rgba(...)` string with the given alpha.
+ *
+ * Accepts a hex string with or without a leading `#`. If `hex` is not a valid
+ * 6-character hex code the function returns `rgba(0,0,0,alpha)`.
+ *
+ * @param {string} hex - A 6-digit hex color (e.g. `"#ffddaa"` or `"ffddaa"`).
+ * @param {number} alpha - Alpha transparency between 0 and 1.
+ * @return {string} An `rgba(r,g,b,a)` CSS color string.
+ */
 function withAlpha(hex, alpha) {
   const normalized = typeof hex === "string" ? hex.replace(/^#/, "") : "";
   if (normalized.length !== 6) {
