@@ -18,12 +18,12 @@
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette…</div>
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
+  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
@@ -32,21 +32,20 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    async function loadJSON(path) {
-      // Offline promise: only touches local file paths. If blocked (e.g. file:// fetch), null is returned.
+    async function loadPalette(path) {
+      // Offline promise: only touches local paths. When browsers block file:// fetch we attempt a JSON module import first.
       try {
         if (window.location && window.location.protocol === "file:") {
           try {
-            // Offline-first: JSON module import avoids blocked fetch calls under file:// origins.
             const module = await import(path, { assert: { type: "json" } });
             return module.default;
           } catch (importError) {
-            // Silent fallback: some browsers reject JSON assertions, so we retry with fetch below.
+            // Silent fallback: some engines reject JSON assertions when opened straight from disk.
           }
         }
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
       } catch (err) {
         return null;
       }
@@ -54,13 +53,13 @@
 
     const defaults = {
       palette: {
-        bg:"#0b0b12",
-        ink:"#e8e8f0",
-        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
 
-    const palette = await loadJSON("./data/palette.json");
+    const palette = await loadPalette("./data/palette.json");
     const active = palette || defaults.palette;
     const usingFallback = !palette;
 
@@ -68,46 +67,23 @@
     document.documentElement.style.setProperty("--bg", active.bg);
     document.documentElement.style.setProperty("--ink", active.ink);
 
-
     elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
 
     if (!ctx) {
       elStatus.textContent += " Canvas 2D context unavailable.";
     } else {
-      // Numerology constants used by geometry routines
+      // Numerology constants used by geometry routines.
       const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
-      // ND-safe rationale: no motion, high readability, soft colors, layered order
-      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    }
-
-
-    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
-
-
-    if (!ctx) {
-      elStatus.textContent += " Canvas 2D context unavailable.";
-    } else {
-      // Numerology constants used by geometry routines
-      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
-
-      // ND-safe rationale: no motion, high readability, soft colors, layered order
-      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    }
-
-    // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(
-      ctx,
-      {
+      // ND-safe rationale: no motion, high readability, soft colors, layered order.
+      renderHelix(ctx, {
         width: canvas.width,
         height: canvas.height,
         palette: active,
         NUM,
         notice: usingFallback ? "Palette fallback active" : null
-      }
-    );
-
-
+      });
+    }
   </script>
 </body>
 </html>
