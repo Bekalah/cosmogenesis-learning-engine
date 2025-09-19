@@ -6,108 +6,145 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <style>
-    /* ND-safe: calm contrast, no motion, generous spacing */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
-    html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-    header { padding:12px 16px; border-bottom:1px solid #1d1d2a; }
-    .status { color:var(--muted); font-size:12px; }
-    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; }
-    .note { max-width:900px; margin:0 auto 16px; color:var(--muted); }
-    code { background:#11111a; padding:2px 4px; border-radius:3px; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1d1d2a;
+      background: linear-gradient(180deg, rgba(17,17,26,0.9), rgba(11,11,18,0.2));
+    }
+    header strong {
+      letter-spacing: 0.04em;
+    }
+    .status {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    #stage {
+      display: block;
+      width: 1440px;
+      height: 900px;
+      margin: 16px auto;
+      max-width: calc(100vw - 32px);
+      max-height: calc(100vh - 160px);
+      box-shadow: 0 0 0 1px #1d1d2a;
+      background: var(--bg);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .note {
+      max-width: 900px;
+      margin: 0 auto 16px;
+      padding: 0 16px;
+      color: var(--muted);
+    }
+    code {
+      background: #11111a;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette…</div>
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
+  <p class="note">This static renderer encodes the vesica field, Tree-of-Life scaffold, Fibonacci curve, and static double-helix lattice. Open this file directly. No animation, no external libraries.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const elStatus = document.getElementById("status");
+    const statusEl = document.getElementById("status");
     const canvas = document.getElementById("stage");
-    const ctx = canvas.getContext("2d");
+    const context = canvas.getContext("2d");
+
+    const FALLBACK = Object.freeze({
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+    });
+
+    const NUM = Object.freeze({
+      THREE: 3,
+      SEVEN: 7,
+      NINE: 9,
+      ELEVEN: 11,
+      TWENTYTWO: 22,
+      THIRTYTHREE: 33,
+      NINETYNINE: 99,
+      ONEFORTYFOUR: 144
+    });
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    function applyChrome(palette) {
+      const root = document.documentElement;
+      root.style.setProperty("--bg", palette.bg);
+      root.style.setProperty("--ink", palette.ink);
+      root.style.setProperty("--muted", palette.muted || palette.ink);
+    }
 
     async function loadJSON(path) {
-      // Offline promise: only touches local file paths. If blocked (e.g. file:// fetch), null is returned.
-      try {
-        if (window.location && window.location.protocol === "file:") {
-          try {
-            // Offline-first: JSON module import avoids blocked fetch calls under file:// origins.
-            const module = await import(path, { assert: { type: "json" } });
-            return module.default;
-          } catch (importError) {
-            // Silent fallback: some browsers reject JSON assertions, so we retry with fetch below.
-          }
+      const url = new URL(path, import.meta.url);
+      if (window.location && window.location.protocol === "file:") {
+        try {
+          const module = await import(url.href, { assert: { type: "json" } });
+          return module.default;
+        } catch (error) {
+          // Some browsers reject JSON module assertions under file origins; fall back to fetch.
         }
-        const res = await fetch(path, { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        return await res.json();
-      } catch (err) {
+      }
+      try {
+        const response = await fetch(url.href, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
+      } catch (error) {
         return null;
       }
     }
 
-    const defaults = {
-      palette: {
-        bg:"#0b0b12",
-        ink:"#e8e8f0",
-        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
-      }
-    };
-
-    const palette = await loadJSON("./data/palette.json");
-    const active = palette || defaults.palette;
-    const usingFallback = !palette;
-
-    // Sync CSS tokens with whichever palette resolved so the chrome mirrors the canvas.
-    document.documentElement.style.setProperty("--bg", active.bg);
-    document.documentElement.style.setProperty("--ink", active.ink);
-
-
-    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
-
-    if (!ctx) {
-      elStatus.textContent += " Canvas 2D context unavailable.";
+    if (!context) {
+      setStatus("Canvas context unavailable in this browser.");
     } else {
-      // Numerology constants used by geometry routines
-      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+      const paletteData = await loadJSON("./data/palette.json");
+      const palette = paletteData || FALLBACK.palette;
+      applyChrome(palette);
 
-      // ND-safe rationale: no motion, high readability, soft colors, layered order
-      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    }
+      const notice = paletteData ? null : "Palette fallback active";
 
-
-    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
-
-
-    if (!ctx) {
-      elStatus.textContent += " Canvas 2D context unavailable.";
-    } else {
-      // Numerology constants used by geometry routines
-      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
-
-      // ND-safe rationale: no motion, high readability, soft colors, layered order
-      renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
-    }
-
-    // ND-safe rationale: no motion, high readability, soft colors, layered order
-    renderHelix(
-      ctx,
-      {
-        width: canvas.width,
-        height: canvas.height,
-        palette: active,
-        NUM,
-        notice: usingFallback ? "Palette fallback active" : null
+      try {
+        const result = renderHelix(context, {
+          width: canvas.width,
+          height: canvas.height,
+          palette,
+          NUM,
+          notice
+        });
+        const summary = result && typeof result.summary === "string" ? ` ${result.summary}` : "";
+        setStatus(`${paletteData ? "Palette loaded." : "Fallback palette in use."}${summary}`);
+      } catch (error) {
+        console.error("Renderer error:", error);
+        setStatus("Renderer failed. See console for details.");
       }
-    );
-
-
+    }
   </script>
 </body>
 </html>

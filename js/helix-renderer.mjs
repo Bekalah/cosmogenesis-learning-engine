@@ -15,6 +15,7 @@
 const DEFAULT_PALETTE = {
   bg: "#0b0b12",
   ink: "#e8e8f0",
+  muted: "#a6a6c1",
   layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
 };
 
@@ -75,6 +76,7 @@ function mergePalette(candidate) {
   return {
     bg: typeof candidate.bg === "string" ? candidate.bg : DEFAULT_PALETTE.bg,
     ink: typeof candidate.ink === "string" ? candidate.ink : DEFAULT_PALETTE.ink,
+    muted: typeof candidate.muted === "string" ? candidate.muted : DEFAULT_PALETTE.muted,
     layers
   };
 }

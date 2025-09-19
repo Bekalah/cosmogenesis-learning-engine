@@ -5,7 +5,7 @@ Static, offline-first canvas capsule that renders four calm layers: the vesica l
 ## Files
 - `index.html` - offline entry point that loads the optional palette, syncs the chrome colours, seeds numerology constants, and invokes the renderer.
 - `js/helix-renderer.mjs` - pure ES module of drawing helpers. Each function documents why the ND-safe order matters and references the covenant numbers.
-- `data/palette.json` - optional colour override. If missing the renderer applies its sealed fallback, posts a status message, and paints a canvas notice.
+- `data/palette.json` - optional colour override (`bg`, `ink`, `muted`, and a six-colour `layers` array). Missing data keeps the sealed fallback, posts a status message, and paints a canvas notice.
 
 ## Usage
 1. Download or clone the repository.
@@ -27,7 +27,7 @@ All routines stay parameterised by `{3, 7, 9, 11, 22, 33, 99, 144}` to honour th
 - ASCII quotes, UTF-8, LF newlines, and small pure functions keep the module portable offline.
 
 ## Customisation
-- Adjust colours by editing `data/palette.json`. Provide `bg`, `ink`, and a six colour `layers` array.
+- Adjust colours by editing `data/palette.json`. Provide `bg`, `ink`, `muted`, and a six colour `layers` array.
 - Override numerology constants in `index.html` before calling `renderHelix` if alternate ratios are desired.
 - Compose new layers by duplicating the helper pattern in `js/helix-renderer.mjs`. Keep additions static and well-commented to preserve ND safety.
 - The loader prefers JSON module imports when opened via `file://` to avoid network access. Browsers without JSON module support fall back to the bundled palette safely.
