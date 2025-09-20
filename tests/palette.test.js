@@ -211,3 +211,165 @@ describe('Color palette schema and quality', () => {
     }
   });
 });
+/**
+ * ---------------------------------------------------------------------------
+ * Additional unit tests for palette utilities and search logic
+ * Framework: BDD (describe/it) + Node's assert; compatible with Jest or Vitest.
+ * Focus: Exercise pure helpers (isHex6, hexToRgb01, srgbToLinear, relLuminance,
+ * contrastRatio, looksLikePalette) and findPaletteJson behavior with setup/teardown.
+ * ---------------------------------------------------------------------------
+ */
+
+describe('Palette helper utilities', () => {
+  describe('isHex6', () => {
+    it('accepts valid #RRGGBB values (case-insensitive)', () => {
+      assert.strictEqual(isHex6('#000000'), true);
+      assert.strictEqual(isHex6('#ffffff'), true);
+      assert.strictEqual(isHex6('#A1B2C3'), true);
+      assert.strictEqual(isHex6('#a1b2c3'), true);
+    });
+
+    it('rejects invalid or malformed hex values and non-strings', () => {
+      const bad = ['#FFF', 'FFF', '123456', '#12345', '#1234567', '#12', '#abcdzz', '#GG0000', '', null, undefined, 42, {}, []];
+      for (const v of bad) {
+        assert.strictEqual(isHex6(v), false, `Expected invalid: ${String(v)}`);
+      }
+    });
+  });
+
+  describe('hexToRgb01 and srgbToLinear', () => {
+    const approx = (a, b, eps = 1e-9) => Math.abs(a - b) <= eps;
+
+    it('hexToRgb01 converts #000000 and #FFFFFF exactly', () => {
+      assert.deepStrictEqual(hexToRgb01('#000000'), [0, 0, 0]);
+      assert.deepStrictEqual(hexToRgb01('#FFFFFF'), [1, 1, 1]);
+    });
+
+    it('hexToRgb01 converts mid-gray #808080 close to 128/255 on each channel', () => {
+      const g = hexToRgb01('#808080');
+      for (const c of g) {
+        assert.ok(approx(c, 128 / 255, 1e-12), `Expected ${c} ≈ 128/255`);
+      }
+    });
+
+    it('srgbToLinear follows piecewise definition for low and high segments', () => {
+      const low = 0.03928;
+      const high = 0.5;
+      const expectedLow = low / 12.92;
+      const expectedHigh = Math.pow((high + 0.055) / 1.055, 2.4);
+
+      assert.ok(approx(srgbToLinear(0), 0));
+      assert.ok(approx(srgbToLinear(low), expectedLow, 1e-9));
+      assert.ok(approx(srgbToLinear(high), expectedHigh, 1e-12));
+      assert.ok(approx(srgbToLinear(1), 1));
+    });
+  });
+
+  describe('relLuminance', () => {
+    const approx = (a, b, eps = 1e-4) => Math.abs(a - b) <= eps;
+
+    it('returns 0 for black and 1 for white', () => {
+      assert.ok(approx(relLuminance('#000000'), 0, 1e-12));
+      assert.ok(approx(relLuminance('#FFFFFF'), 1, 1e-12));
+    });
+
+    it('returns expected luminance for primary colors', () => {
+      assert.ok(approx(relLuminance('#FF0000'), 0.2126));
+      assert.ok(approx(relLuminance('#00FF00'), 0.7152));
+      assert.ok(approx(relLuminance('#0000FF'), 0.0722));
+    });
+  });
+
+  describe('contrastRatio', () => {
+    const approx = (a, b, eps = 1e-12) => Math.abs(a - b) <= eps;
+
+    it('is 21.00 for white over black', () => {
+      const r = contrastRatio('#FFFFFF', '#000000');
+      assert.ok(approx(r, 21), `Expected 21, got ${r}`);
+    });
+
+    it('is 1.00 for identical colors', () => {
+      const r = contrastRatio('#123456', '#123456');
+      assert.ok(approx(r, 1), `Expected 1, got ${r}`);
+    });
+
+    // Note: We intentionally do not assert symmetry here to avoid coupling to
+    // implementation details about argument order. The palette tests above
+    // already verify a real-world contrast condition.
+  });
+
+  describe('looksLikePalette', () => {
+    it('accepts objects with the correct shape', () => {
+      const p = { bg: '#000000', ink: '#FFFFFF', muted: '#888888', layers: ['#111111', '#222222'] };
+      assert.strictEqual(looksLikePalette(p), true);
+    });
+
+    it('does not validate hex content, only presence/types of required fields', () => {
+      const p = { bg: 'not-a-hex', ink: '', muted: 'noop', layers: [] };
+      assert.strictEqual(looksLikePalette(p), true);
+    });
+
+    it('returns false when a required key is missing or has wrong type', () => {
+      assert.strictEqual(looksLikePalette({}), false);
+      assert.strictEqual(looksLikePalette({ bg: '#000000', ink: '#FFFFFF', muted: '#888888' }), false); // missing layers
+      assert.strictEqual(looksLikePalette({ bg: 1, ink: '#FFFFFF', muted: '#888888', layers: [] }), false); // wrong type
+      assert.strictEqual(looksLikePalette({ bg: '#000000', ink: '#FFFFFF', muted: '#888888', layers: null }), false); // wrong type
+    });
+  });
+});
+
+describe('findPaletteJson (filesystem search behavior)', () => {
+  // Require locally to avoid touching top-level imports
+  const os = require('os');
+
+  const mkTempRoot = () => fs.mkdtempSync(path.join(os.tmpdir(), 'palette-test-'));
+  const cleanup = (p) => {
+    try { fs.rmSync(p, { recursive: true, force: true }); }
+    catch { try { fs.rmdirSync(p, { recursive: true }); } catch { /* ignore */ } }
+  };
+  const writeJson = (p, obj) => {
+    fs.mkdirSync(path.dirname(p), { recursive: true });
+    fs.writeFileSync(p, JSON.stringify(obj, null, 2), 'utf8');
+  };
+
+  it('returns null when no matching palette JSON exists', () => {
+    const cwd0 = process.cwd();
+    const tmp = mkTempRoot();
+    try {
+      process.chdir(tmp);
+      const res = findPaletteJson();
+      assert.strictEqual(res, null);
+    } finally {
+      process.chdir(cwd0);
+      cleanup(tmp);
+    }
+  });
+
+  it('finds a valid palette.json within candidate roots and ignores test directories', () => {
+    const cwd0 = process.cwd();
+    const tmp = mkTempRoot();
+    try {
+      process.chdir(tmp);
+
+      // Noise in a directory that should be ignored by the search
+      writeJson(path.join(tmp, 'src', '__tests__', 'palette.json'), { bg: '#000000', ink: '#FFFFFF', muted: '#888888', layers: ['#111111'] });
+
+      // Invalid shape file that matches name but should be ignored
+      writeJson(path.join(tmp, 'data', 'invalid-palette.json'), { foo: 'bar' });
+
+      // Valid target
+      const valid = { bg: '#101010', ink: '#FAFAFA', muted: '#777777', layers: ['#222222', '#333333'] };
+      const target = path.join(tmp, 'data', 'palette.json');
+      writeJson(target, valid);
+
+      const res = findPaletteJson();
+      assert.ok(res && res.path, 'Expected a resolved object with a path');
+      assert.strictEqual(path.resolve(res.path), path.resolve(target), `Expected to resolve ${target}`);
+      assert.deepStrictEqual(res.data, valid, 'Parsed data should match the file contents');
+      assert.ok(looksLikePalette(res.data), 'Resolved data should have the expected shape');
+    } finally {
+      process.chdir(cwd0);
+      cleanup(tmp);
+    }
+  });
+});

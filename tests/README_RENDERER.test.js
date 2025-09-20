@@ -130,3 +130,151 @@ describe("README_RENDERER.md structure and content (diff-focused)", () => {
     expect(content).toMatch(/No animation/i);
   });
 });
+/**
+ * Extended tests for README_RENDERER.md (diff-focused, robustness + optional artifacts)
+ *
+ * Framework: Jest (describe/it/expect)
+ * This block complements existing tests by:
+ *  - Verifying HTML snippet structure (canvas + module script to js/helix-renderer.mjs)
+ *  - Ensuring fenced code blocks are balanced
+ *  - Enforcing documented layer order sequencing
+ *  - Tightening the JSON example keys
+ *  - Optionally validating on-disk artifacts referenced by the docs (index.html, data/palette.json)
+ */
+
+describe("README_RENDERER.md extended checks (diff-focused)", () => {
+  const fs = require("fs");
+  const path = require("path");
+
+  // Robustly locate README_RENDERER.md (duplicate helper for local scope)
+  function findReadmeExt() {
+    const candidates = [
+      path.resolve(process.cwd(), "README_RENDERER.md"),
+      path.resolve(process.cwd(), "docs/README_RENDERER.md"),
+      path.resolve(__dirname, "../README_RENDERER.md"),
+      path.resolve(__dirname, "../docs/README_RENDERER.md"),
+    ];
+    for (const p of candidates) {
+      try { if (fs.existsSync(p)) return p; } catch (_) {}
+    }
+    // Fallback: shallow scan of repo root for README*RENDERER*.md
+    try {
+      const root = process.cwd();
+      const entries = fs.readdirSync(root, { withFileTypes: true });
+      for (const e of entries) {
+        if (e.isFile() && /^README.*RENDERER.*\.md$/i.test(e.name)) {
+          return path.join(root, e.name);
+        }
+      }
+    } catch (_) {}
+    throw new Error("README_RENDERER.md not found for extended tests.");
+  }
+
+  // Utility: return first existing absolute path from relative path candidates
+  function findFirstExisting(relPaths) {
+    const bases = [process.cwd(), path.resolve(__dirname, "..")];
+    for (const rel of relPaths) {
+      for (const base of bases) {
+        const p = path.resolve(base, rel);
+        try { if (fs.existsSync(p)) return p; } catch (_) {}
+      }
+    }
+    return null;
+  }
+
+  let content;
+  let readmePath;
+  let indexHtmlPath;
+  let palettePath;
+
+  beforeAll(() => {
+    readmePath = findReadmeExt();
+    content = fs.readFileSync(readmePath, "utf8");
+    indexHtmlPath = findFirstExisting([
+      "index.html",
+      "docs/index.html",
+      "public/index.html",
+      "site/index.html",
+    ]);
+    palettePath = findFirstExisting([
+      "data/palette.json",
+      "docs/data/palette.json",
+      "public/data/palette.json",
+      "assets/data/palette.json",
+      "assets/palette.json",
+    ]);
+  });
+
+  it("has a Table of Contents-style structure with multiple H2 sections", () => {
+    const h2s = content.match(/^\s*##\s+/gm) || [];
+    expect(h2s.length).toBeGreaterThanOrEqual(4);
+    expect(content).toMatch(/##\s*(Usage|Files)/i);
+  });
+
+  it("contains an HTML snippet with a canvas and module script to js/helix-renderer.mjs", () => {
+    const htmlFence = content.match(/```html[\s\S]*?```/i);
+    expect(htmlFence).toBeTruthy();
+    const html = htmlFence[0];
+    expect(html).toMatch(/<canvas[^>]*>/i);
+    expect(html).toMatch(/<\/canvas>/i);
+    expect(html).toMatch(/<script[^>]+type=["']module["'][^>]+src=["']\.?\/?js\/helix-renderer\.mjs["'][^>]*><\/script>/i);
+  });
+
+  it("has balanced fenced code blocks (triple backticks)", () => {
+    const backticks = (content.match(/```/g) || []).length;
+    expect(backticks % 2).toBe(0);
+  });
+
+  it("documents layer sequence in correct back-to-front order", () => {
+    const m = content.match(/##\s*Layer order[^\n]*\n([\s\S]*?)(?=\n##\s|$)/i);
+    expect(m).toBeTruthy();
+    const section = (m && m[1]) || "";
+    const order = [
+      "Vesica field",
+      "Tree-of-Life scaffold",
+      "Fibonacci curve",
+      "Double-helix lattice",
+    ];
+    const indices = order.map(label => section.toLowerCase().indexOf(label.toLowerCase()));
+    indices.forEach(i => expect(i).toBeGreaterThanOrEqual(0));
+    for (let i = 1; i < indices.length; i++) {
+      expect(indices[i]).toBeGreaterThan(indices[i - 1]);
+    }
+  });
+
+  it("locks JSON example keys under 'Palette override' to exactly {bg, ink, layers}", () => {
+    const match = content.match(/```json[\s\S]*?```/i);
+    expect(match).toBeTruthy();
+    const jsonBlock = match[0].replace(/```json|```/gi, "").trim();
+    const parsed = JSON.parse(jsonBlock);
+    const keys = Object.keys(parsed).sort();
+    expect(keys).toEqual(["bg", "ink", "layers"].sort());
+  });
+
+  // Conditionally validate index.html if present
+  const itIf = (cond) => (cond ? it : it.skip);
+
+  itIf(!!indexHtmlPath)("index.html (if present) references module script and a canvas; avoids external HTTP(S) for offline safety", () => {
+    const html = fs.readFileSync(indexHtmlPath, "utf8");
+    expect(html).toMatch(/<script[^>]+type=["']module["'][^>]+src=["']\.?\/?js\/helix-renderer\.mjs["'][^>]*><\/script>/i);
+    expect(html).toMatch(/<canvas[^>]+id=["'][^"']+["'][^>]*>/i);
+    // Encourage offline: no external CDN references
+    const externals = html.match(/https?:\/\//gi) || [];
+    expect(externals.length).toBe(0);
+  });
+
+  // Conditionally validate data/palette.json if present
+  itIf(!!palettePath)("palette.json (if present) has valid shape and hex colors", () => {
+    const palette = JSON.parse(fs.readFileSync(palettePath, "utf8"));
+    expect(palette).toHaveProperty("bg");
+    expect(palette).toHaveProperty("ink");
+    expect(palette).toHaveProperty("layers");
+    expect(Array.isArray(palette.layers)).toBe(true);
+    expect(palette.layers.length).toBeGreaterThanOrEqual(4);
+    expect(palette.layers.length).toBeLessThanOrEqual(12);
+    for (const v of [palette.bg, palette.ink, ...palette.layers]) {
+      expect(typeof v).toBe("string");
+      expect(v).toMatch(/^#?[0-9a-f]{3,8}$/i);
+    }
+  });
+});
