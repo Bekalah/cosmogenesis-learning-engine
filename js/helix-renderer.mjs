@@ -419,17 +419,17 @@ function mergeFibonacciGeometry(base, patch) {
 }
 
 /**
-  * Merge a partial helix geometry onto a base geometry, producing a new validated object.
+  * Merge a partial helix geometry onto a base helix geometry and return a new validated object.
   *
-  * Numeric fields in `patch` replace `base` only when they are finite and > 0.
+  * Numeric fields from `patch` replace `base` only when they are finite and greater than 0.
   * Alpha-like fields (`strandAlpha`, `rungAlpha`) are accepted when numeric and are clamped to [0, 1].
   * If `patch` is missing or not an object, a shallow copy of `base` is returned.
   *
-  * This function does not mutate `base` or `patch`.
+  * The function is pure with respect to its inputs — it does not mutate `base` or `patch`.
   *
-  * @param {object} base - Base helix geometry (e.g. sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha).
-  * @param {object} [patch] - Partial overrides; only valid positive numeric fields and numeric alpha fields are applied.
-  * @return {object} New helix geometry with merged and validated values.
+  * @param {Object} base - Base helix geometry (e.g. { sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha }).
+  * @param {Object} [patch] - Partial overrides; only positive finite numeric fields and numeric alpha fields are applied.
+  * @return {Object} A new helix geometry object with merged and validated values.
   */
 function mergeHelixGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
@@ -506,27 +506,14 @@ function clamp(value, min, max) {
 }
 
 /**
-
- * Fill the canvas with a solid background color and a subtle radial glow.
+ * Fill the canvas with a solid background color and overlay a subtle radial glow.
  *
- * Draws a full-coverage background using bgColor, then overlays a soft radial
- * gradient (light center fading to transparent) to add visual depth toward the
- * upper-middle of the canvas.
+ * Fills the full rectangle defined by dims with bgColor, then draws a soft
+ * radial gradient centered near the upper-middle of the canvas to add visual depth.
  *
- * @param {CanvasRenderingContext2D} ctx - 2D canvas rendering context to draw into.
- * @param {{width: number, height: number}} dims - Drawing dimensions; both must be positive finite numbers.
- * @param {string} bgColor - CSS color string used as the base background color.
-
- * Fill the canvas area with a solid background color and a subtle radial glow.
- *
- * The function fills the rectangle defined by dims with bgColor, then overlays
- * a soft radial gradient (lighter near the upper-center, fading to transparent)
- * to add visual depth.
- *
- * @param {CanvasRenderingContext2D} ctx - 2D canvas rendering context to draw into.
- * @param {{width: number, height: number}} dims - Drawing dimensions; both must be positive finite numbers.
- * @param {string} bgColor - Base CSS color used for the background.
-
+ * @param {CanvasRenderingContext2D} ctx - Canvas 2D rendering context.
+ * @param {{width: number, height: number}} dims - Positive finite drawing dimensions.
+ * @param {string} bgColor - CSS color string used as the base background.
  */
 function fillBackground(ctx, dims, bgColor) {
   ctx.fillStyle = bgColor;
@@ -549,21 +536,22 @@ function fillBackground(ctx, dims, bgColor) {
 }
 
 /**
- * Draw a centered grid of overlapping stroked circles (a vesica field) and axis guides, returning the count drawn.
+ * Draw a centered grid of overlapping stroked circles (a vesica field) with horizontal and vertical axis guides.
  *
- * The grid layout, circle radius, stroke width and opacity are derived from `config`. The function saves and
- * restores the canvas state and does not modify `numbers`.
+ * Renders a grid of circles across the provided drawing area using values from `config` to derive columns,
+ * rows, padding, circle radius, stroke width, and opacity. The canvas state is saved and restored; `numbers`
+ * is not modified and is not used by this routine.
  *
- * @param {{width:number, height:number}} dims - Canvas drawing area dimensions.
- * @param {string} color - Stroke color for circles and axis guides (any valid CSS color).
- * @param {object} config - Vesica geometry and style controls. Numeric fields:
- *   - columns: desired number of columns (rounded, clamped to >= 2)
- *   - rows: desired number of rows (rounded, clamped to >= 2)
- *   - paddingDivisor: divisor of the smaller canvas dimension used to compute outer padding
- *   - radiusScale: multiplier applied to the grid step to compute circle radius
- *   - strokeDivisor: divisor of the smaller canvas dimension used to compute stroke width
- *   - alpha: global opacity for the circles and guides (0..1)
- * @return {{circles:number}} Object with `circles` equal to the total number of circles stroked.
+ * @param {{width:number, height:number}} dims - Drawing area dimensions in pixels.
+ * @param {string} color - Stroke color for circles and guides (any valid CSS color).
+ * @param {object} config - Vesica layout and style controls. Expected numeric fields:
+ *   - columns, rows: grid counts (rounded, min 2)
+ *   - paddingDivisor: divisor of smaller dimension to compute outer padding
+ *   - radiusScale: multiplier of grid step to compute circle radius
+ *   - strokeDivisor: divisor of smaller dimension to compute stroke width
+ *   - alpha: global opacity (0..1)
+ * @param {object} numbers - Numerology/config object (unused by this function; left intact).
+ * @return {{circles:number}} Count of circles stroked.
  */
 function drawVesicaField(ctx, dims, color, numbers, config) {
   const cols = Math.max(2, Math.round(config.columns));
@@ -607,40 +595,24 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
 }
 
 /**
-
- * Render the Tree-of-Life layer: layout nodes by level and xFactor, draw connecting paths, nodes, and labels.
+ * Render the Tree-of-Life layer: lay out nodes by level and xFactor, draw connecting edges, filled nodes, and labels.
  *
- * Positions each node using config.nodes' level (vertical) and xFactor (horizontal) within an inner margin,
- * draws all config.edges as straight lines between node positions using the palette and configured alphas,
- * then renders filled circular nodes and centered text labels. The canvas context state is saved and restored.
+ * Computes node positions within an inner margin based on config.nodes (each item: id, title, level, xFactor),
+ * draws all config.edges (pairs of node ids) as straight lines between resolved node positions (missing ids are skipped),
+ * then renders filled circular nodes with outlines and centered labels beneath each node.
  *
- * @param {{width:number,height:number}} dims - Canvas dimensions in pixels.
- * @param {Object} palette - Color palette; expects palette.layers (array of per-layer colors) and palette.ink for strokes/text.
- * @param {Object} numbers - Numerology constants used for sizing (e.g., THREE, SEVEN) to compute radii and stroke widths.
- * @param {Object} config - Tree rendering options and geometry:
- *   - nodes: Array of { id, title, level, xFactor } (id used as lookup key; title shown under the node).
- *   - edges: Array of [fromId, toId] pairs describing connections to draw.
- *   - marginDivisor: number controlling outer margin (smaller => larger margin).
- *   - radiusDivisor: number controlling node radius (larger => smaller nodes).
- *   - pathDivisor: number controlling path stroke sizing.
- *   - pathAlpha, nodeAlpha, labelAlpha: numbers in [0,1] for respective opacities.
-
- * Render the Tree-of-Life layer: positions nodes by level and xFactor, draws connecting edges,
- * renders filled node circles, and places node labels.
- *
- * The function uses dims and numerology constants to derive margins, vertical spacing, node radius,
- * and stroke widths. Node positions are computed from config.nodes (each with id, title, level, xFactor)
- * and connections are drawn from config.edges ([fromId, toId] pairs).
+ * The canvas context state is saved and restored. Sizing (margins, vertical spacing, node radius, stroke widths)
+ * is derived from dims and numerology values in numbers. Opacity for paths, nodes, and labels is taken from
+ * config.pathAlpha, config.nodeAlpha, and config.labelAlpha respectively.
  *
  * @param {{width:number,height:number}} dims - Canvas drawing dimensions in pixels.
- * @param {Object} palette - Palette object; expects `layers` (array of colors) and `ink` for labels/outline.
- * @param {Object} numbers - Numerology constants (e.g., THREE, SEVEN) used for sizing heuristics.
- * @param {Object} config - Tree geometry and rendering options. Notable fields:
- *   - nodes: Array<{id:string, title:string, level:number, xFactor:number}> — node list and layout factors.
- *   - edges: Array<[string,string]> — pairs of node ids describing connections.
- *   - marginDivisor, radiusDivisor, pathDivisor: numeric divisors controlling margin, node radius, and path stroke sizing.
- *   - pathAlpha, nodeAlpha, labelAlpha: numbers in [0,1] controlling opacity of paths, nodes, and labels.
-
+ * @param {Object} palette - Palette with at least `layers` (array of per-layer colors) and `ink` (stroke/text color).
+ * @param {Object} numbers - Numerology constants used for sizing heuristics (e.g., THREE, SEVEN).
+ * @param {Object} config - Tree geometry and rendering options:
+ *   - nodes: Array<{id:string, title:string, level:number, xFactor:number}>
+ *   - edges: Array<[string,string]> pairs of node ids
+ *   - marginDivisor, radiusDivisor, pathDivisor: numeric divisors controlling layout/size
+ *   - pathAlpha, nodeAlpha, labelAlpha: opacity values in [0,1]
  * @return {{nodes:number,paths:number}} Counts of nodes and edges processed (lengths of config.nodes and config.edges).
  */
 function drawTreeOfLife(ctx, dims, palette, numbers, config) {
@@ -707,49 +679,24 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
 }
 
 /**
-
- * Draws a logarithmic (Fibonacci-style) spiral on the canvas and places circular markers along it.
+ * Draws a logarithmic (Fibonacci-style) spiral on the canvas and optionally places circular markers along it.
  *
- * The spiral is sampled at a configurable number of points and stroked with the provided color.
- * Markers (filled circles) are drawn at every Nth sample as defined by the config. Scaling and
- * placement are computed from the canvas dimensions and the numeric constants supplied in
- * `numbers`.
+ * Samples the spiral over a configurable angular range, strokes the polyline with the provided color,
+ * and fills circular markers at intervals. Radius grows exponentially using `config.phi`. Stroke width,
+ * marker size, and center placement are derived from `dims` and the supplied numerology constants.
  *
- * Config fields (used to control the curve; values are expected to be normalized before calling):
- * - sampleCount: number of sample points along the spiral (minimum 2).
- * - turns: number of half-turns (multiplied by π to compute theta range).
- * - baseRadiusDivisor: divisor of the smaller canvas dimension used to compute a base radius.
- * - centerXFactor, centerYFactor: normalized [0..1] coordinates for the spiral center.
- * - phi: exponential growth base for radius per π radians.
- * - alpha: global alpha applied to the stroke.
- * - markerInterval: draw a filled marker at every `markerInterval`-th sample.
- *
- * @param {{width:number, height:number}} dims - Canvas drawing area size.
- * @param {string} color - CSS color used for the spiral stroke and markers.
- * @param {Object} numbers - Numerology constants used for sizing and line widths.
-
- * Draws a logarithmic (Fibonacci-style) spiral and optional markers on a 2D canvas.
- *
- * The spiral is sampled at a configurable number of points across `config.turns * π` radians.
- * Radius grows exponentially using `config.phi`, the curve is stroked with `color`, and circular
- * markers are filled at every `config.markerInterval` sample. Stroke width, marker size, and
- * positioning are computed from `dims` and the provided `numbers` constants.
- *
- * Config fields (behavioral summary):
- * - sampleCount: integer ≥ 2, number of samples along the curve.
- * - turns: number of half-turns (theta range = turns * π).
- * - baseRadiusDivisor: divides the smaller canvas dimension to produce the base radius.
- * - centerXFactor, centerYFactor: normalized [0..1] center position for the spiral.
- * - phi: exponential growth base (applied per π radians).
- * - alpha: global alpha applied to the stroke.
- * - markerInterval: integer step between samples where markers are drawn.
- *
- * @param {Object} dims - Canvas drawing area dimensions { width, height }.
+ * @param {{width:number, height:number}} dims - Canvas drawing area size in pixels.
  * @param {string} color - CSS color used for the spiral stroke and marker fill.
- * @param {Object} numbers - Numerology constants (e.g., NINETYNINE, THREE, ONEFORTYFOUR) used for scale calculations.
-
- * @param {Object} config - Per-curve configuration (see fields above).
- * @return {{samples: number, markers: number}} Counts of sampled points and markers drawn.
+ * @param {Object} numbers - Numerology constants used for scale calculations (expects numeric fields like NINETYNINE and ONEFORTYFOUR).
+ * @param {Object} config - Per-curve configuration:
+ *   - sampleCount: integer ≥ 2, number of sampled points along the curve.
+ *   - turns: number of half-turns (theta range = turns * π).
+ *   - baseRadiusDivisor: divisor of the smaller canvas dimension to compute the base radius.
+ *   - centerXFactor, centerYFactor: normalized [0..1] coordinates for the spiral center.
+ *   - phi: exponential growth base applied per π radians.
+ *   - alpha: global alpha applied to the stroke (0..1).
+ *   - markerInterval: integer step between samples where markers are drawn (1 = every sample).
+ * @return {{samples:number, markers:number}} Counts of sampled points and markers drawn.
  */
 function drawFibonacciCurve(ctx, dims, color, numbers, config) {
   const samples = Math.max(2, Math.round(config.sampleCount));

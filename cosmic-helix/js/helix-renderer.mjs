@@ -34,23 +34,20 @@ const FALLBACK_NUMBERS = Object.freeze({
 /**
  * Render a static, four-layer "Cosmic Helix" composition onto a 2D canvas in a single, non-animated pass.
  *
- * Draws four composited layers in back-to-front order — vesica piscis field, Tree of Life scaffold,
- * Fibonacci spiral, and double-helix lattice — then optionally renders a short notice string near the
- * bottom of the canvas. The function normalizes dimensions, palette, numerology constants, and per-layer
- * geometry by merging supplied options with safe defaults. The canvas context state and transform are
- * preserved (the function saves and restores the context).
+ * Renders four composited layers in back-to-front order—vesica piscis field, Tree of Life scaffold,
+ * Fibonacci spiral, and double-helix lattice—then optionally draws a short notice near the bottom.
+ * Dimensions, palette, numerology (NUM), and per-layer geometry are normalized by merging supplied
+ * options with safe defaults. The canvas context state and transform are preserved (the function
+ * saves and restores the context).
  *
- * @param {CanvasRenderingContext2D} ctx - Target 2D canvas context (must have a valid `.canvas`).
  * @param {Object} [options] - Optional overrides.
- * @param {number} [options.width] - Explicit width to render; defaults to `ctx.canvas.width`.
- * @param {number} [options.height] - Explicit height to render; defaults to `ctx.canvas.height`.
- * @param {Object} [options.palette] - Partial palette to merge with defaults (bg, ink, muted, layers).
- * @param {Object} [options.NUM] - Numeric constant overrides merged against default numerology.
- * @param {Object} [options.geometry] - Per-layer geometry overrides (vesica, treeOfLife, fibonacci, helix).
- * @param {string} [options.notice] - Optional short notice text rendered near the bottom of the canvas.
- * @return {{ok: false, reason: string}|{ok: true, numerology: Object}}
- *   - On failure: { ok: false, reason } where reason is "missing-context" (invalid ctx) or "invalid-dimensions".
- *   - On success: { ok: true, numerology } where `numerology` is the numbers/constants object used for layout.
+ * @param {number} [options.width] - Explicit width to render; defaults to the context's canvas width.
+ * @param {number} [options.height] - Explicit height to render; defaults to the context's canvas height.
+ * @param {Object} [options.palette] - Partial palette merged with defaults (fields: bg, ink, muted, layers).
+ * @param {Object} [options.NUM] - Numeric constant overrides merged against the default numerology.
+ * @param {Object} [options.geometry] - Per-layer geometry overrides for `vesica`, `treeOfLife`, `fibonacci`, and `helix`.
+ * @param {string} [options.notice] - Optional short notice string rendered near the bottom; ignored if empty.
+ * @return {{ok: false, reason: ("missing-context"|"invalid-dimensions")}|{ok: true, numerology: Object}}
  */
 export function renderHelix(ctx, options = {}) {
   if (!ctx || typeof ctx.canvas !== "object" || typeof ctx.save !== "function") {
@@ -367,19 +364,18 @@ function mergeVesicaGeometry(base, patch) {
 }
 
 /**
- * Merge user-provided Tree-of-Life geometry overrides into a safe, fully-normalized geometry object.
+ * Merge Tree-of-Life geometry overrides into a validated, render-safe geometry object.
  *
- * Produces a new geometry object based on `base` with numeric fields validated (positive divisors kept via
- * positiveOrDefault; alphas clamped to [0,1]) and array fields cloned. If `patch` supplies `nodes` or `edges`
- * they are sanitized: `nodes` are mapped through `normaliseTreeNode`, and `edges` are filtered to array entries
- * and truncated to node-pair tuples. If `patch` is absent or invalid the function returns a shallow-cloned
- * copy of `base` (nodes and edges are duplicated to avoid shared references).
+ * Returns a new geometry object that combines numeric and alpha fields from `patch` with `base`
+ * while validating and normalizing values. Numeric divisors are required to be positive; alpha
+ * fields are clamped to [0,1]. If `patch.nodes` or `patch.edges` are provided they are sanitized:
+ * nodes are normalized to a stable node shape and edges are filtered to two-element node-ID pairs.
+ * If `patch` is missing or invalid, a shallow-cloned copy of `base` is returned (nodes and edges
+ * duplicated to avoid shared references).
  *
- * @param {Object} base - The fallback Tree-of-Life geometry (must contain numeric divisors, alphas, `nodes` and `edges`).
- * @param {Object|undefined|null} patch - Partial overrides; may include marginDivisor, radiusDivisor, pathDivisor,
- *   nodeAlpha, pathAlpha, labelAlpha, nodes, and edges. Invalid or missing properties are ignored in favor of `base`.
- * @return {Object} A merged, sanitized geometry object safe for rendering (contains marginDivisor, radiusDivisor,
- *   pathDivisor, nodeAlpha, pathAlpha, labelAlpha, nodes, and edges).
+ * @param {Object} base - Fallback geometry containing marginDivisor, radiusDivisor, pathDivisor, nodeAlpha, pathAlpha, labelAlpha, nodes, and edges.
+ * @param {Object|null|undefined} patch - Partial overrides; may include numeric divisors, alpha overrides, `nodes`, and `edges`.
+ * @returns {Object} Merged, sanitized geometry suitable for rendering (contains marginDivisor, radiusDivisor, pathDivisor, nodeAlpha, pathAlpha, labelAlpha, nodes, and edges).
  */
 function mergeTreeGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
@@ -406,10 +402,14 @@ function mergeTreeGeometry(base, patch) {
 }
 
 /**
- * Normalize a Tree-of-Life node object, coercing fields and applying safe defaults.
+ * Coerce a partial Tree-of-Life node into a stable, minimal node shape.
  *
- * Returns a node with guaranteed properties: `id` (string), `title` (non-empty string),
- * `level` (number, default 0) and `xFactor` (number in [0,1], default 0.5).
+ * Returns an object with string `id` and `title`, a numeric `level`, and a numeric
+ * `xFactor`. Fields are coerced but not further validated or clamped:
+ * - `id` is String(node.id || "").
+ * - `title` is the provided non-empty string, otherwise falls back to `id`.
+ * - `level` is used if typeof number, otherwise 0.
+ * - `xFactor` is used if typeof number, otherwise 0.5.
  *
  * @param {Object} node - Partial node object to normalize.
  * @return {{id: string, title: string, level: number, xFactor: number}} The normalized node.
@@ -453,19 +453,16 @@ function mergeFibonacciGeometry(base, patch) {
 }
 
 /**
- * Merge helix geometry overrides into a complete helix geometry object.
+ * Merge user-supplied helix overrides into a complete, validated helix geometry object.
  *
- * Returns a new object combining `base` with numeric overrides from `patch`.
- * Numeric fields (sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount)
- * are accepted only if positive; otherwise the base values are preserved. Alpha fields
- * (strandAlpha, rungAlpha) are accepted when numeric and clamped to [0, 1]; otherwise the base
- * alpha values are preserved. If `patch` is falsy or not an object, a shallow clone of `base`
- * is returned.
+ * Returns a new object that preserves `base` defaults except where `patch` supplies
+ * valid overrides. Positive numeric fields in `patch` replace base values; alpha
+ * fields in `patch` are accepted if numeric and are clamped to [0, 1]. If `patch`
+ * is falsy or not an object, a shallow clone of `base` is returned.
  *
- * @param {object} base - Base helix geometry providing default numeric and alpha fields.
- * @param {object} [patch] - Partial overrides for helix geometry.
- * @return {object} Merged helix geometry with keys:
- *   `{ sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha }`.
+ * @param {object} base - Base helix geometry (provides defaults for all keys).
+ * @param {object} [patch] - Partial overrides; only valid numbers are applied.
+ * @return {{ sampleCount: number, cycles: number, amplitudeDivisor: number, strandSeparationDivisor: number, crossTieCount: number, strandAlpha: number, rungAlpha: number }} Merged helix geometry.
  */
 function mergeHelixGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
@@ -506,14 +503,13 @@ function clamp(value, min, max) {
 }
 
 /**
- * Fill the canvas with a flat background color and overlay a soft radial glow.
+ * Paints the canvas background and applies a subtle radial glow for depth.
  *
- * Renders a full-coverage background using bgColor, then adds a subtle radial
- * gradient centered slightly above the vertical center to give depth behind
- * the layered geometry.
+ * Fills the entire canvas with the given base color and overlays a soft,
+ * centrally biased radial gradient (centered slightly above vertical center)
+ * to lend visual depth behind the rendered layers.
  *
- * @param {CanvasRenderingContext2D} ctx - The drawing context (omitted from detailed param docs as a common service).
- * @param {{width: number, height: number}} dims - Canvas dimensions in pixels.
+ * @param {{width: number, height: number}} dims - Canvas pixel dimensions.
  * @param {string} bgColor - Base background color (any valid CSS color string).
  */
 function fillBackground(ctx, dims, bgColor) {
@@ -537,20 +533,23 @@ function fillBackground(ctx, dims, bgColor) {
 }
 
 /**
- * Render a grid of vesica-style circles across the canvas and draw central axis guides.
+ * Render a grid of evenly spaced vesica-style circles and simple center axis guides.
  *
- * Draws a rows-by-columns grid of stroked circles (vesica anchors) positioned inside
- * a padded area, using configuration for spacing, radius scaling, stroke width, and alpha.
- * Also draws vertical and horizontal center guides to emphasize symmetry.
+ * Draws a rows-by-columns grid of stroked circles inside a padded area computed from
+ * the canvas dimensions, using the provided geometry config for spacing, radius scale,
+ * stroke width and layer alpha. Returns the number of circles drawn (useful for
+ * diagnostics/summaries).
  *
+ * @param {object} dims - Canvas dimensions; expected shape: { width: number, height: number }.
+ * @param {string} color - Stroke color (CSS hex/rgb string) used for circles and guides.
  * @param {object} config - Grid and rendering parameters.
- * @param {number} config.columns - Number of columns (minimum 2).
- * @param {number} config.rows - Number of rows (minimum 2).
+ * @param {number} config.columns - Number of columns (will be coerced to integer, minimum 2).
+ * @param {number} config.rows - Number of rows (will be coerced to integer, minimum 2).
  * @param {number} config.paddingDivisor - Divisor of the smaller canvas dimension used to compute padding.
  * @param {number} config.radiusScale - Multiplier applied to the grid cell size to compute circle radius.
  * @param {number} config.strokeDivisor - Divisor of the canvas size used to compute stroke width.
  * @param {number} config.alpha - Global alpha applied while drawing this layer (0–1).
- * @return {{circles: number}} Object with the number of circles drawn.
+ * @return {{circles: number}} Number of circles stroked.
  */
 function drawVesicaField(ctx, dims, color, numbers, config) {
   const cols = Math.max(2, Math.round(config.columns));
@@ -631,30 +630,27 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
 
 
 /**
- * Merge and sanitize Tree-of-Life geometry configuration, returning a complete, safe structure.
+ * Merge and sanitize a Tree-of-Life geometry configuration into a complete, safe object.
  *
- * Produces a validated tree-of-life geometry object by applying defaults for missing values,
- * sanitizing node entries (ensuring each node has a stable id, title, numeric level, and an
- * xFactor clamped to [0,1]), and filtering edges so they reference existing node ids. If no
- * nodes or edges are supplied, the defaults are used. Other numeric layout values are coerced
- * to positive numbers or fall back to defaults.
+ * Applies defaults for missing values, coerces numeric layout fields, normalizes node entries
+ * (ensuring each node has a stable id, title, numeric level, and xFactor clamped to [0,1]),
+ * and filters edges so only two-item pairs that reference existing node ids are kept.
  *
  * @param {Object} [config={}] - Partial geometry overrides.
- * @param {Array<Object>} [config.nodes] - Optional array of node overrides; each node may provide
- *   {id, title, level, xFactor}. Missing or invalid fields are replaced from defaults.
- * @param {Array<Array<string>>} [config.edges] - Optional array of edges as two-element id pairs.
- *   Edges referencing unknown node ids are dropped.
- * @param {number} [config.marginDivisor] - Optional positive number to override margin divisor.
- * @param {number} [config.radiusDivisor] - Optional positive number to override node radius divisor.
- * @param {number} [config.labelOffset] - Optional numeric label offset.
- * @param {string} [config.labelFont] - Optional font string for labels.
- * @return {Object} Sanitized tree geometry with keys:
+ * @param {Array<Object>} [config.nodes] - Optional node array; each node may include {id, title, level, xFactor}.
+ *   Missing or invalid node fields are filled from the fallback node templates while preserving order.
+ * @param {Array<Array<string>>} [config.edges] - Optional edges as [fromId, toId] pairs; pairs referencing unknown ids are dropped.
+ * @param {number} [config.marginDivisor] - Positive number used to compute outer margin (min(dim)/marginDivisor).
+ * @param {number} [config.radiusDivisor] - Positive number used to compute node radius (min(dim)/radiusDivisor).
+ * @param {number} [config.labelOffset] - Vertical offset in pixels for rendering labels.
+ * @param {string} [config.labelFont] - CSS font string used for labels.
+ * @return {Object} Sanitized tree geometry with the following keys:
  *   - marginDivisor {number}
  *   - radiusDivisor {number}
  *   - labelOffset {number}
  *   - labelFont {string}
- *   - nodes {Array<Object>} (each node: {id, title, level, xFactor})
- *   - edges {Array<Array<string>>} (filtered valid id pairs)
+ *   - nodes {Array<Object>} each node: {id:string, title:string, level:number, xFactor:number}
+ *   - edges {Array<[string,string]>} filtered valid id pairs
  */
 
 
