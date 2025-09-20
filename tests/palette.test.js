@@ -211,3 +211,174 @@ describe('Color palette schema and quality', () => {
     }
   });
 });
+/**
+ * Additional unit tests for palette utilities and discovery.
+ * Framework: BDD (describe/it) with Node 'assert' — compatible with Jest, Vitest, and Mocha.
+ *
+ * These tests:
+ * - Validate helper functions (isHex6, hexToRgb01, srgbToLinear, looksLikePalette)
+ * - Exercise findPaletteJson in an isolated temporary workspace
+ * They do not depend on an existing repo palette and won’t interfere with existing tests.
+ */
+
+describe('palette utility helpers', () => {
+  it('isHex6 accepts valid #RRGGBB and rejects others', () => {
+    assert.strictEqual(isHex6('#000000'), true);
+    assert.strictEqual(isHex6('#FFFFFF'), true);
+    assert.strictEqual(isHex6('#AaBbCc'), true);
+
+    const invalid = ['#FFF', '000000', '#GGGGGG', '#12345G', '#1234567', '', null, undefined, 123, {}, []];
+    for (const v of invalid) {
+      assert.strictEqual(isHex6(v), false, `Expected invalid hex: ${String(v)}`);
+    }
+  });
+
+  it('hexToRgb01 converts hex color to normalized RGB tuple', () => {
+    const eps = 1e-6;
+
+    let [r, g, b] = hexToRgb01('#000000');
+    assert.ok(Math.abs(r - 0) <= eps && Math.abs(g - 0) <= eps && Math.abs(b - 0) <= eps, 'black → (0,0,0)');
+
+    ;([r, g, b] = hexToRgb01('#FFFFFF'));
+    assert.ok(Math.abs(r - 1) <= eps && Math.abs(g - 1) <= eps && Math.abs(b - 1) <= eps, 'white → (1,1,1)');
+
+    ;([r, g, b] = hexToRgb01('#80FF00'));
+    assert.ok(
+      Math.abs(r - (128 / 255)) <= eps && Math.abs(g - 1) <= eps && Math.abs(b - 0) <= eps,
+      '#80FF00 → (128/255,1,0)'
+    );
+  });
+
+  it('srgbToLinear behaves piecewise at the 0.03928 boundary and is monotonic', () => {
+    const eps = 1e-6;
+    const cBoundary = 0.03928;
+    const cAbove = 0.03929;
+
+    const lBoundary = srgbToLinear(cBoundary);
+    const lAbove = srgbToLinear(cAbove);
+
+    // lower branch exact formula
+    assert.ok(Math.abs(lBoundary - cBoundary / 12.92) <= eps, 'lower branch formula');
+
+    // monotonicity across boundary
+    assert.ok(lBoundary <= lAbove + 1e-9, 'monotonic across boundary');
+
+    // mid value uses power branch
+    const mid = 0.5;
+    const lMid = srgbToLinear(mid);
+    assert.ok(lMid > mid / 12.92, 'upper branch > naive linearization');
+  });
+
+  it('relLuminance orders common anchors as expected', () => {
+    const Lblack = relLuminance('#000000');
+    const Lwhite = relLuminance('#FFFFFF');
+    assert.ok(Lblack < Lwhite, 'black should be darker than white');
+  });
+
+  it('looksLikePalette validates only the shape, not the color semantics', () => {
+    assert.strictEqual(
+      looksLikePalette({ bg: '#000', ink: '#fff', muted: '#777', layers: [] }),
+      true,
+      'shape is sufficient even if hex values are not validated here'
+    );
+    assert.strictEqual(looksLikePalette({ bg: '#000000', ink: '#ffffff', muted: '#777777', layers: ['#111111'] }), true);
+    assert.strictEqual(looksLikePalette(null), false);
+    assert.strictEqual(looksLikePalette({}), false);
+    assert.strictEqual(looksLikePalette({ bg: '#000000', ink: '#ffffff', muted: '#777777' }), false, 'missing layers');
+    assert.strictEqual(looksLikePalette({ bg: '#000000', ink: '#ffffff', muted: '#777777', layers: 'nope' }), false, 'layers not array');
+  });
+});
+
+describe('findPaletteJson (isolated filesystem scenarios)', () => {
+  const rmrf = (p) => {
+    try { fs.rmSync(p, { recursive: true, force: true }); }
+    catch { try { fs.rmdirSync(p, { recursive: true }); } catch (_) {} }
+  };
+
+  function withTempCwd(fn) {
+    const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'palette-test-'));
+    const orig = process.cwd();
+    process.chdir(tmpRoot);
+    try {
+      return fn(tmpRoot);
+    } finally {
+      process.chdir(orig);
+      rmrf(tmpRoot);
+    }
+  }
+
+  it('returns null when none of the candidate roots exist', () => {
+    withTempCwd(() => {
+      const res = findPaletteJson();
+      assert.strictEqual(res, null, 'Expected null when no roots or files exist');
+    });
+  });
+
+  it('finds a valid palette under a conventional root (styles/palette.json)', () => {
+    withTempCwd((root) => {
+      const stylesDir = path.join(root, 'styles');
+      fs.mkdirSync(stylesDir, { recursive: true });
+
+      const valid = {
+        bg: '#0a0a0a',
+        ink: '#fafafa',
+        muted: '#777777',
+        layers: ['#111111', '#222222']
+      };
+      fs.writeFileSync(path.join(stylesDir, 'palette.json'), JSON.stringify(valid), 'utf8');
+
+      const res = findPaletteJson();
+      assert.ok(res && res.path && res.data, 'Expected discovery result');
+      assert.ok(/(^|[\\/])styles[\\/]/.test(res.path), `Expected path within styles/, got: ${res.path}`);
+      assert.strictEqual(looksLikePalette(res.data), true, 'shape check');
+      assert.ok([valid.bg, valid.ink, valid.muted].every(isHex6), 'top-level colors are hex6');
+    });
+  });
+
+  it('skips test directories and prefers non-test locations', () => {
+    withTempCwd((root) => {
+      // Create src/tests/palette.json (should be ignored)
+      const ignored = {
+        bg: '#111111', ink: '#eeeeee', muted: '#777777', layers: ['#222222']
+      };
+      const testsDir = path.join(root, 'src', 'tests');
+      fs.mkdirSync(testsDir, { recursive: true });
+      fs.writeFileSync(path.join(testsDir, 'palette.json'), JSON.stringify(ignored), 'utf8');
+
+      // Create src/styles/palette.json (should be discovered)
+      const preferred = {
+        bg: '#121212', ink: '#f5f5f5', muted: '#7a7a7a', layers: ['#1a1a1a', '#2a2a2a']
+      };
+      const stylesDir = path.join(root, 'src', 'styles');
+      fs.mkdirSync(stylesDir, { recursive: true });
+      fs.writeFileSync(path.join(stylesDir, 'palette.json'), JSON.stringify(preferred), 'utf8');
+
+      const res = findPaletteJson();
+      assert.ok(res && res.path && res.data, 'Expected discovery result');
+      assert.ok(\!/([\\/])tests([\\/])/.test(res.path), `Should not select a file inside tests/: ${res.path}`);
+      assert.ok(/([\\/])styles([\\/])/.test(res.path), `Expected a file inside styles/: ${res.path}`);
+      assert.deepStrictEqual(Object.keys(res.data).sort(), ['bg', 'ink', 'layers', 'muted'].sort(), 'shape equality');
+    });
+  });
+
+  it('ignores invalid JSON and continues searching', () => {
+    withTempCwd((root) => {
+      const stylesDir = path.join(root, 'styles');
+      fs.mkdirSync(stylesDir, { recursive: true });
+
+      // Invalid JSON file that matches the name hint
+      fs.writeFileSync(path.join(stylesDir, 'theme-colors.json'), '{ invalid json', 'utf8');
+
+      // Valid but wrong shape (should be skipped)
+      fs.writeFileSync(path.join(stylesDir, 'color-scheme.json'), JSON.stringify({ a: 1 }), 'utf8');
+
+      // Valid and correct shape
+      const valid = { bg: '#0b0b0b', ink: '#fafafa', muted: '#808080', layers: ['#101010'] };
+      fs.writeFileSync(path.join(stylesDir, 'site-palette.json'), JSON.stringify(valid), 'utf8');
+
+      const res = findPaletteJson();
+      assert.ok(res && res.path && res.data, 'Expected discovery result');
+      assert.strictEqual(looksLikePalette(res.data), true, 'found valid shape after encountering invalid files');
+    });
+  });
+});

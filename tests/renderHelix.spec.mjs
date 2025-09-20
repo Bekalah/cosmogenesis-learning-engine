@@ -1,4 +1,7 @@
-// Framework: Jest/Vitest-style BDD APIs (describe/it/expect). Adjust imports if needed based on project setup.
+// Framework: BDD (describe/it/expect). Detected via repo scan: Unknown
+// If your runner doesn't provide globals, import from the framework:
+//   - Vitest:  import { describe, it, expect } from 'vitest';
+//   - Jest:    globals are available by default.
 // Focus: Thorough unit tests for functions present in the PR diff.
 // We import from tests/_mockCanvasContext.mjs because the diff content indicates exported functions there.
 

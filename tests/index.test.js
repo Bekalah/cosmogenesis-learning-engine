@@ -209,3 +209,109 @@ test("cathedral:select falls back to default when payload missing", () => {
   cathedralSelectHandler(doc, { detail: {} });
   assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), '#89a3ff');
 });
+// -------------------- Additional edge-case and contract tests --------------------
+// Framework: Node.js built-in test runner (node:test) with assert/strict.
+// These extend coverage for status composition, CSS token application, palette fallbacks,
+// render invocation contract, and event handling, focusing on edge cases and failure paths.
+
+test('composeStatus: numeric tail is stringified', () => {
+  assert.equal(composeStatus(false, 42), 'Palette loaded. 42');
+});
+
+test('composeStatus: undefined tail surfaces "undefined" (documenting current behavior)', () => {
+  // Documents current behavior; if sanitization is later added, this test should be updated.
+  assert.equal(composeStatus(false, undefined), 'Palette loaded. undefined');
+});
+
+test('StyleShim: stores stringified numbers and booleans', () => {
+  const doc = makeDocumentShim();
+  doc.documentElement.style.setProperty('--n', 0);
+  doc.documentElement.style.setProperty('--flag', false);
+  assert.equal(doc.documentElement.style.getPropertyValue('--n'), '0');
+  assert.equal(doc.documentElement.style.getPropertyValue('--flag'), 'false');
+});
+
+test('applyChrome respects explicit muted when provided', () => {
+  const doc = makeDocumentShim();
+  applyChrome(doc, { bg: '#222222', ink: '#eeeeee', muted: '#123456' });
+  assert.equal(doc.documentElement.style.getPropertyValue('--bg'), '#222222');
+  assert.equal(doc.documentElement.style.getPropertyValue('--ink'), '#eeeeee');
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#123456');
+});
+
+test('applyChromePalette falls back to ink when layers is undefined', () => {
+  const doc = makeDocumentShim();
+  applyChromePalette(doc, { bg: '#101010', ink: '#fafafa' });
+  assert.equal(doc.documentElement.style.getPropertyValue('--bg'), '#101010');
+  assert.equal(doc.documentElement.style.getPropertyValue('--ink'), '#fafafa');
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#fafafa');
+});
+
+test('updateStatus: subsequent calls overwrite previous value', () => {
+  const doc = makeDocumentShim();
+  updateStatus(doc, 'First');
+  updateStatus(doc, 'Second');
+  assert.equal(doc.getElementById('status').textContent, 'Second');
+});
+
+test('render flow: invalid palette type triggers fallback and applies default CSS tokens', async () => {
+  const { doc, usingFallback, notice, cfg } = await runRenderFlow({ paletteJSON: 'oops' });
+  assert.equal(usingFallback, true);
+  assert.equal(notice, 'Palette missing; sealed ND-safe fallback in use.');
+  // Defaults from runRenderFlow
+  assert.equal(cfg.palette.bg, '#0b0b12');
+  assert.equal(doc.documentElement.style.getPropertyValue('--bg'), '#0b0b12');
+  assert.equal(doc.documentElement.style.getPropertyValue('--ink'), '#e8e8f0');
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#a6a6c1');
+  assert.equal(cfg.width, 1440);
+  assert.equal(cfg.height, 900);
+});
+
+test('render flow: applies fetched palette to CSS variables (muted defaults to ink)', async () => {
+  const paletteJSON = { bg: '#121212', ink: '#ededed' };
+  const { doc } = await runRenderFlow({ paletteJSON });
+  assert.equal(doc.documentElement.style.getPropertyValue('--bg'), '#121212');
+  assert.equal(doc.documentElement.style.getPropertyValue('--ink'), '#ededed');
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#ededed');
+});
+
+test('render flow: ok result with custom summary produces exact status', async () => {
+  const paletteJSON = { bg: '#000000', ink: '#ffffff' };
+  const renderResult = { ok: true, summary: 'Geometry: 2 passes.' };
+  const { doc } = await runRenderFlow({ paletteJSON, renderResult });
+  assert.equal(doc.getElementById('status').textContent, 'Palette loaded. Geometry: 2 passes.');
+});
+
+test('render flow: ok result with missing summary surfaces "undefined" (documenting current behavior)', async () => {
+  const paletteJSON = { bg: '#000000', ink: '#ffffff' };
+  const renderResult = { ok: true };
+  const { doc } = await runRenderFlow({ paletteJSON, renderResult });
+  assert.equal(doc.getElementById('status').textContent, 'Palette loaded. undefined');
+});
+
+test('render flow: null render result yields unknown failure message', async () => {
+  const paletteJSON = { bg: '#000000', ink: '#ffffff' };
+  const renderResult = null;
+  const { doc } = await runRenderFlow({ paletteJSON, renderResult });
+  assert.equal(doc.getElementById('status').textContent, 'Render failed: unknown');
+});
+
+test('cathedral:select with undefined event falls back to default color', () => {
+  const doc = makeDocumentShim();
+  cathedralSelectHandler(doc, undefined);
+  assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), '#89a3ff');
+});
+
+test('cathedral:select with empty string color falls back to default', () => {
+  const doc = makeDocumentShim();
+  cathedralSelectHandler(doc, { detail: { payload: { color: '' } } });
+  assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), '#89a3ff');
+});
+
+test('cathedral:select accepts non-hex CSS color tokens', () => {
+  const doc = makeDocumentShim();
+  cathedralSelectHandler(doc, { detail: { payload: { color: 'transparent' } } });
+  assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), 'transparent');
+});
+
+// -------------------- End of additional tests --------------------

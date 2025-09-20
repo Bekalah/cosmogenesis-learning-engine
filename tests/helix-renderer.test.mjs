@@ -760,3 +760,65 @@ test("renderHelix: palette fallback for non-hex bg still renders gradient and ba
   assert.ok(fillRects.length >= 2, "Expected background and gradient fillRect calls");
 
 });
+// -----------------------------------------------------------------------------
+// Additional diff-focused coverage (Node.js test runner + assert)
+// These tests exercise helper edge cases and validate summary resilience.
+// -----------------------------------------------------------------------------
+
+test("helpers: withAlpha expands 6-digit hex (uppercase) and preserves provided alpha", async () => {
+  const m = await import(loadedPath);
+  const rgba = m.withAlpha("#AABBCC", 0.75);
+  // 0xAA=170, 0xBB=187, 0xCC=204
+  assert.match(rgba, /^rgba\(\s*170\s*,\s*187\s*,\s*204\s*,\s*0\.75\s*\)$/);
+});
+
+test("helpers: clonePalette deep copy - mutating clone layers does not affect source", async () => {
+  const { clonePalette, FALLBACK_PALETTE } = await import(loadedPath);
+  const cp = clonePalette(FALLBACK_PALETTE);
+  const originalLen = FALLBACK_PALETTE.layers.length;
+  // mutate clone
+  cp.layers.push("#abcdef");
+  // original must remain unchanged
+  assert.equal(FALLBACK_PALETTE.layers.length, originalLen);
+  assert.equal(cp.layers.length, originalLen + 1);
+});
+
+test("dimensions: normaliseDimensions coerces fractional sizes to integers and syncs canvas", async () => {
+  const { normaliseDimensions } = await import(loadedPath);
+  const { ctx } = createMockCtx({ width: 10, height: 10 });
+  const out = normaliseDimensions(ctx, { width: 120.7, height: 40.2 });
+  assert.ok(out, "normaliseDimensions should return an object");
+  assert.equal(ctx.canvas.width, out.width);
+  assert.equal(ctx.canvas.height, out.height);
+  assert.ok(Number.isInteger(out.width), "width should be integer");
+  assert.ok(Number.isInteger(out.height), "height should be integer");
+  assert.ok(out.width > 0 && out.height > 0, "dimensions should be positive");
+});
+
+test("renderHelix: produces human-readable summary for valid minimal options (per PR diff)", async () => {
+  const { renderHelix } = await import(loadedPath);
+  const { ctx } = createMockCtx({ width: 160, height: 120 });
+  const options = {
+    width: 160,
+    height: 120,
+    palette: { bg: "#000000", ink: "#ffffff", muted: "#777777", layers: ["#111","#222","#333","#444","#555","#666"] },
+    geometry: {
+      vesica: { rows: 2, columns: 2, paddingDivisor: 10, radiusScale: 0.2, strokeDivisor: 20, alpha: 0.5 },
+      treeOfLife: { marginDivisor: 8, radiusDivisor: 16, pathDivisor: 24, nodeAlpha: 0.8, pathAlpha: 0.6, labelAlpha: 0.7, nodes: [{ id: "n1", title: "N1", level: 0, xFactor: 0.5 }], edges: [] },
+      fibonacci: { sampleCount: 5, turns: 1, baseRadiusDivisor: 10, centerXFactor: 0.4, centerYFactor: 0.6, phi: 1.5, markerInterval: 2, alpha: 0.9 },
+      helix: { sampleCount: 5, cycles: 1, amplitudeDivisor: 9, strandSeparationDivisor: 11, crossTieCount: 2, strandAlpha: 0.8, rungAlpha: 0.6 }
+    }
+  };
+  const res = renderHelix(ctx, options);
+  assert.equal(res.ok, true);
+  assert.equal(typeof res.summary, "string");
+  // Should contain section labels composed by summariseLayers
+  assert.ok(res.summary.includes("Vesica") && res.summary.includes("Spiral") && res.summary.includes("Helix"), "summary should contain section labels");
+});
+
+test("summariseLayers: returns non-empty string even with partial/empty stats", async () => {
+  const { summariseLayers } = await import(loadedPath);
+  const s = String(summariseLayers({}));
+  assert.equal(typeof s, "string");
+  assert.ok(s.length > 0, "summary string should not be empty");
+});
