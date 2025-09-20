@@ -211,3 +211,178 @@ describe('Color palette schema and quality', () => {
     }
   });
 });
+/**
+ * Additional unit tests for internal helpers in this file.
+ *
+ * Test runner note:
+ * - Uses describe/it style with Node's assert.
+ * - Compatible with Jest and Vitest; also runnable under Mocha.
+ */
+
+describe('Helper utilities - unit tests', () => {
+  const approx = (a, b, eps = 1e-6) => Math.abs(a - b) <= eps;
+  const approxArr = (arr, exp, eps = 1e-6) => {
+    assert.strictEqual(arr.length, exp.length, 'array length mismatch');
+    for (let i = 0; i < arr.length; i++) {
+      assert.ok(approx(arr[i], exp[i], eps), `index ${i}: got ${arr[i]}, expected ${exp[i]}`);
+    }
+  };
+
+  describe('isHex6', () => {
+    it('accepts valid #RRGGBB values (case-insensitive)', () => {
+      assert.ok(isHex6('#000000'));
+      assert.ok(isHex6('#FFFFFF'));
+      assert.ok(isHex6('#a1B2c3'));
+    });
+    it('rejects invalid formats and types', () => {
+      const bad = ['#abc', 'abc', '#12345G', '#1234567', '#12', '#FFFFF', '', ' #FFFFFF', '#FFFFFF ', null, undefined, 123];
+      for (const v of bad) {
+        assert.strictEqual(isHex6(v), false, `expected false for ${String(v)}`);
+      }
+    });
+  });
+
+  describe('hexToRgb01', () => {
+    it('maps black and white correctly', () => {
+      approxArr(hexToRgb01('#000000'), [0, 0, 0]);
+      approxArr(hexToRgb01('#FFFFFF'), [1, 1, 1]);
+    });
+    it('maps mid-gray approximately to 0.502 on each channel', () => {
+      const [r, g, b] = hexToRgb01('#808080');
+      assert.ok(approx(r, 128/255, 1e-6));
+      assert.ok(approx(g, 128/255, 1e-6));
+      assert.ok(approx(b, 128/255, 1e-6));
+    });
+    it('is case-insensitive', () => {
+      approxArr(hexToRgb01('#FF00Aa'), hexToRgb01('#ff00aa'));
+    });
+  });
+
+  describe('srgbToLinear', () => {
+    it('handles boundary conditions', () => {
+      assert.ok(approx(srgbToLinear(0), 0));
+      assert.ok(approx(srgbToLinear(1), 1));
+    });
+    it('uses piecewise transformation (below/above threshold)', () => {
+      const below = 0.02;
+      const expectedBelow = below / 12.92;
+      assert.ok(approx(srgbToLinear(below), expectedBelow, 1e-9));
+
+      const above = 0.5;
+      const expectedAbove = Math.pow((above + 0.055) / 1.055, 2.4);
+      assert.ok(approx(srgbToLinear(above), expectedAbove, 1e-12));
+    });
+  });
+
+  describe('relLuminance', () => {
+    it('produces 0 for black and ~1 for white', () => {
+      assert.ok(approx(relLuminance('#000000'), 0, 1e-12));
+      assert.ok(approx(relLuminance('#FFFFFF'), 1, 1e-12));
+    });
+    it('matches primary color weights for fully-saturated primaries', () => {
+      assert.ok(approx(relLuminance('#FF0000'), 0.2126, 1e-4));
+      assert.ok(approx(relLuminance('#00FF00'), 0.7152, 1e-4));
+      assert.ok(approx(relLuminance('#0000FF'), 0.0722, 1e-4));
+    });
+  });
+
+  describe('contrastRatio', () => {
+    it('returns ~21 for black vs white (white on black)', () => {
+      const ratio = contrastRatio('#FFFFFF', '#000000');
+      assert.ok(approx(ratio, 21, 1e-10), `expected ~21, got ${ratio}`);
+    });
+    it('returns ~21 for black vs white (black on white)', () => {
+      // This test will catch ordering bugs where hi/lo are not selected correctly.
+      const ratio = contrastRatio('#000000', '#FFFFFF');
+      assert.ok(approx(ratio, 21, 1e-10), `expected ~21, got ${ratio}`);
+    });
+    it('returns 1 for identical colors', () => {
+      const ratio = contrastRatio('#777777', '#777777');
+      assert.ok(approx(ratio, 1, 1e-12), `expected 1, got ${ratio}`);
+    });
+    it('is symmetric regardless of argument order', () => {
+      const a = '#123456';
+      const b = '#abcdef';
+      const r1 = contrastRatio(a, b);
+      const r2 = contrastRatio(b, a);
+      assert.ok(approx(r1, r2, 1e-12), `expected symmetry, got r1=${r1}, r2=${r2}`);
+    });
+  });
+
+  describe('looksLikePalette', () => {
+    it('accepts a valid palette object', () => {
+      const ok = { bg: '#111111', ink: '#ffffff', muted: '#777777', layers: ['#222222', '#333333'] };
+      assert.strictEqual(looksLikePalette(ok), true);
+    });
+    it('rejects objects with missing or invalid fields', () => {
+      const cases = [
+        {},
+        { bg: '#000000', ink: '#ffffff', muted: '#777777' },                // no layers
+        { bg: '#000000', ink: '#ffffff', muted: '#777777', layers: 'x' },   // layers not array
+        { bg: 123, ink: '#ffffff', muted: '#777777', layers: [] },          // non-string bg
+        { bg: '#000000', ink: null, muted: '#777777', layers: [] },         // non-string ink
+      ];
+      for (const c of cases) {
+        assert.strictEqual(looksLikePalette(c), false, `should reject: ${JSON.stringify(c)}`);
+      }
+    });
+  });
+
+  describe('findPaletteJson (controlled temporary workspace)', () => {
+    it('locates a valid palette JSON in a conventional root (theme/)', () => {
+      const fs = require('fs');
+      const path = require('path');
+      const os = require('os');
+
+      const cwd0 = process.cwd();
+      const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'palette-test-'));
+      try {
+        const themeDir = path.join(tmp, 'theme');
+        fs.mkdirSync(themeDir, { recursive: true });
+
+        const paletteObj = {
+          bg: '#0a0a0a',
+          ink: '#fefefe',
+          muted: '#777777',
+          layers: ['#111111', '#222222', '#333333']
+        };
+        const filePath = path.join(themeDir, 'palette.json');
+        fs.writeFileSync(filePath, JSON.stringify(paletteObj), 'utf8');
+
+        process.chdir(tmp);
+        const result = findPaletteJson();
+        assert.ok(result && result.path && result.data, 'expected a result with path and data');
+        assert.ok(result.path.endsWith(path.join('theme', 'palette.json')), `unexpected path: ${result.path}`);
+        assert.strictEqual(result.data.bg, paletteObj.bg);
+        assert.strictEqual(result.data.ink, paletteObj.ink);
+        assert.strictEqual(result.data.muted, paletteObj.muted);
+        assert.strictEqual(Array.isArray(result.data.layers), true);
+        assert.strictEqual(result.data.layers.length, paletteObj.layers.length);
+      } finally {
+        process.chdir(cwd0);
+        try { fs.rmSync(tmp, { recursive: true, force: true }); } catch {}
+      }
+    });
+
+    it('returns null when no matching palette file exists', () => {
+      const fs = require('fs');
+      const path = require('path');
+      const os = require('os');
+
+      const cwd0 = process.cwd();
+      const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'palette-test-empty-'));
+      try {
+        // Create unrelated structure without JSON matches
+        fs.mkdirSync(path.join(tmp, 'src'), { recursive: true });
+        fs.writeFileSync(path.join(tmp, 'src', 'index.js'), 'console.log("noop")', 'utf8');
+
+        process.chdir(tmp);
+        const res = findPaletteJson();
+        assert.strictEqual(res, null);
+      } finally {
+        process.chdir(cwd0);
+        try { fs.rmSync(tmp, { recursive: true, force: true }); } catch {}
+      }
+    });
+  });
+});
