@@ -47,12 +47,10 @@ assets/img/**/*.webm filter=lfs diff=lfs merge=lfs -text
 assets/img/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
 assets/img/**/*.mov filter=lfs diff=lfs merge=lfs -text
 # Global raster handling (Cathedral Light Git Kit v1)
-*.png  filter=lfs diff=lfs merge=lfs -text
 *.tif  filter=lfs diff=lfs merge=lfs -text
 *.tiff filter=lfs diff=lfs merge=lfs -text
 *.exr  filter=lfs diff=lfs merge=lfs -text
 *.hdr  filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
 
 
 # Optional: any file over ~5–10MB you want to force into LFS by extension
