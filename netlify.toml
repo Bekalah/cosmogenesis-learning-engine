@@ -1,11 +1,11 @@
 # cosmogenesis-learning-engine / Netlify configuration
 # Brain: serves small shared datasets + optional hero asset.
 [build]
-  publish = "site"
   command = ""
+  publish = "/"
 
 [build.environment]
-  GIT_LFS_ENABLED = "true"
+  GIT_LFS_ENABLED = "false"
 
 # Allow spokes to fetch shared data with permissive CORS and sensible caching.
 [[headers]]

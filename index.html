@@ -91,13 +91,11 @@
     async function loadPalette() {
       const url = "./data/palette.json";
       if (window.location.protocol === "file:") {
-        try {
-          const module = await import(url, { with: { type: "json" } });
-          if (module && module.default) {
-            return module.default;
-          }
-        } catch (err) {
-          // Browsers that lack JSON module support will fall through to fetch below.
+        const module = await import(url, { with: { type: "json" } })
+          .then((mod) => (mod && mod.default ? mod.default : null))
+          .catch(() => null);
+        if (module) {
+          return module;
         }
       }
       try {
