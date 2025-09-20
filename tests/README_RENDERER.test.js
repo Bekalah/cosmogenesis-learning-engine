@@ -129,4 +129,70 @@ describe("README_RENDERER.md structure and content (diff-focused)", () => {
     expect(content).toMatch(/No server|No build step/i);
     expect(content).toMatch(/No animation/i);
   });
+  // Additional diff-focused tests (Jest) — expanding coverage of README_RENDERER.md
+  it("contains required H2 sections: Usage, Files, Layer order, Palette override, Accessibility/ND-safe", () => {
+    const headings = Array.from(content.matchAll(/^##\s+(.+)$/gm)).map(m => m[1].toLowerCase());
+    expect(headings.some(h => /usage/.test(h))).toBe(true);
+    expect(headings.some(h => /files/.test(h))).toBe(true);
+    expect(headings.some(h => /layer order/.test(h))).toBe(true);
+    expect(headings.some(h => /palette override/.test(h))).toBe(true);
+    expect(headings.some(h => /(nd-safe|accessibility)/.test(h))).toBe(true);
+  });
+
+  it("includes HTML and JS examples with <canvas> and module imports", () => {
+    // HTML block with canvas
+    expect(content).toMatch(/```html[\s\S]*?<canvas[^>]*>[\s\S]*?```/i);
+    // JS/mjs block demonstrating module usage
+    expect(content).toMatch(/```(js|javascript|mjs)[\s\S]*?(script\s+type="module"|import\s+.+?from\s+["']?\.?\/?js\/helix-renderer\.mjs["']?)/i);
+  });
+
+  it("has balanced code fences and at least one html/js/json block", () => {
+    const fences = (content.match(/```/g) || []).length;
+    expect(fences % 2).toBe(0);
+    expect(/```json/.test(content)).toBe(true);
+    expect(/```html/.test(content)).toBe(true);
+    expect(/```(js|javascript|mjs)/.test(content)).toBe(true);
+  });
+
+  it("examples avoid external http(s) dependencies to remain offline-friendly", () => {
+    const blocks = Array.from(content.matchAll(/```(html|js|javascript|mjs)[\s\S]*?```/gi))
+      .map(m => m[0])
+      .join("\n");
+    expect(blocks).not.toMatch(/https?:\/\//i);
+  });
+
+  it("Layer order items appear in back-to-front sequence", () => {
+    const section = (content.match(/##\s*Layer order[\s\S]*?(?=##\s|$)/i) || [content])[0];
+    const names = [
+      "Vesica field",
+      "Tree-of-Life scaffold",
+      "Fibonacci curve",
+      "Double-helix lattice",
+    ];
+    const lower = section.toLowerCase();
+    let last = -1;
+    for (const n of names) {
+      const idx = lower.indexOf(n.toLowerCase());
+      expect(idx).toBeGreaterThan(-1);
+      expect(idx).toBeGreaterThan(last);
+      last = idx;
+    }
+  });
+
+  it("Palette override section mentions data/palette.json path explicitly", () => {
+    const ov = content.match(/##\s*Palette override[\s\S]*?(?=##\s|$)/i);
+    expect(ov).toBeTruthy();
+    const t = ov ? ov[0] : "";
+    expect(t).toMatch(/data\/palette\.json/);
+  });
+
+  it("at least one referenced sample file exists alongside README or at repo root", () => {
+    const dir = path.dirname(readmePath);
+    const root = process.cwd();
+    const candidates = ["index.html", "js/helix-renderer.mjs", "data/palette.json"];
+    const existing = candidates.filter(rel =>
+      fs.existsSync(path.join(dir, rel)) || fs.existsSync(path.join(root, rel))
+    );
+    expect(existing.length).toBeGreaterThanOrEqual(1);
+  });
 });

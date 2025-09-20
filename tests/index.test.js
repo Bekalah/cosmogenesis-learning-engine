@@ -14,17 +14,31 @@ function composeStatus(usingFallback, tail) {
 }
 
 class StyleShim {
-  constructor() { this.map = new Map(); }
-  setProperty(k, v) { this.map.set(k, String(v)); }
-  getPropertyValue(k) { return this.map.get(k) || ''; }
+  constructor() {
+    this.map = new Map();
+  }
+
+  setProperty(k, v) {
+    this.map.set(k, String(v));
+  }
+
+  getPropertyValue(k) {
+    return this.map.get(k) || '';
+  }
 }
 
 function makeDocumentShim() {
   return {
-    documentElement: { style: new StyleShim() },
+    documentElement: {
+      style: new StyleShim()
+    },
     getElementById(id) {
-      if (!this._nodes) this._nodes = {};
-      if (!this._nodes[id]) this._nodes[id] = { textContent: '' };
+      if (!this._nodes) {
+        this._nodes = {};
+      }
+      if (!this._nodes[id]) {
+        this._nodes[id] = { textContent: '' };
+      }
       return this._nodes[id];
     }
   };
@@ -59,14 +73,21 @@ async function runRenderFlow({ paletteJSON, renderResult }) {
   const fetch = async () => {
     if (paletteJSON instanceof Error) throw paletteJSON;
     if (paletteJSON === null) return { ok: false, status: 404 };
-    if (paletteJSON && typeof paletteJSON === 'object') return { ok: true, json: async () => paletteJSON };
+    if (paletteJSON && typeof paletteJSON === 'object') {
+      return {
+        ok: true,
+        json: async () => paletteJSON
+      };
+    }
     return { ok: false, status: 500 };
   };
 
   async function loadPalette(path) {
     try {
       const res = await fetch(path, { cache: 'no-store' });
-      if (!res || !res.ok) return null;
+      if (!res || !res.ok) {
+        return null;
+      }
       return await res.json();
     } catch {
       return null;
@@ -79,7 +100,7 @@ async function runRenderFlow({ paletteJSON, renderResult }) {
       bg: '#0b0b12',
       ink: '#e8e8f0',
       muted: '#a6a6c1',
-      layers: ['#b1c7ff', '#89f7fe', '#a0ffa1', '#ffd27f', '#f5a3ff', '#d0d0e6'],
+      layers: ['#b1c7ff', '#89f7fe', '#a0ffa1', '#ffd27f', '#f5a3ff', '#d0d0e6']
     }
   };
 
@@ -97,14 +118,28 @@ async function runRenderFlow({ paletteJSON, renderResult }) {
     width: 1440,
     height: 900,
     palette,
-    NUM: { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, THIRTYTWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 },
+    NUM: {
+      THREE: 3,
+      SEVEN: 7,
+      NINE: 9,
+      ELEVEN: 11,
+      THIRTYTWENTYTWO: 22,
+      THIRTYTHREE: 33,
+      NINETYNINE: 99,
+      ONEFORTYFOUR: 144
+    },
     notice
   };
 
   const result = renderHelix(ctx, cfg);
 
   const prefix = usingFallback ? 'Fallback palette active. ' : 'Palette loaded. ';
-  updateStatus(doc, result && result.ok ? prefix + result.summary : 'Render failed: ' + (result?.reason ?? 'unknown'));
+  updateStatus(
+    doc,
+    result && result.ok
+      ? prefix + result.summary
+      : 'Render failed: ' + (result?.reason ?? 'unknown')
+  );
 
   return { doc, cfg, usingFallback, notice, result };
 }
@@ -208,4 +243,102 @@ test("cathedral:select falls back to default when payload missing", () => {
   const doc = makeDocumentShim();
   cathedralSelectHandler(doc, { detail: {} });
   assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), '#89a3ff');
+});
+
+// -------------------- Additional tests (Node.js built-in test runner: node:test) --------------------
+
+test('composeStatus: numeric tail coerces to string', () => {
+  assert.equal(composeStatus(false, 0), 'Palette loaded. 0');
+});
+
+test('composeStatus: undefined tail yields literal "undefined"', () => {
+  assert.equal(composeStatus(true, undefined), 'Palette missing; using safe fallback. undefined');
+});
+
+test('applyChrome respects explicit muted if provided', () => {
+  const doc = makeDocumentShim();
+  applyChrome(doc, { bg: '#222233', ink: '#fafafa', muted: '#9999aa' });
+  assert.equal(doc.documentElement.style.getPropertyValue('--bg'), '#222233');
+  assert.equal(doc.documentElement.style.getPropertyValue('--ink'), '#fafafa');
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#9999aa');
+});
+
+test('applyChromePalette: non-array layers fall back to ink', () => {
+  const doc = makeDocumentShim();
+  applyChromePalette(doc, { bg: '#11111c', ink: '#efefef', layers: 'oops' });
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#efefef');
+});
+
+test('applyChromePalette: single layer becomes muted', () => {
+  const doc = makeDocumentShim();
+  applyChromePalette(doc, { bg: '#0a0a0f', ink: '#ededf5', layers: ['#bada55'] });
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#bada55');
+});
+
+test('StyleShim getPropertyValue returns empty string when unset', () => {
+  const s = new StyleShim();
+  assert.equal(s.getPropertyValue('--missing'), '');
+});
+
+test('updateStatus overwrites existing status content', () => {
+  const doc = makeDocumentShim();
+  updateStatus(doc, 'First');
+  const later = updateStatus(doc, 'Second');
+  assert.equal(later, 'Second');
+  assert.equal(doc.getElementById('status').textContent, 'Second');
+});
+
+test('runRenderFlow: applies CSS variables from chosen palette', async () => {
+  const paletteJSON = { bg: '#010203', ink: '#fefefe' };
+  const { doc } = await runRenderFlow({ paletteJSON });
+  assert.equal(doc.documentElement.style.getPropertyValue('--bg'), '#010203');
+  assert.equal(doc.documentElement.style.getPropertyValue('--ink'), '#fefefe');
+  // applyChrome sets muted to palette.muted || palette.ink
+  assert.equal(doc.documentElement.style.getPropertyValue('--muted'), '#fefefe');
+});
+
+test('runRenderFlow: invalid palette response type triggers fallback', async () => {
+  const { usingFallback, notice } = await runRenderFlow({ paletteJSON: 'bad' });
+  assert.equal(usingFallback, true);
+  assert.equal(notice, 'Palette missing; sealed ND-safe fallback in use.');
+});
+
+test('runRenderFlow: render failure without reason shows unknown', async () => {
+  const renderResult = { ok: false };
+  const { doc } = await runRenderFlow({ paletteJSON: { bg: '#101010', ink: '#fafafa' }, renderResult });
+  assert.equal(doc.getElementById('status').textContent, 'Render failed: unknown');
+});
+
+test('runRenderFlow: success path surfaces custom summary', async () => {
+  const renderResult = { ok: true, summary: 'drawn' };
+  const { doc } = await runRenderFlow({ paletteJSON: { bg: '#101010', ink: '#fafafa' }, renderResult });
+  assert.equal(doc.getElementById('status').textContent, 'Palette loaded. drawn');
+});
+
+test('runRenderFlow: cfg has expected dimensions', async () => {
+  const { cfg } = await runRenderFlow({ paletteJSON: { bg: '#000', ink: '#fff' } });
+  assert.equal(cfg.width, 1440);
+  assert.equal(cfg.height, 900);
+});
+
+test('runRenderFlow: cfg.NUM includes 33 and 99', async () => {
+  const { cfg } = await runRenderFlow({ paletteJSON: null });
+  assert.equal(cfg.NUM.THIRTYTHREE, 33);
+  assert.equal(cfg.NUM.NINETYNINE, 99);
+});
+
+test('applyChrome throws with invalid document', () => {
+  assert.throws(() => applyChrome({}, { bg: '#000', ink: '#fff' }), TypeError);
+});
+
+test('cathedral:select defaults when event is undefined', () => {
+  const doc = makeDocumentShim();
+  cathedralSelectHandler(doc);
+  assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), '#89a3ff');
+});
+
+test('cathedral:select stringifies non-string colors', () => {
+  const doc = makeDocumentShim();
+  cathedralSelectHandler(doc, { detail: { payload: { color: 123 } } });
+  assert.equal(doc.documentElement.style.getPropertyValue('--lattice'), '123');
 });
