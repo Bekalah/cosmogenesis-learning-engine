@@ -8,13 +8,40 @@
   <style>
     :root{--bg:#0b0b12;--ink:#e8e8f0;--muted:#a6a6c1;}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
-    header{padding:12px 16px;border-bottom:1px solid #1d1d2a;}
-    .settings{padding:12px 16px;border-bottom:1px solid #1d1d2a;display:flex;gap:12px;font-size:13px;color:var(--muted);}
+    header{padding:12px 16px;border-bottom:1px solid #1d1d2a;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .title{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+    .status{color:var(--muted);font-size:12px;}
+    .about-btn,.dialog__close{background:transparent;border:1px solid #1d1d2a;color:var(--ink);padding:6px 10px;border-radius:6px;cursor:pointer;font:inherit;transition:border-color 0.2s ease;}
+    .about-btn:hover,.about-btn:focus,.dialog__close:hover,.dialog__close:focus{border-color:var(--muted);outline:none;}
+    .settings{padding:12px 16px;border-bottom:1px solid #1d1d2a;display:flex;gap:12px;font-size:13px;color:var(--muted);flex-wrap:wrap;}
     label{display:flex;align-items:center;gap:4px;}
+    dialog{background:rgba(17,17,26,0.96);color:var(--ink);border:1px solid #1d1d2a;border-radius:12px;max-width:420px;width:min(420px,90vw);padding:16px;}
+    dialog::backdrop{background:rgba(0,0,0,0.6);}
+    dialog:not([open]){display:none;}
+    .dialog__header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
+    .dialog__title{margin:0;font-size:16px;}
+    .status-grid{margin:0 0 16px 0;padding:0;display:grid;gap:8px;}
+    .status-grid div{display:grid;gap:4px;}
+    .status-grid dt{font-weight:600;}
+    .status-grid dd{margin:0;color:var(--muted);}
+    .status-grid dd[data-state="warn"]{color:#ffb347;}
+    .status-grid dd[data-state="ok"]{color:#8fdf82;}
+    .realm-section{margin-top:12px;}
+    .realm-section h3{margin:0 0 8px 0;font-size:14px;}
+    .realm-links{margin:0;padding:0;list-style:none;display:grid;gap:8px;}
+    .realm-links li{border:1px solid #1d1d2a;border-radius:8px;padding:8px;}
+    .realm-links a{color:var(--ink);text-decoration:none;}
+    .realm-links a:hover,.realm-links a:focus{text-decoration:underline;}
   </style>
 </head>
 <body>
-  <header><strong>Cosmogenesis Core Boot</strong> <span id="status" class="status">loading…</span></header>
+  <header>
+    <div class="title">
+      <strong>Cosmogenesis Core Boot</strong>
+      <span id="status" class="status">loading…</span>
+    </div>
+    <button id="about-btn" class="about-btn" type="button">About</button>
+  </header>
   <div class="settings" id="settings">
     <label>Motion
       <select id="motion">
@@ -32,6 +59,30 @@
       </select>
     </label>
   </div>
+  <dialog id="about-dialog" aria-labelledby="about-title">
+    <article>
+      <div class="dialog__header">
+        <h2 id="about-title" class="dialog__title">System Status</h2>
+        <button id="about-close" class="dialog__close" type="button">Close</button>
+      </div>
+      <dl class="status-grid">
+        <div>
+          <dt>Codex dataset</dt>
+          <dd id="codex-status">Checking…</dd>
+        </div>
+        <div>
+          <dt>Service worker</dt>
+          <dd id="sw-status">Checking…</dd>
+        </div>
+      </dl>
+      <section class="realm-section">
+        <h3>Realm Links</h3>
+        <ul id="realm-links" class="realm-links">
+          <li>Loading realm links…</li>
+        </ul>
+      </section>
+    </article>
+  </dialog>
   <script type="module" src="./index.js"></script>
 </body>
 </html>

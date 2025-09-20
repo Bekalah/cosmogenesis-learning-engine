@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cosmogenesis Core Health Check</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    :root{--bg:#0b0b12;--ink:#e8e8f0;--muted:#a6a6c1;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+    main{max-width:640px;margin:0 auto;padding:24px 16px 32px;display:grid;gap:16px;}
+    h1{margin:0;font-size:22px;}
+    p.intro{margin:0;color:var(--muted);}
+    .status-grid{margin:0;padding:0;display:grid;gap:12px;}
+    .status-grid div{border:1px solid #1d1d2a;border-radius:8px;padding:12px;display:grid;gap:4px;}
+    .status-grid dt{font-weight:600;}
+    .status-grid dd{margin:0;color:var(--muted);}
+    .status-grid dd[data-state="warn"]{color:#ffb347;}
+    .status-grid dd[data-state="ok"]{color:#8fdf82;}
+    .realm-section h2{margin:0;font-size:16px;}
+    .realm-links{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:8px;}
+    .realm-links li{border:1px solid #1d1d2a;border-radius:8px;padding:10px;}
+    .realm-links a{color:var(--ink);text-decoration:none;}
+    .realm-links a:hover,.realm-links a:focus{text-decoration:underline;}
+    .realm-links p{margin:4px 0 0;color:var(--muted);font-size:12px;}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Cosmogenesis Core Health Check</h1>
+    <p class="intro">Offline-safe snapshot of the Mind registry: codex sync, service worker state, and linked realms.</p>
+    <dl class="status-grid">
+      <div>
+        <dt>Codex dataset</dt>
+        <dd id="hc-codex">Checking…</dd>
+      </div>
+      <div>
+        <dt>Service worker</dt>
+        <dd id="hc-sw">Checking…</dd>
+      </div>
+    </dl>
+    <section class="realm-section">
+      <h2>Realm Links</h2>
+      <ul id="hc-links" class="realm-links">
+        <li>Loading realm links…</li>
+      </ul>
+    </section>
+  </main>
+  <script type="module" src="./health-check.js"></script>
+</body>
+</html>
