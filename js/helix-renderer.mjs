@@ -12,12 +12,20 @@
   (3, 7, 9, 11, 22, 33, 99, 144), and keeps functions pure and well-commented for offline review.
 */
 
+
 const FALLBACK_PALETTE = Object.freeze({
   bg: "#0b0b12",
   ink: "#e8e8f0",
   muted: "#a6a6c1",
   layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
 });
+
+const DEFAULT_PALETTE = {
+  bg: "#0b0b12",
+  ink: "#e8e8f0",
+  layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+};
+
 
 const FALLBACK_NUMBERS = Object.freeze({
   THREE: 3,
@@ -31,6 +39,7 @@ const FALLBACK_NUMBERS = Object.freeze({
 });
 
 /**
+
  * Render the four layered "Cosmic Helix" composition onto a 2D canvas.
  *
  * Renders (back-to-front) the Vesica field, Tree-of-Life scaffold, Fibonacci spiral,
@@ -54,6 +63,23 @@ export function renderHelix(ctx, options = {}) {
   const dims = normaliseDimensions(ctx, options);
   if (!dims) {
     return { ok: false, reason: "invalid-dimensions" };
+
+ * Render a static, four-layer sacred-geometry helix composition onto a 2D canvas.
+ *
+ * Draws, in sequence, a vesica field, a Tree of Life scaffold, a Fibonacci spiral, and a
+ * double-helix lattice. The renderer saves/restores the canvas state, applies an optional
+ * inline notice when fallbacks are active, and summarises the geometry counts for the
+ * caller.
+ *
+ * @param {CanvasRenderingContext2D} ctx - Canvas 2D context to draw into.
+ * @param {Object} [input={}] - Optional configuration overrides (palette, NUM values, dims, notice).
+ * @returns {{summary: string}} A calm human-readable description of the rendered layers.
+ */
+export function renderHelix(ctx, input = {}) {
+  if (!ctx || typeof ctx.canvas === "undefined" || typeof ctx.save !== "function") {
+    // Calm skip keeps the offline shell quiet when contexts are denied (rare on hardened browsers).
+    return { summary: "Canvas context unavailable; rendering skipped." };
+
   }
 
   const numbers = normaliseNumbers(options.NUM);
@@ -148,15 +174,15 @@ function normaliseNumbers(candidate) {
 }
 
 /**
- * Produce a complete palette by merging a partial candidate with the FALLBACK_PALETTE.
+ * Return a complete palette by merging a partial candidate with the fallback palette.
  *
- * If `candidate` is missing or not an object, returns a shallow clone of FALLBACK_PALETTE.
- * When `candidate.layers` is provided, extra entries are truncated to the default length
- * and missing entries are filled from the fallback. Top-level `bg`, `ink`, and `muted`
- * are accepted when they are strings; otherwise fallback values are used.
+ * If `candidate` is not an object, a shallow clone of FALLBACK_PALETTE is returned.
+ * Provided top-level fields `bg`, `ink`, and `muted` are accepted only when they are strings;
+ * otherwise the corresponding fallback values are used. If `candidate.layers` is an array,
+ * its entries are truncated to the fallback length and any missing entries are filled from the fallback.
  *
- * @param {Object|null|undefined} candidate - Partial palette to merge; may contain `bg`, `ink`, `muted`, and `layers` (array of colors).
- * @return {{bg: string, ink: string, muted: string, layers: string[]}} A normalized palette object with `layers` length matching the fallback.
+ * @param {Object|null|undefined} candidate - Partial palette with optional `bg`, `ink`, `muted`, and `layers` (array of color strings).
+ * @return {{bg: string, ink: string, muted: string, layers: string[]}} Normalized palette whose `layers` length matches FALLBACK_PALETTE.
  */
 function normalisePalette(candidate) {
   if (!candidate || typeof candidate !== "object") {
@@ -304,18 +330,19 @@ function mergeVesicaGeometry(base, patch) {
 }
 
 /**
- * Merge a Tree-of-Life geometry patch into a base configuration, producing a normalized geometry object.
+ * Merge a Tree-of-Life geometry patch into a validated, use-safe geometry object.
  *
- * Returns a new geometry object where numeric fields are validated and replaced only when the patch provides
- * valid values; alpha fields are clamped to [0,1]. Node and edge lists are cloned from the base unless the
- * patch supplies its own arrays — supplied nodes are normalized via normaliseTreeNode and supplied edges are
- * filtered to two-element arrays. If patch is null/invalid, returns a shallow copy of base with cloned node
- * and edge arrays.
+ * Returns a new object combining `base` with numeric overrides from `patch` when those values
+ * are positive; alpha fields from `patch` are clamped to [0,1]. If `patch.nodes` is provided
+ * as a non-empty array, each entry is normalized via `normaliseTreeNode`; otherwise the base
+ * nodes are cloned. If `patch.edges` is provided as a non-empty array, entries are filtered to
+ * arrays and truncated to two elements each; otherwise the base edges are cloned. If `patch`
+ * is null or not an object, returns a shallow copy of `base` with cloned `nodes` and `edges` arrays.
  *
- * @param {Object} base - The base tree geometry (must include numeric divisors, alpha values, `nodes` array and `edges` array).
- * @param {Object|null|undefined} patch - Partial geometry to merge; may contain numeric overrides, alpha overrides,
- *                                        `nodes` (array of node-like objects) and `edges` (array of 2-item arrays).
- * @return {Object} A merged, validated, and safe-to-use tree geometry object.
+ * @param {Object} base - Base tree geometry (must include numeric divisors, alpha fields, `nodes` and `edges`).
+ * @param {Object|null|undefined} patch - Partial overrides: numeric fields, `nodeAlpha`, `pathAlpha`, `labelAlpha`,
+ *                                        and optional `nodes`/`edges` arrays.
+ * @return {Object} Merged and validated tree geometry ready for rendering.
  */
 function mergeTreeGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
@@ -363,23 +390,17 @@ function normaliseTreeNode(node) {
 }
 
 /**
- * Merge a Fibonacci-layer geometry patch into a base geometry, validating and clamping fields.
+ * Merge a partial Fibonacci-layer geometry patch into a baseline geometry, returning a new validated object.
  *
- * Returns a new geometry object where numeric overrides from `patch` replace `base` values only if
- * they pass validation: positive numbers use `positiveOrDefault`, `centerXFactor`/`centerYFactor`
- * are clamped to [0,1], `alpha` is clamped to [0,1], and `phi` is accepted only when > 1.
+ * Numeric overrides from `patch` replace `base` values only when valid:
+ * - Positive numeric fields (sampleCount, turns, baseRadiusDivisor, markerInterval) use the provided value when > 0.
+ * - centerXFactor and centerYFactor are clamped to [0, 1].
+ * - alpha is clamped to [0, 1].
+ * - phi is accepted from `patch` only when it is a number > 1.
  *
- * @param {Object} base - The baseline Fibonacci geometry to use as defaults.
- * @param {number} base.sampleCount
- * @param {number} base.turns
- * @param {number} base.baseRadiusDivisor
- * @param {number} base.centerXFactor
- * @param {number} base.centerYFactor
- * @param {number} base.phi
- * @param {number} base.markerInterval
- * @param {number} base.alpha
- * @param {Object|null|undefined} patch - Partial geometry overrides; invalid or missing fields are ignored.
- * @return {Object} A new geometry object with merged and validated fields.
+ * @param {Object} base - Baseline Fibonacci geometry with default fields used when `patch` does not provide valid overrides.
+ * @param {Object} [patch] - Partial overrides; non-object or missing `patch` returns a shallow copy of `base`.
+ * @return {Object} A new geometry object containing merged and validated fields.
  */
 function mergeFibonacciGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
@@ -398,23 +419,60 @@ function mergeFibonacciGeometry(base, patch) {
 }
 
 /**
- * Merge a helix geometry patch onto a base geometry, validating and clamping values.
- *
- * Returns a new geometry object where numeric fields from `patch` override `base`
- * only when they are positive finite numbers; alpha fields are accepted only when
- * numeric and are clamped to [0, 1]. If `patch` is missing or not an object, a
- * shallow copy of `base` is returned.
- *
- * @param {object} base - The base helix geometry to merge into. Expected shape includes
- *   { sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha }.
- * @param {object} [patch] - Partial geometry overrides. Only valid positive numeric fields
- *   replace corresponding base values; `strandAlpha` and `rungAlpha` (if numeric) are clamped to [0,1].
- * @return {object} The merged helix geometry object.
- */
+  * Merge a partial helix geometry onto a base geometry, producing a new validated object.
+  *
+  * Numeric fields in `patch` replace `base` only when they are finite and > 0.
+  * Alpha-like fields (`strandAlpha`, `rungAlpha`) are accepted when numeric and are clamped to [0, 1].
+  * If `patch` is missing or not an object, a shallow copy of `base` is returned.
+  *
+  * This function does not mutate `base` or `patch`.
+  *
+  * @param {object} base - Base helix geometry (e.g. sampleCount, cycles, amplitudeDivisor, strandSeparationDivisor, crossTieCount, strandAlpha, rungAlpha).
+  * @param {object} [patch] - Partial overrides; only valid positive numeric fields and numeric alpha fields are applied.
+  * @return {object} New helix geometry with merged and validated values.
+  */
 function mergeHelixGeometry(base, patch) {
   if (!patch || typeof patch !== "object") {
     return { ...base };
   }
+
+ * Compute pixel coordinates for the Tree-of-Life sephiroth using a covenant-ladder projection.
+ *
+ * Projects a 144-step vertical scale with a 33-step horizontal pillar offset to position
+ * the 11 canonical sephiroth (including Daath as a centered, "hidden" node) across the canvas.
+ * Positions are returned in pixels and are anchored so the two side pillars are offset from
+ * center by 33 steps of a 144-step grid (keeps relative layout consistent across sizes).
+ *
+ * @param {{width:number,height:number}} dims - Canvas dimensions in pixels.
+ * @param {Object<string,number>} numbers - Numeric constants (expects keys like ONEFORTYFOUR, THIRTYTHREE, THREE, etc.)
+ * @return {Object<string,{x:number,y:number}>} Map of sephirah names to {x, y} pixel coordinates.
+ */
+function buildTreeNodes(dims, numbers) {
+  const marginY = dims.height / numbers.THIRTYTHREE;
+  const innerHeight = dims.height - marginY * 2;
+  const verticalUnit = innerHeight / numbers.ONEFORTYFOUR; // 144-step descent honours the covenant ladder.
+  const centerX = dims.width / 2;
+
+  const horizontalUnit = dims.width / numbers.ONEFORTYFOUR;
+  const pillarShift = horizontalUnit * numbers.THIRTYTHREE; // 33-step shift keeps the side pillars tethered to 144.
+  const rightPillarX = centerX + pillarShift;
+  const leftPillarX = centerX - pillarShift;
+
+  const level = multiplier => marginY + verticalUnit * multiplier;
+
+  const levels = {
+    kether: 0,
+    chokmahBinah: numbers.THIRTYTHREE / numbers.THREE, // 33/3 = 11 -> supernal step anchored by 3 and 33.
+    daath: numbers.TWENTYTWO + numbers.SEVEN, // 22+7 = 29 holds the hidden gate between triads.
+    chesedGeburah: numbers.THIRTYTHREE + numbers.NINE, // 33+9 = 42 -> balanced mercy and strength.
+    tiphareth: numbers.THIRTYTHREE + numbers.TWENTYTWO, // 55 -> heart of the tree sits on 33 and 22 combined.
+    netzachHod: numbers.NINETYNINE - numbers.THREE, // 99-3 = 96 -> harmonics of 3 underpin the lower intellect/emotion pair.
+    yesod: numbers.ONEFORTYFOUR - numbers.THREE, // 144-3 = 141 anchors the foundation just above the base.
+    malkuth: numbers.ONEFORTYFOUR // full descent touches earth at 144.
+  };
+
+
+ 
   return {
     sampleCount: positiveOrDefault(patch.sampleCount, base.sampleCount),
     cycles: positiveOrDefault(patch.cycles, base.cycles),
@@ -448,6 +506,7 @@ function clamp(value, min, max) {
 }
 
 /**
+
  * Fill the canvas with a solid background color and a subtle radial glow.
  *
  * Draws a full-coverage background using bgColor, then overlays a soft radial
@@ -457,6 +516,17 @@ function clamp(value, min, max) {
  * @param {CanvasRenderingContext2D} ctx - 2D canvas rendering context to draw into.
  * @param {{width: number, height: number}} dims - Drawing dimensions; both must be positive finite numbers.
  * @param {string} bgColor - CSS color string used as the base background color.
+
+ * Fill the canvas area with a solid background color and a subtle radial glow.
+ *
+ * The function fills the rectangle defined by dims with bgColor, then overlays
+ * a soft radial gradient (lighter near the upper-center, fading to transparent)
+ * to add visual depth.
+ *
+ * @param {CanvasRenderingContext2D} ctx - 2D canvas rendering context to draw into.
+ * @param {{width: number, height: number}} dims - Drawing dimensions; both must be positive finite numbers.
+ * @param {string} bgColor - Base CSS color used for the background.
+
  */
 function fillBackground(ctx, dims, bgColor) {
   ctx.fillStyle = bgColor;
@@ -537,6 +607,7 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
 }
 
 /**
+
  * Render the Tree-of-Life layer: layout nodes by level and xFactor, draw connecting paths, nodes, and labels.
  *
  * Positions each node using config.nodes' level (vertical) and xFactor (horizontal) within an inner margin,
@@ -553,6 +624,23 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
  *   - radiusDivisor: number controlling node radius (larger => smaller nodes).
  *   - pathDivisor: number controlling path stroke sizing.
  *   - pathAlpha, nodeAlpha, labelAlpha: numbers in [0,1] for respective opacities.
+
+ * Render the Tree-of-Life layer: positions nodes by level and xFactor, draws connecting edges,
+ * renders filled node circles, and places node labels.
+ *
+ * The function uses dims and numerology constants to derive margins, vertical spacing, node radius,
+ * and stroke widths. Node positions are computed from config.nodes (each with id, title, level, xFactor)
+ * and connections are drawn from config.edges ([fromId, toId] pairs).
+ *
+ * @param {{width:number,height:number}} dims - Canvas drawing dimensions in pixels.
+ * @param {Object} palette - Palette object; expects `layers` (array of colors) and `ink` for labels/outline.
+ * @param {Object} numbers - Numerology constants (e.g., THREE, SEVEN) used for sizing heuristics.
+ * @param {Object} config - Tree geometry and rendering options. Notable fields:
+ *   - nodes: Array<{id:string, title:string, level:number, xFactor:number}> — node list and layout factors.
+ *   - edges: Array<[string,string]> — pairs of node ids describing connections.
+ *   - marginDivisor, radiusDivisor, pathDivisor: numeric divisors controlling margin, node radius, and path stroke sizing.
+ *   - pathAlpha, nodeAlpha, labelAlpha: numbers in [0,1] controlling opacity of paths, nodes, and labels.
+
  * @return {{nodes:number,paths:number}} Counts of nodes and edges processed (lengths of config.nodes and config.edges).
  */
 function drawTreeOfLife(ctx, dims, palette, numbers, config) {
@@ -619,6 +707,7 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
 }
 
 /**
+
  * Draws a logarithmic (Fibonacci-style) spiral on the canvas and places circular markers along it.
  *
  * The spiral is sampled at a configurable number of points and stroked with the provided color.
@@ -638,6 +727,27 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
  * @param {{width:number, height:number}} dims - Canvas drawing area size.
  * @param {string} color - CSS color used for the spiral stroke and markers.
  * @param {Object} numbers - Numerology constants used for sizing and line widths.
+
+ * Draws a logarithmic (Fibonacci-style) spiral and optional markers on a 2D canvas.
+ *
+ * The spiral is sampled at a configurable number of points across `config.turns * π` radians.
+ * Radius grows exponentially using `config.phi`, the curve is stroked with `color`, and circular
+ * markers are filled at every `config.markerInterval` sample. Stroke width, marker size, and
+ * positioning are computed from `dims` and the provided `numbers` constants.
+ *
+ * Config fields (behavioral summary):
+ * - sampleCount: integer ≥ 2, number of samples along the curve.
+ * - turns: number of half-turns (theta range = turns * π).
+ * - baseRadiusDivisor: divides the smaller canvas dimension to produce the base radius.
+ * - centerXFactor, centerYFactor: normalized [0..1] center position for the spiral.
+ * - phi: exponential growth base (applied per π radians).
+ * - alpha: global alpha applied to the stroke.
+ * - markerInterval: integer step between samples where markers are drawn.
+ *
+ * @param {Object} dims - Canvas drawing area dimensions { width, height }.
+ * @param {string} color - CSS color used for the spiral stroke and marker fill.
+ * @param {Object} numbers - Numerology constants (e.g., NINETYNINE, THREE, ONEFORTYFOUR) used for scale calculations.
+
  * @param {Object} config - Per-curve configuration (see fields above).
  * @return {{samples: number, markers: number}} Counts of sampled points and markers drawn.
  */
@@ -779,15 +889,14 @@ function drawHelixLattice(ctx, dims, palette, numbers, config) {
 }
 
 /**
- * Draws a small footer notice box with translucent background and text in the lower-left corner of the canvas.
+ * Render a small translucent notice box with text in the lower-left corner of the canvas.
  *
- * The box size, padding, and font scale with the canvas dimensions. If `muted` is falsy the `ink` color is used
- * (semi-opaque) for the box background. The function does not return a value and restores the canvas state before exit.
+ * The box, padding, and font scale with the provided canvas dimensions. If `muted` is falsy the notice background
+ * falls back to a semi‑transparent version of `ink`. The function saves and restores the canvas state before exit.
  *
- * @param {CanvasRenderingContext2D} ctx - Rendering context to draw into.
- * @param {{width: number, height: number}} dims - Canvas dimensions used to compute padding and font size.
+ * @param {{width: number, height: number}} dims - Canvas drawing area dimensions used to compute padding and font size.
  * @param {string} ink - Primary text color (CSS color string).
- * @param {string|null|undefined} muted - Optional background color for the notice; falls back to `ink` when not provided.
+ * @param {string|null|undefined} muted - Optional background color for the notice; when not provided `ink` is used.
  * @param {string} text - The notice text to render.
  */
 function drawCanvasNotice(ctx, dims, ink, muted, text) {

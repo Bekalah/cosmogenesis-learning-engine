@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark light">
   <style>
+
     /* ND-safe chrome: calm contrast, layered depth, no motion (why: reduces sensory load). */
     :root {
       --bg: #0b0b12;
@@ -21,9 +22,25 @@
       background: var(--bg);
       color: var(--ink);
       font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    /* ND-safe shell: calm contrast, no motion, maintain spacious margins */
+    :root {
+      --bg:#0b0b12;
+      --ink:#e8e8f0;
+      --muted:#a6a6c1;
+      --edge:#1e2030;
+    }
+    html, body {
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+
     }
 
     header {
+
       padding: 12px 16px;
       border-bottom: 1px solid var(--outline);
       background: linear-gradient(180deg, rgba(25, 25, 40, 0.9), rgba(11, 11, 18, 0.6));
@@ -31,15 +48,26 @@
 
     header strong {
       letter-spacing: 0.06em;
+
+      padding:12px 16px 10px 16px;
+      border-bottom:1px solid var(--edge);
+
     }
 
     .status {
+
       color: var(--muted);
       font-size: 12px;
       margin-top: 2px;
+
+      margin-top:2px;
+      color:var(--muted);
+      font-size:12px;
+
     }
 
     #stage {
+
       display: block;
       margin: 18px auto 12px;
       width: 1440px;
@@ -48,9 +76,18 @@
       max-height: calc(100vh - 168px);
       box-shadow: 0 0 0 1px var(--outline), 0 20px 60px rgba(6, 6, 12, 0.55);
       background: var(--bg);
+
+      display:block;
+      margin:18px auto 12px auto;
+      width:1440px;
+      height:900px;
+      box-shadow:0 0 0 1px var(--edge),0 18px 48px rgba(0,0,0,0.45);
+      background-color:transparent;
+
     }
 
     .note {
+
       max-width: 920px;
       margin: 0 auto 18px;
       color: var(--muted);
@@ -61,12 +98,27 @@
       background: #11111c;
       padding: 2px 4px;
       border-radius: 3px;
+
+      max-width:920px;
+      margin:0 auto 24px auto;
+      padding:0 16px;
+      color:var(--muted);
+    }
+    @media (max-width:1500px) {
+      #stage {
+        width:100%;
+        height:auto;
+        max-width:1440px;
+        aspect-ratio:1440/900;
+      }
+
     }
   </style>
 </head>
 <body>
   <header>
     <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+
     <div class="status" id="status">Preparing canvas…</div>
   </header>
 
@@ -76,6 +128,31 @@
     and a static double-helix lattice. Open this file directly; there are no network requests, build steps, or timers.
   </p>
 
+
+    <div class="status" id="status">Loading palette…</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+  <p class="note">This static renderer paints four calm layers — vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. Open directly; no network or build steps are required.</p>
+
+
+
+    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette...</div>
+  </header>
+
+  <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
+
+  <div id="chapel-ring" style="position:relative;width:min(80vmin,820px);aspect-ratio:1;margin:40px auto"></div>
+  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
+  <script type="module" src="./codex/inject.loader.js"></script>
+
+  <p class="note">Static, offline canvas tuned to the cathedral style reference: vesica grid foundation, Tree-of-Life vault, Fibonacci halo, and double-helix lattice. Palette loads locally with a safe fallback notice for ND assurance.</p>
+
+  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libraries. Open this file directly.</p>
+
+
+
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
@@ -83,7 +160,78 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
+
     const FALLBACK = {
+
+    const DEFAULTS = {
+      palette: {
+        bg:"#0b0b12",
+        ink:"#e8e8f0",
+        layers:["#b1c7ff","#89f7fe","#a0ffa1","#ffd27f","#f5a3ff","#d0d0e6"]
+      }
+    };
+
+
+    async function importJSONModule(path) {
+
+      // Try modern import attributes first, then legacy import assertions.
+      try {
+        // Modern
+        const m = await import(path, { with: { type: "json" } });
+        return m?.default ?? m;
+      } catch (e1) {
+        try {
+          // Legacy
+          const m = await import(path, { assert: { type: "json" } });
+          return m?.default ?? m;
+        } catch (e2) {
+          const err = new Error("JSON module import failed");
+          err.cause = e2;
+          throw err;
+
+      try {
+        const m = await import(path, { with: { type: "json" } });
+        if (m && m.default) return m.default;
+        throw new Error("JSON module missing default export");
+      } catch (e1) {
+        // Fallback for older Chromium builds that used `assert`
+        try {
+          const mOld = await import(path, { assert: { type: "json" } });
+          if (mOld && mOld.default) return mOld.default;
+          throw new Error("JSON module (assert) missing default export");
+        } catch (e2) {
+          throw e2;
+
+        }
+      }
+    }
+    async function fetchJSON(path) {
+      try {
+        const res = await fetch(path, { cache: "no-store" });
+        if (!res.ok) throw new Error(String(res.status));
+        return await res.json();
+    async function loadPalette(path) {
+      // Offline promise: only touches local paths. When browsers block file:// fetch we attempt a JSON module import first.
+      try {
+        if (window.location && window.location.protocol === "file:") {
+          try {
+            const module = await import(path, { assert: { type: "json" } });
+            return module.default;
+          } catch (importError) {
+            // Silent fallback: some engines reject JSON assertions when opened straight from disk.
+          }
+        }
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+
+    const defaults = {
+
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
@@ -91,6 +239,7 @@
         layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
+
 
     const NUM = Object.freeze({
       THREE: 3,
@@ -117,13 +266,133 @@
       try {
         const response = await fetch(path, { cache: "no-store" });
         if (!response.ok) {
+
+      const fetchedPalette = await fetchJSON("./data/palette.json");
+      if (fetchedPalette) {
+        elStatus.textContent = "Palette loaded.";
+        return { palette: fetchedPalette, notice: null };
+
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+      }
+
+      elStatus.textContent = "Palette missing; using safe fallback.";
+      return { palette: defaults.palette, notice: "Palette fallback active" };
+    }
+
+    const { palette: activePalette, notice } = await resolvePalette();
+
+
+    const NUM = {
+      THREE:3,
+      SEVEN:7,
+      NINE:9,
+      ELEVEN:11,
+      TWENTYTWO:22,
+      THIRTYTHREE:33,
+      NINETYNINE:99,
+      ONEFORTYFOUR:144
+    };
+
+
+
+
+    const palette = await loadJSON("./data/palette.json");
+    const palette = await loadPalette("./data/palette.json");
+    const active = palette || defaults.palette;
+    const usingFallback = !palette;
+    const active = palette || defaults.palette;
+    const baseStatus = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+
+
+    initialise();
+
+    async function initialise() {
+      const paletteData = await loadPalette("./data/palette.json");
+      const usingFallback = !paletteData;
+      const palette = paletteData || DEFAULTS.palette;
+
+      applyChromePalette(palette);
+
+      if (!ctx) {
+        updateStatus(composeStatus(usingFallback, "Canvas 2D context unavailable; geometry skipped."));
+        return;
+      }
+
+<
+      // Single-pass render keeps the scene static: no loops, no animation, ND-safe.
+      const outcome = renderHelix(ctx, {
+        width:canvas.width,
+        height:canvas.height,
+        palette,
+
+      // ND-safe: renderer executes once with static geometry and optional notice when fallbacks are active.
+      renderHelix(ctx, {
+
+
+    // ND-safe rationale: no motion, high readability, soft glow, preserved layer order
+    const result = renderHelix(ctx, { width:canvas.width, height:canvas.height, palette:active, NUM, notice: usingFallback ? "Palette fallback active" : null });
+    elStatus.textContent = result && result.summary ? `${baseStatus} ${result.summary}` : baseStatus;
+
+    // ND-safe rationale: no motion, high readability, soft colors, layered order
+    const renderConfig = {
+      width: canvas.width,
+      height: canvas.height,
+      palette: activePalette,
+      NUM,
+      notice
+    };
+
+    renderHelix(ctx, renderConfig);
+
+    // Sync CSS tokens with whichever palette resolved so the chrome mirrors the canvas.
+    document.documentElement.style.setProperty("--bg", active.bg);
+    document.documentElement.style.setProperty("--ink", active.ink);
+
+    elStatus.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
+
+    if (!ctx) {
+      elStatus.textContent += " Canvas 2D context unavailable.";
+    } else {
+      // Numerology constants used by geometry routines.
+      const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
+
+      // ND-safe rationale: no motion, high readability, soft colors, layered order.
+      renderHelix(ctx, {
+        width: canvas.width,
+        height: canvas.height,
+        palette: active,
+
+        NUM,
+        notice: usingFallback ? "Palette fallback active" : null
+      });
+
+      const summary = outcome && typeof outcome.summary === "string"
+        ? outcome.summary
+        : "Geometry rendered once.";
+      updateStatus(composeStatus(usingFallback, summary));
+    }
+
+    async function loadPalette(path) {
+      if (typeof path !== "string") {
+        return null;
+      }
+      try {
+        const response = await fetch(path, { cache:"no-store" });
+        if (!response || !response.ok) {
+
           return null;
         }
         return await response.json();
       } catch (error) {
+
+        // Offline-first: browsers often block fetch for file:// origins; fallback keeps ND safety intact.
+
         return null;
       }
     }
+
 
     function updateStatus(message) {
       statusEl.textContent = message;
@@ -156,6 +425,38 @@
         }
       })();
     }
+
+    function applyChromePalette(palette) {
+      document.documentElement.style.setProperty("--bg", palette.bg);
+      document.documentElement.style.setProperty("--ink", palette.ink);
+      const muted = Array.isArray(palette.layers) && palette.layers.length > 0
+        ? palette.layers[palette.layers.length - 1]
+        : palette.ink;
+      // Muted tone mirrors the outer lattice layer so notes remain legible on both schemes.
+      document.documentElement.style.setProperty("--muted", muted);
+    }
+
+    function composeStatus(usingFallback, tail) {
+      const base = usingFallback
+        ? "Palette missing; using safe fallback."
+        : "Palette loaded.";
+      return `${base} ${tail}`;
+    }
+
+    function updateStatus(message) {
+      statusEl.textContent = message;
+    }
+
+  })();
+  </script>
+  <script>
+  window.addEventListener('cathedral:select', e => {
+    const tint = e.detail?.payload?.color || '#89a3ff';
+    document.documentElement.style.setProperty('--lattice', tint);
+  });
+    }
+
+
   </script>
 </body>
 </html>
