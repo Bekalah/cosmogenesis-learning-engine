@@ -1,0 +1,22 @@
+{
+  "links": [
+    {
+      "id": "cosmogenesis-core",
+      "title": "Cosmogenesis Spiral Teacher",
+      "href": "../cosmogenesis/index.html",
+      "summary": "Render the spiral teacher canvas with ND-safe motion toggles."
+    },
+    {
+      "id": "cosmic-helix",
+      "title": "Cosmic Helix Renderer",
+      "href": "../index.html",
+      "summary": "Static vesica and helix layers for quick palette studies."
+    },
+    {
+      "id": "rooms-atlas",
+      "title": "Rooms Atlas (Stone Grimoire)",
+      "href": "../modules/rooms-atlas.html",
+      "summary": "Map chapel gateways into the rooms atlas without leaving offline mode."
+    }
+  ]
+}
