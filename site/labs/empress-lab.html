@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Empress Lab Study — Daleth Heart Lattice</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Empress Lab ritual for embodied abundance and gentle heart field care.">
+  <link rel="stylesheet" href="../assets/css/lab-page.css">
+</head>
+<body class="lab-empress">
+  <header class="lab-header" aria-labelledby="empress-title">
+    <div class="nav-links">
+      <a href="../index.html">← Return to Atelier</a>
+      <button class="calm-toggle" type="button" aria-pressed="false">Calm Mode</button>
+    </div>
+    <h1 id="empress-title">Empress Lab</h1>
+    <p class="subtitle">Daleth lattice cultivation for welcoming nourishment without overwhelm.</p>
+  </header>
+
+  <main>
+    <section class="lab-section" aria-labelledby="empress-orientation">
+      <h2 class="section-title" id="empress-orientation">Orientation</h2>
+      <p>This lab weaves the double-helix lattice into embodied practice. Each action mirrors one rung of the helix: receive, harmonise, offer. No pace is forced; the heart sets the tempo.</p>
+      <div class="ribbon">
+        <p>Keep a comfort object nearby (blanket, shawl, plush). The Empress honours comfort as sacred data, not indulgence.</p>
+      </div>
+    </section>
+
+    <section class="lab-section" aria-labelledby="empress-prep">
+      <h2 class="section-title" id="empress-prep">Preparation</h2>
+      <ol>
+        <li>Prepare warm tea or water. Taste is part of the ritual; choose something gentle.</li>
+        <li>Open the <a href="../index.html">Cosmic Helix renderer</a> and view the helix lattice. Notice how the rungs bridge both strands evenly.</li>
+        <li>Place a journal or sketchpad to capture sensations after each cycle.</li>
+      </ol>
+    </section>
+
+    <section class="lab-section" aria-labelledby="empress-sequence">
+      <h2 class="section-title" id="empress-sequence">Heart Lattice Sequence</h2>
+      <ol>
+        <li><strong>Receive:</strong> Take a sip of the warm beverage. Feel it move through the body. Name one resource that already supports you.</li>
+        <li><strong>Harmonise:</strong> Rest both hands on the chest. Breathe in for five, out for eight, matching the helix swing.</li>
+        <li><strong>Offer:</strong> Write a single sentence describing how you might extend care to another without draining yourself.</li>
+      </ol>
+      <p>Cycle through the three steps three times. If overwhelm arises, press pause and lean into the comfort object before continuing.</p>
+    </section>
+
+    <section class="lab-section" aria-labelledby="empress-integration">
+      <h2 class="section-title" id="empress-integration">Integration &amp; Embodiment</h2>
+      <ul>
+        <li>Record one tangible act you will take within 24 hours to honour your needs.</li>
+        <li>Note any textures, scents, or sounds that felt supportive during the sequence.</li>
+        <li>Close with gratitude and a physical stretch that feels nourishing.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="lab-footer">
+    <p>Empress Lab values softness. Keep the practice offline, slow, and loving. Share insights only when you feel safe.</p>
+  </footer>
+
+  <script type="module">
+    // Calm Mode keeps gradients hushed so heart work stays gentle (why: protects regulation).
+    const toggle = document.querySelector('.calm-toggle');
+    if (toggle) {
+      const apply = (state) => {
+        document.body.classList.toggle('is-calm', state);
+        toggle.setAttribute('aria-pressed', state ? 'true' : 'false');
+        toggle.textContent = state ? 'Calm Mode: On' : 'Calm Mode';
+      };
+      toggle.addEventListener('click', () => {
+        const next = !document.body.classList.contains('is-calm');
+        apply(next);
+      });
+    }
+  </script>
+</body>
+</html>
