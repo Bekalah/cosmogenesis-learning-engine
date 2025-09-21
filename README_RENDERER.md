@@ -3,7 +3,7 @@
 Static, offline-first canvas capsule aligned with the luminous cosmology canon. Rendering happens once when `index.html` loads, painting four quiet layers (vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice). All geometry is parameterised by numerology anchors `{3, 7, 9, 11, 22, 33, 99, 144}` and every helper is a small, well-commented pure function so the composition stays ND-safe.
 
 ## Files delivered
-- `index.html` — Offline entry point. Loads the optional palette JSON, reports fallback status in the header, seeds the numerology constants, and invokes the renderer with a calm notice when data is missing.
+- `index.html` — Offline entry point. Loads the optional palette JSON without issuing network requests, reports fallback status in the header, seeds the numerology constants, and invokes the renderer with a calm notice when data is missing.
 - `js/helix-renderer.mjs` — Pure ES module containing the layered drawing helpers. Each layer explains how the numerology keeps depth without motion.
 - `data/palette.json` — Optional colour override. When absent the renderer uses its sealed fallback and paints a footer notice for reassurance.
 - `README_RENDERER.md` — This guide.
@@ -11,7 +11,7 @@ Static, offline-first canvas capsule aligned with the luminous cosmology canon. 
 ## How to use (offline)
 1. Download or clone this repository.
 2. Double-click `index.html` in any modern browser. No build steps, bundlers, or servers are required.
-3. If local JSON loading is blocked (common on hardened `file://` contexts) the fallback palette activates automatically, the header reports the change, and the canvas prints "Palette fallback active" near the base.
+3. The palette loader uses module-level JSON import assertions only; if that fails (common on hardened `file://` contexts) the fallback palette activates automatically, the header reports the change, and the canvas prints "Palette fallback active" near the base.
 
 ## Layer order (back to front)
 1. **Vesica field** — Intersecting circle grid arranged by a `{3 × 7}` cadence. A central mandorla glow reinforces the vesica without motion.
@@ -36,7 +36,7 @@ Update `data/palette.json` with your preferred ND-safe palette:
 }
 ```
 
-Missing or malformed palette data never stops rendering; the fallback palette keeps contrast calm and emits the inline notice.
+The loader never performs remote fetches; it only attempts module-level JSON import. Missing or malformed palette data never stops rendering, because the fallback palette keeps contrast calm and emits the inline notice.
 
 ## ND-safe rationale
 - No animation loops or timers — everything renders once.
