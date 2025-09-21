@@ -84,50 +84,62 @@
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
+        muted: "#a6a6c1",
         layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
     };
 
     async function loadPalette() {
       const url = "./data/palette.json";
-      if (window.location.protocol === "file:") {
-        const module = await import(url, { with: { type: "json" } })
-          .then((mod) => (mod && mod.default ? mod.default : null))
-          .catch(() => null);
-        if (module) {
-          return module;
+      const attempts = [
+        async () => {
+          return import(url, { assert: { type: "json" } });
+        },
+        async () => {
+          return import(url, { with: { type: "json" } });
+        }
+      ];
+      for (const attempt of attempts) {
+        try {
+          const mod = await attempt();
+          if (mod && typeof mod === "object") {
+            const payload = mod.default && typeof mod.default === "object"
+              ? mod.default
+              : typeof mod.palette === "object"
+              ? mod.palette
+              : mod;
+            if (payload && typeof payload === "object") {
+              return payload;
+            }
+          }
+        } catch (err) {
+          // Import assertions are not universal; keep iterating to honour offline fallback.
         }
       }
-      try {
-        const response = await fetch(url, { cache: "no-store" });
-        if (!response.ok) {
-          return null;
-        }
-        return await response.json();
-      } catch (err) {
-        return null;
-      }
+      return null;
     }
 
     function applyChromeColours(palette) {
       const root = document.documentElement;
       if (palette.bg) root.style.setProperty("--bg", palette.bg);
       if (palette.ink) root.style.setProperty("--ink", palette.ink);
-      if (Array.isArray(palette.layers) && palette.layers[0]) {
+      if (palette.muted) {
+        root.style.setProperty("--muted", palette.muted);
+      } else if (Array.isArray(palette.layers) && palette.layers[0]) {
         root.style.setProperty("--muted", palette.layers[0]);
       }
     }
 
     const palette = await loadPalette();
     const activePalette = palette || FALLBACK.palette;
-    const notice = palette ? null : "Palette fallback active (local data unavailable).";
+    const notice = palette ? "" : "Palette fallback active (local data unavailable).";
 
     applyChromeColours(activePalette);
 
     if (palette) {
-      statusEl.textContent = "Palette loaded from data/palette.json.";
+      statusEl.textContent = "Palette loaded from data/palette.json without network.";
     } else {
-      statusEl.textContent = "Palette missing or blocked; using sealed fallback.";
+      statusEl.textContent = "Palette missing or blocked; using sealed fallback (no network used).";
     }
 
     // ND-safe rationale: no animation, soft contrast, layered order preserves depth.
