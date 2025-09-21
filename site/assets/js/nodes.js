@@ -119,10 +119,16 @@ function handleLabClick(event) {
     return;
   }
   try {
-    const target = new URL(href, window.location.origin);
-    if (target.origin !== window.location.origin) {
+    const base = document.baseURI || window.location.href;
+    const target = new URL(href, base);
+    const origin = window.location.origin;
+    const allow = origin && origin !== 'null'
+      ? target.origin === origin
+      : target.protocol === 'file:';
+    if (!allow) {
       return;
     }
+    // ND-safe: open in new tab without opener to avoid navigation surprises.
     const win = window.open(target.href, '_blank', 'noopener,noreferrer');
     if (win) {
       win.opener = null;

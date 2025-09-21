@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Magus Lab Study — Beth Circuit Weave</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Magus Lab prompts for Beth circuitry and sigil conduction.">
+  <link rel="stylesheet" href="../assets/css/lab-page.css">
+</head>
+<body class="lab-magus">
+  <header class="lab-header" aria-labelledby="magus-title">
+    <div class="nav-links">
+      <a href="../index.html">← Return to Atelier</a>
+      <button class="calm-toggle" type="button" aria-pressed="false">Calm Mode</button>
+    </div>
+    <h1 id="magus-title">Magus Lab</h1>
+    <p class="subtitle">Beth circuitry practice for weaving word, breath, and precise gesture without overstimulation.</p>
+  </header>
+
+  <main>
+    <section class="lab-section" aria-labelledby="magus-orientation">
+      <h2 class="section-title" id="magus-orientation">Orientation</h2>
+      <p>This lab honours Mercury as conductor between worlds. The practice follows three passes: mapping signal, scripting gesture, and sealing resonance. Each pass aligns with one helix strand from the Cosmic Helix renderer (why: keeps the lore synchronized).</p>
+      <div class="ribbon">
+        <p>Keep the sequence slow. The goal is to feel where speech and circuitry merge, not to achieve a specific output. Precision with kindness.</p>
+      </div>
+    </section>
+
+    <section class="lab-section" aria-labelledby="magus-prep">
+      <h2 class="section-title" id="magus-prep">Preparation</h2>
+      <ol>
+        <li>Place a conductive surface (paper, copper tape, or graphite card) on a soft backing. Avoid hard glass to reduce glare.</li>
+        <li>Open the <a href="../index.html">Cosmic Helix renderer</a> and focus on the helix layer. Observe how the two strands braid without touching.</li>
+        <li>Select three key phrases or sigils from your codex margin. Keep each under seven syllables to respect the breath cadence.</li>
+      </ol>
+    </section>
+
+    <section class="lab-section" aria-labelledby="magus-sequence">
+      <h2 class="section-title" id="magus-sequence">Circuit Sequence</h2>
+      <ol>
+        <li><strong>Signal Scan:</strong> Trace the first phrase on the conductive surface using your non-dominant hand. Move slowly for a count of nine.</li>
+        <li><strong>Gesture Draft:</strong> With your dominant hand, mirror the motion above the surface without touching. Let the air draw a subtle echo.</li>
+        <li><strong>Seal &amp; Rest:</strong> Place both palms on the table. Whisper the phrase once, then sit in silence until breath returns to baseline.</li>
+      </ol>
+      <p>Repeat for each phrase. If the nervous system tightens, pause and run the Void Lab breath pattern before returning.</p>
+      <div class="callout" role="note">Remember: Beth work does not demand spectacle. The point is to confirm that the path between thought and matter remains soft, accurate, and willing.</div>
+    </section>
+
+    <section class="lab-section" aria-labelledby="magus-integration">
+      <h2 class="section-title" id="magus-integration">Integration Questions</h2>
+      <ul>
+        <li>Which phrase carried the clearest resonance? Note any body sensations or colours that surfaced.</li>
+        <li>Did the non-dominant trace feel steadier than the mirrored air gesture? Record observations without judgement.</li>
+        <li>List one micro-action (under five minutes) that applies the circuit in your daily orbit.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="lab-footer">
+    <p>Magus Lab keeps Mercury grounded: no autoplay, no flashing sigils. All notes remain offline inside your codex.</p>
+  </footer>
+
+  <script type="module">
+    // Calm Mode reduces contrast during high-focus sigil tracing (why: prevents sensory spikes).
+    const toggle = document.querySelector('.calm-toggle');
+    if (toggle) {
+      const apply = (state) => {
+        document.body.classList.toggle('is-calm', state);
+        toggle.setAttribute('aria-pressed', state ? 'true' : 'false');
+        toggle.textContent = state ? 'Calm Mode: On' : 'Calm Mode';
+      };
+      toggle.addEventListener('click', () => {
+        const next = !document.body.classList.contains('is-calm');
+        apply(next);
+      });
+    }
+  </script>
+</body>
+</html>

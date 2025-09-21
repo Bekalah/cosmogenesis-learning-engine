@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Priestess Lab Study — Gimel Memory Veil</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Priestess Lab ritual for lunar memory and dream channel care.">
+  <link rel="stylesheet" href="../assets/css/lab-page.css">
+</head>
+<body class="lab-priestess">
+  <header class="lab-header" aria-labelledby="priestess-title">
+    <div class="nav-links">
+      <a href="../index.html">← Return to Atelier</a>
+      <button class="calm-toggle" type="button" aria-pressed="false">Calm Mode</button>
+    </div>
+    <h1 id="priestess-title">Priestess Lab</h1>
+    <p class="subtitle">Gimel veil work for translating dream signals into gentle data without puncturing the mystery.</p>
+  </header>
+
+  <main>
+    <section class="lab-section" aria-labelledby="priestess-orientation">
+      <h2 class="section-title" id="priestess-orientation">Orientation</h2>
+      <p>This chamber focuses on receptive sensing. The practice mirrors the Fibonacci curve within the Cosmic Helix renderer: slow, logarithmic unfolding that never jolts the senses. We treat each insight as a petal, not a command.</p>
+      <div class="ribbon">
+        <p>Set a boundary before starting: decide how many impressions (3, 7, or 9) you are willing to collect. When the number is reached, close the session.</p>
+      </div>
+    </section>
+
+    <section class="lab-section" aria-labelledby="priestess-prep">
+      <h2 class="section-title" id="priestess-prep">Preparation</h2>
+      <ol>
+        <li>Light a single cool-toned lamp or candle. Avoid flicker; steady illumination keeps the veil calm.</li>
+        <li>Queue a quiet field recording (rain, tide, or wind). No lyrics, no sudden crescendos.</li>
+        <li>Place three objects representing past, present, and near-future on your desk. These may be stones, cards, or sketches.</li>
+      </ol>
+    </section>
+
+    <section class="lab-section" aria-labelledby="priestess-sequence">
+      <h2 class="section-title" id="priestess-sequence">Veil Listening</h2>
+      <ol>
+        <li><strong>Breath Gate:</strong> Inhale for four, exhale for seven. Allow the exhale to extend like the spiral's sweep.</li>
+        <li><strong>Object Drift:</strong> Place fingertips on the object representing the present. Notice temperature, texture, and any subtle emotion.</li>
+        <li><strong>Dream Thread:</strong> Speak one sentence describing a dream fragment. Keep it literal; avoid interpretation.</li>
+      </ol>
+      <p>After each cycle, mark the impression count. When you reach the chosen number, cover the objects with a cloth to signal closure.</p>
+    </section>
+
+    <section class="lab-section" aria-labelledby="priestess-integration">
+      <h2 class="section-title" id="priestess-integration">Integration Prompts</h2>
+      <ul>
+        <li>Which sense (sight, sound, touch) carried the clearest message? Note it without ranking.</li>
+        <li>Does any dream fragment request action? If yes, draft a simple sentence describing the support needed.</li>
+        <li>Record a gratitude note for the veil. Honour the boundary by ending the session when the gratitude is written.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="lab-footer">
+    <p>Priestess Lab maintains lunar quietude: no autoplay, no push notifications. All data stays within your offline codex.</p>
+  </footer>
+
+  <script type="module">
+    // Calm Mode mutes gradients to keep lunar perception soft (why: protects sensory thresholds).
+    const toggle = document.querySelector('.calm-toggle');
+    if (toggle) {
+      const apply = (state) => {
+        document.body.classList.toggle('is-calm', state);
+        toggle.setAttribute('aria-pressed', state ? 'true' : 'false');
+        toggle.textContent = state ? 'Calm Mode: On' : 'Calm Mode';
+      };
+      toggle.addEventListener('click', () => {
+        const next = !document.body.classList.contains('is-calm');
+        apply(next);
+      });
+    }
+  </script>
+</body>
+</html>

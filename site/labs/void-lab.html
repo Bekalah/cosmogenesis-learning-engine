@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Void Lab Study — Aleph Breath Field</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Void Lab protocol for steady Aleph breath and vesica attunement.">
+  <link rel="stylesheet" href="../assets/css/lab-page.css">
+</head>
+<body class="lab-void">
+  <header class="lab-header" aria-labelledby="lab-title">
+    <div class="nav-links">
+      <a href="../index.html">← Return to Atelier</a>
+      <button class="calm-toggle" type="button" aria-pressed="false">Calm Mode</button>
+    </div>
+    <h1 id="lab-title">Void Lab</h1>
+    <p class="subtitle">Aleph breath study for resetting the vesica field before entering charged chapels.</p>
+  </header>
+
+  <main>
+    <section class="lab-section" aria-labelledby="void-orientation">
+      <h2 class="section-title" id="void-orientation">Orientation</h2>
+      <p>The Void Lab offers a silent vestibule where the nervous system may soften before deeper practice. Geometry stays implied through soft vesica overlays rather than animated mandalas (why: keeps the space ND-safe).</p>
+      <div class="ribbon">
+        <p>The Aleph current invites three slow breath sets. Each set traces a vertical line, a horizontal span, and finally the vesica curve, mirroring the Cosmic Helix renderer's first layer.</p>
+      </div>
+    </section>
+
+    <section class="lab-section" aria-labelledby="void-prep">
+      <h2 class="section-title" id="void-prep">Preparation</h2>
+      <ol>
+        <li>Dim the surrounding lights to a single soft source. Aim for 33–40 lux so gradients remain readable without glare.</li>
+        <li>Open the <a href="../index.html">Cosmic Helix renderer</a> in a separate window. Allow your gaze to rest on the vesica grid for three breaths.</li>
+        <li>Arrange journal tools or tactile objects within reach. Keep edges rounded; avoid sharp metallic implements.</li>
+      </ol>
+      <div class="callout" role="note">If stimulation rises above a calm threshold, slide the Calm Mode toggle to mute gradients. The body leads the session cadence.</div>
+    </section>
+
+    <section class="lab-section" aria-labelledby="void-practice">
+      <h2 class="section-title" id="void-practice">Practice Sequence</h2>
+      <ol>
+        <li><strong>Three Breath Gate:</strong> Inhale for a count of <code>7</code>, hold for <code>3</code>, release for <code>11</code>. Visualise the breath aligning with the vesica's vertical axis.</li>
+        <li><strong>Listening Sweep:</strong> Trace your attention across the horizontal line, noticing texture shifts in sound or temperature. Record any notes in brief phrases.</li>
+        <li><strong>Mandorla Presence:</strong> Allow awareness to settle in the central vesica overlap. Whisper one anchor word (e.g., 'still', 'open').</li>
+      </ol>
+      <p>Repeat the sequence in sets of <code>3</code>. Between sets, sip water or rest your eyes. No timers, no chimes.</p>
+    </section>
+
+    <section class="lab-section" aria-labelledby="void-integration">
+      <h2 class="section-title" id="void-integration">Integration &amp; Notes</h2>
+      <ul>
+        <li>Sketch the vesica or jot a single sentence describing the body's signal after each set.</li>
+        <li>Optional: transcribe the most resonant word into the <code>Aleph</code> column of your codex.</li>
+        <li>Close by thanking the silence; ground with a small snack or gentle stretch.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="lab-footer">
+    <p>Cosmogenesis Void Lab — offline-first, trauma-informed. Questions? Log them in your codex margin for future integration.</p>
+  </footer>
+
+  <script type="module">
+    // Calm Mode respects sensory boundaries by lowering contrast without motion (why: ND-safe covenant).
+    const toggle = document.querySelector('.calm-toggle');
+    if (toggle) {
+      const apply = (state) => {
+        document.body.classList.toggle('is-calm', state);
+        toggle.setAttribute('aria-pressed', state ? 'true' : 'false');
+        toggle.textContent = state ? 'Calm Mode: On' : 'Calm Mode';
+      };
+      toggle.addEventListener('click', () => {
+        const next = !document.body.classList.contains('is-calm');
+        apply(next);
+      });
+    }
+  </script>
+</body>
+</html>
