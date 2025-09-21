@@ -1,65 +1,508 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Cathedral Grid</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/assets/css/alchemy-plates.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cathedral of Circuits - Integration Hub</title>
     <style>
-      body {
-        margin: 0;
-        background: #0b0b0b;
-        color: #e6e6e6;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Inter,
-          sans-serif;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 16px;
-        padding: 16px;
-      }
-      .tile {
-        background: #111;
-        border: 1px solid #262626;
-        border-radius: 12px;
-        padding: 14px;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .tile:hover {
-        border-color: #5e4ba8;
-      }
-      .cap {
-        opacity: 0.75;
-        font-size: 14px;
-      }
+        /* ND-safe integration shell: calm contrast, layered gradients, zero motion. */
+        :root {
+            --bg-primary: #0b0c10;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #e6e6e6;
+            --text-secondary: #a9b1ba;
+            --accent-gold: #d4af37;
+            --accent-green: #2d5016;
+            --accent-red: #8b0000;
+            --border-color: #3a3a4a;
+            --sacred-ratio: 1.618;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ui-monospace', 'Menlo', 'Monaco', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: var(--sacred-ratio);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+        }
+
+        h1 {
+            font-size: 2.618rem;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        main {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Repository Grid */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.618rem;
+            margin: 2rem 0;
+        }
+
+        .repo-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .repo-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .repo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .repo-title {
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .repo-role {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .repo-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .repo-features li {
+            padding: 0.3rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .repo-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .repo-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .repo-link {
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--accent-gold);
+            border-radius: 4px;
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: background 0.3s ease, color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .repo-link:hover,
+        .repo-link:focus {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        /* Status Indicators (static color only to honour no-motion policy) */
+        .status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+        }
+
+        .status.active {
+            background: #4ade80;
+        }
+
+        .status.pending {
+            background: #fbbf24;
+        }
+
+        .status.inactive {
+            background: #ef4444;
+        }
+
+        /* Sacred Constants Display */
+        .constants-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .constant-item {
+            text-align: center;
+        }
+
+        .constant-number {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+            display: block;
+        }
+
+        .constant-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .instructions h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .instructions ol {
+            padding-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .instructions li {
+            margin: 0.5rem 0;
+        }
+
+        code {
+            background: var(--bg-primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--accent-gold);
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .repo-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <h1 style="padding: 16px">Cathedral</h1>
-    <section class="grid">
-      <a class="tile" href="/chapels/cosmogenesis/index.html">
-        <strong>Cosmogenesis</strong>
-        <span class="cap">Spiral teacher forging cosmic plates</span>
-      </a>
-      <a class="tile" href="/chapels/fusion-kink/library.html">
-        <strong>Sophia7 Library</strong>
-        <span class="cap">Fusion Kink Alchemy Lab</span>
-      </a>
-      <a class="tile" href="/chapels/rooms-atlas.html">
-        <strong>Rooms Atlas</strong>
-        <span class="cap">Map of cathedral rooms</span>
-      </a>
-    </section>
-  </body>
+</head>
+<body>
+    <header>
+        <h1>✦ Cathedral of Circuits ✦</h1>
+        <p class="subtitle">
+            ND-Safe · Provenance Required · All Combinations 0-144<br>
+            72 Angels + 72 Demons · Sacred Geometry · Living Codex
+        </p>
+    </header>
+
+    <main>
+        <!-- Sacred Constants -->
+        <section class="constants-grid" aria-label="Sacred constants registry">
+            <div class="constant-item">
+                <span class="constant-number">0-144</span>
+                <span class="constant-label">All Combinations</span>
+            </div>
+            <div class="constant-item">
+                <span class="constant-number">72</span>
+                <span class="constant-label">Angels</span>
+            </div>
+            <div class="constant-item">
+                <span class="constant-number">72</span>
+                <span class="constant-label">Demons</span>
+            </div>
+            <div class="constant-item">
+                <span class="constant-number">33</span>
+                <span class="constant-label">Spine Chapters</span>
+            </div>
+            <div class="constant-item">
+                <span class="constant-number">78</span>
+                <span class="constant-label">Tarot Arcana</span>
+            </div>
+        </section>
+
+        <!-- Repository Grid -->
+        <section class="repo-grid" aria-label="Repository constellation">
+            <!-- Cosmogenesis Learning Engine -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Cosmogenesis Learning Engine
+                    <span class="status active" aria-label="Active"></span>
+                </h3>
+                <p class="repo-role">Science Engine / Node Registry</p>
+                <ul class="repo-features">
+                    <li>144 Nodes + All Combinations</li>
+                    <li>Schema Validation</li>
+                    <li>Overlay Systems (Soyga, I-Ching, Astrology)</li>
+                    <li>Biogeometry &amp; Sound Profiles</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://cosmogenesis-learning-engine.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/cosmogenesis-learning-engine" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Stone Grimoire -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Stone Grimoire
+                    <span class="status active" aria-label="Active"></span>
+                </h3>
+                <p class="repo-role">Atelier / Museum</p>
+                <ul class="repo-features">
+                    <li>Visionary Art Plates</li>
+                    <li>Provenance Tracking</li>
+                    <li>Sacred Geometry Gallery</li>
+                    <li>Teaching Archive</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://stone-grimoire.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/stone-grimoire" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Circuitum 99 -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Circuitum 99
+                    <span class="status pending" aria-label="Pending"></span>
+                </h3>
+                <p class="repo-role">Story Spine / Guardians</p>
+                <ul class="repo-features">
+                    <li>33-Chapter Narrative</li>
+                    <li>72 Angels Registry</li>
+                    <li>72 Demons Registry</li>
+                    <li>Guardian Assistance System</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://circuitum99.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/circuitum99" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Liber Arcanae -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Liber Arcanae
+                    <span class="status pending" aria-label="Pending"></span>
+                </h3>
+                <p class="repo-role">Companions / Datasets</p>
+                <ul class="repo-features">
+                    <li>78 Tarot Arcana</li>
+                    <li>Archetype Registry</li>
+                    <li>Node Correspondences</li>
+                    <li>Living Companions</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://liber-arcanae.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/liber-arcanae" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Liber Arcanae Game -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Liber Arcanae Game
+                    <span class="status pending" aria-label="Pending"></span>
+                </h3>
+                <p class="repo-role">Playable Layer</p>
+                <ul class="repo-features">
+                    <li>Interactive Guardian Dealing</li>
+                    <li>Real-time Correspondences</li>
+                    <li>Ritual Triggers</li>
+                    <li>Story Navigation</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://liber-arcanae-game.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/liber-arcanae-game" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Tesseract Bridge -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Tesseract Bridge
+                    <span class="status active" aria-label="Active"></span>
+                </h3>
+                <p class="repo-role">Connector / Event Router</p>
+                <ul class="repo-features">
+                    <li>Cross-Repo Synchronization</li>
+                    <li>Realm Links Registry</li>
+                    <li>Event Propagation</li>
+                    <li>State Management</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://tesseract-bridge.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/tesseract-bridge" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Codex 14499 -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Codex 14499
+                    <span class="status active" aria-label="Active"></span>
+                </h3>
+                <p class="repo-role">Codex Bridge / Sacred Constants</p>
+                <ul class="repo-features">
+                    <li>Sacred Number Registry</li>
+                    <li>Canonical Constants</li>
+                    <li>Geometry Definitions</li>
+                    <li>Master Registry</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://codex-14499.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/codex-14499" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
+            <!-- Magical Mystery House -->
+            <article class="repo-card">
+                <h3 class="repo-title">
+                    Magical Mystery House
+                    <span class="status pending" aria-label="Pending"></span>
+                </h3>
+                <p class="repo-role">Recursive Realm / Entry Portal</p>
+                <ul class="repo-features">
+                    <li>Fractal Labyrinth</li>
+                    <li>Paradox Rooms</li>
+                    <li>Onboarding Quests</li>
+                    <li>Matrix Recursion</li>
+                </ul>
+                <div class="repo-links">
+                    <a href="https://magical-mystery-house.netlify.app" class="repo-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                    <a href="https://github.com/yourusername/magical-mystery-house" class="repo-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Deployment Instructions -->
+        <section class="instructions" aria-label="Deployment protocol">
+            <h2>✦ Deployment Protocol</h2>
+            <ol>
+                <li>Clone each repository and add the common files from the blueprint.</li>
+                <li>Place master images in <code>assets/raw/</code> (PNG/JPG only).</li>
+                <li>Run: <code>npm install</code> then <code>npm run build</code>.</li>
+                <li>Deploy to Netlify: <code>netlify deploy --prod --build</code>.</li>
+                <li>In Netlify UI: Disable "Image Asset Optimization".</li>
+                <li>Update <code>tesseract-bridge/registry/realm_links.json</code> with live URLs.</li>
+                <li>Verify <code>/core/health-check.html</code> returns 200 on all sites.</li>
+                <li>Add nodes/combinations to <code>registry/nodes.json</code> (schema enforced).</li>
+                <li>For content updates: Bump <code>SW_VERSION</code> in <code>public/sw.js</code>.</li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Sacred Motto -->
+    <footer>
+        <p>
+            "In sacred pattern, healing is found.<br>
+            In open spiral, truth may be chosen.<br>
+            In the Codex, all is remembered."
+        </p>
+    </footer>
+
+    <script>
+        // Offline-first status check: failures preserve existing labels rather than blinking.
+        async function checkRepoStatus() {
+            const repos = [
+                { url: 'https://cosmogenesis-learning-engine.netlify.app/core/health-check.html', card: 0 },
+                { url: 'https://stone-grimoire.netlify.app/core/health-check.html', card: 1 },
+                { url: 'https://circuitum99.netlify.app/core/health-check.html', card: 2 },
+                { url: 'https://liber-arcanae.netlify.app/core/health-check.html', card: 3 },
+                { url: 'https://liber-arcanae-game.netlify.app/core/health-check.html', card: 4 },
+                { url: 'https://tesseract-bridge.netlify.app/core/health-check.html', card: 5 },
+                { url: 'https://codex-14499.netlify.app/core/health-check.html', card: 6 },
+                { url: 'https://magical-mystery-house.netlify.app/core/health-check.html', card: 7 }
+            ];
+
+            const statuses = document.querySelectorAll('.status');
+
+            for (const repo of repos) {
+                try {
+                    const response = await fetch(repo.url, { mode: 'no-cors' });
+                    if (response) {
+                        statuses[repo.card].className = 'status active';
+                    }
+                } catch (error) {
+                    // Leave the original status in place to avoid false negatives offline.
+                    console.log(`Status check for card ${repo.card} failed: ${error.message}`);
+                }
+            }
+        }
+
+        checkRepoStatus();
+        setInterval(checkRepoStatus, 30000);
+    </script>
+</body>
 </html>
