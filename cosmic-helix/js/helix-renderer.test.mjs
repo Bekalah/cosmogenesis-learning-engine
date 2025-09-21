@@ -80,6 +80,7 @@ test('toPositiveNumber: accepts finite positive numbers, rejects others', () => 
 
 //
 //
+//
 // normaliseDimensions
 //
 test('normaliseDimensions: falls back to ctx.canvas sizes and updates canvas when provided', () => {
@@ -409,4 +410,171 @@ test('renderHelix: omits notice rendering when notice is empty/whitespace', () =
   // Allow some label text from Tree if called before reset; we reset before call, so any fillText would be from notice or tree inside current render.
   // To avoid flakiness, ensure at least one draw occurred overall.
   assert.equal(calls.length > 0, true);
+});
+/**
+ * Additional edge-case and regression tests
+ * Testing library/framework: Node.js built-in test runner (node:test) with assert/strict.
+ * These tests focus on robustness around normalisers, geometry merges, draw helpers, and the orchestrator,
+ * complementing scenarios emphasized in the PR diff.
+ */
+
+test('normaliseNumbers: ignores non-finite/<=0 overrides and does not mutate input', () => {
+  const fn = Mod.__test__?.normaliseNumbers;
+  if (!fn) return;
+
+  const overrides = { THREE: '3', ELEVEN: 0, NINE: -9, THIRTYTHREE: Infinity };
+  const before = JSON.stringify(overrides);
+  const out = fn(overrides);
+
+  // Input object should remain unchanged
+  assert.equal(JSON.stringify(overrides), before);
+
+  // Known defaults should remain when invalid overrides were provided
+  assert.equal(out.THREE, 3);
+  assert.equal(out.ELEVEN, 11);
+  assert.equal(out.NINE, 9);
+  assert.equal(out.THIRTYTHREE, 33);
+});
+
+test('normalisePalette: maintains input immutability and returns complete, cloned structure', () => {
+  const fn = Mod.__test__?.normalisePalette;
+  if (!fn) return;
+
+  const candidate = { bg: '#000', layers: ['#123'] };
+  const before = JSON.stringify(candidate);
+  const out = fn(candidate);
+
+  // Input immutability
+  assert.equal(JSON.stringify(candidate), before);
+
+  // Output structure checks
+  assert.equal(typeof out.bg, 'string');
+  assert.equal(typeof out.ink, 'string');
+  assert.equal(typeof out.muted, 'string');
+  assert.equal(Array.isArray(out.layers), true);
+  assert.equal(out.layers.length, 6);
+
+  // Ensure layers array was cloned
+  assert.notEqual(out.layers, candidate.layers);
+});
+
+test('mergeTreeGeometry: does not mutate base arrays when applying valid patch', () => {
+  const fn = Mod.__test__?.mergeTreeGeometry;
+  if (!fn) return;
+
+  const base = {
+    marginDivisor: 11, radiusDivisor: 33, pathDivisor: 99,
+    nodeAlpha: 0.8, pathAlpha: 0.6, labelAlpha: 0.7,
+    nodes: [{ id: 'a', title: 'A', level: 0, xFactor: 0.5 }],
+    edges: [['a','a']]
+  };
+  const before = JSON.stringify(base);
+
+  // Apply a patch that would update nodes/edges if accepted
+  const _patched = fn(base, { nodes: [{ id: 'b' }], edges: [['a','b']] });
+
+  // Base should remain unchanged
+  assert.equal(JSON.stringify(base), before);
+});
+
+test('drawCanvasNotice: handles very long text and draws measure + rect + text', () => {
+  const { ctx, calls } = makeCtx(640, 360);
+  const dims = { width: 640, height: 360 };
+  const fn = Mod.__test__?.drawCanvasNotice;
+  if (!fn) return;
+
+  fn(ctx, dims, '#fff', '#111', 'X'.repeat(200));
+
+  assert.equal(calls.some(([n]) => n === 'measureText'), true);
+  assert.equal(calls.some(([n]) => n === 'fillRect'), true);
+  assert.equal(calls.some(([n]) => n === 'fillText'), true);
+});
+
+test('drawFibonacciCurve: handles zero samples and subunit markerInterval gracefully', () => {
+  const { ctx } = makeCtx(220, 220);
+  const dims = { width: 220, height: 220 };
+  const numbers = Mod.__test__?.normaliseNumbers ? Mod.__test__.normaliseNumbers({}) : null;
+  const fn = Mod.__test__?.drawFibonacciCurve;
+  if (!numbers || !fn) return;
+
+  const stats = fn(ctx, dims, '#f0f', numbers, {
+    sampleCount: 0, turns: 1, baseRadiusDivisor: 20,
+    centerXFactor: 0.5, centerYFactor: 0.5, phi: 1.62,
+    markerInterval: 0, alpha: 0.5
+  });
+
+  assert.equal(typeof stats.samples, 'number');
+  assert.equal(stats.samples >= 0, true);
+  assert.equal(typeof stats.markers, 'number');
+  assert.equal(stats.markers >= 0, true);
+});
+
+test('drawHelixLattice: handles crossTieCount larger than sampleCount without error', () => {
+  const { ctx, calls } = makeCtx(300, 150);
+  const dims = { width: 300, height: 150 };
+  const numbers = Mod.__test__?.normaliseNumbers ? Mod.__test__.normaliseNumbers({}) : null;
+  const fn = Mod.__test__?.drawHelixLattice;
+  if (!numbers || !fn) return;
+
+  const palette = { layers: ['#a','#b','#c','#d','#e','#f'], ink: '#fff', muted: '#888' };
+  const config = {
+    sampleCount: 8, cycles: 1, amplitudeDivisor: 10,
+    strandSeparationDivisor: 20, crossTieCount: 99,
+    strandAlpha: 0.9, rungAlpha: 0.6
+  };
+
+  const stats = fn(ctx, dims, palette, numbers, config);
+
+  assert.equal(typeof stats.crossTies, 'number');
+  assert.equal(stats.crossTies >= 0, true);
+
+  // At least the two strands should have been stroked
+  const strokeCount = calls.filter(([n]) => n === 'stroke').length;
+  assert.equal(strokeCount >= 2, true);
+});
+
+test('mergeHelixGeometry: immutability and alpha clamping within [0,1]', () => {
+  const fn = Mod.__test__?.mergeHelixGeometry;
+  if (!fn) return;
+
+  const base = {
+    sampleCount: 144, cycles: 3, amplitudeDivisor: 9,
+    strandSeparationDivisor: 33, crossTieCount: 33,
+    strandAlpha: 0.5, rungAlpha: 0.5
+  };
+  const before = JSON.stringify(base);
+
+  const out = fn(base, { strandAlpha: 2, rungAlpha: -1 });
+
+  // Base untouched; outputs clamped
+  assert.equal(JSON.stringify(base), before);
+  assert.equal(out.strandAlpha <= 1 && out.strandAlpha >= 0, true);
+  assert.equal(out.rungAlpha <= 1 && out.rungAlpha >= 0, true);
+});
+
+test('summariseLayers: tolerates missing sections and returns a non-empty string', () => {
+  const fn = Mod.__test__?.summariseLayers;
+  if (!fn) return;
+
+  const s = fn({});
+  assert.equal(typeof s, 'string');
+  assert.equal(s.length > 0, true);
+});
+
+test('renderHelix: rejects non-object options gracefully (no throw, structured error)', () => {
+  const { ctx } = makeCtx(100, 100);
+  let out;
+  assert.doesNotThrow(() => { out = Mod.renderHelix(ctx, 'oops'); });
+  assert.equal(typeof out, 'object');
+  assert.equal(typeof out.ok, 'boolean');
+  assert.equal(out.ok, false);
+  assert.equal(typeof out.reason, 'string');
+});
+
+test('renderHelix: tiny canvas still succeeds and returns a summary', () => {
+  const { ctx } = makeCtx(2, 2);
+  const out = Mod.renderHelix(ctx, { width: 2, height: 2 });
+  assert.equal(out.ok, true);
+  assert.equal(typeof out.summary, 'string');
+  assert.equal(out.summary.length > 0, true);
 });
