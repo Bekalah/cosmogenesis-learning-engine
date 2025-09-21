@@ -1,0 +1,33 @@
+{
+  "_version": "1.0.0",
+  "workers": {
+    "examples": [
+      { "id": 1, "name": "Vehuiyah", "ratio": "3:2", "tone": "C#" },
+      { "id": 2, "name": "Jeliel",   "ratio": "5:4", "tone": "E" },
+      { "id": 38, "name": "Haamiah",  "ratio": "2:3", "tone": "F#" }
+    ]
+  },
+  "nodes": [
+    {
+      "id": 33,
+      "title": "Curious Texture Lab",
+      "arcana": "XVIII",
+      "sephira": "Yesod",
+      "iching": "Hex 29",
+      "soyga": "X93",
+      "solfeggio": "741 Hz",
+      "biogeometry": "BG3 36°",
+      "crystal": "Amethyst",
+      "harmonic_ratio": "7:4",
+      "fractal": "Koch",
+      "sacred_geometry": "Vesica",
+      "art_lineage": "Max Ernst",
+      "resolver": {
+        "system": "raku-lite-cpp",
+        "inputs": { "title": "Curious Texture Lab", "arcana": "XVIII", "seed": 33, "timestamp": "2025-09-21T00:00:00Z" },
+        "worker_id": 38
+      }
+    }
+  ]
+}
+
