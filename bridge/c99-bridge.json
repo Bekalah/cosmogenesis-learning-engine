@@ -1,17 +1,9 @@
 {
   "meta": {
     "project": "Circuitum99 × Stone Grimoire",
-    "updated": "2025-09-02T14:00:00Z",
+    "updated": "2025-09-22T22:47:42.775Z",
     "nd_safe": true,
-    "generator": "manual seed"
-    "project": "circuitum99 × Stone Grimoire",
-    "updated": "2025-09-02T14:00:00Z",
-    "nd_safe": true,
-    "generator": "manual seed"
-    "project": "Circuitum99 × Stone Grimoire",
-    "updated": "2025-09-02T23:00:39.115Z",
-    "nd_safe": true,
-    "generator": "update-art.js (manual)"
+    "generator": "update-art.js"
   },
   "tokens": {
     "css": "/assets/css/perm-style.css",
@@ -26,7 +18,6 @@
       "green": "#00FF80",
       "amber": "#FFC800",
       "light": "#FFFFFF",
-      "gold": "#C9A227"
       "crimson": "#B7410E",
       "gold": "#C9A227",
       "obsidian": "#0B0B0B",
@@ -60,7 +51,48 @@
       "ash_legacy": "#6b6f76",
       "line_legacy": "#22242a",
       "muted_legacy": "#b9b6ad",
-      "accent_legacy": "#7fd8b3"
+      "accent_legacy": "#7fd8b3",
+      "sec-bg": "#0d0e14",
+      "sec-ink": "#ECE7DE",
+      "sec-edge": "#1D2028",
+      "sec-sun": "#F2C14E",
+      "sec-sea": "#3FA7D6",
+      "sec-fern": "#24D6A9",
+      "sec-rose": "#D65A8A",
+      "sec-amethyst": "#7B5DD6",
+      "gold_leaf": "#C8A44D",
+      "gold_warm": "#D9B96A",
+      "gold_cold": "#B89C58",
+      "pearl_white": "#F5F2EA",
+      "pearl_rose": "#F4C9D9",
+      "pearl_aqua": "#BFE9E7",
+      "pearl_lilac": "#CDB8F6",
+      "moonstone_base": "#E7E6F1",
+      "moonstone_blue": "#A8C7FF",
+      "moonstone_green": "#87EBCF",
+      "moonstone_violet": "#B6A4FF",
+      "abalone_deep": "#0B2230",
+      "abalone_teal": "#1FB2A7",
+      "abalone_magenta": "#C45DB5",
+      "abalone_citrine": "#F6D16A",
+      "avalon_mist": "#CFE6F2",
+      "avalon_night": "#0C1521",
+      "tor_stone": "#3D4554",
+      "isle_reed": "#6D8D5E",
+      "astral_ink": "#0D0F18",
+      "astral_mist": "#B7C9FF",
+      "astral_silver": "#C9D1E7",
+      "astral_violet": "#9E8BFF",
+      "threshold_glow": "#98FFE2",
+      "starlight": "#EDE9FF",
+      "starlight_warm": "#FFE9C9",
+      "ember_core": "#FF6A00",
+      "ember_coal": "#20100A",
+      "violet_core": "#7A33FF",
+      "violet_flare": "#B39CFF",
+      "violet_smoke": "#442266",
+      "violet_aura": "#2C0A52",
+      "grail_gold": "#CBB866"
     },
     "secondary": {
       "bg": "#0d0e14",
@@ -87,7 +119,158 @@
         "copper": "raku_copper",
         "violet": "raku_violet",
         "azure": "raku_azure"
+      },
+      "goldLeaf": {
+        "name": "GoldLeaf",
+        "alpha": 0.22,
+        "warm": "gold_warm",
+        "cold": "gold_cold"
+      },
+      "pearl": {
+        "name": "NacreIridescence",
+        "alpha": 0.2,
+        "a": "pearl_rose",
+        "b": "pearl_aqua",
+        "c": "pearl_lilac"
+      },
+      "moonstone": {
+        "name": "Adularescence",
+        "alpha": 0.18,
+        "blue": "moonstone_blue",
+        "violet": "moonstone_violet",
+        "green": "moonstone_green"
+      },
+      "abalone": {
+        "name": "AbaloneShell",
+        "alpha": 0.18,
+        "deep": "abalone_deep",
+        "teal": "abalone_teal",
+        "magenta": "abalone_magenta",
+        "citrine": "abalone_citrine"
+      },
+      "gonzVelvet": {
+        "name": "GonzalezVelvet",
+        "alpha": 0.18
+      },
+      "fae": {
+        "name": "GossamerVeil",
+        "alpha": 0.14,
+        "glimmer": "teal_glow",
+        "mist": "starlight",
+        "pattern": "gossamer-stars"
+      },
+      "roseGate": {
+        "name": "PetalSpiral",
+        "alpha": 0.12,
+        "petal": "rose_quartz",
+        "leaf": "isle_reed",
+        "phi": 1.62803
+      },
+      "violetFlame": {
+        "name": "VioletFlame4",
+        "alpha": 0.16,
+        "ring_core": "violet_core",
+        "ring_halo": "violet_flare",
+        "pattern": "flame-rings-4"
+      },
+      "violetGate": {
+        "name": "VioletFlameGate",
+        "alpha": 0.22,
+        "core": "violet_core",
+        "flare": "violet_flare",
+        "smoke": "violet_smoke",
+        "rim": "grail_gold"
+      },
+      "respawnGate": {
+        "name": "RespawnVioletGate",
+        "alpha": 0.22,
+        "core": "violet_core",
+        "flare": "violet_flare",
+        "smoke": "violet_smoke",
+        "rim": "grail_gold"
+      },
+      "avalonGrove": {
+        "name": "AvalonGrove",
+        "alpha": 0.16,
+        "stone": "tor_stone",
+        "leaf": "isle_reed",
+        "moon": "avalon_mist"
+      },
+      "inBetweenVeil": {
+        "name": "InBetweenVeil",
+        "alpha": 0.14,
+        "mist": "astral_mist",
+        "silver": "astral_silver",
+        "violet": "astral_violet"
+      },
+      "trueFairy": {
+        "name": "TrueFairyShimmer",
+        "alpha": 0.1,
+        "glow": "starlight",
+        "mist": "starlight"
+      },
+      "protectionSigil": {
+        "name": "HamsaEvilEye",
+        "alpha": 0.22,
+        "gold": "gold_leaf",
+        "eye": "teal_glow",
+        "circle": "pearl_white"
       }
+    },
+    "line": {
+      "hair": 1,
+      "primary": 2,
+      "pillar": 3
+    },
+    "typography": {
+      "display": "'EB Garamond','Junicode',serif",
+      "gothic": "'Cinzel',serif",
+      "ui": "'Inter',system-ui,sans-serif",
+      "scale": {
+        "h1": 1.888,
+        "h2": 1.555,
+        "h3": 1.333,
+        "body": 1,
+        "small": 0.888
+      }
+    },
+    "geometry": {
+      "vesica_ratio": 1.732,
+      "spine_33": true,
+      "pillars_21": true,
+      "gates_99": true,
+      "protection_hand": {
+        "type": "hamsa_eye",
+        "outer_circle_ratio": 1,
+        "eye_major_minor": [
+          1,
+          0.382
+        ],
+        "tri_star_inner": true,
+        "crescent_top": true,
+        "phi": 1.6180339,
+        "notes": "Sacred-geometry construction for the logo: circumcircle, vesica, equilateral triad, eye ellipse, lunar crescent."
+      }
+    },
+    "effects": {
+      "stars": {
+        "density": 0.0008,
+        "twinkle": [
+          "starlight",
+          "starlight_warm"
+        ]
+      },
+      "ember_eyes": {
+        "core": "ember_core",
+        "coal": "ember_coal",
+        "glow": "lava_core"
+      }
+    },
+    "a11y": {
+      "min_contrast": 4.5,
+      "motion": "reduce",
+      "autoplay": false,
+      "strobe": false
     }
   },
   "routes": {
@@ -112,23 +295,130 @@
       "tone": 110,
       "geometry": "vesica",
       "stylepack": "Rosicrucian Black",
-      "assets": [
-        {
-          "name": "portal_crypt-a01.png",
-          "thumb": "/assets/art/thumbs/portal_crypt-a01-512.jpg",
-          "webp": "/assets/art/webp/portal_crypt-a01.webp",
-          "src": "/assets/art/processed/portal_crypt-a01.png",
-          "type": "png"
-        },
-        {
-          "name": "sigil_ann-abyss.svg",
-          "thumb": "",
-          "webp": "",
-          "src": "/assets/art/processed/sigil_ann-abyss.svg",
-          "type": "svg"
-    "updated": "2025-09-03T02:31:49.313Z",
-    "nd_safe": true
+      "assets": []
+    },
+    {
+      "id": "nave",
+      "title": "The Nave",
+      "element": "air",
+      "tone": 222,
+      "geometry": "rose-window",
+      "stylepack": "Angelic Chorus",
+      "assets": []
+    },
+    {
+      "id": "apprentice_pillar",
+      "title": "Apprentice Pillar",
+      "element": "water",
+      "tone": 333,
+      "geometry": "fibonacci",
+      "stylepack": "Hilma Spiral",
+      "assets": []
+    },
+    {
+      "id": "respawn_gate",
+      "title": "Respawn Gate",
+      "element": "fire",
+      "tone": 432,
+      "geometry": "merkaba",
+      "stylepack": "Alchemical Bloom",
+      "assets": []
+    }
+  ],
+  "creatures": {
+    "dragons": [],
+    "daimons": []
   },
+  "visionary": {
+    "overlays": []
+  },
+  "angels": [
+    {
+      "id": 1,
+      "name": "Vehuiah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 2,
+      "name": "Jeliel",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 3,
+      "name": "Sitael",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 4,
+      "name": "Elemiah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 5,
+      "name": "Mahasiah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 6,
+      "name": "Lelahel",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 7,
+      "name": "Achaiah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 8,
+      "name": "Cahetel",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 9,
+      "name": "Haziel",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 10,
+      "name": "Aladiah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 11,
+      "name": "Lauviah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    },
+    {
+      "id": 12,
+      "name": "Hahaiah",
+      "virtue": "",
+      "seal": "",
+      "gate": null
+    }
+  ],
+  "assets": [],
   "adventure": {
     "hermetic_alchemy": {
       "id": "hermetic_alchemy",
@@ -396,24 +686,133 @@
     ],
     "optional": true
   },
-  "respawn_gate": {
-    "alias": "violet_flame_gate",
-    "ray": 6,
-    "optional": true,
-    "steps": [
+  "healing": {
+    "solfeggio_map": [
+      {
+        "hz": 396,
+        "theme": "liberation",
+        "color": "#6B1A1A"
+      },
+      {
+        "hz": 417,
+        "theme": "transmutation",
+        "color": "#7A33FF"
+      },
+      {
+        "hz": 432,
+        "theme": "harmonic heart",
+        "color": "#B9A8FF"
+      },
+      {
+        "hz": 528,
+        "theme": "repatterning",
+        "color": "#9EDB6A"
+      },
+      {
+        "hz": 639,
+        "theme": "relational",
+        "color": "#7EC9F8"
+      },
+      {
+        "hz": 741,
+        "theme": "clarity",
+        "color": "#F2D06A"
+      },
+      {
+        "hz": 852,
+        "theme": "intuition",
+        "color": "#CDB8F6"
+      },
+      {
+        "hz": 963,
+        "theme": "unitive",
+        "color": "#F5F2EA"
+      }
+    ],
+    "biogeometry": {
+      "bg3_hint": "vertical sinusoidal overlay; subtle only",
+      "angles_deg": [
+        27,
+        36,
+        45,
+        63,
+        81
+      ]
+    }
+  },
+  "trinity": {
+    "path": [
+      "root_self",
+      "scribe",
+      "drag",
+      "guardian"
+    ],
+    "avatars": {
+      "root_self": {
+        "name": "Incarnate Self",
+        "num": 2,
+        "symbol": "⦿"
+      },
+      "scribe": {
+        "name": "Rebecca Respawn",
+        "title": "Architect-Scribe",
+        "arcana": "Fool",
+        "num": 11,
+        "css": "scribe-gothic"
+      },
+      "drag": {
+        "name": "Respawn Drag Persona",
+        "title": "Performer-Oracle",
+        "arcana": "Star",
+        "num": 22,
+        "css": "glamour-neon"
+      },
+      "guardian": {
+        "name": "Virelai Ezra Lux",
+        "title": "Violet Witch of the Octarine Ray",
+        "arcana": "Magician",
+        "num": 33,
+        "css": "violet-ray",
+        "alignment": "Lavender Quan Yin Reiki"
+      }
+    }
+  },
+  "rituals": {
+    "violet_flame_steps": [
       "Invoke",
       "Rotate",
       "Transmute",
       "Replace"
     ],
-    "style": {
-      "class": "respawn-gate",
-      "layer": "respawnGate"
+    "violet_flame_gate": {
+      "ray": 6,
+      "optional": true
+    },
+    "respawn_gate": {
+      "alias": "violet_flame_gate",
+      "ray": 6,
+      "steps": [
+        "Invoke",
+        "Rotate",
+        "Transmute",
+        "Replace"
+      ],
+      "optional": true,
+      "notes": "Respawn Gate may present as Violet Flame Cauldron (Ray VI)."
     }
   },
-  "oracle_art": [],
-  "angel_seals": [],
-  "pillar_art": [],
+  "pillars": {
+    "columns": [
+      "Severity",
+      "Mildness",
+      "Mercy"
+    ],
+    "levels": 7,
+    "color_left": "#4B2A3B",
+    "color_middle": "#A4A9C9",
+    "color_right": "#2D4758",
+    "oracle_bind": true
+  },
   "egregores": {
     "schema": {
       "id": "string",
@@ -427,24 +826,19 @@
       "color": "hex|null",
       "css": "string|null"
     },
-    {
-      "name": "portal_respawn-a01.png",
-      "src": "/assets/art/processed/portal_respawn-a01.png",
-      "thumb": "/assets/art/thumbs/portal_respawn-a01-512.jpg",
-      "webp": "/assets/art/webp/portal_respawn-a01.webp",
-      "type": "png"
-    }
-  ]
-  "rooms": [],
-  "angels": [],
-  "creatures": {
-    "dragons": [],
-    "daimons": []
+    "defaults": {
+      "ray": 6,
+      "pillar": "middle",
+      "css": "gonz-velvet visionary-grid"
+    },
+    "dataset_hint": [
+      "assets/data/egregores.core.json"
+    ]
   },
-  "visionary": {
-    "overlays": []
-  },
-  "assets": []
-    "list": []
+  "tarot": {
+    "system": "major_arcana_egregores",
+    "dataset_hint": [
+      "assets/data/tarot.majors.json"
+    ]
   }
 }
