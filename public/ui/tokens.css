@@ -1,0 +1,34 @@
+/*
+  tokens.css — shared design tokens grounding Kanso/Ma/Shibumi ethos.
+  ND-safe: calm colours, high contrast, no motion triggers.
+*/
+
+:root {
+  /* Palette tuned for AA+ contrast on deep background. */
+  --color-bg-deep: #080910;
+  --color-bg-panel: #111321;
+  --color-ink-primary: #f5f5ff;
+  --color-ink-muted: #b7b8d6;
+  --color-accent: #8fb5ff;
+  --color-accent-soft: #5f8ddc;
+  --color-line: #1d2134;
+
+  /* Spatial rhythm (multiples of 11 to echo the canon). */
+  --space-1: 11px;
+  --space-2: 22px;
+  --space-3: 33px;
+  --space-4: 44px;
+
+  /* Typographic cadence. */
+  --font-sans: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Cascadia Code", "Fira Code", ui-monospace, SFMono-Regular, monospace;
+  --font-size-body: 15px;
+  --font-size-label: 13px;
+  --font-size-heading: 19px;
+
+  /* Interaction minimum: 44px target size. */
+  --hit-target-min: 44px;
+  --radius-sm: 8px;
+  --radius-lg: 18px;
+  --shadow-panel: 0 22px 44px rgba(0, 0, 0, 0.45);
+}
