@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "module": "./executors.js",
+  "entries": [
+    {
+      "id": "vesicaGrid",
+      "title": "Vesica Grid",
+      "layer": 1,
+      "numerology": {"rows": 9, "columns": 11, "radius_scale": "7/33"},
+      "defaults": {"rows": 9, "columns": 11, "padding_divisor": 11, "radius_scale": 0.212, "stroke_divisor": 99, "alpha": 0.55}
+    },
+    {
+      "id": "treeOfLife",
+      "title": "Tree of Life",
+      "layer": 2,
+      "numerology": {"sephirot": 10, "paths": 22, "pillars": 3},
+      "defaults": {"margin_divisor": 11, "radius_divisor": 33, "path_divisor": 99, "node_alpha": 0.88, "path_alpha": 0.62}
+    },
+    {
+      "id": "fibonacciSpiral",
+      "title": "Fibonacci Spiral",
+      "layer": 3,
+      "numerology": {"samples": 144, "turns": 3, "phi": 1.61803398875},
+      "defaults": {"sample_count": 144, "turns": 3, "base_radius_divisor": 22, "marker_interval": 11, "alpha": 0.85}
+    },
+    {
+      "id": "helixLattice",
+      "title": "Double Helix",
+      "layer": 4,
+      "numerology": {"cycles": 3, "cross_ties": 33, "samples": 144},
+      "defaults": {"sample_count": 144, "cycles": 3, "amplitude_divisor": 9, "strand_separation_divisor": 33, "cross_tie_count": 33}
+    }
+  ],
+  "placeholders": [
+    {
+      "id": "exportZip",
+      "status": "pending",
+      "notes": "Client ZIP export remains a placeholder to honor the no-workflow covenant."
+    }
+  ],
+  "safety": {
+    "nd_safe": true,
+    "comments": "Registry entries describe static geometry executors only."
+  }
+}
