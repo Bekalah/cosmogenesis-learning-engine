@@ -1,0 +1,66 @@
+{
+  "version": "0.1.0",
+  "engine": "cosmogenesis-learning-engine",
+  "summary": "Offline interchange manifest describing the layered geometry set and safe export anchors.",
+  "numerology": {
+    "anchors": [3, 7, 9, 11, 22, 33, 99, 144],
+    "notes": "All geometry executors respect these values to keep depth and ratios aligned."
+  },
+  "layers": [
+    {
+      "id": "vesica",
+      "title": "Vesica Field",
+      "order": 1,
+      "executor": "vesicaGrid",
+      "palette_index": 0,
+      "description": "Intersecting circles that seed the womb-of-forms lattice."
+    },
+    {
+      "id": "tree",
+      "title": "Tree of Life",
+      "order": 2,
+      "executor": "treeOfLife",
+      "palette_index": 2,
+      "description": "Ten sephirot plus Daath, with twenty-two calm paths between pillars."
+    },
+    {
+      "id": "fibonacci",
+      "title": "Fibonacci Spiral",
+      "order": 3,
+      "executor": "fibonacciSpiral",
+      "palette_index": 3,
+      "description": "Logarithmic spiral grown from phi with quarter-turn markers."
+    },
+    {
+      "id": "helix",
+      "title": "Double Helix",
+      "order": 4,
+      "executor": "helixLattice",
+      "palette_index": 5,
+      "description": "Phase-shifted lattice tying two still strands with thirty-three rungs."
+    }
+  ],
+  "nodes": {
+    "catalog": ["./nodes/00033.json"],
+    "fallback": "./nodes/00033.json"
+  },
+  "exports": {
+    "offline_canvas": "./index.html",
+    "palette": "./data/palette.json",
+    "geometry_registry": "./public/engine/registry.json"
+  },
+  "actions": [
+    {
+      "id": "export-placeholder",
+      "title": "Client ZIP Placeholder",
+      "status": "pending",
+      "notes": "Export buttons remain placeholders; offline ZIP bundling will arrive later."
+    }
+  ],
+  "safety": {
+    "nd_safe": true,
+    "motion": "none",
+    "offline_first": true,
+    "comments": "Manifest lists offline assets only; no network endpoints are referenced."
+  }
+}

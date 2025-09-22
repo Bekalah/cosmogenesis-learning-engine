@@ -1,0 +1,32 @@
+{
+  "id": "00033",
+  "title": "Tiphareth Anchor",
+  "layer": "tree",
+  "level": 3,
+  "x_factor": 0.5,
+  "numerology": {
+    "spine": 33,
+    "triad": 3,
+    "paths": 22,
+    "explanation": "Node 33 stands on the middle pillar, balancing the upper and lower triads."
+  },
+  "geometry": {
+    "radius_divisor": 33,
+    "path_targets": ["kether", "yesod", "netzach", "hod"],
+    "label": "Tiphareth",
+    "annotations": [
+      "Calm sun at the heart of the Tree.",
+      "Bridges supernal insight with grounded action.",
+      "Used as anchor for helix cross tie cadence."
+    ]
+  },
+  "palette_hint": {
+    "fill": "layer-3",
+    "stroke": "ink",
+    "alpha": 0.88
+  },
+  "export": {
+    "included": true,
+    "reason": "Provides a working example node for downstream Atelier tooling."
+  }
+}
