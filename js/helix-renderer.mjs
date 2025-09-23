@@ -3,10 +3,10 @@
   ND-safe static renderer for layered sacred geometry.
 
   Layer order (back to front):
-    1) Vesica field — intersecting circles establishing the womb-of-forms grid.
-    2) Tree-of-Life scaffold — ten sephirot nodes and twenty-two calm paths.
-    3) Fibonacci curve — logarithmic spiral sampled over 144 points.
-    4) Double-helix lattice — two still strands tied by thirty-three crossbars.
+    1) Vesica field - intersecting circles establishing the womb-of-forms grid.
+    2) Tree-of-Life scaffold - ten sephirot nodes and twenty-two calm paths.
+    3) Fibonacci curve - logarithmic spiral sampled over 144 points.
+    4) Double-helix lattice - two still strands tied by thirty-three crossbars.
 
   Why this design: preserves layered depth without animation, honours numerology constants
   (3, 7, 9, 11, 22, 33, 99, 144), and keeps functions pure and well-commented for offline review.
@@ -470,7 +470,7 @@ function fillBackground(ctx, dims, bgColor) {
 /**
  * Draws a grid of vesica-style circles and simple axis guides onto the provided canvas context.
  *
- * Renders a rows×columns lattice of stroked circles sized and spaced to fit within the given
+ * Renders a rows x columns lattice of stroked circles sized and spaced to fit within the given
  * dimensions, using visual parameters from `config`. Also draws two orthogonal axis guides
  * (vertical and horizontal) centered in the canvas to emphasise the composition's symmetry.
  *
@@ -621,7 +621,7 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
  * @param {Object} numbers - Numerology constants used to scale line width and marker size.
  * @param {Object} config - Spiral configuration:
  *   - sampleCount: number of samples along the spiral (minimum 2)
- *   - turns: angular extent in half-π units (multiplied by Math.PI)
+ *   - turns: angular extent in half-pi units (multiplied by Math.PI)
  *   - baseRadiusDivisor: divisor applied to the smaller canvas dimension to compute base radius
  *   - centerXFactor, centerYFactor: 0..1 factors locating the spiral center within the canvas
  *   - phi: radial growth factor (>1)
@@ -809,14 +809,14 @@ function drawCanvasNotice(ctx, dims, ink, muted, text) {
  * @param {Object} stats.treeStats - Tree-of-Life stats; expects numeric `paths` and `nodes`.
  * @param {Object} stats.fibonacciStats - Fibonacci spiral stats; expects numeric `samples`.
  * @param {Object} stats.helixStats - Helix lattice stats; expects numeric `crossTies`.
- * @return {string} A single-line summary like "Vesica 42 circles · Paths 11 / Nodes 10 · Spiral 360 samples · Helix 20 ties".
+ * @return {string} A single-line summary like "Vesica 42 circles | Paths 11 / Nodes 10 | Spiral 360 samples | Helix 20 ties".
  */
 function summariseLayers(stats) {
   const vesicaPart = `Vesica ${stats.vesicaStats.circles} circles`;
   const treePart = `Paths ${stats.treeStats.paths} / Nodes ${stats.treeStats.nodes}`;
   const fibPart = `Spiral ${stats.fibonacciStats.samples} samples`;
   const helixPart = `Helix ${stats.helixStats.crossTies} ties`;
-  return `${vesicaPart} · ${treePart} · ${fibPart} · ${helixPart}`;
+  return `${vesicaPart} | ${treePart} | ${fibPart} | ${helixPart}`;
 }
 
 /**
