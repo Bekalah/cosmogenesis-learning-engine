@@ -25,7 +25,7 @@ Mineralogical data follow Mindat (2024) classifications and planetary metrics re
    • game[]: threshold trial (choice of paths)
    • artifact[]: Spiral Key
    
-I. The Magician — Mirror Witch
+I. The Magician — Mirror Witch - John Dee
 • Hebrew Letter: Beth (House, Speech)
 • Astrology: Mercury
 • Ray: Golden Yellow (Ray 1)
@@ -46,7 +46,7 @@ I. The Magician — Mirror Witch
 • game[]: alchemical transmutation puzzle
 • artifact[]: Duality Wand
 
-II. The High Priestess — Moonchild
+II. The High Priestess — Dion Fortune
 • Hebrew Letter: Gimel (Camel, Moon)
 • Astrology: Moon
 • Ray: Silver Indigo (Ray 2)
