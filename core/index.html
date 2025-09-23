@@ -20,6 +20,24 @@
     dialog:not([open]){display:none;}
     .dialog__header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
     .dialog__title{margin:0;font-size:16px;}
+    .hub{padding:16px;}
+    .apps{display:grid;gap:16px;max-width:1100px;margin:0 auto;}
+    .apps__header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;}
+    .apps__header h2{margin:0;font-size:18px;}
+    .apps__summary{margin:0;color:var(--muted);font-size:13px;}
+    .apps__grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+    .app-card{border:1px solid #1d1d2a;border-radius:12px;padding:12px 14px;background:rgba(17,17,26,0.6);display:grid;gap:8px;}
+    .app-card__header{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+    .app-card__title{font-weight:600;}
+    .app-card__status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+    .app-card__dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#4a4a5c;box-shadow:0 0 0 1px rgba(255,255,255,0.08);}
+    .app-card[data-state="ok"] .app-card__dot{background:#8fdf82;}
+    .app-card[data-state="warn"] .app-card__dot{background:#ffb347;}
+    .app-card[data-state="offline"] .app-card__dot{background:#ff6f61;}
+    .app-card__links{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;}
+    .app-card__links a{color:var(--ink);text-decoration:none;padding:4px 8px;border:1px solid #1d1d2a;border-radius:6px;}
+    .app-card__links a:hover,.app-card__links a:focus{border-color:var(--muted);text-decoration:none;}
+    .app-card__meta{margin:0;font-size:12px;color:var(--muted);}
     .status-grid{margin:0 0 16px 0;padding:0;display:grid;gap:8px;}
     .status-grid div{display:grid;gap:4px;}
     .status-grid dt{font-weight:600;}
@@ -59,6 +77,22 @@
       </select>
     </label>
   </div>
+  <main class="hub" id="hub" aria-live="polite">
+    <section class="apps" aria-label="Service constellation">
+      <header class="apps__header">
+        <h2>Services</h2>
+        <p class="apps__summary" id="apps-summary">Probing health endpoints…</p>
+      </header>
+      <div class="apps__grid" id="apps-grid">
+        <article class="app-card app-card--loading">
+          <div class="app-card__header">
+            <span class="app-card__title">Loading service map…</span>
+          </div>
+          <p class="app-card__meta">If offline, statuses will settle into fallback mode.</p>
+        </article>
+      </div>
+    </section>
+  </main>
   <dialog id="about-dialog" aria-labelledby="about-title">
     <article>
       <div class="dialog__header">

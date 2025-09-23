@@ -1,0 +1,64 @@
+{
+  "apps": [
+    {
+      "id": "cosmogenesis-learning-engine",
+      "title": "Cosmogenesis Learning Engine",
+      "role": "Hub / Mind Registry",
+      "summary": "Master hub with ND-safe toggles and codex sync.",
+      "url": "https://cosmogenesis-learning-engine.fly.dev/",
+      "health": "https://cosmogenesis-learning-engine.fly.dev/core/health-check.html",
+      "links": [
+        { "label": "Open hub", "href": "https://cosmogenesis-learning-engine.fly.dev/" },
+        { "label": "Health", "href": "https://cosmogenesis-learning-engine.fly.dev/core/health-check.html" }
+      ]
+    },
+    {
+      "id": "circuitum99",
+      "title": "Circuitum 99",
+      "role": "Story Spine / Guardians",
+      "summary": "Interactive spine with guardians and ND-safe rituals.",
+      "url": "https://circuitum99.fly.dev/",
+      "health": "https://circuitum99.fly.dev/core/health-check.html",
+      "links": [
+        { "label": "Launch", "href": "https://circuitum99.fly.dev/" },
+        { "label": "Health", "href": "https://circuitum99.fly.dev/core/health-check.html" }
+      ]
+    },
+    {
+      "id": "stone-cathedral",
+      "title": "Stone Cathedral",
+      "role": "Rooms Atlas / Museum",
+      "summary": "Cathedral atlas with provenance-safe walkthroughs.",
+      "url": "https://stone-cathedral.fly.dev/",
+      "health": "https://stone-cathedral.fly.dev/core/health-check.html",
+      "links": [
+        { "label": "Open atlas", "href": "https://stone-cathedral.fly.dev/" },
+        { "label": "Health", "href": "https://stone-cathedral.fly.dev/core/health-check.html" }
+      ]
+    },
+    {
+      "id": "liber-arcanae",
+      "title": "Liber Arcanae",
+      "role": "Tarot Companions",
+      "summary": "Tarot compendium with ND-safe overlays.",
+      "url": "https://liber-arcanae.fly.dev/",
+      "health": "https://liber-arcanae.fly.dev/core/health-check.html",
+      "links": [
+        { "label": "Visit", "href": "https://liber-arcanae.fly.dev/" },
+        { "label": "Health", "href": "https://liber-arcanae.fly.dev/core/health-check.html" }
+      ]
+    },
+    {
+      "id": "cosmic-helix",
+      "title": "Cosmic Helix",
+      "role": "Static Renderer",
+      "summary": "Offline vesica + helix canvas for palette study.",
+      "url": "https://cosmic-helix.fly.dev/",
+      "health": "https://cosmic-helix.fly.dev/core/health-check.html",
+      "links": [
+        { "label": "Renderer", "href": "https://cosmic-helix.fly.dev/" },
+        { "label": "Health", "href": "https://cosmic-helix.fly.dev/core/health-check.html" }
+      ]
+    }
+  ]
+}

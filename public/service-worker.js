@@ -13,9 +13,13 @@ self.addEventListener("message", (event) => {
     if (event.ports && event.ports[0]) {
       event.ports[0].postMessage({ version: SW_VERSION });
     } else {
-      self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
-        clients.forEach((client) => client.postMessage({ type: "SW_VERSION_RESPONSE", version: SW_VERSION }));
-      });
+      self.clients
+        .matchAll({ type: "window", includeUncontrolled: true })
+        .then((clients) => {
+          clients.forEach((client) =>
+            client.postMessage({ type: "SW_VERSION_RESPONSE", version: SW_VERSION })
+          );
+        });
     }
   }
 });

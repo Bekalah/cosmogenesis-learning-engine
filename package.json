@@ -12,10 +12,11 @@
   "scripts": {
     "registry": "node tools/build-registry.mjs",
     "validate": "node tools/validate.mjs",
-    "build": "npm run registry && npm run validate",
-    "dev": "http-server -p 5173 -c-1 .",
-    "start": "npm run dev",
-    "preview": "http-server -p 8080 -c-1 .",
+    "build": "npm run registry && npm run validate && npm run build:ui",
+    "build:ui": "vite build",
+    "dev": "vite dev",
+    "start": "node server.mjs",
+    "preview": "vite preview --host 0.0.0.0 --port 8080",
     "test": "./scripts/run-tests.sh",
     "fmt": "prettier -w .",
     "lint": "eslint .",
@@ -30,12 +31,15 @@
     "project": "node scripts/projection.mjs"
   },
   "dependencies": {
-    "ajv": "^8.17.1"
+    "ajv": "^8.17.1",
+    "compression": "^1.7.5",
+    "express": "^4.21.1"
   },
   "devDependencies": {
     "http-server": "^14.1.1",
     "eslint": "^8.57.0",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "vite": "^5.4.11"
   },
   "keywords": [
     "cosmogenesis",
