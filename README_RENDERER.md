@@ -1,75 +1,50 @@
-# Cosmic Helix Renderer
+# Cosmic Helix Renderer (Offline, ND-safe)
 
-Static, offline-first canvas capsule aligned with the luminous cosmology canon. Rendering happens once when `index.html` loads,
-painting four calm layers (vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice). All geometry
-is parameterised by numerology anchors `{3, 7, 9, 11, 22, 33, 99, 144}` and every helper is a small, well-commented pure function
-so the composition stays ND-safe.
+This capsule paints a layered cosmology onto a single 1440×900 canvas the moment `index.html` loads. No animation, no motion opt-ins, and no network calls—just calm geometry that honours the numerology anchors `{3, 7, 9, 11, 22, 33, 99, 144}`.
 
-## Files delivered
-- `index.html` - Offline entry point. Loads the optional palette JSON without issuing network requests, reports fallback status in the header, seeds the numerology constants, and invokes the renderer with a calm notice when data is missing.
-- `js/helix-renderer.mjs` - Pure ES module containing the layered drawing helpers. Each layer explains how the numerology keeps depth without motion.
-- `data/palette.json` - Optional colour override. When absent the renderer uses its sealed fallback and paints a footer notice for reassurance.
-- `README_RENDERER.md` - This guide.
-- `assets/data/interchange.json` - Offline interchange manifest linking the renderer, geometry registry, and export placeholders.
-- `assets/data/nodes/00033.json` - Example Tree-of-Life node seeded at the middle pillar for tooling tests.
-- `public/engine/registry.json` - Geometry registry describing each executor and its numerology anchors.
-- `public/engine/executors.js` - Small pure functions returning configuration payloads for each layer.
-- `index.html` — Offline entry point. Loads the optional palette JSON using a local `fetch` attempt, reports fallback status in
-  the header, seeds the numerology constants, and invokes the renderer with a calm notice when data is missing.
-- `js/helix-renderer.mjs` — Pure ES module containing the layered drawing helpers. Each layer explains how the numerology keeps
-depth without motion.
-- `data/palette.json` — Optional colour override. When absent the renderer uses its sealed fallback and paints a footer notice
-for reassurance.
-- `README_RENDERER.md` — This guide.
+## Delivered files
+- `index.html` — Offline entry point. Seeds numerology constants, loads the optional palette, relays fallback status in the header, and invokes the renderer once.
+- `js/helix-renderer.mjs` — Pure ES module with well-commented helpers for each layer (vesica field, Tree-of-Life scaffold, Fibonacci curve, and static double helix lattice).
+- `data/palette.json` — Optional ND-safe palette override. When absent, the renderer applies a sealed fallback and prints a small canvas notice.
+- `README_RENDERER.md` — This guide with offline instructions and rationale.
 
-## How to use (offline)
-1. Download or clone this repository.
+## Using the renderer
+1. Clone or download this repository.
 2. Double-click `index.html` in any modern browser. No build steps, bundlers, or servers are required.
-3. The palette loader issues a single `fetch` for `data/palette.json`. Hardened `file://` environments may block that request; when
-   it fails the fallback palette activates automatically, the header reports the change, and the canvas prints "Palette fallback
-   active" near the base.
+3. If your browser blocks `file://` fetches, the renderer will report the fallback palette in the header and draw a gentle notice near the canvas base—rendering still completes.
 
 ## Layer order (back to front)
-1. **Vesica field** - Intersecting circle grid arranged by a `{3 x 7}` cadence. A central mandorla glow reinforces the vesica without motion.
-2. **Tree-of-Life scaffold** - Ten sephirot plus hidden Daath, linked by twenty-two calm paths. Pillar spacing and vertical placement derive from `{33, 99, 144}` ratios, forming a vaulted arch.
-3. **Fibonacci curve** - Logarithmic spiral seeded by the golden ratio. Quarter-turn markers align to the Fibonacci sequence up to `144` and receive pearl markers for clarity.
-4. **Double-helix lattice** - Two phase-shifted strands sampled at `22` stations, alternating rungs to imply twist. A quiet base walkway anchors the lattice without animation.
-
-## Numerology anchors
-- Vertical placement steps through the 144-unit ladder so Malkuth rests at `144` while the supernal triad seats `33 / 3 = 11` units below the crown.
-- Daath bridges triads at `22 + 7`, Chesed/Geburah sit at `33 + 9`, Tiphareth at `33 + 22`, Netzach/Hod at `99 - 3`, Yesod at `144 - 3`.
-1. **Vesica field** — Intersecting circle grid arranged by a `{3 × 7}` cadence. A central mandorla glow reinforces the vesica without
-   motion.
-2. **Tree-of-Life scaffold** — Ten sephirot plus hidden Daath, linked by twenty-two calm paths. Pillar spacing and vertical placement
-   derive from `{33, 99, 144}` ratios, forming a vaulted arch.
-3. **Fibonacci curve** — Logarithmic spiral seeded by the golden ratio. Quarter-turn markers align to the Fibonacci sequence up to `144`
-   and receive pearl markers for clarity.
-4. **Double-helix lattice** — Two phase-shifted strands sampled at `22` stations, alternating rungs to imply twist. A quiet base walkway
-   anchors the lattice without animation.
-
-## Numerology anchors
-- Vertical placement steps through the 144-unit ladder so Malkuth rests at `144` while the supernal triad seats `33 ÷ 3 = 11` units below
-  the crown.
-- Daath bridges triads at `22 + 7`, Chesed/Geburah sit at `33 + 9`, Tiphareth at `33 + 22`, Netzach/Hod at `99 − 3`, Yesod at `144 − 3`.
-- The helix rails oscillate with a sine phase scaled by `{3, 11, 22}`, while rungs appear every other station to honour `33` anchors.
-- The Fibonacci spiral grows by `phi` so each quarter-turn multiplies the radius, matching the canonical progression up to `144`.
+1. **Vesica field** — Intersecting circle lattice sampled on a `{9 × 11}` grid. Padding and radius ratios follow `{7, 33, 99}` to preserve depth without animation.
+2. **Tree-of-Life scaffold** — Ten sephirot and twenty-two paths laid out with `{11, 33, 99}` divisors. Node halos and labels explain pillar balance while keeping contrast above AA 4.5.
+3. **Fibonacci curve** — Logarithmic spiral sampled at `144` points. Golden-ratio growth and marker intervals of `11` maintain numerology alignment.
+4. **Double helix lattice** — Two phase-shifted strands with `33` cross-ties. Amplitude and separation respect `{9, 22, 33}` divisors for a still, layered helix.
 
 ## Palette customisation
-Update `data/palette.json` with your preferred ND-safe palette:
+Update `data/palette.json` with ND-safe colours:
 
 ```json
 {
   "bg": "#0a0c16",
   "ink": "#f8e8ca",
-  "layers": ["#213963", "#2b5f7a", "#d8a159", "#f7d78e", "#cc8add", "#324766"]
+  "layers": [
+    "#213963",
+    "#2b5f7a",
+    "#d8a159",
+    "#f7d78e",
+    "#cc8add",
+    "#324766"
+  ]
 }
 ```
 
-The loader never performs remote fetches; it only attempts to read this local JSON file. Missing or malformed palette data never stops
-rendering, because the fallback palette keeps contrast calm and emits the inline notice.
+The loader only attempts this local JSON file and falls back gracefully when it is missing or malformed. The canvas notice confirms the fallback so caretakers know why colours shifted.
 
-## ND-safe rationale
-- No animation loops or timers - everything renders once.
-- Layered drawing order avoids flattening geometry, preserving depth through overlaid transparencies.
-- Comments explain why each choice is present so future curators understand the trauma-informed guardrails.
-- ASCII quotes, UTF-8, and LF newlines keep the files portable and offline friendly.
+## ND-safe choices
+- **No motion.** Everything renders once; no intervals, requestAnimationFrame, or autoplay.
+- **Layered geometry.** Each drawing helper preserves depth with translucency instead of flattening into a single SVG layer.
+- **Readable contrast.** Default and sample palettes respect AA 4.5+ contrast for text and guides.
+- **Pure helpers.** Every geometry function is a small, well-commented pure routine to ease trauma-informed audits.
+
+## Troubleshooting
+- If the header reports "Palette missing", confirm the file name is `data/palette.json`. Rendering still succeeds thanks to the fallback palette.
+- Browsers that forbid `file://` fetch calls (notably Chromium with strict flags) require launching via `--allow-file-access-from-files` or using the bundled fallback palette.
