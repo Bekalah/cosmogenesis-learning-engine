@@ -1,0 +1,15 @@
+# Exclude heavy or generated assets from Fly deployments
+node_modules
+npm-debug.log
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+dist
+build
+coverage
+.tmp
+.temp
+.DS_Store
+assets/raw
+assets/original
+exports
