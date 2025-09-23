@@ -7,6 +7,7 @@
   <meta name="color-scheme" content="light dark">
   <style>
     /* ND-safe: calm contrast, layered depth preserved without motion */
+    /* ND-safe: calm contrast, still composition, no motion */
     :root { --bg:#0b0b12; --ink:#e8e8f0; --muted:#a6a6c1; }
     html,body {
       margin:0;
@@ -17,7 +18,7 @@
     }
     header { padding:12px 16px; border-bottom:1px solid #1d1d2a; }
     .status { color:var(--muted); font-size:12px; margin-top:4px; }
-    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; }
+    #stage { display:block; margin:16px auto; box-shadow:0 0 0 1px #1d1d2a; background:var(--bg); }
     .note { max-width:900px; margin:0 auto 16px; padding:0 16px; color:var(--muted); }
     code { background:#11111a; padding:2px 4px; border-radius:3px; }
   </style>
@@ -25,38 +26,31 @@
 <body>
   <header>
     <div><strong>Cosmic Helix Renderer</strong>  -  layered sacred geometry (offline, ND-safe)</div>
+    <div><strong>Cosmic Helix Renderer</strong> -- layered sacred geometry (offline, ND-safe)</div>
     <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Static renderer with four calm layers: vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. Open this file directly; no build step or external network request is required.</p>
+  <p class="note">Static renderer with four calm layers: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. Open directly; no build step or network is required.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
 
-    const statusEl = document.getElementById("status");
+    const status = document.getElementById("status");
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    const FALLBACK = {
-      palette: {
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        muted: "#a6a6c1",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
+    // Helper stays local-only: browsers may block file:// fetch, so we guard and fall back calmly.
+    async function loadJSON(path) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        return await response.json();
+      } catch (error) {
+        return null;
       }
-    };
-
-    const NUM = {
-      THREE: 3,
-      SEVEN: 7,
-      NINE: 9,
-      ELEVEN: 11,
-      TWENTYTWO: 22,
-      THIRTYTHREE: 33,
-      NINETYNINE: 99,
-      ONEFORTYFOUR: 144
-    };
+    }
 
     function applyPalette(palette) {
       const root = document.documentElement;
@@ -66,40 +60,37 @@
       if (muted) root.style.setProperty("--muted", muted);
     }
 
-    async function loadPalette() {
-      try {
-        const response = await fetch("./data/palette.json", { cache: "no-store" });
-        if (!response.ok) {
-          return null;
-        }
-        const data = await response.json();
-        return data && typeof data === "object" ? data : null;
-      } catch (err) {
-        // Hardened file:// contexts may block fetch; fall back quietly.
-        return null;
+    const defaults = {
+      palette: {
+        bg: "#0b0b12",
+        ink: "#e8e8f0",
+        muted: "#a6a6c1",
+        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
       }
-    }
+    };
 
-    const palette = await loadPalette();
-    const activePalette = palette || FALLBACK.palette;
-    applyPalette(activePalette);
-    statusEl.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
+    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
-    const notice = palette ? "" : "Palette fallback active (data/palette.json unavailable).";
-    const result = renderHelix(ctx, {
+    const paletteData = await loadJSON("./data/palette.json");
+    const palette = paletteData && typeof paletteData === "object" ? paletteData : defaults.palette;
+    const usingFallback = !paletteData;
+
+    applyPalette(palette);
+    status.textContent = usingFallback ? "Palette missing; using safe fallback." : "Palette loaded.";
+
+    // ND-safe rationale: render once, preserve layer depth, and offer notice if data is absent.
+    const outcome = renderHelix(ctx, {
       width: canvas.width,
       height: canvas.height,
-      palette: activePalette,
+      palette,
       NUM,
-      notice
+      notice: usingFallback ? "Palette fallback active (data/palette.json unavailable)." : ""
     });
 
-    if (result && result.ok) {
-      statusEl.textContent += ` ${result.summary}`;
-    } else if (result && !result.ok) {
-      statusEl.textContent += ` Rendering stopped (${result.reason}).`;
-    } else {
-      statusEl.textContent += " Rendering did not return a status.";
+    if (!outcome.ok) {
+      status.textContent = `Render issue: ${outcome.reason}`;
+    } else if (outcome.summary) {
+      status.textContent += ` ${outcome.summary}`;
     }
   </script>
 </body>
