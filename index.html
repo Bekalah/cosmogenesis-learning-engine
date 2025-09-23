@@ -18,13 +18,12 @@
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> - layered sacred geometry (offline, ND-safe)</div>
-    <div class="status" id="status">Loading palette...</div>
+    <div><strong>Cosmic Helix Renderer</strong> — layered sacred geometry (offline, ND-safe)</div>
+    <div class="status" id="status">Loading palette…</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
   <p class="note">Static renderer with four calm layers: vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double helix lattice. Open directly; no network or build step is required.</p>
-  <p class="note">This static renderer encodes Vesica, Tree-of-Life, Fibonacci, and a static double-helix lattice. No animation, no autoplay, no external libs. Open this file directly.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
@@ -33,18 +32,11 @@
     const canvas = document.getElementById("stage");
     const ctx = canvas.getContext("2d");
 
-    const NUM = {
-      THREE: 3,
-      SEVEN: 7,
-      NINE: 9,
-      ELEVEN: 11,
-      TWENTYTWO: 22,
-      THIRTYTHREE: 33,
-      NINETYNINE: 99,
-      ONEFORTYFOUR: 144
-    };
+    // Numerology constants honoured across the geometry helpers.
+    const NUM = { THREE:3, SEVEN:7, NINE:9, ELEVEN:11, TWENTYTWO:22, THIRTYTHREE:33, NINETYNINE:99, ONEFORTYFOUR:144 };
 
-    const FALLBACK = {
+    // Calm fallback palette keeps contrast ND-safe when palette.json is missing.
+    const DEFAULTS = {
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
@@ -53,24 +45,16 @@
       }
     };
 
-    const paletteImportAttempts = [
-      () => Promise.resolve()
-        .then(() => import("./data/palette.json", { assert: { type: "json" } }))
-        .then((mod) => normalisePaletteModule(mod), () => null),
-      () => Promise.resolve()
-        .then(() => import("./data/palette.json", { with: { type: "json" } }))
-        .then((mod) => normalisePaletteModule(mod), () => null),
-      () => Promise.resolve()
-        .then(() => import("./data/palette.json"))
-        .then((mod) => normalisePaletteModule(mod), () => null)
-    ];
+    function applyPaletteChrome(palette) {
+      const root = document.documentElement;
+      if (palette.bg) root.style.setProperty("--bg", palette.bg);
+      if (palette.ink) root.style.setProperty("--ink", palette.ink);
+      if (palette.muted) root.style.setProperty("--muted", palette.muted);
+      else if (Array.isArray(palette.layers) && palette.layers.length) {
+        root.style.setProperty("--muted", palette.layers[0]);
+      }
+    }
 
-    async function loadPalette() {
-      for (const attempt of paletteImportAttempts) {
-        const paletteModule = await attempt();
-        if (paletteModule) {
-          return paletteModule;
-        }
     async function loadJSON(path) {
       try {
         const res = await fetch(path, { cache: "no-store" });
@@ -81,55 +65,33 @@
       }
     }
 
-    function normalisePaletteModule(mod) {
-      if (!mod || typeof mod !== "object") {
-        return null;
-      }
-      if (mod.default && typeof mod.default === "object") {
-        return mod.default;
-      }
-      if (mod.palette && typeof mod.palette === "object") {
-        return mod.palette;
-      }
-      return typeof mod === "object" ? mod : null;
+    function ensureObject(value) {
+      return value && typeof value === "object" ? value : null;
     }
 
-    function applyChromeColours(palette) {
-    function applyPalette(palette) {
-      const root = document.documentElement;
-      if (palette.bg) root.style.setProperty("--bg", palette.bg);
-      if (palette.ink) root.style.setProperty("--ink", palette.ink);
-      if (palette.muted) {
-        root.style.setProperty("--muted", palette.muted);
-      } else if (Array.isArray(palette.layers) && palette.layers.length) {
-        root.style.setProperty("--muted", palette.layers[0]);
+    async function initialise() {
+      // Offline-friendly: only attempts a local fetch, never reaching out to the network.
+      const paletteData = ensureObject(await loadJSON("./data/palette.json"));
+      const activePalette = paletteData || DEFAULTS.palette;
+      applyPaletteChrome(activePalette);
+
+      const notice = paletteData ? "" : "Palette fallback active (data/palette.json unavailable).";
+      elStatus.textContent = paletteData ? "Palette loaded." : "Palette missing; using safe fallback.";
+
+      // Render once; no motion. Outcome summary appended for quick confirmation.
+      const outcome = renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: activePalette, NUM, notice });
+
+      if (!outcome || outcome.ok !== true) {
+        elStatus.textContent += " Rendering failed: " + (outcome && outcome.reason ? outcome.reason : "unknown");
+        return;
+      }
+
+      if (outcome.summary) {
+        elStatus.textContent += ` ${outcome.summary}`;
       }
     }
 
-    const defaults = {
-      palette: {
-        bg: "#0b0b12",
-        ink: "#e8e8f0",
-        layers: ["#b1c7ff", "#89f7fe", "#a0ffa1", "#ffd27f", "#f5a3ff", "#d0d0e6"]
-      }
-    };
-
-    const paletteData = await loadJSON("./data/palette.json");
-    const palette = paletteData && typeof paletteData === "object" ? paletteData : null;
-    const activePalette = palette || defaults.palette;
-    const notice = palette ? "" : "Palette fallback active (data/palette.json unavailable).";
-
-    applyPalette(activePalette);
-    elStatus.textContent = palette ? "Palette loaded." : "Palette missing; using safe fallback.";
-
-    // Numerology constants used by geometry routines
-    const NUM = { THREE: 3, SEVEN: 7, NINE: 9, ELEVEN: 11, TWENTYTWO: 22, THIRTYTHREE: 33, NINETYNINE: 99, ONEFORTYFOUR: 144 };
-
-    // ND-safe rationale: no motion, high readability, soft colours, layered order
-    const outcome = renderHelix(ctx, { width: canvas.width, height: canvas.height, palette: activePalette, NUM, notice });
-    if (outcome && outcome.summary) {
-      elStatus.textContent += ` ${outcome.summary}`;
-    }
+    initialise();
   </script>
 </body>
 </html>
