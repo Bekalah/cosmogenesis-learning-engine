@@ -2,15 +2,17 @@
   "vesica": {
     "rows": 9,
     "columns": 11,
-    "paddingDivisor": 11,
+    "paddingFactor": 11,
     "radiusFactor": 1.5,
     "strokeDivisor": 99,
     "alpha": 0.55
   },
   "treeOfLife": {
-    "marginDivisor": 11,
+    "marginFactor": 11,
     "radiusDivisor": 22,
-    "labelOffset": -24,
+    "pathWidthDivisor": 33,
+    "labelOffset": 8,
+    "labelFont": "13px system-ui, -apple-system, Segoe UI, sans-serif",
     "nodes": [
       { "id": "kether", "title": "Kether", "meaning": "Crown", "level": 0, "xFactor": 0.5 },
       { "id": "chokmah", "title": "Chokmah", "meaning": "Wisdom", "level": 1, "xFactor": 0.7 },
@@ -46,23 +48,26 @@
       ["netzach", "yesod"],
       ["hod", "yesod"],
       ["yesod", "malkuth"]
-    ],
-    "labelFont": "13px system-ui, -apple-system, Segoe UI, sans-serif"
+    ]
   },
   "fibonacci": {
     "sampleCount": 144,
     "turns": 3,
-    "baseRadiusDivisor": 3,
+    "baseRadiusDivisor": 9,
     "phi": 1.618033988749895,
-    "alpha": 0.85
+    "alpha": 0.85,
+    "thickness": 2.5,
+    "centerOffsetX": 0.62,
+    "centerOffsetY": 0.58
   },
   "helix": {
-    "sampleCount": 144,
-    "cycles": 3,
-    "amplitudeDivisor": 3,
-    "phaseOffset": 180,
-    "crossTieCount": 33,
-    "strandAlpha": 0.85,
-    "rungAlpha": 0.6
+    "strandPoints": 144,
+    "rungCount": 33,
+    "sideMarginDivisor": 11,
+    "amplitudeDivisor": 9,
+    "frequencyTurns": 3,
+    "strandThickness": 3,
+    "rungAlpha": 0.6,
+    "verticalCenterOffset": 0
   }
 }

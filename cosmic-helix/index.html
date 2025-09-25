@@ -96,7 +96,7 @@
       ONEFORTYFOUR: 144
     });
 
-    const FALLBACK = Object.freeze({
+    const DEFAULTS = Object.freeze({
       palette: {
         bg: "#0b0b12",
         ink: "#e8e8f0",
@@ -105,7 +105,7 @@
       }
     });
 
-    async function loadPalette(path) {
+    async function loadJSON(path) {
       try {
         const response = await fetch(path, { cache: "no-store" });
         if (!response.ok) {
@@ -134,23 +134,39 @@
         return;
       }
 
-      const paletteData = await loadPalette("./data/palette.json");
-      const activePalette = paletteData ? paletteData : FALLBACK.palette;
+      const [paletteData, geometryData] = await Promise.all([
+        loadJSON("./data/palette.json"),
+        loadJSON("./data/geometry.json")
+      ]);
+
+      const activePalette = paletteData || DEFAULTS.palette;
+      const activeGeometry = geometryData && typeof geometryData === "object" ? geometryData : undefined;
+
       applyTheme(activePalette);
+
+      const noticeLines = [];
+      if (!paletteData) {
+        noticeLines.push("Palette fallback active.");
+      }
+      if (!geometryData) {
+        noticeLines.push("Geometry fallback active.");
+      }
+      const notice = noticeLines.length ? noticeLines.join("\n") : "";
 
       const result = renderHelix(context, {
         width: canvas.width,
         height: canvas.height,
         palette: activePalette,
+        geometry: activeGeometry,
         NUM,
-        notice: paletteData ? null : "Palette missing; sealed fallback active."
+        notice
       });
 
       if (result.ok) {
-        const parts = [];
-        parts.push(paletteData ? "Palette loaded." : "Palette missing; fallback palette in use.");
-        parts.push(result.notice ? "Fallback notice rendered." : "Render complete.");
-        updateStatus(parts.join(" "));
+        const paletteMessage = paletteData ? "Palette loaded." : "Palette missing; using sealed fallback.";
+        const geometryMessage = geometryData ? " Geometry loaded." : " Geometry fallback in use.";
+        const noticeMessage = notice ? " Fallback notice rendered." : " Render complete.";
+        updateStatus(paletteMessage + geometryMessage + noticeMessage);
       } else {
         updateStatus("Renderer error: " + (result.reason || "unknown"));
       }
