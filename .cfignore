@@ -1,0 +1,10 @@
+# Keep Cloudflare Pages deploys focused on the offline renderer capsule
+/*
+!.cfignore
+!_headers
+!index.html
+!README_RENDERER.md
+!data/
+!data/**
+!js/
+!js/helix-renderer.mjs
