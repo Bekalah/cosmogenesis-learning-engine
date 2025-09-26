@@ -24,13 +24,13 @@
 </head>
 <body>
   <header>
-    <div><strong>Cosmic Helix Renderer</strong> — Codex 144:99 synthesis portal (offline, ND-safe)</div>
+    <div><strong>Cosmic Helix Renderer</strong> - static layered geometry portal (offline, ND-safe)</div>
     <div class="status" id="status">Loading palette...</div>
   </header>
 
   <canvas id="stage" width="1440" height="900" aria-label="Layered sacred geometry canvas"></canvas>
-  <p class="note">Static renderer with four calm layers: Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice. Open this file directly; no build step or external network request is required.</p>
-  <p class="note">Cross-reference portals: <code>codex-144-99/</code> supplies research strata and <code>cathedral/</code> carries the architectural motifs mirrored here.</p>
+  <p class="note">This static renderer is the self-contained template for the Cathedral of Circuits repos. It draws four calm layers (Vesica field, Tree-of-Life scaffold, Fibonacci curve, and a static double-helix lattice) with no build step or dependencies.</p>
+  <p class="note">The optional <code>data/palette.json</code> file adjusts colours. When the file is missing or blocked the fallback palette is applied automatically, and a notice appears in the header. See <code>README_RENDERER.md</code> for Cloudflare Pages deployment steps plus the <code>_headers</code> and <code>.cfignore</code> usage.</p>
 
   <script type="module">
     import { renderHelix } from "./js/helix-renderer.mjs";
