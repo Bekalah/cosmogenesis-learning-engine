@@ -73,7 +73,7 @@ export function renderHelix(ctx, options = {}) {
 
   fillBackground(ctx, dims, palette.bg);
 
-  const vesicaStats = drawVesicaField(ctx, dims, palette.layers[0], numbers, geometry.vesica);
+  const vesicaStats = drawVesicaField(ctx, dims, palette, numbers, geometry.vesica);
   const treeStats = drawTreeOfLife(ctx, dims, palette, numbers, geometry.treeOfLife);
   const fibonacciStats = drawFibonacciCurve(ctx, dims, palette.layers[3], numbers, geometry.fibonacci);
   const helixStats = drawHelixLattice(ctx, dims, palette, numbers, geometry.helix);
@@ -468,26 +468,20 @@ function fillBackground(ctx, dims, bgColor) {
 }
 
 /**
- * Draws a grid of vesica-style circles and simple axis guides onto the provided canvas context.
+ * Draws a grid of vesica-style circles and architectural guides onto the canvas context.
  *
  * Renders a rows x columns lattice of stroked circles sized and spaced to fit within the given
- * dimensions, using visual parameters from `config`. Also draws two orthogonal axis guides
- * (vertical and horizontal) centered in the canvas to emphasise the composition's symmetry.
+ * dimensions, using palette-driven colours. Adds orthogonal and diagonal guides plus a mandorla
+ * glow and eight-point star to echo the cathedral imagery supplied by the user brief.
  *
  * @param {Object} dims - Canvas dimensions in pixels: { width, height }.
- * @param {string} color - Stroke color used for circles and guides (CSS color string).
- * @param {Object} numbers - Numerology constants object (passed through for consistency; not directly mutated).
- * @param {Object} config - Geometry and rendering options:
- *   - {number} columns - Desired number of columns (clamped to >= 2).
- *   - {number} rows - Desired number of rows (clamped to >= 2).
- *   - {number} paddingDivisor - Divisor used to compute padding from min(width,height).
- *   - {number} radiusScale - Scale factor applied to grid step to derive circle radius.
- *   - {number} strokeDivisor - Divisor used to compute stroke width from canvas size.
- *   - {number} alpha - Global alpha applied to the vesica layer (0..1).
- *
- * @return {{ circles: number }} An object with the total number of circles drawn.
+ * @param {Object} palette - Palette providing layered colours (`layers`, `ink`).
+ * @param {Object} numbers - Numerology constants object.
+ * @param {Object} config - Geometry options (rows, columns, paddingDivisor, radiusScale, strokeDivisor, alpha).
+ * @return {{ circles: number }} An object with the total number of grid circles drawn.
  */
-function drawVesicaField(ctx, dims, color, numbers, config) {
+function drawVesicaField(ctx, dims, palette, numbers, config) {
+  const primary = palette.layers[0];
   const cols = Math.max(2, Math.round(config.columns));
   const rows = Math.max(2, Math.round(config.rows));
   const padding = Math.min(dims.width, dims.height) / config.paddingDivisor;
@@ -500,7 +494,7 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
 
   ctx.save();
   ctx.globalAlpha = config.alpha;
-  ctx.strokeStyle = color;
+  ctx.strokeStyle = primary;
   ctx.lineWidth = strokeWidth;
 
   let circles = 0;
@@ -515,8 +509,12 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
     }
   }
 
-  // Axis guides emphasise the vesica symmetry without animation.
+  const accent = palette.layers[3] || primary;
+  const halo = palette.layers[2] || accent;
+
+  // Axis guides emphasise the vesica symmetry without motion.
   ctx.globalAlpha = config.alpha * 0.8;
+  ctx.strokeStyle = withAlpha(primary, 0.8);
   ctx.beginPath();
   ctx.moveTo(dims.width / 2, padding);
   ctx.lineTo(dims.width / 2, dims.height - padding);
@@ -524,8 +522,130 @@ function drawVesicaField(ctx, dims, color, numbers, config) {
   ctx.lineTo(dims.width - padding, dims.height / 2);
   ctx.stroke();
 
+  // Diagonal guides create the "portal" diamond without animation or harsh contrast.
+  ctx.globalAlpha = config.alpha * 0.6;
+  ctx.strokeStyle = withAlpha(primary, 0.5);
+  ctx.beginPath();
+  ctx.moveTo(padding, padding);
+  ctx.lineTo(dims.width - padding, dims.height - padding);
+  ctx.moveTo(dims.width - padding, padding);
+  ctx.lineTo(padding, dims.height - padding);
+  ctx.stroke();
+
   ctx.restore();
+
+  drawMandorlaGlow(ctx, dims, {
+    core: accent,
+    rim: halo,
+    ink: palette.ink,
+    alpha: clamp(config.alpha * 1.1, 0, 1)
+  }, numbers);
+  drawPortalRing(ctx, dims, accent, palette.ink, numbers);
+  drawPortalStar(ctx, dims, palette, numbers);
+
   return { circles };
+}
+
+/**
+ * Paint a central mandorla glow reinforcing the vesica womb-of-forms without animation.
+ *
+ * @param {CanvasRenderingContext2D} ctx - Target context.
+ * @param {{width:number,height:number}} dims - Canvas dimensions.
+ * @param {{core:string,rim:string,ink:string,alpha:number}} colors - Palette slice.
+ * @param {Object} numbers - Numerology constants for scale ratios.
+ */
+function drawMandorlaGlow(ctx, dims, colors, numbers) {
+  ctx.save();
+  const centerX = dims.width / 2;
+  const centerY = dims.height * 0.52;
+  const minDim = Math.min(dims.width, dims.height);
+  const lensRadiusX = minDim / numbers.THREE * 0.78;
+  const lensRadiusY = lensRadiusX * 0.62;
+
+  ctx.globalAlpha = clamp(colors.alpha, 0, 1);
+  const gradient = ctx.createRadialGradient(centerX, centerY, lensRadiusY / numbers.SEVEN, centerX, centerY, lensRadiusX);
+  gradient.addColorStop(0, withAlpha(colors.core, 0.38));
+  gradient.addColorStop(1, withAlpha(colors.core, 0));
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.ellipse(centerX, centerY, lensRadiusX, lensRadiusY, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.globalAlpha = 1;
+  ctx.lineWidth = Math.max(1.4, minDim / numbers.NINETYNINE * numbers.SEVEN);
+  ctx.strokeStyle = withAlpha(colors.rim, 0.75);
+  ctx.beginPath();
+  ctx.ellipse(centerX, centerY, lensRadiusX, lensRadiusY, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Vertical spine suggests cathedral nave without motion.
+  ctx.strokeStyle = withAlpha(colors.ink, 0.28);
+  ctx.lineWidth = Math.max(1, minDim / numbers.ONEFORTYFOUR * numbers.THREE);
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY - lensRadiusY * 1.6);
+  ctx.lineTo(centerX, centerY + lensRadiusY * 1.6);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+/**
+ * Draw concentric portal rings anchoring the vesica to the cathedral floorplan.
+ * @param {CanvasRenderingContext2D} ctx - Target context.
+ * @param {{width:number,height:number}} dims - Canvas dimensions.
+ * @param {string} accent - Main accent colour for the ring.
+ * @param {string} ink - Ink colour for secondary ring.
+ * @param {Object} numbers - Numerology constants for ratio control.
+ */
+function drawPortalRing(ctx, dims, accent, ink, numbers) {
+  ctx.save();
+  const centerX = dims.width / 2;
+  const centerY = dims.height * 0.52;
+  const minDim = Math.min(dims.width, dims.height);
+  const outerRadius = minDim / (numbers.NINETYNINE / numbers.NINE);
+
+  ctx.lineWidth = Math.max(1.2, minDim / numbers.THIRTYTHREE);
+  ctx.strokeStyle = withAlpha(accent, 0.45);
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.lineWidth = Math.max(1, ctx.lineWidth / 2);
+  ctx.strokeStyle = withAlpha(ink, 0.24);
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, outerRadius * 0.72, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+/**
+ * Draw the static eight-pointed star referencing cathedral rose windows.
+ * @param {CanvasRenderingContext2D} ctx - Target context.
+ * @param {{width:number,height:number}} dims - Canvas dimensions.
+ * @param {Object} palette - Palette (uses layers + ink).
+ * @param {Object} numbers - Numerology constants.
+ */
+function drawPortalStar(ctx, dims, palette, numbers) {
+  const centerX = dims.width / 2;
+  const centerY = dims.height * 0.52;
+  const minDim = Math.min(dims.width, dims.height);
+  const outerRadius = minDim / numbers.THREE * 0.68;
+  const innerRadius = outerRadius / (numbers.ELEVEN / numbers.SEVEN);
+  const strokeColor = withAlpha(palette.ink, 0.82);
+  const fillColor = withAlpha(palette.layers[5] || palette.layers[1], 0.18);
+  const lineWidth = Math.max(1.2, outerRadius / numbers.THIRTYTHREE * numbers.THREE);
+
+  drawStarPolygon(ctx, {
+    centerX,
+    centerY,
+    outerRadius,
+    innerRadius,
+    points: numbers.ELEVEN - numbers.THREE, // yields 8-point star
+    rotation: Math.PI / numbers.NINE,
+    stroke: strokeColor,
+    fill: fillColor,
+    lineWidth
+  });
 }
 
 /**
@@ -560,6 +680,8 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
     const y = margin + node.level * levelStep;
     positions.set(node.id, { x, y, title: node.title });
   }
+
+  drawTreeVault(ctx, dims, palette, margin, radius, numbers, positions);
 
   ctx.save();
   ctx.lineWidth = pathWidth;
@@ -607,6 +729,55 @@ function drawTreeOfLife(ctx, dims, palette, numbers, config) {
 
   ctx.restore();
   return { nodes: config.nodes.length, paths: config.edges.length };
+}
+
+/**
+ * Draw vaulted arches, pillars, and dais rings behind the Tree-of-Life scaffold.
+ *
+ * Mirrors cathedral cues from the user reference images while staying motionless and ND-safe.
+ */
+function drawTreeVault(ctx, dims, palette, margin, radius, numbers, positions) {
+  ctx.save();
+  const baseNode = positions.get("malkuth") || { x: dims.width / 2, y: dims.height - margin };
+  const crownNode = positions.get("kether") || { x: dims.width / 2, y: margin };
+  const baseY = baseNode.y + radius * 1.1;
+  const topY = Math.max(margin, crownNode.y - radius * 1.6);
+  const centerX = dims.width / 2;
+  const vaultRadius = Math.max((baseY - topY) * 1.12, dims.width / numbers.THREE);
+
+  ctx.globalAlpha = 1;
+  ctx.lineWidth = Math.max(1.2, radius / numbers.ELEVEN);
+  ctx.strokeStyle = withAlpha(palette.layers[1], 0.4);
+  ctx.beginPath();
+  ctx.arc(centerX, baseY, vaultRadius, Math.PI, Math.PI * 2, false);
+  ctx.stroke();
+
+  const sideOffset = (dims.width - margin * 2) / numbers.THIRTYTHREE * numbers.SEVEN;
+  ctx.beginPath();
+  ctx.arc(centerX - sideOffset, baseY, vaultRadius * 0.88, Math.PI * 1.04, Math.PI * 1.96, false);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(centerX + sideOffset, baseY, vaultRadius * 0.88, Math.PI * 1.04, Math.PI * 1.96, false);
+  ctx.stroke();
+
+  ctx.strokeStyle = withAlpha(palette.layers[0], 0.55);
+  ctx.lineWidth = Math.max(1, radius / numbers.NINE);
+  const pillarFactors = [0.28, 0.5, 0.72];
+  for (const factor of pillarFactors) {
+    const x = margin + clamp(factor, 0, 1) * (dims.width - margin * 2);
+    ctx.beginPath();
+    ctx.moveTo(x, baseY);
+    ctx.lineTo(x, topY + radius * 1.6);
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = withAlpha(palette.layers[2], 0.45);
+  ctx.lineWidth = Math.max(1, radius / numbers.ELEVEN);
+  ctx.beginPath();
+  ctx.arc(centerX, baseY - radius * 0.2, radius * numbers.SEVEN / 1.8, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.restore();
 }
 
 /**
@@ -662,6 +833,14 @@ function drawFibonacciCurve(ctx, dims, color, numbers, config) {
   }
   ctx.stroke();
 
+  drawSpiralChambers(ctx, points, {
+    color,
+    centerX,
+    centerY,
+    baseRadius,
+    minDim
+  }, numbers);
+
   ctx.fillStyle = color;
   const markerRadius = Math.max(2, minDim / numbers.ONEFORTYFOUR);
   let markers = 0;
@@ -675,6 +854,54 @@ function drawFibonacciCurve(ctx, dims, color, numbers, config) {
 
   ctx.restore();
   return { samples, markers };
+}
+
+/**
+ * Lay concentric research chambers and connective chords across the Fibonacci spiral.
+ * @param {CanvasRenderingContext2D} ctx - Target context.
+ * @param {Array<{x:number,y:number}>} points - Sampled spiral points.
+ * @param {{color:string,centerX:number,centerY:number,baseRadius:number,minDim:number}} settings - Layout data.
+ * @param {Object} numbers - Numerology constants guiding ratios.
+ */
+function drawSpiralChambers(ctx, points, settings, numbers) {
+  if (!points.length) {
+    return;
+  }
+  ctx.save();
+  const ratios = [numbers.ELEVEN / numbers.NINE, numbers.TWENTYTWO / numbers.ELEVEN, numbers.THIRTYTHREE / numbers.ELEVEN];
+  ctx.strokeStyle = withAlpha(settings.color, 0.34);
+  ctx.lineWidth = Math.max(1, settings.baseRadius / numbers.THIRTYTHREE);
+  for (const ratio of ratios) {
+    const radiusX = settings.baseRadius * ratio;
+    const radiusY = radiusX * 0.72;
+    ctx.beginPath();
+    ctx.ellipse(settings.centerX, settings.centerY, radiusX, radiusY, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  const anchorIndices = [numbers.SEVEN, numbers.ELEVEN, numbers.TWENTYTWO, numbers.THIRTYTHREE, numbers.NINETYNINE];
+  ctx.strokeStyle = withAlpha(settings.color, 0.52);
+  ctx.lineWidth = Math.max(1, settings.minDim / numbers.ONEFORTYFOUR * numbers.THREE);
+  ctx.beginPath();
+  let hasMove = false;
+  for (const index of anchorIndices) {
+    const clampedIndex = Math.min(points.length - 1, Math.max(0, Math.round(index)));
+    const point = points[clampedIndex];
+    if (!point) {
+      continue;
+    }
+    if (!hasMove) {
+      ctx.moveTo(point.x, point.y);
+      hasMove = true;
+    } else {
+      ctx.lineTo(point.x, point.y);
+    }
+  }
+  if (hasMove) {
+    ctx.stroke();
+  }
+
+  ctx.restore();
 }
 
 /**
@@ -706,6 +933,8 @@ function drawHelixLattice(ctx, dims, palette, numbers, config) {
   const separation = minDim / config.strandSeparationDivisor;
   const baseY = dims.height / 2;
   const stepX = dims.width / (samples - 1);
+
+  drawHelixColumn(ctx, dims, palette, numbers);
 
   ctx.save();
   ctx.lineWidth = Math.max(1.4, minDim / numbers.NINETYNINE * numbers.THREE);
@@ -768,6 +997,48 @@ function drawHelixLattice(ctx, dims, palette, numbers, config) {
 }
 
 /**
+ * Render a central luminous column and base dais that the helix strands wrap around.
+ * @param {CanvasRenderingContext2D} ctx - Target context.
+ * @param {{width:number,height:number}} dims - Canvas dimensions.
+ * @param {Object} palette - Palette providing colour accents.
+ * @param {Object} numbers - Numerology constants for ratio control.
+ */
+function drawHelixColumn(ctx, dims, palette, numbers) {
+  ctx.save();
+  const centerX = dims.width / 2;
+  const topY = dims.height / numbers.THREE;
+  const baseY = dims.height - dims.height / numbers.THIRTYTHREE;
+  const minDim = Math.min(dims.width, dims.height);
+  const columnWidth = Math.max(2, minDim / numbers.TWENTYTWO);
+
+  const gradient = ctx.createLinearGradient(centerX, topY, centerX, baseY);
+  gradient.addColorStop(0, withAlpha(palette.layers[5] || palette.layers[1], 0.65));
+  gradient.addColorStop(1, withAlpha(palette.layers[4] || palette.layers[0], 0.3));
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = columnWidth;
+  ctx.globalAlpha = 0.92;
+  ctx.beginPath();
+  ctx.moveTo(centerX, topY);
+  ctx.lineTo(centerX, baseY);
+  ctx.stroke();
+
+  ctx.lineWidth = columnWidth / 2;
+  ctx.strokeStyle = withAlpha(palette.layers[3] || palette.ink, 0.45);
+  const baseRadius = minDim / numbers.THREE;
+  ctx.beginPath();
+  ctx.arc(centerX, baseY, baseRadius, Math.PI, Math.PI * 2, false);
+  ctx.stroke();
+
+  ctx.strokeStyle = withAlpha(palette.ink, 0.35);
+  ctx.lineWidth = Math.max(1, columnWidth / numbers.SEVEN);
+  ctx.beginPath();
+  ctx.arc(centerX, topY, columnWidth * numbers.SEVEN, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+/**
  * Draws a small notice banner near the bottom of the canvas.
  *
  * Renders a semi-opaque rounded-rectangle-like background and draws the provided
@@ -815,7 +1086,7 @@ function summariseLayers(stats) {
   const vesicaPart = `Vesica ${stats.vesicaStats.circles} circles`;
   const treePart = `Paths ${stats.treeStats.paths} / Nodes ${stats.treeStats.nodes}`;
   const fibPart = `Spiral ${stats.fibonacciStats.samples} samples`;
-  const helixPart = `Helix ${stats.helixStats.crossTies} ties`;
+  const helixPart = `Helix ${stats.helixStats.crossTies} ties (144:99)`;
   return `${vesicaPart} | ${treePart} | ${fibPart} | ${helixPart}`;
 }
 
@@ -843,6 +1114,54 @@ function withAlpha(color, alpha) {
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
   return `rgba(${r}, ${g}, ${b}, ${clamp(alpha, 0, 1)})`;
+}
+
+/**
+ * Draw a filled and stroked star polygon using alternating outer/inner radii.
+ * @param {CanvasRenderingContext2D} ctx - Target context.
+ * @param {{centerX:number,centerY:number,outerRadius:number,innerRadius:number,points:number,rotation:number,stroke?:string,fill?:string,lineWidth?:number}} options
+ *        Star definition.
+ */
+function drawStarPolygon(ctx, options) {
+  const {
+    centerX,
+    centerY,
+    outerRadius,
+    innerRadius,
+    points,
+    rotation = 0,
+    stroke,
+    fill,
+    lineWidth = 1.5
+  } = options;
+  if (!points || points < 2) {
+    return;
+  }
+  ctx.save();
+  ctx.beginPath();
+  const totalVertices = points * 2;
+  for (let i = 0; i < totalVertices; i += 1) {
+    const angle = rotation + (Math.PI * i) / points;
+    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+  ctx.closePath();
+  if (fill) {
+    ctx.fillStyle = fill;
+    ctx.fill();
+  }
+  if (stroke) {
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = stroke;
+    ctx.stroke();
+  }
+  ctx.restore();
 }
 
 /**
