@@ -1,0 +1,26 @@
+# Cloudflare Pages ignore list (why: keep deployments lean, ND-safe static bundle only)
+node_modules/
+*.log
+*.tmp
+*.swp
+*.swo
+*.psd
+*.ai
+*.xcf
+*.sketch
+*.zip
+*.tar
+*.tgz
+*.7z
+*.bak
+*.orig
+.vscode/
+.idea/
+coverage/
+dist/
+build/
+.DS_Store
+Thumbs.db
+# Preserve local lore archives outside deployment
+notes/
+experiments/
