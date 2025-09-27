@@ -9,6 +9,7 @@ World-building generator for Codex 144:99. It keeps Art, Learn, Play, and Study 
 
 ## Integration Hub
 - Open `cathedral.html` for a static, offline-friendly overview of every Cathedral of Circuits repository, deployment protocol, and health-check link. The hub preserves ND-safe contrast, honours the 0–144 combinations, and keeps cross-repo provenance in one place.
+- Legacy experiments and orphaned static renderers now live under `random/` (see `random/README.md`). The active GitHub Pages/Vite build uses the `core/` directory as its entry point with shared modules under `engines/`, `ui/`, and `public/`.
 
 ## Covenant
 Read the [ND-safe covenant](docs/covenant/covenant.md) before shipping changes. Every dataset entry must include citations and every page must surface provenance.

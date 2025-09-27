@@ -5,7 +5,7 @@
  */
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import * as mod from '../js/helix-renderer.mjs';
+import * as mod from '../root-offline/js/helix-renderer.mjs';
 
 // Minimal context helper if absent
 function makeCtx(width = 320, height = 200) {
